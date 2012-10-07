@@ -1,3 +1,5 @@
+package com.redhat.theses
+
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletResponse

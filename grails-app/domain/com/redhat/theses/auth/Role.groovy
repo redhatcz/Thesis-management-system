@@ -1,4 +1,4 @@
-package com.jboss.theses.auth
+package com.redhat.theses.auth
 
 class Role {
 

@@ -1,4 +1,4 @@
-package com.jboss.theses
+package com.redhat.theses
 
 
 

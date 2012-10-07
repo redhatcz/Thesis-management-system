@@ -1,4 +1,4 @@
-package com.jboss.theses
+package com.redhat.theses
 
 
 
@@ -8,10 +8,10 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Topic)
-class TopicTests {
+@TestFor(Tag)
+class TagTests {
 
     void testSomething() {
-        fail "Implement me"
+       fail "Implement me"
     }
 }

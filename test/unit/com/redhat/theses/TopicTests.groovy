@@ -1,4 +1,4 @@
-package com.jboss.theses.domain
+package com.redhat.theses
 
 
 
@@ -12,6 +12,6 @@ import org.junit.*
 class TopicTests {
 
     void testSomething() {
-       fail "Implement me"
+        fail "Implement me"
     }
 }

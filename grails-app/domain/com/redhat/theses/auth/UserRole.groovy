@@ -1,4 +1,4 @@
-package com.jboss.theses.auth
+package com.redhat.theses.auth
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 

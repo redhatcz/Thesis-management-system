@@ -89,16 +89,16 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    all 'com.jboss.theses'
+    all 'com.redhat.theses'
 
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.jboss.theses.auth.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.jboss.theses.auth.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.jboss.theses.auth.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.redhat.theses.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.jboss.theses.auth.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.jboss.theses.auth.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.jboss.theses.auth.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.redhat.theses.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'

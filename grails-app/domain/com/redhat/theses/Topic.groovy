@@ -1,6 +1,6 @@
-package com.jboss.theses
+package com.redhat.theses
 
-import com.jboss.theses.auth.User
+import com.redhat.theses.auth.User
 
 class Topic {
 
