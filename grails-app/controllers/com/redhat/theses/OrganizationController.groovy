@@ -1,6 +1,5 @@
 package com.redhat.theses
 
-class TagController {
-
+class OrganizationController {
     static scaffold = true
 }

@@ -1,4 +1,4 @@
-package com.redhat.theses
+package com.redhat.theses.auth
 
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
