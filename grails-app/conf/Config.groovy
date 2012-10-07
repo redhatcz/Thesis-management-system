@@ -92,3 +92,13 @@ log4j = {
     all 'com.jboss.theses'
 
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.jboss.theses.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.jboss.theses.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.jboss.theses.auth.Role'
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.jboss.theses.auth.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.jboss.theses.auth.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.jboss.theses.auth.Role'
