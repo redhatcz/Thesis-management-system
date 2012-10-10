@@ -13,7 +13,7 @@ class Organization {
     }
 
     static mapping = {
-
+        members lazy: false
     }
 
 

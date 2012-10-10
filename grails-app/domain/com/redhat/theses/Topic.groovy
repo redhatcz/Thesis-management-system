@@ -1,4 +1,4 @@
-package com.redhat.theses
+ package com.redhat.theses
 
 import com.redhat.theses.auth.User
 
@@ -8,10 +8,15 @@ class Topic {
     String primaryAnnotation
     String secondaryAnnotation
     Date dateCreated
-    User Supervisor
+    User supervisor
 
     static hasMany = [tags : Tag]
     static constraints = {
-        secondaryAnnotation nullable: true
+        primaryAnnotation widget: 'textarea'
+        secondaryAnnotation nullable: true, widget: 'textarea'
+    }
+    static mapping = {
+        primaryAnnotation type: 'text'
+        secondaryAnnotation type: 'text'
     }
 }

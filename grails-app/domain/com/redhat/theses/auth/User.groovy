@@ -25,9 +25,10 @@ class User {
 
 	static mapping = {
 		password column: '`password`'
+        organizations lazy: false
 	}
 
-    def beforeDelete = {
+    def beforeDelete() {
     }
 
 	Set<Role> getAuthorities() {
