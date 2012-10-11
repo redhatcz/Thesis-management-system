@@ -25,7 +25,7 @@ class User {
 
 	static mapping = {
 		password column: '`password`'
-        organizations lazy: false
+        organizations fetch: 'join'
 	}
 
     def beforeDelete() {
