@@ -6,7 +6,8 @@ class BootStrap {
     def init = { servletContext ->
         if(!User.count() ){
             def o = new Organization(name: 'Masaryk University')
-                    .addToMembers(new User(username: 'jcechace', password: "passw0rd"))
+                    .addToMembers(new User(username: 'admin', password: "admin", enabled: true))
+                    .addToMembers(new User(username: 'jcechace', password: "passw0rd", enabled: true))
                     .save()
         }
     }
