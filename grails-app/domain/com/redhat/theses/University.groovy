@@ -21,4 +21,8 @@ class University {
     boolean  hasMember(User user){
         Membership.countByUserAndUniversity(user, this) > 0
     }
+
+    String tostring(){
+        name
+    }
 }

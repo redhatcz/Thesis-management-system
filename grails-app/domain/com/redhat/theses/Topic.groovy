@@ -22,4 +22,8 @@ class Topic {
         description type: 'text'
         secondaryAnnotation type: 'text'
     }
+
+    String toString(){
+        title
+    }
 }

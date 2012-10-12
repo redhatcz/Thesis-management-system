@@ -14,4 +14,8 @@ class Tag {
         title   unique: true
         parent  nullable: true
     }
+
+    String toString(){
+        title
+    }
 }
