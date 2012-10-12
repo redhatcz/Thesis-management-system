@@ -2,20 +2,12 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'primaryAnnotation', 'error')} ">
-	<label for="primaryAnnotation">
-		<g:message code="topic.primaryAnnotation.label" default="Primary Annotation" />
+<div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'description', 'error')} ">
+	<label for="description">
+		<g:message code="topic.description.label" default="Description" />
 		
 	</label>
-	<g:textArea name="primaryAnnotation" cols="40" rows="5" value="${topicInstance?.primaryAnnotation}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'secondaryAnnotation', 'error')} ">
-	<label for="secondaryAnnotation">
-		<g:message code="topic.secondaryAnnotation.label" default="Secondary Annotation" />
-		
-	</label>
-	<g:textArea name="secondaryAnnotation" cols="40" rows="5" value="${topicInstance?.secondaryAnnotation}"/>
+	<g:textArea name="description" cols="40" rows="5" value="${topicInstance?.description}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
@@ -24,14 +16,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="owner" name="owner.id" from="${com.redhat.theses.auth.User.list()}" optionKey="id" required="" value="${topicInstance?.owner?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'supervison', 'error')} ">
-	<label for="supervison">
-		<g:message code="topic.supervison.label" default="Supervison" />
-		
-	</label>
-	<g:select name="supervison" from="${com.redhat.theses.Membership.list()}" multiple="multiple" optionKey="id" size="5" value="${topicInstance?.supervison*.id}" class="many-to-many"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'tags', 'error')} ">

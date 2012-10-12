@@ -5,25 +5,21 @@ import com.redhat.theses.auth.User
 class Topic {
 
     String title
-    String primaryAnnotation
-    String secondaryAnnotation
+    String description
     Date dateCreated
     User owner
 
-    static hasMany = [tags : Tag, supervison: Membership]
+    static hasMany = [tags : Tag]
     static constraints = {
-        primaryAnnotation widget: 'textarea'
-        secondaryAnnotation nullable: true, widget: 'textarea'
+        description widget: 'textarea'
+    }
+
+    Set<Supervision> getSupervisions() {
+        Supervision.findAllByTopic(this).collect {it.membership} as Set
     }
 
     static mapping = {
-        primaryAnnotation type: 'text'
+        description type: 'text'
         secondaryAnnotation type: 'text'
-    }
-
-    Map<University, List<User>> getSupervision (){
-        supervision.groupBy {it.university}.collectEntries {key, value ->
-            [key, value.collect {it.user}]
-        }
     }
 }

@@ -24,9 +24,7 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="primaryAnnotation" title="${message(code: 'topic.primaryAnnotation.label', default: 'Primary Annotation')}" />
-					
-						<g:sortableColumn property="secondaryAnnotation" title="${message(code: 'topic.secondaryAnnotation.label', default: 'Secondary Annotation')}" />
+						<g:sortableColumn property="description" title="${message(code: 'topic.description.label', default: 'Description')}" />
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'topic.dateCreated.label', default: 'Date Created')}" />
 					
@@ -40,9 +38,7 @@
 				<g:each in="${topicInstanceList}" status="i" var="topicInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "primaryAnnotation")}</g:link></td>
-					
-						<td>${fieldValue(bean: topicInstance, field: "secondaryAnnotation")}</td>
+						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "description")}</g:link></td>
 					
 						<td><g:formatDate date="${topicInstance.dateCreated}" /></td>
 					

@@ -23,20 +23,11 @@
 			</g:if>
 			<ol class="property-list topic">
 			
-				<g:if test="${topicInstance?.primaryAnnotation}">
+				<g:if test="${topicInstance?.description}">
 				<li class="fieldcontain">
-					<span id="primaryAnnotation-label" class="property-label"><g:message code="topic.primaryAnnotation.label" default="Primary Annotation" /></span>
+					<span id="description-label" class="property-label"><g:message code="topic.description.label" default="Description" /></span>
 					
-						<span class="property-value" aria-labelledby="primaryAnnotation-label"><g:fieldValue bean="${topicInstance}" field="primaryAnnotation"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${topicInstance?.secondaryAnnotation}">
-				<li class="fieldcontain">
-					<span id="secondaryAnnotation-label" class="property-label"><g:message code="topic.secondaryAnnotation.label" default="Secondary Annotation" /></span>
-					
-						<span class="property-value" aria-labelledby="secondaryAnnotation-label"><g:fieldValue bean="${topicInstance}" field="secondaryAnnotation"/></span>
+						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${topicInstance}" field="description"/></span>
 					
 				</li>
 				</g:if>
@@ -55,17 +46,6 @@
 					<span id="owner-label" class="property-label"><g:message code="topic.owner.label" default="Owner" /></span>
 					
 						<span class="property-value" aria-labelledby="owner-label"><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${topicInstance?.supervison}">
-				<li class="fieldcontain">
-					<span id="supervison-label" class="property-label"><g:message code="topic.supervison.label" default="Supervison" /></span>
-					
-						<g:each in="${topicInstance.supervison}" var="s">
-						<span class="property-value" aria-labelledby="supervison-label"><g:link controller="membership" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
-						</g:each>
 					
 				</li>
 				</g:if>

@@ -9,10 +9,9 @@ class Membership implements Serializable    {
 
     static mapping = {
         version false
-        id composite: ['user', 'university']
     }
 
     static constraints = {
-
+        user unique: ['university']
     }
 }
