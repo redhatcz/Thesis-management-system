@@ -242,6 +242,15 @@ fieldset,
 	margin-left: 27%;
 }
 
+.fieldcontain .dynamic-list {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fieldcontain .dynamic-list-child {
+    margin-bottom: 5px;
+}
+
 label {
 	cursor: pointer;
 	display: inline-block;

@@ -1,6 +1,8 @@
 package com.redhat.theses
 
 import org.springframework.dao.DataIntegrityViolationException
+import com.redhat.theses.auth.User
+import grails.converters.JSON
 
 class UniversityController {
 
@@ -13,6 +15,19 @@ class UniversityController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [universityInstanceList: University.list(params), universityInstanceTotal: University.count()]
+    }
+
+    def listUsersByName(String term) {
+        def users = User.findAllByFullNameLike("%" + term + "%", [max: 5])
+        def userList = []
+        users.each {
+            def userMap = [:]
+            userMap.put("id", it.id)
+            userMap.put("label", it.fullName)
+            userMap.put("name", it.fullName)
+            userList.add(userMap)
+        }
+        render userList as JSON
     }
 
     def create() {

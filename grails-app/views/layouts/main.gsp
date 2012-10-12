@@ -14,6 +14,9 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.min.css')}" type="text/css">
+        <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-ui.min.js')}"></script>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
