@@ -1,7 +1,8 @@
 package com.redhat.theses.auth
 
-import com.redhat.theses.Organization
 import groovy.transform.ToString
+import com.redhat.theses.University
+import com.redhat.theses.Membership
 
 @ToString(includes='username')
 class User {
@@ -15,8 +16,8 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
-    static hasMany = [organizations: Organization]
-    static belongsTo = Organization
+    static hasMany = [universities: University]
+    static belongsTo = University
 
 	static constraints = {
 		username blank: false, unique: true
@@ -24,11 +25,16 @@ class User {
 	}
 
 	static mapping = {
-		password column: '`password`'
-        organizations fetch: 'join'
+        universities fetch: 'join'
 	}
 
-    def beforeDelete() {
+
+    boolean isMember(University university){
+        Membership.countByUserAndUniversity(this, university) > 0
+    }
+
+    Set<University> getUniversities() {
+        Membership.findAllByUser(this).collect {it.university} as Set
     }
 
 	Set<Role> getAuthorities() {

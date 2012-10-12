@@ -3,13 +3,12 @@ package com.redhat.theses
 
 
 import grails.test.mixin.*
-import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Organization)
-class OrganizationTests {
+@TestFor(University)
+class UniversityTests {
 
     void testSomething() {
         fail "Implement me"

@@ -1,5 +1,5 @@
 package com.redhat.theses
 
-class OrganizationController {
+class UniversityController {
     static scaffold = true
 }

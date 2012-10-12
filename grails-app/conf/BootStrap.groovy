@@ -1,14 +1,15 @@
-import com.redhat.theses.Organization
+import com.redhat.theses.University
 import com.redhat.theses.auth.User
+import com.redhat.theses.University
+import com.redhat.theses.Membership
 
 class BootStrap {
 
     def init = { servletContext ->
         if(!User.count() ){
-            def o = new Organization(name: 'Masaryk University')
-                    .addToMembers(new User(username: 'admin', password: "admin", enabled: true))
-                    .addToMembers(new User(username: 'jcechace', password: "passw0rd", enabled: true))
-                    .save()
+            def u = new User(username: 'admin', password: "admin", enabled: true).save();
+            def o = new University(name: 'Masaryk University').save()
+            new Membership(user: u, university: o).save()
         }
     }
     def destroy = {
