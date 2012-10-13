@@ -56,18 +56,18 @@ class UniversityController {
         [universityInstance: universityInstance]
     }
 
-    def edit(Long id) {
+    def edit(Long id, UsersCommand usersCommand) {
         def universityInstance = University.get(id)
         if (!universityInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'university.label', default: 'University'), id])
             redirect(action: "list")
             return
         }
-
-        [universityInstance: universityInstance]
+        usersCommand.users = Membership.findAllByUniversity(universityInstance).collect { it.user }
+        [universityInstance: universityInstance, usersCommand: usersCommand]
     }
 
-    def update(Long id, Long version) {
+    def update(Long id, Long version, UsersCommand usersCommand) {
         def universityInstance = University.get(id)
         if (!universityInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'university.label', default: 'University'), id])
@@ -86,6 +86,7 @@ class UniversityController {
         }
 
         universityInstance.properties = params
+        usersCommand.properties = params
 
         if (!universityInstance.save(flush: true)) {
             render(view: "edit", model: [universityInstance: universityInstance])
