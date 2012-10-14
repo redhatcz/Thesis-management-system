@@ -3,6 +3,7 @@
     $(document).ready(function() {
         autocompletion("${jQuery.escapeSelector(value: name)}",
                 "${jQuery.escapeSelector(value: hiddenFieldId)}",
-                "${remoteUrl}");
+                "${remoteUrl}",
+                "${optElements}");
     });
 </script>
