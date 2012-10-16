@@ -22,7 +22,7 @@ class University {
         Membership.countByUserAndUniversity(user, this) > 0
     }
 
-    String tostring(){
+    String toString(){
         name
     }
 }

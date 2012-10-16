@@ -1,6 +1,8 @@
 package com.redhat.theses
 
 import org.springframework.dao.DataIntegrityViolationException
+import com.redhat.theses.auth.User
+import grails.converters.JSON
 
 class TopicController {
 
@@ -15,16 +17,32 @@ class TopicController {
         [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count()]
     }
 
+    def listUsersFromUniversityByName(String term) {
+        def query = Membership.where {university.id == Long.parseLong(params.membership.university.id)  && user.fullName =~ "%${term}%"}
+        def memberships = query.find([max: 5])
+        def userList = []
+
+        memberships.each {
+            userList << [id: it.id, label: it.user.fullName, name: it.user.fullName]
+        }
+        render userList as JSON
+    }
+
     def create() {
-        [topicInstance: new Topic(params)]
+        [topicInstance: new Topic(params), membershipInstance: new Membership(params.membership)]
     }
 
     def save() {
         def topicInstance = new Topic(params)
+        def membershipInstance = Membership.get(params.membership.id)
+        def supervison = new Supervision(topic: topicInstance, membership: membershipInstance)
         if (!topicInstance.save(flush: true)) {
             render(view: "create", model: [topicInstance: topicInstance])
             return
         }
+
+        // TODO: inform user if supervision couldn't be persisted
+        supervison.save(flush: true)
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
         redirect(action: "show", id: topicInstance.id)
