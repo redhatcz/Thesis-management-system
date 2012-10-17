@@ -7,7 +7,7 @@
 
 
     <g:hiddenField name="membership.id" value="${membershipInstance?.user?.id}"/>
-    <autocomplete:textField name="membership.user.fullName" value="${user?.fullName}"
+    <a4g:autocomplete name="membership.user.fullName" value="${user?.fullName}"
                             hiddenFieldId="membership.id"
                             remoteUrl="${createLink(action: 'listUsersFromUniversityByName')}"
                             optElements="membership.university"/>

@@ -1,11 +1,9 @@
 package com.redhat.theses
 
-import grails.converters.JSON
+class Ajax4GSPTagLib {
+    static namespace = "a4g"
 
-class AutocompleteTagLib {
-    static namespace = "autocomplete"
-
-    def textField = { attrs, body ->
+    def autocomplete = { attrs, body ->
         def model = [name: attrs.name, value: attrs.value,
                      hiddenFieldId: attrs.hiddenFieldId,
                      remoteUrl: attrs.remoteUrl,
