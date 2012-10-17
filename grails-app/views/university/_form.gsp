@@ -10,11 +10,11 @@
 	<g:textField name="name" value="${universityInstance?.name}"/>
 </div>
 <div class="fieldcontain">
-    <label for="users">
+    <label for="users-list">
         <g:message code="university.users.label" default="Users" />
 
     </label>
-    <div id="add-users-list" class="dynamic-list">
+    <div id="users-list" class="dynamic-list">
         <g:each in="${usersCommand?.users}" var="user" status="i">
             <g:render template="userfield" model="['user': user, 'i': i]"/>
         </g:each>
