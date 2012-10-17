@@ -9,7 +9,7 @@ if (typeof jQuery !== 'undefined') {
 }
 
 function autocompletion(field_id, hidden_id, url, optElements) {
-    $("#" + field_id).autocomplete({
+    $("#" + escapeSelector(field_id)).autocomplete({
         source: function(request, response){
             var params = buildParams(optElements.split(" "));
             console.log(params);
@@ -25,7 +25,7 @@ function autocompletion(field_id, hidden_id, url, optElements) {
         },
         minLength: 2,
         select: function(event, ui) {
-            $("#" + hidden_id).val(ui.item.id);
+            $("#" + escapeSelector(hidden_id)).val(ui.item.id);
         }
     });
 }
