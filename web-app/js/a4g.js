@@ -4,8 +4,10 @@
  * Dependencies: JQuery, JQuery-UI
  */
 
+UI = $.ui.autocomplete;
+
 function autocompletion(inputFieldId, outputFieldId, url, optElements) {
-    $("#" + escapeSelector(inputFieldId)).autocomplete({
+    $("#" + UI.escapeRegex(inputFieldId)).autocomplete({
         source: function(request, response){
             var params = buildParams(optElements.split(" "));
 
@@ -21,20 +23,16 @@ function autocompletion(inputFieldId, outputFieldId, url, optElements) {
         minLength: 2,
         select: function(event, ui) {
             if (outputFieldId) {
-                $("#" + escapeSelector(outputFieldId)).val(ui.item.id);
+                $("#" + UI.escapeRegex(outputFieldId)).val(ui.item.id);
             }
         }
     });
 }
 
-function escapeSelector(id) {
-    return id.replace(/([\[\]\.])/g, "\\$1");
-}
-
 function buildParams(elements){
     var params = {};
     for (var i=0; i < elements.length; ++i){
-        var elem = $("#" + escapeSelector(elements[i]));
+        var elem = $("#" + UI.escapeRegex(elements[i]));
         var param = elem.attr('name');
         params[param] = elem.val();
     }
