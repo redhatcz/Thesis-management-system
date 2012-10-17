@@ -12,7 +12,6 @@ function autocompletion(field_id, hidden_id, url, optElements) {
     $("#" + escapeSelector(field_id)).autocomplete({
         source: function(request, response){
             var params = buildParams(optElements.split(" "));
-            console.log(params);
 
             params['term'] = request.term;
             $.ajax({
