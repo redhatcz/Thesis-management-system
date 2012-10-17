@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.min.css')}" type="text/css">
         <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
         <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-ui.min.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js', file: 'a4g.js')}"></script>
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
