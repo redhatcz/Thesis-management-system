@@ -5,9 +5,8 @@
               required=""
               value="${membershipInstance?.university?.id}" class="many-to-one"/>
 
-
-    <g:hiddenField name="membership.id" value="${membershipInstance?.user?.id}"/>
-    <a4g:autocomplete name="membership.user.fullName" value="${user?.fullName}"
-                            hiddenFieldId="membership.id"
-                            remoteUrl="${createLink(action: 'listUsersFromUniversityByName')}"
-                            optElements="membership.university"/>
+    <a4g:autocomplete remoteUrl="${createLink(action: 'listUsersFromUniversityByName')}"
+                      optElements="membership.university">
+        <g:hiddenField name="membership.id" value="${membershipInstance?.user?.id}"/>
+        <g:textField name="membership.user.fullName" value="${user?.fullName}"/>
+    </a4g:autocomplete>

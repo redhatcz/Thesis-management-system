@@ -1,5 +1,11 @@
-function autocompletion(field_id, hidden_id, url, optElements) {
-    $("#" + escapeSelector(field_id)).autocomplete({
+/**
+ * A4G javascript functions
+ *
+ * Dependencies: JQuery, JQuery-UI
+ */
+
+function autocompletion(inputFieldId, outputFieldId, url, optElements) {
+    $("#" + escapeSelector(inputFieldId)).autocomplete({
         source: function(request, response){
             var params = buildParams(optElements.split(" "));
 
@@ -14,7 +20,9 @@ function autocompletion(field_id, hidden_id, url, optElements) {
         },
         minLength: 2,
         select: function(event, ui) {
-            $("#" + escapeSelector(hidden_id)).val(ui.item.id);
+            if (outputFieldId) {
+                $("#" + escapeSelector(outputFieldId)).val(ui.item.id);
+            }
         }
     });
 }
