@@ -6,6 +6,12 @@ class Ajax4GSPTagLib {
     /**
      * Adds autocomplete "magic" on textfield inside this element.
      * If you wish, you can provide a hidden element that will be populated with ID returned from the server.
+     *
+     * Attributes:
+     *  - remoteUrl - url of the ajax request
+     *  - optElements - elements that will be a part of the query string, separated by one whitespace, you can use
+     *    '@' symbol if you want to change the name of the query string parameter, otherwise, the name of the selected
+     *    element will be used as the query string parameter
      */
     def autocomplete = { attrs, body ->
         def content = body()

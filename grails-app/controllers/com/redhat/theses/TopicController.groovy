@@ -29,7 +29,9 @@ class TopicController {
     }
 
     def create() {
-        [topicInstance: new Topic(params), membershipInstance: new Membership(params.membership)]
+        def membershipCommand = new MembershipCommand();
+        bindData(membershipCommand, params)
+        [topicInstance: new Topic(params), membershipCommand: membershipCommand]
     }
 
     def save() {

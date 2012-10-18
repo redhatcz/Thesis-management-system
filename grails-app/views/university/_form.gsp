@@ -14,39 +14,10 @@
         <g:message code="university.users.label" default="Users" />
 
     </label>
-    <div id="users-list" class="dynamic-list">
-        <g:each in="${usersCommand?.users}" var="user" status="i">
-            <g:render template="userfield" model="['user': user, 'i': i]"/>
-        </g:each>
-        <g:render template="userfield" model="['i': 'clone']"/>
-
-        <div id="add-user">
-            <input type="button" value="Add User" onclick="addUser()"/>
-        </div>
-
-        <script type="text/javascript">
-            var usersCount = ${usersCommand?.users?.size()};
-
-            function addUser() {
-                //clone last element
-                var clone = $("#user-clone").clone();
-
-                //replace last element's 'clone' with membershipsCount
-                var userCloneHtml = $("#user-clone")[0].outerHTML.replace(/clone/g, usersCount);
-                $("#user-clone").replaceWith(userCloneHtml);
-
-                //prepend the clone before button 'add-user'
-                $("#add-user").before(clone);
-
-                //increment membershipsCount
-                usersCount++;
-            }
-
-            function deleteUser(id) {
-                if (id != 'clone') {
-                    $('#user-' + id).remove();
-                }
-            }
-        </script>
-    </div>
+    <richg:dynamicField id="users-list" for="${usersCommand?.users}" var="user" index="i">
+        <a4g:autocomplete remoteUrl="${createLink(action: 'listUsersByName')}">
+            <g:hiddenField name="users[${i}].id" value="${user?.id}"/>
+            <g:textField name="users[${i}].fullName" value="${user?.fullName}"/>
+        </a4g:autocomplete>
+    </richg:dynamicField>
 </div>

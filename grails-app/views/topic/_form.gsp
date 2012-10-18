@@ -20,9 +20,7 @@
     <label for="supervison-list">
         <g:message code="supervision.label" default="Supervision" />
     </label>
-    <div id="supervison-list" class="dynamic-list">
-        <g:render template="membership"/>
-    </div>
+    <g:render template="membership"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'tags', 'error')} ">
