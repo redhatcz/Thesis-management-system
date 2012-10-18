@@ -6,7 +6,7 @@
               value="${membershipInstance?.university?.id}" class="many-to-one"/>
 
     <a4g:autocomplete remoteUrl="${createLink(action: 'listUsersFromUniversityByName')}"
-                      optElements="membership.university">
+                      optElements="membership.university@universityId">
         <g:hiddenField name="membership.id" value="${membershipInstance?.user?.id}"/>
         <g:textField name="membership.user.fullName" value="${user?.fullName}"/>
     </a4g:autocomplete>

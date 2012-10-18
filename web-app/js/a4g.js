@@ -32,9 +32,15 @@ function autocompletion(inputFieldId, outputFieldId, url, optElements) {
 function buildParams(elements){
     var params = {};
     for (var i=0; i < elements.length; ++i){
-        var elem = $("#" + UI.escapeRegex(elements[i]));
-        var param = elem.attr('name');
-        params[param] = elem.val();
+        var idAndAlias = elements[i].split("@");
+        var elem = $("#" + UI.escapeRegex(idAndAlias[0]));
+
+        if (!idAndAlias[1]) {
+            var param = elem.attr('name');
+            params[param] = elem.val();
+        } else {
+            params[idAndAlias[1]] = elem.val();
+        }
     }
     return params
 }
