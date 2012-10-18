@@ -18,14 +18,10 @@ class UniversityController {
     }
 
     def listUsersByName(String term) {
-        def users = User.findAllByFullNameLike("%" + term + "%", [max: 5])
+        def users = User.findAllByFullNameLike("%${term}%", [max: 5])
         def userList = []
         users.each {
-            def userMap = [:]
-            userMap.put("id", it.id)
-            userMap.put("label", it.fullName)
-            userMap.put("name", it.fullName)
-            userList.add(userMap)
+            userList << [id: it.id, label: it.fullName, name: it.fullName]
         }
         render userList as JSON
     }
