@@ -16,8 +16,10 @@ function addDynamicField(variable, size) {
     //prepend the clone before button
     $(buttonId).before(cloneHtml);
 
-    //make it visible
-    $("#dynamic-field-" + variable + "-" + size).removeAttr("style");
+    //make it visible and enabled
+    var currentDynamicFieldId = "#dynamic-field-" + variable + "-" + size;
+    $(currentDynamicFieldId).removeAttr("style");
+    $(currentDynamicFieldId + " :input").removeAttr("disabled");
 
     //change add field
     var newSize = size + 1;

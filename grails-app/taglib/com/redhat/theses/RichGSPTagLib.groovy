@@ -21,12 +21,16 @@ class RichGSPTagLib {
         def list = attrs?.for;
 
         def cloneModel = [var: var, i: "clone",
-                          body: body((index): "clone")]
+                          body: body((index): "clone"),
+                          classes: "dynamic-field-child clone",
+                          id: "dynamic-field-${var}-clone"]
         result += render(template: "/taglib/richg/dynamicFieldInner", model: cloneModel)
 
         list?.eachWithIndex { item, i ->
             def model = [var: var, i: i,
-                         body: body((var): item, (index): i)]
+                         body: body((var): item, (index): i),
+                         classes: "dynamic-field-child",
+                         id: "dynamic-field-${var}-${i}"]
             result += render(template: "/taglib/richg/dynamicFieldInner", model: model)
         }
 

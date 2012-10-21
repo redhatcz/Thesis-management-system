@@ -1,4 +1,4 @@
-<div id="dynamic-field-${var}-${i}" class="dynamic-field-child" style="${i == 'clone' ? 'display: none;' : ''}">
+<div id="${id}" class="${classes}">
     ${body}
-    <input type="button" class="delete" value="Delete" onclick="$('#dynamic-field-${var}-${i}').remove();"/>
+    <input type="button" class="delete" value="Delete" onclick='$("#${id}").remove();'/>
 </div>
