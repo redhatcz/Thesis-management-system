@@ -8,6 +8,8 @@ class UniversityController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def universityService
+
     def index() {
         redirect(action: "list", params: params)
     }
@@ -26,14 +28,16 @@ class UniversityController {
         render userList as JSON
     }
 
-    def create() {
-        [universityInstance: new University(params)]
+    def create(UsersCommand usersCommand) {
+        [universityInstance: new University(params), usersCommand: usersCommand]
     }
 
-    def save() {
+    def save(UsersCommand usersCommand) {
         def universityInstance = new University(params)
-        if (!universityInstance.save(flush: true)) {
-            render(view: "create", model: [universityInstance: universityInstance])
+        def filteredUsers = usersCommand.users.grep { it.id != null }
+        def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
+        if (usersCommand.hasErrors() || !universityService.save(universityInstance, memberships)) {
+            render(view: "create", model: [universityInstance: universityInstance, usersCommand: usersCommand])
             return
         }
 
@@ -49,7 +53,7 @@ class UniversityController {
             return
         }
 
-        [universityInstance: universityInstance]
+        [universityInstance: universityInstance, users: universityInstance.users]
     }
 
     def edit(Long id, UsersCommand usersCommand) {
@@ -82,10 +86,12 @@ class UniversityController {
         }
 
         universityInstance.properties = params
-        usersCommand.properties = params
 
-        if (!universityInstance.save(flush: true)) {
-            render(view: "edit", model: [universityInstance: universityInstance])
+        def filteredUsers = usersCommand.users.grep { it.id != null }
+        def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
+
+        if (usersCommand.hasErrors() || !universityService.save(universityInstance, memberships)) {
+            render(view: "edit", model: [universityInstance: universityInstance, usersCommand: usersCommand])
             return
         }
 

@@ -3,12 +3,11 @@ package com.redhat.theses
 import com.redhat.theses.auth.User
 import groovy.transform.ToString
 
-@ToString(includes='name')
 class University {
     String name;
 
     static constraints = {
-
+        name blank: false, unique: true
     }
 
     static mapping = {

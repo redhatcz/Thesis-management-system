@@ -31,6 +31,19 @@
 					
 				</li>
 				</g:if>
+
+                <g:if test="${!users.empty}">
+                    <li class="fieldcontain">
+                        <span id="users-label" class="property-label"><g:message code="university.users.label" default="Users" /></span>
+
+                        <div>
+                            <g:each in="${users}" var="user">
+                                <span class="property-value" aria-labelledby="users-label"><g:fieldValue bean="${user}" field="fullName"/></span>
+                            </g:each>
+                        </div>
+
+                    </li>
+                </g:if>
 			
 			</ol>
 			<g:form>
