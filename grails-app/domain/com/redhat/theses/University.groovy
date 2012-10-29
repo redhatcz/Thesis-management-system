@@ -2,6 +2,7 @@ package com.redhat.theses
 
 import com.redhat.theses.auth.User
 import groovy.transform.ToString
+import org.springframework.dao.InvalidDataAccessApiUsageException
 
 class University {
     String name;
@@ -13,8 +14,13 @@ class University {
     static mapping = {
     }
 
-    Set<User> getUsers(){
-        Membership.findAllByUniversity(this).collect {it.user} as Set
+    Set<User> getUsers() {
+        try {
+            Membership.findAllByUniversity(this).collect {it.user} as Set
+        } catch (InvalidDataAccessApiUsageException e) {
+            //this object has not been saved yet, so return empty collection
+            new HashSet<User>()
+        }
     }
 
     boolean  hasMember(User user){
