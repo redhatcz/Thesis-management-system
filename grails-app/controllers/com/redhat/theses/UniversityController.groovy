@@ -34,7 +34,7 @@ class UniversityController {
 
     def save(UsersCommand usersCommand) {
         def universityInstance = new University(params)
-        def filteredUsers = usersCommand.users.grep { it.id != null }
+        def filteredUsers = usersCommand.users.unique().grep { it.id != null }
         def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
         if (usersCommand.hasErrors() || !universityService.saveWithMemberships(universityInstance, memberships)) {
             render(view: "create", model: [universityInstance: universityInstance, usersCommand: usersCommand])
@@ -87,7 +87,7 @@ class UniversityController {
 
         universityInstance.properties = params
 
-        def filteredUsers = usersCommand.users.grep { it.id != null }
+        def filteredUsers = usersCommand.users.unique().grep { it.id != null }
         def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
 
         if (usersCommand.hasErrors() || !universityService.saveWithMemberships(universityInstance, memberships)) {
