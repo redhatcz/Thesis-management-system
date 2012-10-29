@@ -11,11 +11,13 @@ class Topic {
 
     static hasMany = [tags : Tag]
     static constraints = {
-        description widget: 'textarea'
+        description widget: 'textarea' , nullable: false, blank: false
+        title nullable: false, blank: false
+        owner nullable: false
     }
 
     Set<Supervision> getSupervisions() {
-        Supervision.findAllByTopic(this).collect {it.membership} as Set
+        Supervision.findAllByTopic(this) as Set
     }
 
     static mapping = {
