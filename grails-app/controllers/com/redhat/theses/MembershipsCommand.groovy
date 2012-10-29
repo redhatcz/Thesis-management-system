@@ -2,14 +2,16 @@ package com.redhat.theses
 
 import org.apache.commons.collections.ListUtils
 import org.apache.commons.collections.FactoryUtils
+import grails.validation.Validateable
 
-/**
- * Created with IntelliJ IDEA.
- * User: jcechace
- * Date: 10/13/12
- * Time: 11:56 PM
- * To change this template use File | Settings | File Templates.
- */
-class MembershipCommand {
+@Validateable
+class MembershipsCommand {
+
+    static constraints = {
+        memberships validator: {memberships ->
+            memberships.every { Membership.get(it?.id) }
+        }
+    }
+
     List<Membership> memberships = ListUtils.lazyList(new ArrayList<Membership>(), FactoryUtils.instantiateFactory(Membership.class));
 }

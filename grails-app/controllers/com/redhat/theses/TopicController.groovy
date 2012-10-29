@@ -1,10 +1,12 @@
 package com.redhat.theses
 
 import org.springframework.dao.DataIntegrityViolationException
-import com.redhat.theses.auth.User
+
 import grails.converters.JSON
 
 class TopicController {
+
+    def topicService;
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -29,22 +31,20 @@ class TopicController {
     }
 
     def create() {
-        def membershipCommand = new MembershipCommand();
-        bindData(membershipCommand, params)
-        [topicInstance: new Topic(params), membershipCommand: membershipCommand]
+        def membershipsCommand = new MembershipsCommand();
+        bindData(membershipsCommand, params.supervisions)
+        [topicInstance: new Topic(params), membershipCommand: membershipsCommand]
     }
 
     def save() {
-        def topicInstance = new Topic(params)
-        def membershipInstance = Membership.get(params.membership.id)
-        def supervison = new Supervision(topic: topicInstance, membership: membershipInstance)
-        if (!topicInstance.save(flush: true)) {
-            render(view: "create", model: [topicInstance: topicInstance])
+        def topicInstance = new Topic(params.topic)
+        def membershipsCommand = new MembershipsCommand()
+        bindData(membershipsCommand, params.supervisions)
+
+        if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships)) {
+            render(view: "create", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand])
             return
         }
-
-        // TODO: inform user if supervision couldn't be persisted
-        supervison.save(flush: true)
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
         redirect(action: "show", id: topicInstance.id)
@@ -61,7 +61,7 @@ class TopicController {
         [topicInstance: topicInstance]
     }
 
-    def edit(Long id) {
+    def edit(Long id, MembershipsCommand membershipsCommand) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
@@ -69,7 +69,9 @@ class TopicController {
             return
         }
 
-        [topicInstance: topicInstance]
+        membershipsCommand.memberships += topicInstance.supervisions.collect {it.membership}
+
+        [topicInstance: topicInstance, membershipCommand: membershipsCommand]
     }
 
     def update(Long id, Long version) {
@@ -90,10 +92,13 @@ class TopicController {
             }
         }
 
-        topicInstance.properties = params
+        topicInstance.properties = params.topic
+        def membershipsCommand = new MembershipsCommand()
+        bindData(membershipsCommand, params.supervisions)
+        membershipsCommand.memberships = membershipsCommand.memberships.findAll()
 
-        if (!topicInstance.save(flush: true)) {
-            render(view: "edit", model: [topicInstance: topicInstance])
+        if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships))  {
+            render(view: "edit", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand])
             return
         }
 
@@ -109,12 +114,10 @@ class TopicController {
             return
         }
 
-        try {
-            topicInstance.delete(flush: true)
+        if (topicService.deleteWithSupervisions(topicInstance)) {
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'topic.label', default: 'Topic'), id])
             redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
+        } else {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'topic.label', default: 'Topic'), id])
             redirect(action: "show", id: id)
         }
