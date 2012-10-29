@@ -4,7 +4,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport
 
 class UniversityService {
 
-    def save(University university, List<Membership> memberships) {
+    def saveWithMemberships(University university, List<Membership> memberships) {
         def allMembers = university.users
         def difference = memberships.grep { !(it.user in allMembers) }
 
