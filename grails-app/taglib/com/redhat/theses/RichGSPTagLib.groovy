@@ -35,7 +35,7 @@ class RichGSPTagLib {
         }
 
         def modelOuter = [id: attrs?.id, var: var,
-                          size: list?.size() , body: result]
+                          size: list?.size() ?: 0 , body: result]
         out << render(template: "/taglib/richg/dynamicFieldOuter", model: modelOuter)
     }
 }
