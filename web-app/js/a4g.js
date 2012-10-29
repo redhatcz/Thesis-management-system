@@ -22,6 +22,10 @@ UI = $.ui.autocomplete;
             if ( matcher.test( item.label || item.value || item ) ) {
                 autocomplete.selectedItem = item;
                 return false;
+            } else {
+                autocomplete.selectedItem = {
+                    id: null
+                }
             }
         });
         if ( autocomplete.selectedItem ) {
