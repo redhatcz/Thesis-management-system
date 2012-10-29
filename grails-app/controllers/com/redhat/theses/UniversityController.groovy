@@ -15,7 +15,7 @@ class UniversityController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [universityInstanceList: University.list(params), universityInstanceTotal: University.count()]
+        [universityInstanceList: University.list(params.university), universityInstanceTotal: University.count()]
     }
 
     def listUsersByName(String term) {
@@ -27,15 +27,18 @@ class UniversityController {
         render userList as JSON
     }
 
-    def create(UsersCommand usersCommand) {
-        [universityInstance: new University(params), usersCommand: usersCommand]
+    def create() {
+        [universityInstance: new University(params.university), usersCommand: new UsersCommand()]
     }
 
-    def save(UsersCommand usersCommand) {
-        def universityInstance = new University(params)
+    def save() {
+        def usersCommand = new UsersCommand()
+        bindData(usersCommand, params.usersCommand)
+        def universityInstance = new University(params.university)
+
         def filteredUsers = usersCommand.users.unique().grep { it.id != null }
         def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
-        if (usersCommand.hasErrors() || !universityService.saveWithMemberships(universityInstance, memberships)) {
+        if (!usersCommand.validate() || !universityService.saveWithMemberships(universityInstance, memberships)) {
             render(view: "create", model: [universityInstance: universityInstance, usersCommand: usersCommand])
             return
         }
@@ -55,7 +58,10 @@ class UniversityController {
         [universityInstance: universityInstance, users: universityInstance.users]
     }
 
-    def edit(Long id, UsersCommand usersCommand) {
+    def edit(Long id) {
+        def usersCommand = new UsersCommand()
+        bindData(usersCommand, params.usersCommand)
+
         def universityInstance = University.get(id)
         if (!universityInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'university.label', default: 'University'), id])
@@ -66,7 +72,12 @@ class UniversityController {
         [universityInstance: universityInstance, usersCommand: usersCommand]
     }
 
-    def update(Long id, Long version, UsersCommand usersCommand) {
+    def update() {
+        Long id = params.university.long("id")
+        Long version = params.university.long("version")
+        def usersCommand = new UsersCommand()
+        bindData(usersCommand, params.usersCommand)
+
         def universityInstance = University.get(id)
         if (!universityInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'university.label', default: 'University'), id])
@@ -84,12 +95,12 @@ class UniversityController {
             }
         }
 
-        universityInstance.properties = params
+        universityInstance.properties = params.university
 
         def filteredUsers = usersCommand.users.unique().grep { it.id != null }
         def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
 
-        if (usersCommand.hasErrors() || !universityService.saveWithMemberships(universityInstance, memberships)) {
+        if (!usersCommand.validate() || !universityService.saveWithMemberships(universityInstance, memberships)) {
             render(view: "edit", model: [universityInstance: universityInstance, usersCommand: usersCommand])
             return
         }
@@ -98,7 +109,9 @@ class UniversityController {
         redirect(action: "show", id: universityInstance.id)
     }
 
-    def delete(Long id) {
+    def delete() {
+        Long id = params.university.long("id")
+
         def universityInstance = University.get(id)
         if (!universityInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'university.label', default: 'University'), id])

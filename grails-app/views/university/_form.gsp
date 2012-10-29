@@ -7,7 +7,7 @@
 		<g:message code="university.name.label" default="Name" />
 		
 	</label>
-	<g:textField name="name" value="${universityInstance?.name}"/>
+	<g:textField name="university.name" value="${universityInstance?.name}"/>
 </div>
 <div class="fieldcontain">
     <label for="users-list">
@@ -16,8 +16,8 @@
     </label>
     <richg:dynamicField id="users-list" for="${usersCommand?.users}" var="user" index="i">
         <a4g:autocomplete remoteUrl="${createLink(action: 'listUsersByName')}">
-            <g:hiddenField name="users[${i}].id" value="${user?.id}"/>
-            <g:textField name="users[${i}].fullName" value="${user?.fullName}"/>
+            <g:hiddenField name="usersCommand.users[${i}].id" value="${user?.id}"/>
+            <g:textField name="usersCommand.users[${i}].fullName" value="${user?.fullName}"/>
         </a4g:autocomplete>
     </richg:dynamicField>
 </div>
