@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class UniversityService {
 
-    def saveWithMemberships(University university, List<Membership> memberships) {
+    Boolean saveWithMemberships(University university, List<Membership> memberships) {
         def allMembers = university.users
         def difference = memberships.grep { !(it.user in allMembers) }
 
@@ -16,7 +16,7 @@ class UniversityService {
         success
     }
 
-    def deleteWithMemberships(University university, List<Membership> memberships) {
+    Boolean deleteWithMemberships(University university, List<Membership> memberships) {
         def success = memberships.each { delete(it) } && delete(university)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
