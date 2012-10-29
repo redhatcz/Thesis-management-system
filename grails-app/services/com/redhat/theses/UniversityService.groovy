@@ -6,10 +6,13 @@ import org.springframework.dao.DataIntegrityViolationException
 class UniversityService {
 
     Boolean saveWithMemberships(University university, List<Membership> memberships) {
-        def allMembers = university.users
-        def difference = memberships.grep { !(it.user in allMembers) }
+        def allMemberships = Membership.findAllByUniversity(university)
+        def allMembers = allMemberships.collect { it.user }
+        def currentMembers = memberships.collect { it.user }
+        def toBeSaved = memberships.grep { !(it.user in allMembers) }
+        def toBeDeleted = allMemberships.grep { it.user in currentMembers }
 
-        def success = university.save() && difference.every { it.save() }
+        def success = university.save() && toBeSaved.every { it.save() } && toBeDeleted.every { delete(it) }
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         }
