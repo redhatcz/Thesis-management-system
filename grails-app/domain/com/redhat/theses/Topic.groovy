@@ -20,7 +20,6 @@ class Topic {
 
     static mapping = {
         description type: 'text'
-        secondaryAnnotation type: 'text'
     }
 
     String toString(){
