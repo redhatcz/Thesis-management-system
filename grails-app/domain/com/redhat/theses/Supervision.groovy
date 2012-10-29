@@ -1,11 +1,16 @@
 package com.redhat.theses
 
-class Supervision {
+class Supervision implements Serializable {
 
     Topic topic
     Membership membership
 
     static constraints = {
-        membership unique: ['topic']
+
+    }
+
+    static mapping = {
+        id composite: ['topic', 'membership']
+        version false
     }
 }
