@@ -1,6 +1,5 @@
 package com.redhat.theses
 
-import org.springframework.dao.DataIntegrityViolationException
 import com.redhat.theses.auth.User
 import grails.converters.JSON
 
@@ -107,12 +106,10 @@ class UniversityController {
             return
         }
 
-        try {
-            universityInstance.delete(flush: true)
+        if (universityService.deleteWithMemberships(universityInstance, Membership.findAllByUniversity(universityInstance))) {
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'university.label', default: 'University'), id])
             redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
+        } else {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'university.label', default: 'University'), id])
             redirect(action: "show", id: id)
         }
