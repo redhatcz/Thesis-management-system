@@ -36,8 +36,8 @@ class UniversityController {
         bindData(usersCommand, params.usersCommand)
         def universityInstance = new University(params.university)
 
-        def filteredUsers = usersCommand.users.unique().grep { it.id != null }
-        def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
+        usersCommand.users = usersCommand.users.unique().findAll { it?.id }
+        def memberships = usersCommand.users.collect { new Membership(university: universityInstance, user: it) }
         if (!usersCommand.validate() || !universityService.saveWithMemberships(universityInstance, memberships)) {
             render(view: "create", model: [universityInstance: universityInstance, usersCommand: usersCommand])
             return
@@ -97,8 +97,8 @@ class UniversityController {
 
         universityInstance.properties = params.university
 
-        def filteredUsers = usersCommand.users.unique().grep { it.id != null }
-        def memberships = filteredUsers.collect { new Membership(university: universityInstance, user: it) }
+        usersCommand.users = usersCommand.users.unique().findAll { it?.id }
+        def memberships = usersCommand.users.collect { new Membership(university: universityInstance, user: it) }
 
         if (!usersCommand.validate() || !universityService.saveWithMemberships(universityInstance, memberships)) {
             render(view: "edit", model: [universityInstance: universityInstance, usersCommand: usersCommand])

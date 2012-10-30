@@ -9,8 +9,8 @@ class UniversityService {
         def allMemberships = Membership.findAllByUniversity(university)
         def allMembers = allMemberships.collect { it.user }
         def currentMembers = memberships.collect { it.user }
-        def toBeSaved = memberships.grep { !(it.user in allMembers) }
-        def toBeDeleted = allMemberships.grep { it.user in currentMembers }
+        def toBeSaved = memberships.findAll { !(it.user in allMembers) }
+        def toBeDeleted = allMemberships.findAll { !(it.user in currentMembers) }
 
         def success = university.save() && toBeSaved.every { it.save() } && toBeDeleted.every { delete(it) }
         if (!success) {
