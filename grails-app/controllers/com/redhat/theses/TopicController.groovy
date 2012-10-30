@@ -58,7 +58,12 @@ class TopicController {
             return
         }
 
-        [topicInstance: topicInstance]
+        def supervisions = topicInstance.supervisions
+                .collect { it.membership }
+                .groupBy { it.university }
+                .collectEntries {key, val -> [key, val.user]}
+
+        [topicInstance: topicInstance, supervisions: supervisions]
     }
 
     def edit(Long id, MembershipsCommand membershipsCommand) {

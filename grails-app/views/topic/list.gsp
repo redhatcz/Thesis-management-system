@@ -23,29 +23,22 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<g:sortableColumn property="description" title="${message(code: 'topic.description.label', default: 'Description')}" />
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'topic.dateCreated.label', default: 'Date Created')}" />
+                        <g:sortableColumn property="title" title="${message(code: 'topic.title.label', default: 'Title')}" />
 					
 						<th><g:message code="topic.owner.label" default="Owner" /></th>
-					
-						<g:sortableColumn property="title" title="${message(code: 'topic.title.label', default: 'Title')}" />
-					
+
+                        <g:sortableColumn property="dateCreated" title="${message(code: 'topic.dateCreated.label', default: 'Date Created')}" />
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${topicInstanceList}" status="i" var="topicInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "description")}</g:link></td>
-					
+						<td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "title")}</g:link></td>
+
+                        <td>${fieldValue(bean: topicInstance, field: "owner")}</td>
+
 						<td><g:formatDate date="${topicInstance.dateCreated}" /></td>
-					
-						<td>${fieldValue(bean: topicInstance, field: "owner")}</td>
-					
-						<td>${fieldValue(bean: topicInstance, field: "title")}</td>
-					
 					</tr>
 				</g:each>
 				</tbody>

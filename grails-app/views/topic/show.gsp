@@ -22,53 +22,63 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list topic">
-			
-				<g:if test="${topicInstance?.description}">
-				<li class="fieldcontain">
-					<span id="description-label" class="property-label"><g:message code="topic.description.label" default="Description" /></span>
-					
-						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${topicInstance}" field="description"/></span>
-					
-				</li>
-				</g:if>
-			
+
+                <g:if test="${topicInstance?.title}">
+                    <li class="fieldcontain">
+                        <span id="title-label" class="property-label"><g:message code="topic.title.label" default="Title" /></span>
+
+                        <span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${topicInstance}" field="title"/></span>
+
+                    </li>
+                </g:if>
+
+                <g:if test="${topicInstance?.owner}">
+                    <li class="fieldcontain">
+                        <span id="owner-label" class="property-label"><g:message code="topic.owner.label" default="Owner" /></span>
+                        <span class="property-value" aria-labelledby="owner-label"><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link></span>
+                    </li>
+                </g:if>
+
 				<g:if test="${topicInstance?.dateCreated}">
 				<li class="fieldcontain">
 					<span id="dateCreated-label" class="property-label"><g:message code="topic.dateCreated.label" default="Date Created" /></span>
-					
-						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${topicInstance?.dateCreated}" /></span>
-					
+					<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${topicInstance?.dateCreated}" /></span>
 				</li>
 				</g:if>
-			
-				<g:if test="${topicInstance?.owner}">
-				<li class="fieldcontain">
-					<span id="owner-label" class="property-label"><g:message code="topic.owner.label" default="Owner" /></span>
-					
-						<span class="property-value" aria-labelledby="owner-label"><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
+
+                <g:if test="${!supervisions.empty}">
+                    <li class="fieldcontain">
+                        <span id="supervisions-label" class="property-label"><g:message code="topic.supervisions.label" default="Supervisions" /></span>
+                            <g:each in="${supervisions}" status="i" var="supervision">
+                                <span class="property-value" aria-labelledby="supervisions-label">
+                                    <g:fieldValue bean="${supervision.key}" field="name"/>
+                                </span>
+                                <g:each in="${supervision.value}" var="supervisor">
+                                    <span class="property-value" aria-labelledby="supervisions-label">
+                                        <g:link controller="user" action="show" id="${supervisor?.id}">${supervisor?.encodeAsHTML()}</g:link>
+                                    </span>
+                                </g:each>
+                            </g:each>
+                    </li>
+                </g:if>
+
 				<g:if test="${topicInstance?.tags}">
 				<li class="fieldcontain">
 					<span id="tags-label" class="property-label"><g:message code="topic.tags.label" default="Tags" /></span>
-					
-						<g:each in="${topicInstance.tags}" var="t">
-						<span class="property-value" aria-labelledby="tags-label"><g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
+					<g:each in="${topicInstance.tags}" var="t">
+					<span class="property-value" aria-labelledby="tags-label"><g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+					</g:each>
 				</li>
 				</g:if>
-			
-				<g:if test="${topicInstance?.title}">
-				<li class="fieldcontain">
-					<span id="title-label" class="property-label"><g:message code="topic.title.label" default="Title" /></span>
-					
-						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${topicInstance}" field="title"/></span>
-					
-				</li>
-				</g:if>
+
+
+                <g:if test="${topicInstance?.description}">
+                    <li class="fieldcontain">
+                        <span id="description-label" class="property-label"><g:message code="topic.description.label" default="Description" /></span>
+                        <span class="property-value" aria-labelledby="description-label">
+                            <markdown:renderHtml text="${topicInstance?.description}"/>
+                    </li>
+                </g:if>
 			
 			</ol>
 			<g:form>
