@@ -19,6 +19,7 @@
         <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-ui.min.js')}"></script>
         <script type="text/javascript" src="${resource(dir: 'js', file: 'a4g.js')}"></script>
         <script type="text/javascript" src="${resource(dir: 'js', file: 'richg.js')}"></script>
+        %{--<r:require module="bootstrap-css"/>--}%
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>
