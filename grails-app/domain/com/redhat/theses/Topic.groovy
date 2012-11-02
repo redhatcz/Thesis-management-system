@@ -8,6 +8,7 @@ class Topic {
     String description
     Date dateCreated
     User owner
+    Company company
 
     static hasMany = [tags : Tag]
     static constraints = {

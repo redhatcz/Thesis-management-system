@@ -3,6 +3,7 @@ import com.redhat.theses.auth.User
 import com.redhat.theses.University
 import com.redhat.theses.Membership
 import com.redhat.theses.Tag
+import com.redhat.theses.Company
 
 class BootStrap {
 
@@ -15,6 +16,8 @@ class BootStrap {
             def u2 = new User(username: 'person', fullName: 'Person Person', password: "person", enabled: true).save();
             def o2 = new University(name: 'VUT').save()
             new Membership(user: u2, university: o2).save()
+
+            def c = new Company(name: 'Red Hat').save()
         }
         if(!Tag.count()){
             def t = new Tag(title: 'Root tag').save()

@@ -16,6 +16,14 @@
     <g:select id="owner" name="topic.owner.id" from="${com.redhat.theses.auth.User.list()}" optionKey="id" required="" value="${topicInstance?.owner?.id}" class="many-to-one"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'company', 'error')} required">
+    <label for="company">
+        <g:message code="topic.company.label" default="Company" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:select id="company" name="topic.company.id" from="${com.redhat.theses.Company.list()}" optionKey="id" required="" value="${topicInstance?.company?.id}" class="many-to-one"/>
+</div>
+
 <div class="fieldcontain">
     <label for="supervison-list">
         <g:message code="supervision.label" default="Supervision" />

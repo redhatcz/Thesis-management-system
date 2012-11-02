@@ -3,24 +3,24 @@ package com.redhat.theses
 import org.springframework.transaction.interceptor.TransactionAspectSupport
 import org.springframework.dao.DataIntegrityViolationException
 
-class UniversityService {
+class OrganizationService {
 
-    Boolean saveWithMemberships(University university, List<Membership> memberships) {
-        def allMemberships = Membership.findAllByUniversity(university)
+    Boolean saveWithMemberships(Organization organization, List<Membership> memberships) {
+        def allMemberships = Membership.findAllByOrganization(organization)
         def allMembers = allMemberships.collect { it.user }
         def currentMembers = memberships.collect { it.user }
         def toBeSaved = memberships.findAll { !(it.user in allMembers) }
         def toBeDeleted = allMemberships.findAll { !(it.user in currentMembers) }
 
-        def success = university.save() && toBeSaved.every { it.save() } && toBeDeleted.every { delete(it) }
+        def success = organization.save() && toBeSaved.every { it.save() } && toBeDeleted.every { delete(it) }
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         }
         success
     }
 
-    Boolean deleteWithMemberships(University university, List<Membership> memberships) {
-        def success = memberships.each { delete(it) } && delete(university)
+    Boolean deleteWithMemberships(Organization organization, List<Membership> memberships) {
+        def success = memberships.each { delete(it) } && delete(organization)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         }

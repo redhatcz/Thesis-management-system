@@ -2,16 +2,16 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: universityInstance, field: 'name', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: organizationInstance, field: 'name', 'error')} ">
 	<label for="name">
-		<g:message code="university.name.label" default="Name" />
+		<g:message code="organization.name.label" default="Name" />
 		
 	</label>
-	<g:textField name="university.name" value="${universityInstance?.name}"/>
+	<g:textField name="organization.name" value="${organizationInstance?.name}"/>
 </div>
 <div class="fieldcontain">
     <label for="users-list">
-        <g:message code="university.users.label" default="Users" />
+        <g:message code="organization.users.label" default="Users" />
 
     </label>
     <richg:dynamicField id="users-list" for="${usersCommand?.users}" var="user" index="i">

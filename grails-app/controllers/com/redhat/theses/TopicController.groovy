@@ -19,8 +19,8 @@ class TopicController {
         [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count()]
     }
 
-    def listUsersFromUniversityByName(String term, Long universityId) {
-        def query = Membership.where {university.id == universityId  && user.fullName =~ "%${term}%"}
+    def listUsersFromUniversityByName(String term, Long organizationId) {
+        def query = Membership.where {organization.id == organizationId  && user.fullName =~ "%${term}%"}
         def memberships = query.find([max: 5])
         def userList = []
 
