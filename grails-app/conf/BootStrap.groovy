@@ -11,11 +11,11 @@ class BootStrap {
         if(!User.count() ){
             def u = new User(username: 'admin', fullName: 'Admin Admin', password: "admin", enabled: true).save();
             def o = new University(name: 'Masaryk University').save()
-            new Membership(user: u, university: o).save()
+            new Membership(user: u, organization: o).save()
 
             def u2 = new User(username: 'person', fullName: 'Person Person', password: "person", enabled: true).save();
             def o2 = new University(name: 'VUT').save()
-            new Membership(user: u2, university: o2).save()
+            new Membership(user: u2, organization: o2).save()
 
             def c = new Company(name: 'Red Hat').save()
         }

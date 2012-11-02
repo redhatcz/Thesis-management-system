@@ -60,7 +60,7 @@ class TopicController {
 
         def supervisions = topicInstance.supervisions
                 .collect { it.membership }
-                .groupBy { it.university }
+                .groupBy { it.organization }
                 .collectEntries {key, val -> [key, val.user]}
 
         [topicInstance: topicInstance, supervisions: supervisions]
