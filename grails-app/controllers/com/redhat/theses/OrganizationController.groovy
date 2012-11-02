@@ -9,6 +9,8 @@ class OrganizationController {
 
     def organizationService
 
+    def grailsApplication
+
     def index() {
         redirect(action: "list", params: params)
     }
@@ -34,12 +36,9 @@ class OrganizationController {
     def save() {
         def usersCommand = new UsersCommand()
         bindData(usersCommand, params.usersCommand)
-        def organizationInstance
-        if (params.organization.type == 'University'){
-            organizationInstance = new University(params.organization)
-        } else if (params.organization.type == 'Company'){
-            organizationInstance = new Company(params.organization)
-        }
+        def organizationClass = grailsApplication.domainClasses.find {it.name == params.organization.type}
+        def organizationInstance = (Organization) organizationClass.newInstance()
+        organizationInstance.properties = params.organization
 
         usersCommand.users = usersCommand.users.unique().findAll { it?.id }
         def memberships = usersCommand.users.collect { new Membership(organization: organizationInstance, user: it) }
