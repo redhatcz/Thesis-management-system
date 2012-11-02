@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class OrganizationService {
 
     Boolean saveWithMemberships(Organization organization, List<Membership> memberships) {
-        def allMemberships = Membership.findAllByOrganization(organization)
+        def allMemberships = organization.id ? Membership.findAllByOrganization(organization) : []
         def allMembers = allMemberships.collect { it.user }
         def currentMembers = memberships.collect { it.user }
         def toBeSaved = memberships.findAll { !(it.user in allMembers) }
