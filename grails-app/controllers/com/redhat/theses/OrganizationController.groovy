@@ -17,7 +17,7 @@ class OrganizationController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [organizationInstanceList: Organization.list(params.organization), organizationInstanceTotal: Organization.count()]
+        [organizationInstanceList: Organization.list(params), organizationInstanceTotal: Organization.count()]
     }
 
     def listUsersByName(String term) {
