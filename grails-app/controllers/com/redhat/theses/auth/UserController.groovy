@@ -16,11 +16,11 @@ class UserController {
     }
 
     def create() {
-        [userInstance: new User(params)]
+        [userInstance: new User(params.user)]
     }
 
     def save() {
-        def userInstance = new User(params)
+        def userInstance = new User(params.user)
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return
@@ -52,7 +52,9 @@ class UserController {
         [userInstance: userInstance]
     }
 
-    def update(Long id, Long version) {
+    def update() {
+        Long id = params.user.long("id")
+        Long version = params.user.long("version")
         def userInstance = User.get(id)
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
@@ -70,7 +72,7 @@ class UserController {
             }
         }
 
-        userInstance.properties = params
+        userInstance.properties = params.user
 
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])
@@ -81,7 +83,8 @@ class UserController {
         redirect(action: "show", id: userInstance.id)
     }
 
-    def delete(Long id) {
+    def delete() {
+        Long id = params.user.long("id")
         def userInstance = User.get(id)
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
