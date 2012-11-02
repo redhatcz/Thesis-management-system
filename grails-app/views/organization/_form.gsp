@@ -1,7 +1,7 @@
 <%@ page import="com.redhat.theses.University" %>
 
 <div class="fieldcontain ${hasErrors(bean: organizationInstance, field: 'name', 'error')} ">
-	<label for="name">
+	<label for="organization.name">
 		<g:message code="organization.name.label" default="Name" />
 		
 	</label>

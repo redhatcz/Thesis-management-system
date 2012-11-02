@@ -1,7 +1,7 @@
 <%@ page import="com.redhat.theses.Topic" %>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'title', 'error')} ">
-    <label for="title">
+    <label for="topic.title">
         <g:message code="topic.title.label" default="Title" />
 
     </label>
@@ -9,11 +9,11 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
-    <label for="owner">
+    <label for="topic.owner.id">
         <g:message code="topic.owner.label" default="Owner" />
         <span class="required-indicator">*</span>
     </label>
-    <g:select id="owner" name="topic.owner.id" from="${com.redhat.theses.auth.User.list()}" optionKey="id" required="" value="${topicInstance?.owner?.id}" class="many-to-one"/>
+    <g:select name="topic.owner.id" from="${com.redhat.theses.auth.User.list()}" optionKey="id" required="" value="${topicInstance?.owner?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'company', 'error')} required">
@@ -32,7 +32,7 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'tags', 'error')} ">
-    <label for="tags">
+    <label for="topic.tags">
         <g:message code="topic.tags.label" default="Tags" />
 
     </label>
@@ -40,7 +40,7 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'description', 'error')} ">
-	<label for="description">
+	<label for="topic.description">
 		<g:message code="topic.description.label" default="Description" />
 		
 	</label>
