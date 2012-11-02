@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 
+                <li class="fieldcontain">
+                    <span id="type-label" class="property-label"><g:message code="organization.type.label" default="Type of organization" /></span>
+
+                    <span class="property-value" aria-labelledby="name-label">
+                        <g:message code="organization.type.value" default="${organizationInstance?.class?.simpleName}"/>
+                    </span>
+
+                </li>
+
                 <g:if test="${!users.empty}">
                     <li class="fieldcontain">
                         <span id="users-label" class="property-label"><g:message code="organization.users.label" default="Users" /></span>

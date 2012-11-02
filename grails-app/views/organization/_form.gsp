@@ -1,7 +1,5 @@
 <%@ page import="com.redhat.theses.University" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: organizationInstance, field: 'name', 'error')} ">
 	<label for="name">
 		<g:message code="organization.name.label" default="Name" />
@@ -9,6 +7,15 @@
 	</label>
 	<g:textField name="organization.name" value="${organizationInstance?.name}"/>
 </div>
+
+<div class="fieldcontain">
+    <label for="organization.type">
+        <g:message code="organization.type.label" default="Type of organization" />
+
+    </label>
+    <g:select from="['University', 'Company']" required="" name="organization.type" value="${organizationInstance?.class?.simpleName}"/>
+</div>
+
 <div class="fieldcontain">
     <label for="users-list">
         <g:message code="organization.users.label" default="Users" />
