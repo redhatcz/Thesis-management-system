@@ -33,7 +33,7 @@ class TopicController {
     def create() {
         def membershipsCommand = new MembershipsCommand();
         bindData(membershipsCommand, params.supervisions)
-        [topicInstance: new Topic(params), membershipCommand: membershipsCommand]
+        [topicInstance: new Topic(params), membershipCommand: membershipsCommand, universities: University.all]
     }
 
     def save() {
@@ -42,7 +42,7 @@ class TopicController {
         bindData(membershipsCommand, params.supervisions)
 
         if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships)) {
-            render(view: "create", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand])
+            render(view: "create", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand, universities: University.all])
             return
         }
 
@@ -76,7 +76,7 @@ class TopicController {
 
         membershipsCommand.memberships += topicInstance.supervisions.collect {it.membership}
 
-        [topicInstance: topicInstance, membershipCommand: membershipsCommand]
+        [topicInstance: topicInstance, membershipCommand: membershipsCommand, universities: University.all]
     }
 
     def update() {
@@ -105,7 +105,7 @@ class TopicController {
         membershipsCommand.memberships = membershipsCommand.memberships.findAll()
 
         if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships))  {
-            render(view: "edit", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand])
+            render(view: "edit", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand, universities: University.all])
             return
         }
 

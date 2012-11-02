@@ -1,7 +1,7 @@
 <richg:dynamicField id="supervision-list" for="${membershipCommand?.memberships}" var="membership" index="i">
     <g:select id="supervisions.memberships[${i}].organization"
               name="supervisions.memberships[${i}].organization.id"
-              from="${com.redhat.theses.University.list()}"
+              from="${universities}"
               optionKey="id"
               required=""
               value="${membership?.organization?.id}" class="many-to-one"/>
