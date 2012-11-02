@@ -16,11 +16,11 @@ class TagController {
     }
 
     def create() {
-        [tagInstance: new Tag(params)]
+        [tagInstance: new Tag(params.tag)]
     }
 
     def save() {
-        def tagInstance = new Tag(params)
+        def tagInstance = new Tag(params.tag)
         if (!tagInstance.save(flush: true)) {
             render(view: "create", model: [tagInstance: tagInstance])
             return
@@ -52,7 +52,9 @@ class TagController {
         [tagInstance: tagInstance]
     }
 
-    def update(Long id, Long version) {
+    def update() {
+        Long id = params.tag.long("id")
+        Long version = params.tag.long("version")
         def tagInstance = Tag.get(id)
         if (!tagInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
@@ -70,7 +72,7 @@ class TagController {
             }
         }
 
-        tagInstance.properties = params
+        tagInstance.properties = params.tag
 
         if (!tagInstance.save(flush: true)) {
             render(view: "edit", model: [tagInstance: tagInstance])
@@ -81,7 +83,8 @@ class TagController {
         redirect(action: "show", id: tagInstance.id)
     }
 
-    def delete(Long id) {
+    def delete() {
+        Long id = params.tag.long("id")
         def tagInstance = Tag.get(id)
         if (!tagInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])

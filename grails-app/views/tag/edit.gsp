@@ -28,8 +28,8 @@
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" >
-				<g:hiddenField name="id" value="${tagInstance?.id}" />
-				<g:hiddenField name="version" value="${tagInstance?.version}" />
+				<g:hiddenField name="tag.id" value="${tagInstance?.id}" />
+				<g:hiddenField name="tag.version" value="${tagInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
