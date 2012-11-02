@@ -79,7 +79,9 @@ class TopicController {
         [topicInstance: topicInstance, membershipCommand: membershipsCommand]
     }
 
-    def update(Long id, Long version) {
+    def update() {
+        Long id = params.topic.long("id")
+        Long version = params.topic.long("version")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
@@ -111,7 +113,8 @@ class TopicController {
         redirect(action: "show", id: topicInstance.id)
     }
 
-    def delete(Long id) {
+    def delete() {
+        Long id = params.topic.long("id")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])

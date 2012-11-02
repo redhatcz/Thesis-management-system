@@ -28,8 +28,8 @@
 			</ul>
 			</g:hasErrors>
 			<g:form method="post" >
-				<g:hiddenField name="id" value="${topicInstance?.id}" />
-				<g:hiddenField name="version" value="${topicInstance?.version}" />
+				<g:hiddenField name="topic.id" value="${topicInstance?.id}" />
+				<g:hiddenField name="topic.version" value="${topicInstance?.version}" />
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
