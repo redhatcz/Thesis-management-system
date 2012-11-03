@@ -3,6 +3,7 @@ package com.redhat.theses
 import org.springframework.dao.DataIntegrityViolationException
 
 import grails.converters.JSON
+import com.redhat.theses.auth.User
 
 class TopicController {
 
@@ -33,7 +34,7 @@ class TopicController {
     def create() {
         def membershipsCommand = new MembershipsCommand();
         bindData(membershipsCommand, params.supervisions)
-        [topicInstance: new Topic(params), membershipCommand: membershipsCommand, universities: University.all]
+        [topicInstance: new Topic(params), membershipCommand: membershipsCommand, universities: University.all, owners: User.all]
     }
 
     def save() {
@@ -42,7 +43,8 @@ class TopicController {
         bindData(membershipsCommand, params.supervisions)
 
         if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships)) {
-            render(view: "create", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand, universities: University.all])
+            render(view: "create", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand,
+                    universities: University.all, owners: User.all])
             return
         }
 
@@ -76,7 +78,8 @@ class TopicController {
 
         membershipsCommand.memberships += topicInstance.supervisions.collect {it.membership}
 
-        [topicInstance: topicInstance, membershipCommand: membershipsCommand, universities: University.all]
+        [topicInstance: topicInstance, membershipCommand: membershipsCommand,
+                universities: University.all, owners: User.all]
     }
 
     def update() {
@@ -105,7 +108,8 @@ class TopicController {
         membershipsCommand.memberships = membershipsCommand.memberships.findAll()
 
         if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships))  {
-            render(view: "edit", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand, universities: University.all])
+            render(view: "edit", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand,
+                    universities: University.all, owners: User.all])
             return
         }
 
