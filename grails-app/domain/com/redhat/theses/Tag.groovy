@@ -23,7 +23,7 @@ class Tag {
     }
 
     List<Tag> getAllSubTags(){
-        subTags ? subTags*.allSubTags.flatten() : []
+        subTags ? subTags*.allSubTags.flatten() + subTags : []
     }
 
     String toString(){
