@@ -1,8 +1,8 @@
 package com.redhat.theses.auth
 
 import groovy.transform.ToString
-import com.redhat.theses.University
 import com.redhat.theses.Membership
+import com.redhat.theses.Organization
 
 @ToString(includes='username')
 class User {
@@ -24,12 +24,12 @@ class User {
 	}
 
 
-    boolean isMember(University university){
-        Membership.countByUserAndUniversity(this, university) > 0
+    boolean isMember(Organization organization){
+        Membership.countByUserAndOrganization(this, organization) > 0
     }
 
-    Set<University> getUniversities() {
-        Membership.findAllByUser(this).collect {it.university} as Set
+    Set<Organization> getOrganizations() {
+        Membership.findAllByUser(this).collect {it.organization} as Set
     }
 
 	Set<Role> getAuthorities() {
