@@ -1,10 +1,8 @@
 package com.redhat.theses.auth
 
-import groovy.transform.ToString
 import com.redhat.theses.Membership
 import com.redhat.theses.Organization
 
-@ToString(includes='username')
 class User {
 
 	transient springSecurityService
