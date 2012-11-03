@@ -5,7 +5,14 @@ class RegistrationController {
     static allowedMethods = [register: "POST"]
 
     def index() {
-        [registrationCommand: new RegistrationCommand()]
+        def requestURI = request.requestURI
+        def actionFromUrl = requestURI.substring(requestURI.lastIndexOf('/') + 1, requestURI.length() - 9)
+
+        if (actionFromUrl == 'index') {
+            redirect uri: '/registration', permanent: true
+        } else {
+            [registrationCommand: new RegistrationCommand()]
+        }
     }
 
     def register(RegistrationCommand registrationCommand) {
