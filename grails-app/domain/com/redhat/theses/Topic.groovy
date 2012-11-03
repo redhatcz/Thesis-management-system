@@ -17,8 +17,24 @@ class Topic {
         owner nullable: false
     }
 
+    def beforeInsert(){
+        filterTags()
+    }
+
+    def beforeUpdate(){
+        filterTags()
+    }
+
     Set<Supervision> getSupervisions() {
         Supervision.findAllByTopic(this) as Set
+    }
+
+    private filterTags(){
+        def filtered = new ArrayList<Tag>(tags)
+        tags.each {
+            filtered.removeAll(it.allParents)
+        }
+        tags = filtered
     }
 
     static mapping = {
