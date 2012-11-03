@@ -17,6 +17,10 @@ class Topic {
         owner nullable: false
     }
 
+    static List<Supervision> findAllByTag(Tag tag){
+        Topic.findAll('FROM Topic t where :tag member of t.tags', [tag: tag])
+    }
+
     def beforeInsert(){
         filterTags()
     }
@@ -25,10 +29,11 @@ class Topic {
         filterTags()
     }
 
-    Set<Supervision> getSupervisions() {
-        Supervision.findAllByTopic(this) as Set
+    List<Supervision> getSupervisions() {
+        Supervision.findAllByTopic(this)
     }
 
+//    TODO: possible refactoring
     private filterTags(){
         def filtered = new ArrayList<Tag>(tags)
         tags.each {
