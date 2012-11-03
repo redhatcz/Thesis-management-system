@@ -21,6 +21,9 @@ class BootStrap {
         }
         if(!Tag.count()){
             def t = new Tag(title: 'Root tag').save()
+            def t2 = new Tag(title: 'Sub tag 1', parent: t).save()
+            def t3 = new Tag(title: 'Sub tag 2', parent: t).save()
+            def t4 = new Tag(title: 'Sub sub tag 1', parent: t2).save()
         }
     }
     def destroy = {
