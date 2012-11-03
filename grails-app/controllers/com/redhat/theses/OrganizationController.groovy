@@ -12,7 +12,7 @@ class OrganizationController {
     def grailsApplication
 
     def index() {
-        redirect(action: "list", params: params)
+        redirect(action: "list", params: params, permanent: true)
     }
 
     def list(Integer max) {

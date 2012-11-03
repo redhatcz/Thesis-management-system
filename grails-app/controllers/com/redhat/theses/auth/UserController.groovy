@@ -7,7 +7,7 @@ class UserController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "list", params: params)
+        redirect(action: "list", params: params, permanent: true)
     }
 
     def list(Integer max) {
