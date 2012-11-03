@@ -1,5 +1,3 @@
-<%@ page import="com.redhat.theses.Topic" %>
-
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'title', 'error')} ">
     <label for="topic.title">
         <g:message code="topic.title.label" default="Title" />

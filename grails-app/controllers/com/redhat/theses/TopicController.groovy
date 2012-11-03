@@ -17,7 +17,31 @@ class TopicController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count()]
+        def rootTags = Tag.findAllByParentIsNull()
+        [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count(), tags: rootTags]
+    }
+
+
+    def tag(Long id, Integer max) {
+        if (!id){
+            redirect(action: "list", permanent: true)
+            return
+        }
+
+        params.max = Math.min(max ?: 10, 100)
+        def tag = Tag.get(id)
+
+        if (!tag) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            redirect(action: "list")
+            return
+        }
+
+        def subTags = tag.allSubTags
+        def topicInstanceList = subTags.collect {Topic.findAllByTag(it)}.flatten()
+
+        [topicInstanceList: topicInstanceList, topicInstanceTotal: Topic.count(),
+                currentTag: tag, tags: subTags]
     }
 
     def listUsersFromUniversityByName(String term, Long organizationId) {
