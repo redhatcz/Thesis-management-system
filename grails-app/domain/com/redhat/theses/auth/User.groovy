@@ -17,17 +17,10 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
-    static hasMany = [universities: University]
-    static belongsTo = University
-
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
         fullName blank: false
-	}
-
-	static mapping = {
-        universities fetch: 'join'
 	}
 
 
