@@ -5,6 +5,7 @@ import com.redhat.theses.auth.User
 class Topic {
 
     String title
+    String lead
     String description
     Date dateCreated
     User owner
