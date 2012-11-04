@@ -1,5 +1,3 @@
-<%@ page import="com.redhat.theses.University" %>
-
 <div class="fieldcontain ${hasErrors(bean: organizationInstance, field: 'name', 'error')} ">
 	<label for="organization.name">
 		<g:message code="organization.name.label" default="Name" />
@@ -22,7 +20,7 @@
 
     </label>
     <richg:dynamicField id="users-list" for="${usersCommand?.users}" var="user" index="i">
-        <a4g:autocomplete remoteUrl="${createLink(action: 'listUsersByName')}">
+        <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listUsersByName')}">
             <g:hiddenField name="usersCommand.users[${i}].id" value="${user?.id}"/>
             <g:textField name="usersCommand.users[${i}].fullName" value="${user?.fullName}"/>
         </a4g:autocomplete>

@@ -1,8 +1,5 @@
 package com.redhat.theses
 
-import org.springframework.dao.DataIntegrityViolationException
-
-import grails.converters.JSON
 import com.redhat.theses.auth.User
 
 class TopicController {
@@ -20,7 +17,6 @@ class TopicController {
         def rootTags = Tag.findAllByParentIsNull()
         [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count(), tags: rootTags]
     }
-
 
     def tag(Long id, Integer max) {
         if (!id){
@@ -42,17 +38,6 @@ class TopicController {
 
         [topicInstanceList: topicInstanceList, topicInstanceTotal: Topic.count(),
                 currentTag: tag, tags: tag.subTags]
-    }
-
-    def listUsersFromUniversityByName(String term, Long organizationId) {
-        def query = Membership.where {organization.id == organizationId  && user.fullName =~ "%${term}%"}
-        def memberships = query.find([max: 5])
-        def userList = []
-
-        memberships.each {
-            userList << [id: it.id, label: it.user.fullName, name: it.user.fullName]
-        }
-        render userList as JSON
     }
 
     def create() {

@@ -1,8 +1,5 @@
 package com.redhat.theses
 
-import com.redhat.theses.auth.User
-import grails.converters.JSON
-
 class OrganizationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -18,15 +15,6 @@ class OrganizationController {
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [organizationInstanceList: Organization.list(params), organizationInstanceTotal: Organization.count()]
-    }
-
-    def listUsersByName(String term) {
-        def users = User.findAllByFullNameLike("%${term}%", [max: 5])
-        def userList = []
-        users.each {
-            userList << [id: it.id, label: it.fullName, name: it.fullName]
-        }
-        render userList as JSON
     }
 
     def create() {

@@ -1,3 +1,4 @@
+<%@ page import="com.redhat.theses.ajax.JsonController" %>
 <richg:dynamicField id="supervision-list" for="${membershipCommand?.memberships}" var="membership" index="i">
     <g:select id="supervisions.memberships[${i}].organization"
               name="supervisions.memberships[${i}].organization.id"
@@ -6,7 +7,7 @@
               required=""
               value="${membership?.organization?.id}" class="many-to-one"/>
 
-    <a4g:autocomplete remoteUrl="${createLink(action: 'listUsersFromUniversityByName')}"
+    <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listUsersFromUniversityByName')}"
                       optElements="supervisions.memberships[${i}].organization@organizationId">
         <g:hiddenField name="supervisions.memberships[${i}].id" value="${membership?.user?.id}"/>
         <g:textField name="supervisions.memberships[${i}].user.fullName" value="${membership?.user?.fullName}"/>
