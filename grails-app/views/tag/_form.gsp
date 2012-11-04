@@ -13,9 +13,11 @@
 <div class="fieldcontain ${hasErrors(bean: tagInstance, field: 'parent', 'error')} ">
 	<label for="tag.parent.id">
 		<g:message code="tag.parent.label" default="Parent" />
-		
 	</label>
-	<g:select name="tag.parent.id" from="${com.redhat.theses.Tag.list()}" optionKey="id" value="${tagInstance?.parent?.id}" class="many-to-one" noSelection="['null': '']"/>
+    <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listTagsByName')}">
+        <g:hiddenField name="tag.parent.id" value="${tagInstance?.parent?.id}"/>
+        <g:textField name="tag.parent.title" value="${tagInstance?.parent?.title}"/>
+    </a4g:autocomplete>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: tagInstance, field: 'subTags', 'error')} ">
