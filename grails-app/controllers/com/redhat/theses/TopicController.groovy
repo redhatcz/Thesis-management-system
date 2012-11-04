@@ -37,11 +37,11 @@ class TopicController {
             return
         }
 
-        def subTags = tag.allSubTags
-        def topicInstanceList = subTags.collect {Topic.findAllByTag(it)}.flatten()
+        // TODO: possible refactoring
+        def topicInstanceList = (tag.allSubTags + tag).collect {Topic.findAllByTag(it)}.flatten().unique()
 
         [topicInstanceList: topicInstanceList, topicInstanceTotal: Topic.count(),
-                currentTag: tag, tags: subTags]
+                currentTag: tag, tags: tag.subTags]
     }
 
     def listUsersFromUniversityByName(String term, Long organizationId) {
