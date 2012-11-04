@@ -36,6 +36,9 @@ class Topic {
 
 //    TODO: possible refactoring
     private filterTags(){
+        if (!tags){
+            return
+        }
         def filtered = new ArrayList<Tag>(tags)
         tags.each {
             filtered.removeAll(it.allParents)
