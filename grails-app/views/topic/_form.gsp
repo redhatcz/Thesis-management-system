@@ -6,12 +6,16 @@
     <g:textField name="topic.title" value="${topicInstance?.title}"/>
 </div>
 
+
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
     <label for="topic.owner.id">
         <g:message code="topic.owner.label" default="Owner" />
         <span class="required-indicator">*</span>
     </label>
-    <g:select name="topic.owner.id" from="${owners}" optionKey="id" required="" value="${topicInstance?.owner?.id}" class="many-to-one"/>
+    <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listUsersByName')}">
+        <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
+        <g:textField name="topic.owner.fullName" value="${topicInstance?.owner?.fullName}"/>
+    </a4g:autocomplete>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'company', 'error')} required">
