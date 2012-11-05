@@ -18,9 +18,6 @@
 		</div>
 		<div id="show-tag" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
 			<ol class="property-list tag">
 			
 				<g:if test="${tagInstance?.title}">
