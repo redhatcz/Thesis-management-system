@@ -7,6 +7,6 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
-<g:render template="topicList" />
+    <g:render template="topicList" />
 </body>
 </html>

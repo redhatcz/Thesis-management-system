@@ -1,42 +1,40 @@
-<a href="#list-topic" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+<div class="span8">
+    <div class="table-base">
+        <g:if test="${topicInstanceList.isEmpty()}">
+            <p class="center muted">No topics were found.</p>
+        </g:if>
+        <g:else>
+            <g:each var="topic" in="${topicInstanceList}">
+                <div class="table-layout">
+                    <h4>
+                        <g:link action="show" id="${topic.id}">
+                            <g:fieldValue bean="${topic}" field="title"/>
+                        </g:link>
+                    </h4>
+                    <g:fieldValue bean="${topic}" field="lead"/>
+                </div>
+            </g:each>
+        </g:else>
+    </div>
+    <ul class="pager">
+        <li class="next">
+            <a href="#">Older &rarr;</a>
+        </li>
+        <li class="previous">
+            <a href="#">&larr; Newer</a>
+        </li>
     </ul>
 </div>
 
-<g:render template="tagList" />
-
-<div id="list-topic" class="content scaffold-list" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <table>
-        <thead>
-        <tr>
-            <g:sortableColumn property="title" title="${message(code: 'topic.title.label', default: 'Title')}" />
-
-            <th><g:message code="topic.owner.label" default="Owner" /></th>
-
-            <g:sortableColumn property="dateCreated" title="${message(code: 'topic.dateCreated.label', default: 'Date Created')}" />
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${topicInstanceList}" status="i" var="topicInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-                <td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "title")}</g:link></td>
-
-                <td>${fieldValue(bean: topicInstance, field: "owner")}</td>
-
-                <td><g:formatDate date="${topicInstance.dateCreated}" /></td>
-            </tr>
-        </g:each>
-        </tbody>
-    </table>
-    <div class="pagination">
-        <g:paginate total="${topicInstanceTotal}" />
+<div class="span4">
+    <div class="thesis">
+        <h4>Tags</h4>
+        <g:render template="tagList" />
+    </div>
+    <div class="thesis">
+        <h4>Topics Management</h4>
+        <g:link class="btn btn-info" action="create">
+            <g:message code="default.new.label" args="[entityName]" />
+        </g:link>
     </div>
 </div>
