@@ -5,8 +5,10 @@
     <meta name="layout" content="main">
 </head>
 <body>
-<ul class="errors">
-    <li>Error 400 - the request cannot be fulfilled due to bad syntax.</li>
-</ul>
+    <div class="span12">
+        <div class="alert alert-error">
+            Error 400 - the request cannot be fulfilled due to bad syntax.
+        </div>
+    </div>
 </body>
 </html>

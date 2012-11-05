@@ -5,8 +5,10 @@
     <meta name="layout" content="main">
 </head>
 <body>
-<ul class="errors">
-    <li>Error 403 - you don't have permission to access this page.</li>
-</ul>
+    <div class="span12">
+        <div class="alert alert-error">
+            Error 403 - you don't have permission to access this page.
+        </div>
+    </div>
 </body>
 </html>

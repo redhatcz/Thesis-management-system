@@ -5,8 +5,10 @@
     <meta name="layout" content="main">
 </head>
 <body>
-    <ul class="errors">
-        <li>Error 404 - the requested page was not found on the server.</li>
-    </ul>
+    <div class="span12">
+        <div class="alert alert-error">
+            Error 404 - the requested page was not found on the server.
+        </div>
+    </div>
 </body>
 </html>
