@@ -1,60 +1,52 @@
 <%@ page import="com.redhat.theses.auth.User" %>
-
-
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
-	<label for="user.username">
+<div class="control-group ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
+	<label class="control-label" for="user.username">
 		<g:message code="user.username.label" default="Username" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="user.username" required="" value="${userInstance?.username}"/>
+    <div class="controls">
+	    <g:textField name="user.username" required="" value="${userInstance?.username}"/>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
-	<label for="user.password">
+<div class="control-group ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
+	<label class="control-label" for="user.password">
 		<g:message code="user.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="user.password" required="" value="${userInstance?.password}"/>
+    <div class="controls">
+	    <g:passwordField name="user.password" required="" value="${userInstance?.password}"/>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'fullName', 'error')} required">
-	<label for="user.fullName">
+<div class="control-group ${hasErrors(bean: userInstance, field: 'fullName', 'error')} required">
+	<label class="control-label" for="user.fullName">
 		<g:message code="user.fullName.label" default="Full Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="user.fullName" required="" value="${userInstance?.fullName}"/>
+    <div class="controls">
+	    <g:textField name="user.fullName" required="" value="${userInstance?.fullName}"/>
+    </div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountExpired', 'error')} ">
-	<label for="user.accountExpired">
-		<g:message code="user.accountExpired.label" default="Account Expired" />
-		
-	</label>
-	<g:checkBox name="user.accountExpired" value="${userInstance?.accountExpired}" />
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountLocked', 'error')} ">
-	<label for="user.accountLocked">
-		<g:message code="user.accountLocked.label" default="Account Locked" />
-		
-	</label>
-	<g:checkBox name="user.accountLocked" value="${userInstance?.accountLocked}" />
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">
-	<label for="user.enabled">
-		<g:message code="user.enabled.label" default="Enabled" />
-		
-	</label>
-	<g:checkBox name="user.enabled" value="${userInstance?.enabled}" />
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'passwordExpired', 'error')} ">
-	<label for="user.passwordExpired">
-		<g:message code="user.passwordExpired.label" default="Password Expired" />
-		
-	</label>
-	<g:checkBox name="user.passwordExpired" value="${userInstance?.passwordExpired}" />
+<div class="control-group ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">
+    <div class="controls">
+        <label class="checkbox" for="user.enabled">
+            <g:checkBox name="user.enabled" value="${userInstance?.enabled}" />
+            <g:message code="user.enabled.label" default="Enabled" />
+        </label>
+        <label class="checkbox" for="user.passwordExpired">
+            <g:checkBox name="user.passwordExpired" value="${userInstance?.passwordExpired}" />
+            <g:message code="user.passwordExpired.label" default="Password Expired" />
+        </label>
+        <label class="checkbox" for="user.accountLocked">
+            <g:checkBox name="user.accountLocked" value="${userInstance?.accountLocked}" />
+            <g:message code="user.accountLocked.label" default="Account Locked" />
+        </label>
+        <label class="checkbox" for="user.accountExpired">
+            <g:checkBox name="user.accountExpired" value="${userInstance?.accountExpired}" />
+            <g:message code="user.accountExpired.label" default="Account Expired" />
+        </label>
+    </div>
 </div>
 

@@ -13,9 +13,7 @@
     <g:form class="form-horizontal" method="post" >
         <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
         <g:hiddenField name="topic.version" value="${topicInstance?.version}" />
-        <fieldset>
-            <g:render template="form"/>
-        </fieldset>
+        <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
             <g:actionSubmit class="btn btn-primary" action="update"
