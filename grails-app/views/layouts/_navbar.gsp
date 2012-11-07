@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="container">
             <div class="span12">
-                <a class="brand" href="#">Theses Management System</a>
+                <g:link class="brand" uri="/">Theses Management System</g:link>
                 <form class="navbar-search pull-right">
                     <input type="text" class="search-query" placeholder="Search">
                 </form>

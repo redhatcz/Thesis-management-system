@@ -6,7 +6,7 @@
     <g:set var="entityName" value="${message(code: 'topic.label', default: 'Topic')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
-<body nav-button="topics">
+<body>
     <g:render template="topicList" />
 </body>
 </html>

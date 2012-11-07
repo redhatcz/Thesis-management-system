@@ -8,23 +8,16 @@
 <html>
 <head>
     <g:render template="/layouts/head" />
-    <g:layoutHead/>
-    <r:layoutResources />
 </head>
 <body>
 
     <g:render template="/layouts/navbar" />
 
     <div class="container">
-        <g:if test="${flash.message}">
-            <div class="span12">
-                <div class="alert alert-info" role="status">
-                    ${flash.message}
-                </div>
-            </div>
-        </g:if>
-
-        <g:layoutBody />
+        <div class="span12">
+            <g:render template="/layouts/messages" />
+            <g:layoutBody />
+        </div>
     </div>
 
     <g:render template="/layouts/footer" />

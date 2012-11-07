@@ -4,7 +4,7 @@
     <meta name="layout" content="main"/>
     <title>Welcome to Grails</title>
 </head>
-    <body nav-button="news-feed">
+    <body>
 
         <div class="span8">
             <div class="table-base">

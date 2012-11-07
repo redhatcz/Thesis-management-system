@@ -12,3 +12,5 @@
 <script type="text/javascript" src="${resource(dir: 'js', file: 'richg.js')}"></script>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css">
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'base.css')}" type="text/css">
+<g:layoutHead/>
+<r:layoutResources />

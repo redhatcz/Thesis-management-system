@@ -6,15 +6,16 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 <head>
     <g:render template="/layouts/head" />
-    <g:layoutHead />
-    <r:layoutResources />
 </head>
 <body>
 
     <g:render template="/layouts/navbar" />
 
     <div class="container">
-        <g:render template="/layouts/navigation" />
+        <div class="span12">
+            <g:render template="/layouts/navigation" />
+            <g:render template="/layouts/messages" />
+        </div>
         <g:layoutBody />
     </div>
 
