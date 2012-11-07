@@ -19,6 +19,7 @@ class Comment {
 
     static mapping = {
         content type: 'text'
+        sort 'dateCreated'
     }
 
     String toString() {

@@ -74,7 +74,9 @@ class TopicController {
                 .groupBy { it.organization }
                 .collectEntries {key, val -> [key, val.user]}
 
-        [topicInstance: topicInstance, supervisions: supervisions]
+        def comments = Comment.findAllByArticle(topicInstance)
+
+        [topicInstance: topicInstance, supervisions: supervisions, comments: comments]
     }
 
     def edit(Long id, MembershipsCommand membershipsCommand) {
