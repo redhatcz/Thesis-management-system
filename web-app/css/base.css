@@ -6,6 +6,10 @@
     width: 1000px;
 }
 
+.margin {
+    padding-top: 30px;
+}
+
 .table-layout {
     border-bottom: 1px solid #dddddd;
     padding: 15px 15px;
@@ -56,8 +60,22 @@
             -moz-border-radius: 4px;
 }
 
+div.comment {
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #e3e3e3;
+        -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+}
+
+textarea.comment {
+    width: 100%;
+    padding: 0;
+}
+
 body {
     overflow-y: scroll;
+    margin-top: 41px;
 }
 
 .footer {
@@ -112,13 +130,9 @@ a.tag-root {
     background-color: #468847;
 }
 
-h1.header {
+.header {
     color: #999;
     padding-bottom: 20px;
     margin: 0 0 30px;
     border-bottom: 1px solid #eeeeee;
-}
-
-.Margin {
-    padding: 40px 0;
 }

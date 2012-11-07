@@ -17,6 +17,26 @@
         <g:if test="${topicInstance?.description}">
             <markdown:renderHtml text="${topicInstance?.description}"/>
         </g:if>
+
+        <g:if test="${comments}">
+            <h3 class="header">
+                Comments
+            </h3>
+            <g:each in="${comments}" var="comment" status="i">
+                <div class="comment" id="comment-${i}">
+                    <strong>${comment?.user.fullName}</strong>
+                    <markdown:renderHtml text="${comment?.content}" />
+                </div>
+            </g:each>
+        </g:if>
+
+        <h4 class="header">
+            Leave a comment
+        </h4>
+        <g:textArea class="comment" name="comment.content" rows="5" />
+        <button class="btn btn-primary pull-right">
+            <g:message code="default.button.post.label" default="Post Comment" />
+        </button>
     </div>
 
         %{--<g:if test="${!supervisions.empty}">--}%
@@ -64,15 +84,13 @@
         <div class="thesis">
             <h4>Topic Management</h4>
             <g:form>
-                <fieldset>
-                    <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
-                    <g:link class="btn btn-warning" action="edit" id="${topicInstance?.id}">
-                        <g:message code="default.button.edit.label" default="Edit" />
-                    </g:link>
-                    <g:actionSubmit class="btn btn-danger" action="delete"
-                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
+                <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
+                <g:link class="btn btn-warning" action="edit" id="${topicInstance?.id}">
+                    <g:message code="default.button.edit.label" default="Edit" />
+                </g:link>
+                <g:actionSubmit class="btn btn-danger" action="delete"
+                                value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
             </g:form>
         </div>
     </div>
