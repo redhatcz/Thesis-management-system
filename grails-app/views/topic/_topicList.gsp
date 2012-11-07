@@ -32,7 +32,7 @@
         <g:render template="tagList" />
     </div>
     <div class="thesis">
-        <h4>Topics Management</h4>
+        <h4>Manage Topics</h4>
         <g:link class="btn btn-info" action="create">
             <g:message code="default.new.label" args="[entityName]" />
         </g:link>
