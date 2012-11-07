@@ -37,6 +37,11 @@
                                id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
                         <g:message code="springSecurity.login.remember.me.label"/>
                     </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
                     <input type='submit' id="submit" class="btn btn-primary"
                            value='${message(code: "springSecurity.login.button")}'/>
                 </div>

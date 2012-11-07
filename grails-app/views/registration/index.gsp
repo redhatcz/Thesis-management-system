@@ -10,9 +10,7 @@
     </h1>
     <div class="offset2">
         <g:form class="form-horizontal" action="register" >
-            <fieldset class="form">
-                <g:render template="form"/>
-            </fieldset>
+            <g:render template="form"/>
             <div class="control-group">
                 <div class="controls">
                     <g:actionSubmit name="register" class="btn btn-primary"
