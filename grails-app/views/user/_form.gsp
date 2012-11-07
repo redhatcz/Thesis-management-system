@@ -5,7 +5,8 @@
 		<span class="required-indicator">*</span>
 	</label>
     <div class="controls">
-	    <g:textField name="user.username" required="" value="${userInstance?.username}"/>
+	    <g:textField name="user.username" value="${userInstance?.username}"
+	                 placeholder="${message(code: 'user.username', default: 'Username')}" />
     </div>
 </div>
 
@@ -15,7 +16,8 @@
 		<span class="required-indicator">*</span>
 	</label>
     <div class="controls">
-	    <g:passwordField name="user.password" required="" value="${userInstance?.password}"/>
+	    <g:passwordField name="user.password" value="${userInstance?.password}"
+                         placeholder="${message(code: 'user.password.label', default: 'Password')}" />
     </div>
 </div>
 
@@ -25,7 +27,8 @@
 		<span class="required-indicator">*</span>
 	</label>
     <div class="controls">
-	    <g:textField name="user.fullName" required="" value="${userInstance?.fullName}"/>
+	    <g:textField name="user.fullName" value="${userInstance?.fullName}"
+                     placeholder="${message(code: 'user.fullName.label', default: 'Full Name')}" />
     </div>
 </div>
 
