@@ -1,8 +1,13 @@
 package com.redhat.theses.auth
 
+import com.redhat.theses.University
+import com.redhat.theses.Membership
+
 class RegistrationController {
 
     static allowedMethods = [register: "POST"]
+
+    def userService
 
     def index() {
         def requestURI = request.requestURI
@@ -11,20 +16,22 @@ class RegistrationController {
         if (actionFromUrl == 'index') {
             redirect uri: '/registration', permanent: true
         } else {
-            [registrationCommand: new RegistrationCommand()]
+            [registrationCommand: new RegistrationCommand(), universityList: University.findAll()]
         }
     }
 
     def register(RegistrationCommand registrationCommand) {
         //TODO: set default Authority
-        def user = new User(params.registrationCommand)
+        User user = new User(params.registrationCommand)
         user.accountExpired = false
         user.enabled = false
         user.accountLocked = false
         user.passwordExpired = false
 
-        if (registrationCommand.hasErrors() || !user.save(flush: true)) {
-            render(view: "index", model: [registrationCommand: registrationCommand])
+        Membership membership = new Membership(user: user, organization: registrationCommand.university)
+
+        if (registrationCommand.hasErrors() || !userService.saveWithMemberships(user, [membership])) {
+            render(view: "index", model: [registrationCommand: registrationCommand, universityList: University.findAll()])
             return
         }
 

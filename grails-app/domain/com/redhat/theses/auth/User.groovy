@@ -9,7 +9,8 @@ class User {
 
 	String username
 	String password
-    String fullName;
+    String fullName
+    String email
 	boolean enabled
 	boolean accountExpired
 	boolean accountLocked
@@ -19,6 +20,7 @@ class User {
 		username blank: false, unique: true
 		password blank: false
         fullName blank: false
+        email email: true, blank: false
 	}
 
 
