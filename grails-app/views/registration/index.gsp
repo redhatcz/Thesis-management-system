@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="main">
+    <meta name="layout" content="light">
     <title><g:message code="default.registration.label" default="Registration" /></title>
 </head>
 <body>
