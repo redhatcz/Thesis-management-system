@@ -18,7 +18,7 @@ class Topic extends Article {
         owner nullable: false
     }
 
-    static List<Supervision> findAllByTag(Tag tag){
+    static List<Topic> findAllByTag(Tag tag){
         Topic.findAll('FROM Topic t where :tag member of t.tags', [tag: tag])
     }
 
