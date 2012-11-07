@@ -2,7 +2,7 @@
 
 import com.redhat.theses.auth.User
 
-class Topic {
+class Topic extends Article {
 
     String title
     String lead
