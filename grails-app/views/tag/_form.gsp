@@ -14,10 +14,10 @@
 	<label for="tag.parent.id">
 		<g:message code="tag.parent.label" default="Parent" />
 	</label>
-    <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listTagsByName')}">
-        <g:hiddenField name="tag.parent.id" value="${tagInstance?.parent?.id}"/>
-        <g:textField name="tag.parent.title" value="${tagInstance?.parent?.title}"/>
-    </a4g:autocomplete>
+    <g:hiddenField name="tag.parent.id" value="${tagInstance?.parent?.id}"/>
+    <a4g:textField name="tag.parent.title" value="${tagInstance?.parent?.title}"
+                   autocomplete-url="${createLink(controller: 'json', action: 'listTagsByName')}"
+                   autocomplete-target="tag.parent.id"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: tagInstance, field: 'subTags', 'error')} ">

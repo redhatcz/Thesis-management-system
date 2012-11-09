@@ -20,9 +20,9 @@
 
     </label>
     <richg:dynamicField id="users-list" for="${usersCommand?.users}" var="user" index="i">
-        <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listUsersByName')}">
-            <g:hiddenField name="usersCommand.users[${i}].id" value="${user?.id}"/>
-            <g:textField name="usersCommand.users[${i}].fullName" value="${user?.fullName}"/>
-        </a4g:autocomplete>
+        <g:hiddenField name="usersCommand.users[${i}].id" value="${user?.id}"/>
+        <a4g:textField name="usersCommand.users[${i}].fullName" value="${user?.fullName}"
+                     autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
+                     autocomplete-target="usersCommand.users[${i}].id"/>
     </richg:dynamicField>
 </div>

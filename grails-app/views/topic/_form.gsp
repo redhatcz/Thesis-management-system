@@ -13,10 +13,10 @@
         <span class="required-indicator">*</span>
     </label>
     <div class="controls">
-        <a4g:autocomplete remoteUrl="${createLink(controller: 'json', action: 'listUsersByName')}">
-            <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
-            <g:textField name="topic.owner.fullName" value="${topicInstance?.owner?.fullName}"/>
-        </a4g:autocomplete>
+        <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
+        <a4g:textField name="topic.owner.fullName" value="${topicInstance?.owner?.fullName}"
+                       autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
+                       autocomplete-target="topic.owner.id"/>
     </div>
 </div>
 

@@ -1,74 +1,70 @@
 /**
  * A4G javascript functions
  *
- * Dependencies: JQuery, JQuery-UI
+ * Dependencies: JQuery, bootstrap-typeahead
  */
 
-UI = $.ui.autocomplete;
-
-/**
- * This definition ensures that the written value in the autocomplete text field is selected even though the user
- * wrote the value instead of clicking on it from the autocomplte box.
- */
-(function( $ ) {
-    $.ui.autocomplete.prototype.options.autoSelect = true;
-    $( ".ui-autocomplete-input" ).live( "blur", function( event ) {
-        var autocomplete = $( this ).data( "autocomplete" );
-        if ( !autocomplete.options.autoSelect || autocomplete.selectedItem ) { return; }
-
-        var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( $(this).val() ) + "$", "i" );
-        autocomplete.widget().children( ".ui-menu-item" ).each(function() {
-            var item = $( this ).data( "uiAutocompleteItem" );
-            if ( matcher.test( item.label || item.value || item ) ) {
-                autocomplete.selectedItem = item;
-                return false;
-            } else {
-                autocomplete.selectedItem = {
-                    id: null
-                }
-            }
-        });
-        if ( autocomplete.selectedItem ) {
-            autocomplete._trigger( "select", event, { item: autocomplete.selectedItem } );
-        }
-    });
-}( jQuery ));
-
-function autocompletion(inputFieldId, outputFieldId, url, optElements) {
-    $("#" + UI.escapeRegex(inputFieldId)).autocomplete({
-        source: function(request, response){
-            var params = buildParams(optElements.split(" "));
-
-            params['term'] = request.term;
-            $.ajax({
-                url: url,
-                data: params,
-                success: function(data){
-                    response(data);
-                }
-            });
-        },
-        minLength: 2,
-        select: function(event, ui) {
-            if (outputFieldId) {
-                $("#" + UI.escapeRegex(outputFieldId)).val(ui.item.id);
-            }
-        }
-    });
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 function buildParams(elements){
     var params = {};
-    for (var i=0; i < elements.length; ++i){
-        var idAndAlias = elements[i].split("@");
-        var elem = $("#" + UI.escapeRegex(idAndAlias[0]));
+    if (elements != undefined) {
+        for (var i=0; i < elements.length; ++i){
+            var idAndAlias = elements[i].split("@");
+            var elem = $("#" + escapeRegex(idAndAlias[0]));
 
-        if (!idAndAlias[1]) {
-            var param = elem.attr('name');
-            params[param] = elem.val();
-        } else {
-            params[idAndAlias[1]] = elem.val();
+            if (!idAndAlias[1]) {
+                var param = elem.attr('name');
+                params[param] = elem.val();
+            } else {
+                params[idAndAlias[1]] = elem.val();
+            }
         }
     }
-    return params
+    return params;
+}
+
+function autocomplete(id) {
+    var $this = $("#" + escapeRegex(id));
+    $this.attr("autocomplete", "off");
+    $(document).ready(function() {
+        $this.typeahead({
+            source: function(term, process) {
+                var params = buildParams($this.attr('autocomplete-opts').split(" "));
+                params['term'] = term;
+                console.log(params);
+                $.get($this.attr('autocomplete-url'), params, function(data) {
+                    map = data;
+                    labels = $.map(data, function(value, key) {
+                        return key;
+                    });
+                    process(labels);
+                });
+            },
+            updater: function(item) {
+                $('#' + escapeRegex($this.attr('autocomplete-target'))).val(map[item]);
+                return item;
+            }
+        });
+        $this.blur(function() {
+            var term = $this.val();
+            $.get($this.attr('autocomplete-url'), {term: term}, function(data) {
+                var exactMatch = false;
+                $.each(data, function(key, value) {
+                    if (key == term) {
+                        exactMatch = true;
+                    }
+                });
+                if (exactMatch) {
+                    map = data;
+                    $this.data('typeahead').updater(term);
+                } else {
+                    $('#' + escapeRegex($this.attr('autocomplete-target'))).val(null);
+                }
+
+            });
+        });
+    });
 }

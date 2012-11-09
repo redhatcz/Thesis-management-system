@@ -108,12 +108,8 @@ grails.resources.modules = {
     'custom-bootstrap' {
         resource url: [dir: 'less', file: 'custom-bootstrap.less'], attrs: [rel: 'stylesheet/less', type:'css']
     }
-    'jquery-ui' {
-        resource url: [dir: 'css', file: 'jquery-ui.min.css'], attrs: [rel: 'stylesheet', type: 'css']
-        resource url: [dir: 'js', file: 'jquery-ui.min.js']
-    }
     'a4g' {
-        resource url: [dir: 'js', file: 'a4g.js']
+        resource url: [dir: 'js', file: 'a4g.js'], disposition: 'head'
     }
     'richg' {
         resource url: [dir: 'js', file: 'richg.js']
