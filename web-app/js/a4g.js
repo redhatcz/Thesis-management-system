@@ -8,9 +8,10 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
-function buildParams(elements){
+function buildParams(opts){
     var params = {};
-    if (elements != undefined) {
+    if (opts != undefined) {
+        var elements = opts.split(" ");
         for (var i=0; i < elements.length; ++i){
             var idAndAlias = elements[i].split("@");
             var elem = $("#" + escapeRegex(idAndAlias[0]));
@@ -32,7 +33,7 @@ function autocomplete(id) {
     $(document).ready(function() {
         $this.typeahead({
             source: function(term, process) {
-                var params = buildParams($this.attr('autocomplete-opts').split(" "));
+                var params = buildParams($this.attr('autocomplete-opts'));
                 params['term'] = term;
                 console.log(params);
                 $.get($this.attr('autocomplete-url'), params, function(data) {
