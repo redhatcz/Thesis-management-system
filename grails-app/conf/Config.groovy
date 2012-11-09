@@ -102,3 +102,21 @@ grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.redhat.theses.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'
+
+grails.resources.modules = {
+
+    'custom-bootstrap' {
+        resource url: [dir: 'less', file: 'custom-bootstrap.less'], attrs: [rel: 'stylesheet/less', type:'css']
+    }
+    'jquery-ui' {
+        resource url: [dir: 'css', file: 'jquery-ui.min.css'], attrs: [rel: 'stylesheet', type: 'css']
+        resource url: [dir: 'js', file: 'jquery-ui.min.js']
+    }
+    'a4g' {
+        resource url: [dir: 'js', file: 'a4g.js']
+    }
+    'richg' {
+        resource url: [dir: 'js', file: 'richg.js']
+    }
+
+}

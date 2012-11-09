@@ -5,12 +5,10 @@
 <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery-ui.min.css')}" type="text/css">
-<script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.min.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-ui.min.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'js', file: 'a4g.js')}"></script>
-<script type="text/javascript" src="${resource(dir: 'js', file: 'richg.js')}"></script>
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css">
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'base.css')}" type="text/css">
+<r:require module="bootstrap-js"/>
+<r:require module="custom-bootstrap"/>
+<r:require module="jquery-ui"/>
+<r:require module="a4g"/>
+<r:require module="richg"/>
 <g:layoutHead/>
 <r:layoutResources />

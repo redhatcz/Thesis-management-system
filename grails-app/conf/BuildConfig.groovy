@@ -58,5 +58,9 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.1"
 
         compile ':cache:1.0.0'
+
+        runtime (":less-resources:1.3.0.2") {
+            excludes 'svn'
+        }
     }
 }
