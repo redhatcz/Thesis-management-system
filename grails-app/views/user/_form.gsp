@@ -10,6 +10,17 @@
     </div>
 </div>
 
+<div class="control-group ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
+    <label class="control-label" for="user.email">
+        <g:message code="user.email.label" default="Email" />
+        <span class="required-indicator">*</span>
+    </label>
+    <div class="controls">
+        <g:textField name="user.email" value="${userInstance?.email}"
+                     placeholder="${message(code: 'user.email', default: 'Email')}" />
+    </div>
+</div>
+
 <div class="control-group ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 	<label class="control-label" for="user.password">
 		<g:message code="user.password.label" default="Password" />
