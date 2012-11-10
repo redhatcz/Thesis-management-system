@@ -7,7 +7,7 @@
 }
 
 .table-layout {
-    border-bottom: 1px solid @tableBorder;
+    border-top: 1px solid @tableBorder;
     padding: 15px 15px;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .table-base {
-    border-top: 1px solid @tableBorder;
+    border-bottom: 1px solid @tableBorder;
 }
 
 .thesis {
@@ -33,7 +33,7 @@
 }
 
 .dl-thesis {
-    font-size: 13px;
+    font-size: @fontSizeSmall;
 }
 
 .dl-thesis dt {
@@ -110,15 +110,7 @@ textarea {
 }
 
 a.tag {
-    display: inline-block;
-    padding: 2px 4px;
-    font-size: 11.844px;
-    font-weight: bold;
-    line-height: 14px;
-    color: #ffffff;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    white-space: nowrap;
-    vertical-align: baseline;
+    .label();
     background-color: #3a87ad;
 }
 
@@ -128,7 +120,15 @@ a.tag-root {
 
 .header {
     color: #999;
+}
+
+h1.header {
     padding-bottom: 20px;
     margin: 0 0 30px;
     border-bottom: 1px solid #eeeeee;
+}
+
+h3.header,
+h4.header {
+    margin-top: 40px;
 }

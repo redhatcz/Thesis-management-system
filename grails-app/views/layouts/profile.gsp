@@ -16,7 +16,6 @@
     </div>
 
     <g:render template="/layouts/footer" />
-    <g:javascript library="application"/>
     <r:layoutResources />
 
 </body>

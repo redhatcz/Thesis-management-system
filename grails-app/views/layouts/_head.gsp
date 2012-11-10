@@ -9,5 +9,6 @@
 <r:require module="custom-bootstrap"/>
 <r:require module="a4g"/>
 <r:require module="richg"/>
+<r:require module="application"/>
 <g:layoutHead/>
 <r:layoutResources />
