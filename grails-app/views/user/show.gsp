@@ -9,7 +9,7 @@
 <body>
     <div class="span4">
         <div class="avatar">
-            %{--Profile picture will be here--}%
+            %{--Profile picture will be here soon!--}%
         </div>
 
         <div class="thesis">
