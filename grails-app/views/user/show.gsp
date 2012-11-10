@@ -15,9 +15,9 @@
         <div class="thesis">
             <h4>User Information</h4>
             <dl class="dl-thesis">
-                <g:if test="${userInstance?.username}">
-                    <dt><g:message code="user.username.label" default="Username" /></dt>
-                    <dd><g:fieldValue bean="${userInstance}" field="username"/></dd>
+                <g:if test="${userInstance?.email}">
+                    <dt><g:message code="user.email.label" default="Email" /></dt>
+                    <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
                 </g:if>
                 <g:if test="${userInstance?.fullName}">
                     <dt><g:message code="user.fullName.label" default="Full Name" /></dt>
