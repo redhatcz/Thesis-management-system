@@ -38,4 +38,30 @@ class RichGSPTagLib {
                           size: list?.size() ?: 0 , body: result]
         out << render(template: "/taglib/richg/dynamicFieldOuter", model: modelOuter)
     }
+
+    /**
+     * Creates alert @message of @type (success, info, error or warning)
+     */
+    def alert = { attrs, body ->
+        out << render(template: '/taglib/richg/alert',
+                model: [type: attrs.type, message: attrs.message])
+    }
+
+    /**
+     * Creates comment with id comment-@index from @comment
+     * // TODO: customizability
+     */
+    def comment = { attrs, body ->
+        out << render(template: '/taglib/richg/comment',
+                model: [comment: attrs.comment, index: attrs.index])
+    }
+
+    /**
+     * Creates comments component from @comments for @article
+     * // TODO: some more customizability, like url of ajax etc
+     */
+    def comments = { attrs, body ->
+        out << render(template: '/taglib/richg/comments',
+                model: [comments: attrs.comments, article: attrs.article])
+    }
 }

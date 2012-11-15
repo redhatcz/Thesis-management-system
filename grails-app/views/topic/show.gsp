@@ -27,7 +27,7 @@
             </p>
         </g:if>
 
-        <g:render template="/shared/comments"/>
+        <richg:comments comments="${comments}" article="${topicInstance}"/>
     </div>
 
     <div class="span4">
