@@ -27,6 +27,8 @@
                 </g:each>
             </tbody>
         </table>
+
+        <g:paginate total="${organizationInstanceTotal}" class="pagination-centered"/>
     </div>
 
     <div class="span4">

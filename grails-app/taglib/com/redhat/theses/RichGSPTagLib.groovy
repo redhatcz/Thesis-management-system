@@ -62,6 +62,6 @@ class RichGSPTagLib {
      */
     def comments = { attrs, body ->
         out << render(template: '/taglib/richg/comments',
-                model: [comments: attrs.comments, article: attrs.article])
+                model: [comments: attrs.comments, article: attrs.article, commentsTotal: attrs.commentsTotal])
     }
 }

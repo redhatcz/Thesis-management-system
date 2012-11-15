@@ -74,9 +74,12 @@ class TopicController {
                 .groupBy { it.organization }
                 .collectEntries {key, val -> [key, val.user]}
 
-        def comments = Comment.findAllByArticle(topicInstance)
+        def comments = Comment.findAllByArticle(topicInstance,
+                [max: 10, sort: 'dateCreated', offset: params.offset])
 
-        [topicInstance: topicInstance, supervisions: supervisions, comments: comments]
+        def commentsTotal = Comment.countByArticle(topicInstance)
+
+        [topicInstance: topicInstance, supervisions: supervisions, comments: comments, commentsTotal: commentsTotal]
     }
 
     def edit(Long id, MembershipsCommand membershipsCommand) {

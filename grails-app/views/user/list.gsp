@@ -36,6 +36,8 @@
             </g:each>
             </tbody>
         </table>
+
+        <g:paginate total="${userInstanceTotal}" class="pagination-centered"/>
     </div>
 
     <div class="span4">

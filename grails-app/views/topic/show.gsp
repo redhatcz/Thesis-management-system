@@ -27,7 +27,7 @@
             </p>
         </g:if>
 
-        <richg:comments comments="${comments}" article="${topicInstance}"/>
+        <richg:comments comments="${comments}" article="${topicInstance}" commentsTotal="${commentsTotal}"/>
     </div>
 
     <div class="span4">

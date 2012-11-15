@@ -1,13 +1,15 @@
-<div id="comments">
 <g:if test="${comments}">
     <h3 class="header">
         Comments
     </h3>
-    <g:each in="${comments}" var="comment" status="i">
-        <richg:comment comment="${comment}" index="${i}"/>
-    </g:each>
+    <div id="comments">
+        <g:each in="${comments}" var="comment" status="i">
+            <richg:comment comment="${comment}" index="${i}"/>
+        </g:each>
+    </div>
 </g:if>
-</div>
+
+<g:paginate total="${commentsTotal}" params="[id: params.id]" class="pagination-centered"/>
 
 <h4 class="header">
     Leave a comment

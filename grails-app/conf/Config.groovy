@@ -103,6 +103,9 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.these
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.redhat.theses.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'
 
+// fix for g:paginate to work with bootstrap
+grails.plugins.twitterbootstrap.fixtaglib = true
+
 grails.resources.modules = {
 
     'custom-bootstrap' {
