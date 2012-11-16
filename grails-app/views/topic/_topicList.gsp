@@ -16,14 +16,7 @@
             </g:each>
         </g:else>
     </div>
-    <ul class="pager">
-        <li class="next">
-            <a href="#">Older &rarr;</a>
-        </li>
-        <li class="previous">
-            <a href="#">&larr; Newer</a>
-        </li>
-    </ul>
+    <g:paginate total="${topicInstanceTotal}" class="pagination-centered"/>
 </div>
 
 <div class="span4">
