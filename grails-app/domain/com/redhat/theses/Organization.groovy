@@ -17,12 +17,10 @@ class Organization {
     }
 
     Set<User> getUsers() {
-        try {
-            Membership.findAllByOrganization(this).collect {it.user} as Set
-        } catch (InvalidDataAccessApiUsageException e) {
-            //this object has not been saved yet, so return empty collection
-            new HashSet<User>()
+        if (Organization.find(this) == null) {
+            return  [] as Set<User>
         }
+        Membership.findAllByOrganization(this).collect {it.user} as Set
     }
 
     boolean  hasMember(User user){
