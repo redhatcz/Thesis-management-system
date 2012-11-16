@@ -16,7 +16,7 @@ class Util {
     }
 
     public static Integer lastOffset(total, maximum = null) {
-        total - (total % Util.max(maximum))
+        total - ((total % Util.max(maximum)) ?: DEFAULT_MAX)
     }
 
     public static Integer lastOffset(total, maximum, currentOffset) {
