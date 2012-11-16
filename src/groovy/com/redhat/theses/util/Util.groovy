@@ -10,7 +10,7 @@ class Util {
 
     public static Integer max(maximum) {
         if (maximum instanceof String) {
-            maximum = parseInt(maximum)
+            maximum = toInt(maximum)
         }
         Math.min(maximum ?: DEFAULT_MAX, MAX_LIMIT)
     }
@@ -23,15 +23,24 @@ class Util {
         if (currentOffset == null) {
             lastOffset(total, maximum)
         } else {
-            parseInt(currentOffset)
+            toInt(currentOffset)
         }
     }
 
-    public static Integer parseInt(string) {
-        try {
-            Integer.parseInt(string)
-        } catch (NumberFormatException e) {
-            null
+    public static Integer toInt(object) {
+        def result = 0
+        if (object instanceof String) {
+            try {
+                result = Integer.parseInt(object)
+            } catch (NumberFormatException e) {
+            }
+        } else if (object instanceof Number) {
+            result = object
         }
+        result
+    }
+
+    public static Boolean isPaginationVisible(total, max) {
+        toInt(total) > toInt(max)
     }
 }
