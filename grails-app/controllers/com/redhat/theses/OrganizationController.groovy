@@ -1,5 +1,7 @@
 package com.redhat.theses
 
+import com.redhat.theses.util.Util
+
 class OrganizationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -13,7 +15,7 @@ class OrganizationController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Util.max(max)
         [organizationInstanceList: Organization.list(params), organizationInstanceTotal: Organization.count()]
     }
 

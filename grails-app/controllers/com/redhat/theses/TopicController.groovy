@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
+import com.redhat.theses.util.Util
 
 class TopicController {
 
@@ -13,7 +14,7 @@ class TopicController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Util.max(max)
         def rootTags = Tag.findAllByParentIsNull()
         [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count(), tags: rootTags]
     }
@@ -24,7 +25,7 @@ class TopicController {
             return
         }
 
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Util.max(max)
         def tag = Tag.get(id)
 
         if (!tag) {
@@ -74,10 +75,11 @@ class TopicController {
                 .groupBy { it.organization }
                 .collectEntries {key, val -> [key, val.user]}
 
-        def comments = Comment.findAllByArticle(topicInstance,
-                [max: 10, sort: 'dateCreated', offset: params.offset])
-
         def commentsTotal = Comment.countByArticle(topicInstance)
+        def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
+
+        def comments = Comment.findAllByArticle(topicInstance,
+                [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
 
         [topicInstance: topicInstance, supervisions: supervisions, comments: comments, commentsTotal: commentsTotal]
     }

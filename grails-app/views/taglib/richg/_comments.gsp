@@ -1,3 +1,5 @@
+<%@ page import="com.redhat.theses.util.Util" %>
+
 <g:if test="${comments}">
     <h3 class="header">
         Comments
@@ -9,7 +11,8 @@
     </div>
 </g:if>
 
-<g:paginate total="${commentsTotal}" params="[id: params.id]" class="pagination-centered"/>
+<g:paginate total="${commentsTotal}" params="[id: params.id]"
+            class="pagination-centered" offset="${Util.lastOffset(commentsTotal, params.max, params.offset)}"/>
 
 <h4 class="header">
     Leave a comment

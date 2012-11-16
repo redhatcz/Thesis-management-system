@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import org.springframework.dao.DataIntegrityViolationException
+import com.redhat.theses.util.Util
 
 class TagController {
 
@@ -11,7 +12,7 @@ class TagController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Util.max(max)
         [tagInstanceList: Tag.list(params), tagInstanceTotal: Tag.count()]
     }
 
