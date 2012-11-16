@@ -1,3 +1,5 @@
+<%@ page import="com.redhat.theses.util.Util" %>
+
 <div class="span8">
     <div class="table-base">
         <g:if test="${topicInstanceList.isEmpty()}">
@@ -16,7 +18,10 @@
             </g:each>
         </g:else>
     </div>
-    <g:paginate total="${topicInstanceTotal}" class="pagination-centered"/>
+
+    <g:if test="${Util.isPaginationVisible(topicInstanceTotal, params.max)}">
+        <g:paginate total="${topicInstanceTotal}" class="pagination-centered"/>
+    </g:if>
 </div>
 
 <div class="span4">

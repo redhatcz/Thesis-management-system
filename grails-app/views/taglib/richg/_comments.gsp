@@ -11,8 +11,10 @@
     </div>
 </g:if>
 
-<g:paginate total="${commentsTotal}" params="[id: params.id]"
-            class="pagination-centered" offset="${Util.lastOffset(commentsTotal, params.max, params.offset)}"/>
+<g:if test="${Util.isPaginationVisible(commentsTotal, params.max)}">
+    <g:paginate total="${commentsTotal}" params="[id: params.id]"
+                class="pagination-centered" offset="${Util.lastOffset(commentsTotal, params.max, params.offset)}"/>
+</g:if>
 
 <h4 class="header">
     Leave a comment

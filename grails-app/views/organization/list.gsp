@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.Organization" %>
+<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Organization" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,9 @@
             </tbody>
         </table>
 
-        <g:paginate total="${organizationInstanceTotal}" class="pagination-centered"/>
+        <g:if test="${Util.isPaginationVisible(organizationInstanceTotal, params.max)}">
+            <g:paginate total="${organizationInstanceTotal}" class="pagination-centered"/>
+        </g:if>
     </div>
 
     <div class="span4">

@@ -1,5 +1,5 @@
+<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.auth.User" %>
 
-<%@ page import="com.redhat.theses.auth.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +37,9 @@
             </tbody>
         </table>
 
-        <g:paginate total="${userInstanceTotal}" class="pagination-centered"/>
+        <g:if test="${Util.isPaginationVisible(userInstanceTotal, params.max)}">
+            <g:paginate total="${userInstanceTotal}" class="pagination-centered"/>
+        </g:if>
     </div>
 
     <div class="span4">
