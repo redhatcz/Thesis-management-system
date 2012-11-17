@@ -1,5 +1,5 @@
 /**
- * RichGSP javascript functions
+ * RichGSP javascript file
  *
  * Dependencies: JQuery
  */
@@ -25,3 +25,48 @@ function addDynamicField(variable, size) {
     var newSize = size + 1;
     $(buttonId + " > input").attr("onclick", "addDynamicField('" + variable + "'," + newSize + ")");
 }
+
+function sendForm(form, func) {
+    form.submit(function() {
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            success: function(data) {
+                func(data);
+            }
+        });
+        return false;
+    });
+}
+
+$(document).ready(function() {
+
+    /**
+     * edit button for all comments
+     */
+    $('.comment').each(function () {
+        var $this = $(this);
+        $this.find('.edit-comment').click(function() {
+            $this.find('.edit-comment-form').fadeIn();
+            $this.find('.comment-content').hide();
+            return false;
+        });
+    });
+
+    /**
+     * update form for all comments
+     */
+    $('.comment').each(function() {
+        var $this = $(this);
+        sendForm($this.find('.edit-comment-form'), function(data) {
+            $('.alert > .close').click();
+            if (data.success) {
+                location.reload();
+            } else {
+                $(data.message).insertBefore($this).hide().fadeIn();
+            }
+        });
+    });
+
+});

@@ -27,20 +27,12 @@
 </g:form>
 <script type="text/javascript">
     var form = $('#create-comment-form');
-    form.submit(function() {
-        $.ajax({
-            url: form.attr('action'),
-            type: form.attr('method'),
-            data: form.serialize(),
-            success: function(data) {
-                $('.alert > .close').click();
-                if (data.success) {
-                    window.location = '${createLink(action: 'show', params: [id: params.id])}';
-                } else {
-                    $(data.message).appendTo('#comments').hide().fadeIn();
-                }
-            }
-        });
-        return false;
+    sendForm(form, function(data) {
+        $('.alert > .close').click();
+        if (data.success) {
+            window.location = '${createLink(action: 'show', params: [id: params.id])}';
+        } else {
+            $(data.message).appendTo('#comments').hide().fadeIn();
+        }
     });
 </script>
