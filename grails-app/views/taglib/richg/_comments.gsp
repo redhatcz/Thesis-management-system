@@ -19,30 +19,28 @@
 <h4 class="header">
     Leave a comment
 </h4>
-<g:hiddenField name="comment.article.id" value="${article?.id}" />
-<g:textArea class="comment" name="comment.content" rows="5" />
-<button id="add-comment" class="btn btn-primary pull-right">
-    <g:message code="default.button.post.label" default="Post Comment" />
-</button>
+<g:form controller="comment" action="create" name="create-comment-form">
+    <g:hiddenField name="comment.article.id" value="${article?.id}" />
+    <g:textArea class="comment" name="comment.content" rows="5" />
+    <g:submitButton name="create-comment" class="btn btn-primary pull-right"
+                    value="${message(code: 'default.button.post.label', default: 'Post Comment')}"/>
+</g:form>
 <script type="text/javascript">
-    commentsCount = ${comments?.size()};
-    $('#add-comment').click(function() {
+    var form = $('#create-comment-form');
+    form.submit(function() {
         $.ajax({
-            url: "${createLink(controller: 'json', action: 'createComment')}",
-            type: 'POST',
-            data: {
-                'comment.article.id': $('#comment\\.article\\.id').val(),
-                'comment.content':    $('#comment\\.content').val(),
-                'comment.index':      commentsCount++
-            },
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
             success: function(data) {
                 $('.alert > .close').click();
                 if (data.success) {
-                    $('#comment\\.content').val(null);
-                    $(data.data).appendTo('#comments').hide().fadeIn();
+                    window.location = '${createLink(action: 'show', params: [id: params.id])}';
+                } else {
+                    $(data.message).appendTo('#comments').hide().fadeIn();
                 }
-                $(data.message).appendTo('#comments').hide().fadeIn();
             }
         });
+        return false;
     });
 </script>
