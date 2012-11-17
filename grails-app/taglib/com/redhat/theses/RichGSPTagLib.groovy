@@ -7,11 +7,10 @@ class RichGSPTagLib {
      * This will create dynamic number of the content, usually dynamic number of textFields that the user can either
      * increase or decrease.
      *
-     * Attributes
-     *  - id - id of the enclosing div
-     *  - for - collection that will be used to initialize the dynamic list
-     *  - var - the name of the variable that will be used to store every item from the collection 'for'
-     *  - index - status of the collection
+     * @attr id - id of the enclosing div
+     * @attr for - collection that will be used to initialize the dynamic list
+     * @attr var - the name of the variable that will be used to store every item from the collection 'for'
+     * @attr index - status of the collection
      */
     def dynamicField = { attrs, body ->
         def result = ""
@@ -41,6 +40,9 @@ class RichGSPTagLib {
 
     /**
      * Creates alert @message of @type (success, info, error or warning)
+     *
+     * @attr message - message to be printed
+     * @attr type - type of the message
      */
     def alert = { attrs, body ->
         out << render(template: '/taglib/richg/alert',

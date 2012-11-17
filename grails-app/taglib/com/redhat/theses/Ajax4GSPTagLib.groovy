@@ -6,10 +6,9 @@ class Ajax4GSPTagLib {
     /**
      * Autocomplete textField.
      *
-     * Attributes:
-     *  - autocomplete-url - url of the ajax request
-     *  - autocomplete-target - id of element that will be populated with the value of the selected item
-     *  - autocomplete-opts - elements that will be a part of the query string, separated by one whitespace, you can use
+     * @attr autocomplete-url - url of the ajax request
+     * @attr autocomplete-target - id of element that will be populated with the value of the selected item
+     * @attr autocomplete-opts - elements that will be a part of the query string, separated by one whitespace, you can use
      *    '@' symbol if you want to change the name of the query string parameter, otherwise, the name of the selected
      *    element will be used as the query string parameter
      */
