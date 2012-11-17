@@ -105,20 +105,3 @@ grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role
 
 // fix for g:paginate to work with bootstrap
 grails.plugins.twitterbootstrap.fixtaglib = true
-
-grails.resources.modules = {
-
-    'custom-bootstrap' {
-        resource url: [dir: 'less', file: 'custom-bootstrap.less'], attrs: [rel: 'stylesheet/less', type:'css']
-    }
-    'application' {
-        resource url: [dir: 'js', file: 'application.js']
-    }
-    'a4g' {
-        resource url: [dir: 'js', file: 'a4g.js'], disposition: 'head'
-    }
-    'richg' {
-        resource url: [dir: 'js', file: 'richg.js']
-    }
-
-}
