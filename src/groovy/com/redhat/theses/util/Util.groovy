@@ -9,9 +9,7 @@ class Util {
     public static final Integer MAX_LIMIT = 100
 
     public static Integer max(maximum) {
-        if (maximum instanceof String) {
-            maximum = toInt(maximum)
-        }
+        maximum = toInt(maximum)
         Math.min(maximum ?: DEFAULT_MAX, MAX_LIMIT)
     }
 
@@ -41,6 +39,6 @@ class Util {
     }
 
     public static Boolean isPaginationVisible(total, max) {
-        toInt(total) > toInt(max)
+        toInt(total) > Util.max(max)
     }
 }
