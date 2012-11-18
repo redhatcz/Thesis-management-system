@@ -1,15 +1,18 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 
-<g:if test="${comments}">
-    <h3 class="header">
-        Comments
-    </h3>
-    <div id="comments">
+<h3 class="header">
+    Comments
+</h3>
+<div id="comments">
+    <g:if test="${comments}">
         <g:each in="${comments}" var="comment" status="i">
             <richg:comment comment="${comment}" index="${i}"/>
         </g:each>
-    </div>
-</g:if>
+    </g:if>
+    <g:else>
+        <p>${message(code: 'article.comments.nocomments', default: 'There are no comments for this article.')}</p>
+    </g:else>
+</div>
 
 <g:if test="${Util.isPaginationVisible(commentsTotal, params.max)}">
     <g:paginate total="${commentsTotal}" params="[id: params.id]"
