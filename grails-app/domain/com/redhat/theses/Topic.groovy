@@ -29,15 +29,21 @@ class Topic extends Article {
 
     def beforeInsert(){
         filterTags()
-        publishEvent(new TopicEvent('insert', this))
     }
 
     def beforeUpdate(){
         filterTags()
+    }
+
+    def afterInsert() {
+        publishEvent(new TopicEvent('insert', this))
+    }
+
+    def afterUpdate(){
         publishEvent(new TopicEvent('update', this))
     }
 
-    def beforeDelete() {
+    def afterDelete() {
         publishEvent(new TopicEvent('delete', this))
     }
 
