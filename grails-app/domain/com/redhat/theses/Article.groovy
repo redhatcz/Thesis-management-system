@@ -9,4 +9,13 @@ abstract class Article {
         tablePerHierarchy false
         id generator: 'sequence', params: [sequence: 'seq_article_id']
     }
+
+    def beforeDelete() {
+        Comment.withNewTransaction {
+            def comments = Comment.findAllByArticle(this);
+            comments.each {
+                it.delete()
+            }
+        }
+    }
 }
