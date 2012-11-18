@@ -66,4 +66,31 @@ class RichGSPTagLib {
         out << render(template: '/taglib/richg/comments',
                 model: [comments: attrs.comments, article: attrs.article, commentsTotal: attrs.commentsTotal])
     }
+
+    def multiCheckBox = { attrs, body ->
+        def from  = attrs.from
+        def name  = attrs.name
+        def id    = attrs.id ?: name
+        def classes = attrs['class']
+        def value = attrs.value
+        def optionKey = attrs.optionKey
+        def result = ''
+        def isChecked
+
+        from?.eachWithIndex { item, i ->
+            isChecked = (value?.find {it?."${optionKey}" ==  item."${optionKey}"}) ? true: false
+
+            def model = [name: "${name}[${i}].${optionKey}",
+                    id: "${id}[${i}]",
+                    value: item."${optionKey}",
+                    label: item."${attrs.label}",
+                    checked: isChecked,
+                    classes: classes
+            ]
+            result += render(template: '/taglib/richg/multiCheckBoxInner', model: model)
+        }
+
+        def modelOuter = [id: attrs.id, body: result]
+        out << render(template: '/taglib/richg/multiCheckBoxOuter', model: modelOuter);
+    }
 }
