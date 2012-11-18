@@ -1,8 +1,5 @@
 modules = {
 
-    'custom-bootstrap' {
-        resource url: [dir: 'less', file: 'custom-bootstrap.less'], attrs: [rel: 'stylesheet/less', type:'css']
-    }
     'application' {
         dependsOn 'jquery'
         resource url: [dir: 'js', file: 'application.js']
