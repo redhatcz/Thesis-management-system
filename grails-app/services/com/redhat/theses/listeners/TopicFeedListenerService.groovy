@@ -12,6 +12,6 @@ class TopicFeedListenerService implements ApplicationListener<TopicEvent> {
 
     @Override
     void onApplicationEvent(TopicEvent e) {
-        feedService.createTopicFeed(e.type, (Topic) e.source)
+        feedService.createTopicFeed(e.type, (Topic) e.source, e.currentUser)
     }
 }
