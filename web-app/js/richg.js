@@ -69,4 +69,24 @@ $(document).ready(function() {
         });
     });
 
+    /**
+     * delete form for all comments
+     */
+    $('.comment').each(function() {
+        var $this = $(this);
+        var form = $this.find('.delete-comment-form');
+
+        $this.find('.delete-comment-submit').click(function() {
+            var message = form.attr('confirm-message');
+            return window.confirm(message);
+        });
+
+        sendForm(form, function(data) {
+            if (data.success) {
+                location.reload();
+            } else {
+                $(data.message).insertBefore(form).hide().fadeIn();
+            }
+        });
+    });
 });

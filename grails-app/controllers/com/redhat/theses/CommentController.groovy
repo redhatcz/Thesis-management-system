@@ -2,9 +2,11 @@ package com.redhat.theses
 
 import com.redhat.theses.auth.User
 import grails.converters.JSON
+import org.springframework.dao.DataIntegrityViolationException
 
+//TODO: error messages
 class CommentController {
-    static allowedMethods = [create: 'POST', update: 'POST']
+    static allowedMethods = [create: 'POST', update: 'POST', delete: 'POST']
 
     def springSecurityService
 
@@ -46,6 +48,17 @@ class CommentController {
         }
 
         flash.message = message(code: 'comment.create.sucessfull', default: 'Your comment has been successfully updated.')
+        render([success: true] as JSON)
+    }
+
+    def delete() {
+        Long id = params.comment.int('id')
+        Comment comment = Comment.get(id)
+
+        //TODO: some error might occur
+        comment.delete()
+
+        flash.message = message(code: 'comment.delete.sucessfull', default: 'The comment has been successfully deleted.')
         render([success: true] as JSON)
     }
 }
