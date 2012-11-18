@@ -11,15 +11,19 @@ class Topic extends Article {
     User owner
     Company company
 
-    static hasMany = [tags : Tag]
+    static hasMany = [universities : University, tags : Tag]
     static constraints = {
         description widget: 'textarea' , nullable: false, blank: false
         title nullable: false, blank: false
         owner nullable: false
     }
 
-    static List<Topic> findAllByTag(Tag tag){
-        Topic.findAll('FROM Topic t where :tag member of t.tags', [tag: tag])
+    static List<Topic> findAllByTag(Tag tag, Map params = [:]){
+        Topic.findAll('FROM Topic t where :tag member of t.tags', [tag: tag], params)
+    }
+
+    static List<Topic> findAllBySupervisor(User user, Map params = [:]){
+        Topic.executeQuery('SELECT s.topic FROM  Supervision s WHERE s.membership.user=:user', [user: user], params).unique()
     }
 
     def beforeInsert(){
