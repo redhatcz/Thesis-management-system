@@ -2,6 +2,7 @@ package com.redhat.theses.auth
 
 import com.redhat.theses.University
 import com.redhat.theses.Membership
+import com.redhat.theses.util.Util
 
 class RegistrationController {
 
@@ -10,14 +11,12 @@ class RegistrationController {
     def userService
 
     def index() {
-        def requestURI = request.requestURI
-        def actionFromUrl = requestURI.substring(requestURI.lastIndexOf('/') + 1, requestURI.length() - 9)
 
-        if (actionFromUrl == 'index') {
+        if (Util.isActionInUrl(request, 'index')) {
             redirect uri: '/registration', permanent: true
-        } else {
-            [registrationCommand: new RegistrationCommand(), universityList: University.findAll()]
         }
+
+        [registrationCommand: new RegistrationCommand(), universityList: University.findAll()]
     }
 
     def register(RegistrationCommand registrationCommand) {

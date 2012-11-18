@@ -1,5 +1,7 @@
 package com.redhat.theses.util
 
+import javax.servlet.http.HttpServletRequest
+
 /**
  * @author vdedik@redhat.com
  */
@@ -40,5 +42,22 @@ class Util {
 
     public static Boolean isPaginationVisible(total, max) {
         toInt(total) > Util.max(max)
+    }
+
+    public static Boolean isActionInUrl(HttpServletRequest request, String action) {
+        getControllerAndAction(request)[1] == action
+    }
+
+    public static Boolean isControllerInUrl(HttpServletRequest request, String controller) {
+        getControllerAndAction(request)[0] == controller
+    }
+
+    public static Boolean isControllerOrActionInUrl(HttpServletRequest request, String controller, String action) {
+        isControllerInUrl(request, controller) || isActionInUrl(request, action)
+    }
+
+    private static List getControllerAndAction(HttpServletRequest request) {
+        String uri = request.forwardURI - request.contextPath
+        uri.substring(1).split('/')
     }
 }
