@@ -7,11 +7,9 @@
 <body>
     <div class="span8">
         <div class="table-base">
-            <g:each var="i" in="${ (0..10) }">
+            <g:each in="${feedList}" var="feed">
                 <div class="table-layout">
-                    Congratulations, you have successfully started your first Grails application! At the moment
-                    this is the default page, feel free to modify it to either redirect to a controller or display
-                    whatever content you may choose.
+                    <markdown:renderHtml text="${message(code: feed?.messageCode, args: feed?.args)}"/>
                 </div>
             </g:each>
         </div>

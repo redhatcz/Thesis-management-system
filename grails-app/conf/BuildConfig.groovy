@@ -62,5 +62,7 @@ grails.project.dependency.resolution = {
         runtime (":less-resources:1.3.0.2") {
             excludes 'svn'
         }
+
+        compile ":spring-events:1.2"
     }
 }

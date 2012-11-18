@@ -1,6 +1,7 @@
  package com.redhat.theses
 
 import com.redhat.theses.auth.User
+ import com.redhat.theses.events.TopicEvent
 
 class Topic extends Article {
 
@@ -28,10 +29,16 @@ class Topic extends Article {
 
     def beforeInsert(){
         filterTags()
+        publishEvent(new TopicEvent('insert', this))
     }
 
     def beforeUpdate(){
         filterTags()
+        publishEvent(new TopicEvent('update', this))
+    }
+
+    def beforeDelete() {
+        publishEvent(new TopicEvent('delete', this))
     }
 
     List<Supervision> getSupervisions() {
