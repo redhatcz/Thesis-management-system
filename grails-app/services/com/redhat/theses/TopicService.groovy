@@ -24,7 +24,19 @@ class TopicService {
         success
     }
 
-    def Boolean deleteWithSupervisions(Topic topic){
+    def Boolean saveSupervisions(Topic topic, List memberships) {
+        def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
+
+        def success = supervisionService.saveMany(topic, memberships).every() &&
+                removedSupervisions.every { delete(it) }
+
+        if (!success) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
+        }
+        success
+    }
+
+    def Boolean deleteWithSupervisions(Topic topic) {
         def success = topic?.supervisions?.every { delete(it) } && delete(topic)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
