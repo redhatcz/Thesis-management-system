@@ -9,16 +9,14 @@ import com.redhat.theses.University
 @Validateable
 class RegistrationCommand {
 
-    String username
-    String password
-    String repeatPassword
     String email
     String repeatEmail
+    String password
+    String repeatPassword
     String fullName
     University university
 
     static constraints = {
-        username blank: false, minSize: 4
         password blank: false, minSize: 6
         email blank: false, email: true
         fullName blank: false

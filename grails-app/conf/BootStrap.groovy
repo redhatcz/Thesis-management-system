@@ -19,12 +19,12 @@ class BootStrap {
             new Role(authority: 'STUDENT').save()
         ]
 
-        def u = new User(username: 'admin', fullName: 'Admin Admin', password: "admin", enabled: true, email: 'admin@gmail.com').save();
+        def u = new User(email: 'admin@gmail.com', fullName: 'Admin Admin', password: "admin", enabled: true).save();
         def o = new University(name: 'Masaryk University').save()
         new Membership(user: u, organization: o).save()
         roles.each { new UserRole(role: it, user: u).save() }
 
-        def u2 = new User(username: 'person', fullName: 'Person Person', password: "person", enabled: true, email: 'person@gmail.com').save();
+        def u2 = new User(email: 'person@gmail.com', fullName: 'Person Person', password: "person", enabled: true).save();
         def o2 = new University(name: 'VUT').save()
         new Membership(user: u2, organization: o2).save()
         roles.each {

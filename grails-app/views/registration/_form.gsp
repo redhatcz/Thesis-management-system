@@ -1,12 +1,22 @@
 <%@ page import="com.redhat.theses.auth.User" %>
 
-<div class="control-group ${hasErrors(bean: registrationCommand, field: 'username', 'error')} required">
-    <label class="control-label" for="username">
-        <g:message code="user.username.label" default="Username" />
+<div class="control-group ${hasErrors(bean: registrationCommand, field: 'email', 'error')} required">
+    <label class="control-label" for="email">
+        <g:message code="user.email.label" default="Email" />
         <span class="required-indicator">*</span>
     </label>
     <div class="controls">
-        <g:textField name="username" placeholder="Username" value="${registrationCommand?.username}"/>
+        <g:textField name="email" placeholder="Email" value="${registrationCommand?.email}"/>
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: registrationCommand, field: 'repeatEmail', 'error')} required">
+    <label class="control-label" for="repeatEmail">
+        <g:message code="user.repeatEmail.label" default="Repeat Email" />
+        <span class="required-indicator">*</span>
+    </label>
+    <div class="controls">
+        <g:textField name="repeatEmail" placeholder="Repeat email" value="${registrationCommand?.repeatEmail}"/>
     </div>
 </div>
 
@@ -27,26 +37,6 @@
     </label>
     <div class="controls">
         <g:passwordField name="repeatPassword" placeholder="Repeat password" value="${registrationCommand?.repeatPassword}"/>
-    </div>
-</div>
-
-<div class="control-group ${hasErrors(bean: registrationCommand, field: 'email', 'error')} required">
-    <label class="control-label" for="email">
-        <g:message code="user.email.label" default="Email" />
-        <span class="required-indicator">*</span>
-    </label>
-    <div class="controls">
-        <g:textField name="email" placeholder="Email" value="${registrationCommand?.email}"/>
-    </div>
-</div>
-
-<div class="control-group ${hasErrors(bean: registrationCommand, field: 'repeatEmail', 'error')} required">
-    <label class="control-label" for="repeatEmail">
-        <g:message code="user.repeatEmail.label" default="Repeat Email" />
-        <span class="required-indicator">*</span>
-    </label>
-    <div class="controls">
-        <g:textField name="repeatEmail" placeholder="Repeat email" value="${registrationCommand?.repeatEmail}"/>
     </div>
 </div>
 

@@ -1,15 +1,4 @@
 <%@ page import="com.redhat.theses.auth.User" %>
-<div class="control-group ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
-	<label class="control-label" for="user.username">
-		<g:message code="user.username.label" default="Username" />
-		<span class="required-indicator">*</span>
-	</label>
-    <div class="controls">
-	    <g:textField name="user.username" value="${userInstance?.username}"
-	                 placeholder="${message(code: 'user.username', default: 'Username')}" />
-    </div>
-</div>
-
 <div class="control-group ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
     <label class="control-label" for="user.email">
         <g:message code="user.email.label" default="Email" />

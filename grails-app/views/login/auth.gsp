@@ -11,12 +11,12 @@
     <div class="offset2">
         <form action='${postUrl}' method='POST' id='loginForm' class='form-horizontal'>
             <div class="control-group">
-                <label class="control-label" for='username'>
-                    <g:message code="springSecurity.login.username.label"/>
+                <label class="control-label" for='email'>
+                    <g:message code="springSecurity.login.email.label" default="Email"/>
                 </label>
                 <div class="controls">
                     <input type='text' name='j_username' id='username'
-                           placeholder="${message(code: 'springSecurity.login.username.label', default: 'Username')}" />
+                           placeholder="${message(code: 'springSecurity.login.email.label', default: 'Email')}" />
                 </div>
             </div>
 

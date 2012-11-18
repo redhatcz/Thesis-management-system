@@ -15,7 +15,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
+                    <g:sortableColumn property="id" title="${message(code: 'user.id.label', default: 'Id')}" />
                     <g:sortableColumn property="fullName" title="${message(code: 'user.fullName.label', default: 'Full Name')}" />
                     <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" />
                     <g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}" />
@@ -26,9 +26,9 @@
             <g:each in="${userInstanceList}" status="i" var="userInstance">
                 <tr>
                     <td><g:link action="show" id="${userInstance.id}">
-                        ${fieldValue(bean: userInstance, field: "username")}
+                        <g:fieldValue field="id" bean="${userInstance}"/>
                     </g:link></td>
-                    <td>${fieldValue(bean: userInstance, field: "fullName")}</td>
+                    <td><g:fieldValue bean="${userInstance}" field="fullName"/></td>
                     <td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
                     <td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>
                     <td><g:formatBoolean boolean="${userInstance.enabled}" /></td>
