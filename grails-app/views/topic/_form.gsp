@@ -31,6 +31,16 @@
     </div>
 </div>
 
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
+    <label class="control-label" for="topic.universities">
+        <g:message code="topic.universities.label" default="Universities" />
+    </label>
+    <div class="controls">
+        <g:select name="topic.universities" from="${universities}" multiple="multiple"
+                  optionKey="id" size="5" value="${topicInstance?.universities*.id}" class="many-to-many"/>
+    </div>
+</div>
+
 <div class="control-group">
     <label class="control-label" for="supervison-list">
         <g:message code="supervision.label" default="Supervision" />
