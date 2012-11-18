@@ -7,7 +7,7 @@ import com.redhat.theses.Topic
 /**
  * @author vdedik@redhat.com
  */
-class TopicListenerService implements ApplicationListener<TopicEvent> {
+class TopicFeedListenerService implements ApplicationListener<TopicEvent> {
     def feedService
 
     @Override
