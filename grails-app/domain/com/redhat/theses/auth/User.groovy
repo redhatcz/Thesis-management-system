@@ -32,6 +32,10 @@ class User {
         Membership.findAllByUser(this).collect {it.organization} as Set
     }
 
+    Set<Organization> getOrganizations(Class clazz) {
+        Membership.findAllByUser(this).collect {it.organization}.findAll {it.class == clazz} as Set
+    }
+
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
