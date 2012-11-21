@@ -2,16 +2,16 @@ package com.redhat.theses
 
 import org.springframework.transaction.interceptor.TransactionAspectSupport
 import org.springframework.dao.DataIntegrityViolationException
+import com.redhat.theses.events.TopicEvent
 
 class TopicService {
 
     def supervisionService
 
-    def serviceMethod() {
-
-    }
+    def springSecurityService
 
     def Boolean saveWithSupervision(Topic topic, List memberships) {
+        String type = topic.id ? 'update' : 'insert'
         def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
 
         def success = topic.save(flush: true) &&
@@ -20,6 +20,8 @@ class TopicService {
 
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
+        } else {
+            publishEvent(new TopicEvent(topic, type, springSecurityService.currentUser))
         }
         success
     }
@@ -40,6 +42,8 @@ class TopicService {
         def success = topic?.supervisions?.every { delete(it) } && delete(topic)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
+        } else {
+            publishEvent(new TopicEvent(topic, 'delete', springSecurityService.currentUser))
         }
         success
     }

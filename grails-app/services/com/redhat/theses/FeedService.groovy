@@ -11,12 +11,11 @@ class FeedService {
         feed.save()
     }
 
-    def createTopicFeed(String messageType, Topic topic, currentUser) {
+    def createTopicFeed(Topic topic, String messageType, User user) {
         //If noone is logged in, do not proceed
-        if (!currentUser) {
+        if (!user) {
             return
         }
-        def user = User.get(currentUser.id)
 
         def args = [
                 user.fullName,

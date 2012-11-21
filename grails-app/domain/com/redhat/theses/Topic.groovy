@@ -35,20 +35,6 @@ class Topic extends Article {
         filterTags()
     }
 
-    def springSecurityService
-
-    def afterInsert() {
-        publishEvent(new TopicEvent('insert', this, springSecurityService.currentUser))
-    }
-
-    def afterUpdate(){
-        publishEvent(new TopicEvent('update', this, springSecurityService.currentUser))
-    }
-
-    def afterDelete() {
-        publishEvent(new TopicEvent('delete', this, springSecurityService.currentUser))
-    }
-
     List<Supervision> getSupervisions() {
         Supervision.findAllByTopic(this)
     }
