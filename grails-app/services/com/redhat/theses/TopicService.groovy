@@ -39,7 +39,9 @@ class TopicService {
     }
 
     def Boolean deleteWithSupervisions(Topic topic) {
-        def success = topic?.supervisions?.every { delete(it) } && delete(topic)
+        def success = topic?.supervisions?.every { delete(it) } &&
+                Comment.findAllByArticle(topic).every { delete(it) } &&
+                delete(topic)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
