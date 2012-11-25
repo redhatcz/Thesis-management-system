@@ -8,30 +8,42 @@ import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.UserRole
 import com.redhat.theses.Topic
 import com.redhat.theses.Comment
+import com.redhat.theses.Supervision
 
 class BootStrap {
 
     def init = { servletContext ->
         List<Role> roles = [
-            new Role(authority: 'ADMIN').save(),
-            new Role(authority: 'OWNER').save(),
-            new Role(authority: 'SUPERVISOR').save(),
-            new Role(authority: 'STUDENT').save()
+            new Role(authority: 'ROLE_ADMIN').save(),
+            new Role(authority: 'ROLE_OWNER').save(),
+            new Role(authority: 'ROLE_SUPERVISOR').save(),
+            new Role(authority: 'ROLE_STUDENT').save()
         ]
 
         def u = new User(email: 'admin@gmail.com', fullName: 'Admin Admin', password: "admin", enabled: true).save();
         def o = new University(name: 'Masaryk University').save()
-        new Membership(user: u, organization: o).save()
+        def m1 = new Membership(user: u, organization: o).save()
         roles.each { new UserRole(role: it, user: u).save() }
 
         def u2 = new User(email: 'person@gmail.com', fullName: 'Person Person', password: "person", enabled: true).save();
         def o2 = new University(name: 'VUT').save()
-        new Membership(user: u2, organization: o2).save()
+        def m2 = new Membership(user: u2, organization: o2).save()
         roles.each {
-           if (it.authority in ['SUPERVISOR', 'STUDENT']) {
+           if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
                new UserRole(role: it, user: u2).save()
            }
         }
+
+        def m3 = new Membership(user: u, organization: o2).save()
+
+        def u3 = new User(username: 'padmin', fullName: 'Person Admin', password: "padmin", enabled: true, email: 'padmin@gmail.com').save();
+        def m4 = new Membership(user: u3, organization: o2).save()
+        roles.each {
+            if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
+                new UserRole(role: it, user: u3).save()
+            }
+        }
+
 
         def c = new Company(name: 'Red Hat').save()
 
@@ -40,7 +52,11 @@ class BootStrap {
         def t3 = new Tag(title: 'Sub tag 2', parent: t).save()
         def t4 = new Tag(title: 'Sub sub tag 1', parent: t2).save()
 
-        def topic = new Topic(title: 'Topic 1', owner: u, tags: [t], description: '###Description 1', lead: 'Lead 1', company: c).save()
+        def topic = new Topic(title: 'Topic 1', owner: u, tags: [t], description: '###Description 1', lead: 'Lead 1', company: c, universities: [o,o2]).save()
+        new Supervision(topic: topic, membership: m1).save()
+        new Supervision(topic: topic, membership: m2).save()
+        new Supervision(topic: topic, membership: m3).save()
+
         new Topic(title: 'Topic 2', owner: u, tags: [t], description: '###Description 2', lead: 'Lead 2', company: c).save()
         new Topic(title: 'Topic 3', owner: u, tags: [t], description: '###Description 3', lead: 'Lead 3', company: c).save()
         new Topic(title: 'Topic 4', owner: u, tags: [t], description: '###Description 4', lead: 'Lead 4', company: c).save()
