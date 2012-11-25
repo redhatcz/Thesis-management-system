@@ -20,4 +20,18 @@ class Ajax4GSPTagLib {
         out << g.textField(attrs)
         out << "<script type='text/javascript'>autocomplete('${id}')</script>"
     }
+
+    def select = { attrs, body ->
+        def id = attrs.id
+        if (!id) {
+            id = attrs.name
+        }
+
+        if (!attrs.from) {
+            attrs.from = '[]'
+        }
+
+        out << g.select(attrs)
+        out << "<script type='text/javascript'>dynamicSelect('${id}')</script>"
+    }
 }

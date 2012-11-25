@@ -27,6 +27,25 @@ function buildParams(opts){
     return params;
 }
 
+function dynamicSelect(id) {
+    var $this = $("#" + escapeRegex(id));
+    var noSelection = $this.find(':first-child')
+    $(document).ready(function () {
+        var source = $('#' + escapeRegex($this.attr('source')))
+        source.change(function () {
+            var params = buildParams($this.attr('remote-opts'));
+            $.get($this.attr('remote-url'), params, function (data) {
+                $this.html(noSelection);
+                map = data;
+                $.each(data, function (key, value) {
+                    $this.html($this.html() + '<option value="' + value + '">' + key + '</option>')
+                })
+
+            });
+        })
+    })
+}
+
 function autocomplete(id) {
     var $this = $("#" + escapeRegex(id));
     $this.attr("autocomplete", "off");
@@ -35,7 +54,6 @@ function autocomplete(id) {
             source: function(term, process) {
                 var params = buildParams($this.attr('autocomplete-opts'));
                 params['term'] = term;
-                console.log(params);
                 $.get($this.attr('autocomplete-url'), params, function(data) {
                     map = data;
                     labels = $.map(data, function(value, key) {
@@ -69,3 +87,4 @@ function autocomplete(id) {
         });
     });
 }
+
