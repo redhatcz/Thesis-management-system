@@ -18,7 +18,7 @@ class JsonController {
      */
     def listUsersFromUniversityByName(String term, Long organizationId) {
         def query = Membership.where {organization.id == organizationId  && user.fullName =~ "%${term}%"}
-        def memberships = query.find([max: 5])
+        def memberships = query.list([max: 5])
         def userMap = [:]
 
         memberships.each {
