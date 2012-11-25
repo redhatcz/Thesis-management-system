@@ -3,10 +3,15 @@ package com.redhat.theses.auth
 import org.springframework.dao.DataIntegrityViolationException
 import com.redhat.theses.util.Util
 import com.redhat.theses.Topic
+import com.redhat.theses.MembershipsCommand
+import com.redhat.theses.Organization
+import com.redhat.theses.Membership
 
 class UserController {
 
     def springSecurityService
+
+    def userService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -20,13 +25,17 @@ class UserController {
     }
 
     def create() {
-        [userInstance: new User(params.user)]
+        [userInstance: new User(params.user), membershipsCommand: new MembershipsCommand(), organizations: Organization.findAll()]
     }
 
     def save() {
+        def membershipsCommand = new MembershipsCommand()
+        bindData(membershipsCommand, params.membershipsCommand)
         def userInstance = new User(params.user)
-        if (!userInstance.save(flush: true)) {
-            render(view: "create", model: [userInstance: userInstance])
+        if (!userService.saveWithOrganizations(userInstance, membershipsCommand.memberships*.organization)) {
+            render(view: "create", model: [userInstance: userInstance,
+                    membershipsCommand: membershipsCommand,
+                    organizations: Organization.findAll()])
             return
         }
 
@@ -43,7 +52,7 @@ class UserController {
             return
         }
 
-        [userInstance: userInstance]
+        [userInstance: userInstance, memberships: Membership.findAllByUser(userInstance)]
     }
 
     def supervisions(Long id, Integer max) {
@@ -68,12 +77,16 @@ class UserController {
             return
         }
 
-        [userInstance: userInstance]
+        def membershipsCommand = new MembershipsCommand()
+        membershipsCommand.memberships = Membership.findAllByUser(userInstance)
+        [userInstance: userInstance, membershipsCommand: membershipsCommand, organizations: Organization.findAll()]
     }
 
     def update() {
         Long id = params.user.long("id")
         Long version = params.user.long("version")
+        def membershipsCommand = new MembershipsCommand()
+        bindData(membershipsCommand, params.membershipsCommand)
         def userInstance = User.get(id)
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
@@ -86,15 +99,19 @@ class UserController {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'user.label', default: 'User')] as Object[],
                         "Another user has updated this User while you were editing")
-                render(view: "edit", model: [userInstance: userInstance])
+                render(view: "edit", model: [userInstance: userInstance,
+                        membershipsCommand: membershipsCommand,
+                        organizations: Organization.findAll()])
                 return
             }
         }
 
         userInstance.properties = params.user
 
-        if (!userInstance.save(flush: true)) {
-            render(view: "edit", model: [userInstance: userInstance])
+        if (!userService.saveWithOrganizations(userInstance, membershipsCommand.memberships*.organization)) {
+            render(view: "edit", model: [userInstance: userInstance,
+                    membershipsCommand: membershipsCommand,
+                    organizations: Organization.findAll()])
             return
         }
 
@@ -111,14 +128,13 @@ class UserController {
             return
         }
 
-        try {
-            userInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
+        if (!userService.deleteWithMemberships(userInstance)) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "show", id: id)
+            return
         }
+
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+        redirect(action: "list")
     }
 }

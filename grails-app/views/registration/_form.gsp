@@ -56,8 +56,13 @@
         <span class="required-indicator">*</span>
     </label>
     <div class="controls">
-        <g:select id="university" from="${universityList}" required="" name="university.id"
-                  optionKey="id" value="${registrationCommand?.university?.id}"/>
+        <g:select id="university"
+                  from="${universityList}"
+                  required=""
+                  name="university.id"
+                  optionKey="id"
+                  value="${registrationCommand?.university?.id}"
+                  noSelection="[null:'-- no selection --']"/>
     </div>
 </div>
 

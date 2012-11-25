@@ -5,21 +5,8 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class OrganizationService {
 
-    Boolean saveWithMemberships(Organization organization, List<Membership> memberships) {
-        def allMemberships = organization.id ? Membership.findAllByOrganization(organization) : []
-        def allMembers = allMemberships.collect { it.user }
-        def currentMembers = memberships.collect { it.user }
-        def toBeSaved = memberships.findAll { !(it.user in allMembers) }
-        def toBeDeleted = allMemberships.findAll { !(it.user in currentMembers) }
-
-        def success = organization.save() && toBeSaved.every { it.save() } && toBeDeleted.every { delete(it) }
-        if (!success) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
-        }
-        success
-    }
-
-    Boolean deleteWithMemberships(Organization organization, List<Membership> memberships) {
+    Boolean deleteWithMemberships(Organization organization) {
+        def memberships = Membership.findAllByOrganization(organization)
         def success = memberships.each { delete(it) } && delete(organization)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()

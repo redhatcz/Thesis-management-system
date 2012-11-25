@@ -27,9 +27,7 @@ class RegistrationController {
         user.accountLocked = false
         user.passwordExpired = false
 
-        Membership membership = new Membership(user: user, organization: registrationCommand.university)
-
-        if (registrationCommand.hasErrors() || !userService.saveWithMemberships(user, [membership])) {
+        if (registrationCommand.hasErrors() || !userService.saveWithOrganizations(user, [registrationCommand.university])) {
             render(view: "index", model: [registrationCommand: registrationCommand, universityList: University.findAll()])
             return
         }

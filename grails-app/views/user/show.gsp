@@ -39,6 +39,12 @@
                     <dt><g:message code="user.passwordExpired.label" default="Password Expired" /></dt>
                     <dd><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></dd>
                 </g:if>
+                <g:if test="${!memberships.empty}">
+                    <dt><g:message code="user.memberships.label" default="Memberships" /></dt>
+                    <g:each in="${memberships*.organization}" var="organization">
+                        <dd><g:fieldValue bean="${organization}" field="name"/></dd>
+                    </g:each>
+                </g:if>
             </dl>
         </div>
     </div>

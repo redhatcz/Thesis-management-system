@@ -20,20 +20,16 @@ class OrganizationController {
     }
 
     def create() {
-        [organizationInstance: new Organization(params.organization), usersCommand: new UsersCommand()]
+        [organizationInstance: new Organization(params.organization)]
     }
 
     def save() {
-        def usersCommand = new UsersCommand()
-        bindData(usersCommand, params.usersCommand)
         def organizationClass = grailsApplication.domainClasses.find {it.name == params.organization.type}
         def organizationInstance = (Organization) organizationClass.newInstance()
         organizationInstance.properties = params.organization
 
-        usersCommand.users = usersCommand.users.unique().findAll { it?.id }
-        def memberships = usersCommand.users.collect { new Membership(organization: organizationInstance, user: it) }
-        if (!usersCommand.validate() || !organizationService.saveWithMemberships(organizationInstance, memberships)) {
-            render(view: "create", model: [organizationInstance: organizationInstance, usersCommand: usersCommand])
+        if (!organizationInstance.save()) {
+            render(view: "create", model: [organizationInstance: organizationInstance])
             return
         }
 
@@ -53,24 +49,18 @@ class OrganizationController {
     }
 
     def edit(Long id) {
-        def usersCommand = new UsersCommand()
-        bindData(usersCommand, params.usersCommand)
-
         def organizationInstance = Organization.get(id)
         if (!organizationInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'organization.label', default: 'Organization'), id])
             redirect(action: "list")
             return
         }
-        usersCommand.users = Membership.findAllByOrganization(organizationInstance).collect { it.user }
-        [organizationInstance: organizationInstance, usersCommand: usersCommand]
+        [organizationInstance: organizationInstance]
     }
 
     def update() {
         Long id = params.organization.long("id")
         Long version = params.organization.long("version")
-        def usersCommand = new UsersCommand()
-        bindData(usersCommand, params.usersCommand)
 
         def organizationInstance = Organization.get(id)
         if (!organizationInstance) {
@@ -91,11 +81,8 @@ class OrganizationController {
 
         organizationInstance.properties = params.organization
 
-        usersCommand.users = usersCommand.users.unique().findAll { it?.id }
-        def memberships = usersCommand.users.collect { new Membership(organization: organizationInstance, user: it) }
-
-        if (!usersCommand.validate() || !organizationService.saveWithMemberships(organizationInstance, memberships)) {
-            render(view: "edit", model: [organizationInstance: organizationInstance, usersCommand: usersCommand])
+        if (!organizationInstance.save()) {
+            render(view: "edit", model: [organizationInstance: organizationInstance])
             return
         }
 
@@ -113,7 +100,7 @@ class OrganizationController {
             return
         }
 
-        if (organizationService.deleteWithMemberships(organizationInstance, Membership.findAllByOrganization(organizationInstance))) {
+        if (organizationService.deleteWithMemberships(organizationInstance)) {
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'organization.label', default: 'Organization'), id])
             redirect(action: "list")
         } else {
