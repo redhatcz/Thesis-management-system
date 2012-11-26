@@ -54,6 +54,13 @@ class UserService {
         success
     }
 
+    Boolean updatePassword(User user, String newPassword) {
+        user.setPassword(newPassword)
+        def success = user.save()
+
+        success
+    }
+
     private Boolean delete(entity) {
         def success
         try {

@@ -60,6 +60,9 @@
             </li>
             <div class="controls pull-right">
                 <g:form controller="user" class="form-inline">
+                    <g:link class="btn btn-warning" action="editPassword">
+                        <g:message code="default.button.editPassword.label" default="Change password" />
+                    </g:link>
                     <g:link class="btn btn-warning" controller="user" action="edit" id="${userInstance?.id}">
                         <g:message code="default.button.edit.label" default="Edit" />
                     </g:link>
