@@ -50,27 +50,27 @@
 </div>
 
 <div class="span8">
-    <g:form controller="user">
-        <div class="control-group">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="#">Theses</a>
-                </li>
-                <li>
-                    <a href="#">Activity</a>
-                </li>
-                <div class="controls pull-right">
-                    <g:hiddenField name="user.id" value="${userInstance?.id}" />
+    <div class="control-group">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#">Theses</a>
+            </li>
+            <li>
+                <a href="#">Activity</a>
+            </li>
+            <div class="controls pull-right">
+                <g:form controller="user" class="form-inline">
                     <g:link class="btn btn-warning" controller="user" action="edit" id="${userInstance?.id}">
                         <g:message code="default.button.edit.label" default="Edit" />
                     </g:link>
+                    <g:hiddenField name="user.id" value="${userInstance?.id}" />
                     <g:actionSubmit class="btn btn-danger" action="delete"
                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </div>
-            </ul>
-        </div>
-    </g:form>
+                </g:form>
+            </div>
+        </ul>
+    </div>
 </div>
 </body>
 </html>
