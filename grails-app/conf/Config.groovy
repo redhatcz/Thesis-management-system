@@ -106,6 +106,9 @@ grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role
 // fix for g:paginate to work with bootstrap
 grails.plugins.twitterbootstrap.fixtaglib = true
 
+// use hyphenated url
+grails.web.url.converter = 'hyphenated'
+
 grails.resources.modules = {
 
     'custom-bootstrap' {
