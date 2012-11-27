@@ -7,6 +7,8 @@ class TopicController {
 
     def topicService;
 
+    def springSecurityService
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -81,7 +83,10 @@ class TopicController {
         def comments = Comment.findAllByArticle(topicInstance,
                 [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
 
-        [topicInstance: topicInstance, supervisions: supervisions, comments: comments, commentsTotal: commentsTotal]
+        def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, topicInstance)
+
+        [topicInstance: topicInstance, supervisions: supervisions,
+                comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
     }
 
     def edit(Long id, MembershipsCommand membershipsCommand) {
