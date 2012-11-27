@@ -21,7 +21,7 @@ class TopicService {
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            publishEvent(new TopicEvent(topic, type, springSecurityService.currentUser))
+            publishEvent(new TopicEvent(topic, springSecurityService.currentUser, type))
         }
         success
     }
@@ -45,7 +45,7 @@ class TopicService {
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            publishEvent(new TopicEvent(topic, 'delete', springSecurityService.currentUser))
+            publishEvent(new TopicEvent(topic, springSecurityService.currentUser, 'delete'))
         }
         success
     }
