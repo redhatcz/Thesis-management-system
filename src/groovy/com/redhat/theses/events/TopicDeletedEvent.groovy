@@ -6,11 +6,8 @@ import com.redhat.theses.auth.User
 /**
  * @author vdedik@redhat.com
  */
-class TopicEvent extends AuthenticatedUserAwareEvent {
-    String type
-
-    TopicEvent(Topic topic, User currentUser, type){
+class TopicDeletedEvent extends AuthenticatedUserAwareEvent{
+    TopicDeletedEvent(Topic topic, User currentUser){
         super(topic, currentUser)
-        this.type = type
     }
 }

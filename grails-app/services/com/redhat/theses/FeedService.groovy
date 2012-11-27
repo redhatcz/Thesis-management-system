@@ -5,22 +5,23 @@ import com.redhat.theses.auth.User
 class FeedService {
     def grailsLinkGenerator
 
-    def createFeed(String messageCode, List<String> args = null){
+    Feed createFeed(String messageCode, List<String> args = null){
         def feed = new Feed(messageCode: messageCode)
         feed.args = args
         feed.save()
     }
 
-    def createTopicFeed(Topic topic, String messageType, User user) {
+    Feed createTopicFeed(Topic topic, String messageType, User user) {
         //If noone is logged in, do not proceed
+        //TODO: remove when security is done
         if (!user) {
-            return
+            return null
         }
 
         def args = [
-                user.fullName,
-                grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),
-                topic.title
+            user.fullName,
+            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),
+            topic.title
         ]
 
         if (messageType != 'delete') {
