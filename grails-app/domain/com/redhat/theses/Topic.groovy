@@ -1,7 +1,6 @@
  package com.redhat.theses
 
 import com.redhat.theses.auth.User
- import com.redhat.theses.events.TopicEvent
 
 class Topic extends Article {
 
