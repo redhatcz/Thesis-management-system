@@ -17,7 +17,7 @@
 
 <div class="control-group ${hasErrors(bean: applicationInstance, field: 'supervisor', 'error')} required">
 	<label class="control-label" for="application.supervisor.id">
-		<g:message code="application.supervisor.label" default="Supervisor" />
+		<g:message code="application.supervisor.label" default="Preferred supervisor" />
 	</label>
     <div class="controls">
         <a4g:select id="application.supervisor.id"
