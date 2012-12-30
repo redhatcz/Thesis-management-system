@@ -1,15 +1,25 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
+import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
 
 class ApplicationController {
 
-    def topicService
     def springSecurityService
+    def applicationService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+
+    def index() {
+        redirect(action: "list", params: params, permanent: true)
+    }
+
+    def list(Integer max) {
+        params.max = Util.max(max)
+        [applicationInstanceList: Application.list(params), applicationInstanceTotal: Application.count]
+    }
 
     @Secured(['ROLE_STUDENT'])
     def create(Long id) {
@@ -48,5 +58,41 @@ class ApplicationController {
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), application.id])
         redirect(controller: 'topic', action: "show", id: topicInstance?.id)
+    }
+
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def approve(Long id) {
+        def applicationInstance = Application.get(id)
+        if (!applicationInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), id])
+            redirect(controller: 'application', action: 'list')
+            return
+        }
+
+        User user = springSecurityService.currentUser
+
+        if (applicationInstance.topic.owner != user) {
+            flash.message = message(code: 'permissions.deny', default: 'Permission denied')
+            redirect(controller: 'application', action: 'list')
+            return
+        }
+
+        if (applicationInstance.topic.owner == user) {
+            applicationService.approve(applicationInstance)
+            flash.message = message(code: 'application.approved', default: 'Application has been approved')
+        }
+
+        redirect(controller: 'application', action: 'show', id: applicationInstance.id)
+    }
+
+    def show(Long id) {
+        def applicationInstance = Application.get(id)
+        if (!applicationInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [applicationInstance: applicationInstance]
     }
 }
