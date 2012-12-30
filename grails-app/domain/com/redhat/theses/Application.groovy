@@ -7,21 +7,20 @@ class Application {
     User applicant
     Topic topic
     University university
-    User  supervisor
+    User supervisor
     Date dateCreated
     String note;
     Boolean approvedByOwner = false;
-    Boolean acceptedBySupervisor = false;
 
     static constraints = {
         university validator: { university, application ->
             university.id in application.applicant.organizations*.id
         }
-        supervisor validator: {supervisor, application ->
 
+        supervisor validator: { supervisor, application ->
             supervisor.id in application.topic.supervisions
-                    .collect {it.membership}
-                    .findAll {it.organizationId == application.universityId}*.userId
+                    .collect { it.membership }
+                    .findAll { it.organizationId == application.universityId }*.userId
         }
     }
 }
