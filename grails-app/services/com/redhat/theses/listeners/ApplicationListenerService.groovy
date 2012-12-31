@@ -1,9 +1,7 @@
 package com.redhat.theses.listeners
 
 import com.redhat.theses.Application
-import com.redhat.theses.events.ApplicationApproveddEvent
 import grails.events.Listener
-import org.springframework.context.ApplicationListener
 
 /**
  * Created with IntelliJ IDEA.
