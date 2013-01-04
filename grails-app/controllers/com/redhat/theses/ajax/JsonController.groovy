@@ -28,7 +28,7 @@ class JsonController {
     }
 
     def listUsersByName(String term) {
-        def users = User.findAllByFullNameLike("%${term}%", [max: 5])
+        def users = User.findAllByFullNameIlike("%${term}%", [max: 5])
         def userMap = [:]
         users.each {
             userMap[it.fullName] = it.id
@@ -37,7 +37,7 @@ class JsonController {
     }
 
     def listTagsByName(String term){
-        def tags = Tag.findAllByTitleLike("%${term}%", [max: 5])
+        def tags = Tag.findAllByTitleIlike("%${term}%", [max: 5])
         def tagMap = [:]
         tags.each {
             tagMap[it.title] = it.id
