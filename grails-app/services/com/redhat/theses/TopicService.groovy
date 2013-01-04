@@ -1,10 +1,8 @@
 package com.redhat.theses
 
+import com.redhat.theses.events.TopicEvent
 import org.springframework.transaction.interceptor.TransactionAspectSupport
 import org.springframework.dao.DataIntegrityViolationException
-import com.redhat.theses.events.TopicDeletedEvent
-import com.redhat.theses.events.TopicUpdatedEvent
-import com.redhat.theses.events.TopicCreatedEvent
 
 class TopicService {
 
@@ -23,13 +21,12 @@ class TopicService {
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            switch (type) {
-                case 'update':
-                    publishEvent(new TopicUpdatedEvent(topic, springSecurityService.currentUser))
-                    break
-                case 'insert':
-                    publishEvent(new TopicCreatedEvent(topic, springSecurityService.currentUser))
-                    break
+            if (type == 'update') {
+                event('topicUpdated', 
+                    new TopicEvent(topic, springSecurityService.currentUser))
+            } else if (type == 'insert') {
+                event('topicCreated', 
+                    new TopicEvent(topic, springSecurityService.currentUser))
             }
 
         }
@@ -55,7 +52,8 @@ class TopicService {
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            publishEvent(new TopicDeletedEvent(topic, springSecurityService.currentUser))
+            event('topicDeleted', 
+                new TopicEvent(topic, springSecurityService.currentUser))
         }
         success
     }

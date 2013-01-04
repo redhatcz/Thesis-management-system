@@ -3,9 +3,9 @@ package com.redhat.theses.auth
 import org.springframework.transaction.interceptor.TransactionAspectSupport
 import com.redhat.theses.Membership
 import com.redhat.theses.Organization
+import com.redhat.theses.events.UserCreatedEvent
 import org.springframework.dao.DataIntegrityViolationException
 import org.apache.commons.lang.RandomStringUtils
-import com.redhat.theses.events.UserCreatedEvent
 
 class UserService {
 
@@ -39,7 +39,8 @@ class UserService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
             if (eventType == 'create') {
-                publishEvent(new UserCreatedEvent(persistedUser, password))
+                event('userCreated', 
+                    new UserCreatedEvent(persistedUser, password))
             }
         }
         success
