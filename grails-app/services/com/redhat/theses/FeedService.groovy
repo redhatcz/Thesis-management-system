@@ -37,4 +37,24 @@ class FeedService {
         createFeed(messageCode, args)
     }
 
+    Feed createThesisFeed(Thesis thesis, String messageType, User user) {
+        if (!user) {
+            throw new AuthenticationCredentialsNotFoundException(
+                    "No user is logged in, thesis feed could not be created.")
+        }
+
+        def args = [
+            user.fullName,
+            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),
+            thesis.id
+        ]
+
+        if (messageType != 'delete') {
+            args += [grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: thesis.id)]
+        }
+
+        def messageCode = "feed.thesis.${messageType}"
+
+        createFeed(messageCode, args)
+    }
 }

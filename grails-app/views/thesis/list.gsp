@@ -15,8 +15,9 @@
     <table class="table">
         <thead>
         <tr>
-            <g:sortableColumn property="topic" title="${message(code: 'topic.label', default: 'Topic')}"/>
-            <g:sortableColumn property="author" title="${message(code: 'thesis.author.label', default: 'Author')}"/>
+            <g:sortableColumn property="id" title="${message(code: 'thesis.id.label', default: 'Id')}"/>
+            <g:sortableColumn property="topic" title="${message(code: 'thesis.topic.label', default: 'Thesis topic')}"/>
+            <g:sortableColumn property="author" title="${message(code: 'thesis.assingee.label', default: 'Assignee')}"/>
         </tr>
         </thead>
         <tbody>
@@ -24,11 +25,14 @@
             <tr>
                 <td>
                     <g:link action="show" id="${thesisInstance.id}">
-                        ${fieldValue(bean: thesisInstance.topic, field: "title")}
+                        <g:fieldValue field="id" bean="${thesisInstance}"/>
                     </g:link>
                 </td>
                 <td>
-                    ${fieldValue(bean: thesisInstance.assignee, field: "fullName")}
+                    <g:fieldValue field="title" bean="${thesisInstance?.topic}"/>
+                </td>
+                <td>
+                    <g:fieldValue field="fullName" bean="${thesisInstance?.assignee}"/>
                 </td>
             </tr>
         </g:each>

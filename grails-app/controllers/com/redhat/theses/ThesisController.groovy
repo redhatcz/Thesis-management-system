@@ -6,6 +6,16 @@ class ThesisController {
 
     static allowedMethods = [save: 'POST', update: 'POST']
 
+    /*
+     * Dependency injection of ThesisService
+     */
+    def thesisService
+
+    /*
+     * Dependency injection of SpringSecurityService
+     */
+    def springSecurityService
+
     def index() {
         redirect(action: "list", params: params, permanent: true)
     }
@@ -29,7 +39,9 @@ class ThesisController {
         def comments = Comment.findAllByArticle(thesisInstance,
                 [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
 
-        [thesisInstance: thesisInstance, comments: comments, commentsTotal: commentsTotal]
+        def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, thesisInstance)
+
+        [thesisInstance: thesisInstance, comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
     }
 
     def create(Long id) {
@@ -44,7 +56,7 @@ class ThesisController {
         def thesisInstance = new Thesis(params.thesis)
         thesisInstance.status = Thesis.Status.IN_PROGRESS
 
-        if (!thesisInstance.save(flush: true)) {
+        if (!thesisService.save(thesisInstance)) {
             render view: 'create', model: [thesisInstance: thesisInstance]
             return
         }
@@ -76,14 +88,14 @@ class ThesisController {
         if (version && thesisInstance.version > version) {
             thesisInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'thesis.label', default: 'Thesis')] as Object[],
-                    "Another user has updated this Topic while you were editing")
+                    "Another user has updated this thesis while you were editing")
             render view: "edit", model:
                     [thesisInstance: thesisInstance, statusList: Thesis.Status.values(), gradeList: Thesis.Grade.values()]
             return
         }
 
         thesisInstance.properties = params.thesis
-        if (!thesisInstance.save(flush: true)) {
+        if (!thesisService.save(thesisInstance)) {
             render view: 'edit', model:
                     [thesisInstance: thesisInstance, statusList: Thesis.Status.values(), gradeList: Thesis.Grade.values()]
             return
@@ -92,5 +104,23 @@ class ThesisController {
         flash.message = message(code: 'default.updated.message', args:
                 [message(code: 'thesis.label', default: 'Thesis'), thesisInstance.id])
         redirect action: "show", id: thesisInstance.id
+    }
+
+    def delete() {
+        Long id = params.thesis.int('id')
+        def thesisInstance = Thesis.get(id)
+        if (!thesisInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (thesisService.delete(thesisInstance)) {
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            redirect(action: "list")
+        } else {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            redirect(action: "show", id: id)
+        }
     }
 }

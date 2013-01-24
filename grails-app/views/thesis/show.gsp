@@ -46,6 +46,24 @@
         <g:link class="btn btn-warning" controller="thesis" action="edit" id="${thesisInstance?.id}">
             <g:message code="thesis.edit.button" default="Edit" />
         </g:link>
+        <g:form style="display: inline;">
+            <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
+            <g:actionSubmit class="btn btn-danger" action="delete"
+                            value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+        </g:form>
+        <g:if test="${!subscriber}">
+            <g:form style="display: inline;" controller="subscription" action="subscribe">
+                <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
+                <g:submitButton class="btn btn-info" name="submit-subscription" value="Subscribe"/>
+            </g:form>
+        </g:if>
+        <g:else>
+            <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
+                <g:submitButton class="btn btn-info" name="submit-unsubscription" value="Unsubscribe"/>
+            </g:form>
+        </g:else>
     </div>
 </div>
 

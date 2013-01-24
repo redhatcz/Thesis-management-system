@@ -1,7 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
-import org.springframework.dao.DataIntegrityViolationException
+import com.redhat.theses.util.Commons
 
 class SubscriptionService {
 
@@ -13,18 +13,7 @@ class SubscriptionService {
 
     Boolean unsubscribe(User subscriber, Article article) {
         def subscription = Subscription.findBySubscriberAndArticle(subscriber, article)
-        def success = subscription && delete(subscription)
-        success
-    }
-
-    private Boolean delete(entity) {
-        def success
-        try {
-            entity.delete()
-            success = true
-        } catch (DataIntegrityViolationException e) {
-            success = false
-        }
+        def success = subscription && Commons.delete(subscription)
         success
     }
 }
