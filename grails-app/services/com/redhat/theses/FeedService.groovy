@@ -1,8 +1,13 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException
 
 class FeedService {
+
+    /*
+     * Dependency injection of LinkGenerator
+     */
     def grailsLinkGenerator
 
     Feed createFeed(String messageCode, List<String> args = null){
@@ -12,10 +17,9 @@ class FeedService {
     }
 
     Feed createTopicFeed(Topic topic, String messageType, User user) {
-        //If noone is logged in, do not proceed
-        //TODO: remove when security is done
         if (!user) {
-            return null
+            throw new AuthenticationCredentialsNotFoundException(
+                    "No user is logged in, topic feed could not be created.")
         }
 
         def args = [
