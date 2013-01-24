@@ -6,12 +6,18 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class TopicService {
 
+    /*
+     * Dependency injection of SupervisionService
+     */
     def supervisionService
 
+    /*
+     * Dependency injection of SpringSecurityService
+     */
     def springSecurityService
 
-    def Boolean saveWithSupervision(Topic topic, List memberships) {
-        String type = topic.id ? 'update' : 'insert'
+    Boolean saveWithSupervision(Topic topic, List memberships) {
+        String type = topic.id ? 'topicUpdated' : 'topicCreated'
         def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
 
         def success = topic.save(flush: true) &&
@@ -21,19 +27,12 @@ class TopicService {
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            if (type == 'update') {
-                event('topicUpdated', 
-                    new TopicEvent(topic, springSecurityService.currentUser))
-            } else if (type == 'insert') {
-                event('topicCreated', 
-                    new TopicEvent(topic, springSecurityService.currentUser))
-            }
-
+            event(type, new TopicEvent(topic, springSecurityService.currentUser))
         }
         success
     }
 
-    def Boolean saveSupervisions(Topic topic, List memberships) {
+    Boolean saveSupervisions(Topic topic, List memberships) {
         def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
 
         def success = supervisionService.saveMany(topic, memberships).every() &&
@@ -45,15 +44,14 @@ class TopicService {
         success
     }
 
-    def Boolean deleteWithSupervisions(Topic topic) {
+    Boolean deleteWithSupervisions(Topic topic) {
         def success = topic?.supervisions?.every { delete(it) } &&
                 Comment.findAllByArticle(topic).every { delete(it) } &&
                 delete(topic)
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            event('topicDeleted', 
-                new TopicEvent(topic, springSecurityService.currentUser))
+            event('topicDeleted', new TopicEvent(topic, springSecurityService.currentUser))
         }
         success
     }
