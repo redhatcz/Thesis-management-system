@@ -46,7 +46,7 @@ class TopicController {
     def create() {
         def membershipsCommand = new MembershipsCommand();
         bindData(membershipsCommand, params.supervisions)
-        [topicInstance: new Topic(params), membershipCommand: membershipsCommand, universities: University.all, owners: User.all]
+        [topicInstance: new Topic(params.topic), membershipCommand: membershipsCommand, universities: University.all, owners: User.all]
     }
 
     def save() {
