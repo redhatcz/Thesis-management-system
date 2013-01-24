@@ -1,6 +1,7 @@
 package com.redhat.theses.ajax
 
 import com.redhat.theses.Membership
+import com.redhat.theses.Topic
 import grails.converters.JSON
 import com.redhat.theses.auth.User
 
@@ -14,11 +15,14 @@ import com.redhat.theses.Supervision
 class JsonController {
 
 /*
-    These methods are providing data for autocomplete
-     */
+ * Following methods provide data for autocomplete
+ */
+
+    static final Integer MAX_RESULTS = 5
+
     def listUsersFromUniversityByName(String term, Long organizationId) {
         def query = Membership.where {organization.id == organizationId  && user.fullName =~ "%${term}%"}
-        def memberships = query.list([max: 5])
+        def memberships = query.list([max: MAX_RESULTS])
         def userMap = [:]
 
         memberships.each {
@@ -28,7 +32,7 @@ class JsonController {
     }
 
     def listUsersByName(String term) {
-        def users = User.findAllByFullNameIlike("%${term}%", [max: 5])
+        def users = User.findAllByFullNameIlike("%${term}%", [max: MAX_RESULTS])
         def userMap = [:]
         users.each {
             userMap[it.fullName] = it.id
@@ -37,7 +41,7 @@ class JsonController {
     }
 
     def listTagsByName(String term){
-        def tags = Tag.findAllByTitleIlike("%${term}%", [max: 5])
+        def tags = Tag.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS])
         def tagMap = [:]
         tags.each {
             tagMap[it.title] = it.id
@@ -45,14 +49,24 @@ class JsonController {
         render tagMap as JSON
     }
 
+    def listTopicsByTitle(String term) {
+        def topics = Topic.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS])
+        def topicMap = [:]
+        topics.each {
+            topicMap[it.title] = it.id
+        }
+        render topicMap as JSON
+    }
+
 /*
-    These methods are providing data for dynamic selects
+ * Following methods provide data for dynamic selects
  */
+
     def listSupervisorsFromUniversity(Long topicId,  Long organizationId) {
         def users = User.executeQuery('''SELECT s.membership.user
                 FROM  Supervision s
-                WHERE s.topic.id = :topidId AND s.membership.organization.id = :organizationId''',
-                [topidId: topicId, organizationId: organizationId])
+                WHERE s.topic.id = :topicId AND s.membership.organization.id = :organizationId''',
+                [topicId: topicId, organizationId: organizationId])
         def userMap = [:]
 
         users.each {

@@ -57,7 +57,7 @@ class ApplicationController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), application.id])
-        redirect(controller: 'topic', action: "show", id: topicInstance?.id)
+        redirect(action: "show", id: topicInstance?.id)
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
@@ -77,10 +77,8 @@ class ApplicationController {
             return
         }
 
-        if (applicationInstance.topic.owner == user) {
-            applicationService.approve(applicationInstance)
-            flash.message = message(code: 'application.approved', default: 'Application has been approved')
-        }
+        applicationService.approve(applicationInstance)
+        flash.message = message(code: 'application.approved', default: 'Application has been approved')
 
         redirect(controller: 'application', action: 'show', id: applicationInstance.id)
     }

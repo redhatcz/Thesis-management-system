@@ -28,7 +28,7 @@ class Ajax4GSPTagLib {
         }
 
         if (!attrs.from) {
-            attrs.from = '[]'
+            attrs.from = []
         }
 
         out << g.select(attrs)

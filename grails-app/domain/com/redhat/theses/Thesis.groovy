@@ -1,8 +1,11 @@
 package com.redhat.theses
 
+import com.redhat.theses.auth.User
+
 class Thesis extends Article{
 
-    Application application
+    Topic topic
+    User assignee
     Status status
     Grade grade
     String thesisAbstract

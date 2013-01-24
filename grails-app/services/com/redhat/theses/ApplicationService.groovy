@@ -7,12 +7,12 @@ class ApplicationService {
             return
         }
 
-        application.approvedByOwner = true;
+        application.approvedByOwner = true
         def result = application.save()
         if (result) {
             event('applicationApproved', application)
         }
-        result;
+        result
     }
 
 }

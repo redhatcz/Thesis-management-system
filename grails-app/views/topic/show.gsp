@@ -80,7 +80,12 @@
                     <g:submitButton class="btn btn-info" name="submit-unsubscription" value="Unsubscribe"/>
                 </g:form>
             </g:else>
-
+            <g:link class="btn btn-info" controller="application" action="create" id="${topicInstance?.id}">
+                <g:message code="default.button.apply.label" default="Apply" />
+            </g:link>
+            <g:link class="btn btn-info" controller="thesis" action="create" id="${topicInstance?.id}">
+                <g:message code="thesis.create.button" default="Create thesis" />
+            </g:link>
         </div>
     </div>
 

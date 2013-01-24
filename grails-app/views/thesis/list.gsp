@@ -24,11 +24,11 @@
             <tr>
                 <td>
                     <g:link action="show" id="${thesisInstance.id}">
-                        ${fieldValue(bean: thesisInstance.application.topic, field: "title")}
+                        ${fieldValue(bean: thesisInstance.topic, field: "title")}
                     </g:link>
                 </td>
                 <td>
-                    ${fieldValue(bean: thesisInstance.application.applicant, field: "fullName")}
+                    ${fieldValue(bean: thesisInstance.assignee, field: "fullName")}
                 </td>
             </tr>
         </g:each>
@@ -42,7 +42,7 @@
 
 <div class="span4">
     <div class="thesis">
-        <h4>Manage Organizations</h4>
+        <h4>Manage theses</h4>
         <g:link class="btn btn-info" action="create">
             <g:message code="default.new.label" args="[entityName]"/>
         </g:link>
