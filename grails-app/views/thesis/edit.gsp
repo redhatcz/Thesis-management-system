@@ -10,7 +10,7 @@
 <h1 class="header">
     <g:message code="default.edit.label" args="[entityName]" />
 </h1>
-<g:form class="form-horizontal" method="post" >
+<g:form class="form-horizontal" method="post" name="thesis-form">
     <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
     <g:hiddenField name="thesis.version" value="${thesisInstance?.version}" />
     <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}" />

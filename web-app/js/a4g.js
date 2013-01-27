@@ -31,7 +31,8 @@ function dynamicSelect(id) {
     var $this = $("#" + escapeRegex(id));
     var noSelection = $this.find(':first-child')
     $(document).ready(function () {
-        var source = $('#' + escapeRegex($this.attr('source')))
+        var sourceSelector = '#' + escapeRegex($this.attr('source')).replace(/\\\s/g, ",#");
+        var source = $(sourceSelector);
         source.change(function () {
             var params = buildParams($this.attr('remote-opts'));
             $.get($this.attr('remote-url'), params, function (data) {

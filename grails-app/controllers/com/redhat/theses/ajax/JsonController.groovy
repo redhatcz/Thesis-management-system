@@ -74,4 +74,19 @@ class JsonController {
         }
         render userMap as JSON
     }
+
+    def listSupervisorsForUser(Long topicId,  Long userId) {
+        def userMap = [:]
+        if (topicId && userId) {
+            def users = User.executeQuery('''SELECT s.membership.user
+                    FROM  Supervision s
+                    WHERE s.topic.id = :topicId AND s.membership.user.id = :userId''',
+                    [topicId: topicId, userId: userId])
+
+            users.each {
+                userMap[it.fullName] = it.id
+            }
+        }
+        render userMap as JSON
+    }
 }

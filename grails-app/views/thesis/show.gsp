@@ -24,9 +24,19 @@
     <div class="thesis">
         <h4>Thesis Information</h4>
         <dl class="dl-thesis">
+            <dt><g:message code="thesis.topic.label" default="Topic"/></dt>
+            <dd>
+                <g:link action="show" controller="topic" id="${thesisInstance?.topicId}">
+                    <g:fieldValue field="topic" bean="${thesisInstance}"/>
+                </g:link>
+            </dd>
             <dt><g:message code="thesis.assignee.label" default="Assignee"/></dt>
             <dd>
                 <g:fieldValue field="assignee" bean="${thesisInstance}"/>
+            </dd>
+            <dt><g:message code="thesis.supervisor.label" default="Supervisor"/></dt>
+            <dd>
+                <g:fieldValue field="supervisor" bean="${thesisInstance}"/>
             </dd>
             <dt><g:message code="thesis.status.label" default="Status"/></dt>
             <dd>

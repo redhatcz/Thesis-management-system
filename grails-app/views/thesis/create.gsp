@@ -23,17 +23,8 @@
             </div>
         </div>
 
-        <div class="control-group ${hasErrors(bean: thesisInstance?.assignee, field: 'fullName', 'error')}">
-            <label class="control-label" for="thesis.assignee.fullName">
-                <g:message code="thesis.assignee.label" default="Assignee" />
-            </label>
-            <div class="controls">
-                <g:hiddenField name="thesis.assignee.id" value="${thesisInstance?.assignee?.id}"/>
-                <a4g:textField name="thesis.assignee.fullName" value="${thesisInstance?.assignee?.fullName}" required=""
-                               autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
-                               autocomplete-target="thesis.assignee.id"/>
-            </div>
-        </div>
+        <g:render template="formAssigneeAndSupervisor"/>
+
         <div class="control-group">
             <div class="controls">
                 <g:submitButton name="create" class="btn btn-primary"

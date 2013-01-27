@@ -6,6 +6,7 @@ class Thesis extends Article{
 
     Topic topic
     User assignee
+    User supervisor
     Status status
     Grade grade
     String thesisAbstract
