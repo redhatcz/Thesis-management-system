@@ -51,6 +51,7 @@ function autocomplete(id) {
     var $this = $("#" + escapeRegex(id));
     $this.attr("autocomplete", "off");
     $(document).ready(function() {
+        var map = undefined;
         $this.typeahead({
             source: function(term, process) {
                 var params = buildParams($this.attr('autocomplete-opts'));

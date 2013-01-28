@@ -46,10 +46,12 @@ class ThesisController {
 
     def create(Long id) {
         def thesisInstance = new Thesis(params.thesis)
+        def disabledTopicField = false
         if (id) {
             thesisInstance.topic = Topic.get(id)
+            disabledTopicField = true
         }
-        [thesisInstance: thesisInstance]
+        [thesisInstance: thesisInstance, disabledTopicField: disabledTopicField]
     }
 
     def save() {

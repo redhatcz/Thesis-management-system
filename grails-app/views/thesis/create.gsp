@@ -11,19 +11,8 @@
         <g:message code="default.create.label" args="[entityName]" />
     </h1>
     <g:form class="form-horizontal" action="save" >
-        <div class="control-group ${hasErrors(bean: thesisInstance?.topic, field: 'title', 'error')}">
-            <label class="control-label" for="thesis.topic.title">
-                <g:message code="thesis.topic.title.label" default="Topic" />
-            </label>
-            <div class="controls">
-                <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}"/>
-                <a4g:textField name="thesis.topic.title" value="${thesisInstance?.topic?.title}" required=""
-                               autocomplete-url="${createLink(controller: 'json', action: 'listTopicsByTitle')}"
-                               autocomplete-target="thesis.topic.id"/>
-            </div>
-        </div>
 
-        <g:render template="formAssigneeAndSupervisor"/>
+        <g:render template="formCreate"/>
 
         <div class="control-group">
             <div class="controls">

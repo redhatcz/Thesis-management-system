@@ -1,4 +1,4 @@
-<g:render template="formAssigneeAndSupervisor"/>
+<g:render template="formCommon"/>
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'status', 'error')}">
     <label class="control-label" for="thesis.status">
