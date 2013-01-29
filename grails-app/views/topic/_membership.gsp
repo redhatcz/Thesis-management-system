@@ -7,7 +7,7 @@
               required=""
               value="${membership?.organization?.id}" class="many-to-one"/>
 
-    <g:hiddenField name="supervisions.memberships[${i}].id" value="${membership?.user?.id}"/>
+    <g:hiddenField name="supervisions.memberships[${i}].id" value="${membership?.id}"/>
     <a4g:textField name="supervisions.memberships[${i}].user.fullName" value="${membership?.user?.fullName}"
                    autocomplete-url="${createLink(controller: 'json', action: 'listUsersFromUniversityByName')}"
                    autocomplete-target="supervisions.memberships[${i}].id"
