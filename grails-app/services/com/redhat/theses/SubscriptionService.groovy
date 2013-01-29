@@ -16,4 +16,23 @@ class SubscriptionService {
         def success = subscription && Commons.delete(subscription)
         success
     }
+
+    def notify(User subscriber, String subj, String body) {
+        log.info "Sending mail to ${subscriber.email}"
+        try {
+            sendMail {
+                to subscriber.email
+                subject subj
+                text body
+            }
+        } catch (Exception ex) {
+            log.error ex.getMessage()
+        }
+    }
+
+    def notifyAll(List<User> subscribers, String subj, String body) {
+        subscribers.each { subscriber ->
+            notify(subscriber, subj, body)
+        }
+    }
 }

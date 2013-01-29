@@ -3,7 +3,6 @@ package com.redhat.theses.listeners
 import com.redhat.theses.Subscription
 import com.redhat.theses.events.ThesisEvent
 import grails.events.Listener
-import org.springframework.context.i18n.LocaleContextHolder
 
 /**
  * @author vdedik@redhat.com
@@ -15,15 +14,27 @@ class ThesisListenerService {
     def feedService
 
     /*
-     * Dependency injection of MessageSource
+     * Dependency injection of SubscriptionService
      */
-    def messageSource
+    def subscriptionService
 
     @Listener(topic = "thesisCreated")
     void thesisCreated(ThesisEvent e) {
         feedService.createThesisFeed(e.thesis, 'insert', e.user)
+
+        def subscribers = [e.thesis.supervisor, e.thesis.assignee].unique()
+        subscribers.each { subscriber ->
+            subscriptionService.subscribe(subscriber, e.thesis)
+
+            if (e.user != subscriber) {
+                subscriptionService.notify(subscriber,
+                        "You have been automatically subscribed for thesis ${e.thesis.id}",
+                        "User ${e?.user?.fullName} created thesis ${e.thesis.id}")
+            }
+        }
     }
 
+    //TODO: send all subscribers notification about deletion
     @Listener(topic = "thesisDeleted")
     void thesisDeleted(ThesisEvent e) {
         feedService.createThesisFeed(e.thesis, 'delete', e.user)
@@ -31,16 +42,14 @@ class ThesisListenerService {
 
     @Listener(topic = "thesisUpdated")
     void thesisUpdated(ThesisEvent e) {
-        def feed = feedService.createThesisFeed(e.thesis, 'update', e.user)
+        feedService.createThesisFeed(e.thesis, 'update', e.user)
 
         def subscribers = Subscription.findAllByArticle(e.thesis)*.subscriber.unique()
         //remove currentUser from subscribers
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}
 
-        filteredSubscribers.each {
-            //TODO: send email instead of printing the message to stdout, and also refactoring needed
-            println "Sending mail to subscriber ${it.fullName}:"
-            println messageSource.getMessage(feed.messageCode, feed.args.toArray(), LocaleContextHolder.getLocale())
-        }
+        subscriptionService.notifyAll(filteredSubscribers,
+                "Thesis ${e.thesis.id} has been updated",
+                "User ${e?.user?.fullName} updated thesis ${e.thesis.id}.")
     }
 }

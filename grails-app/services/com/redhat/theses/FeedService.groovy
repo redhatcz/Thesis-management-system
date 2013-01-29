@@ -1,7 +1,6 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException
 
 class FeedService {
 
@@ -17,11 +16,6 @@ class FeedService {
     }
 
     Feed createTopicFeed(Topic topic, String messageType, User user) {
-        if (!user) {
-            throw new AuthenticationCredentialsNotFoundException(
-                    "No user is logged in, topic feed could not be created.")
-        }
-
         def args = [
             user.fullName,
             grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),
@@ -38,11 +32,6 @@ class FeedService {
     }
 
     Feed createThesisFeed(Thesis thesis, String messageType, User user) {
-        if (!user) {
-            throw new AuthenticationCredentialsNotFoundException(
-                    "No user is logged in, thesis feed could not be created.")
-        }
-
         def args = [
             user.fullName,
             grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),

@@ -16,15 +16,27 @@ class TopicListenerService{
     def feedService
 
     /*
-     * Dependency injection of MessageSource
+     * Dependency injection of SubscriptionService
      */
-    def messageSource
+    def subscriptionService
 
     @Listener(topic = "topicCreated")
     void topicCreated(TopicEvent e) {
         feedService.createTopicFeed(e.topic, 'insert', e.user)
+
+        def subscribers = [e.topic.owner].unique()
+        subscribers.each { subscriber ->
+            subscriptionService.subscribe(subscriber, e.topic)
+
+            if (e.user != subscriber) {
+                subscriptionService.notify(subscriber,
+                        "You have been automatically subscribed for topic ${e.topic.title}",
+                        "User ${e?.user?.fullName} created topic ${e.topic.title}")
+            }
+        }
     }
 
+    //TODO: send all subscribers notification about deletion
     @Listener(topic = "topicDeleted")
     void topicDeleted(TopicEvent e) {
         feedService.createTopicFeed(e.topic, 'delete', e.user)
@@ -32,16 +44,14 @@ class TopicListenerService{
 
     @Listener(topic = "topicUpdated")
     void topicUpdated(TopicEvent e) {
-        def feed = feedService.createTopicFeed(e.topic, 'update', e.user)
+        feedService.createTopicFeed(e.topic, 'update', e.user)
 
         def subscribers = Subscription.findAllByArticle(e.topic)*.subscriber.unique()
         //remove currentUser from subscribers
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}
 
-        filteredSubscribers.each {
-            //TODO: send email instead of printing the message to stdout, and also refactoring needed
-            println "Sending mail to subscriber ${it.fullName}:"
-            println messageSource.getMessage(feed.messageCode, feed.args.toArray(), LocaleContextHolder.getLocale())
-        }
+        subscriptionService.notifyAll(filteredSubscribers,
+                "Topic ${e.topic.title} has been updated",
+                "User ${e?.user?.fullName} updated topic ${e.topic.title}.")
     }
 }

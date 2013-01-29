@@ -62,10 +62,25 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+
+        grails {
+            mail {
+                host = "smtp.gmail.com"
+                port = 465
+                username = "noone.localhost@gmail.com"
+                password = "noone.local"
+                overrideAddress = "noone.localhost@gmail.com"
+                props = ["mail.smtp.auth":"true",
+                        "mail.smtp.socketFactory.port":"465",
+                        "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                        "mail.smtp.socketFactory.fallback":"false"]
+            }
+        }
     }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
+        // TODO: add mail server configuration
     }
 }
 
@@ -89,8 +104,14 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    all 'com.redhat.theses'
-
+    all additivity: false, console: [
+            'grails.app.controllers.com.redhat.theses',
+            'grails.app.domain.your.com.redhat.theses',
+            'grails.app.services.com.redhat.theses',
+            'grails.app.taglib.com.redhat.theses',
+            'grails.app.conf.com.redhat.theses',
+            'grails.app.filters.com.redhat.theses'
+    ]
 }
 
 // Added by the Spring Security Core plugin:
