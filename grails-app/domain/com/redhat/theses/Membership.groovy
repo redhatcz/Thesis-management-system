@@ -4,7 +4,7 @@ import com.redhat.theses.auth.User
 
 class Membership implements Serializable    {
 
-    User user;
+    User user
     Organization organization
 
     static mapping = {

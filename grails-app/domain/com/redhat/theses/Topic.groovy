@@ -15,7 +15,7 @@ class Topic extends Article {
     static constraints = {
         description widget: 'textarea' , nullable: false, blank: false
         title nullable: false, blank: false
-        owner nullable: false
+        lead nullable: false, blank: false
     }
 
     static List<Topic> findAllByTag(Tag tag, Map params = [:]){

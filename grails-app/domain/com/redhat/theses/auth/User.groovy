@@ -26,16 +26,16 @@ class User {
         Membership.countByUserAndOrganization(this, organization) > 0
     }
 
-    Set<Organization> getOrganizations() {
-        Membership.findAllByUser(this).collect {it.organization} as Set
+    List<Organization> getOrganizations() {
+        Membership.findAllByUser(this).collect {it.organization}
     }
 
-    Set<Organization> getOrganizations(Class clazz) {
-        Membership.findAllByUser(this).collect {it.organization}.findAll {it.class == clazz} as Set
+    List<Organization> getOrganizations(Class clazz) {
+        Membership.findAllByUser(this).collect {it.organization}.findAll {it.class == clazz}
     }
 
-	Set<Role> getAuthorities() {
-		UserRole.findAllByUser(this).collect { it.role } as Set
+	List<Role> getAuthorities() {
+		UserRole.findAllByUser(this).collect { it.role }
 	}
 
 	def beforeInsert() {

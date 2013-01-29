@@ -2,11 +2,11 @@ package com.redhat.theses
 
 class Tag {
 
+    String title
+
     static hasMany = [subTags: Tag]
     static belongsTo = [parent: Tag]
     static transients = ['allParents', 'allSubtags']
-
-    String title
 
     static constraints = {
         title   unique: true
