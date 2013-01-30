@@ -1,9 +1,9 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Organization" %>
+<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Application" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'application.label', default: 'Organization')}"/>
+    <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -48,7 +48,7 @@
 
 <div class="span4">
     <div class="thesis">
-        <h4>Manage Organizations</h4>
+        <h4>Manage applications</h4>
         <g:link class="btn btn-info" action="create">
             <g:message code="default.new.label" args="[entityName]"/>
         </g:link>
