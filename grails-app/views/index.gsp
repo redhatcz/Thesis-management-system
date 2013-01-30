@@ -9,7 +9,7 @@
         <div class="table-base">
             <g:each in="${feedList}" var="feed">
                 <div class="table-layout">
-                    <markdown:renderHtml text="${message(code: feed?.messageCode, args: feed?.args)}"/>
+                    <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
                 </div>
             </g:each>
         </div>

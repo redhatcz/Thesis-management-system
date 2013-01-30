@@ -3,7 +3,7 @@ package com.redhat.theses.listeners
 import com.redhat.theses.events.TopicEvent
 import com.redhat.theses.Subscription
 import grails.events.Listener
-import org.springframework.context.i18n.LocaleContextHolder
+import org.springframework.context.i18n.LocaleContextHolder as LCH
 
 /**
  * @author vdedik@redhat.com
@@ -20,20 +20,24 @@ class TopicListenerService{
      */
     def subscriptionService
 
+    /**
+     * Dependency injection of org.springframework.context.MessageSource
+     */
+    def messageSource
+
     @Listener(topic = "topicCreated")
     void topicCreated(TopicEvent e) {
-        feedService.createTopicFeed(e.topic, 'insert', e.user)
+        def feed = feedService.createTopicFeed(e.topic, 'insert', e.user)
 
         def subscribers = [e.topic.owner].unique()
-        subscribers.each { subscriber ->
-            subscriptionService.subscribe(subscriber, e.topic)
-
-            if (e.user != subscriber) {
-                subscriptionService.notify(subscriber,
-                        "You have been automatically subscribed for topic ${e.topic.title}",
-                        "User ${e?.user?.fullName} created topic ${e.topic.title}")
-            }
+        subscribers.each {
+            subscriptionService.subscribe(it, e.topic)
         }
+        def filteredSubscribers = subscribers.findAll {it.id != e.user.id}
+
+        def subject = messageSource.getMessage('mail.topic.subscribed.subject', [e.topic.title].toArray(), LCH.locale)
+        def body = messageSource.getMessage(feed.messageCode, feed.args.toArray(), LCH.locale)
+        subscriptionService.notifyAll(filteredSubscribers, subject, body)
     }
 
     //TODO: send all subscribers notification about deletion
@@ -44,14 +48,13 @@ class TopicListenerService{
 
     @Listener(topic = "topicUpdated")
     void topicUpdated(TopicEvent e) {
-        feedService.createTopicFeed(e.topic, 'update', e.user)
+        def feed = feedService.createTopicFeed(e.topic, 'update', e.user)
 
         def subscribers = Subscription.findAllByArticle(e.topic)*.subscriber.unique()
-        //remove currentUser from subscribers
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}
 
-        subscriptionService.notifyAll(filteredSubscribers,
-                "Topic ${e.topic.title} has been updated",
-                "User ${e?.user?.fullName} updated topic ${e.topic.title}.")
+        def subject = messageSource.getMessage('mail.topic.update.subject', [e.topic.id].toArray(), LCH.locale)
+        def body = messageSource.getMessage(feed.messageCode, feed.args.toArray(), LCH.locale)
+        subscriptionService.notifyAll(filteredSubscribers, subject, body)
     }
 }

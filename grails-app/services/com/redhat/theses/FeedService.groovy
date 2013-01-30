@@ -18,12 +18,12 @@ class FeedService {
     Feed createTopicFeed(Topic topic, String messageType, User user) {
         def args = [
             user.fullName,
-            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),
+            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id, absolute: true),
             topic.title
         ]
 
         if (messageType != 'delete') {
-            args += [grailsLinkGenerator.link(controller: 'topic', action: 'show', id: topic.id)]
+            args += [grailsLinkGenerator.link(controller: 'topic', action: 'show', id: topic.id, absolute: true)]
         }
 
         def messageCode = "feed.topic.${messageType}"
@@ -34,12 +34,12 @@ class FeedService {
     Feed createThesisFeed(Thesis thesis, String messageType, User user) {
         def args = [
             user.fullName,
-            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id),
+            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id, absolute: true),
             thesis.id
         ]
 
         if (messageType != 'delete') {
-            args += [grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: thesis.id)]
+            args += [grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: thesis.id, absolute: true)]
         }
 
         def messageCode = "feed.thesis.${messageType}"

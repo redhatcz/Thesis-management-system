@@ -23,7 +23,7 @@ class SubscriptionService {
             sendMail {
                 to subscriber.email
                 subject subj
-                text body
+                html body
             }
         } catch (Exception ex) {
             log.error ex.getMessage()
