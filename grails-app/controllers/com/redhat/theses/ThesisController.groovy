@@ -6,13 +6,13 @@ class ThesisController {
 
     static allowedMethods = [save: 'POST', update: 'POST']
 
-    /*
-     * Dependency injection of ThesisService
+    /**
+     * Dependency injection of com.redhat.theses.ThesisService
      */
     def thesisService
 
-    /*
-     * Dependency injection of SpringSecurityService
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
      */
     def springSecurityService
 
@@ -28,7 +28,7 @@ class ThesisController {
     def show(Long id) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            flash.message = message(code: 'thesis.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -63,14 +63,14 @@ class ThesisController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'thesis.label', default: 'Thesis'), thesisInstance.id])
+        flash.message = message(code: 'thesis.created', args: [ thesisInstance.id])
         redirect action: 'show', id: thesisInstance.id
     }
 
     def edit(Long id) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            flash.message = message(code: 'thesis.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -82,15 +82,13 @@ class ThesisController {
         Long version = params.thesis.long("version")
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            flash.message = message(code: 'thesis.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
         if (version && thesisInstance.version > version) {
-            thesisInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                    [message(code: 'thesis.label', default: 'Thesis')] as Object[],
-                    "Another user has updated this thesis while you were editing")
+            thesisInstance.errors.rejectValue("version", "thesis.optimistic.lock.error")
             render view: "edit", model:
                     [thesisInstance: thesisInstance, statusList: Thesis.Status.values(), gradeList: Thesis.Grade.values()]
             return
@@ -103,8 +101,7 @@ class ThesisController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args:
-                [message(code: 'thesis.label', default: 'Thesis'), thesisInstance.id])
+        flash.message = message(code: 'thesis.updated', args: [thesisInstance.id])
         redirect action: "show", id: thesisInstance.id
     }
 
@@ -112,16 +109,16 @@ class ThesisController {
         Long id = params.thesis.int('id')
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            flash.message = message(code: 'thesis.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
         if (thesisService.delete(thesisInstance)) {
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            flash.message = message(code: 'thesis.updated', args: [id])
             redirect(action: "list")
         } else {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'thesis.label', default: 'Thesis'), id])
+            flash.message = message(code: 'thesis.not.updated', args: [id])
             redirect(action: "show", id: id)
         }
     }

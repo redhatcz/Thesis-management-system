@@ -4,8 +4,8 @@ import com.redhat.theses.auth.User
 
 class FeedService {
 
-    /*
-     * Dependency injection of LinkGenerator
+    /**
+     * Dependency injection of org.codehaus.groovy.grails.web.mapping.LinkGenerator
      */
     def grailsLinkGenerator
 

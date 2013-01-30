@@ -5,8 +5,8 @@ package com.redhat.theses.config
  */
 class Configuration {
 
-    /*
-     * Dependency injection of ConfigurationProvider (set up in resources.groovy)
+    /**
+     * Dependency injection of com.redhat.theses.config.ConfigurationProvider (set up in resources.groovy)
      */
     def configurationProvider
 

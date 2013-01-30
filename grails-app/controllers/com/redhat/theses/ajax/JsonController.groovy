@@ -6,8 +6,6 @@ import grails.converters.JSON
 import com.redhat.theses.auth.User
 
 import com.redhat.theses.Tag
-import com.redhat.theses.Comment
-import com.redhat.theses.Supervision
 /**
  * TODO: if the key of the map that is returned as JSON is not unique,
  * we should return something that is unique, e.g. "Full Name (id)"

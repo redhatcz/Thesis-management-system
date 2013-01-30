@@ -17,12 +17,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 class LoginController {
 
 	/**
-	 * Dependency injection for the authenticationTrustResolver.
+	 * Dependency injection of org.springframework.security.authentication.AuthenticationTrustResolver
 	 */
 	def authenticationTrustResolver
 
 	/**
-	 * Dependency injection for the springSecurityService.
+	 * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
 	 */
 	def springSecurityService
 

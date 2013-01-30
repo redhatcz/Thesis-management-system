@@ -39,14 +39,23 @@ class RichGSPTagLib {
     }
 
     /**
-     * Creates alert @message of @type (success, info, error or warning)
+     * Creates alert @message (or @code) of @type (success, info, error or warning)
      *
      * @attr message - message to be printed
+     * @attr code - code of the message
+     * @attr args - arguments of the message
      * @attr type - type of the message
      */
     def alert = { attrs, body ->
+        def message
+        if (attrs.code) {
+            message = g.message(code: attrs.code, args: attrs.args)
+        } else {
+            message = attrs.message
+        }
+
         out << render(template: '/taglib/richg/alert',
-                model: [type: attrs.type, message: attrs.message])
+                model: [type: attrs.type, message: message])
     }
 
     /**

@@ -9,8 +9,8 @@ class ConfigurationController {
 
     static allowedMethods = [update: 'POST']
 
-    /*
-     * Dependency injection of Configuration
+    /**
+     * Dependency injection of com.redhat.theses.config.Configuration
      */
     def configuration
 

@@ -6,11 +6,17 @@ import grails.plugins.springsecurity.Secured
 
 class ApplicationController {
 
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
+     */
     def springSecurityService
+
+    /**
+     * Dependency injection of com.redhat.theses.ApplicationService
+     */
     def applicationService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
 
     def index() {
         redirect(action: "list", params: params, permanent: true)
@@ -25,12 +31,12 @@ class ApplicationController {
     def create(Long id) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(controller: 'topic', action: "list")
             return
         }
         if (topicInstance.universities.empty) {
-            flash.message = message(code: 'application.impossible', args: [message(code: 'application.label', default: 'Application'), id])
+            flash.message = message(code: 'application.impossible.no.university', args: [id])
             redirect(controller: 'topic', action: "list")
             return
         }
@@ -56,7 +62,7 @@ class ApplicationController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), application.id])
+        flash.message = message(code: 'application.created', args: [application.id])
         redirect(action: "show", id: topicInstance?.id)
     }
 
@@ -64,7 +70,7 @@ class ApplicationController {
     def approve(Long id) {
         def applicationInstance = Application.get(id)
         if (!applicationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), id])
+            flash.message = message(code: 'application.not.found', args: [id])
             redirect(controller: 'application', action: 'list')
             return
         }
@@ -72,13 +78,13 @@ class ApplicationController {
         User user = springSecurityService.currentUser
 
         if (applicationInstance.topic.owner != user) {
-            flash.message = message(code: 'permissions.deny', default: 'Permission denied')
+            flash.message = message(code: 'action.permission.denied')
             redirect(controller: 'application', action: 'list')
             return
         }
 
         applicationService.approve(applicationInstance)
-        flash.message = message(code: 'application.approved', default: 'Application has been approved')
+        flash.message = message(code: 'application.approved')
 
         redirect(controller: 'application', action: 'show', id: applicationInstance.id)
     }
@@ -86,7 +92,7 @@ class ApplicationController {
     def show(Long id) {
         def applicationInstance = Application.get(id)
         if (!applicationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'Application'), id])
+            flash.message = message(code: 'application.not.found', args: [id])
             redirect(action: "list")
             return
         }

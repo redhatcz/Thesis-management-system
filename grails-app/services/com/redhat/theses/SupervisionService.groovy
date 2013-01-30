@@ -2,10 +2,6 @@ package com.redhat.theses
 
 class SupervisionService {
 
-    def serviceMethod() {
-
-    }
-
     /**
      * Creates and persists supervision for given topic and each element from list of Membership
      * @param topic

@@ -5,8 +5,14 @@ import com.redhat.theses.util.Util
 
 class TopicController {
 
+    /**
+     * Dependency injection of com.redhat.theses.TopicService
+     */
     def topicService;
 
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
+     */
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -31,7 +37,7 @@ class TopicController {
         def tag = Tag.get(id)
 
         if (!tag) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            flash.message = message(code: 'tag.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -60,14 +66,14 @@ class TopicController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
+        flash.message = message(code: 'topic.created', args: [topicInstance.id])
         redirect(action: "show", id: topicInstance.id)
     }
 
     def show(Long id) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -92,7 +98,7 @@ class TopicController {
     def edit(Long id, MembershipsCommand membershipsCommand) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -108,19 +114,15 @@ class TopicController {
         Long version = params.topic.long("version")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
-        if (version != null) {
-            if (topicInstance.version > version) {
-                topicInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'topic.label', default: 'Topic')] as Object[],
-                          "Another user has updated this Topic while you were editing")
-                render(view: "edit", model: [topicInstance: topicInstance])
-                return
-            }
+        if (version != null && topicInstance.version > version) {
+            topicInstance.errors.rejectValue("version", "topic.optimistic.lock.error")
+            render(view: "edit", model: [topicInstance: topicInstance])
+            return
         }
 
         topicInstance.properties = params.topic
@@ -134,7 +136,7 @@ class TopicController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
+        flash.message = message(code: 'topic.updated', args: [topicInstance.id])
         redirect(action: "show", id: topicInstance.id)
     }
 
@@ -142,16 +144,16 @@ class TopicController {
         Long id = params.topic.long("id")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
         if (topicService.deleteWithSupervisions(topicInstance)) {
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.deleted', args: [id])
             redirect(action: "list")
         } else {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.deleted', args: [id])
             redirect(action: "show", id: id)
         }
     }

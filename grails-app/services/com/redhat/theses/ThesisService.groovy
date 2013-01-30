@@ -5,8 +5,8 @@ import com.redhat.theses.util.Commons
 
 class ThesisService {
 
-    /*
-     * Dependency injection of SpringSecurityService
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
      */
     def springSecurityService
 

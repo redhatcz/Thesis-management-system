@@ -8,6 +8,9 @@ class RegistrationController {
 
     static allowedMethods = [register: "POST"]
 
+    /**
+     * Dependency injection of com.redhat.theses.auth.UserService
+     */
     def userService
 
     def index() {
@@ -32,7 +35,7 @@ class RegistrationController {
             return
         }
 
-        flash.message = message(code: 'registration.sucessfull.message')
+        flash.message = message(code: 'registration.created')
         redirect(url: "/")
     }
 }

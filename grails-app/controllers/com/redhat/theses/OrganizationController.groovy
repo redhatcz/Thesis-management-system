@@ -6,8 +6,14 @@ class OrganizationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    /**
+     * Dependency injection of com.redhat.theses.OrganizationService
+     */
     def organizationService
 
+    /**
+     * Dependency injection of org.codehaus.groovy.grails.commons.GrailsApplication
+     */
     def grailsApplication
 
     def index() {
@@ -33,14 +39,14 @@ class OrganizationController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'organization.label', default: 'Organization'), organizationInstance.id])
+        flash.message = message(code: 'organization.created', args: [organizationInstance.id])
         redirect(action: "show", id: organizationInstance.id)
     }
 
     def show(Long id) {
         def organizationInstance = Organization.get(id)
         if (!organizationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'organization.label', default: 'Organization'), id])
+            flash.message = message(code: 'organization.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -51,7 +57,7 @@ class OrganizationController {
     def edit(Long id) {
         def organizationInstance = Organization.get(id)
         if (!organizationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'organization.label', default: 'Organization'), id])
+            flash.message = message(code: 'organization.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -64,19 +70,15 @@ class OrganizationController {
 
         def organizationInstance = Organization.get(id)
         if (!organizationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'organization.label', default: 'Organization'), id])
+            flash.message = message(code: 'organization.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
-        if (version != null) {
-            if (organizationInstance.version > version) {
-                organizationInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'organization.label', default: 'Organization')] as Object[],
-                          "Another user has updated this Organization while you were editing")
-                render(view: "edit", model: [organizationInstance: organizationInstance])
-                return
-            }
+        if (version != null && organizationInstance.version > version) {
+            organizationInstance.errors.rejectValue("version", "organization.optimistic.lock.error")
+            render(view: "edit", model: [organizationInstance: organizationInstance])
+            return
         }
 
         organizationInstance.properties = params.organization
@@ -86,7 +88,7 @@ class OrganizationController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'organization.label', default: 'Organization'), organizationInstance.id])
+        flash.message = message(code: 'organization.updated', args: [organizationInstance.id])
         redirect(action: "show", id: organizationInstance.id)
     }
 
@@ -95,16 +97,16 @@ class OrganizationController {
 
         def organizationInstance = Organization.get(id)
         if (!organizationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'organization.label', default: 'Organization'), id])
+            flash.message = message(code: 'organization.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
         if (organizationService.deleteWithMemberships(organizationInstance)) {
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'organization.label', default: 'Organization'), id])
+            flash.message = message(code: 'organization.deleted', args: [id])
             redirect(action: "list")
         } else {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'organization.label', default: 'Organization'), id])
+            flash.message = message(code: 'organization.not.deleted', args: [id])
             redirect(action: "show", id: id)
         }
     }

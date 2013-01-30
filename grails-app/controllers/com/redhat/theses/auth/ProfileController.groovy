@@ -7,8 +7,14 @@ class ProfileController {
 
     static allowedMethods = [updatePassword: 'POST']
 
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
+     */
     def springSecurityService
 
+    /**
+     * Dependency injection of com.redhat.theses.auth.UserService
+     */
     def userService
 
     def index() {
@@ -18,8 +24,7 @@ class ProfileController {
         }
 
         if (!springSecurityService.isLoggedIn()) {
-            flash.message = message code: 'profile.index.error.notLoggedIn',
-                    default: 'You must be logged in to view your profile'
+            flash.message = message(code: 'profile.not.authenticated')
             redirect uri: '/'
             return
         }
@@ -32,8 +37,7 @@ class ProfileController {
 
     def editPassword() {
         if (!springSecurityService.isLoggedIn()) {
-            flash.message = message code: 'profile.index.error.notLoggedIn',
-                    default: 'You must be logged in to view your profile'
+            flash.message = message(code: 'profile.not.authenticated')
             redirect uri: '/'
             return
         }
@@ -43,8 +47,7 @@ class ProfileController {
 
     def updatePassword(PasswordCommand passwordCommand) {
         if (!springSecurityService.isLoggedIn()) {
-            flash.message = message code: 'profile.index.error.notLoggedIn',
-                    default: 'You must be logged in to view your profile'
+            flash.message = message(code: 'profile.not.authenticated')
             redirect uri: '/'
             return
         }
@@ -57,8 +60,7 @@ class ProfileController {
             return
         }
 
-        flash.message = message(code: 'profile.updatePassword.sucessfull.message',
-                default: 'Your password was successfully updated.')
+        flash.message = message(code: 'profile.password.updated')
         redirect controller: 'profile'
     }
 }

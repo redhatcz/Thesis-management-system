@@ -11,6 +11,10 @@ import grails.events.Listener
  * To change this template use File | Settings | File Templates.
  */
 class ApplicationListenerService{
+
+    /**
+     * Dependency injeciton of com.redhat.theses.ThesisService
+     */
     def thesisService
 
     @Listener(topic = "applicationApproved")

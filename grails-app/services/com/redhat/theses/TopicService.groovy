@@ -6,13 +6,13 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport
 
 class TopicService {
 
-    /*
-     * Dependency injection of SupervisionService
+    /**
+     * Dependency injection of com.redhat.theses.SupervisionService
      */
     def supervisionService
 
-    /*
-     * Dependency injection of SpringSecurityService
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
      */
     def springSecurityService
 

@@ -5,6 +5,9 @@ import com.redhat.theses.Organization
 
 class User {
 
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
+     */
 	transient springSecurityService
 
 	String password

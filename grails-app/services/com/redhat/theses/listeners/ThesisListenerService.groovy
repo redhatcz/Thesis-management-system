@@ -8,13 +8,14 @@ import grails.events.Listener
  * @author vdedik@redhat.com
  */
 class ThesisListenerService {
-    /*
-     * Dependency injection of FeedService
+
+    /**
+     * Dependency injection of com.redhat.theses.FeedService
      */
     def feedService
 
-    /*
-     * Dependency injection of SubscriptionService
+    /**
+     * Dependency injection of com.redhat.theses.SubscriptionService
      */
     def subscriptionService
 

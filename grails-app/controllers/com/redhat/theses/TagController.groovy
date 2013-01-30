@@ -27,14 +27,14 @@ class TagController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'tag.label', default: 'Tag'), tagInstance.id])
+        flash.message = message(code: 'tag.created', args: [tagInstance.id])
         redirect(action: "show", id: tagInstance.id)
     }
 
     def show(Long id) {
         def tagInstance = Tag.get(id)
         if (!tagInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            flash.message = message(code: 'tag.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -45,7 +45,7 @@ class TagController {
     def edit(Long id) {
         def tagInstance = Tag.get(id)
         if (!tagInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            flash.message = message(code: 'tag.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -58,19 +58,15 @@ class TagController {
         Long version = params.tag.long("version")
         def tagInstance = Tag.get(id)
         if (!tagInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            flash.message = message(code: 'tag.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
-        if (version != null) {
-            if (tagInstance.version > version) {
-                tagInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'tag.label', default: 'Tag')] as Object[],
-                          "Another user has updated this Tag while you were editing")
-                render(view: "edit", model: [tagInstance: tagInstance])
-                return
-            }
+        if (version != null && tagInstance.version > version) {
+            tagInstance.errors.rejectValue("version", "tag.optimistic.lock.error")
+            render(view: "edit", model: [tagInstance: tagInstance])
+            return
         }
 
         tagInstance.properties = params.tag
@@ -80,7 +76,7 @@ class TagController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'tag.label', default: 'Tag'), tagInstance.id])
+        flash.message = message(code: 'tag.updated', args: [tagInstance.id])
         redirect(action: "show", id: tagInstance.id)
     }
 
@@ -88,18 +84,17 @@ class TagController {
         Long id = params.tag.long("id")
         def tagInstance = Tag.get(id)
         if (!tagInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            flash.message = message(code: 'tag.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
         try {
             tagInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+            flash.message = message(code: 'tag.deleted', args: [id])
             redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'tag.label', default: 'Tag'), id])
+        } catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'tag.not.deleted', args: [id])
             redirect(action: "show", id: id)
         }
     }

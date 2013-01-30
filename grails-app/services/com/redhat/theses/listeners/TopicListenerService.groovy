@@ -10,13 +10,13 @@ import org.springframework.context.i18n.LocaleContextHolder
  */
 class TopicListenerService{
 
-    /*
-     * Dependency injection of FeedService
+    /**
+     * Dependency injection of com.redhat.theses.FeedService
      */
     def feedService
 
-    /*
-     * Dependency injection of SubscriptionService
+    /**
+     * Dependency injection of com.redhat.theses.SubscriptionService
      */
     def subscriptionService
 

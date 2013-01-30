@@ -8,6 +8,9 @@ import org.springframework.dao.DataIntegrityViolationException
 class CommentController {
     static allowedMethods = [create: 'POST', update: 'POST', delete: 'POST']
 
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
+     */
     def springSecurityService
 
     def create() {
@@ -15,18 +18,18 @@ class CommentController {
         comment.setUser((User) springSecurityService.currentUser)
 
         if (!comment.content) {
-            def message = richg.alert type: 'error', message: 'The content of your comment cannot be empty.'
+            def message = richg.alert type: 'error', code: 'comment.empty.error'
             render([success: false, message: message] as JSON)
             return
         }
 
         if (!comment.save(flush: true)) {
-            def message = richg.alert type: 'error', message: 'An error has occured and the comment could not be saved.'
+            def message = richg.alert type: 'error', code: 'comment.error'
             render([success: false, message: message] as JSON)
             return
         }
 
-        flash.message = message(code: 'comment.create.sucessfull', default: 'Your comment has been successfully created.')
+        flash.message = message(code: 'comment.created')
         render([success: true] as JSON)
     }
 
@@ -36,18 +39,18 @@ class CommentController {
         comment.properties = params.comment
 
         if (!comment.content) {
-            def message = richg.alert type: 'error', message: 'The content of your comment cannot be empty.'
+            def message = richg.alert type: 'error', code: 'comment.empty.error'
             render([success: false, message: message] as JSON)
             return
         }
 
         if (!comment.save(flush: true)) {
-            def message = richg.alert type: 'error', message: 'An error has occured and the comment could not be updated.'
+            def message = richg.alert type: 'error', code: 'comment.error'
             render([success: false, message: message] as JSON)
             return
         }
 
-        flash.message = message(code: 'comment.create.sucessfull', default: 'Your comment has been successfully updated.')
+        flash.message = message(code: 'comment.updated')
         render([success: true] as JSON)
     }
 
@@ -58,7 +61,7 @@ class CommentController {
         //TODO: some error might occur
         comment.delete()
 
-        flash.message = message(code: 'comment.delete.sucessfull', default: 'The comment has been successfully deleted.')
+        flash.message = message(code: 'comment.deleted')
         render([success: true] as JSON)
     }
 }

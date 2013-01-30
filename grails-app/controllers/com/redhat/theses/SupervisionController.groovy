@@ -1,12 +1,17 @@
 package com.redhat.theses
 
-import grails.plugins.springsecurity.SpringSecurityService
 import com.redhat.theses.auth.User
-import com.redhat.theses.util.Util
 
 class SupervisionController {
 
+    /**
+     * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
+     */
     def springSecurityService
+
+    /**
+     * Dependency injection of com.redhat.theses.TopicService
+     */
     def topicService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -16,7 +21,7 @@ class SupervisionController {
         def topicInstance = Topic.findById(id);
 
         if (topicInstance == null){
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -35,7 +40,7 @@ class SupervisionController {
         Long id = params.topic?.long("id")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), id])
+            flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
         }
@@ -58,7 +63,7 @@ class SupervisionController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
+        flash.message = message(code: 'topic.updated', args: [topicInstance.id])
         redirect(controller: 'user', action: 'supervisions', id: user.id)
 
     }
