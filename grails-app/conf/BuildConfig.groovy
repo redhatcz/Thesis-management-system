@@ -48,6 +48,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.8.0"
         runtime ":resources:1.1.6"
 
+
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
@@ -62,5 +63,9 @@ grails.project.dependency.resolution = {
         runtime (":less-resources:1.3.0.2") {
             excludes 'svn'
         }
+
+        compile ":file-uploader:1.2.1"
+        compile ":amazon-s3:0.8.2"
+        compile ":quartz:1.0-RC5"
     }
 }
