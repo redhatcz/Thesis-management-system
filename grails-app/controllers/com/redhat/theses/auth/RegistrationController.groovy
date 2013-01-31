@@ -13,6 +13,11 @@ class RegistrationController {
      */
     def userService
 
+    /**
+     * Dependency injection of com.redhat.theses.config.Configuration
+     */
+    def configuration
+
     def index() {
 
         if (Util.isActionInUrl(request, 'index')) {
@@ -23,14 +28,20 @@ class RegistrationController {
     }
 
     def register(RegistrationCommand registrationCommand) {
-        //TODO: set default Authority
         User user = new User(params.registrationCommand)
         user.accountExpired = false
         user.enabled = false
         user.accountLocked = false
         user.passwordExpired = false
 
-        if (registrationCommand.hasErrors() || !userService.saveWithOrganizations(user, [registrationCommand.university])) {
+        println Util.hasAnyDomain(user.email, configuration.emailDomains)
+        if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
+            registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
+        }
+
+        if (registrationCommand.hasErrors()
+                || !userService.saveWithOrganizations(user, [registrationCommand.university])
+                || !UserRole.create(user, Role.findByAuthority('ROLE_STUDENT'))) {
             render(view: "index", model: [registrationCommand: registrationCommand, universityList: University.findAll()])
             return
         }

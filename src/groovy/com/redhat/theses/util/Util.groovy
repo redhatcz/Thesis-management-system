@@ -56,6 +56,14 @@ class Util {
         isControllerInUrl(request, controller) || isActionInUrl(request, action)
     }
 
+    static Boolean hasDomain(String email, String domain) {
+        email =~ /@${domain.replaceAll('.', '\\.')}$/
+    }
+
+    static Boolean hasAnyDomain(String email, List<String> domains) {
+        domains.any {hasDomain(email, it)}
+    }
+
     private static List getControllerAndAction(HttpServletRequest request) {
         String uri = request.forwardURI - request.contextPath
         uri.substring(1).split('/')
