@@ -1,6 +1,10 @@
 package com.redhat.theses
 
+import org.springframework.transaction.interceptor.TransactionAspectSupport
+
 class ApplicationService {
+
+    def thesisService
 
     def Application approve(Application application) {
         if (application.approvedByOwner) {
@@ -8,11 +12,17 @@ class ApplicationService {
         }
 
         application.approvedByOwner = true
-        def result = application.save()
-        if (result) {
-            event('applicationApproved', application)
+        def createdThesis = thesisService.createFromApplication(application)
+        application.thesis = createdThesis
+
+        def persistedApplication = application.save()
+
+        if (!createdThesis || !persistedApplication) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
+            persistedApplication = null;
         }
-        result
+
+        persistedApplication
     }
 
 }

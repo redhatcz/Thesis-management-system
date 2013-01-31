@@ -11,15 +11,13 @@ class ThesisService {
     def springSecurityService
 
     Thesis createFromApplication(Application application) {
-        Thesis thesis =  new Thesis(status: Thesis.Status.IN_PROGRESS, topic: application.topic,
+        Thesis persistedThesis =  new Thesis(status: Thesis.Status.IN_PROGRESS, topic: application.topic,
                 assignee: application.applicant, supervisor: application.supervisor).save()
-        Application applicationWithThesis = Application.get(application.id)
-        applicationWithThesis.thesis = thesis
-        def persistedThesis = applicationWithThesis.save()
 
         if (persistedThesis) {
             event('thesisCreated', new ThesisEvent(persistedThesis, springSecurityService.currentUser))
         }
+
         persistedThesis
     }
 

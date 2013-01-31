@@ -77,7 +77,8 @@ class ApplicationController {
 
         User user = springSecurityService.currentUser
 
-        if (applicationInstance.topic.owner != user) {
+        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors*.id.contains(user.id)) {
+
             flash.message = message(code: 'action.permission.denied')
             redirect(controller: 'application', action: 'list')
             return

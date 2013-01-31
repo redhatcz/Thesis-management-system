@@ -38,6 +38,10 @@ class Topic extends Article {
         Supervision.findAllByTopic(this)
     }
 
+    List<User> getSupervisors() {
+        Supervision.findAllByTopic(this)*.membership*.user.unique()
+    }
+
 //    TODO: possible refactoring
     private filterTags(){
         if (!tags){
