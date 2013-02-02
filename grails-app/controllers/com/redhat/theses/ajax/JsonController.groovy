@@ -1,6 +1,8 @@
 package com.redhat.theses.ajax
 
 import com.redhat.theses.Membership
+import com.redhat.theses.Supervision
+import com.redhat.theses.SupervisionService
 import com.redhat.theses.Topic
 import grails.converters.JSON
 import com.redhat.theses.auth.User
@@ -11,6 +13,8 @@ import com.redhat.theses.Tag
  * we should return something that is unique, e.g. "Full Name (id)"
  */
 class JsonController {
+
+    def springSecurityService
 
 /*
  * Following methods provide data for autocomplete
@@ -61,16 +65,60 @@ class JsonController {
  */
 
     def listSupervisorsFromUniversity(Long topicId,  Long organizationId) {
-        def users = User.executeQuery('''SELECT s.membership.user
-                FROM  Supervision s
-                WHERE s.topic.id = :topicId AND s.membership.organization.id = :organizationId''',
-                [topicId: topicId, organizationId: organizationId])
         def userMap = [:]
 
-        users.each {
-            userMap[it.fullName] = it.id
+        if (topicId && organizationId) {
+            def users = User.executeQuery('''SELECT s.membership.user
+                FROM  Supervision s
+                WHERE s.topic.id = :topicId AND s.membership.organization.id = :organizationId''',
+                    [topicId: topicId, organizationId: organizationId])
+
+            users.each {
+                userMap[it.fullName] = it.id
+            }
         }
+
         render userMap as JSON
+    }
+
+    def listMembershipsWithinOrganization(Long topicId, Long organizationId) {
+        def membershipMap = [:]
+
+        if (topicId && organizationId) {
+            def memberships = Supervision.executeQuery('''SELECT s.membership
+                    FROM  Supervision  s
+                    WHERE s.topic.id = :topicId AND  s.membership.organization.id = :organizationId''',
+                    [organizationId: organizationId, topicId: topicId])
+
+            memberships.each {
+                membershipMap[it.user.fullName] = it.id
+            }
+        }
+
+
+        render membershipMap as JSON
+    }
+
+    def listUniversitiesForUserWithinTopic(Long topicId, Long userId){
+        def universityMap = [:]
+
+        if (topicId && userId) {
+            def topicInstance = Topic.get(topicId)
+            User user = User.get(userId);
+
+            def topicUniversities = Supervision.executeQuery('''SELECT  s.membership.organization
+                    FROM Supervision  s
+                    WHERE  s.topic.id = :topicId''',
+                    [topicId: topicId])
+
+            def universities = user.organizations.findAll {it.id in topicUniversities*.id}
+
+            universities.each {
+                universityMap[it.name] = it.id
+            }
+        }
+
+        render universityMap as JSON
     }
 
     def listSupervisorsForUser(Long topicId,  Long userId) {
