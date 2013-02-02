@@ -19,7 +19,7 @@
     <div class="controls">
         <g:select name="thesis.grade"
                   from="${gradeList}"
-                  noSelection="['null':'-- no selection --']"
+                  noSelection="['':'-- no selection --']"
                   value="${thesisInstance?.grade?.toString()}"/>
     </div>
 </div>

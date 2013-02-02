@@ -6,7 +6,7 @@ class Thesis extends Article{
 
     Topic topic
     User assignee
-    User supervisor
+    Membership sMembership
     Status status
     Grade grade
     String thesisAbstract
@@ -14,7 +14,23 @@ class Thesis extends Article{
 
     static constraints = {
         grade nullable: true
+        sMembership nullable: true
         thesisAbstract nullable: true
+
+        sMembership validator: {sMembership, thesis ->
+            sMembership == null ||
+            sMembership.id &&
+            Supervision.findByTopicAndMembership(thesis.topic, sMembership) &&
+            Membership.findByUserAndOrganization(thesis.assignee, sMembership.organization)
+        }
+
+        topic validator: {topic ->
+            topic?.id != null && Topic.get(topic.id)
+        }
+
+        assignee validator: {assignee ->
+            assignee?.id != null && User.get(assignee.id)
+        }
     }
 
     static enum Status {
@@ -30,4 +46,9 @@ class Thesis extends Article{
     public List<String> getFileURLs(){
        return null;
     }
+
+    public Supervision getSupervision() {
+        return Supervision.findByTopicAndMembership(topic, sMembership)
+    }
+
 }

@@ -26,7 +26,7 @@
         <dl class="dl-thesis">
             <dt><g:message code="thesis.topic.label" default="Topic"/></dt>
             <dd>
-                <g:link action="show" controller="topic" id="${thesisInstance?.topicId}">
+                <g:link action="show" controller="topic" id="${thesisInstance?.topic?.id}">
                     <g:fieldValue field="topic" bean="${thesisInstance}"/>
                 </g:link>
             </dd>
@@ -34,9 +34,13 @@
             <dd>
                 <g:fieldValue field="assignee" bean="${thesisInstance}"/>
             </dd>
-            <dt><g:message code="thesis.supervisor.label" default="Supervisor"/></dt>
+            <dt><g:message code="thesis.sMembership.organization.label" default="University"/></dt>
             <dd>
-                <g:fieldValue field="supervisor" bean="${thesisInstance}"/>
+                <g:fieldValue field="name" bean="${thesisInstance?.sMembership?.organization}"/>
+            </dd>
+            <dt><g:message code="thesis.sMembership.user.label" default="Supervisor"/></dt>
+            <dd>
+                <g:fieldValue field="fullName" bean="${thesisInstance?.sMembership?.user}"/>
             </dd>
             <dt><g:message code="thesis.status.label" default="Status"/></dt>
             <dd>
