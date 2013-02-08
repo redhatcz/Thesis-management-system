@@ -36,13 +36,13 @@
             </dl>
         </div>
 
-        <ul class="nav nav-tabs nav-stacked">
+        <!-- <ul class="nav nav-tabs nav-stacked">
             <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
                 <li class="controller">
                     <g:link controller="${c.logicalPropertyName}">${c.name}</g:link>
                 </li>
             </g:each>
-        </ul>
+        </ul> -->
     </div>
 </body>
 </html>

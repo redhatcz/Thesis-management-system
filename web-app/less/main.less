@@ -1,10 +1,144 @@
-.container {
-    width: @gridRowWidth + 40;
+/* variables
+@grayDark:              #363636;
+@gray:                  #4c4c4c;
+@grayLight:             #8e8e8e;
+@grayLighter:           #c7c7c7;
+@red:                   #ed1c24;
+*/
+
+/*main*/
+
+body {
+    overflow-y: scroll;
+    margin-top: 41px;
+    background-image: url('../images/bg.png');
+    background-repeat: repeat;
 }
 
-.margin {
-    padding-top: 30px;
+p a {
+    border-bottom: 1px solid #c7c7c7;
 }
+
+p a:hover {
+    border-bottom: 1px solid #ed1c24;
+    text-decoration: none;
+}
+
+/*blocks*/
+
+/*.container {
+    width: @gridRowWidth - 20;
+}*/
+
+.span12,
+.span8,
+.span4 {
+    margin-left: 0px;
+}
+
+.span8 {
+    background-color: white;
+    min-height: 200px;
+            box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
+       -moz-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+/*navbar*/
+
+.margin {
+    padding-top: 70px;
+}
+
+.navbar-tms {
+    background-color: #363636;
+    height: 35px;
+    padding-top: 15px;
+}
+
+.logo {
+    color: #8e8e8e;
+    font-size: @fontSizeHeading;
+    font-family: @headingsFontFamily;
+}
+
+.logo:hover {
+    color: @white;
+    text-decoration: none;
+}
+
+/*nav-menu*/
+
+.nav-pills {
+    height: 50px;
+    width: 980px;
+    background-image: url('../images/buttons/menu.png');
+}
+
+.nav-pills > li a {
+    color: @gray;
+    border-radius: 0;
+    height: 50px;
+    width: 245px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.nav-pills > li a:hover {
+    background: none;
+    color: @red;
+    border-bottom: none;
+}
+
+.nav-pills > .active a,
+.nav-pills > .active a:hover {    
+    background-image: url('../images/buttons/menu_active.png');
+    background-color: transparent;
+    width: 245px;
+    height: 50px;
+    color: @red;
+}
+
+.active#news-feed a {}
+
+.active#topics a {
+    background-position: 490px 0;
+}
+
+.active#theses a {
+    background-position: 490px 0;
+}
+
+.active#projects a {
+    background-position: 735px 0;
+}
+
+/*footer*/
+
+.footer {
+    padding: 30px 0;
+    background-color:  @grayDark;
+}
+
+.footer p {
+    margin-bottom: 0;
+    color: @grayLighter;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .table-layout {
     border-top: 1px solid @tableBorder;
@@ -67,33 +201,6 @@ div.comment {
 textarea.comment {
     width: 100%;
     padding: 0;
-}
-
-body {
-    overflow-y: scroll;
-    margin-top: 41px;
-}
-
-.footer {
-    padding: 50px 0;
-    margin: 30px 0px;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #f5f5f5;
-}
-
-.footer p {
-    margin-bottom: 0;
-    color: #777;
-}
-
-.footer-links {
-    margin: 10px 0;
-}
-
-.footer-links li {
-    display: inline;
-    margin-right: 10px;
 }
 
 .dynamic-field-child {

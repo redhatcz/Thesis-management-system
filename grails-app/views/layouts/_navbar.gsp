@@ -1,10 +1,9 @@
 <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
+    <div class="navbar-tms">
         <div class="container">
-            <g:link class="brand" uri="/">Theses Management System</g:link>
-            <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="Search">
-            </form>
+            <div class="span12">
+                <g:link class="logo" uri="/">Theses Management System</g:link>
+            </div>
         </div>
     </div>
 </div>
