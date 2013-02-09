@@ -11,10 +11,12 @@
 // -------------------------
 @black:                 #000;
 @grayDarker:            #222;
-@grayDark:              #333;
-@gray:                  #555;
-@grayLight:             #999;
-@grayLighter:           #eee;
+@grayDark:              #363636;
+@gray:                  #4c4c4c;
+@grayLight:             #8e8e8e;
+@grayTitles:            #b7b7b7;
+@grayLighter:           #c7c7c7;
+@graySuperLight:        #f2f2f2;
 @white:                 #fff;
 
 
@@ -23,7 +25,7 @@
 @blue:                  #049cdb;
 @blueDark:              #0064cd;
 @green:                 #46a546;
-@red:                   #9d261d;
+@red:                   #ed1c24;
 @yellow:                #ffc40d;
 @orange:                #f89406;
 @pink:                  #c3325f;
@@ -38,23 +40,24 @@
 
 // Links
 // -------------------------
-@linkColor:             #08c;
-@linkColorHover:        darken(@linkColor, 15%);
+@linkColor:             @red;
+@linkColorHover:        @linkColor;
 
 
 // Typography
 // -------------------------
-@sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+@sansFontFamily:        Arial, "Helvetica Neue", Helvetica, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
-@baseFontSize:          14px;
+@baseFontSize:          16px;
 @baseFontFamily:        @sansFontFamily;
 @baseLineHeight:        20px;
 @altFontFamily:         @serifFontFamily;
 
+@titleFontFamily:       Sanchez, serif;
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
-@headingsFontWeight:    bold;    // instead of browser default, bold
+@headingsFontWeight:    normal;    // instead of browser default, bold
 @headingsColor:         inherit; // empty to use BS default, @textColor
 
 
@@ -62,9 +65,9 @@
 // -------------------------
 // Based on 14px font-size and 20px line-height
 
-@fontSizeLarge:         @baseFontSize * 1.25; // ~18px
-@fontSizeSmall:         @baseFontSize * 0.85; // ~12px
-@fontSizeMini:          @baseFontSize * 0.75; // ~11px
+@fontSizeLarge:         @baseFontSize * 1.25; // ~20px
+@fontSizeSmall:         @baseFontSize * 0.85; // ~14px
+@fontSizeMini:          @baseFontSize * 0.75; // ~12px
 
 @paddingLarge:          11px 19px; // 44px
 @paddingSmall:          2px 10px;  // 26px
@@ -153,7 +156,7 @@
 // -------------------------
 @iconSpritePath:          "../images/buttons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "../images/buttons/glyphicons-halflings-white.png";
-@iconicFontPath:          "../font";
+@iconicFontPath:          "../fonts";
 
 
 // Input placeholder text color
@@ -270,10 +273,10 @@
 // --------------------------------------------------
 
 
-// Default 940px grid
+// Default 980px grid
 // -------------------------
 @gridColumns:             12;
-@gridColumnWidth:         63.33px;
+@gridColumnWidth:         63.34px;
 @gridGutterWidth:         20px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
