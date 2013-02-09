@@ -11,6 +11,9 @@ class Thesis extends Article{
     Grade grade
     String thesisAbstract
 
+    static mapping = {
+        thesisAbstract type: 'text'
+    }
 
     static constraints = {
         grade nullable: true
