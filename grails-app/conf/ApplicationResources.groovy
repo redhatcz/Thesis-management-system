@@ -12,5 +12,14 @@ modules = {
         dependsOn 'jquery'
         resource url: [dir: 'js', file: 'richg.js'], disposition: 'head'
     }
+    'bootstrap-js' {
+        resource url: [dir: 'js', file: 'bootstrap.min.js']
+    }
+    'bootstrap-less' {
+        dependsOn 'bootstrap-js'
+    
+        resource url: [dir: 'less', file: 'bootstrap.less'], attrs: [rel: 'stylesheet/less', type: 'css'], bundle: 'bundle_bootstrap-less'
+        resource url: [dir: 'css', file: 'blank.css'], disposition: 'head'
+    }
 
 }

@@ -6,7 +6,7 @@
 <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 <r:require module="bootstrap-js"/>
-<r:require module="bootstrap-css"/>
+<r:require module="bootstrap-less"/>
 <r:require module="a4g"/>
 <r:require module="richg"/>
 <r:require module="application"/>
