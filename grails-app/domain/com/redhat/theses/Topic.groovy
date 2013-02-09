@@ -12,10 +12,16 @@ class Topic extends Article {
     Company company
 
     static hasMany = [universities : University, tags : Tag]
+
     static constraints = {
         description widget: 'textarea' , nullable: false, blank: false
         title nullable: false, blank: false
         lead nullable: false, blank: false
+    }
+
+    static mapping = {
+        description type: 'text'
+        lead type: 'text'
     }
 
     static List<Topic> findAllByTag(Tag tag, Map params = [:]){
@@ -49,13 +55,11 @@ class Topic extends Article {
         }
         def filtered = new ArrayList<Tag>(tags)
         tags.each {
-            filtered.removeAll(it.allParents)
+            if (it) {
+                filtered.removeAll(it.allParents)
+            }
         }
         tags = filtered
-    }
-
-    static mapping = {
-        description type: 'text'
     }
 
     String toString(){
