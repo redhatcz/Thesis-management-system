@@ -129,11 +129,3 @@ grails.plugins.twitterbootstrap.fixtaglib = true
 
 // use hyphenated url
 grails.web.url.converter = 'hyphenated'
-
-grails.resources.modules = {
-
-    'custom-bootstrap' {
-        resource url: [dir: 'less', file: 'custom-bootstrap.less'], attrs: [rel: 'stylesheet/less', type:'css']
-    }
-
-}

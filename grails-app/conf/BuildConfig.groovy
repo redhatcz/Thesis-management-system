@@ -60,10 +60,6 @@ grails.project.dependency.resolution = {
 
         compile ':cache:1.0.0'
 
-        runtime (":less-resources:1.3.0.2") {
-            excludes 'svn'
-        }
-
         compile ":ajax-uploader:1.1"
         compile ":mongodb:1.1.0.GA"
         compile ":platform-core:1.0.RC5"
@@ -71,6 +67,5 @@ grails.project.dependency.resolution = {
         compile ":spring-security-core:1.2.7.3"
         compile ":twitter-bootstrap:2.3.0"
         compile ":mail:1.0.1"
-
     }
 }
