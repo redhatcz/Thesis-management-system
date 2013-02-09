@@ -33,7 +33,7 @@
     <div class="span4">
         <div class="thesis">
             <h4>Topic Information</h4>
-            <dl class="dl-thesis">
+            <dl>
                 <g:if test="${topicInstance?.owner}">
                     <dt><g:message code="topic.owner.label" default="Owner" /></dt>
                     <dd><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">

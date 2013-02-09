@@ -26,12 +26,12 @@
     <div class="span4">
         <div class="thesis">
             <h4>Your Thesis</h4>
-            <dl class="dl-thesis">
-                <dt>Name</dt>
+            <dl>
+                <dt>name</dt>
                 <dd><a href="#">Java Security Centralization</a></dd>
-                <dt>Suprevisor</dt>
+                <dt>suprevisor</dt>
                 <dd>RNDr. Robb Stark</dd>
-                <dt>Status</dt>
+                <dt>status</dt>
                 <dd>The thesis has been awarded the grade <strong>A</strong></dd>
             </dl>
         </div>

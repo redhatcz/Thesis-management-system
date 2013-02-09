@@ -23,7 +23,7 @@
 <div class="span4">
     <div class="thesis">
         <h4>Thesis Information</h4>
-        <dl class="dl-thesis">
+        <dl>
             <dt><g:message code="thesis.topic.label" default="Topic"/></dt>
             <dd>
                 <g:link action="show" controller="topic" id="${thesisInstance?.topic?.id}">

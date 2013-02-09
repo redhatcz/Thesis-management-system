@@ -15,7 +15,7 @@
 
         <div class="thesis">
             <h4>Organization Information</h4>
-            <dl class="dl-thesis">
+            <dl>
                 <g:if test="${organizationInstance?.name}">
                     <dt><g:message code="organization.name.label" default="Name" /></dt>
                     <dd><g:fieldValue bean="${organizationInstance}" field="name"/></dd>
