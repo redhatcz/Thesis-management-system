@@ -64,8 +64,13 @@ grails.project.dependency.resolution = {
             excludes 'svn'
         }
 
-        compile ":file-uploader:1.2.1"
-        compile ":amazon-s3:0.8.2"
-        compile ":quartz:1.0-RC5"
+        compile ":ajax-uploader:1.1"
+        compile ":mongodb:1.1.0.GA"
+        compile ":platform-core:1.0.RC5"
+        compile ":markdown:1.0.0.RC1"
+        compile ":spring-security-core:1.2.7.3"
+        compile ":twitter-bootstrap:2.3.0"
+        compile ":mail:1.0.1"
+
     }
 }
