@@ -8,6 +8,10 @@ body {
     background-repeat: repeat;
 }
 
+a:focus {
+    outline: none;
+}
+
 p a,
 dl a {
     border-bottom: 1px solid @grayLighter;
@@ -19,12 +23,12 @@ dl a:hover {
     text-decoration: none;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     font-family: @titleFontFamily;
     font-color: @gray;
 }
 
-h5, h6 {
+h4, h5, h6 {
     font-color: #gray;
 }
 
@@ -33,11 +37,41 @@ p {
 }
 
 
+/*---------HEADER---------*/
+
+h1.header,
+h2.header,
+h3.header,
+h4.header {
+    color: @grayDark;
+    font-family: @titleFontFamily;
+}
+
+h1.header {
+    font-size: @titleFontSize;
+}
+
+h2.header {
+    font-size: @titleFontSize - 5;
+    padding-top: @marginSmall;
+}
+
+h3.header {
+    font-size: @titleFontSize - 10;
+    padding-top: @marginSmall - 3;
+}
+
+h4.header {
+    font-size: @titleFontSize - 15;
+    padding-top: @marginSmall - 6;
+}
+
+
 /*---------BLOCKS---------*/
 
-.span12,
+.span4,
 .span8,
-.span4 {
+.span12 {
     margin-left: 0px;
 }
 
@@ -51,9 +85,7 @@ p {
     padding: 30px;
     margin-bottom: 40px;
     background-color: white;
-            box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
-       -moz-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
+    .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 }
 
 
@@ -149,12 +181,7 @@ p {
     margin-top: 20px;
     background-color: @graySuperLight;
     border: 1px solid @grayLighter;
-    -webkit-border-top-right-radius: 10px;
-       -moz-border-top-right-radius: 10px;
-            border-top-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px;
-       -moz-border-bottom-right-radius: 10px;
-            border-bottom-right-radius: 10px;
+    .border-right-radius(10px);
 }
 
 .thesis > h4 {
@@ -196,7 +223,7 @@ p {
             vertical-align: middle;
             display: inline-block;
             content: "";
-            width: 1em;
+            width: 0.5em;
             text-align: center;
         }
     }
@@ -215,14 +242,83 @@ p {
     .tms-settings:before    { content: '\2699'; }
     .tms-book:before        { content: '\1F4D5'; }
 
-    .tms-github:before      { content: '\F300'; font-family: 'Entypo Social'}
-    .tms-twitter:before     { content: '\F309'; font-family: 'Entypo Social'}
-    .tms-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'}
+    .tms-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
+    .tms-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
+    .tms-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
+
+    .big { font-size: 2em; }
+    .medium { font-size: 1.5em; }
 }
 
 
+/*---------TAGS---------*/
 
-/*-----------------HAS-TO-BE-REFACTORED-----------------------------*/
+.tag-list {
+    padding: 15px 0;
+    border-bottom: 1px solid @grayBorder;
+}
+
+
+/*---------BUTTONS---------*/
+
+.tms-btn {
+    color: @grayDark;
+    background: @btnBorder;
+    border: 1px solid @btnBorder;
+    padding: 4px 9px;
+    *border: 0;
+    .border-radius(@baseBorderRadius);
+    .ie7-restore-left-whitespace();
+    .box-shadow(0px 1px 1px @grayTitles);
+
+    &:hover {
+        color: @white;
+        background: @red;        
+        border: 1px solid @red;
+        text-decoration: none;
+        .transition(background-position .1s linear);
+        .box-shadow(0px 1px 1px @redDark);
+    }
+    &.active,
+    &:active {
+        box-shadow: none;
+    }
+}
+
+
+/*---------COMMENTS---------*/
+
+textarea {
+    width: auto;
+}
+
+textarea.comment {
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+}
+
+div.comment {
+    color: @gray;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid @grayBorder;
+}
+
+div.comment .tms-settings {
+    visibility: hidden;
+}
+
+div.comment:hover .tms-settings {
+    visibility: visible;
+}
+
+.dropdown a {
+    color: @grayDark;
+}
+
+
+/*-----------------------WILL-BE-REFACTORED-----------------------------*/
 
 
 
@@ -243,22 +339,9 @@ p {
 .avatar {
     padding: 150px 20px;
     margin-bottom: 20px;
-    border: 1px solid #e3e3e3;
+    border: 1px solid @grayBorder;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-}
-
-div.comment {
-    padding: 10px;
-    margin-bottom: 30px;
-    border: 1px solid #e3e3e3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-}
-
-textarea.comment {
-    width: 100%;
-    padding: 0;
 }
 
 .dynamic-field-child {
@@ -268,10 +351,6 @@ textarea.comment {
 .center {
     text-align: center;
     padding: 20px 0px;
-}
-
-textarea {
-    width: auto;
 }
 
 a.tag {
@@ -285,17 +364,6 @@ a.tag-root {
 
 .header {
     color: #999;
-}
-
-h1.header {
-    padding-bottom: 20px;
-    margin: 0 0 30px;
-    border-bottom: 1px solid #eeeeee;
-}
-
-h3.header,
-h4.header {
-    margin-top: 40px;
 }
 
 label.text {
@@ -312,7 +380,4 @@ label.text {
     padding: 0;
     margin: 0;
     border: 0;
-    //TODO: remove this nasty hack when resolved
-    position: relative;
-    top: -1px;
 }

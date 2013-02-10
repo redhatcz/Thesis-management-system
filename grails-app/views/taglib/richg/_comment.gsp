@@ -1,13 +1,23 @@
+<strong>${comment?.user?.fullName}</strong>
+%{-- <g:submitButton name="delete-comment" class="btn-link pull-right" id="comment-${index}-delete"
+                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>--}%
+
 <div class="comment" id="comment-${index}">
-    <strong>${comment?.user?.fullName}</strong>
+
     <g:form controller="comment" action="delete" class="form-inline pull-right delete-comment-form"
             confirm-message="${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}">
         <g:hiddenField name="comment.id" value="${comment?.id}" id="commet-${index}-id-del"/>
-        <g:submitButton name="delete-comment" class="btn-link delete-comment-submit" id="comment-${index}-delete"
-                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"/>
     </g:form>
-    <span class="pull-right">&nbsp;|&nbsp;</span>
-    <a class="edit-comment pull-right" href="#">Edit</a>
+
+    <div class="dropdown pull-right">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="tms-settings"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">    
+            <li><a class="edit-comment" tabindex="-1" href="#">Edit</a></li>
+            <li><a tabindex="-1" href="#">Delete</a></li>
+        </ul>
+    </div>
 
     <g:form controller="comment" action="update" style="display: none; padding: 5px;" class="edit-comment-form">
         <g:hiddenField name="comment.id" value="${comment?.id}" id="comment-${index}-id"/>

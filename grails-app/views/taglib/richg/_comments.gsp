@@ -25,7 +25,7 @@
 <g:form controller="comment" action="create" name="create-comment-form">
     <g:hiddenField name="comment.article.id" value="${article?.id}" />
     <g:textArea class="comment" name="comment.content" rows="5" />
-    <g:submitButton name="create-comment" class="btn btn-primary pull-right"
+    <g:submitButton name="create-comment" class="tms-btn pull-right"
                     value="${message(code: 'default.button.post.label', default: 'Post Comment')}"/>
 </g:form>
 <script type="text/javascript">

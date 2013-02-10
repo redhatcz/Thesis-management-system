@@ -19,10 +19,10 @@
         </g:if>
 
         <g:if test="${topicInstance?.tags}">
-            <p>
-                <strong><g:message code="topic.tags.label" default="Tags" />:</strong>
+            <p class="tag-list">
+                <span class="tms-tag big"></span><g:message code="topic.tags.label" default="tags" />:
                 <g:each in="${topicInstance.tags}" var="t">
-                    <g:link controller="tag" class="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link>
+                    <g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link>,
                 </g:each>
             </p>
         </g:if>

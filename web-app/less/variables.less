@@ -16,7 +16,8 @@
 @grayLight:             #8e8e8e;
 @grayTitles:            #b7b7b7;
 @grayLighter:           #c7c7c7;
-@graySuperLight:        #f2f2f2;
+@grayBorder:            #e3e3e3;
+@graySuperLight:        #f4f4f4;
 @white:                 #fff;
 
 
@@ -26,6 +27,7 @@
 @blueDark:              #0064cd;
 @green:                 #46a546;
 @red:                   #ed1c24;
+@redDark:               #9c1218;
 @yellow:                #ffc40d;
 @orange:                #f89406;
 @pink:                  #c3325f;
@@ -65,6 +67,7 @@
 // -------------------------
 // Based on 14px font-size and 20px line-height
 
+@titleFontSize:         @baseFontSize * 2.5;
 @fontSizeLarge:         @baseFontSize * 1.25; // ~20px
 @fontSizeSmall:         @baseFontSize * 0.85; // ~14px
 @fontSizeMini:          @baseFontSize * 0.75; // ~12px
@@ -73,9 +76,13 @@
 @paddingSmall:          2px 10px;  // 26px
 @paddingMini:           0 6px;   // 22px
 
-@baseBorderRadius:      4px;
-@borderRadiusLarge:     6px;
-@borderRadiusSmall:     3px;
+@marginLarge:           40px;
+@marginSmall:           20px;
+@marginMin:             10px;
+
+@baseBorderRadius:      6px;
+@borderRadiusLarge:     8px;
+@borderRadiusSmall:     4px;
 
 
 // Tables
@@ -89,7 +96,7 @@
 // -------------------------
 @btnBackground:                     @white;
 @btnBackgroundHighlight:            darken(@white, 10%);
-@btnBorder:                         #bbb;
+@btnBorder:                         #e1e1e1;
 
 @btnPrimaryBackground:              @linkColor;
 @btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 20%);
