@@ -1,3 +1,4 @@
+<%@ page import="com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +14,20 @@
                 </div>
             </g:each>
         </div>
-        <ul class="pager">
-            <li class="next">
-                <a href="#">Older &rarr;</a>
-            </li>
-            <li class="previous">
-                <a href="#">&larr; Newer</a>
-            </li>
-        </ul>
+        <g:if test="${Util.isPaginationVisible(feedListTotal, params?.max)}">
+            <ul class="pager">
+                <g:if test="${!Util.isLastPage(feedListTotal, params?.max, params?.offset)}">
+                    <li class="next">
+                        <g:link params="[max: Util.max(params?.max), offset: Util.nextOffset(params?.offset, params?.max)]">Older &rarr;</g:link>
+                    </li>
+                </g:if>
+                <g:if test="${!Util.isFirstPage(params?.offset)}">
+                    <li class="previous">
+                        <g:link params="[max: Util.max(params?.max), offset: Util.previousOffset(params?.offset, params?.max)]">&larr; Newer</g:link>
+                    </li>
+                </g:if>
+            </ul>
+        </g:if>
     </div>
 
     <div class="span4">

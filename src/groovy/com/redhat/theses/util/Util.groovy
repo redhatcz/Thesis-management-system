@@ -40,6 +40,22 @@ class Util {
         result
     }
 
+    static Integer nextOffset(currentOffset, maximum) {
+        (toInt(currentOffset) ?: 0) + max(maximum)
+    }
+
+    static Integer previousOffset(currentOffset, maximum) {
+        toInt(currentOffset) - max(maximum)
+    }
+
+    static Boolean isLastPage(total, maximum, offset) {
+        (toInt(total) - toInt(offset)) <= max(maximum)
+    }
+
+    static Boolean isFirstPage(offset) {
+        offset == null || toInt(offset) == 0
+    }
+
     static Boolean isPaginationVisible(total, max) {
         toInt(total) > Util.max(max)
     }
