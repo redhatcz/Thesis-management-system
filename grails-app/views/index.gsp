@@ -7,13 +7,11 @@
 </head>
 <body>
     <div class="span8">
-        <div class="table-base">
-            <g:each in="${feedList}" var="feed">
-                <div class="table-layout">
-                    <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
-                </div>
-            </g:each>
-        </div>
+        <g:each in="${feedList}" var="feed">
+            <div class="table-layout">
+                <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
+            </div>
+        </g:each>
         <g:if test="${Util.isPaginationVisible(feedListTotal, params?.max)}">
             <ul class="pager">
                 <g:if test="${!Util.isLastPage(feedListTotal, params?.max, params?.offset)}">

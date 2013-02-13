@@ -233,7 +233,9 @@ h4.header {
 
     .tms-thesis:before      { content: '\1F393'; }
     .tms-tag:before         { content: '\E789'; }
+    .tms-tag2:before        { content: '\1F4D1'; }
     .tms-mail:before        { content: '\2709'; }
+    .tms-clock:before       { content: '\1F554'; }
     .tms-user:before        { content: '\1F464'; }
     .tms-users:before       { content: '\1F465'; }
     .tms-add-user:before    { content: '\E700'; }
@@ -286,6 +288,20 @@ h4.header {
 }
 
 
+/*---------LINKS---------*/
+
+a.gray-link {
+    font-size: @fontSizeSmall;
+    color: @grayLight;
+    display: block;
+    margin-top: @marginMin;
+}
+
+a.gray-link:hover {
+    color: @grayLight;
+}
+
+
 /*---------COMMENTS---------*/
 
 textarea {
@@ -318,23 +334,56 @@ div.comment:hover .tms-settings {
 }
 
 
+/*---------LISTS---------*/
+
+.table-layout {
+    border-top: 1px solid @tableBorder;
+    padding: @marginSmall 15px;
+}
+
+.table-layout:first-child {
+    border-top: none;
+    padding-top: 5px;
+}
+
+.table-layout h3 {
+    margin: 0;
+}
+
+.table-layout h3 a {
+    color: @gray;
+}
+
+.table-layout h3 a:hover {
+    text-decoration: none;
+}
+
+.table-layout li span {
+    padding: 0 5px 5px 0;
+    color: @grayLight;
+}
+
+.table-layout ul {
+    border-bottom: 1px dotted @grayBorder;
+}
+
+.table-layout ul > li {
+    padding: 0 20px 10px 0;
+    color: @grayLight;
+    font-size: @fontSizeSmall;
+}
+
+.table-text {
+    margin-top: @marginSmall;
+}
+
+
 /*-----------------------WILL-BE-REFACTORED-----------------------------*/
 
 
 
 
-.table-layout {
-    border-top: 1px solid @tableBorder;
-    padding: 15px 15px;
-}
 
-.table-layout:hover {
-    background-color: @tableBackgroundHover;
-}
-
-.table-base {
-    border-bottom: 1px solid @tableBorder;
-}
 
 .avatar {
     padding: 150px 20px;

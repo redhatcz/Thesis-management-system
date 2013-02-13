@@ -1,23 +1,39 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 
 <div class="span8">
-    <div class="table-base">
-        <g:if test="${topicInstanceList.isEmpty()}">
-            <p class="center muted">No topics were found.</p>
-        </g:if>
-        <g:else>
-            <g:each var="topic" in="${topicInstanceList}">
-                <div class="table-layout">
-                    <h4>
-                        <g:link action="show" id="${topic.id}">
-                            <g:fieldValue bean="${topic}" field="title"/>
+    <g:if test="${topicInstanceList.isEmpty()}">
+        <p class="center muted">No topics were found.</p>
+    </g:if>
+    <g:else>
+        <g:each var="topic" in="${topicInstanceList}">
+            <div class="table-layout">
+                <h3>
+                    <g:link action="show" id="${topic.id}">
+                        <g:fieldValue bean="${topic}" field="title"/>
+                    </g:link>
+                </h3>
+                <ul class="inline">
+                    <li><span class="tms-user"></span>
+                        <g:link controler="user" action="show" id="${topic?.ownerId}">
+                            ${topic?.owner?.fullName}
                         </g:link>
-                    </h4>
+                    </li>
+                    <li><span class="tms-clock"></span>
+                        <g:formatDate date="${topic?.dateCreated}" dateStyle="LONG" type="date" />
+                    </li>
+                    <li><span class="tms-tag2"></span>
+                        <a href="#">Tag1</a>, <a href="#">Tag2</a>
+                    </li>
+                </ul>
+                <div class="table-text">
                     <g:fieldValue bean="${topic}" field="lead"/>
+                    <g:link class="gray-link" action="show" id="${topic.id}">
+                        <g:message code="topic.text.more" default="Read more" />&hellip;<!--Three dots-->
+                    </g:link>
                 </div>
-            </g:each>
-        </g:else>
-    </div>
+            </div>
+        </g:each>
+    </g:else>
 
     <g:if test="${Util.isPaginationVisible(topicInstanceTotal, params.max)}">
         <g:paginate total="${topicInstanceTotal}" class="pagination-centered"/>
