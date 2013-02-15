@@ -9,8 +9,8 @@ class FeedService {
      */
     def grailsLinkGenerator
 
-    Feed createFeed(String messageCode, List<String> args = null){
-        def feed = new Feed(messageCode: messageCode)
+    Feed createFeed(String messageCode, User user, List<String> args = null){
+        def feed = new Feed(messageCode: messageCode, user: user)
         feed.args = args
         feed.save()
     }
@@ -28,7 +28,7 @@ class FeedService {
 
         def messageCode = "feed.topic.${messageType}"
 
-        createFeed(messageCode, args)
+        createFeed(messageCode, user, args)
     }
 
     Feed createThesisFeed(Thesis thesis, String messageType, User user) {
@@ -44,6 +44,6 @@ class FeedService {
 
         def messageCode = "feed.thesis.${messageType}"
 
-        createFeed(messageCode, args)
+        createFeed(messageCode, user, args)
     }
 }

@@ -1,8 +1,10 @@
 package com.redhat.theses
 
+import com.redhat.theses.auth.User
 import grails.converters.JSON
 
 class Feed {
+    User user
     String messageCode
     String argsJSON
     Date dateCreated
