@@ -3,6 +3,7 @@
     <html>
     <head>
         <title><g:layoutTitle default="Show user"/></title>
+        <g:layoutHead/>
     </head>
     <body>
     <div class="span4">
