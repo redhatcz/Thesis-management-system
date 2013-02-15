@@ -50,6 +50,7 @@ $(document).ready(function() {
         $this.find('.edit-comment').click(function() {
             $this.find('.edit-comment-form').fadeIn();
             $this.find('.comment-content').hide();
+            $this.find('.open').removeClass('open');
             return false;
         });
     });
@@ -70,16 +71,11 @@ $(document).ready(function() {
     });
 
     /**
-     * delete form for all comments
+     * delete button for all comments
      */
     $('.comment').each(function() {
         var $this = $(this);
         var form = $this.find('.delete-comment-form');
-
-        $this.find('.delete-comment-submit').click(function() {
-            var message = form.attr('confirm-message');
-            return window.confirm(message);
-        });
 
         sendForm(form, function(data) {
             if (data.success) {
@@ -87,6 +83,15 @@ $(document).ready(function() {
             } else {
                 $(data.message).insertBefore(form).hide().fadeIn();
             }
+        });
+
+        $this.find('.delete-comment').click(function() {
+            var message = form.attr('confirm-message');
+            var result = window.confirm(message);
+            if (result) {
+                form.submit();
+            }
+            return result;
         });
     });
 });
