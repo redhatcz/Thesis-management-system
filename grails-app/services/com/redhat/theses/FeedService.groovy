@@ -34,13 +34,17 @@ class FeedService {
     Feed createThesisFeed(Thesis thesis, String messageType, User user) {
         def args = [
             user.fullName,
-            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id, absolute: true),
-            thesis.id
+            grailsLinkGenerator.link(controller: 'user', action: 'show', id: user.id, absolute: true)
         ]
 
         if (messageType != 'delete') {
             args += [grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: thesis.id, absolute: true)]
         }
+
+        args += [
+            thesis.topic.title,
+            grailsLinkGenerator.link(controller: 'topic', action: 'show', id: thesis.topic.id)
+        ]
 
         def messageCode = "feed.thesis.${messageType}"
 
