@@ -62,8 +62,8 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
     }
 
     protected UserDetails createUserDetails(User user, Collection<GrantedAuthority> authorities) {
-        new GrailsUser(user.email, user.password, user.enabled, !user.accountExpired, !user.passwordExpired,
-                !user.accountLocked, authorities, user.id)
+        new CustomGrailsUser(user.email, user.fullName, user.password, user.enabled, 
+            !user.accountExpired, !user.passwordExpired, !user.accountLocked, authorities, user.id)
     }
 
     protected Logger getLog() { _log }
