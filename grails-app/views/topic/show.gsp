@@ -18,11 +18,12 @@
             <markdown:renderHtml text="${topicInstance?.description}"/>
         </g:if>
 
-        <g:if test="${topicInstance?.tags}">
+        <g:set var="topicTags" value="${topicInstance?.tags}"/>
+        <g:if test="${topicTags}">
             <p class="tag-list">
                 <span class="tms-tag big"></span><g:message code="topic.tags.label" default="tags" />:
-                <g:each in="${topicInstance.tags}" var="t">
-                    <g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link>,
+                <g:each in="${topicTags}" var="t" status="i">
+                    <g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
                 </g:each>
             </p>
         </g:if>
