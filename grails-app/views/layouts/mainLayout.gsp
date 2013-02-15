@@ -21,8 +21,32 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-tms">
             <div class="container">
-                <div class="span12">
-                    <g:link class="logo" uri="/">Theses Management System</g:link>
+                <div class="head">
+                    <g:link uri="/">
+                        Theses Management System
+                    </g:link>
+                    <sec:ifLoggedIn>
+                    <div class="pull-right">
+                        <g:link controller="profile">
+                            <sec:loggedInUserInfo field="fullName"/>
+                        </g:link>
+                        <div class="dropdown" style="display: inline;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="tms-settings medium-big"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li><g:link tabindex="-1">Edit Profile</g:link></li>
+                                <li class="divider"></li>
+                                <li><g:link tabindex="-1" controller="logout">Sign Out</g:link></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                    <div class="pull-right">
+                        <g:link controller="login" action="auth">Sign In</g:link>
+                    </div>
+                    </sec:ifNotLoggedIn>
                 </div>
             </div>
         </div>

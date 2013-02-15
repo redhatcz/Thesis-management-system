@@ -1,5 +1,5 @@
 
-/*---------MAJOR---------*/
+/*---------GLOBAL---------*/
 
 body {
     overflow-y: scroll;
@@ -34,6 +34,11 @@ h4, h5, h6 {
 
 p {
     font-color: @gray;
+}
+
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
 }
 
 
@@ -97,20 +102,37 @@ h4.header {
 
 .navbar-tms {
     background-color: @grayDark;
-    height: 35px;
-    padding-top: 15px;
+    height: 50px;
 }
 
-.logo {
+.head {
+    margin-top: 15px;
+}
+
+.head a {    
     color: @grayLight;
     font-size: 18px;
     font-family: @titleFontFamily;
 }
 
-.logo:hover {
+.head a:hover {
     color: @white;
     text-decoration: none;
 }
+
+.head .dropdown-menu a {
+    font-family: @sansFontFamily;
+    font-size: @baseFontSize;
+}
+
+.head [class*="tms-"] {
+    color: @grayLight;
+}
+
+.head [class*="tms-"]:hover {
+    color: @white;
+}
+
 
 /*---------NAVIGATION-MENU---------*/
 
@@ -249,7 +271,7 @@ h4.header {
     .tms-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
 
     .big { font-size: 2em; }
-    .medium { font-size: 1.5em; }
+    .medium-big { font-size: 1.25em; }
 }
 
 
