@@ -16,9 +16,9 @@
         <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
-            <g:actionSubmit class="btn btn-primary" action="update"
+            <g:actionSubmit class="tms-btn" action="update"
                             value="${message(code: 'default.button.update.label', default: 'Update')}" />
-            <g:actionSubmit class="btn btn-danger" action="delete"
+            <g:actionSubmit class="tms-btn tms-danger" action="delete"
                             value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
             </div>

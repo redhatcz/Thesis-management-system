@@ -4,7 +4,7 @@
 
     <div class="dropdown pull-right">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="tms-settings"></span>
+            <span class="entypo-settings"></span>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <%-- this button shows edit form bellow by javascript (see in richg.js) --%>
@@ -25,7 +25,7 @@
         <g:hiddenField name="comment.user.id" value="${comment?.user?.id}" id="comment-${index}-user"/>
         <g:hiddenField name="comment.dateCreated" value="${comment?.dateCreated}" id="comment-${index}-dateCreated"/>
         <g:textArea class="comment" name="comment.content" rows="5" value="${comment?.content}" id="comment-${index}-content" />
-        <g:submitButton name="update-comment" class="btn btn-primary pull-right" id="comment-${index}-submit"
+        <g:submitButton name="update-comment" class="tms-btn pull-right" id="comment-${index}-submit"
                         value="${message(code: 'default.button.update.label', default: 'Update')}"/>
     </g:form>
     <div class="comment-content">

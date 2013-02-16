@@ -19,7 +19,7 @@
                         </g:link>
                         <div class="dropdown" style="display: inline;">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <span class="tms-settings medium-big"></span>
+                                <span class="entypo-settings medium-big"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                 <li><g:link tabindex="-1">Edit Profile</g:link></li>

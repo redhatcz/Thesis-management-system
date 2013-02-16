@@ -36,10 +36,10 @@
                 <g:form>
                     <fieldset class="buttons">
                         <g:hiddenField name="tag.id" value="${tagInstance?.id}" />
-                        <g:link class="btn btn-warning" action="edit" id="${tagInstance?.id}">
+                        <g:link class="tms-btn tms-warning" action="edit" id="${tagInstance?.id}">
                             <g:message code="default.button.edit.label" default="Edit" />
                         </g:link>
-                        <g:actionSubmit class="btn btn-danger" action="delete"
+                        <g:actionSubmit class="tms-btn tms-danger" action="delete"
                                         value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                     </fieldset>

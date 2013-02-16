@@ -38,7 +38,7 @@
         <g:form>
             <fieldset class="buttons">
                 <g:hiddenField name="tag.id" value="${applicationInstance?.id}" />
-                <g:link class="btn btn-warning" action="approve" id="${applicationInstance?.id}">
+                <g:link class="tms-btn tms-warning" action="approve" id="${applicationInstance?.id}">
                     <g:message code="application.button.approve.label" default="Approve" />
                 </g:link>
              </fieldset>

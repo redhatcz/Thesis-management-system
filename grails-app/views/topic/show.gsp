@@ -21,7 +21,7 @@
         <g:set var="topicTags" value="${topicInstance?.tags}"/>
         <g:if test="${topicTags}">
             <p class="tag-list">
-                <span class="tms-tag big"></span><g:message code="topic.tags.label" default="tags" />:
+                <span class="entypo-tag big"></span><g:message code="topic.tags.label" default="tags" />:
                 <g:each in="${topicTags}" var="t" status="i">
                     <g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
                 </g:each>
@@ -59,31 +59,31 @@
 
             <h4>Topic Management</h4>
             <div class="panel-content">
-                <g:link class="btn btn-warning" action="edit" id="${topicInstance?.id}">
+                <g:link class="tms-btn tms-warning" action="edit" id="${topicInstance?.id}">
                     <g:message code="default.button.edit.label" default="Edit" />
                 </g:link>
                 <g:form style="display: inline;">
                     <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
-                    <g:actionSubmit class="btn btn-danger" action="delete"
+                    <g:actionSubmit class="tms-btn tms-danger" action="delete"
                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </g:form>
                 <g:if test="${!subscriber}">
                     <g:form style="display: inline;" controller="subscription" action="subscribe">
                         <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                        <g:submitButton class="btn btn-info" name="submit-subscription" value="Subscribe"/>
+                        <g:submitButton class="tms-btn tms-info" name="submit-subscription" value="Subscribe"/>
                     </g:form>
                 </g:if>
                 <g:else>
                     <g:form style="display: inline;" controller="subscription" action="unsubscribe">
                         <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                        <g:submitButton class="btn btn-info" name="submit-unsubscription" value="Unsubscribe"/>
+                        <g:submitButton class="tms-btn tms-info" name="submit-unsubscription" value="Unsubscribe"/>
                     </g:form>
                 </g:else>
-                <g:link class="btn btn-info" controller="application" action="create" id="${topicInstance?.id}">
+                <g:link class="tms-btn tms-success" controller="application" action="create" id="${topicInstance?.id}">
                     <g:message code="default.button.apply.label" default="Apply" />
                 </g:link>
-                <g:link class="btn btn-info" controller="thesis" action="create" id="${topicInstance?.id}">
+                <g:link class="tms-btn tms-info" controller="thesis" action="create" id="${topicInstance?.id}">
                     <g:message code="thesis.create.button" default="Create thesis" />
                 </g:link>
             </div>

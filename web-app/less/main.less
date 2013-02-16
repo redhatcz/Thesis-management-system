@@ -51,18 +51,6 @@ p {
     font-color: @gray;
 }
 
-.pull-right .dropdown-menu {
-    left: auto;
-    right: 0;
-}
-
-.typeahead-details {
-    color: gray;
-    font-size: small;
-}
-.active .typeahead-details {
-    color: white;
-}
 
 /*---------HEADER---------*/
 
@@ -143,7 +131,7 @@ h4.header {
     }
 }
 
-.head [class*="tms-"] {
+.head [class*="entypo-"] {
     color: @grayLight;
     &:hover {
         color: @white;
@@ -274,7 +262,7 @@ dl.panel-content {
 /*---------ICONS---------*/
 
 @media screen, print {
-    [class*="tms-"] {
+    [class*="entypo-"] {
         font-style: inherit;
         font-weight: normal;
         vertical-align: bottom;
@@ -288,26 +276,26 @@ dl.panel-content {
             text-align: center;
         }
     }
-    .tms-stroke:before {
+    .entypo-stroke:before {
         font-family: Entypo;
     }
 
-    .tms-thesis:before      { content: '\1F393'; }
-    .tms-tag:before         { content: '\E789'; }
-    .tms-tag2:before        { content: '\1F4D1'; }
-    .tms-mail:before        { content: '\2709'; }
-    .tms-clock:before       { content: '\1F554'; }
-    .tms-user:before        { content: '\1F464'; }
-    .tms-users:before       { content: '\1F465'; }
-    .tms-add-user:before    { content: '\E700'; }
-    .tms-comment:before     { content: '\E718'; }
-    .tms-quote:before       { content: '\275E'; }
-    .tms-settings:before    { content: '\2699'; }
-    .tms-book:before        { content: '\1F4D5'; }
+    .entypo-thesis:before      { content: '\1F393'; }
+    .entypo-tag:before         { content: '\E789'; }
+    .entypo-tag2:before        { content: '\1F4D1'; }
+    .entypo-mail:before        { content: '\2709'; }
+    .entypo-clock:before       { content: '\1F554'; }
+    .entypo-user:before        { content: '\1F464'; }
+    .entypo-users:before       { content: '\1F465'; }
+    .entypo-add-user:before    { content: '\E700'; }
+    .entypo-comment:before     { content: '\E718'; }
+    .entypo-quote:before       { content: '\275E'; }
+    .entypo-settings:before    { content: '\2699'; }
+    .entypo-book:before        { content: '\1F4D5'; }
 
-    .tms-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
-    .tms-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
-    .tms-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
+    .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
+    .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
+    .entypo-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
 
     .big { font-size: 2em; }
     .medium-big { font-size: 1.33em; }
@@ -325,7 +313,7 @@ a.tag-root {
     font-weight: bold;
 }
 
-a.tag-list {
+.tag-list {
     padding: 15px 0;
     border-bottom: 1px solid @grayBorder;
 }
@@ -354,6 +342,26 @@ a.tag-list {
     &.active,
     &:active {
         box-shadow: none;
+    }
+
+    &.tms-warning:hover {
+        background: @btnWarningBackground;
+        .box-shadow(0px 1px 1px @btnWarningBackgroundHighlight);
+    }
+
+    &.tms-danger:hover {
+        background: red;
+        .box-shadow(0px 1px 1px darken(red, 40%));
+    }
+
+    &.tms-success:hover {
+        background: @btnSuccessBackground;
+        .box-shadow(0px 1px 1px @btnSuccessBackgroundHighlight);
+    }
+
+    &.tms-info:hover {
+        background: @btnInfoBackground;
+        .box-shadow(0px 1px 1px @btnInfoBackgroundHighlight);
     }
 }
 
@@ -390,11 +398,11 @@ div.comment {
     margin-bottom: 30px;
     border: 1px solid @grayBorder;
 
-    .tms-settings {
+    .entypo-settings {
         visibility: hidden;
     }
 
-    &:hover .tms-settings {
+    &:hover .entypo-settings {
         visibility: visible;
     }
 }
@@ -492,17 +500,31 @@ h1.login-title {
     margin-bottom: 5px;
 }
 
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.typeahead-details {
+    color: gray;
+    font-size: small;
+}
+
+.active .typeahead-details {
+    color: white;
+}
+
 .center {
     text-align: center;
     padding: 20px 0px;
-}
-
-label.text {
-    padding-top: 5px;
 }
 
 .form-inline {
     padding: 0;
     margin: 0;
     border: 0;
+}
+
+label.text {
+    padding-top: 5px;
 }

@@ -26,7 +26,7 @@
     <div class="thesis">
         <h4>Configuration management</h4>
 
-        <g:link class="btn btn-warning" action="edit">
+        <g:link class="tms-btn tms-warning" action="edit">
             <g:message code="configuration.edit.button" default="Edit" />
         </g:link>
     </div>

@@ -58,11 +58,11 @@
                 </li>
                 <div class="controls pull-right">
                     <g:form controller="user" class="form-inline">
-                        <g:link class="btn btn-warning" controller="user" action="edit" id="${userInstance?.id}">
+                        <g:link class="tms-btn tms-warning" controller="user" action="edit" id="${userInstance?.id}">
                             <g:message code="default.button.edit.label" default="Edit" />
                         </g:link>
                         <g:hiddenField name="user.id" value="${userInstance?.id}" />
-                        <g:actionSubmit class="btn btn-danger" action="delete"
+                        <g:actionSubmit class="tms-btn tms-danger" action="delete"
                                         value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                     </g:form>

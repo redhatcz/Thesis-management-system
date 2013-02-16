@@ -13,15 +13,15 @@
                     </g:link>
                 </h3>
                 <ul class="inline">
-                    <li><span class="tms-user"></span>
+                    <li><span class="entypo-user"></span>
                         <g:link controler="user" action="show" id="${topic?.ownerId}">
                             ${topic?.owner?.fullName}
                         </g:link>
                     </li>
-                    <li><span class="tms-clock"></span>
+                    <li><span class="entypo-clock"></span>
                         <g:formatDate date="${topic?.dateCreated}" dateStyle="LONG" type="date" />
                     </li>
-                    <li><span class="tms-tag2"></span>
+                    <li><span class="entypo-tag2"></span>
                         <g:set var="topicTags" value="${topic?.tags}"/>
                         <g:each in="${topicTags}" var="tag" status="i">
                             <g:link controller="tag" action="show" id="${tag?.id}">${tag?.title}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
@@ -51,7 +51,7 @@
         </div>
         <h4>Manage Topics</h4>
         <div class="panel-content">
-            <g:link class="btn btn-info" action="create">
+            <g:link class="tms-btn tms-info" action="create">
                 <g:message code="default.new.label" args="[entityName]" />
             </g:link>
         </div>

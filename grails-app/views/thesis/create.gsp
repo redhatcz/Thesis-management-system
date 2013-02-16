@@ -16,7 +16,7 @@
 
         <div class="control-group">
             <div class="controls">
-                <g:submitButton name="create" class="btn btn-primary"
+                <g:submitButton name="create" class="tms-btn"
                                 value="${message(code: 'default.button.create.label', default: 'Create')}" />
             </div>
         </div>

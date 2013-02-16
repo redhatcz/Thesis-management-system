@@ -46,7 +46,7 @@
         <div class="panel right">
             <h4>Manage Users</h4>
             <div class="panel-content">
-                <g:link class="btn btn-info" action="create">
+                <g:link class="tms-btn tms-info" action="create">
                     <g:message code="default.new.label" args="[entityName]" />
                 </g:link>
             </div>

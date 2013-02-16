@@ -13,7 +13,7 @@
             <g:render template="form"/>
             <div class="control-group">
                 <div class="controls">
-                    <g:actionSubmit name="register" class="btn btn-primary"
+                    <g:actionSubmit name="register" class="tms-btn"
                                     value="${message(code: 'default.button.register.label', default: 'Register')}" />
                 </div>
             </div>
