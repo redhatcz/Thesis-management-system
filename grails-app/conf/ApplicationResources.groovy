@@ -5,8 +5,9 @@ modules = {
         resource url: [dir: 'js', file: 'application.js']
     }
     'a4g' {
-        dependsOn 'jquery'
+        dependsOn 'jquery, bootstrap-js'
         resource url: [dir: 'js', file: 'a4g.js'], disposition: 'head'
+        resource url: [dir: 'js', file: 'a4g-bottom.js']
     }
     'richg' {
         dependsOn 'jquery'

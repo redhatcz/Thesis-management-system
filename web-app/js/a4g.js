@@ -39,7 +39,7 @@ function dynamicSelect(id) {
                 $this.html(noSelection);
                 map = data;
                 $.each(data, function (key, value) {
-                    $this.html($this.html() + '<option value="' + value + '">' + key + '</option>')
+                    $this.html($this.html() + '<option value="' + key + '">' + value + '</option>')
                 })
 
             });
@@ -51,41 +51,22 @@ function autocomplete(id) {
     var $this = $("#" + escapeRegex(id));
     $this.attr("autocomplete", "off");
     $(document).ready(function() {
-        var map = undefined;
         $this.typeahead({
             source: function(term, process) {
                 var params = buildParams($this.attr('autocomplete-opts'));
                 params['term'] = term;
                 $.get($this.attr('autocomplete-url'), params, function(data) {
-                    map = data;
-                    labels = $.map(data, function(value, key) {
-                        return key;
-                    });
-                    process(labels);
+                    process(data);
                 });
             },
-            updater: function(item) {
-                $('#' + escapeRegex($this.attr('autocomplete-target'))).val(map[item]);
-                return item;
-            }
-        });
-        $this.blur(function() {
-            var term = $this.val();
-            $.get($this.attr('autocomplete-url'), {term: term}, function(data) {
-                var exactMatch = false;
-                $.each(data, function(key, value) {
-                    if (key == term) {
-                        exactMatch = true;
-                    }
-                });
-                if (exactMatch) {
-                    map = data;
-                    $this.data('typeahead').updater(term);
-                } else {
-                    $('#' + escapeRegex($this.attr('autocomplete-target'))).val(null);
+            updater: function(item, type) {
+                //clear the input if the autocomplete dropdown is hidden
+                var result = this.shown ? item : undefined;
+                if (type == "value") {
+                    $('#' + escapeRegex($this.attr('autocomplete-target'))).val(result);
                 }
-
-            });
+                return result;
+            }
         });
     });
 }

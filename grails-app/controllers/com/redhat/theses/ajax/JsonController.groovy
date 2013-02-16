@@ -28,7 +28,7 @@ class JsonController {
         def userMap = [:]
 
         memberships.each {
-            userMap[it.user.fullName] = it.id
+            userMap[it.id] = it.user.fullName
         }
         render userMap as JSON
     }
@@ -37,7 +37,7 @@ class JsonController {
         def users = User.findAllByFullNameIlike("%${term}%", [max: MAX_RESULTS])
         def userMap = [:]
         users.each {
-            userMap[it.fullName] = it.id
+            userMap[it.id] = it.fullName
         }
         render userMap as JSON
     }
@@ -46,7 +46,7 @@ class JsonController {
         def tags = Tag.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS])
         def tagMap = [:]
         tags.each {
-            tagMap[it.title] = it.id
+            tagMap[it.id] = it.title
         }
         render tagMap as JSON
     }
@@ -55,7 +55,7 @@ class JsonController {
         def topics = Topic.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS])
         def topicMap = [:]
         topics.each {
-            topicMap[it.title] = it.id
+            topicMap[it.id] = it.title
         }
         render topicMap as JSON
     }
@@ -74,7 +74,7 @@ class JsonController {
                     [topicId: topicId, organizationId: organizationId])
 
             users.each {
-                userMap[it.fullName] = it.id
+                userMap[it.id] = it.fullName
             }
         }
 
@@ -91,7 +91,7 @@ class JsonController {
                     [organizationId: organizationId, topicId: topicId])
 
             memberships.each {
-                membershipMap[it.user.fullName] = it.id
+                membershipMap[it.id] = it.user.fullName
             }
         }
 
@@ -114,7 +114,7 @@ class JsonController {
             def universities = user.organizations.findAll {it.id in topicUniversities*.id}
 
             universities.each {
-                universityMap[it.name] = it.id
+                universityMap[it.id] = it.name
             }
         }
 
@@ -130,7 +130,7 @@ class JsonController {
                     [topicId: topicId, userId: userId])
 
             users.each {
-                userMap[it.fullName] = it.id
+                userMap[it.id] = it.fullName
             }
         }
         render userMap as JSON
