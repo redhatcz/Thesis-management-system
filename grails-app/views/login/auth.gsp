@@ -6,6 +6,8 @@
 
 <body>
     <h1 class="login-title">Theses Management System</h1>
+
+    <g:render template="/layouts/messages"/>
         
     <div class="login">
         <form action='${postUrl}' method='POST' id='loginForm' class='form-vertical'>
