@@ -30,19 +30,21 @@
     </div>
 
     <div class="span4">
-        <div class="thesis">
+        <div class="panel right">
             <h4>Tag Management</h4>
-            <g:form>
-                <fieldset class="buttons">
-                    <g:hiddenField name="tag.id" value="${tagInstance?.id}" />
-                    <g:link class="btn btn-warning" action="edit" id="${tagInstance?.id}">
-                        <g:message code="default.button.edit.label" default="Edit" />
-                    </g:link>
-                    <g:actionSubmit class="btn btn-danger" action="delete"
-                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
+            <div class="panel-content">
+                <g:form>
+                    <fieldset class="buttons">
+                        <g:hiddenField name="tag.id" value="${tagInstance?.id}" />
+                        <g:link class="btn btn-warning" action="edit" id="${tagInstance?.id}">
+                            <g:message code="default.button.edit.label" default="Edit" />
+                        </g:link>
+                        <g:actionSubmit class="btn btn-danger" action="delete"
+                                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    </fieldset>
+                </g:form>
+            </div>
         </div>
     </div>
 </body>

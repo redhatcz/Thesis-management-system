@@ -7,13 +7,12 @@
     </head>
     <body>
     <div class="span4">
-        <div class="avatar">
-            %{--Profile picture will be here soon!--}%
-        </div>
-
-        <div class="thesis">
+        <div class="panel left">
+            <div class="avatar">
+                %{--Profile picture will be here soon!--}%
+            </div>
             <h4>User Information</h4>
-            <dl>
+            <dl class="panel-content">
                 <g:if test="${userInstance?.email}">
                     <dt><g:message code="user.email.label" default="Email" /></dt>
                     <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>

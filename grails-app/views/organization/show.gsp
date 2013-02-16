@@ -13,9 +13,9 @@
             %{--Organization logo will be here soon!--}%
         </div>
 
-        <div class="thesis">
+        <div class="panel left">
             <h4>Organization Information</h4>
-            <dl>
+            <dl class="panel-content">
                 <g:if test="${organizationInstance?.name}">
                     <dt><g:message code="organization.name.label" default="Name" /></dt>
                     <dd><g:fieldValue bean="${organizationInstance}" field="name"/></dd>

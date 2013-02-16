@@ -82,13 +82,13 @@ h4.header {
 
 .span4 {
     width: 340px;
+    margin-bottom: 50px;
 }
 
 .span8 {
     width: 580px;
-    min-height: 400px;
     padding: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     background-color: white;
     .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 }
@@ -97,7 +97,7 @@ h4.header {
 /*---------NAVBAR---------*/
 
 .margin {
-    padding-top: 70px;
+    padding-top: 60px;
 }
 
 .navbar-tms {
@@ -198,26 +198,40 @@ h4.header {
 
 /*---------SIDE-PANEL---------*/
 
-.thesis {
-    padding: 10px 20px;
+.panel {
     margin-top: 20px;
+    padding: 5px 0 20px;
     background-color: @graySuperLight;
     border: 1px solid @grayLighter;
-    .border-right-radius(10px);
 }
 
-.thesis > h4 {
+.panel h4 {
+    padding: 10px 20px 5px;
     font-family: @titleFontFamily;
     font-size: 24px;
     color: @grayTitles;
+    border-bottom: 2px solid lighten(@grayLighter, 5%);
 }
 
-.thesis dl {
+.panel.right {    
+    .border-right-radius(10px);
+}
+
+.panel.left {
+    .border-left-radius(10px);
+}
+
+.panel-content {
+    padding: 10px 20px;
+}
+
+dl.panel-content {
     font-size: @fontSizeSmall;
     color: @gray;
+    margin: 0px;
 }
 
-.thesis dt {
+dl.panel-content dt {
     padding: 7px 0;
     float: left;
     width: 110px;
@@ -226,9 +240,16 @@ h4.header {
     font-weight: normal;
 }
 
-.thesis dd {
+dl.panel-content dd {
     padding: 7px 0;
     margin-left: 120px;
+}
+
+.avatar {
+    height: 296px;
+    margin: 20px;
+    border: 1px solid @grayBorder;
+    background-color: @white;
 }
 
 
@@ -403,17 +424,6 @@ div.comment:hover .tms-settings {
 /*-----------------------WILL-BE-REFACTORED-----------------------------*/
 
 
-
-
-
-
-.avatar {
-    padding: 150px 20px;
-    margin-bottom: 20px;
-    border: 1px solid @grayBorder;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-}
 
 .dynamic-field-child {
     margin-bottom: 5px;

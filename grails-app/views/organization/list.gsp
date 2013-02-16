@@ -34,11 +34,13 @@
     </div>
 
     <div class="span4">
-        <div class="thesis">
+        <div class="panel right">
             <h4>Manage Organizations</h4>
-            <g:link class="btn btn-info" action="create">
-                <g:message code="default.new.label" args="[entityName]" />
-            </g:link>
+            <div class="panel-content">
+                <g:link class="btn btn-info" action="create">
+                    <g:message code="default.new.label" args="[entityName]" />
+                </g:link>
+            </div>
         </div>
     </div>
 </body>

@@ -32,9 +32,9 @@
     </div>
 
     <div class="span4">
-        <div class="thesis">
+        <div class="panel right">
             <h4>Topic Information</h4>
-            <dl>
+            <dl class="panel-content">
                 <g:if test="${topicInstance?.owner}">
                     <dt><g:message code="topic.owner.label" default="Owner" /></dt>
                     <dd><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">
@@ -56,37 +56,37 @@
                     </g:each>
                 </g:if>
             </dl>
-        </div>
 
-        <div class="thesis">
             <h4>Topic Management</h4>
-            <g:link class="btn btn-warning" action="edit" id="${topicInstance?.id}">
-                <g:message code="default.button.edit.label" default="Edit" />
-            </g:link>
-            <g:form style="display: inline;">
-                <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
-                <g:actionSubmit class="btn btn-danger" action="delete"
-                                value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-            </g:form>
-            <g:if test="${!subscriber}">
-                <g:form style="display: inline;" controller="subscription" action="subscribe">
-                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="btn btn-info" name="submit-subscription" value="Subscribe"/>
+            <div class="panel-content">
+                <g:link class="btn btn-warning" action="edit" id="${topicInstance?.id}">
+                    <g:message code="default.button.edit.label" default="Edit" />
+                </g:link>
+                <g:form style="display: inline;">
+                    <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
+                    <g:actionSubmit class="btn btn-danger" action="delete"
+                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </g:form>
-            </g:if>
-            <g:else>
-                <g:form style="display: inline;" controller="subscription" action="unsubscribe">
-                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="btn btn-info" name="submit-unsubscription" value="Unsubscribe"/>
-                </g:form>
-            </g:else>
-            <g:link class="btn btn-info" controller="application" action="create" id="${topicInstance?.id}">
-                <g:message code="default.button.apply.label" default="Apply" />
-            </g:link>
-            <g:link class="btn btn-info" controller="thesis" action="create" id="${topicInstance?.id}">
-                <g:message code="thesis.create.button" default="Create thesis" />
-            </g:link>
+                <g:if test="${!subscriber}">
+                    <g:form style="display: inline;" controller="subscription" action="subscribe">
+                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                        <g:submitButton class="btn btn-info" name="submit-subscription" value="Subscribe"/>
+                    </g:form>
+                </g:if>
+                <g:else>
+                    <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                        <g:submitButton class="btn btn-info" name="submit-unsubscription" value="Unsubscribe"/>
+                    </g:form>
+                </g:else>
+                <g:link class="btn btn-info" controller="application" action="create" id="${topicInstance?.id}">
+                    <g:message code="default.button.apply.label" default="Apply" />
+                </g:link>
+                <g:link class="btn btn-info" controller="thesis" action="create" id="${topicInstance?.id}">
+                    <g:message code="thesis.create.button" default="Create thesis" />
+                </g:link>
+            </div>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-<div class="nav" role="navigation">
+<div role="navigation">
     <g:if test="${currentTag}">
         <g:if test="${currentTag.parent}">
             <g:link class="tag tag-root" action="tag" id="${currentTag?.parent?.id}">

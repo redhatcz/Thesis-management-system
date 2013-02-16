@@ -29,9 +29,9 @@
     </div>
 
     <div class="span4">
-        <div class="thesis">
+        <div class="panel right">
             <h4>Your Thesis</h4>
-            <dl>
+            <dl class="panel-content">
                 <dt>name</dt>
                 <dd><a href="#">Java Security Centralization</a></dd>
                 <dt>suprevisor</dt>

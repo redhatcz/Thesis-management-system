@@ -12,9 +12,9 @@
         %{--Profile picture will be here soon!--}%
     </div>
 
-    <div class="thesis">
+    <div class="panel left">
         <h4>User Information</h4>
-        <dl class="dl-thesis">
+        <dl class="panel-content">
             <g:if test="${userInstance?.email}">
                 <dt><g:message code="user.email.label" default="Email" /></dt>
                 <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
@@ -65,23 +65,21 @@
             </ul>
         </div>
     </g:form>
-    <div class="table-base">
-        <g:if test="${topicInstanceList.isEmpty()}">
-            <p class="center muted">No topics were found.</p>
-        </g:if>
-        <g:else>
-            <g:each var="topic" in="${topicInstanceList}">
-                <div class="table-layout">
-                    <h4>
-                        <g:link controller="supervision" action="manage" id="${topic.id}">
-                            <g:fieldValue bean="${topic}" field="title"/>
-                        </g:link>
-                    </h4>
-                    <g:fieldValue bean="${topic}" field="lead"/>
-                </div>
-            </g:each>
-        </g:else>
-    </div>
+    <g:if test="${topicInstanceList.isEmpty()}">
+        <p class="center muted">No topics were found.</p>
+    </g:if>
+    <g:else>
+        <g:each var="topic" in="${topicInstanceList}">
+            <div class="table-layout">
+                <h4>
+                    <g:link controller="supervision" action="manage" id="${topic.id}">
+                        <g:fieldValue bean="${topic}" field="title"/>
+                    </g:link>
+                </h4>
+                <g:fieldValue bean="${topic}" field="lead"/>
+            </div>
+        </g:each>
+    </g:else>
 </div>
 </body>
 </html>
