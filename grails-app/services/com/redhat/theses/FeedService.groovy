@@ -43,7 +43,7 @@ class FeedService {
 
         args += [
             thesis.topic.title,
-            grailsLinkGenerator.link(controller: 'topic', action: 'show', id: thesis.topic.id)
+            grailsLinkGenerator.link(controller: 'topic', action: 'show', id: thesis.topic.id, absolute: true)
         ]
 
         def messageCode = "feed.thesis.${messageType}"
