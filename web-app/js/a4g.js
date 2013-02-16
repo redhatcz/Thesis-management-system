@@ -50,23 +50,30 @@ function dynamicSelect(id) {
 function autocomplete(id) {
     var $this = $("#" + escapeRegex(id));
     $this.attr("autocomplete", "off");
+    var detailsType = $this.attr('autocomplete-detailsType');
+    detailsType = detailsType ? detailsType : 'nextTo';
+
     $(document).ready(function() {
+        var map = undefined
         $this.typeahead({
             source: function(term, process) {
                 var params = buildParams($this.attr('autocomplete-opts'));
                 params['term'] = term;
                 $.get($this.attr('autocomplete-url'), params, function(data) {
+                    map = data;
                     process(data);
                 });
             },
             updater: function(item, type) {
-                //clear the input if the autocomplete dropdown is hidden
-                var result = this.shown ? item : undefined;
                 if (type == "value") {
-                    $('#' + escapeRegex($this.attr('autocomplete-target'))).val(result);
+                    $('#' + escapeRegex($this.attr('autocomplete-target'))).val(item);
                 }
-                return result;
-            }
+                return item;
+            },
+            deleter: function () {
+                $('#' + escapeRegex($this.attr('autocomplete-target'))).val(null);
+            },
+            detailsType: detailsType
         });
     });
 }
