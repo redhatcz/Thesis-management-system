@@ -18,9 +18,7 @@ modules = {
     }
     'bootstrap-less' {
         dependsOn 'bootstrap-js'
-    
-        resource url: [dir: 'less', file: 'bootstrap.less'], attrs: [rel: 'stylesheet/less', type: 'css'], bundle: 'bundle_bootstrap-less'
-        resource url: [dir: 'css', file: 'blank.css'], disposition: 'head'
+        resource url: [dir: 'less', file: 'bootstrap.less'], attrs: [rel: 'stylesheet/less', type: 'css']
     }
 
 }
