@@ -62,6 +62,7 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        plugin.emailConfirmation.from = '"Do not reply" <noreply@localhost>'
 
         grails {
             mail {
@@ -79,6 +80,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
+        // TODO: set plugin.emailConfirmation.from
         // TODO: grails.serverURL = "http://www.changeme.com"
         // TODO: add mail server configuration
     }

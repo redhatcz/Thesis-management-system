@@ -46,7 +46,15 @@ class RegistrationController {
             return
         }
 
-        flash.message = message(code: 'registration.created')
-        redirect(url: "/")
+        redirect(action: 'complete')
+    }
+
+    def complete() {
+    }
+
+    def confirmed() {
+    }
+
+    def expired() {
     }
 }
