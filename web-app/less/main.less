@@ -106,8 +106,25 @@ h4.header {
 
 /*---------NAVBAR---------*/
 
-.margin {
-    padding-top: 60px;
+.manage {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    height: 22px;
+
+    a {
+        padding: 6px 9px;
+        font-size: @fontSizeSmall;
+        color: @grayLight;
+        background-color: @graySuperLight;
+        border: 1px solid @grayLighter;
+        .border-radius(5px);
+
+        &:hover {
+            text-decoration: none;
+            color: @orange;
+            .transition(color linear .1s);
+        }
+    }
 }
 
 .navbar-tms {
@@ -219,16 +236,32 @@ h4.header {
     }
 
     h4 {
-        padding: 10px 20px 5px;
+        padding: 20px 20px 5px;
         font-family: @titleFontFamily;
         font-size: 24px;
         color: @grayTitles;
         border-bottom: 2px solid lighten(@grayLighter, 5%);
+
+        &:first-child {
+            padding-top: 10px;
+        }
     }
 }
 
 .panel-content {
-    padding: 10px 20px;
+    padding: 8px 20px;
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    li:last-child {
+        margin-bottom: 0;
+    }
+
+    ul.unstyled {
+        margin-bottom: 0;
+    }
 }
 
 dl.panel-content {
@@ -292,6 +325,7 @@ dl.panel-content {
     .entypo-quote:before       { content: '\275E'; }
     .entypo-settings:before    { content: '\2699'; }
     .entypo-book:before        { content: '\1F4D5'; }
+    .entypo-rss:before         { content: '\E73A'; }
 
     .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
     .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }

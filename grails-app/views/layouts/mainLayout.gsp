@@ -38,7 +38,9 @@
             </div>
         </div>
     </div>
-    <div class="margin"></div>
+    <div class="manage">
+        <g:pageProperty name="page.manage-box"/>
+    </div>
 
     <div class="container">
         <g:pageProperty name="page.container-box"/>
