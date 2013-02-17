@@ -3,8 +3,6 @@ package com.redhat.theses
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
 
-import javax.persistence.FetchType
-
 class TopicController {
 
     /**
@@ -26,8 +24,6 @@ class TopicController {
     def list(Integer max) {
         params.max = Util.max(max)
         def rootTags = Tag.findAllByParentIsNull()
-        // Fetch eagerly since the tags will be needed
-        params.fetch = [tags: FetchType.EAGER]
         [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count(), tags: rootTags]
     }
 
