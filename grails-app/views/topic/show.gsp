@@ -67,7 +67,7 @@
                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </g:form>
 
-                <!-- <g:if test="${!subscriber}">
+                <g:if test="${!subscriber}">
                 <g:form style="display: inline;" controller="subscription" action="subscribe">
                     <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
                     <g:submitButton class="tms-btn tms-info" name="submit-subscription"
@@ -86,7 +86,7 @@
                 <g:link class="tms-btn tms-success" controller="application"
                         action="create" id="${topicInstance?.id}">
                     <g:message code="default.button.apply.label" default="Apply" />
-                </g:link> -->
+                </g:link>
 
                 <g:link class="tms-btn tms-info" controller="thesis"
                         action="create" id="${topicInstance?.id}">
@@ -95,6 +95,11 @@
 
                 <g:link class="tms-btn tms-warning" action="edit" id="${topicInstance?.id}">
                     <g:message code="default.button.edit.label" default="Edit" />
+                </g:link>
+
+                <g:link class="tms-btn tms-warning" controller="supervision"
+                        action="manage" id="${topicInstance?.id}">
+                    <g:message code="supervisions.edit" default="My Supervisions" />
                 </g:link>
 
             </div>
