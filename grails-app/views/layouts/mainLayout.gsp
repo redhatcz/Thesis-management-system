@@ -46,10 +46,43 @@
         <g:pageProperty name="page.container-box"/>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="span12">
-                <p class="pull-right">CopyRight &copy; 2013 Red Hat Inc.</p>
+    <footer>
+        <div class="footer-up">
+            <div class="container">
+                <div class="span3">
+                    <p class="leading">Developers</p>
+                    <a href="#">Get Started</a>
+                    <a href="#">User Guide</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="span3">
+                    <p class="leading">Comunity</p>
+                    <a href="#">Blog</a>
+                    <a href="#">Forum</a>
+                    <a href="#">IRC Channel</a>
+                    <a href="#">Feedback</a>
+                </div>                    
+                <div class="span3">
+                    <p class="leading">Get Involved</p>
+                    <a href="#">Open Source</a>
+                    <a href="#">Newsletter Sign Up</a>
+                    <a href="#">Make It Better</a>
+                    <a href="#">GitHub</a>
+                </div>                    
+                <div class="span3">
+                    <p class="leading">Account</p>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Security Policy</a>
+                    <a href="#">Plans</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-down">
+            <div class="container">
+                <img src="${resource(dir: 'images', file: 'redhat.png')}">
+                <p class="pull-right">CopyRight &copy; 2013 Red Hat, Inc.</p>
             </div>
         </div>
     </footer>
