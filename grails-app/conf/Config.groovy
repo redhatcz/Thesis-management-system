@@ -80,9 +80,24 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: set plugin.emailConfirmation.from
-        // TODO: grails.serverURL = "http://www.changeme.com"
-        // TODO: add mail server configuration
+        // TODO: set plugin.emailConfirmation.from to something more representative
+        plugin.emailConfirmation.from = '"Do not reply" <noreply@localhost>'
+        // TODO: change this to the actual server url
+        grails.serverURL = "http://theses-managementsystem.rhcloud.com"
+        // TODO: changed the mail configuration to something more representative
+        grails {
+            mail {
+                host = "smtp.gmail.com"
+                port = 465
+                username = "noone.localhost@gmail.com"
+                password = "noone.local"
+                overrideAddress = "noone.localhost@gmail.com"
+                props = ["mail.smtp.auth":"true",
+                        "mail.smtp.socketFactory.port":"465",
+                        "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                        "mail.smtp.socketFactory.fallback":"false"]
+            }
+        }
     }
 }
 
