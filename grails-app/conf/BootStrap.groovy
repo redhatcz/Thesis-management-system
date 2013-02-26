@@ -1,5 +1,7 @@
 import com.redhat.theses.Application
 import com.redhat.theses.Feed
+import com.redhat.theses.Grade
+import com.redhat.theses.Status
 import com.redhat.theses.Thesis
 import com.redhat.theses.auth.User
 import com.redhat.theses.University
@@ -480,7 +482,7 @@ early Fleetwood Mac cover, being added to the recording.'''
                 assignee: kuba,
                 topic: tms,
                 sMembership: jiriKolarMembership,
-                status: Thesis.Status.IN_PROGRESS,
+                status: Status.IN_PROGRESS,
                 thesisAbstract: '''Created Topic, Thesis and Project management, file uploading for theses so that
 students can upload their work after they are done with their thesis and application management.'''
         ).save(failOnError: true)
@@ -490,7 +492,7 @@ students can upload their work after they are done with their thesis and applica
                 assignee: vaclav,
                 topic: tms,
                 sMembership: jiriKolarMembership,
-                status: Thesis.Status.IN_PROGRESS,
+                status: Status.IN_PROGRESS,
                 thesisAbstract: '''Created User, Organization, University and Company management, news feed system so
 that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
 in one of those can follow it, mail service for sending these feeds to subscribers and overall configuration.'''
@@ -501,7 +503,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 assignee: pavel,
                 topic: tms,
                 sMembership: jiriKolarMembership,
-                status: Thesis.Status.IN_PROGRESS,
+                status: Status.IN_PROGRESS,
                 thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
         ).save(failOnError: true)
         feedService.createThesisFeed(pavelThesis, 'insert', tms.owner)
@@ -510,8 +512,8 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 assignee: pavel,
                 topic: pythonFramework,
                 sMembership: m3,
-                status: Thesis.Status.FINISHED,
-                grade: Thesis.Grade.F,
+                status: Status.FINISHED,
+                grade: Grade.F,
                 thesisAbstract: '''The majority of Web frameworks are exclusively server-side technology, although,
 with the increased prevalence of AJAX, some Web frameworks are beginning to include AJAX code that helps developers
 with the particularly tricky task of programming (client-side) the user's browser. At the extreme end of the client-side
@@ -536,8 +538,8 @@ known as full-stack frameworks in that they attempt to supply components for eac
                 assignee: vaclav,
                 topic: rubyKillingMachine,
                 sMembership: jiriKolarMembership,
-                status: Thesis.Status.FINISHED,
-                grade: Thesis.Grade.A,
+                status: Status.FINISHED,
+                grade: Grade.A,
                 thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
         ).save(failOnError: true)
         feedService.createThesisFeed(vaclavThesis2, 'insert', rubyKillingMachine.owner)

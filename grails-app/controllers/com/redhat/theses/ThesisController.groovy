@@ -61,7 +61,7 @@ class ThesisController {
     def save() {
         def thesisInstance = new Thesis(params.thesis)
 
-        thesisInstance.status = Thesis.Status.IN_PROGRESS
+        thesisInstance.status = Status.IN_PROGRESS
 //        thesisInstance.topic = Topic.get(thesisInstance.topic.id)
 //        thesisInstance.assignee = User.get(thesisInstance.assignee.id)
 
@@ -91,7 +91,7 @@ class ThesisController {
 
         def universities = user.organizations.findAll {it.id in thesisInstance.topic.universities*.id}
 
-        [thesisInstance: thesisInstance, statusList: Thesis.Status.values(), gradeList: Thesis.Grade.values(),
+        [thesisInstance: thesisInstance, statusList: Status.values(), gradeList: Grade.values(),
         memberships: memberships, universities: universities]
     }
 
@@ -108,14 +108,14 @@ class ThesisController {
         if (version && thesisInstance.version > version) {
             thesisInstance.errors.rejectValue("version", "thesis.optimistic.lock.error")
             render view: "edit", model:
-                    [thesisInstance: thesisInstance, statusList: Thesis.Status.values(), gradeList: Thesis.Grade.values()]
+                    [thesisInstance: thesisInstance, statusList: Status.values(), gradeList: Grade.values()]
             return
         }
 
         thesisInstance.properties = params.thesis
         if (!thesisService.save(thesisInstance)) {
             render view: 'edit', model:
-                    [thesisInstance: thesisInstance, statusList: Thesis.Status.values(), gradeList: Thesis.Grade.values()]
+                    [thesisInstance: thesisInstance, statusList: Status.values(), gradeList: Grade.values()]
             return
         }
 

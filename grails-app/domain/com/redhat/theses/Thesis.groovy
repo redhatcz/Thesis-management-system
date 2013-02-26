@@ -36,16 +36,6 @@ class Thesis extends Article{
         }
     }
 
-    static enum Status {
-        IN_PROGRESS,
-        FINISHED,
-        FAILED,
-        POSPONED
-    }
-    static enum Grade {
-        A, B, C, D, E, F
-    }
-
     public List<String> getFileURLs(){
        return null;
     }
