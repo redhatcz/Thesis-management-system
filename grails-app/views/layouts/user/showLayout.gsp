@@ -14,31 +14,23 @@
             <h4>User Information</h4>
             <dl class="panel-content">
                 <g:if test="${userInstance?.email}">
-                    <dt><g:message code="user.email.label" default="Email" /></dt>
+                    <dt><span class="entypo-mail mini"></span><g:message code="user.email.label" default="email" /></dt>
                     <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
                 </g:if>
                 <g:if test="${userInstance?.fullName}">
-                    <dt><g:message code="user.fullName.label" default="Full Name" /></dt>
+                    <dt><span class="entypo-user mini"></span><g:message code="user.fullName.label" default="full name" /></dt>
                     <dd><g:fieldValue bean="${userInstance}" field="fullName"/></dd>
                 </g:if>
                 <g:if test="${userInstance?.accountExpired}">
-                    <dt><g:message code="user.accountExpired.label" default="Account Expired" /></dt>
+                    <dt><span class="entypo-clock mini"></span><g:message code="user.accountExpired.label" default="account Expired" /></dt>
                     <dd><g:formatBoolean boolean="${userInstance?.accountExpired}" /></dd>
                 </g:if>
                 <g:if test="${userInstance?.accountLocked}">
-                    <dt><g:message code="user.accountLocked.label" default="Account Locked" /></dt>
+                    <dt><span class="entypo-lock mini"></span><g:message code="user.accountLocked.label" default="Account Locked" /></dt>
                     <dd><g:formatBoolean boolean="${userInstance?.accountLocked}" /></dd>
                 </g:if>
-                <g:if test="${userInstance?.enabled}">
-                    <dt><g:message code="user.enabled.label" default="Enabled" /></dt>
-                    <dd><g:formatBoolean boolean="${userInstance?.enabled}" /></dd>
-                </g:if>
-                <g:if test="${userInstance?.passwordExpired}">
-                    <dt><g:message code="user.passwordExpired.label" default="Password Expired" /></dt>
-                    <dd><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></dd>
-                </g:if>
                 <g:if test="${!memberships.empty}">
-                    <dt><g:message code="user.memberships.label" default="Memberships" /></dt>
+                    <dt><span class="entypo-users mini"></span><g:message code="user.memberships.label" default="memberships" /></dt>
                     <g:each in="${memberships*.organization}" var="organization">
                         <dd><g:fieldValue bean="${organization}" field="name"/></dd>
                     </g:each>

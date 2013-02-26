@@ -24,31 +24,31 @@
     <div class="panel right">
         <h4>Thesis Information</h4>
         <dl class="panel-content">
-            <dt><g:message code="thesis.topic.label" default="Topic"/></dt>
+            <dt><span class="entypo-thesis mini"></span><g:message code="thesis.topic.label" default="topic"/></dt>
             <dd>
                 <g:link action="show" controller="topic" id="${thesisInstance?.topic?.id}">
                     <g:fieldValue field="topic" bean="${thesisInstance}"/>
                 </g:link>
             </dd>
-            <dt><g:message code="thesis.assignee.label" default="Assignee"/></dt>
+            <dt><span class="entypo-user mini"></span><g:message code="thesis.assignee.label" default="assignee"/></dt>
             <dd>
                 <g:fieldValue field="assignee" bean="${thesisInstance}"/>
             </dd>
-            <dt><g:message code="thesis.sMembership.organization.label" default="University"/></dt>
+            <dt><span class="entypo-book mini"></span><g:message code="thesis.sMembership.organization.label" default="university"/></dt>
             <dd>
                 <g:fieldValue field="name" bean="${thesisInstance?.sMembership?.organization}"/>
             </dd>
-            <dt><g:message code="thesis.sMembership.user.label" default="Supervisor"/></dt>
+            <dt><span class="entypo-user mini"></span><g:message code="thesis.sMembership.user.label" default="supervisor"/></dt>
             <dd>
                 <g:fieldValue field="fullName" bean="${thesisInstance?.sMembership?.user}"/>
             </dd>
-            <dt><g:message code="thesis.status.label" default="Status"/></dt>
+            <dt><span class="entypo-status mini"></span><g:message code="thesis.status.label" default="status"/></dt>
             <dd>
                 <g:message code="thesis.status.${thesisInstance.status.toString().toLowerCase()}.label"
                            default="${thesisInstance.status.toString()}"/>
             </dd>
             <g:if test="${thesisInstance?.grade}">
-                <dt><g:message code="thesis.grade.label" default="Grade"/></dt>
+                <dt><span class="entypo-users mini"></span><g:message code="thesis.grade.label" default="grade"/></dt>
                 <dd><g:fieldValue bean="${thesisInstance}" field="grade"/></dd>
             </g:if>
 

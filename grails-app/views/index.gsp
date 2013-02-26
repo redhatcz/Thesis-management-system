@@ -32,11 +32,11 @@
         <div class="panel right">
             <h4>Your Thesis</h4>
             <dl class="panel-content">
-                <dt>name</dt>
-                <dd><a href="#">Java Security Centralization</a></dd>
-                <dt>suprevisor</dt>
+                <dt><span class="entypo-thesis mini"></span>name</dt>
+                <dd><a href="#">Java Centralization</a></dd>
+                <dt><span class="entypo-user mini"></span>suprevisor</dt>
                 <dd>RNDr. Robb Stark</dd>
-                <dt>status</dt>
+                <dt><span class="entypo-status mini"></span>status</dt>
                 <dd>The thesis has been awarded the grade <strong>A</strong></dd>
             </dl>
         </div>

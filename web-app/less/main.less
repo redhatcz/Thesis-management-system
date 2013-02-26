@@ -173,19 +173,19 @@ h4.header {
     width: 245px;
     margin: 0;
     padding: 0;
-    text-align: center;
     display: table-cell;
     vertical-align: middle;
+    text-align: center;
 
     &:hover {
         background: none;
         color: @red;
-        border-bottom: none;        
+        border-bottom: none;
     }
 }
 
 .nav-pills > .active a,
-.nav-pills > .active a:hover {    
+.nav-pills > .active a:hover {
     background-image: url('../images/buttons/menu_active.png');
     background-color: transparent;
     width: 245px;
@@ -293,22 +293,31 @@ h4.header {
 }
 
 dl.panel-content {
+    .dl-horizontal();
     font-size: @fontSizeSmall;
     color: @gray;
     margin: 0px;
 
     dt {
         padding: 7px 0;
-        float: left;
         width: 110px;
-        overflow: hidden;
         text-align: left;
         font-weight: normal;
     }
 
     dd {
         padding: 7px 0;
-        margin-left: 120px;
+        margin-left: 130px;
+
+        /*---TODO: find better solution---*/
+
+        padding-top: 8px;
+
+        &:first-child {
+            padding-top: 7px;
+        }
+
+        /*--------------------------------*/
     }
 }
 
@@ -354,11 +363,14 @@ dl.panel-content {
     .entypo-settings:before    { content: '\2699'; }
     .entypo-book:before        { content: '\1F4D5'; }
     .entypo-rss:before         { content: '\E73A'; }
+    .entypo-status:before      { content: '\E704'; }
+    .entypo-lock:before        { content: '1F512'; }
 
     .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
     .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
     .entypo-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
 
+    .mini { padding-right: 10px; font-size: 1.05em;}
     .big { font-size: 2em; }
     .medium-big { font-size: 1.33em; }
 }

@@ -36,17 +36,17 @@
             <h4>Topic Information</h4>
             <dl class="panel-content">
                 <g:if test="${topicInstance?.owner}">
-                    <dt><g:message code="topic.owner.label" default="Owner" /></dt>
+                    <dt><span class="entypo-user mini"></span><g:message code="topic.owner.label" default="owner" /></dt>
                     <dd><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">
                         ${topicInstance?.owner?.encodeAsHTML()}
                     </g:link></dd>
                 </g:if>
                 <g:if test="${topicInstance?.dateCreated}">
-                    <dt><g:message code="topic.dateCreated.label" default="Date Created" /></dt>
+                    <dt><span class="entypo-clock mini"></span><g:message code="topic.dateCreated.label" default="created" /></dt>
                     <dd><g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" /></dd>
                 </g:if>
                 <g:if test="${!supervisions.empty}">
-                    <dt><g:message code="topic.supervisions.label" default="Supervisions" /></dt>
+                    <dt><span class="entypo-users mini"></span><g:message code="topic.supervisions.label" default="supervisions" /></dt>
                     <g:each in="${supervisions}" status="i" var="supervision">
                         <g:each in="${supervision.value}" var="supervisor">
                             <dd><g:link controller="user" action="show" id="${supervisor?.id}">
