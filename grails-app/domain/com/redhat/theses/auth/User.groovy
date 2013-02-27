@@ -24,6 +24,9 @@ class User {
         email email: true, blank: false, unique: true
 	}
 
+    static mapping = {
+        table "`user`"
+    }
 
     boolean isMember(Organization organization){
         Membership.countByUserAndOrganization(this, organization) > 0
