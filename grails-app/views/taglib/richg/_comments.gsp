@@ -1,9 +1,9 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 
-<h3 class="header">
+<h3 id="comments" class="header">
     Comments
 </h3>
-<div id="comments">
+<div class="comments">
     <g:if test="${comments}">
         <g:each in="${comments}" var="comment" status="i">
             <richg:comment comment="${comment}" index="${i}"/>

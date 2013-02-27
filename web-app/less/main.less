@@ -44,7 +44,7 @@ h1, h2, h3 {
 }
 
 h4, h5, h6 {
-    font-color: #gray;
+    font-color: @gray;
 }
 
 p {
@@ -309,7 +309,7 @@ dl.panel-content {
         padding: 7px 0;
         margin-left: 130px;
 
-        /*---TODO: find better solution---*/
+        /*---TODO: find a better solution---*/
 
         padding-top: 8px;
 
@@ -317,7 +317,7 @@ dl.panel-content {
             padding-top: 7px;
         }
 
-        /*--------------------------------*/
+        /*----------------------------------*/
     }
 }
 
@@ -364,7 +364,7 @@ dl.panel-content {
     .entypo-book:before        { content: '\1F4D5'; }
     .entypo-rss:before         { content: '\E73A'; }
     .entypo-status:before      { content: '\E704'; }
-    .entypo-lock:before        { content: '1F512'; }
+    .entypo-lock:before        { content: '\1F512'; }
 
     .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
     .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
@@ -425,7 +425,7 @@ a.tag-root {
 
     &.tms-danger:hover {
         background: red;
-        .box-shadow(0px 1px 1px darken(red, 40%));
+        .box-shadow(0px 1px 1px darken(red, 20%));
     }
 
     &.tms-success:hover {

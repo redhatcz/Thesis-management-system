@@ -21,11 +21,8 @@
                     <li><span class="entypo-clock"></span>
                         <g:formatDate date="${topic?.dateCreated}" dateStyle="LONG" type="date" />
                     </li>
-                    <li><span class="entypo-tag2"></span>
-                        <g:set var="topicTags" value="${topic?.tags}"/>
-                        <g:each in="${topicTags}" var="tag" status="i">
-                            <g:link controller="tag" action="show" id="${tag?.id}">${tag?.title}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
-                        </g:each>
+                    <li><span class="entypo-comment"></span>
+                        <g:link action="show" id="${topic.id}" fragment="comments">12 comments</g:link>
                     </li>
                 </ul>
                 <div class="table-text">
