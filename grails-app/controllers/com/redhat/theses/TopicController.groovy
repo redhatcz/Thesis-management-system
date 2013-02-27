@@ -67,15 +67,19 @@ class TopicController {
         }
 
         flash.message = message(code: 'topic.created', args: [topicInstance.id])
-        redirect(action: "show", id: topicInstance.id)
+        redirect(action: "show", id: topicInstance.id, params: [headline: Util.hyphenize(topicInstance.title)])
     }
 
-    def show(Long id) {
+    def show(Long id, String headline) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'topic.not.found', args: [id])
             redirect(action: "list")
             return
+        }
+
+        if (Util.hyphenize(topicInstance.title) != headline) {
+            redirect(action: 'show', id: id, params: [headline: Util.hyphenize(topicInstance.title)], permanent: true)
         }
 
         def supervisions = topicInstance.supervisions
@@ -137,7 +141,7 @@ class TopicController {
         }
 
         flash.message = message(code: 'topic.updated', args: [topicInstance.id])
-        redirect(action: "show", id: topicInstance.id)
+        redirect(action: "show", id: topicInstance.id, params: [headline: Util.hyphenize(topicInstance.title)])
     }
 
     def delete() {
@@ -154,7 +158,7 @@ class TopicController {
             redirect(action: "list")
         } else {
             flash.message = message(code: 'topic.not.deleted', args: [id])
-            redirect(action: "show", id: id)
+            redirect(action: "show", id: id, params: [headline: Util.hyphenize(topicInstance.title)])
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.redhat.theses.util
 
 import javax.servlet.http.HttpServletRequest
+import javax.xml.bind.annotation.adapters.NormalizedStringAdapter
+import java.text.Normalizer
 
 /**
  * @author vdedik@redhat.com
@@ -78,6 +80,21 @@ class Util {
 
     static Boolean hasAnyDomain(String email, List<String> domains) {
         domains.any {hasDomain(email, it)}
+    }
+
+    static String hyphenize(String string) {
+        // Decompose any funny characters.
+        def link = Normalizer.normalize(string, Normalizer.Form.NFKD)
+
+        // Spaces to dashes.
+        link = link.replace(' ', '-')
+
+        // Keep only word characters ([a-zA-Z_0-9]) and the dash.
+        link = link.replaceAll(/[^-\w]/, '')
+
+        link = link.toLowerCase()
+
+        return link
     }
 
     private static List getControllerAndAction(HttpServletRequest request) {

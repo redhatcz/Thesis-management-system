@@ -8,7 +8,7 @@
         <g:each var="topic" in="${topicInstanceList}">
             <div class="table-layout">
                 <h3>
-                    <g:link action="show" id="${topic.id}">
+                    <g:link action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]">
                         <g:fieldValue bean="${topic}" field="title"/>
                     </g:link>
                 </h3>
@@ -27,7 +27,7 @@
                 </ul>
                 <div class="table-text">
                     <g:fieldValue bean="${topic}" field="lead"/>
-                    <g:link class="gray-link" action="show" id="${topic.id}">
+                    <g:link class="gray-link" action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]">
                         <g:message code="topic.text.more" default="Read more" />&hellip;<!--Three dots-->
                     </g:link>
                 </div>
