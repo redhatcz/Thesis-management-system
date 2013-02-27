@@ -20,6 +20,12 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        // Do not run this script if it has been already run
+        def test = User.findAll()
+        if (test != null && test.size() != 0) {
+            return
+        }
+
         // ROLES
         List<Role> roles = [
             new Role(authority: 'ROLE_ADMIN').save(),
