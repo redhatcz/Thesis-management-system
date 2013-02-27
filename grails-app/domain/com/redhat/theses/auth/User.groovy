@@ -28,6 +28,10 @@ class User {
         table "`user`"
     }
 
+    static hibernateFilters = {
+        enabledFilter(condition:'enabled=1 and account_expired=0 and account_locked=0', default: true)
+    }
+
     boolean isMember(Organization organization){
         Membership.countByUserAndOrganization(this, organization) > 0
     }

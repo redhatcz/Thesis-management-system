@@ -34,7 +34,6 @@ class RegistrationController {
         user.accountLocked = false
         user.passwordExpired = false
 
-        println Util.hasAnyDomain(user.email, configuration.emailDomains)
         if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
             registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
         }

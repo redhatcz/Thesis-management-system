@@ -1,3 +1,5 @@
+import org.grails.plugin.hibernate.filter.HibernateFilterDomainConfiguration
+
 def credentials = [
         host: System.getenv("OPENSHIFT_POSTGRESQL_DB_HOST"),
         port: System.getenv("OPENSHIFT_POSTGRESQL_DB_PORT"),
@@ -6,6 +8,11 @@ def credentials = [
         password: "FI_TGbqAvNxP",
         name:"theses"
 ]
+
+dataSource {
+    pooled = true
+    configClass = HibernateFilterDomainConfiguration
+}
 
 hibernate {
     cache.use_second_level_cache = true
@@ -16,7 +23,6 @@ hibernate {
 environments {
     development {
         dataSource {
-            pooled = true
             driverClassName = "org.h2.Driver"
             username = "sa"
             password = ""
@@ -27,7 +33,6 @@ environments {
     }
     test {
         dataSource {
-            pooled = true
             driverClassName = "org.h2.Driver"
             username = "sa"
             password = ""
@@ -43,7 +48,6 @@ environments {
             url = "jdbc:postgresql://${credentials.host}:${credentials.port}/${credentials.name}"
             driverClassName = "org.postgresql.Driver"
             dbCreate = "update"
-            pooled = true
             properties {
                maxActive = -1
                minEvictableIdleTimeMillis=1800000
