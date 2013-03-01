@@ -19,6 +19,8 @@
                 class="pagination-centered" offset="${Util.lastOffset(commentsTotal, params.max, params.offset)}"/>
 </g:if>
 
+<div id="commentMessages"></div>
+
 <h4 class="header">
     Leave a comment
 </h4>
@@ -35,7 +37,7 @@
         if (data.success) {
             window.location = '${createLink(action: 'show', params: [id: params.id])}';
         } else {
-            $(data.message).appendTo('#comments').hide().fadeIn();
+            $(data.message).appendTo('#commentMessages').hide().fadeIn();
         }
     });
 </script>
