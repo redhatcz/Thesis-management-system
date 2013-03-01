@@ -120,6 +120,7 @@ h4.header {
         background-color: @graySuperLight;
         border: 1px solid @grayLighter;
         .border-radius(5px);
+        .transition(color linear .1s);
 
         &:hover {
             text-decoration: none;
@@ -143,15 +144,19 @@ h4.header {
     color: @grayTitles;
     font-size: 18px;
     font-family: @titleFontFamily;
+    .transition(color linear .2s);
+
     &:hover {
         color: @white;
         text-decoration: none;
-        .transition(color linear .2s)
+        .transition(color linear .2s);
     }
 }
 
 .head [class*="entypo-"] {
     color: @grayTitles;
+    .transition(color linear .2s);
+
     &:hover {
         color: @white;
         .transition(color linear .2s)
@@ -542,8 +547,7 @@ div.comment {
 .login {
     display: block;
     margin: 30px auto 50px;
-    height: 300px;
-    width: 300px;
+    width: 320px;
     background-color: white;
     .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 
@@ -566,7 +570,7 @@ div.comment {
     }
 
     .bottom {
-        padding-top: 20px;
+        padding: 15px 0;
     }
 }
 

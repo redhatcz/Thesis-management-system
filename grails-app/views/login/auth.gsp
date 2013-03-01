@@ -7,10 +7,9 @@
 <body>
     <h1 class="login-title">Theses Management System</h1>
 
-    <g:render template="/layouts/messages"/>
-        
     <div class="login">
         <form action='${postUrl}' method='POST' id='loginForm' class='form-vertical'>
+            <g:render template="/layouts/messages"/>
             <div class="control-group">
                 <label class="control-label" for='email'>
                     <g:message code="springSecurity.login.email.label" default="Email"/>
