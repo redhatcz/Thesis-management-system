@@ -15,6 +15,11 @@ class TopicController {
      */
     def springSecurityService
 
+    /**
+     * Dependency injection of com.redhat.theses.CommentService
+     */
+    def commentService
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -24,7 +29,11 @@ class TopicController {
     def list(Integer max) {
         params.max = Util.max(max)
         def rootTags = Tag.findAllByParentIsNull()
-        [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count(), tags: rootTags]
+        def topics = Topic.list(params)
+        def commentCounts = commentService.countByArticles(topics)
+        println commentCounts.toString()
+        [topicInstanceList: topics, topicInstanceTotal: Topic.count(),
+                commentCounts: commentCounts, tags: rootTags]
     }
 
     def tag(Long id, Integer max) {

@@ -22,7 +22,7 @@
                         <g:formatDate date="${topic?.dateCreated}" dateStyle="LONG" type="date" />
                     </li>
                     <li><span class="entypo-comment"></span>
-                        <g:link action="show" id="${topic.id}" fragment="comments">12 comments</g:link>
+                        <g:link action="show" id="${topic.id}" fragment="comments">${commentCounts[topic] ?: 0} comments</g:link>
                     </li>
                 </ul>
                 <div class="table-text">
