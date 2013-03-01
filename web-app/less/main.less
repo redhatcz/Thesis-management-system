@@ -137,13 +137,14 @@ h4.header {
 
 .head {
     margin-top: 15px;
+    color: @grayTitles;
 }
 
 .head > a,
 .head .pull-right > a {
-    color: @grayTitles;
     font-size: 18px;
     font-family: @titleFontFamily;
+    color: @grayTitles;
     .transition(color linear .2s);
 
     &:hover {
@@ -153,14 +154,18 @@ h4.header {
     }
 }
 
-.head [class*="entypo-"] {
-    color: @grayTitles;
+.head a [class*="entypo-"] {
     .transition(color linear .2s);
+    color: @grayTitles;
 
     &:hover {
         color: @white;
         .transition(color linear .2s)
     }
+}
+
+.head .entypo-dot {
+    vertical-align: middle;
 }
 
 
@@ -380,11 +385,13 @@ dl.panel-content {
     .entypo-rss:before         { content: '\E73A'; }
     .entypo-status:before      { content: '\E704'; }
     .entypo-lock:before        { content: '\1F512'; }
+    .entypo-dot:before         { content: '\25CF'; }
 
     .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
     .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
     .entypo-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
 
+    .micro { padding: 0 3px; font-size: 0.5em; }
     .mini { padding-right: 10px; font-size: 1.05em;}
     .big { font-size: 2em; }
     .medium-big { font-size: 1.33em; }

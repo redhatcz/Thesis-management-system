@@ -32,6 +32,8 @@
                     <sec:ifNotLoggedIn>
                     <div class="pull-right">
                         <g:link controller="login" action="auth">Sign In</g:link>
+                        <span class="entypo-dot micro"></span>
+                        <g:link controller="registration">Sign Up</g:link>
                     </div>
                     </sec:ifNotLoggedIn>
                 </div>
@@ -62,14 +64,14 @@
                     <a href="#">Forum</a>
                     <a href="#">IRC Channel</a>
                     <a href="#">Feedback</a>
-                </div>                    
+                </div>
                 <div class="span3">
                     <p class="leading">Get Involved</p>
                     <a href="#">Open Source</a>
                     <a href="#">Newsletter Sign Up</a>
                     <a href="#">Make It Better</a>
                     <a href="#">GitHub</a>
-                </div>                    
+                </div>
                 <div class="span3">
                     <p class="leading">Account</p>
                     <a href="#">Terms of Service</a>
