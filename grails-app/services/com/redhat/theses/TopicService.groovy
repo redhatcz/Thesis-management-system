@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.events.TopicEvent
+import com.redhat.theses.events.TopicUpdatedEvent
 import com.redhat.theses.util.Commons
 import org.springframework.transaction.interceptor.TransactionAspectSupport
 
@@ -20,14 +21,19 @@ class TopicService {
         String type = topic.id ? 'topicUpdated' : 'topicCreated'
         def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
 
-        def success = topic.save(flush: true) &&
+        def savedTopic = topic.save(flush: true)
+        def success = savedTopic &&
                 supervisionService.saveMany(topic, memberships).every() &&
                 removedSupervisions.every { Commons.delete(it) }
 
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
-            event(type, new TopicEvent(topic, springSecurityService.currentUser))
+            if (type == 'topicUpdated') {
+                event(type, new TopicUpdatedEvent(topic, savedTopic, springSecurityService.currentUser))
+            } else {
+                event(type, new TopicEvent(savedTopic, springSecurityService.currentUser))
+            }
         }
         success
     }

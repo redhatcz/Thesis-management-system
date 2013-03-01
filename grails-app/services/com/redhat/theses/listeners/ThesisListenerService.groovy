@@ -25,11 +25,24 @@ class ThesisListenerService {
      */
     def messageSource
 
+    /**
+     * Dependency injection of org.codehaus.groovy.grails.web.mapping.LinkGenerator
+     */
+    def grailsLinkGenerator
+
     @Listener(topic = "thesisCreated")
     void thesisCreated(ThesisEvent e) {
-        def feed = feedService.createThesisFeed(e.thesis, 'insert', e.user)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id, absolute: true),
+                e.thesis.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id, absolute: true)
+        ]
 
-        def subscribers = [e.thesis.supervisor, e.thesis.assignee].unique()
+        def feed = feedService.createFeed("feed.thesis.insert", e.user, args)
+
+        def subscribers = [e.thesis.sMembership.user, e.thesis.assignee].unique()
         subscribers.each {
             subscriptionService.subscribe(it, e.thesis)
         }
@@ -43,12 +56,27 @@ class ThesisListenerService {
     //TODO: send all subscribers notification about deletion
     @Listener(topic = "thesisDeleted")
     void thesisDeleted(ThesisEvent e) {
-        feedService.createThesisFeed(e.thesis, 'delete', e.user)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                e.thesis.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id, absolute: true)
+        ]
+
+        feedService.createFeed("feed.thesis.delete", e.user, args)
     }
 
     @Listener(topic = "thesisUpdated")
     void thesisUpdated(ThesisEvent e) {
-        def feed = feedService.createThesisFeed(e.thesis, 'update', e.user)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id, absolute: true),
+                e.thesis.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id, absolute: true)
+        ]
+
+        def feed = feedService.createFeed("feed.thesis.update", e.user, args)
 
         def subscribers = Subscription.findAllByArticle(e.thesis)*.subscriber.unique()
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}

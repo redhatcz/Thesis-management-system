@@ -25,9 +25,21 @@ class TopicListenerService{
      */
     def messageSource
 
+    /**
+     * Dependency injection of org.codehaus.groovy.grails.web.mapping.LinkGenerator
+     */
+    def grailsLinkGenerator
+
     @Listener(topic = "topicCreated")
     void topicCreated(TopicEvent e) {
-        def feed = feedService.createTopicFeed(e.topic, 'insert', e.user)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                e.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id, absolute: true)
+        ]
+
+        def feed = feedService.createFeed("feed.topic.insert", e.user, args)
 
         def subscribers = [e.topic.owner].unique()
         subscribers.each {
@@ -43,12 +55,25 @@ class TopicListenerService{
     //TODO: send all subscribers notification about deletion
     @Listener(topic = "topicDeleted")
     void topicDeleted(TopicEvent e) {
-        feedService.createTopicFeed(e.topic, 'delete', e.user)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                e.topic.title
+        ]
+
+        feedService.createFeed("feed.topic.delete", e.user, args)
     }
 
     @Listener(topic = "topicUpdated")
     void topicUpdated(TopicEvent e) {
-        def feed = feedService.createTopicFeed(e.topic, 'update', e.user)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                e.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id, absolute: true)
+        ]
+
+        def feed = feedService.createFeed("feed.topic.update", e.user, args)
 
         def subscribers = Subscription.findAllByArticle(e.topic)*.subscriber.unique()
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}

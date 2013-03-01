@@ -1,5 +1,4 @@
 import com.redhat.theses.Application
-import com.redhat.theses.Feed
 import com.redhat.theses.Grade
 import com.redhat.theses.Status
 import com.redhat.theses.Thesis
@@ -13,10 +12,12 @@ import com.redhat.theses.auth.UserRole
 import com.redhat.theses.Topic
 import com.redhat.theses.Comment
 import com.redhat.theses.Supervision
+import com.redhat.theses.events.ThesisEvent
+import com.redhat.theses.events.TopicEvent
 
 class BootStrap {
 
-    def feedService
+    def grailsEvents
 
     def init = { servletContext ->
 
@@ -138,7 +139,7 @@ _Note: You should also consider management of school projects._
 '''
         ).save()
         new Supervision(topic: tms, membership: jiriKolarMembership).save(flush: true)
-        feedService.createTopicFeed(tms, 'insert', tms.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(tms, tms.owner))
 
         def torquebox = new Topic(
                 title: 'Torquebox productization',
@@ -164,7 +165,7 @@ Download ePub manual Highlights of major......'''
         ).save()
         new Supervision(topic: torquebox, membership: m1).save(flush: true)
         new Supervision(topic: torquebox, membership: m2).save(flush: true)
-        feedService.createTopicFeed(torquebox, 'insert', torquebox.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(torquebox, torquebox.owner))
 
         def pythonFramework = new Topic(
                 title: 'Framework for Python',
@@ -191,7 +192,7 @@ Python has been awarded a TIOBE Programming Language of the Year award twice (in
 language with the greatest growth in popularity over the course of a year, as measured by the TIOBE index.[22]'''
         ).save()
         new Supervision(topic: pythonFramework, membership: m3).save(flush: true)
-        feedService.createTopicFeed(pythonFramework, 'insert', pythonFramework.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(pythonFramework, pythonFramework.owner))
 
         def testsForWFK = new Topic(
                 title: 'Tests for WFK',
@@ -210,7 +211,7 @@ Kit is a single solution that includes certified and integrated software—every
 simple web applications.'''
         ).save()
         new Supervision(topic: testsForWFK, membership: jiriKolarMembership).save(flush: true)
-        feedService.createTopicFeed(testsForWFK, 'insert', testsForWFK.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(testsForWFK, testsForWFK.owner))
 
         def mavenThingy = new Topic(
                 title: 'Maven Thingy',
@@ -243,7 +244,7 @@ If you are looking for a quick reference, you can use *the documentation* index.
         new Supervision(topic: mavenThingy, membership: jiriKolarMembership).save(flush: true)
         new Supervision(topic: mavenThingy, membership: m1).save(flush: true)
         new Supervision(topic: mavenThingy, membership: m2).save(flush: true)
-        feedService.createTopicFeed(mavenThingy, 'insert', mavenThingy.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(mavenThingy, mavenThingy.owner))
 
         def grailsPluginForLess = new Topic(
                 title: 'Grails plugin for less resources',
@@ -263,7 +264,7 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
     a much more stable and future-proof platform. It is highly recommended that you use this version.'''
         ).save()
         new Supervision(topic: grailsPluginForLess, membership: m1).save(flush: true)
-        feedService.createTopicFeed(grailsPluginForLess, 'insert', grailsPluginForLess.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(grailsPluginForLess, grailsPluginForLess.owner))
 
 
         def djangoPluginForLess = new Topic(
@@ -308,7 +309,7 @@ _Note: none_
 '''
         ).save()
         new Supervision(topic: djangoPluginForLess, membership: m1).save(flush: true)
-        feedService.createTopicFeed(djangoPluginForLess, 'insert', djangoPluginForLess.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(djangoPluginForLess, djangoPluginForLess.owner))
 
         def markdownCompiler = new Topic(
                 title: 'Markdown compiler in groovy',
@@ -333,7 +334,7 @@ example, you can view the Markdown source for the article text on this page here
 http://daringfireball.net/projects/markdown/index.text'''
         ).save()
         new Supervision(topic: markdownCompiler, membership: jiriKolarMembership).save(flush: true)
-        feedService.createTopicFeed(markdownCompiler, 'insert', markdownCompiler.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(markdownCompiler, markdownCompiler.owner))
 
         def jbossMavenPlugin = new Topic(
                 title: 'JBoss AS maven plugin',
@@ -368,7 +369,7 @@ contact the user mailing list. The posts to the mailing list are archived and co
 to your question as part of an older thread. Hence, it is also worth browsing/searching the mail archive.'''
         ).save()
         new Supervision(topic: jbossMavenPlugin, membership: jiriKolarMembership).save(flush: true)
-        feedService.createTopicFeed(jbossMavenPlugin, 'insert', jbossMavenPlugin.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(jbossMavenPlugin, jbossMavenPlugin.owner))
 
         def twitterBootstrapPlugin = new Topic(
                 title: 'Twitter bootstrap plugin for picking date',
@@ -405,8 +406,8 @@ Updates the date picker's position relative to the element
 
 Set a new value for the datepicker. It cand be a string in the specified format or a Date object.'''
         ).save()
-        new Supervision(topic: twitterBootstrapPlugin, membership: m1).save()
-        feedService.createTopicFeed(twitterBootstrapPlugin, 'insert', twitterBootstrapPlugin.owner)
+        new Supervision(topic: twitterBootstrapPlugin, membership: m1).save(flush: true)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(twitterBootstrapPlugin, twitterBootstrapPlugin.owner))
 
         def autocompletePlugin = new Topic(
                 title: 'Autocomplete plugin for grails',
@@ -433,7 +434,7 @@ program manages to keep up, using the recipient's typeahead functions. However, 
 specifications of the computer with which one is communicating, it is not often used.'''
         ).save()
         new Supervision(topic: autocompletePlugin, membership: jiriKolarMembership).save(flush: true)
-        feedService.createTopicFeed(autocompletePlugin, 'insert', autocompletePlugin.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(autocompletePlugin, autocompletePlugin.owner))
 
         def hibernateProductization = new Topic(
                 title: 'Productization of hibernate',
@@ -461,7 +462,7 @@ Hibernate supports the mapping of custom value types. This makes the following s
 '''
         ).save()
         new Supervision(topic: hibernateProductization, membership: jiriKolarMembership).save(flush: true)
-        feedService.createTopicFeed(hibernateProductization, 'insert', hibernateProductization.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(hibernateProductization, hibernateProductization.owner))
 
         def rubyKillingMachine = new Topic(
                 title: 'Killing machine for Ruby',
@@ -481,7 +482,7 @@ early Fleetwood Mac cover, being added to the recording.'''
         ).save()
         new Supervision(topic: rubyKillingMachine, membership: jiriKolarMembership).save(flush: true)
         new Supervision(topic: rubyKillingMachine, membership: m1).save(flush: true)
-        feedService.createTopicFeed(rubyKillingMachine, 'insert', rubyKillingMachine.owner)
+        grailsEvents.event('app', 'topicCreated', new TopicEvent(rubyKillingMachine, rubyKillingMachine.owner))
 
         // THESES
         def kubaThesis = new Thesis(
@@ -491,8 +492,8 @@ early Fleetwood Mac cover, being added to the recording.'''
                 status: Status.IN_PROGRESS,
                 thesisAbstract: '''Created Topic, Thesis and Project management, file uploading for theses so that
 students can upload their work after they are done with their thesis and application management.'''
-        ).save(failOnError: true)
-        feedService.createThesisFeed(kubaThesis, 'insert', tms.owner)
+        ).save(failOnError: true, flush: true)
+        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(kubaThesis, tms.owner))
 
         def vaclavThesis = new Thesis(
                 assignee: vaclav,
@@ -502,8 +503,8 @@ students can upload their work after they are done with their thesis and applica
                 thesisAbstract: '''Created User, Organization, University and Company management, news feed system so
 that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
 in one of those can follow it, mail service for sending these feeds to subscribers and overall configuration.'''
-        ).save(failOnError: true)
-        feedService.createThesisFeed(vaclavThesis, 'insert', tms.owner)
+        ).save(failOnError: true, flush: true)
+        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis, tms.owner))
 
         def pavelThesis = new Thesis(
                 assignee: pavel,
@@ -511,8 +512,8 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 sMembership: jiriKolarMembership,
                 status: Status.IN_PROGRESS,
                 thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
-        ).save(failOnError: true)
-        feedService.createThesisFeed(pavelThesis, 'insert', tms.owner)
+        ).save(failOnError: true, flush: true)
+        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(pavelThesis, tms.owner))
 
         def pavelThesis2 = new Thesis(
                 assignee: pavel,
@@ -537,8 +538,8 @@ handling cookies and sessions), producing responses (presenting data as HTML or 
 persistently, and so on. Since a non-trivial Web application will require a number of different kinds of abstractions,
 often stacked upon each other, those frameworks which attempt to provide a complete solution for applications are often
 known as full-stack frameworks in that they attempt to supply components for each layer in the stack.'''
-        ).save(failOnError: true)
-        feedService.createThesisFeed(pavelThesis2, 'insert', pythonFramework.owner)
+        ).save(failOnError: true, flush: true)
+        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(pavelThesis2, pythonFramework.owner))
 
         def vaclavThesis2 = new Thesis(
                 assignee: vaclav,
@@ -547,8 +548,8 @@ known as full-stack frameworks in that they attempt to supply components for eac
                 status: Status.FINISHED,
                 grade: Grade.A,
                 thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
-        ).save(failOnError: true)
-        feedService.createThesisFeed(vaclavThesis2, 'insert', rubyKillingMachine.owner)
+        ).save(failOnError: true, flush: true)
+        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis2, rubyKillingMachine.owner))
 
         // COMMENTS
         new Comment(content: 'That is cool', user: vaclav, article: tms).save()
