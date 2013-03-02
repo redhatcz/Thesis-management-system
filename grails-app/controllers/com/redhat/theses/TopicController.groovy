@@ -31,7 +31,7 @@ class TopicController {
         def rootTags = Tag.findAllByParentIsNull()
         def topics = Topic.list(params)
         def commentCounts = commentService.countByArticles(topics)
-        println commentCounts.toString()
+
         [topicInstanceList: topics, topicInstanceTotal: Topic.count(),
                 commentCounts: commentCounts, tags: rootTags]
     }
@@ -53,9 +53,10 @@ class TopicController {
 
         // TODO: possible refactoring
         def topicInstanceList = (tag.allSubTags + tag).collect {Topic.findAllByTag(it)}.flatten().unique()
+        def commentCounts = commentService.countByArticles(topicInstanceList)
 
         [topicInstanceList: topicInstanceList, topicInstanceTotal: Topic.count(),
-                currentTag: tag, tags: tag.subTags]
+                currentTag: tag, tags: tag.subTags, commentCounts: commentCounts]
     }
 
     def create() {
