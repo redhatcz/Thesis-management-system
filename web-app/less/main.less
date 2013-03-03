@@ -34,7 +34,11 @@ a:focus {
 }
 
 p a,
-dl a {
+dl a,
+dd a,
+dt a,
+ul a,
+li a {
     .pretty-link()
 }
 
@@ -187,6 +191,7 @@ h4.header {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+    border-bottom: none;
 
     &:hover {
         background: none;
@@ -513,6 +518,7 @@ div.comment {
 .table-layout {
     border-top: 1px solid @tableBorder;
     padding: @marginSmall 15px;
+
     &:first-child {
         border-top: none;
         padding-top: 5px;
@@ -522,11 +528,11 @@ div.comment {
         margin: 0;
     }
 
-    h3 a {
+    h3 a,
+    h3 a:hover {
         color: @gray;
-        &:hover {
-            text-decoration: none;
-        }
+        border-bottom: none;
+        text-decoration: none;
     }
 
     li span {
@@ -536,6 +542,7 @@ div.comment {
 
     ul {
         border-bottom: 1px dotted @grayBorder;
+
         & > li {
             padding: 0 20px 10px 0;
             color: @grayLight;
@@ -604,6 +611,16 @@ h1.login-title {
 .pull-right .dropdown-menu {
     left: auto;
     right: 0;
+}
+
+.dropdown-menu a,
+.dropdown-menu a:hover {
+    border-bottom: none;
+}
+
+.pager a,
+.pager a:hover {
+    border-color: @grayLighter;
 }
 
 .typeahead-details {
