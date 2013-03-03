@@ -18,9 +18,10 @@
         <div class="controls">
             <g:actionSubmit class="tms-btn" action="update"
                             value="${message(code: 'default.button.update.label', default: 'Update')}" />
-            <g:actionSubmit class="tms-btn tms-danger" action="delete"
-                            value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+            <g:link class="tms-btn tms-danger" action="show" id="${tagInstance?.id}"
+                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+                ${message(code: 'default.button.cancel.label', default: 'Cancel')}
+            </g:link>
         </div>
     </div>
 </g:form>
