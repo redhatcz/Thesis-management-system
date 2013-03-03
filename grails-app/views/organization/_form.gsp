@@ -1,6 +1,6 @@
 <div class="control-group ${hasErrors(bean: organizationInstance, field: 'name', 'error')} ">
 	<label class="control-label" for="organization.name">
-		<g:message code="organization.name.label" default="Name" />
+		<strong><g:message code="organization.name.label" default="Name" /></strong>
 	</label>
     <div class="controls">
 	    <g:textField name="organization.name" value="${organizationInstance?.name}" placeholder="Name"/>
@@ -9,7 +9,7 @@
 
 <div class="control-group">
     <label class="control-label" for="organization.type">
-        <g:message code="organization.type.label" default="Type of organization" />
+        <strong><g:message code="organization.type.label" default="Type of organization" /></strong>
     </label>
     <div class="controls">
         <g:select from="['University', 'Company']" required="" name="organization.type"

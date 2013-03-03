@@ -49,7 +49,7 @@
                     <g:link action="activity" id="${userInstance?.id}">Activity</g:link>
                 </li>
                 <div class="controls pull-right">
-                    <g:form controller="user" class="form-inline">
+                    <g:form controller="user">
                         <g:link class="tms-btn tms-warning" controller="user" action="edit" id="${userInstance?.id}">
                             <g:message code="default.button.edit.label" default="Edit" />
                         </g:link>

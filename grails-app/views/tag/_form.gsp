@@ -1,7 +1,7 @@
 <%@ page import="com.redhat.theses.Tag" %>
 <div class="control-group ${hasErrors(bean: tagInstance, field: 'title', 'error')} ">
 	<label class="control-label" for="tag.title">
-		<g:message code="tag.title.label" default="Title" />
+		<strong><g:message code="tag.title.label" default="Title" /></strong>
 	</label>
     <div class="controls">
         <g:textField name="tag.title" value="${tagInstance?.title}" placeholder="Title" />
@@ -10,7 +10,7 @@
 
 <div class="control-group ${hasErrors(bean: tagInstance, field: 'parent', 'error')} ">
 	<label class="control-label" for="tag.parent.id">
-		<g:message code="tag.parent.label" default="Parent" />
+		<strong><g:message code="tag.parent.label" default="Parent" /></strong>
 	</label>
     <div class="controls">
         <g:hiddenField name="tag.parent.id" value="${tagInstance?.parent?.id}"/>
@@ -22,7 +22,7 @@
 
 <div class="control-group ${hasErrors(bean: tagInstance, field: 'subTags', 'error')} ">
 	<label class="control-label" for="tag.subTags">
-		<g:message code="tag.subTags.label" default="Sub Tags" />
+		<strong><g:message code="tag.subTags.label" default="Sub Tags" /></strong>
 	</label>
     <div class="controls">
         <label class="text">

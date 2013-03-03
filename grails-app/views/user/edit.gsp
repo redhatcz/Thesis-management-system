@@ -7,10 +7,10 @@
     <title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 <body>
-    <h1 class="header">
+    <h2 class="header">
         <g:message code="default.edit.label" args="[entityName]" />
-    </h1>
-    <g:form class="form-horizontal" method="post" >
+    </h2>
+    <g:form class="form-inline" method="post" >
         <g:hiddenField name="user.id" value="${userInstance?.id}" />
         <g:hiddenField name="user.version" value="${userInstance?.version}" />
         <g:render template="form"/>

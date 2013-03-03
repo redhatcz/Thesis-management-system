@@ -3,19 +3,52 @@
 
 .pretty-link() {
     border-bottom: 1px solid @grayLighter;
+
     &:hover {
         text-decoration: none;
         border-bottom: 1px solid @red;
     }
 }
 
-.pretty-input() {
-    height: 35px;
-    background-color: @graySuperLight;
+.pretty-input(@height) {
+    height: @height;
     border-color: @grayLighter;
+    .border-radius(0);
+    padding: 4px 8px;
+
     &:focus {
         border-color: @grayLight;
         .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+    }
+}
+
+.pretty-select(@height) {
+    height: @height;
+    border-color: @grayLighter;
+    .border-radius(0);
+    .transition(border-color linear .2s);
+
+    &:focus {
+        border-color: @grayLight;
+        .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+        .transition(border-color linear .2s);
+    }
+}
+
+.pretty-textarea(@height) {
+    height: @height;
+    width: 100%;
+    padding: 0;
+    border-color: @grayLighter;
+    .border-radius(0);
+    .transition(border-color linear .2s);
+    .box-sizing(border-box);
+    padding: 10px 12px;
+
+    &:focus {
+        border-color: @grayLight;
+        .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+        .transition(border-color linear .2s);
     }
 }
 
@@ -29,7 +62,8 @@ body {
     background-repeat: repeat;
 }
 
-a:focus {
+a:focus,
+select:focus {
     outline: none;
 }
 
@@ -55,6 +89,17 @@ p {
     font-color: @gray;
 }
 
+select {
+    .pretty-select(40px);
+}
+
+textarea {
+    .pretty-textarea(auto);}
+
+input[type="text"] {
+    .pretty-input(30px);
+}
+
 
 /*---------HEADER---------*/
 
@@ -72,7 +117,6 @@ h1.header {
 
 h2.header {
     font-size: @titleFontSize - 5;
-    padding-top: @marginSmall;
 }
 
 h3.header {
@@ -91,6 +135,7 @@ h4.header {
 .span3:first-child,
 .span4,
 .span8,
+.span9,
 .span12 {
     margin-left: 0px;
 }
@@ -105,6 +150,13 @@ h4.header {
     width: 580px;
     padding: 30px;
     margin-bottom: 50px;
+    background-color: white;
+    .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
+}
+
+.span9 {
+    padding: 30px;
+    margin-bottom: 70px;
     background-color: white;
     .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 }
@@ -222,6 +274,15 @@ h4.header {
 .active#projects a {
     background-position: 735px 0;
 }
+
+
+/*---------FORMS----------*/
+
+form.form-inline {
+    background-color: @graySuperLight;
+    padding: 15px 20px;
+}
+
 
 /*---------FOOTER---------*/
 
@@ -483,16 +544,6 @@ a.gray-link {
 
 /*---------COMMENTS---------*/
 
-textarea {
-    width: auto;
-
-    &.comment {
-        width: 100%;
-        padding: 0;
-        border-radius: 0;
-    }
-}
-
 div.comment {
     color: @gray;
     padding: 10px;
@@ -571,7 +622,8 @@ div.comment {
 
     input#username,
     input#password {
-        .pretty-input();
+        .pretty-input(40px);
+        background-color: @graySuperLight;
     }
 
     .checkbox {
@@ -601,6 +653,7 @@ h1.login-title {
 .alert {
     border-width: 3px;
 }
+
 
 /*---------OTHER---------*/
 

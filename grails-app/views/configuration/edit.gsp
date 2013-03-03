@@ -6,10 +6,10 @@
     <title><g:message code="configuration.edit.title" default="Edit configuration" /></title>
 </head>
 <body>
-<h1 class="header">
+<h2 class="header">
     <g:message code="configuration.edit.header" default="Edit configuration" />
-</h1>
-<g:form class="form-horizontal" method="post" name="thesis-form">
+</h2>
+<g:form class="form-inline" method="post" name="thesis-form">
     <g:render template="form"/>
     <div class="control-group">
         <div class="controls">

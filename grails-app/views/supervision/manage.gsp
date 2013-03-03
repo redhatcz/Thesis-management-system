@@ -6,19 +6,17 @@
     <title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 <body>
-    <div class="span8">
-        <h1 class="header">
-            <g:message code="default.edit.label" args="[entityName]" />
-        </h1>
-        <g:form class="form-horizontal" method="post">
-            <g:render template="form"/>
-            <div class="control-group">
-                <div class="controls">
-                    <g:actionSubmit class="tms-btn" action="save"
-                                    value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                </div>
+    <h2 class="header">
+        <g:message code="default.edit.label" args="[entityName]" />
+    </h2>
+    <g:form class="form-inline" method="post">
+        <g:render template="form"/>
+        <div class="control-group">
+            <div class="controls">
+                <g:actionSubmit class="tms-btn" action="save"
+                                value="${message(code: 'default.button.update.label', default: 'Update')}" />
             </div>
-        </g:form>
-    </div>
+        </div>
+    </g:form>
 </body>
 </html>

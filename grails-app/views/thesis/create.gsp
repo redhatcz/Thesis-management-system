@@ -10,7 +10,7 @@
     <h1 class="header">
         <g:message code="default.create.label" args="[entityName]" />
     </h1>
-    <g:form class="form-horizontal" action="save" >
+    <g:form class="form-inline" action="save" >
 
         <g:render template="formCreate"/>
 

@@ -2,7 +2,7 @@
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'status', 'error')}">
     <label class="control-label" for="thesis.status">
-        <g:message code="thesis.status.label" default="Status" />
+        <strong><g:message code="thesis.status.label" default="Status" /></strong>
     </label>
     <div class="controls">
         <g:select name="thesis.status"
@@ -14,7 +14,7 @@
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'grade', 'error')}">
     <label class="control-label" for="thesis.grade">
-        <g:message code="thesis.grade.label" default="Grade" />
+        <strong><g:message code="thesis.grade.label" default="Grade" /></strong>
     </label>
     <div class="controls">
         <g:select name="thesis.grade"
@@ -26,7 +26,7 @@
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'thesisAbstract', 'error')}">
     <label class="control-label" for="thesis.thesisAbstract">
-        <g:message code="thesis.abstract.label" default="Abstract" />
+        <strong><g:message code="thesis.abstract.label" default="Abstract" /></strong>
     </label>
     <div class="controls">
         <g:textArea name="thesis.thesisAbstract" cols="80" rows="5" value="${thesisInstance?.thesisAbstract}"/>

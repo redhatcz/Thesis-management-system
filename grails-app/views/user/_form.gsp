@@ -1,8 +1,8 @@
 <%@ page import="com.redhat.theses.auth.User" %>
 <div class="control-group ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
     <label class="control-label" for="user.email">
-        <g:message code="user.email.label" default="Email" />
-        <span class="required-indicator">*</span>
+        <strong><g:message code="user.email.label" default="Email" />
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:textField name="user.email" value="${userInstance?.email}"
@@ -12,8 +12,8 @@
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'fullName', 'error')} required">
 	<label class="control-label" for="user.fullName">
-		<g:message code="user.fullName.label" default="Full Name" />
-		<span class="required-indicator">*</span>
+		<strong><g:message code="user.fullName.label" default="Full Name" />
+		<span class="required-indicator">*</span></strong>
 	</label>
     <div class="controls">
 	    <g:textField name="user.fullName" value="${userInstance?.fullName}"
@@ -44,7 +44,7 @@
 
 <div class="control-group">
     <label class="control-label" for="users-list">
-        <g:message code="user.memberships.label" default="Memberships" />
+        <strong><g:message code="user.memberships.label" default="Memberships" /></strong>
     </label>
     <div class="controls">
         <richg:dynamicField id="memberships-list" for="${membershipsCommand?.memberships}" var="membership" index="i">

@@ -5,11 +5,11 @@
     <title><g:message code="default.registration.label" default="Registration" /></title>
 </head>
 <body>
-    <h1 class="header">
+    <h2 class="header">
         <g:message code="default.registration.label" default="Registration" />
-    </h1>
+    </h2>
     <div class="offset2">
-        <g:form class="form-horizontal" action="register" >
+        <g:form class="form-inline" action="register" >
             <g:render template="form"/>
             <div class="control-group">
                 <div class="controls">
