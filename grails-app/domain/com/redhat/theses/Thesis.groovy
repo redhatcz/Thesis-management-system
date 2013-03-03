@@ -10,6 +10,7 @@ class Thesis extends Article{
     Status status
     Grade grade
     String thesisAbstract
+    Date dateCreated
 
     static mapping = {
         thesisAbstract type: 'text'

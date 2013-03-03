@@ -30,15 +30,37 @@
 
     <div class="span4">
         <div class="panel right">
-            <h4>Your Thesis</h4>
-            <dl class="panel-content">
-                <dt><span class="entypo-thesis mini"></span>name</dt>
-                <dd><a href="#">Java Centralization</a></dd>
-                <dt><span class="entypo-user mini"></span>suprevisor</dt>
-                <dd>RNDr. Robb Stark</dd>
-                <dt><span class="entypo-status mini"></span>status</dt>
-                <dd>The thesis has been awarded the grade <strong>A</strong></dd>
-            </dl>
+            <h4>Your Theses</h4>
+            <sec:ifLoggedIn>
+                <g:if test="${yourTheses?.size() != 0}">
+                    <g:each in="${yourTheses}" var="yourThesis">
+                        <dl class="panel-content">
+                            <dt><span class="entypo-thesis mini"></span>topic</dt>
+                            <dd>
+                                <g:link controller="topic" action="show" id="${yourThesis?.topicId}"
+                                        params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
+                            </dd>
+                            <dt><span class="entypo-user mini"></span>suprevisor</dt>
+                            <dd><g:fieldValue field="fullName" bean="${yourThesis?.sMembership?.user}"/></dd>
+                            <dt><span class="entypo-status mini"></span>status</dt>
+                            <dd>
+                                <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
+                                    <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />
+                                </g:if>
+                                <g:else>
+                                    This has been awarded the grade <strong>${yourThesis?.grade}</strong>.
+                                </g:else>
+                            </dd>
+                        </dl>
+                    </g:each>
+                </g:if>
+                <g:else>
+                    <div class="panel-content">You have currently no theses.</div>
+                </g:else>
+            </sec:ifLoggedIn>
+            <sec:ifNotLoggedIn>
+                <div class="panel-content">You must be <g:link controller="login">logged in</g:link> to view your theses.</div>
+            </sec:ifNotLoggedIn>
         </div>
 
         <!-- <ul class="nav nav-tabs nav-stacked">

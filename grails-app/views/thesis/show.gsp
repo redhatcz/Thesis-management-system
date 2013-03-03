@@ -38,6 +38,10 @@
             <dd>
                 <g:fieldValue field="name" bean="${thesisInstance?.sMembership?.organization}"/>
             </dd>
+            <dt><span class="entypo-clock mini"></span><g:message code="thesis.dateCreated.label" default="created"/></dt>
+            <dd>
+                <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
+            </dd>
             <dt><span class="entypo-user mini"></span><g:message code="thesis.sMembership.user.label" default="supervisor"/></dt>
             <dd>
                 <g:fieldValue field="fullName" bean="${thesisInstance?.sMembership?.user}"/>
