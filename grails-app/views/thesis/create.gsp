@@ -7,9 +7,9 @@
     <title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
 <body>
-    <h1 class="header">
+    <h2 class="header">
         <g:message code="default.create.label" args="[entityName]" />
-    </h1>
+    </h2>
     <g:form class="form-inline" action="save" >
 
         <g:render template="formCreate"/>
