@@ -8,16 +8,14 @@
     <h2 class="header">
         <g:message code="default.registration.label" default="Registration" />
     </h2>
-    <div class="offset2">
-        <g:form class="form-inline" action="register" >
-            <g:render template="form"/>
-            <div class="control-group">
-                <div class="controls">
-                    <g:actionSubmit name="register" class="tms-btn"
-                                    value="${message(code: 'default.button.register.label', default: 'Register')}" />
-                </div>
+    <g:form class="form-inline" action="register" >
+        <g:render template="form"/>
+        <div class="control-group">
+            <div class="controls">
+                <g:actionSubmit name="register" class="tms-btn"
+                                value="${message(code: 'default.button.register.label', default: 'Register')}" />
             </div>
-        </g:form>
-    </div>
+        </div>
+    </g:form>
 </body>
 </html>
