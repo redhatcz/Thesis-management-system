@@ -2,6 +2,7 @@ package com.redhat.theses.listeners
 
 import com.redhat.theses.Subscription
 import com.redhat.theses.events.ThesisEvent
+import com.redhat.theses.util.Util
 import grails.events.Listener
 import org.springframework.context.i18n.LocaleContextHolder as LCH
 
@@ -37,7 +38,8 @@ class ThesisListenerService {
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
                 grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id, absolute: true),
                 e.thesis.topic.title,
-                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id, absolute: true)
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id,
+                        params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
         ]
 
         def feed = feedService.createFeed("feed.thesis.insert", e.user, args)
@@ -60,7 +62,8 @@ class ThesisListenerService {
                 e.user.fullName,
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
                 e.thesis.topic.title,
-                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id, absolute: true)
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id,
+                        params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
         ]
 
         feedService.createFeed("feed.thesis.delete", e.user, args)
@@ -73,7 +76,8 @@ class ThesisListenerService {
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
                 grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id, absolute: true),
                 e.thesis.topic.title,
-                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id, absolute: true)
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id,
+                        params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
         ]
 
         def feed = feedService.createFeed("feed.thesis.update", e.user, args)

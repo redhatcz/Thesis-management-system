@@ -2,6 +2,7 @@ package com.redhat.theses.listeners
 
 import com.redhat.theses.events.TopicEvent
 import com.redhat.theses.Subscription
+import com.redhat.theses.util.Util
 import grails.events.Listener
 import org.springframework.context.i18n.LocaleContextHolder as LCH
 
@@ -36,7 +37,8 @@ class TopicListenerService{
                 e.user.fullName,
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
                 e.topic.title,
-                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id, absolute: true)
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id,
+                        params: [headline: Util.hyphenize(e.topic.title)], absolute: true)
         ]
 
         def feed = feedService.createFeed("feed.topic.insert", e.user, args)
@@ -70,7 +72,8 @@ class TopicListenerService{
                 e.user.fullName,
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
                 e.topic.title,
-                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id, absolute: true)
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id,
+                        params: [headline: Util.hyphenize(e.topic.title)], absolute: true)
         ]
 
         def feed = feedService.createFeed("feed.topic.update", e.user, args)
