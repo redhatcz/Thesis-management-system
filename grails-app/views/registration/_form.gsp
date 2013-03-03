@@ -50,18 +50,3 @@
     </div>
 </div>
 
-<div class="control-group required">
-    <label class="control-label" for="university">
-        <strong><g:message code="user.university.label" default="Your university" />
-        <span class="required-indicator">*</span></strong>
-    </label>
-    <div class="controls">
-        <g:select id="university"
-                  from="${universityList}"
-                  name="university.id"
-                  optionKey="id"
-                  value="${registrationCommand?.university?.id}"
-                  noSelection="[null:'-- no selection --']"/>
-    </div>
-</div>
-

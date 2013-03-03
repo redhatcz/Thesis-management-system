@@ -1,8 +1,10 @@
 package com.redhat.theses
 
+import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class ApplicationController {
 
@@ -41,11 +43,8 @@ class ApplicationController {
             return
         }
 
-
-        User user = springSecurityService.currentUser
-        def universities = user.organizations.findAll {it.id in topicInstance.universities*.id}
         def application = new Application(topic: topicInstance)
-        [application: application, universities: universities]
+        [application: application, universities: topicInstance?.universities]
     }
 
     @Secured(['ROLE_STUDENT'])
@@ -57,8 +56,7 @@ class ApplicationController {
         def topicInstance = Topic.get(application.topic.id)
 
         if (!application.validate() || !application.save()) {
-            def universities = user.organizations.findAll {it.id in topicInstance?.universities*.id}
-            render(view: "create", model: [application: application, universities: universities])
+            render(view: "create", model: [application: application, universities: topicInstance?.universities])
             return
         }
 
@@ -77,14 +75,18 @@ class ApplicationController {
 
         User user = springSecurityService.currentUser
 
-        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors*.id.contains(user.id)) {
+        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
+            && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'action.permission.denied')
             redirect(controller: 'application', action: 'list')
             return
         }
 
-        applicationService.approve(applicationInstance)
+        if (!applicationService.approve(applicationInstance)) {
+            render view: 'show', model: [applicationInstance: applicationInstance]
+            return
+        }
         flash.message = message(code: 'application.approved')
 
         redirect(controller: 'application', action: 'show', id: applicationInstance.id)

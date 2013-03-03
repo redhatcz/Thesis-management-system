@@ -1,8 +1,5 @@
 package com.redhat.theses.auth
 
-import com.redhat.theses.Membership
-import com.redhat.theses.Organization
-
 class User {
 
     /**
@@ -30,18 +27,6 @@ class User {
 
     static hibernateFilters = {
         enabledFilter(condition:'enabled=1 and account_expired=0 and account_locked=0', default: true)
-    }
-
-    boolean isMember(Organization organization){
-        Membership.countByUserAndOrganization(this, organization) > 0
-    }
-
-    List<Organization> getOrganizations() {
-        Membership.findAllByUser(this).collect {it.organization}
-    }
-
-    List<Organization> getOrganizations(Class clazz) {
-        Membership.findAllByUser(this).collect {it.organization}.findAll {it.class == clazz}
     }
 
 	List<Role> getAuthorities() {

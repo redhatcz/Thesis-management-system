@@ -8,23 +8,26 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport
 class TopicService {
 
     /**
-     * Dependency injection of com.redhat.theses.SupervisionService
-     */
-    def supervisionService
-
-    /**
      * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
      */
     def springSecurityService
 
-    Boolean saveWithSupervision(Topic topic, List memberships) {
+    Boolean saveWithSupervisions(Topic topic, List supervisions) {
         String type = topic.id ? 'topicUpdated' : 'topicCreated'
-        def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
-
+        def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it in supervisions)} : []
+        println removedSupervisions
         def savedTopic = topic.save(flush: true)
         def success = savedTopic &&
-                supervisionService.saveMany(topic, memberships).every() &&
+                supervisions.every {
+                    if (!it.id) {
+                        it.topic = savedTopic
+                        it.save()
+                    } else {
+                        true
+                    }
+                } &&
                 removedSupervisions.every { Commons.delete(it) }
+        println success
 
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
@@ -38,17 +41,6 @@ class TopicService {
         success
     }
 
-    Boolean saveSupervisions(Topic topic, List memberships) {
-        def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it.membership in memberships)} : []
-
-        def success = supervisionService.saveMany(topic, memberships).every() &&
-                removedSupervisions.every { Commons.delete(it) }
-
-        if (!success) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
-        }
-        success
-    }
 
     Boolean deleteWithSupervisions(Topic topic) {
         def success = topic?.supervisions?.every { Commons.delete(it) } &&

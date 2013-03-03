@@ -28,8 +28,8 @@ class Topic extends Article {
         Topic.findAll('FROM Topic t where :tag member of t.tags', [tag: tag], params)
     }
 
-    static List<Topic> findAllBySupervisor(User user, Map params = [:]){
-        Topic.executeQuery('SELECT s.topic FROM  Supervision s WHERE s.membership.user=:user', [user: user], params).unique()
+    static List<Topic> findAllBySupervisor(User supervisor, Map params = [:]){
+        Topic.executeQuery('SELECT s.topic FROM Supervision s WHERE s.supervisor=:supervisor', [supervisor: supervisor], params).unique()
     }
 
     def beforeInsert(){
@@ -45,7 +45,7 @@ class Topic extends Article {
     }
 
     List<User> getSupervisors() {
-        Supervision.findAllByTopic(this)*.membership*.user.unique()
+        Supervision.findAllByTopic(this)*.supervisor.unique()
     }
 
 //    TODO: possible refactoring

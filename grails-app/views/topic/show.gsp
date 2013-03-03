@@ -48,11 +48,11 @@
                 <g:if test="${!supervisions.empty}">
                     <dt><span class="entypo-users mini"></span><g:message code="topic.supervisions.label" default="supervisions" /></dt>
                     <g:each in="${supervisions}" status="i" var="supervision">
-                        <g:each in="${supervision.value}" var="supervisor">
-                            <dd><g:link controller="user" action="show" id="${supervisor?.id}">
-                                ${supervisor?.encodeAsHTML()}
-                            </g:link></dd>
-                        </g:each>
+                        <dd>
+                            <g:link controller="user" action="show" id="${supervision?.supervisor?.id}" title="${supervision?.university?.name}">
+                                ${supervision?.supervisor?.encodeAsHTML()}
+                            </g:link>
+                        </dd>
                     </g:each>
                 </g:if>
             </dl>

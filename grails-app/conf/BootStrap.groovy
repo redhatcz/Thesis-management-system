@@ -4,7 +4,6 @@ import com.redhat.theses.Status
 import com.redhat.theses.Thesis
 import com.redhat.theses.auth.User
 import com.redhat.theses.University
-import com.redhat.theses.Membership
 import com.redhat.theses.Tag
 import com.redhat.theses.Company
 import com.redhat.theses.auth.Role
@@ -40,47 +39,36 @@ class BootStrap {
         def vut = new University(name: 'VUT').save()
 
         // USERS
-        def u = new User(email: 'admin@gmail.com', fullName: 'Admin Admin', password: "admin", enabled: true).save();
-        def m1 = new Membership(user: u, organization: muni).save()
-        roles.each { new UserRole(role: it, user: u).save() }
+        def admin = new User(email: 'admin@gmail.com', fullName: 'Admin Admin', password: "admin", enabled: true).save();
+        roles.each { new UserRole(role: it, user: admin).save() }
 
-        def u2 = new User(email: 'person@gmail.com', fullName: 'Person Person', password: "person", enabled: true).save();
-        def m2 = new Membership(user: u2, organization: vut).save()
+        def person = new User(email: 'person@gmail.com', fullName: 'Person Person', password: "person", enabled: true).save();
         roles.each {
            if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
-               new UserRole(role: it, user: u2).save()
+               new UserRole(role: it, user: person).save()
            }
         }
 
-        def m3 = new Membership(user: u, organization: vut).save()
-
-        def u3 = new User(username: 'padmin', fullName: 'Person Admin', password: "padmin", enabled: true, email: 'padmin@gmail.com').save();
-        def m4 = new Membership(user: u3, organization: vut).save()
+        def padmin = new User(username: 'padmin', fullName: 'Person Admin', password: "padmin", enabled: true, email: 'padmin@gmail.com').save();
         roles.each {
             if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
-                new UserRole(role: it, user: u3).save()
+                new UserRole(role: it, user: padmin).save()
             }
         }
 
         def vaclav = new User(email: 'vaclav.dedik@gmail.com', fullName: 'Vaclav Dedik', password: "vaclav.dedik", enabled: true).save();
-        new Membership(user: vaclav, organization: muni).save()
         new UserRole(role: roles[3], user: vaclav).save()
         def pavel = new User(email: 'dedikx@gmail.com', fullName: 'Pavel Dedik', password: "dedikx", enabled: true).save();
-        new Membership(user: pavel, organization: muni).save()
-        new Membership(user: pavel, organization: vut).save()
         new UserRole(role: roles[3], user: pavel).save()
         def kuba = new User(email: 'jcechace@gmail.com', fullName: 'Jakub Cechacek', password: "jcechace", enabled: true).save();
-        new Membership(user: kuba, organization: muni).save()
         new UserRole(role: roles[3], user: kuba).save()
         def jiriKolar = new User(email: 'jiri.kolar@gmail.com', fullName: 'Jiri Kolar', password: "jiri.kolar", enabled: true).save();
-        def jiriKolarMembership = new Membership(user: jiriKolar, organization: muni).save()
         roles.each {
             if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
                 new UserRole(role: it, user: jiriKolar).save()
             }
         }
         def jiriPechanec = new User(email: 'jpechanec@redhat.com', fullName: 'Jiri Pechanec', password: "jpechanec", enabled: true).save();
-        def jiriPechanecMembership = new Membership(user: jiriPechanec, organization: muni).save()
         roles.each {
             if (it.authority in ['ROLE_OWNER', 'ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
                 new UserRole(role: it, user: jiriPechanec).save()
@@ -138,12 +126,12 @@ using the most *state-of-the-art* technologies and will be deployed on OpenShift
 _Note: You should also consider management of school projects._
 '''
         ).save()
-        new Supervision(topic: tms, membership: jiriKolarMembership).save(flush: true)
+        new Supervision(topic: tms, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(tms, tms.owner))
 
         def torquebox = new Topic(
                 title: 'Torquebox productization',
-                owner: u,
+                owner: admin,
                 tags: [javaTag, rubyTag, wfkTag],
                 company: redhat,
                 universities: [muni, vut],
@@ -163,8 +151,8 @@ bug-fix only release and is a recommended upgrade for anyone running TorqueBox 2
 2.1.2 (ZIP) Browse Getting Started Guide Browse HTML manual Browse JavaDocs Browse Gem RDocs Download PDF manual
 Download ePub manual Highlights of major......'''
         ).save()
-        new Supervision(topic: torquebox, membership: m1).save(flush: true)
-        new Supervision(topic: torquebox, membership: m2).save(flush: true)
+        new Supervision(topic: torquebox, supervisor: admin, university: muni).save(flush: true)
+        new Supervision(topic: torquebox, supervisor: person, university: vut).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(torquebox, torquebox.owner))
 
         def pythonFramework = new Topic(
@@ -191,7 +179,7 @@ Python 2.6 and 2.7.[21]
 Python has been awarded a TIOBE Programming Language of the Year award twice (in 2007 and 2010), which is given to the
 language with the greatest growth in popularity over the course of a year, as measured by the TIOBE index.[22]'''
         ).save()
-        new Supervision(topic: pythonFramework, membership: m3).save(flush: true)
+        new Supervision(topic: pythonFramework, supervisor: admin, university: vut).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(pythonFramework, pythonFramework.owner))
 
         def testsForWFK = new Topic(
@@ -210,7 +198,7 @@ Simplify your use of popular open source frameworks. Avoid integration and versi
 Kit is a single solution that includes certified and integrated software—everything you need to build and maintain
 simple web applications.'''
         ).save()
-        new Supervision(topic: testsForWFK, membership: jiriKolarMembership).save(flush: true)
+        new Supervision(topic: testsForWFK, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(testsForWFK, testsForWFK.owner))
 
         def mavenThingy = new Topic(
@@ -241,14 +229,14 @@ You can access the guides at any time from the left navigation.
 If you are looking for a quick reference, you can use *the documentation* index.
 '''
         ).save()
-        new Supervision(topic: mavenThingy, membership: jiriKolarMembership).save(flush: true)
-        new Supervision(topic: mavenThingy, membership: m1).save(flush: true)
-        new Supervision(topic: mavenThingy, membership: m2).save(flush: true)
+        new Supervision(topic: mavenThingy, supervisor: jiriKolar, university: muni).save(flush: true)
+        new Supervision(topic: mavenThingy, supervisor: admin, university: muni).save(flush: true)
+        new Supervision(topic: mavenThingy, supervisor: person, university: vut).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(mavenThingy, mavenThingy.owner))
 
         def grailsPluginForLess = new Topic(
                 title: 'Grails plugin for less resources',
-                owner: u,
+                owner: admin,
                 tags: [grailsTag, jbossTag],
                 company: redhat,
                 universities: [muni, vut],
@@ -263,13 +251,13 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
     This plugin is seen as a replacement for the lesscss plugin . It utilizes the resources plugin which will provide
     a much more stable and future-proof platform. It is highly recommended that you use this version.'''
         ).save()
-        new Supervision(topic: grailsPluginForLess, membership: m1).save(flush: true)
+        new Supervision(topic: grailsPluginForLess, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(grailsPluginForLess, grailsPluginForLess.owner))
 
 
         def djangoPluginForLess = new Topic(
                 title: 'Django plugin for less resources',
-                owner: u,
+                owner: admin,
                 tags: [djangoTag, python3Tag, jbossTag],
                 company: redhat,
                 universities: [muni, vut],
@@ -308,7 +296,7 @@ renders to
 _Note: none_
 '''
         ).save()
-        new Supervision(topic: djangoPluginForLess, membership: m1).save(flush: true)
+        new Supervision(topic: djangoPluginForLess, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(djangoPluginForLess, djangoPluginForLess.owner))
 
         def markdownCompiler = new Topic(
@@ -333,7 +321,7 @@ The best way to get a feel for Markdown’s formatting syntax is simply to look 
 example, you can view the Markdown source for the article text on this page here:
 http://daringfireball.net/projects/markdown/index.text'''
         ).save()
-        new Supervision(topic: markdownCompiler, membership: jiriKolarMembership).save(flush: true)
+        new Supervision(topic: markdownCompiler, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(markdownCompiler, markdownCompiler.owner))
 
         def jbossMavenPlugin = new Topic(
@@ -368,12 +356,12 @@ In case you still have questions regarding the plugin's usage, please have a loo
 contact the user mailing list. The posts to the mailing list are archived and could already contain the answer
 to your question as part of an older thread. Hence, it is also worth browsing/searching the mail archive.'''
         ).save()
-        new Supervision(topic: jbossMavenPlugin, membership: jiriKolarMembership).save(flush: true)
+        new Supervision(topic: jbossMavenPlugin, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(jbossMavenPlugin, jbossMavenPlugin.owner))
 
         def twitterBootstrapPlugin = new Topic(
                 title: 'Twitter bootstrap plugin for picking date',
-                owner: u,
+                owner: admin,
                 tags: [othersTag],
                 company: redhat,
                 universities: [muni, vut],
@@ -406,7 +394,7 @@ Updates the date picker's position relative to the element
 
 Set a new value for the datepicker. It cand be a string in the specified format or a Date object.'''
         ).save()
-        new Supervision(topic: twitterBootstrapPlugin, membership: m1).save(flush: true)
+        new Supervision(topic: twitterBootstrapPlugin, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(twitterBootstrapPlugin, twitterBootstrapPlugin.owner))
 
         def autocompletePlugin = new Topic(
@@ -433,7 +421,7 @@ In some network operations, one might attempt to dispatch information over a net
 program manages to keep up, using the recipient's typeahead functions. However, as this is far too reliant on the
 specifications of the computer with which one is communicating, it is not often used.'''
         ).save()
-        new Supervision(topic: autocompletePlugin, membership: jiriKolarMembership).save(flush: true)
+        new Supervision(topic: autocompletePlugin, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(autocompletePlugin, autocompletePlugin.owner))
 
         def hibernateProductization = new Topic(
@@ -461,7 +449,7 @@ Hibernate supports the mapping of custom value types. This makes the following s
 * Mapping a single property to multiple columns.
 '''
         ).save()
-        new Supervision(topic: hibernateProductization, membership: jiriKolarMembership).save(flush: true)
+        new Supervision(topic: hibernateProductization, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(hibernateProductization, hibernateProductization.owner))
 
         def rubyKillingMachine = new Topic(
@@ -480,15 +468,15 @@ Killing Machine was retitled Hell Bent for Leather for release in the US, becaus
 like the "murderous implications" of the album title and with "The Green Manalishi (With the Two-Pronged Crown)" an
 early Fleetwood Mac cover, being added to the recording.'''
         ).save()
-        new Supervision(topic: rubyKillingMachine, membership: jiriKolarMembership).save(flush: true)
-        new Supervision(topic: rubyKillingMachine, membership: m1).save(flush: true)
+        new Supervision(topic: rubyKillingMachine, supervisor: jiriKolar, university: muni).save(flush: true)
+        new Supervision(topic: rubyKillingMachine, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(rubyKillingMachine, rubyKillingMachine.owner))
 
         // THESES
         def kubaThesis = new Thesis(
                 assignee: kuba,
                 topic: tms,
-                sMembership: jiriKolarMembership,
+                supervisor: jiriKolar,
                 status: Status.IN_PROGRESS,
                 thesisAbstract: '''Created Topic, Thesis and Project management, file uploading for theses so that
 students can upload their work after they are done with their thesis and application management.'''
@@ -498,7 +486,7 @@ students can upload their work after they are done with their thesis and applica
         def vaclavThesis = new Thesis(
                 assignee: vaclav,
                 topic: tms,
-                sMembership: jiriKolarMembership,
+                supervisor: jiriKolar,
                 status: Status.IN_PROGRESS,
                 thesisAbstract: '''Created User, Organization, University and Company management, news feed system so
 that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
@@ -509,7 +497,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
         def pavelThesis = new Thesis(
                 assignee: pavel,
                 topic: tms,
-                sMembership: jiriKolarMembership,
+                supervisor: jiriKolar,
                 status: Status.IN_PROGRESS,
                 thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
         ).save(failOnError: true, flush: true)
@@ -518,7 +506,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
         def pavelThesis2 = new Thesis(
                 assignee: pavel,
                 topic: pythonFramework,
-                sMembership: m3,
+                supervisor: admin,
                 status: Status.FINISHED,
                 grade: Grade.F,
                 thesisAbstract: '''The majority of Web frameworks are exclusively server-side technology, although,
@@ -544,7 +532,7 @@ known as full-stack frameworks in that they attempt to supply components for eac
         def vaclavThesis2 = new Thesis(
                 assignee: vaclav,
                 topic: rubyKillingMachine,
-                sMembership: jiriKolarMembership,
+                supervisor: jiriKolar,
                 status: Status.FINISHED,
                 grade: Grade.A,
                 thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''

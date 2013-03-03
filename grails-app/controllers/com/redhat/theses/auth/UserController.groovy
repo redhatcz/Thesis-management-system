@@ -3,9 +3,6 @@ package com.redhat.theses.auth
 import com.redhat.theses.Feed
 import com.redhat.theses.util.Util
 import com.redhat.theses.Topic
-import com.redhat.theses.MembershipsCommand
-import com.redhat.theses.Organization
-import com.redhat.theses.Membership
 
 class UserController {
 
@@ -31,17 +28,13 @@ class UserController {
     }
 
     def create() {
-        [userInstance: new User(params.user), membershipsCommand: new MembershipsCommand(), organizations: Organization.findAll()]
+        [userInstance: new User(params.user)]
     }
 
     def save() {
-        def membershipsCommand = new MembershipsCommand()
-        bindData(membershipsCommand, params.membershipsCommand)
         def userInstance = new User(params.user)
-        if (!userService.saveWithOrganizations(userInstance, membershipsCommand.memberships*.organization)) {
-            render(view: "create", model: [userInstance: userInstance,
-                    membershipsCommand: membershipsCommand,
-                    organizations: Organization.findAll()])
+        if (!userService.save(userInstance)) {
+            render(view: "create", model: [userInstance: userInstance])
             return
         }
 
@@ -58,7 +51,7 @@ class UserController {
             return
         }
 
-        [userInstance: userInstance, memberships: Membership.findAllByUser(userInstance)]
+        [userInstance: userInstance]
     }
 
     def activity(Long id) {
@@ -75,8 +68,7 @@ class UserController {
         def feedList = Feed.findAllByUser(userInstance, params)
         def feedListTotal = Feed.countByUser(userInstance)
 
-        [userInstance: userInstance, memberships: Membership.findAllByUser(userInstance),
-         feedList: feedList, feedListTotal: feedListTotal]
+        [userInstance: userInstance, feedList: feedList, feedListTotal: feedListTotal]
     }
 
     def supervisions(Long id, Integer max) {
@@ -101,16 +93,12 @@ class UserController {
             return
         }
 
-        def membershipsCommand = new MembershipsCommand()
-        membershipsCommand.memberships = Membership.findAllByUser(userInstance)
-        [userInstance: userInstance, membershipsCommand: membershipsCommand, organizations: Organization.findAll()]
+        [userInstance: userInstance]
     }
 
     def update() {
         Long id = params.user.long("id")
         Long version = params.user.long("version")
-        def membershipsCommand = new MembershipsCommand()
-        bindData(membershipsCommand, params.membershipsCommand)
         def userInstance = User.get(id)
         if (!userInstance) {
             flash.message = message(code: 'user.not.found', args: [id])
@@ -120,18 +108,14 @@ class UserController {
 
         if (version != null && userInstance.version > version) {
             userInstance.errors.rejectValue("version", "user.optimistic.lock.error")
-            render(view: "edit", model: [userInstance: userInstance,
-                    membershipsCommand: membershipsCommand,
-                    organizations: Organization.findAll()])
+            render(view: "edit", model: [userInstance: userInstance])
             return
         }
 
         userInstance.properties = params.user
 
-        if (!userService.saveWithOrganizations(userInstance, membershipsCommand.memberships*.organization)) {
-            render(view: "edit", model: [userInstance: userInstance,
-                    membershipsCommand: membershipsCommand,
-                    organizations: Organization.findAll()])
+        if (!userService.save(userInstance)) {
+            render(view: "edit", model: [userInstance: userInstance])
             return
         }
 
@@ -148,7 +132,7 @@ class UserController {
             return
         }
 
-        if (!userService.deleteWithMemberships(userInstance)) {
+        if (!userService.delete(userInstance)) {
             flash.message = message(code: 'user.deleted', args: [id])
             redirect(action: "show", id: id)
             return

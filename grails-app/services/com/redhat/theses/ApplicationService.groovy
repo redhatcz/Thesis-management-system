@@ -6,9 +6,10 @@ class ApplicationService {
 
     def thesisService
 
-    def Application approve(Application application) {
+    Application approve(Application application) {
         if (application.approvedByOwner) {
-            return
+            application.errors.reject('application.already.approved', 'Application has been already approved.')
+            return null
         }
 
         application.approvedByOwner = true
@@ -19,7 +20,7 @@ class ApplicationService {
 
         if (!createdThesis || !persistedApplication) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
-            persistedApplication = null;
+            persistedApplication = null
         }
 
         persistedApplication

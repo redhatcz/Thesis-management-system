@@ -44,7 +44,7 @@ class ThesisListenerService {
 
         def feed = feedService.createFeed("feed.thesis.insert", e.user, args)
 
-        def subscribers = [e.thesis.sMembership.user, e.thesis.assignee].unique()
+        def subscribers = [e.thesis.supervisor, e.thesis.assignee].unique()
         subscribers.each {
             subscriptionService.subscribe(it, e.thesis)
         }

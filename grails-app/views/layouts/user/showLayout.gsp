@@ -29,12 +29,6 @@
                     <dt><span class="entypo-lock mini"></span><g:message code="user.accountLocked.label" default="Account Locked" /></dt>
                     <dd><g:formatBoolean boolean="${userInstance?.accountLocked}" /></dd>
                 </g:if>
-                <g:if test="${!memberships.empty}">
-                    <dt><span class="entypo-users mini"></span><g:message code="user.memberships.label" default="memberships" /></dt>
-                    <g:each in="${memberships*.organization}" var="organization">
-                        <dd><g:fieldValue bean="${organization}" field="name"/></dd>
-                    </g:each>
-                </g:if>
             </dl>
         </div>
     </div>

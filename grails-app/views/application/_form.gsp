@@ -23,7 +23,7 @@
                       source="application.university.id"
                       noSelection="${['null':'-- no selection --']}"
                       remote-url="${createLink(controller: 'json', action: 'listSupervisorsFromUniversity')}"
-                      remote-opts="application.topic.id@topicId application.university.id@organizationId"
+                      remote-opts="application.topic.id@topicId application.university.id@universityId"
                       class="many-to-one"/>
         </div>
 </div>

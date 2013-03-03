@@ -51,7 +51,7 @@ class OrganizationController {
             return
         }
 
-        [organizationInstance: organizationInstance, users: organizationInstance.users]
+        [organizationInstance: organizationInstance]
     }
 
     def edit(Long id) {
@@ -102,7 +102,7 @@ class OrganizationController {
             return
         }
 
-        if (organizationService.deleteWithMemberships(organizationInstance)) {
+        if (organizationService.delete(organizationInstance)) {
             flash.message = message(code: 'organization.deleted', args: [id])
             redirect(action: "list")
         } else {

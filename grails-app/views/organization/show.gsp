@@ -22,12 +22,6 @@
                 </g:if>
                 <dt><g:message code="organization.type.label" default="Type" /></dt>
                 <dd><g:message code="organization.type.value" default="${organizationInstance?.class?.simpleName}"/></dd>
-                <g:if test="${!users.empty}">
-                    <dt><g:message code="organization.users.label" default="Users" /></dt>
-                    <g:each in="${users}" var="user">
-                        <dd><g:fieldValue bean="${user}" field="fullName"/></dd>
-                    </g:each>
-                </g:if>
             </dl>
         </div>
     </div>

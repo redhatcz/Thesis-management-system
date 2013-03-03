@@ -87,7 +87,7 @@ class RichGSPTagLib {
         def isChecked
 
         from?.eachWithIndex { item, i ->
-            isChecked = (value?.find {it?."${optionKey}" ==  item."${optionKey}"}) ? true: false
+            isChecked = value?.find {it?."${optionKey}" == item."${optionKey}"}
 
             def model = [name: "${name}[${i}].${optionKey}",
                     id: "${id}[${i}]",

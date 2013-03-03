@@ -1,7 +1,6 @@
 package com.redhat.theses.auth
 
 import com.redhat.theses.University
-import com.redhat.theses.Membership
 import com.redhat.theses.util.Util
 
 class RegistrationController {
@@ -39,7 +38,8 @@ class RegistrationController {
         }
 
         if (registrationCommand.hasErrors()
-                || !userService.saveWithOrganizations(user, [registrationCommand.university])
+                //TODO : merge
+                || !userService.save(user)
                 || !UserRole.create(user, Role.findByAuthority('ROLE_STUDENT'))) {
             render(view: "index", model: [registrationCommand: registrationCommand, universityList: University.findAll()])
             return

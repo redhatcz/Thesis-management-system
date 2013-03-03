@@ -41,7 +41,7 @@
                                         params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
                             </dd>
                             <dt><span class="entypo-user mini"></span>suprevisor</dt>
-                            <dd><g:fieldValue field="fullName" bean="${yourThesis?.sMembership?.user}"/></dd>
+                            <dd><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></dd>
                             <dt><span class="entypo-status mini"></span>status</dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">

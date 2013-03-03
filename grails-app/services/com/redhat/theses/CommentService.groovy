@@ -6,12 +6,16 @@ package com.redhat.theses
 class CommentService {
 
     Map<Article, Integer> countByArticles(List<Article> articles) {
-        return Comment.createCriteria().list {
-            projections {
-                groupProperty 'article'
-                countDistinct 'id'
-            }
-            'in' 'article', articles
-        }.collectEntries { [it[0], it[1]] }
+        if (!articles || articles.size() == 0) {
+            []
+        } else {
+            Comment.createCriteria().list {
+                projections {
+                    groupProperty 'article'
+                    countDistinct 'id'
+                }
+                'in' 'article', articles
+            }.collectEntries { [it[0], it[1]] }
+        }
     }
 }

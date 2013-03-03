@@ -26,25 +26,25 @@
         <dl class="panel-content">
             <dt><span class="entypo-thesis mini"></span><g:message code="thesis.topic.label" default="topic"/></dt>
             <dd>
-                <g:link action="show" controller="topic" id="${thesisInstance?.topic?.id}">
+                <g:link action="show" controller="topic" id="${thesisInstance?.topicId}">
                     <g:fieldValue field="topic" bean="${thesisInstance}"/>
                 </g:link>
             </dd>
             <dt><span class="entypo-user mini"></span><g:message code="thesis.assignee.label" default="assignee"/></dt>
             <dd>
-                <g:fieldValue field="assignee" bean="${thesisInstance}"/>
+                <g:link controller="user" action="show" id="${thesisInstance?.assigneeId}">
+                    <g:fieldValue field="assignee" bean="${thesisInstance}"/>
+                </g:link>
             </dd>
-            <dt><span class="entypo-book mini"></span><g:message code="thesis.sMembership.organization.label" default="university"/></dt>
+            <dt><span class="entypo-user mini"></span><g:message code="thesis.supervisor.label" default="supervisor"/></dt>
             <dd>
-                <g:fieldValue field="name" bean="${thesisInstance?.sMembership?.organization}"/>
+                <g:link controller="user" action="show" id="${thesisInstance?.supervisorId}">
+                    <g:fieldValue field="fullName" bean="${thesisInstance?.supervisor}"/>
+                </g:link>
             </dd>
             <dt><span class="entypo-clock mini"></span><g:message code="thesis.dateCreated.label" default="created"/></dt>
             <dd>
                 <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
-            </dd>
-            <dt><span class="entypo-user mini"></span><g:message code="thesis.sMembership.user.label" default="supervisor"/></dt>
-            <dd>
-                <g:fieldValue field="fullName" bean="${thesisInstance?.sMembership?.user}"/>
             </dd>
             <dt><span class="entypo-status mini"></span><g:message code="thesis.status.label" default="status"/></dt>
             <dd>

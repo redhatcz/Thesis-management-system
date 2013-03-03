@@ -17,13 +17,11 @@ class Application {
         thesis nullable: true
 
         university validator: { university, application ->
-            university.id in application.applicant.organizations*.id
+            university.id in application.topic.universities*.id
         }
 
         supervisor validator: { supervisor, application ->
-            supervisor.id in application.topic.supervisions
-                    .collect { it.membership }
-                    .findAll { it.organizationId == application.universityId }*.userId
+            supervisor.id in application.topic.supervisions*.supervisor*.id
         }
     }
 }

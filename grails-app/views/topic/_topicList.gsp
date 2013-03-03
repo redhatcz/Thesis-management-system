@@ -14,7 +14,7 @@
                 </h3>
                 <ul class="inline">
                     <li><span class="entypo-user"></span>
-                        <g:link controler="user" action="show" id="${topic?.ownerId}">
+                        <g:link controller="user" action="show" id="${topic?.ownerId}">
                             ${topic?.owner?.fullName}
                         </g:link>
                     </li>

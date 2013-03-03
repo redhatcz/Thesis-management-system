@@ -10,39 +10,14 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: applicationInstance, field: 'university', 'error')} required">
-    <label class="control-label" for="application.university.id">
-        <strong><g:message code="application.university.label" default="University" /></strong>
-    </label>
-    <div class="controls">
-        <a4g:select id="thesis.sMembership.organization.id"
-                  name="thesis.sMembership.organization.id"
-                  value="${thesisInstance?.sMembership?.organization?.id}"
-                  from="${universities}"
-                  optionKey="id"
-                  source="thesis.assignee.fullName thesis.topic.title"
-                  noSelection="${['null':'-- no selection --']}"
-                  remote-url="${createLink(controller: 'json', action: 'listUniversitiesForUserWithinTopic')}"
-                  remote-opts="thesis.assignee.id@userId thesis.topic.id@topicId"
-                  class="many-to-one"/>
-    </div>
-</div>
-
-<div class="control-group ${hasErrors(bean: thesisInstance?.sMembership, field: 'id', 'error')} required">
-    <label class="control-label" for="thesis.supervision.id">
+<div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
+    <label class="control-label" for="thesis.supervisor.id">
         <strong><g:message code="thesis.supervisor.label" default="Supervisor" /></strong>
     </label>
     <div class="controls">
-        <a4g:select id="thesis.sMembership.id"
-                    name="thesis.sMembership.id"
-                    value="${thesisInstance?.sMembership?.id}"
-                    from="${memberships}"
-                    optionKey="id"
-                    optionValue="user"
-                    source="thesis.sMembership.organization.id"
-                    noSelection="${['null':'-- no selection --']}"
-                    remote-url="${createLink(controller: 'json', action: 'listMembershipsWithinOrganization')}"
-                    remote-opts="thesis.topic.id@topicId thesis.sMembership.organization.id@organizationId"
-                    class="many-to-one"/>
+        <g:hiddenField name="thesis.supervisor.id" value="${thesisInstance?.supervisor?.id}"/>
+        <a4g:textField name="thesis.supervisor.fullName" value="${thesisInstance?.supervisor?.fullName}" required=""
+                       autocomplete-url="${createLink(controller: 'json', action: 'listSupervisorsByName')}"
+                       autocomplete-target="thesis.supervisor.id"/>
     </div>
 </div>

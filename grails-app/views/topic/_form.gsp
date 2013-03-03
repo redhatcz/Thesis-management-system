@@ -45,7 +45,7 @@
         <strong><g:message code="supervision.label" default="Supervision" /></strong>
     </label>
     <div class="controls">
-        <g:render template="membership"/>
+        <g:render template="supervision"/>
     </div>
 </div>
 

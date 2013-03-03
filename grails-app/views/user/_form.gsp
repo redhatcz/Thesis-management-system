@@ -41,21 +41,3 @@
         </label>
     </div>
 </div>
-
-<div class="control-group">
-    <label class="control-label" for="users-list">
-        <strong><g:message code="user.memberships.label" default="Memberships" /></strong>
-    </label>
-    <div class="controls">
-        <richg:dynamicField id="memberships-list" for="${membershipsCommand?.memberships}" var="membership" index="i">
-            <g:select name="membershipsCommand.memberships[${i}].organization.id"
-                      from="${organizations}"
-                      optionKey="id"
-                      value="${membership?.organization?.id}"
-                      required=""
-                      class="many-to-one"
-                      noSelection="[null:'-- no selection --']"/>
-        </richg:dynamicField>
-    </div>
-</div>
-

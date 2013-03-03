@@ -1,7 +1,5 @@
 package com.redhat.theses
 
-import com.redhat.theses.auth.User
-
 class SupervisionController {
 
     /**
@@ -10,14 +8,14 @@ class SupervisionController {
     def springSecurityService
 
     /**
-     * Dependency injection of com.redhat.theses.TopicService
+     * Dependency injection of com.redhat.theses.SupervisionService
      */
-    def topicService
+    def supervisionService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 
-    def manage(Long id, MembershipsCommand membershipsCommand){
+    def manage(Long id, UniversityCommand universityCommand){
         def topicInstance = Topic.findById(id);
 
         if (topicInstance == null){
@@ -27,13 +25,9 @@ class SupervisionController {
         }
 
         def user = springSecurityService.currentUser
-        def memberships = Membership.findAllByUser(User.get(user.id))
-                .findAll {it.organization.id in topicInstance.universities*.id}
-        membershipsCommand.memberships +=  topicInstance.supervisions
-                .collect {it.membership}
-                .findAll {it.user.id == user.id}
-                .findAll {it.organizationId in topicInstance.universities*.id}
-        [topicInstance: topicInstance, membershipCommand: membershipsCommand, memberships: memberships]
+        def universities = topicInstance.universities
+        universityCommand.universities += Supervision.findAllByTopicAndSupervisor(topicInstance, user)*.university
+        [topicInstance: topicInstance, universityCommand: universityCommand, universities: universities]
     }
 
     def save(){
@@ -46,24 +40,25 @@ class SupervisionController {
         }
 
         def user = springSecurityService.currentUser
-        def membershipsCommand = new MembershipsCommand()
+        def universityCommand = new UniversityCommand()
+        bindData(universityCommand, params.universityCommand)
+        universityCommand.validate()
 
-        // little hack to prevent binding from initialization of elements with null id
-        params.remove '_supervisions'
+        def supervisions = []
+        universityCommand.universities.each {
+            if (it?.id) {
+                supervisions << new Supervision(topic: topicInstance, supervisor: user, university: it)
+            }
+        }
 
-        bindData(membershipsCommand, params.supervisions)
-        membershipsCommand.memberships = membershipsCommand.memberships
-                .findAll {it.userId == user.id}
-
-
-        if (!membershipsCommand.validate() || !topicService.saveSupervisions(topicInstance, membershipsCommand.memberships))  {
-            def memberships = Membership.findAllByUser(User.get(user.id))
-                    .findAll {it.organization.id in topicInstance.universities*.id}
-            render(view: "manage", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand, memberships: memberships])
+        //TODO: this doesn't remove supervisions !!!!!!
+        if (universityCommand.hasErrors() || !supervisionService.saveAll(supervisions)) {
+            render(view: "manage", model: [topicInstance: topicInstance, universityCommand:
+                    universityCommand, universities: topicInstance.universities])
             return
         }
 
-        flash.message = message(code: 'topic.updated', args: [topicInstance.id])
+        flash.message = message(code: 'supervision.updated', args: [topicInstance.id])
         redirect(controller: 'user', action: 'supervisions', id: user.id)
 
     }

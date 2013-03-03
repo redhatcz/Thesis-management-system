@@ -60,18 +60,19 @@ class TopicController {
     }
 
     def create() {
-        def membershipsCommand = new MembershipsCommand();
-        bindData(membershipsCommand, params.supervisions)
-        [topicInstance: new Topic(params.topic), membershipCommand: membershipsCommand, universities: University.all, owners: User.all]
+        def supervisionCommand = new SupervisionCommand()
+        bindData(supervisionCommand, params.supervisionCommand)
+        [topicInstance: new Topic(params.topic), supervisionCommand: supervisionCommand,
+                universities: University.all, owners: User.all]
     }
 
     def save() {
         def topicInstance = new Topic(params.topic)
-        def membershipsCommand = new MembershipsCommand()
-        bindData(membershipsCommand, params.supervisions)
+        def supervisionCommand = new SupervisionCommand()
+        bindData(supervisionCommand, params.supervisionCommand)
 
-        if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships)) {
-            render(view: "create", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand,
+        if (!topicService.saveWithSupervisions(topicInstance, supervisionCommand.supervisions)) {
+            render(view: "create", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                     universities: University.all, owners: User.all])
             return
         }
@@ -93,9 +94,6 @@ class TopicController {
         }
 
         def supervisions = topicInstance.supervisions
-                .collect { it.membership }
-                .groupBy { it.organization }
-                .collectEntries {key, val -> [key, val.user]}
 
         def commentsTotal = Comment.countByArticle(topicInstance)
         def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
@@ -109,7 +107,7 @@ class TopicController {
                 comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
     }
 
-    def edit(Long id, MembershipsCommand membershipsCommand) {
+    def edit(Long id, SupervisionCommand supervisionCommand) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'topic.not.found', args: [id])
@@ -117,9 +115,9 @@ class TopicController {
             return
         }
 
-        membershipsCommand.memberships += topicInstance.supervisions.collect {it.membership}
+        supervisionCommand.supervisions += topicInstance.supervisions
 
-        [topicInstance: topicInstance, membershipCommand: membershipsCommand,
+        [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                 universities: University.all, owners: User.all]
     }
 
@@ -133,19 +131,29 @@ class TopicController {
             return
         }
 
+        topicInstance.properties = params.topic
+        def supervisionCommand = new SupervisionCommand()
+        bindData(supervisionCommand, params.supervisionCommand)
+        supervisionCommand.supervisions = supervisionCommand.supervisions.findAll()
+
         if (version != null && topicInstance.version > version) {
             topicInstance.errors.rejectValue("version", "topic.optimistic.lock.error")
-            render(view: "edit", model: [topicInstance: topicInstance])
+            render(view: "edit", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
+                    universities: University.all, owners: User.all])
             return
         }
 
-        topicInstance.properties = params.topic
-        def membershipsCommand = new MembershipsCommand()
-        bindData(membershipsCommand, params.supervisions)
-        membershipsCommand.memberships = membershipsCommand.memberships.findAll()
-
-        if (!membershipsCommand.validate() || !topicService.saveWithSupervision(topicInstance, membershipsCommand.memberships))  {
-            render(view: "edit", model: [topicInstance: topicInstance, membershipCommand: membershipsCommand,
+        //TODO: refactoring?
+        def withExistingSupervisions = supervisionCommand.supervisions.collect {
+            def supervision = Supervision.findByTopicAndSupervisorAndUniversity(topicInstance, it.supervisor, it.university)
+            if (supervision) {
+                supervision
+            } else {
+                it
+            }
+        }
+        if (!topicService.saveWithSupervisions(topicInstance, withExistingSupervisions))  {
+            render(view: "edit", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                     universities: University.all, owners: User.all])
             return
         }

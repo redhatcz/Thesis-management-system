@@ -1,12 +1,14 @@
 package com.redhat.theses
 
+import com.redhat.theses.auth.User
+
 class Supervision implements Serializable {
 
     Topic topic
-    Membership membership
+    User supervisor
+    University university
 
-    static mapping = {
-        id composite: ['topic', 'membership']
-        version false
+    static constraints = {
+        supervisor unique: ['university', 'topic']
     }
 }
