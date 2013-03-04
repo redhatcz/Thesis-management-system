@@ -7,7 +7,7 @@ class CommentService {
 
     Map<Article, Integer> countByArticles(List<Article> articles) {
         if (!articles || articles.size() == 0) {
-            []
+            [:]
         } else {
             Comment.createCriteria().list {
                 projections {
