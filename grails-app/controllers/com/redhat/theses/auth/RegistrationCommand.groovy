@@ -1,8 +1,5 @@
 package com.redhat.theses.auth
-
 import grails.validation.Validateable
-import com.redhat.theses.University
-
 /**
  * @author vdedik@redhat.com
  */
@@ -14,7 +11,6 @@ class RegistrationCommand {
     String password
     String repeatPassword
     String fullName
-    University university
 
     static constraints = {
         password blank: false, minSize: 6
@@ -26,6 +22,5 @@ class RegistrationCommand {
         repeatEmail validator: {val, obj ->
             val == obj.email
         }
-        university nullable: false
     }
 }
