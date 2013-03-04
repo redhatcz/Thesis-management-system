@@ -1,5 +1,15 @@
 <%@ page import="com.redhat.theses.auth.User" %>
 
+<div class="control-group ${hasErrors(bean: registrationCommand, field: 'fullName', 'error')} required">
+    <label class="control-label" for="fullName">
+        <strong><g:message code="user.fullName.label" default="Full name" />
+            <span class="required-indicator">*</span></strong>
+    </label>
+    <div class="controls">
+        <g:textField name="fullName" placeholder="Full name" value="${registrationCommand?.fullName}"/>
+    </div>
+</div>
+
 <div class="control-group ${hasErrors(bean: registrationCommand, field: 'email', 'error')} required">
     <label class="control-label" for="email">
         <strong><g:message code="user.email.label" default="Email" />
@@ -37,16 +47,6 @@
     </label>
     <div class="controls">
         <g:passwordField name="repeatPassword" placeholder="Repeat password" value="${registrationCommand?.repeatPassword}"/>
-    </div>
-</div>
-
-<div class="control-group ${hasErrors(bean: registrationCommand, field: 'fullName', 'error')} required">
-    <label class="control-label" for="fullName">
-        <strong><g:message code="user.fullName.label" default="Full name" />
-        <span class="required-indicator">*</span></strong>
-    </label>
-    <div class="controls">
-        <g:textField name="fullName" placeholder="Full name" value="${registrationCommand?.fullName}"/>
     </div>
 </div>
 

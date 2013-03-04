@@ -1,10 +1,12 @@
 package com.redhat.theses.auth
 
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class ProfileController {
 
-    static allowedMethods = [updatePassword: 'POST']
+    static allowedMethods = [update: 'POST']
 
     /**
      * Dependency injection of grails.plugins.springsecurity.SpringSecurityService
@@ -17,14 +19,49 @@ class ProfileController {
             return
         }
 
-        if (!springSecurityService.isLoggedIn()) {
-            flash.message = message(code: 'profile.not.authenticated')
+        def userInstance = springSecurityService.currentUser
+
+        redirect controller: 'user', action: 'show', id: userInstance.id
+    }
+
+    def edit() {
+        def user = springSecurityService.currentUser
+        def profileCommand = new ProfileCommand()
+        profileCommand.email = user.email
+        profileCommand.fullName = user.fullName
+
+        [profileCommand: profileCommand, userInstance: user]
+    }
+
+    def update(ProfileCommand profileCommand) {
+        Long id = params.user.long('id')
+        Long version = params.user.long('version')
+        def user = User.get(id)
+        if (user.id != springSecurityService.currentUser.id) {
+            flash.message = message(code: 'action.permission.denied')
             redirect uri: '/'
             return
         }
 
-        def userInstance = springSecurityService.currentUser
+        if (version != null && user.version > version) {
+            user.errors.rejectValue("version", "user.optimistic.lock.error")
+            render(view: "edit", model: [profileCommand: profileCommand, userInstance: user])
+            return
+        }
 
-        redirect controller: 'user', action: 'show', id: userInstance.id
+        user.email = profileCommand.email
+        user.fullName = profileCommand.fullName
+        if (profileCommand.password) {
+            user.password = profileCommand.password
+        }
+
+        if (profileCommand.hasErrors() || !user.save(flush: true)) {
+            render view: 'edit', model: [profileCommand: profileCommand, userInstance: user]
+            return
+        }
+
+        springSecurityService.reauthenticate(user.email, user.password)
+        flash.message = message(code: 'profile.updated')
+        redirect action: 'index'
     }
 }

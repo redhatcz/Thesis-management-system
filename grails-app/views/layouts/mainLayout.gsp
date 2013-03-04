@@ -22,7 +22,7 @@
                                 <span class="entypo-settings medium-big"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li><g:link tabindex="-1">Edit Profile</g:link></li>
+                                <li><g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link></li>
                                 <li class="divider"></li>
                                 <li><g:link tabindex="-1" controller="logout">Sign Out</g:link></li>
                             </ul>
