@@ -19,17 +19,16 @@
             </thead>
             <tbody>
                 <g:each in="${organizationInstanceList}" status="i" var="organizationInstance">
-                    <tr>
-                        <td><g:link action="show" id="${organizationInstance.id}">
-                            ${fieldValue(bean: organizationInstance, field: "name")}
-                        </g:link></td>
-                    </tr>
+                <tr>
+                    <td><g:link action="show" id="${organizationInstance.id}">
+                        ${fieldValue(bean: organizationInstance, field: "name")}
+                    </g:link></td>
+                </tr>
                 </g:each>
             </tbody>
         </table>
-
         <g:if test="${Util.isPaginationVisible(organizationInstanceTotal, params.max)}">
-            <g:paginate total="${organizationInstanceTotal}" class="pagination-centered"/>
+        <g:paginate total="${organizationInstanceTotal}" class="pagination-centered"/>
         </g:if>
     </div>
 

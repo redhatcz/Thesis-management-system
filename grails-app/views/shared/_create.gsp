@@ -1,6 +1,4 @@
-<h2 class="header">
-    <g:message code="default.create.label" args="[entityName]" />
-</h2>
+<h2 class="header"><g:message code="default.create.label" args="[entityName]" /></h2>
 <g:form class="form-inline" action="save" >
     <g:render template="form"/>
     <div class="control-group">

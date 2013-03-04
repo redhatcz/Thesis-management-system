@@ -17,12 +17,12 @@
             <h4>Organization Information</h4>
             <div class="panel-content">
                 <dl>
-                <g:if test="${organizationInstance?.name}">
+                    <g:if test="${organizationInstance?.name}">
                     <dt><g:message code="organization.name.label" default="Name" /></dt>
                     <dd><g:fieldValue bean="${organizationInstance}" field="name"/></dd>
-                </g:if>
-                <dt><g:message code="organization.type.label" default="Type" /></dt>
-                <dd><g:message code="organization.type.value" default="${organizationInstance?.class?.simpleName}"/></dd>
+                    </g:if>
+                    <dt><g:message code="organization.type.label" default="Type" /></dt>
+                    <dd><g:message code="organization.type.value" default="${organizationInstance?.class?.simpleName}"/></dd>
                 </dl>
             </div>
         </div>
@@ -32,12 +32,8 @@
         <g:form>
             <div class="control-group">
                 <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#">Theses</a>
-                    </li>
-                    <li>
-                        <a href="#">Activity</a>
-                    </li>
+                    <li class="active"><a href="#">Theses</a></li>
+                    <li><a href="#">Activity</a></li>
                     <div class="controls pull-right">
                         <g:hiddenField name="organization.id" value="${organizationInstance?.id}" />
                         <g:link class="tms-btn tms-warning" action="edit" id="${organizationInstance?.id}">

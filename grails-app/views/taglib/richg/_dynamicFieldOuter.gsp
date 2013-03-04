@@ -2,7 +2,8 @@
     ${body}
 
     <div id="add-${var}-button">
-        <input class="tms-btn" type="button" value="Add ${var}" onclick="addDynamicField('${var}', ${size})"/>
+        <input class="tms-btn" type="button" value="Add ${var}"
+               onclick="addDynamicField('${var}', ${size})"/>
     </div>
 
     <script type="text/javascript">

@@ -7,9 +7,7 @@
     <title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 <body>
-    <h2 class="header">
-        <g:message code="default.edit.label" args="[entityName]" />
-    </h2>
+    <h2 class="header"><g:message code="default.edit.label" args="[entityName]" /></h2>
     <g:form class="form-inline" method="post" >
         <g:hiddenField name="organization.id" value="${organizationInstance?.id}" />
         <g:hiddenField name="organization.version" value="${organizationInstance?.version}" />

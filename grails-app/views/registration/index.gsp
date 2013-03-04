@@ -5,9 +5,7 @@
     <title><g:message code="default.registration.label" default="Registration" /></title>
 </head>
 <body>
-    <h2 class="header">
-        <g:message code="default.registration.label" default="Registration" />
-    </h2>
+    <h2 class="header"><g:message code="default.registration.label" default="Registration" /></h2>
     <g:form class="form-inline" action="register" >
         <g:render template="form"/>
         <div class="control-group">

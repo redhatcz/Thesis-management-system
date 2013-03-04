@@ -33,16 +33,18 @@
 </div>
 
 <div class="span4">
-    <div class="thesis">
+    <div class="panel right">
         <h4>Thesis Management</h4>
-        <g:form>
-            <fieldset class="buttons">
-                <g:hiddenField name="tag.id" value="${applicationInstance?.id}" />
-                <g:link class="tms-btn tms-warning" action="approve" id="${applicationInstance?.id}">
-                    <g:message code="application.button.approve.label" default="Approve" />
-                </g:link>
-             </fieldset>
-        </g:form>
+        <div class="panel-content">
+            <g:form>
+                <fieldset class="buttons">
+                    <g:hiddenField name="tag.id" value="${applicationInstance?.id}" />
+                    <g:link class="tms-btn tms-warning" action="approve" id="${applicationInstance?.id}">
+                        <g:message code="application.button.approve.label" default="Approve" />
+                    </g:link>
+                 </fieldset>
+            </g:form>
+        </div>
     </div>
 </div>
 </body>
