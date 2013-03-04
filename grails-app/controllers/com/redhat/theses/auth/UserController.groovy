@@ -68,7 +68,7 @@ class UserController {
 
         params.sort = 'dateCreated'
         params.order= 'desc'
-        params.max = Util.max(params.max)
+        params.max = Util.DEFAULT_MAX
         def feedList = Feed.findAllByUser(userInstance, params)
         def feedListTotal = Feed.countByUser(userInstance)
 
