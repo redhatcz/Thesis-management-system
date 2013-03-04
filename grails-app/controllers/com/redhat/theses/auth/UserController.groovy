@@ -1,8 +1,9 @@
 package com.redhat.theses.auth
 
 import com.redhat.theses.Feed
-import com.redhat.theses.util.Util
+import com.redhat.theses.Thesis
 import com.redhat.theses.Topic
+import com.redhat.theses.util.Util
 
 class UserController {
 
@@ -51,7 +52,10 @@ class UserController {
             return
         }
 
-        [userInstance: userInstance]
+        def thesisInstanceList =
+            Thesis.findAllByAssignee(springSecurityService.currentUser, [sort:'dateCreated', order:'desc', max: 5])
+
+        [userInstance: userInstance, thesisInstanceList: thesisInstanceList]
     }
 
     def activity(Long id) {
