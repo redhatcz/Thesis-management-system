@@ -12,7 +12,8 @@
                 %{--Profile picture will be here soon!--}%
             </div>
             <h4>User Information</h4>
-            <dl class="panel-content">
+            <div class="panel-content">
+                <dl>
                 <g:if test="${userInstance?.email}">
                     <dt><span class="entypo-mail mini"></span><g:message code="user.email.label" default="email" /></dt>
                     <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
@@ -29,7 +30,8 @@
                     <dt><span class="entypo-lock mini"></span><g:message code="user.accountLocked.label" default="Account Locked" /></dt>
                     <dd><g:formatBoolean boolean="${userInstance?.accountLocked}" /></dd>
                 </g:if>
-            </dl>
+                </dl>
+            </div>
         </div>
     </div>
 

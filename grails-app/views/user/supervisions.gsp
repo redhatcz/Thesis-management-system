@@ -14,7 +14,8 @@
 
     <div class="panel left">
         <h4>User Information</h4>
-        <dl class="panel-content">
+        <div class="panel-content">
+            <dl>
             <g:if test="${userInstance?.email}">
                 <dt><g:message code="user.email.label" default="Email" /></dt>
                 <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
@@ -39,7 +40,8 @@
                 <dt><g:message code="user.passwordExpired.label" default="Password Expired" /></dt>
                 <dd><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></dd>
             </g:if>
-        </dl>
+            </dl>
+        </div>
     </div>
 </div>
 

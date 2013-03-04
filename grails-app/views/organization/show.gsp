@@ -15,14 +15,16 @@
 
         <div class="panel left">
             <h4>Organization Information</h4>
-            <dl class="panel-content">
+            <div class="panel-content">
+                <dl>
                 <g:if test="${organizationInstance?.name}">
                     <dt><g:message code="organization.name.label" default="Name" /></dt>
                     <dd><g:fieldValue bean="${organizationInstance}" field="name"/></dd>
                 </g:if>
                 <dt><g:message code="organization.type.label" default="Type" /></dt>
                 <dd><g:message code="organization.type.value" default="${organizationInstance?.class?.simpleName}"/></dd>
-            </dl>
+                </dl>
+            </div>
         </div>
     </div>
 

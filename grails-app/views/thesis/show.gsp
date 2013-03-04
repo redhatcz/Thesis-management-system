@@ -23,7 +23,8 @@
 <div class="span4">
     <div class="panel right">
         <h4>Thesis Information</h4>
-        <dl class="panel-content">
+        <div class="panel-content">
+            <dl>
             <dt><span class="entypo-thesis mini"></span><g:message code="thesis.topic.label" default="topic"/></dt>
             <dd>
                 <g:link action="show" controller="topic" id="${thesisInstance?.topicId}">
@@ -55,8 +56,8 @@
                 <dt><span class="entypo-users mini"></span><g:message code="thesis.grade.label" default="grade"/></dt>
                 <dd><g:fieldValue bean="${thesisInstance}" field="grade"/></dd>
             </g:if>
-
-        </dl>
+            </dl>
+        </div>
 
         <h4>Thesis Management</h4>
         <div class="panel-content">

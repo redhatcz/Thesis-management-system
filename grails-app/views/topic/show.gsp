@@ -34,7 +34,8 @@
     <div class="span4">
         <div class="panel right">
             <h4>Topic Information</h4>
-            <dl class="panel-content">
+            <div class="panel-content">
+                <dl>
                 <g:if test="${topicInstance?.owner}">
                     <dt><span class="entypo-user mini"></span><g:message code="topic.owner.label" default="owner" /></dt>
                     <dd><g:link controller="user" action="show" id="${topicInstance?.owner?.id}">
@@ -55,7 +56,8 @@
                         </dd>
                     </g:each>
                 </g:if>
-            </dl>
+                </dl>
+            </div>
 
             <h4>Topic Management</h4>
             <div class="panel-content">

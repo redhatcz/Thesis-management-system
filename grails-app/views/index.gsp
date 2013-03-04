@@ -33,8 +33,9 @@
             <h4>Your Theses</h4>
             <sec:ifLoggedIn>
                 <g:if test="${yourTheses?.size() != 0}">
+                    <div class="panel-content">
                     <g:each in="${yourTheses}" var="yourThesis">
-                        <dl class="panel-content">
+                        <dl>
                             <dt><span class="entypo-thesis mini"></span>topic</dt>
                             <dd>
                                 <g:link controller="topic" action="show" id="${yourThesis?.topicId}"
@@ -53,6 +54,7 @@
                             </dd>
                         </dl>
                     </g:each>
+                    </div>
                 </g:if>
                 <g:else>
                     <div class="panel-content">You have currently no theses.</div>
