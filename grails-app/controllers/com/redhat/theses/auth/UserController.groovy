@@ -53,7 +53,7 @@ class UserController {
         }
 
         def thesisInstanceList =
-            Thesis.findAllByAssignee(springSecurityService.currentUser, [sort:'dateCreated', order:'desc', max: 5])
+            Thesis.findAllByAssignee(userInstance, [sort:'dateCreated', order:'desc', max: 5])
 
         [userInstance: userInstance, thesisInstanceList: thesisInstanceList]
     }

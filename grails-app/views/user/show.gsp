@@ -37,9 +37,10 @@
     <g:else>
         <p>There are no theses.</p>
     </g:else>
-
-    <!-- TODO: link to more theses -->
-    <a href="#">More ...</a>
+    <g:if test="${thesisInstanceList?.size() > 5}">
+        <!-- TODO: link to more theses -->
+        <a href="#">More ...</a>
+    </g:if>
 </content>
 </body>
 </html>
