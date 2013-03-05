@@ -22,6 +22,8 @@ class Topic extends Article {
     static mapping = {
         description type: 'text'
         lead type: 'text'
+        sort 'dateCreated'
+        order 'desc'
     }
 
     static List<Topic> findAllByTag(Tag tag, Map params = [:]){

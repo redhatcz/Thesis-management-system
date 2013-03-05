@@ -14,6 +14,8 @@ class Thesis extends Article{
 
     static mapping = {
         thesisAbstract type: 'text'
+        sort 'dateCreated'
+        order 'desc'
     }
 
     static constraints = {
