@@ -61,3 +61,8 @@ environments {
         }
     }
 }
+grails {
+    mongo {
+        databaseName = "db"
+    }
+}
