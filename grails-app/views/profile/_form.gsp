@@ -43,7 +43,9 @@
         <strong><g:message code="user.repeatPassword.label" default="Repeat password" /></strong>
     </label>
     <div class="controls">
-        <g:passwordField name="repeatPassword" placeholder="Repeat password" value="${profileCommand?.repeatPassword}"/>
+        <g:passwordField name="repeatPassword"
+                         placeholder="Repeat password"
+                         value="${profileCommand?.repeatPassword}"/>
     </div>
 </div>
 
@@ -53,6 +55,8 @@
             <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
-        <g:passwordField name="oldPassword" placeholder="Old password" value="${profileCommand?.repeatPassword}"/>
+        <g:passwordField name="oldPassword"
+                         placeholder="Old password"
+                         value="${profileCommand?.repeatPassword}"/>
     </div>
 </div>

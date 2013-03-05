@@ -8,7 +8,8 @@
                     name="application.university.id"
                     from="${universities}"
                     noSelection="${['null':'-- no selection --']}"
-                    optionKey="id" value="${applicationInstance?.university?.id}"
+                    optionKey="id"
+                    value="${applicationInstance?.university?.id}"
                     class="many-to-one"/>
         </div>
 </div>
@@ -33,8 +34,6 @@
         <strong><g:message code="application.note" default="Note" /></strong>
     </label>
     <div class="controls">
-        <g:textArea name="application.note"
-                    value="${application.note}"
-                    cols="" rows=""/>
+        <g:textArea name="application.note" value="${application.note}" />
     </div>
 </div>

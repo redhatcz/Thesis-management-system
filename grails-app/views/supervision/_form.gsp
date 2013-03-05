@@ -4,6 +4,7 @@
         <richg:multiCheckBox name="universityCommand.universities"
                              from="${universities}"
                              value="${universityCommand.universities}"
-                             optionKey="id" label="name" />
+                             optionKey="id"
+                             label="name" />
     </div>
 </div>

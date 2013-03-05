@@ -9,19 +9,16 @@
 
 <content tag="main-box">
     <g:if test="${topicInstanceList.isEmpty()}">
-        <p class="center muted">No topics were found.</p>
+    <p class="center muted">No topics were found.</p>
     </g:if>
+
     <g:else>
-        <g:each var="topic" in="${topicInstanceList}">
-            <div class="table-layout">
-                <h4>
-                    <g:link controller="supervision" action="manage" id="${topic.id}">
-                        <g:fieldValue bean="${topic}" field="title"/>
-                    </g:link>
-                </h4>
-                <g:fieldValue bean="${topic}" field="lead"/>
-            </div>
-        </g:each>
+    <g:each var="topic" in="${topicInstanceList}">
+    <div class="table-layout">
+        <h4><g:link controller="supervision" action="manage" id="${topic.id}"><g:fieldValue bean="${topic}" field="title"/></g:link></h4>
+        <g:fieldValue bean="${topic}" field="lead"/>
+    </div>
+    </g:each>
     </g:else>
 </content>
 </body>

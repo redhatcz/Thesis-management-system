@@ -8,7 +8,6 @@
     <div class="container">
         <g:layoutBody />
     </div>
-    
     <r:layoutResources />
 </body>
 </html>

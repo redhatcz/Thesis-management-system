@@ -26,7 +26,9 @@
         <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
-        <g:textField name="repeatEmail" placeholder="Repeat email" value="${registrationCommand?.repeatEmail}"/>
+        <g:textField name="repeatEmail"
+                     placeholder="Repeat email"
+                     value="${registrationCommand?.repeatEmail}"/>
     </div>
 </div>
 
@@ -36,7 +38,9 @@
         <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
-        <g:passwordField name="password" placeholder="Password" value="${registrationCommand?.password}"/>
+        <g:passwordField name="password"
+                         placeholder="Password"
+                         value="${registrationCommand?.password}"/>
     </div>
 </div>
 
@@ -46,7 +50,9 @@
         <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
-        <g:passwordField name="repeatPassword" placeholder="Repeat password" value="${registrationCommand?.repeatPassword}"/>
+        <g:passwordField name="repeatPassword"
+                         placeholder="Repeat password"
+                         value="${registrationCommand?.repeatPassword}"/>
     </div>
 </div>
 

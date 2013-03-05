@@ -9,22 +9,20 @@
         <div class="navbar-tms">
             <div class="container">
                 <div class="head">
-                    <g:link uri="/">
-                        Theses Management System
-                    </g:link>
+                    <g:link uri="/">Theses Management System</g:link>
                     <sec:ifLoggedIn>
                     <div class="pull-right">
-                        <g:link controller="profile">
-                            <sec:loggedInUserInfo field="fullName"/>
-                        </g:link>
+                        <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
                         <div class="dropdown" style="display: inline;">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <span class="entypo-settings medium-big"></span>
-                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="entypo-settings medium-big"></span></a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li><g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link></li>
+                                <li>
+                                    <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
+                                </li>
                                 <li class="divider"></li>
-                                <li><g:link tabindex="-1" controller="logout">Sign Out</g:link></li>
+                                <li>
+                                    <g:link tabindex="-1" controller="logout">Sign Out</g:link>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -43,11 +41,9 @@
     <div class="manage">
         <g:pageProperty name="page.manage-box"/>
     </div>
-
     <div class="container">
         <g:pageProperty name="page.container-box"/>
     </div>
-
     <footer>
         <div class="footer-up">
             <div class="container">

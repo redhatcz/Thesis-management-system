@@ -14,12 +14,13 @@
         <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
-                <g:actionSubmit class="tms-btn" action="update"
+                <g:actionSubmit class="tms-btn"
+                                action="update"
                                 value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                <g:link class="tms-btn tms-danger" action="show" id="${organizationInstance?.id}"
-                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                    ${message(code: 'default.button.cancel.label', default: 'Cancel')}
-                </g:link>
+                <g:link class="tms-btn tms-danger"
+                        action="show"
+                        id="${organizationInstance?.id}"
+                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">${message(code: 'default.button.cancel.label', default: 'Cancel')}</g:link>
             </div>
         </div>
     </g:form>

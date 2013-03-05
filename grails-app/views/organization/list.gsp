@@ -14,15 +14,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <g:sortableColumn property="name" title="${message(code: 'organization.name.label', default: 'Name')}" />
+                    <g:sortableColumn property="name"
+                                      title="${message(code: 'organization.name.label', default: 'Name')}" />
                 </tr>
             </thead>
             <tbody>
                 <g:each in="${organizationInstanceList}" status="i" var="organizationInstance">
                 <tr>
-                    <td><g:link action="show" id="${organizationInstance.id}">
-                        ${fieldValue(bean: organizationInstance, field: "name")}
-                    </g:link></td>
+                    <td>
+                        <g:link action="show" id="${organizationInstance.id}">${fieldValue(bean: organizationInstance, field: "name")}</g:link>
+                    </td>
                 </tr>
                 </g:each>
             </tbody>
@@ -36,9 +37,7 @@
         <div class="panel right">
             <h4>Manage Organizations</h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create">
-                    <g:message code="default.new.label" args="[entityName]" />
-                </g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
             </div>
         </div>
     </div>

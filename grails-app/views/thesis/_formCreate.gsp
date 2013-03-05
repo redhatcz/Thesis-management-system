@@ -4,7 +4,8 @@
     </label>
     <div class="controls">
         <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}" />
-        <a4g:textField name="thesis.topic.title" value="${thesisInstance?.topic?.title}"
+        <a4g:textField name="thesis.topic.title"
+                       value="${thesisInstance?.topic?.title}"
                        disabled="${disabledTopicField}"
                        autocomplete-url="${createLink(controller: 'json', action: 'listTopicsByTitle')}"
                        autocomplete-target="thesis.topic.id" />

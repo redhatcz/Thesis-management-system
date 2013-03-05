@@ -23,9 +23,7 @@
     <div class="panel right">
         <h4>Configuration management</h4>
         <div class="panel-content">
-            <g:link class="tms-btn tms-warning" action="edit">
-                <g:message code="configuration.edit.button" default="Edit" />
-            </g:link>
+            <g:link class="tms-btn tms-warning" action="edit"><g:message code="configuration.edit.button" default="Edit" /></g:link>
         </div>
     </div>
 </div>

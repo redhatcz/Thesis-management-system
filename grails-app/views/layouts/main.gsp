@@ -3,7 +3,6 @@
         <title><g:layoutTitle/></title>
         <g:layoutHead/>
     </head>
-
     <content tag="manage-box">
         <div class="container">
             <div class="pull-right">
@@ -11,7 +10,6 @@
             </div>
         </div>
     </content>
-
     <content tag="container-box">
         <div class="span12">
             <g:render template="/layouts/navigation" />

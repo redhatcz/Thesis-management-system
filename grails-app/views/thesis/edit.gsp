@@ -7,9 +7,7 @@
     <title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 <body>
-<h2 class="header">
-    <g:message code="default.edit.label" args="[entityName]" />
-</h2>
+<h2 class="header"><g:message code="default.edit.label" args="[entityName]" /></h2>
 <g:form class="form-inline" method="post" name="thesis-form">
     <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
     <g:hiddenField name="thesis.version" value="${thesisInstance?.version}" />
@@ -17,12 +15,13 @@
     <g:render template="formEdit"/>
     <div class="control-group">
         <div class="controls">
-            <g:actionSubmit class="tms-btn" action="update"
+            <g:actionSubmit class="tms-btn"
+                            action="update"
                             value="${message(code: 'default.button.update.label', default: 'Update')}" />
-            <g:link class="tms-btn tms-danger" action="show" id="${thesisInstance?.id}"
-                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-                ${message(code: 'default.button.cancel.label', default: 'Cancel')}
-            </g:link>
+            <g:link class="tms-btn tms-danger"
+                    action="show"
+                    id="${thesisInstance?.id}"
+                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">${message(code: 'default.button.cancel.label', default: 'Cancel')}</g:link>
         </div>
     </div>
 </g:form>

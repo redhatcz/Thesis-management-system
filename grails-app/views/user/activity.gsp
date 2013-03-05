@@ -10,14 +10,15 @@
 
     <content tag="main-box">
         <g:if test="${feedList && feedList.size() != 0}">
-            <g:each in="${feedList}" var="feed">
-                <div class="table-layout">
-                    <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
-                </div>
-            </g:each>
+        <g:each in="${feedList}" var="feed">
+        <div class="table-layout">
+            <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
+        </div>
+        </g:each>
         </g:if>
+
         <g:else>
-            <p>No activity.</p>
+        <p>No activity.</p>
         </g:else>
     </content>
 </body>

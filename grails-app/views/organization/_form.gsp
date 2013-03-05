@@ -12,7 +12,8 @@
         <strong><g:message code="organization.type.label" default="Type of organization" /></strong>
     </label>
     <div class="controls">
-        <g:select from="['University', 'Company']" required="" name="organization.type"
+        <g:select from="['University', 'Company']"
+                  name="organization.type"
                   value="${organizationInstance?.class?.simpleName}"/>
     </div>
 </div>

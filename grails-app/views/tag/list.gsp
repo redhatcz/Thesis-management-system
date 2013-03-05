@@ -8,23 +8,25 @@
 </head>
 <body>
     <div class="span8">
-        <h1 class="header">
-            <g:message code="default.list.label" args="[entityName]" />
-        </h1>
+        <h1 class="header"><g:message code="default.list.label" args="[entityName]" /></h1>
         <table class="table">
             <thead>
                 <tr>
                     <g:sortableColumn property="title" title="${message(code: 'tag.title.label', default: 'Title')}" />
-                    <th><g:message code="tag.parent.label" default="Parent" /></th>
+                    <th>
+                        <g:message code="tag.parent.label" default="Parent" />
+                    </th>
                 </tr>
             </thead>
             <tbody>
             <g:each in="${tagInstanceList}" status="i" var="tagInstance">
                 <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                    <td><g:link action="show" id="${tagInstance.id}">
-                        ${fieldValue(bean: tagInstance, field: "title")}
-                    </g:link></td>
-                    <td>${fieldValue(bean: tagInstance, field: "parent")}</td>
+                    <td>
+                        <g:link action="show" id="${tagInstance.id}">${fieldValue(bean: tagInstance, field: "title")}</g:link>
+                    </td>
+                    <td>
+                        ${fieldValue(bean: tagInstance, field: "parent")}
+                    </td>
                 </tr>
             </g:each>
             </tbody>

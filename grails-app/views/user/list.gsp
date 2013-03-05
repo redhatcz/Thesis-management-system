@@ -9,9 +9,7 @@
 </head>
 <body>
     <div class="span8">
-        <h1 class="header">
-            <g:message code="default.list.label" args="[entityName]" />
-        </h1>
+        <h1 class="header"><g:message code="default.list.label" args="[entityName]" /></h1>
         <table class="table">
             <thead>
                 <tr>
@@ -25,9 +23,7 @@
             <tbody>
             <g:each in="${userInstanceList}" status="i" var="userInstance">
                 <tr>
-                    <td><g:link action="show" id="${userInstance.id}">
-                        <g:fieldValue field="id" bean="${userInstance}"/>
-                    </g:link></td>
+                    <td><g:link action="show" id="${userInstance.id}"><g:fieldValue field="id" bean="${userInstance}"/></g:link></td>
                     <td><g:fieldValue bean="${userInstance}" field="fullName"/></td>
                     <td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
                     <td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>
@@ -46,9 +42,7 @@
         <div class="panel right">
             <h4>Manage Users</h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create">
-                    <g:message code="default.new.label" args="[entityName]" />
-                </g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
             </div>
         </div>
     </div>

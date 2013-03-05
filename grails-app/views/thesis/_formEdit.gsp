@@ -7,7 +7,6 @@
     <div class="controls">
         <g:select name="thesis.status"
                   from="${statusList}"
-                  required=""
                   value="${thesisInstance?.status?.toString()}"/>
     </div>
 </div>
@@ -29,6 +28,8 @@
         <strong><g:message code="thesis.abstract.label" default="Abstract" /></strong>
     </label>
     <div class="controls">
-        <g:textArea name="thesis.thesisAbstract" cols="80" rows="5" value="${thesisInstance?.thesisAbstract}"/>
+        <g:textArea name="thesis.thesisAbstract"
+                    cols="80" rows="5"
+                    value="${thesisInstance?.thesisAbstract}"/>
     </div>
 </div>

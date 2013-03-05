@@ -14,9 +14,11 @@
 	</label>
     <div class="controls">
         <g:hiddenField name="tag.parent.id" value="${tagInstance?.parent?.id}"/>
-        <a4g:textField name="tag.parent.title" value="${tagInstance?.parent?.title}"
+        <a4g:textField name="tag.parent.title"
+                       value="${tagInstance?.parent?.title}"
                        autocomplete-url="${createLink(controller: 'json', action: 'listTagsByName')}"
-                       autocomplete-target="tag.parent.id" placeholder="Parent" />
+                       autocomplete-target="tag.parent.id"
+                       placeholder="Parent" />
     </div>
 </div>
 
@@ -26,14 +28,15 @@
 	</label>
     <div class="controls">
         <label class="text">
-            <g:if test="${tagInstance?.subTags == null}">
-                No subtags.
-            </g:if>
-            <g:else>
-                <g:each in="${tagInstance?.subTags?}" var="s">
-                    <g:link controller="tag" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
-                </g:each>
-            </g:else>
+        <g:if test="${tagInstance?.subTags == null}">
+            No subtags.
+        </g:if>
+
+        <g:else>
+        <g:each in="${tagInstance?.subTags?}" var="s">
+            <g:link controller="tag" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link>
+        </g:each>
+        </g:else>
         </label>
     </div>
 </div>

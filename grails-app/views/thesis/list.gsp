@@ -8,9 +8,7 @@
 </head>
 <body>
     <div class="span8">
-        <h1 class="header">
-            <g:message code="default.list.label" args="[entityName]"/>
-        </h1>
+        <h1 class="header"><g:message code="default.list.label" args="[entityName]"/></h1>
         <table class="table">
             <thead>
             <tr>
@@ -23,9 +21,7 @@
             <g:each in="${thesisInstanceList}" status="i" var="thesisInstance">
                 <tr>
                     <td>
-                        <g:link action="show" id="${thesisInstance.id}">
-                            <g:fieldValue field="id" bean="${thesisInstance}"/>
-                        </g:link>
+                        <g:link action="show" id="${thesisInstance.id}"><g:fieldValue field="id" bean="${thesisInstance}"/></g:link>
                     </td>
                     <td>
                         <g:fieldValue field="title" bean="${thesisInstance?.topic}"/>
@@ -47,9 +43,7 @@
         <div class="panel right">
             <h4>Manage theses</h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create">
-                    <g:message code="default.new.label" args="[entityName]"/>
-                </g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link>
             </div>
         </div>
     </div>
