@@ -10,5 +10,6 @@
 <r:require module="a4g"/>
 <r:require module="richg"/>
 <r:require module="application"/>
+<r:require module="fine-uploader"/>
 <g:layoutHead/>
 <r:layoutResources />
