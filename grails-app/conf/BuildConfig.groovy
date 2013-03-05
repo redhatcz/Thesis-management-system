@@ -60,8 +60,6 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.1"
 
         compile ':cache:1.0.0'
-
-        compile ":ajax-uploader:1.1"
         compile ":mongodb:1.1.0.GA"
         compile ":platform-core:1.0.RC5"
         compile ":markdown:1.0.0.RC1"
