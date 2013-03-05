@@ -1,5 +1,4 @@
 package com.redhat.theses
-
 import com.redhat.theses.events.TopicEvent
 import com.redhat.theses.events.TopicUpdatedEvent
 import com.redhat.theses.util.Commons

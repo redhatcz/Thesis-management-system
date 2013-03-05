@@ -52,10 +52,18 @@ class TopicController {
         }
 
         // TODO: possible refactoring
-        def topicInstanceList = (tag.allSubTags + tag).collect {Topic.findAllByTag(it)}.flatten().unique()
+        def topicInstanceList = Topic.findAllByTags(tag.allSubTags + tag)
+        println topicInstanceList
+        def topicInstanceTotal = topicInstanceList.size()
+        if (params.max && params.offset) {
+            def fromIndex = params.int('offset')
+            def toIndex = Math.min(fromIndex + params.('max'), topicInstanceTotal)
+            topicInstanceList = topicInstanceList.subList(fromIndex, toIndex)
+        }
+
         def commentCounts = commentService.countByArticles(topicInstanceList)
 
-        [topicInstanceList: topicInstanceList, topicInstanceTotal: Topic.count(),
+        [topicInstanceList: topicInstanceList, topicInstanceTotal: topicInstanceTotal,
                 currentTag: tag, tags: tag.subTags, commentCounts: commentCounts]
     }
 

@@ -30,6 +30,14 @@ class Topic extends Article {
         Topic.findAll('FROM Topic t where :tag member of t.tags', [tag: tag], params)
     }
 
+    static List<Topic> findAllByTags(List<Tag> tagList) {
+        Topic.createCriteria().listDistinct {
+            tags {
+                'in' 'id', tagList*.id
+            }
+        }
+    }
+
     static List<Topic> findAllBySupervisor(User supervisor, Map params = [:]){
         Topic.executeQuery('SELECT s.topic FROM Supervision s WHERE s.supervisor=:supervisor', [supervisor: supervisor], params).unique()
     }
