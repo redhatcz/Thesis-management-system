@@ -15,7 +15,7 @@ class UploadListenerService {
 
     @Listener(topic = "thesis" ,namespace = 'uploader')
     def thesis( event) {
-        def thesis = Thesis.get(14)
+        def thesis = Thesis.get(event.params.id)
         if (!thesis){
             return null
         }
