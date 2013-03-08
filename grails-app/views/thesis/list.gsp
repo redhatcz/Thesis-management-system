@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Organization" %>
+<%@ page import="com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
