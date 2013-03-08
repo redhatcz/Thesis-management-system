@@ -25,7 +25,17 @@
     </label>
     <div class="controls">
         <g:select name="topic.universities" from="${universities}" multiple="multiple"
-                  optionKey="id" size="5" value="${topicInstance?.universities*.id}" class="many-to-many"/>
+                  optionKey="id" size="5" value="${topicInstance?.universities*.id}" class="one-to-many"/>
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'types', 'error')}">
+    <label class="control-label" for="topic.types">
+        <strong><g:message code="topic.types.label" default="Types" /></strong>
+    </label>
+    <div class="controls">
+        <g:select name="topic.types" from="${types}" multiple="multiple"
+                  size="5" value="${topicInstance?.types}" class="one-to-many"/>
     </div>
 </div>
 
@@ -63,5 +73,14 @@
     <div class="controls">
         <g:select name="topic.tags" from="${com.redhat.theses.Tag.list()}" multiple="multiple"
                   optionKey="id" size="5" value="${topicInstance?.tags*.id}" class="many-to-many"/>
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')} ">
+    <div class="controls">
+        <label class="checkbox" for="topic.enabled">
+            <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
+            <g:message code="topic.enabled.label" default="Enabled" />
+        </label>
     </div>
 </div>

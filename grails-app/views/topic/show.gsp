@@ -62,6 +62,17 @@
                     </dd>
                     </g:each>
                 </g:if>
+
+                <g:if test="${!topicInstance?.types?.empty}">
+                    <dt>
+                        <span class="entypo-thesis mini"></span><g:message code="topic.types.label" default="types" />
+                    </dt>
+                    <dd>
+                    <g:each in="${topicInstance?.types}" status="i" var="type">
+                        <g:message code="topic.type.${type?.toString().toLowerCase()}.label"/><g:if test="${i != topicInstance?.types?.size() - 1}"><span>, </span></g:if>
+                    </g:each>
+                    </dd>
+                </g:if>
                 </dl>
             </div>
 

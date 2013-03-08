@@ -9,8 +9,13 @@ class Topic extends Article {
     String description
     Date dateCreated
     User owner
+    Boolean enabled = true
 
-    static hasMany = [universities : University, tags : Tag]
+    static hasMany = [universities : University, tags : Tag, types : Type]
+
+    static hibernateFilters = {
+        enabledFilter(condition:"enabled='1'", default: true)
+    }
 
     static constraints = {
         description widget: 'textarea' , nullable: false, blank: false

@@ -1,15 +1,7 @@
-import com.redhat.theses.Application
-import com.redhat.theses.Grade
-import com.redhat.theses.Status
-import com.redhat.theses.Thesis
-import com.redhat.theses.auth.User
-import com.redhat.theses.University
-import com.redhat.theses.Tag
+import com.redhat.theses.*
 import com.redhat.theses.auth.Role
+import com.redhat.theses.auth.User
 import com.redhat.theses.auth.UserRole
-import com.redhat.theses.Topic
-import com.redhat.theses.Comment
-import com.redhat.theses.Supervision
 import com.redhat.theses.events.ThesisEvent
 import com.redhat.theses.events.TopicEvent
 
@@ -96,6 +88,7 @@ class BootStrap {
                 title: 'Theses management system',
                 owner: jiriPechanec,
                 tags: [grailsTag, jbossTag],
+                types: [Type.BACHELOR],
                 universities: [muni, vut],
                 lead: '''Application for managing theses for Red Hat''',
                 description:

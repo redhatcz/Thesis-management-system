@@ -1,6 +1,5 @@
 package com.redhat.theses
 
-import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
 
 class TopicController {
@@ -71,7 +70,7 @@ class TopicController {
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
         [topicInstance: new Topic(params.topic), supervisionCommand: supervisionCommand,
-                universities: University.all, owners: User.all]
+                universities: University.all, types: Type.values()]
     }
 
     def save() {
@@ -81,7 +80,7 @@ class TopicController {
 
         if (!topicService.saveWithSupervisions(topicInstance, supervisionCommand.supervisions)) {
             render(view: "create", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
-                    universities: University.all, owners: User.all])
+                    universities: University.all, types: Type.values()])
             return
         }
 
@@ -126,7 +125,7 @@ class TopicController {
         supervisionCommand.supervisions += topicInstance.supervisions
 
         [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
-                universities: University.all, owners: User.all]
+                universities: University.all, types: Type.values()]
     }
 
     def update() {
@@ -147,7 +146,7 @@ class TopicController {
         if (version != null && topicInstance.version > version) {
             topicInstance.errors.rejectValue("version", "topic.optimistic.lock.error")
             render(view: "edit", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
-                    universities: University.all, owners: User.all])
+                    universities: University.all, types: Type.values()])
             return
         }
 
@@ -162,7 +161,7 @@ class TopicController {
         }
         if (!topicService.saveWithSupervisions(topicInstance, withExistingSupervisions))  {
             render(view: "edit", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
-                    universities: University.all, owners: User.all])
+                    universities: University.all, types: Type.values()])
             return
         }
 
