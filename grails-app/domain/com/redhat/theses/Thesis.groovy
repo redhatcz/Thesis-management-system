@@ -4,6 +4,9 @@ import com.redhat.theses.auth.User
 
 class Thesis extends Article{
 
+    String title
+    String description
+
     Topic topic
     User assignee
     User supervisor
@@ -13,12 +16,15 @@ class Thesis extends Article{
     Date dateCreated
 
     static mapping = {
+        description type: 'text'
         thesisAbstract type: 'text'
         sort 'dateCreated'
         order 'desc'
     }
 
     static constraints = {
+        title blank: false
+        description blank: false
         grade nullable: true
         supervisor nullable: true
         thesisAbstract nullable: true

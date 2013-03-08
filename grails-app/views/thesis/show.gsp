@@ -8,10 +8,14 @@
 </head>
 <body>
 <div class="span8">
-    <h1 class="header">Thesis: <g:fieldValue bean="${thesisInstance?.topic}" field="title"/></h1>
+    <h1 class="header"><g:fieldValue bean="${thesisInstance}" field="title"/></h1>
+    <g:if test="${thesisInstance?.description}">
+        <markdown:renderHtml text="${thesisInstance?.description}"/>
+    </g:if>
 
+    <h3>Abstract</h3>
     <g:if test="${thesisInstance?.thesisAbstract}">
-        <markdown:renderHtml text="${thesisInstance?.thesisAbstract}"/>
+        <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
     </g:if>
 
     <richg:comments comments="${comments}" article="${thesisInstance}" commentsTotal="${commentsTotal}"/>

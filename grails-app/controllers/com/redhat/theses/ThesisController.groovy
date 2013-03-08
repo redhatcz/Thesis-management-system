@@ -46,11 +46,19 @@ class ThesisController {
 
     def create(Long id) {
         def thesisInstance = new Thesis(params.thesis)
+
+        // If creating from topic
         def disabledTopicField = false
         if (id) {
             thesisInstance.topic = Topic.get(id)
             disabledTopicField = true
         }
+
+        // Set default title to topic title
+        if (id && !thesisInstance.title) {
+            thesisInstance.title = thesisInstance.topic.title
+        }
+
         [thesisInstance: thesisInstance, disabledTopicField: disabledTopicField]
     }
 

@@ -450,36 +450,44 @@ early Fleetwood Mac cover, being added to the recording.'''
 
         // THESES
         def kubaThesis = new Thesis(
+                title: "Implementation of Theses management system",
+                description: '''Create Topic, file upload for theses so that students can upload their work after
+they are done with their thesis and application management.''',
                 assignee: kuba,
                 topic: tms,
                 supervisor: jiriKolar,
-                status: Status.IN_PROGRESS,
-                thesisAbstract: '''Created Topic, Thesis and Project management, file uploading for theses so that
-students can upload their work after they are done with their thesis and application management.'''
+                status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'thesisCreated', new ThesisEvent(kubaThesis, tms.owner))
 
         def vaclavThesis = new Thesis(
+                title: "Implementation of Theses management system",
+                description: '''Create User, University management, news feed system so
+that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
+in one of those can follow it, mail service for sending these feeds to subscribers and overall configuration.''',
                 assignee: vaclav,
                 topic: tms,
                 supervisor: jiriKolar,
-                status: Status.IN_PROGRESS,
-                thesisAbstract: '''Created User, Organization, University and Company management, news feed system so
-that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
-in one of those can follow it, mail service for sending these feeds to subscribers and overall configuration.'''
+                status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis, tms.owner))
 
         def pavelThesis = new Thesis(
+                title: "Design for Theses management system",
+                description: '''Paint all graphic stuff that anyone can do and create views for the TMS.''',
                 assignee: pavel,
                 topic: tms,
                 supervisor: jiriKolar,
-                status: Status.IN_PROGRESS,
-                thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
+                status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'thesisCreated', new ThesisEvent(pavelThesis, tms.owner))
 
         def pavelThesis2 = new Thesis(
+                title: "Implementation of a python framework",
+                description: '''Python is a general-purpose, high-level programming language whose design philosophy
+emphasizes code readability. Python's syntax allows for programmers to express concepts in fewer lines of code than
+would be possible in languages such as C, and the language provides constructs intended to enable clear programs on
+both a small and large scale.''',
                 assignee: pavel,
                 topic: pythonFramework,
                 supervisor: admin,
@@ -489,29 +497,19 @@ in one of those can follow it, mail service for sending these feeds to subscribe
 with the increased prevalence of AJAX, some Web frameworks are beginning to include AJAX code that helps developers
 with the particularly tricky task of programming (client-side) the user's browser. At the extreme end of the client-side
 Web Frameworks is technology that can use the web browser as a full-blown application execution environment (a la gmail
-for example): see Web Browser Programming for details.
-
-As a developer using a framework, you typically write code which conforms to some kind of conventions that lets you
-"plug in" to the framework, delegating responsibility for the communications, infrastructure and low-level stuff to
-the framework while concentrating on the logic of the application in your own code. This "plugging in" aspect of Web
-development is often seen as being in opposition to the classical distinction between programs and libraries, and the
-notion of a "mainloop" dispatching events to application code is very similar to that found in GUI programming.
-
-Generally, frameworks provide support for a number of activities such as interpreting requests (getting form parameters,
-handling cookies and sessions), producing responses (presenting data as HTML or in other formats), storing data
-persistently, and so on. Since a non-trivial Web application will require a number of different kinds of abstractions,
-often stacked upon each other, those frameworks which attempt to provide a complete solution for applications are often
-known as full-stack frameworks in that they attempt to supply components for each layer in the stack.'''
+for example): see Web Browser Programming for details.'''
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'thesisCreated', new ThesisEvent(pavelThesis2, pythonFramework.owner))
 
         def vaclavThesis2 = new Thesis(
+                title: "Implementation of Ruby Killing Machine",
+                description: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.''',
                 assignee: vaclav,
                 topic: rubyKillingMachine,
                 supervisor: jiriKolar,
                 status: Status.FINISHED,
                 grade: Grade.A,
-                thesisAbstract: '''Painted all graphic stuff that anyone can do and created views for the TMS.'''
+                thesisAbstract: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.'''
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis2, rubyKillingMachine.owner))
 

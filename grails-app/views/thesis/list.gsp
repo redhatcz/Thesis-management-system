@@ -12,22 +12,18 @@
         <table class="table">
             <thead>
             <tr>
-                <g:sortableColumn property="id" title="${message(code: 'thesis.id.label', default: 'Id')}"/>
-                <g:sortableColumn property="topic" title="${message(code: 'thesis.topic.label', default: 'Thesis topic')}"/>
-                <g:sortableColumn property="author" title="${message(code: 'thesis.assingee.label', default: 'Assignee')}"/>
+                <g:sortableColumn property="title" title="${message(code: 'thesis.title.label', default: 'Thesis title')}"/>
+                <g:sortableColumn property="assignee" title="${message(code: 'thesis.assingee.label', default: 'Assignee')}"/>
             </tr>
             </thead>
             <tbody>
             <g:each in="${thesisInstanceList}" status="i" var="thesisInstance">
                 <tr>
                     <td>
-                        <g:link action="show" id="${thesisInstance.id}"><g:fieldValue field="id" bean="${thesisInstance}"/></g:link>
+                        <g:link action="show" id="${thesisInstance.id}"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
                     </td>
                     <td>
-                        <g:fieldValue field="title" bean="${thesisInstance?.topic}"/>
-                    </td>
-                    <td>
-                        <g:fieldValue field="fullName" bean="${thesisInstance?.assignee}"/>
+                        <g:link action="show" id="${thesisInstance.assigneeId}"><g:fieldValue field="fullName" bean="${thesisInstance?.assignee}"/></g:link>
                     </td>
                 </tr>
             </g:each>
