@@ -9,7 +9,6 @@ class Topic extends Article {
     String description
     Date dateCreated
     User owner
-    Company company
 
     static hasMany = [universities : University, tags : Tag]
 

@@ -19,17 +19,6 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'company', 'error')} required">
-    <label class="control-label" for="company">
-        <strong><g:message code="topic.company.label" default="Company" />
-        <span class="required-indicator">*</span></strong>
-    </label>
-    <div class="controls">
-        <g:select id="company" name="topic.company.id" from="${com.redhat.theses.Company.list()}"
-                  optionKey="id" required="" value="${topicInstance?.company?.id}" class="many-to-one"/>
-    </div>
-</div>
-
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
     <label class="control-label" for="topic.universities">
         <strong><g:message code="topic.universities.label" default="Universities" /></strong>

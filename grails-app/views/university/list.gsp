@@ -1,9 +1,9 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Organization" %>
+<%@ page import="com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'organization.label', default: 'Organization')}" />
+    <g:set var="entityName" value="${message(code: 'university.label', default: 'University')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -15,27 +15,27 @@
             <thead>
                 <tr>
                     <g:sortableColumn property="name"
-                                      title="${message(code: 'organization.name.label', default: 'Name')}" />
+                                      title="${message(code: 'university.name.label', default: 'Name')}" />
                 </tr>
             </thead>
             <tbody>
-                <g:each in="${organizationInstanceList}" status="i" var="organizationInstance">
+                <g:each in="${universityInstanceList}" status="i" var="universityInstance">
                 <tr>
                     <td>
-                        <g:link action="show" id="${organizationInstance.id}">${fieldValue(bean: organizationInstance, field: "name")}</g:link>
+                        <g:link action="show" id="${universityInstance.id}">${fieldValue(bean: universityInstance, field: "name")}</g:link>
                     </td>
                 </tr>
                 </g:each>
             </tbody>
         </table>
-        <g:if test="${Util.isPaginationVisible(organizationInstanceTotal, params.max)}">
-        <g:paginate total="${organizationInstanceTotal}" class="pagination-centered"/>
+        <g:if test="${Util.isPaginationVisible(universityInstanceTotal, params.max)}">
+            <g:paginate total="${universityInstanceTotal}" class="pagination-centered"/>
         </g:if>
     </div>
 
     <div class="span4">
         <div class="panel right">
-            <h4>Manage Organizations</h4>
+            <h4>Manage Universities</h4>
             <div class="panel-content">
                 <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
             </div>
