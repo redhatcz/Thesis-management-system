@@ -1,14 +1,12 @@
 package com.redhat.theses.auth
 
-class Role {
+enum Role {
+    ADMIN,
+    SUPERVISOR,
+    OWNER,
+    STUDENT
 
-	String authority
-
-	static mapping = {
-		cache true
-	}
-
-	static constraints = {
-		authority blank: false, unique: true
-	}
+    String toString() {
+        "ROLE_${this.name()}"
+    }
 }

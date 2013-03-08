@@ -15,8 +15,6 @@ import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUserDetailsServic
  */
 class CustomUserDetailsService implements GrailsUserDetailsService {
 
-    private Logger _log = LoggerFactory.getLogger(getClass())
-
     /**
      * Some Spring Security classes (e.g. RoleHierarchyVoter) expect at least one role, so
      * we give a user with no granted roles this one which gets past that restriction but
@@ -38,7 +36,7 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
                 throw new UsernameNotFoundException('User not found', email)
             }
 
-            Collection<GrantedAuthority> authorities = loadAuthorities(user, email, loadRoles)
+            Collection<GrantedAuthority> authorities = loadAuthorities(user, loadRoles)
             createUserDetails user, authorities
         }
     }
@@ -52,12 +50,12 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
         loadUserByUsername email, true
     }
 
-    protected Collection<GrantedAuthority> loadAuthorities(User user, String email, boolean loadRoles) {
+    protected Collection<GrantedAuthority> loadAuthorities(User user, boolean loadRoles) {
         if (!loadRoles) {
             return []
         }
 
-        def authorities = user.authorities.collect { new GrantedAuthorityImpl(it.authority) }
+        def authorities = user.roles.collect { new GrantedAuthorityImpl(it.toString()) }
         authorities ?: NO_ROLES
     }
 
@@ -65,6 +63,4 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
         new CustomGrailsUser(user.email, user.fullName, user.password, user.enabled, 
             !user.accountExpired, !user.passwordExpired, !user.accountLocked, authorities, user.id)
     }
-
-    protected Logger getLog() { _log }
 }

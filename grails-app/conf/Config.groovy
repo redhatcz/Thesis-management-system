@@ -133,12 +133,6 @@ log4j = {
 
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.redhat.theses.auth.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'
-
-// Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.redhat.theses.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'
 
 // fix for g:paginate to work with bootstrap

@@ -1,6 +1,5 @@
 package com.redhat.theses.auth
 
-import com.redhat.theses.University
 import com.redhat.theses.util.Util
 
 class RegistrationController {
@@ -23,7 +22,7 @@ class RegistrationController {
             redirect uri: '/registration', permanent: true
         }
 
-        [registrationCommand: new RegistrationCommand(), universityList: University.findAll()]
+        [registrationCommand: new RegistrationCommand()]
     }
 
     def register(RegistrationCommand registrationCommand) {
@@ -32,16 +31,14 @@ class RegistrationController {
         user.enabled = false
         user.accountLocked = false
         user.passwordExpired = false
+        user.roles = [Role.STUDENT]
 
         if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
             registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
         }
 
-        if (registrationCommand.hasErrors()
-                //TODO : merge
-                || !userService.save(user)
-                || !UserRole.create(user, Role.findByAuthority('ROLE_STUDENT'))) {
-            render(view: "index", model: [registrationCommand: registrationCommand, universityList: University.findAll()])
+        if (registrationCommand.hasErrors() || !userService.save(user)) {
+            render(view: "index", model: [registrationCommand: registrationCommand])
             return
         }
 

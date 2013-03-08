@@ -1,8 +1,7 @@
 package com.redhat.theses.ajax
 
-import com.redhat.theses.Supervision
 import com.redhat.theses.Topic
-import com.redhat.theses.auth.UserRole
+import com.redhat.theses.auth.Role
 import grails.converters.JSON
 import com.redhat.theses.auth.User
 
@@ -22,10 +21,7 @@ class JsonController {
     static final Integer MAX_RESULTS = 5
 
     def listSupervisorsByName(String term) {
-        def supervisors = UserRole.executeQuery(
-                """SELECT ur.user FROM UserRole ur
-                   WHERE ur.role.authority = 'ROLE_SUPERVISOR'
-                   AND ur.user.fullName LIKE :term""", [max: MAX_RESULTS, term: "%${term}%"])
+        def supervisors = User.findByRolesAndFullNameIlike([Role.SUPERVISOR], "%${term}%")
         def userMap = [:]
 
         supervisors.each {

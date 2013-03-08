@@ -1,7 +1,6 @@
 import com.redhat.theses.*
 import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
-import com.redhat.theses.auth.UserRole
 import com.redhat.theses.events.ThesisEvent
 import com.redhat.theses.events.TopicEvent
 
@@ -17,55 +16,71 @@ class BootStrap {
             return
         }
 
-        // ROLES
-        List<Role> roles = [
-            new Role(authority: 'ROLE_ADMIN').save(),
-            new Role(authority: 'ROLE_OWNER').save(),
-            new Role(authority: 'ROLE_SUPERVISOR').save(),
-            new Role(authority: 'ROLE_STUDENT').save()
-        ]
-
         // UNIVERSITIES
         def muni = new University(name: 'Masaryk University').save()
         def vut = new University(name: 'VUT').save()
 
         // USERS
-        def admin = new User(email: 'admin@gmail.com', fullName: 'Admin Admin', password: "admin", enabled: true).save();
-        roles.each { new UserRole(role: it, user: admin).save() }
+        def admin = new User(
+                email: 'admin@gmail.com',
+                fullName: 'Admin Admin',
+                password: "admin",
+                enabled: true,
+                roles: [Role.ADMIN, Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
+        ).save()
 
-        def person = new User(email: 'person@gmail.com', fullName: 'Person Person', password: "person", enabled: true).save();
-        roles.each {
-           if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
-               new UserRole(role: it, user: person).save()
-           }
-        }
+        def person = new User(
+                email: 'person@gmail.com',
+                fullName: 'Person Person',
+                password: "person",
+                enabled: true,
+                roles: [Role.SUPERVISOR, Role.STUDENT]
+        ).save()
 
-        def padmin = new User(username: 'padmin', fullName: 'Person Admin', password: "padmin", enabled: true, email: 'padmin@gmail.com').save();
-        roles.each {
-            if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
-                new UserRole(role: it, user: padmin).save()
-            }
-        }
+        def padmin = new User(
+                username: 'padmin',
+                fullName: 'Person Admin',
+                password: "padmin",
+                enabled: true,
+                email: 'padmin@gmail.com',
+                roles: [Role.SUPERVISOR, Role.STUDENT]
+        ).save()
 
-        def vaclav = new User(email: 'vaclav.dedik@gmail.com', fullName: 'Vaclav Dedik', password: "vaclav.dedik", enabled: true).save();
-        new UserRole(role: roles[3], user: vaclav).save()
-        def pavel = new User(email: 'dedikx@gmail.com', fullName: 'Pavel Dedik', password: "dedikx", enabled: true).save();
-        new UserRole(role: roles[3], user: pavel).save()
-        def kuba = new User(email: 'jcechace@gmail.com', fullName: 'Jakub Cechacek', password: "jcechace", enabled: true).save();
-        new UserRole(role: roles[3], user: kuba).save()
-        def jiriKolar = new User(email: 'jiri.kolar@gmail.com', fullName: 'Jiri Kolar', password: "jiri.kolar", enabled: true).save();
-        roles.each {
-            if (it.authority in ['ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
-                new UserRole(role: it, user: jiriKolar).save()
-            }
-        }
-        def jiriPechanec = new User(email: 'jpechanec@redhat.com', fullName: 'Jiri Pechanec', password: "jpechanec", enabled: true).save();
-        roles.each {
-            if (it.authority in ['ROLE_OWNER', 'ROLE_SUPERVISOR', 'ROLE_STUDENT']) {
-                new UserRole(role: it, user: jiriPechanec).save()
-            }
-        }
-
+        def vaclav = new User(
+                email: 'vaclav.dedik@gmail.com',
+                fullName: 'Vaclav Dedik',
+                password: "vaclav.dedik",
+                enabled: true,
+                roles: [Role.STUDENT]
+        ).save()
+        def pavel = new User(
+                email: 'dedikx@gmail.com',
+                fullName: 'Pavel Dedik',
+                password: "dedikx",
+                enabled: true,
+                roles: [Role.STUDENT]
+        ).save()
+        def kuba = new User(
+                email: 'jcechace@gmail.com',
+                fullName: 'Jakub Cechacek',
+                password: "jcechace",
+                enabled: true,
+                roles: [Role.STUDENT]
+        ).save()
+        def jiriKolar = new User(
+                email: 'jiri.kolar@gmail.com',
+                fullName: 'Jiri Kolar',
+                password: "jiri.kolar",
+                enabled: true,
+                roles: [Role.SUPERVISOR, Role.STUDENT]
+        ).save()
+        def jiriPechanec = new User(
+                email: 'jpechanec@redhat.com',
+                fullName: 'Jiri Pechanec',
+                password: "jpechanec",
+                enabled: true,
+                roles: [Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
+        ).save()
 
         // TAGS
         def javaTag = new Tag(title: 'java').save()

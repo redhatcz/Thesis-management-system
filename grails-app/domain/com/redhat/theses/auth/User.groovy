@@ -15,6 +15,8 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
+    static hasMany = [roles: Role]
+
 	static constraints = {
 		password blank: false
         fullName blank: false
@@ -29,10 +31,6 @@ class User {
     static hibernateFilters = {
         enabledFilter(condition:"enabled='1' and account_expired='0' and account_locked='0'", default: true)
     }
-
-	List<Role> getAuthorities() {
-		UserRole.findAllByUser(this).collect { it.role }
-	}
 
 	def beforeInsert() {
 		encodePassword()
