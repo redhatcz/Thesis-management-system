@@ -49,17 +49,13 @@
                     <span class="entypo-status mini"></span><g:message code="thesis.status.label" default="status"/>
                 </dt>
                 <dd>
-                    <g:message code="thesis.status.${thesisInstance.status.toString().toLowerCase()}.label" default="${thesisInstance.status.toString()}"/>
-                </dd>
-
-                <g:if test="${thesisInstance?.grade}">
-                <dt>
-                    <span class="entypo-users mini"></span><g:message code="thesis.grade.label" default="grade"/>
-                </dt>
-                <dd>
-                    <g:fieldValue bean="${thesisInstance}" field="grade"/>
-                </dd>
+                <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">
+                    <g:message code="thesis.status.${thesisInstance?.status?.toString()?.toLowerCase()}.label" />
                 </g:if>
+                <g:else>
+                    This has been awarded the grade <strong>${thesisInstance?.grade}</strong>.
+                </g:else>
+                </dd>
             </dl>
         </div>
 
