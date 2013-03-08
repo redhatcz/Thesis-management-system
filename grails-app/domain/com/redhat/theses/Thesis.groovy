@@ -32,6 +32,8 @@ class Thesis extends Article{
         }
     }
 
+    static bucketMapping = "thesis"
+
     public List<String> getFileURLs(){
        return null;
     }
