@@ -4,7 +4,9 @@
 	<title><g:message code="springSecurity.login.title"/></title>
 </head>
 <body>
-    <h1 class="login-title">Theses Management System</h1>
+    <div class="login-logo">
+        <img src="${resource(dir: 'images', file: 'redhat-b.png')}">
+    </div>
     <div class="login">
         <form action='${postUrl}' method='POST' id='loginForm' class='form-vertical'>
             <g:render template="/layouts/messages" />

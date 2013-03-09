@@ -7,7 +7,7 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
-    <div class="span8">
+    <div class="span8 content">
         <h1 class="header"><g:message code="default.list.label" args="[entityName]" /></h1>
         <table class="table">
             <thead>
@@ -33,7 +33,7 @@
         </table>
     </div>
 
-    <div class="span4">
+    <div class="span4 sidebar">
         <div class="panel right">
             <h4>Manage Tags</h4>
             <div class="panel-content">

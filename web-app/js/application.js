@@ -10,9 +10,9 @@ if (typeof jQuery !== 'undefined') {
 
 // Super simple script that sets the minimal height of the class "span8"
 // as high as the height of the class "span4"
-if ($("div.span8").height() < $("div.span4").height()) {
+if ($(".span8.content").height() < $(".span4.sidebar").height()) {
 
-    $("div.span8").height(
-        $("div.span4").height()
+    $(".span8.content").height(
+        $(".span4.sidebar").height()
     );
 }

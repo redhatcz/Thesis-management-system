@@ -57,7 +57,6 @@
 
 body {
     overflow-y: scroll;
-    margin-top: 41px;
     background-image: url('../images/bg.png');
     background-repeat: repeat;
 }
@@ -142,12 +141,12 @@ h4.header {
     margin-left: 0px;
 }
 
-.span4 {
+.span4.sidebar {
     width: 340px;
     margin-bottom: 50px;
 }
 
-.span8 {
+.span8.content {
     /*The height is set by javascript (see 'js/application.js')*/
     width: 580px;
     padding: 30px;
@@ -156,7 +155,7 @@ h4.header {
     .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 }
 
-.span9 {
+.span9.content {
     padding: 30px;
     margin-bottom: 70px;
     background-color: white;
@@ -167,8 +166,7 @@ h4.header {
 /*---------NAVBAR---------*/
 
 .manage {
-    padding-top: 30px;
-    padding-bottom: 20px;
+    padding: 20px 0;
     height: 22px;
 
     a {
@@ -188,13 +186,13 @@ h4.header {
     }
 }
 
-.navbar-tms {
+.navbar {
     background-color: @grayDark;
     height: 50px;
 }
 
 .head {
-    margin-top: 15px;
+    padding-top: 15px;
     color: @grayTitles;
 }
 
@@ -224,6 +222,10 @@ h4.header {
 
 .head .entypo-dot {
     vertical-align: middle;
+}
+
+img#logo {
+    padding: 5px 0 9px;
 }
 
 
@@ -645,11 +647,10 @@ div.comment {
     }
 }
 
-h1.login-title {
+.login-logo {
     display: block;
-    margin-top: 80px;
-    font-size: 24px;
-    text-align: center;
+    margin: 70px auto 30px;
+    width: 320px;
 }
 
 
@@ -705,12 +706,12 @@ h1.login-title {
 }
 
 .typeahead-details {
-    color: gray;
+    color: @gray;
     font-size: small;
 }
 
 .active .typeahead-details {
-    color: white;
+    color: @white;
 }
 
 .center {

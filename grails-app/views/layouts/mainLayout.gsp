@@ -5,41 +5,43 @@
     <g:render template="/layouts/head"/>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-tms">
-            <div class="container">
-                <div class="head">
-                    <g:link uri="/">Theses Management System</g:link>
-                    <sec:ifLoggedIn>
-                    <div class="pull-right">
-                        <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
-                        <div class="dropdown" style="display: inline;">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="entypo-settings medium-big"></span></a>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li>
-                                    <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
-                                </li>
-                                <sec:ifAllGranted roles="ROLE_ADMIN">
-                                <li id="configuration">
-                                    <g:link controller="configuration" action="edit">Site Configuration</g:link>
-                                </li>
-                                </sec:ifAllGranted>
-                                <li class="divider"></li>
-                                <li>
-                                    <g:link tabindex="-1" controller="logout">Sign Out</g:link>
-                                </li>
-                            </ul>
-                        </div>
+    <div class="navbar navbar-static-top">
+        <div class="container">
+            <div class="span4">
+                <g:link uri="/">
+                    <img id="logo" src="${resource(dir: 'images', file: 'redhat.png')}">
+                </g:link>
+            </div>
+            <div class="head">
+                <sec:ifLoggedIn>
+                <div class="pull-right">
+                    <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
+                    <div class="dropdown" style="display: inline;">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="entypo-settings medium-big"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li>
+                                <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
+                            </li>
+                            <sec:ifAllGranted roles="ROLE_ADMIN">
+                            <li id="configuration">
+                                <g:link controller="configuration" action="edit">Site Configuration</g:link>
+                            </li>
+                            </sec:ifAllGranted>
+                            <li class="divider"></li>
+                            <li>
+                                <g:link tabindex="-1" controller="logout">Sign Out</g:link>
+                            </li>
+                        </ul>
                     </div>
-                    </sec:ifLoggedIn>
-                    <sec:ifNotLoggedIn>
-                    <div class="pull-right">
-                        <g:link controller="login" action="auth">Sign In</g:link>
-                        <span class="entypo-dot micro"></span>
-                        <g:link controller="registration">Sign Up</g:link>
-                    </div>
-                    </sec:ifNotLoggedIn>
                 </div>
+                </sec:ifLoggedIn>
+                <sec:ifNotLoggedIn>
+                <div class="pull-right">
+                    <g:link controller="login" action="auth">Sign In</g:link>
+                    <span class="entypo-dot micro"></span>
+                    <g:link controller="registration">Sign Up</g:link>
+                </div>
+                </sec:ifNotLoggedIn>
             </div>
         </div>
     </div>
@@ -84,8 +86,7 @@
         </div>
         <div class="footer-down">
             <div class="container">
-                <img src="${resource(dir: 'images', file: 'redhat.png')}">
-                <p class="pull-right">CopyRight &copy; 2013 Red Hat, Inc.</p>
+                <p class="pull-right">Copyright &copy; 2013 Red Hat, Inc.</p>
             </div>
         </div>
     </footer>

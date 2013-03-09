@@ -7,7 +7,7 @@
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
-    <div class="span8">
+    <div class="span8 content">
         <h1 class="header"><g:fieldValue bean="${tagInstance}" field="title"/></h1>
         <dl class="dl-horizontal">
             <g:if test="${tagInstance?.parent}">
@@ -31,7 +31,7 @@
             </g:if>
         </dl>
     </div>
-    <div class="span4">
+    <div class="span4 sidebar">
         <div class="panel right">
             <h4>Tag Management</h4>
             <div class="panel-content">

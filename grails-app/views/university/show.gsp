@@ -6,7 +6,7 @@
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
-    <div class="span4">
+    <div class="span4 sidebar">
         <div class="panel left">
             <div class="avatar">
                 %{--University logo will be here soon!--}%
@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="span8">
+    <div class="span8 content">
         <g:form>
             <div class="control-group">
                 <ul class="nav nav-tabs">

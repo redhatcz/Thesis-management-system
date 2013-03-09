@@ -7,7 +7,7 @@
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
-    <div class="span8">
+    <div class="span8 content">
         <g:if test="${topicInstance?.title}">
         <h1 class="header"><g:fieldValue bean="${topicInstance}" field="title"/></h1>
         </g:if>
@@ -29,7 +29,7 @@
         <richg:comments comments="${comments}" article="${topicInstance}" commentsTotal="${commentsTotal}"/>
     </div>
 
-    <div class="span4">
+    <div class="span4 sidebar">
         <div class="panel right">
             <h4>Topic Information</h4>
             <div class="panel-content">

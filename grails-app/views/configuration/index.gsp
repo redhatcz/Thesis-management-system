@@ -5,7 +5,7 @@
     <title><g:message code="default.show.configuration" default="Configuration" /></title>
 </head>
 <body>
-<div class="span8">
+<div class="span8 content">
     <h1 class="header"><g:message code="default.show.configuration" default="Configuration" /></h1>
     <dl class="dl-horizontal">
         <dt>Allowed Email domains</dt>
@@ -19,7 +19,7 @@
         </g:else>
     </dl>
 </div>
-<div class="span4">
+<div class="span4 sidbar">
     <div class="panel right">
         <h4>Configuration management</h4>
         <div class="panel-content">

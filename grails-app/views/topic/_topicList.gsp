@@ -1,5 +1,5 @@
 <%@ page import="com.redhat.theses.util.Util" %>
-<div class="span8">
+<div class="span8 content">
 <g:if test="${topicInstanceList.isEmpty()}">
     <p class="center muted">No topics were found.</p>
 </g:if>
@@ -38,7 +38,7 @@
 </g:if>
 </div>
 
-<div class="span4">
+<div class="span4 sidebar">
     <div class="panel right">
         <h4>Manage Topics</h4>
         <div class="panel-content">

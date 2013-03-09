@@ -6,7 +6,7 @@
     <title>Thesis management system</title>
 </head>
 <body>
-    <div class="span8">
+    <div class="span8 content">
         <g:each in="${feedList}" var="feed">
             <div class="table-layout">
                 <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
@@ -28,7 +28,7 @@
         </g:if>
     </div>
 
-    <div class="span4">
+    <div class="span4 sidebar">
         <div class="panel right">
             <h4>Your Theses</h4>
             <sec:ifLoggedIn>

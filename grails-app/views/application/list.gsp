@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div class="span8">
+<div class="span8 content">
     <h1 class="header"><g:message code="default.list.label" args="[entityName]"/></h1>
     <g:if test="${!applicationInstanceList?.empty}">
     <table class="table">
@@ -46,7 +46,7 @@
     <g:else>No applications found.</g:else>
 </div>
 
-<div class="span4">
+<div class="span4 sidebar">
     <div class="panel right">
         <h4>Manage Applications</h4>
         <div class="panel-content">

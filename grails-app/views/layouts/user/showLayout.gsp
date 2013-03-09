@@ -6,7 +6,7 @@
     <g:layoutHead/>
 </head>
 <body>
-<div class="span4">
+<div class="span4 sidebar">
     <div class="panel left">
         <div class="avatar">
             %{--Profile picture will be here soon!--}%
@@ -34,7 +34,7 @@
         </div>
     </div>
 </div>
-<div class="span8">
+<div class="span8 content">
     <div class="control-group">
         <ul class="nav nav-tabs">
             <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}"><g:link action="show" id="${userInstance?.id}">Theses</g:link></li>
