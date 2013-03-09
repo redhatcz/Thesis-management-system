@@ -15,9 +15,9 @@ class UploadController {
     def upload() {
         try {
             MultipartFile file = ((MultipartHttpServletRequest) request).getFile('qqfile')
-            String callback = params?.callback ?: 'avatar'
+            String topic = params?.topic
 
-            Boolean success = uploadService.upload(file, callback, params)
+            Boolean success = uploadService.upload(file, topic, params)
 
             return render(text: [success: success] as JSON, contentType: 'text/json')
         } catch (Exception e) {

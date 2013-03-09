@@ -10,11 +10,11 @@ class UploadService {
     def gridFileService
     def springSecurityService
 
-    def upload(MultipartFile file, String topic = null, Map params = []) {
+    def upload(MultipartFile file, String topic = null, Map params = [:]) {
         try {
             def data = new UploaderEvent(file, params)
 
-            def reply = event(topic: 'thesis', for: 'uploader', data: data, fork: false).waitFor()
+            def reply = event(topic: topic, for: 'uploader', data: data, fork: false).waitFor()
 
             if (reply.hasErrors()) {
                 throw new FileUploadException(reply.getErrors()[1])
