@@ -1,4 +1,6 @@
 package com.redhat.grails.upload
+
+import com.redhat.grails.upload.events.UploaderDeleteEvent
 import com.redhat.grails.upload.events.UploaderEvent
 import org.grails.plugin.platform.events.EventReply
 import org.springframework.web.multipart.MultipartFile
@@ -10,19 +12,19 @@ class UploadService {
 
     Map upload(MultipartFile file, String topic = null, Map params = [:]) {
         def response = [success: false, message: null]
+        def data = new UploaderEvent(file, params)
 
-        try {
-            def data = new UploaderEvent(file, params)
+        EventReply reply = event(topic: topic, for: 'uploader', data: data, fork: false)
+        response = reply.value
+        return response
+    }
 
-            EventReply reply = event(topic: topic, for: 'uploader', data: data, fork: false).waitFor()
-            response = reply.value
+    Map delete(String id, String bucket, String topic = null, Map params = [:]) {
+        def response = [success: false, message: null]
+        def data =  new UploaderDeleteEvent(id, bucket, params)
 
-            if (reply.hasErrors()) {
-                log.error('Error during file upload', e)
-            }
-        } catch (Exception e) {
-            log.error('Error during file upload', e)
-        }
+        EventReply reply = event(topic: topic, for: 'uploader-delete', data: data, fork: false)
+        response = reply.value
         return response
     }
 

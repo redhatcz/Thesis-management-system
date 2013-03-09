@@ -24,4 +24,16 @@ class UploadController {
                     contentType: 'text/json')
         }
     }
+
+    def delete(String id){
+        try {
+            String topic = params?.topic
+            def result = uploadService.delete(id, topic, params)
+        } catch (Exception e) {
+            log.error('Error while deleting file', e)
+            def errorMessage = message(code: 'uploader.error.delete')
+            return render(text: [success: false, message: errorMessage] as JSON,
+                    contentType: 'text/json')
+        }
+    }
 }
