@@ -3,6 +3,5 @@
         <g:message code="thesis.abstract.label" default="Abstract" />
     </label>
     <div class="controls">
-        <file
     </div>
 </div>

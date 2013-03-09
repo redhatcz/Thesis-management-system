@@ -3,6 +3,9 @@
         <g:message code="thesis.abstract.label" default="Abstract" />
     </label>
     <div class="controls">
-        <g:textArea name="thesis.thesisAbstract" cols="80" rows="5" value="${thesisInstance?.thesisAbstract}"/>
+        <g:textArea name="thesis.thesisAbstract"
+                    cols="80"
+                    rows="5"
+                    value="${thesisInstance?.thesisAbstract}"/>
     </div>
 </div>

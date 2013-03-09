@@ -1,10 +1,9 @@
 <div id="${wrapperId}"></div>
 
 <g:if test="${!autoUpload}">
-    <div id="triggerUpload" class="btn btn-primary">
-        <i class="icon-upload icon-white"></i>
+    <span id="triggerUpload" class="tms-btn">
         ${message(code: 'uploader.text.startUploadButton', default: 'Start upload')}
-    </div>
+    </span>
 </g:if>
 
 <script>

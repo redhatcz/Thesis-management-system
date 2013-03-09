@@ -94,7 +94,8 @@ select {
 }
 
 textarea {
-    .pretty-textarea(auto);}
+    .pretty-textarea(auto);
+}
 
 input[type="text"],
 input[type="password"] {
@@ -228,52 +229,55 @@ h4.header {
 
 /*---------NAVIGATION-MENU---------*/
 
-.nav-pills {
-    height: 50px;
-    width: 980px;
+#navigation {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
     background-image: url('../images/buttons/menu.png');
+    margin-bottom: 20px;
 }
 
-.nav-pills > li a {
-    color: @gray;
-    border-radius: 0;
-    height: 50px;
-    width: 245px;
-    margin: 0;
-    padding: 0;
-    display: table-cell;
-    vertical-align: middle;
+#navigation ul {
+    display: table-row;
+}
+
+#navigation li {
     text-align: center;
-    border-bottom: none;
-
-    &:hover {
-        background: none;
-        color: @red;
-        border-bottom: none;
-    }
-}
-
-.nav-pills > .active a,
-.nav-pills > .active a:hover {
-    background-image: url('../images/buttons/menu_active.png');
-    background-color: transparent;
-    width: 245px;
+    vertical-align: middle;
     height: 50px;
-    color: @red;
-}
+    display: table-cell;
+    border-right: 1px solid @grayLighter;
 
-.active#news-feed a {}
+    a {
+        border-bottom: none;
+        color: @gray;
 
-.active#topics a {
-    background-position: 490px 0;
-}
+        &:hover {
+            border-bottom: none;
+            color: @red;
+        }
+    }
 
-.active#theses a {
-    background-position: 490px 0;
-}
+    &.active {
+        background-image: url('../images/buttons/menu_active.png');
+        background-position: 490px 0px;
 
-.active#projects a {
-    background-position: 735px 0;
+        &:first-child {
+            background-position: 0px 0px;
+        }
+
+        &:last-child {
+            background-position: right 0px;
+        }
+
+        a {
+            color: @red;
+        }
+    }
+
+    &:last-child {
+        border-right: none;
+    }
 }
 
 
@@ -365,16 +369,6 @@ ul form {
         margin-bottom: 10px;
     }
 
-    li a {
-        padding: 0 2px;
-        .transition(margin-left linear .1s);
-    }
-
-    li a:hover {
-        margin-left: 5px;
-        .transition(margin-left linear .1s);
-    }
-
     li:last-child {
         margin-bottom: 0;
     }
@@ -459,6 +453,7 @@ ul form {
     .entypo-status:before      { content: '\E704'; }
     .entypo-lock:before        { content: '\1F512'; }
     .entypo-dot:before         { content: '\25CF'; }
+    .entypo-upload:before      { content: '\2B06'; }
 
     .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
     .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
@@ -495,6 +490,7 @@ a.tag-root {
     background: @btnBorder;
     border: none;
     padding: 5px 10px;
+    cursor: pointer;
     *border: 0;
     .border-radius(@baseBorderRadius);
     .ie7-restore-left-whitespace();
@@ -661,6 +657,29 @@ h1.login-title {
     border-width: 3px;
 }
 
+
+/*-----FILE-UPLOADER-----*/
+
+.qq-upload-drop-area {
+
+}
+
+.qq-upload-button {
+    display: inline-block;
+    width: auto;
+}
+
+.qq-drop-processing {
+
+}
+
+.qq-drop-processing-spinner {
+
+}
+
+.qq-upload-list {
+
+}
 
 /*---------OTHER---------*/
 
