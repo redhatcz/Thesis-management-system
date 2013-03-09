@@ -7,10 +7,10 @@
 </head>
 <body>
     <div class="span4">
-        <div class="avatar">
-            %{--University logo will be here soon!--}%
-        </div>
         <div class="panel left">
+            <div class="avatar">
+                %{--University logo will be here soon!--}%
+            </div>
             <h4>University Information</h4>
             <div class="panel-content">
                 <dl>
