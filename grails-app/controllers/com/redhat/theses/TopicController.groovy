@@ -59,10 +59,23 @@ class TopicController {
                 currentCategory: category, commentCounts: commentCounts]
     }
 
-    def create() {
+    def create(Long categoryId) {
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
-        [topicInstance: new Topic(params.topic), supervisionCommand: supervisionCommand,
+
+        def topicInstance = new Topic(params.topic)
+        // if category id is set, set default category to the current category
+        if (categoryId) {
+            def categoryInstance = Category.get(categoryId)
+            if (categoryInstance) {
+                topicInstance.categories = [categoryInstance]
+            }
+        }
+
+        // set default types to Bachelor and master
+        topicInstance.types = [Type.BACHELOR, Type.MASTER]
+
+        [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                 universities: University.all, types: Type.values()]
     }
 

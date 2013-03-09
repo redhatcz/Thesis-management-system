@@ -42,7 +42,12 @@
     <div class="panel right">
         <h4>Manage Topics</h4>
         <div class="panel-content">
-            <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+            <g:if test="${currentCategory}">
+                <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]">Create topic</g:link>
+            </g:if>
+            <g:else>
+                <g:link class="tms-btn tms-info" action="create">Create topic</g:link>
+            </g:else>
         </div>
 
         <g:if test="${currentCategory}">
