@@ -21,9 +21,6 @@
         <li id="universities" class="${controllerName == 'university' ? 'active' : ''}">
             <g:link controller="university">Universities</g:link>
         </li>
-        <li id="configuration" class="${controllerName == 'configuration' ? 'active' : ''}">
-            <g:link controller="configuration">Configuration</g:link>
-        </li>
         </sec:ifAllGranted>
     </ul>
 </div>

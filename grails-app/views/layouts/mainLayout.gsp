@@ -19,6 +19,13 @@
                                 <li>
                                     <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
                                 </li>
+                                <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <li id="configuration"
+                                    class="${controllerName == 'configuration' ? 'active' : ''}">
+                                    <g:link controller="configuration"
+                                            action="edit">Configuration</g:link>
+                                </li>
+                                </sec:ifAllGranted>
                                 <li class="divider"></li>
                                 <li>
                                     <g:link tabindex="-1" controller="logout">Sign Out</g:link>
