@@ -1,7 +1,7 @@
 package com.redhat.grails.mongodb
 
 // TODO: Support for files which are not bound to domain instances
-class GridFIleTagLib {
+class GridFileTagLib {
 
     static namespace = "grid"
 
