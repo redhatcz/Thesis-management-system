@@ -15,19 +15,15 @@
                 <tr>
                     <g:sortableColumn property="id" title="${message(code: 'user.id.label', default: 'Id')}" />
                     <g:sortableColumn property="fullName" title="${message(code: 'user.fullName.label', default: 'Full Name')}" />
-                    <g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" />
-                    <g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}" />
-                    <g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled')}" />
+                    <g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Registration date')}" />
                 </tr>
             </thead>
             <tbody>
             <g:each in="${userInstanceList}" status="i" var="userInstance">
                 <tr>
-                    <td><g:link action="show" id="${userInstance.id}"><g:fieldValue field="id" bean="${userInstance}"/></g:link></td>
-                    <td><g:fieldValue bean="${userInstance}" field="fullName"/></td>
-                    <td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
-                    <td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>
-                    <td><g:formatBoolean boolean="${userInstance.enabled}" /></td>
+                    <td><g:fieldValue field="id" bean="${userInstance}"/></td>
+                    <td><g:link action="show" id="${userInstance.id}"><g:fieldValue bean="${userInstance}" field="fullName"/></g:link></td>
+                    <td><g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" /></td>
                 </tr>
             </g:each>
             </tbody>

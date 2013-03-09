@@ -14,14 +14,15 @@
         <h4>User Information</h4>
         <div class="panel-content">
             <dl>
-            <g:if test="${userInstance?.email}">
                 <dt><span class="entypo-mail mini"></span><g:message code="user.email.label" default="email" /></dt>
                 <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
-            </g:if>
-            <g:if test="${userInstance?.fullName}">
+
                 <dt><span class="entypo-user mini"></span><g:message code="user.fullName.label" default="full name" /></dt>
                 <dd><g:fieldValue bean="${userInstance}" field="fullName"/></dd>
-            </g:if>
+
+                <dt><span class="entypo-clock mini"></span><g:message code="user.show.dateCreated.label" default="registered" /></dt>
+                <dd><g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" /></dd>
+
             <g:if test="${userInstance?.accountExpired}">
                 <dt><span class="entypo-clock mini"></span><g:message code="user.accountExpired.label" default="account Expired" /></dt>
                 <dd><g:formatBoolean boolean="${userInstance?.accountExpired}" /></dd>

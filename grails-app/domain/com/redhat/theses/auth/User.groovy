@@ -10,6 +10,7 @@ class User {
 	String password
     String fullName
     String email
+    Date dateCreated
 	boolean enabled
 	boolean accountExpired
 	boolean accountLocked
