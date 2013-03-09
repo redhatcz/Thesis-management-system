@@ -20,8 +20,8 @@
         <g:if test="${topicTags}">
         <p class="tag-list">
             <span class="entypo-tag big"></span><g:message code="topic.tags.label" default="tags" />:
-            <g:each in="${topicTags}" var="t" status="i">
-                <g:link controller="tag" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
+            <g:each in="${topicTags}" var="tag" status="i">
+                <g:link action="tag" id="${tag.id}">${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
             </g:each>
         </p>
         </g:if>
