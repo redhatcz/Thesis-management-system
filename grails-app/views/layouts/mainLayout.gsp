@@ -24,7 +24,7 @@
                             </li>
                             <sec:ifAllGranted roles="ROLE_ADMIN">
                             <li id="configuration">
-                                <g:link controller="configuration" action="edit">Site Configuration</g:link>
+                                <g:link controller="configuration">Site Configuration</g:link>
                             </li>
                             </sec:ifAllGranted>
                             <li class="divider"></li>

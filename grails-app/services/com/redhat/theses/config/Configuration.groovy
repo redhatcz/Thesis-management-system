@@ -26,6 +26,8 @@ class Configuration {
     def save() {
         if (config != null) {
             configurationProvider.save(config)
+        } else {
+            false
         }
     }
 

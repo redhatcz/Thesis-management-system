@@ -24,5 +24,6 @@ class DummyConfigurationProvider implements ConfigurationProvider {
     @Override
     def save(ConfigObject config) {
         configObject = config
+        true
     }
 }

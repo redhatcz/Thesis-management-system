@@ -21,15 +21,17 @@ class ConfigurationController {
         [config: configuration.getConfig()]
     }
 
-    def edit() {
-        [config: configuration.getConfig()]
-    }
-
     def update() {
         ConfigObject config = new ConfigObject()
         config.putAll(params.configuration ?: [])
         configuration.setConfig(config)
-        configuration.save()
+
+        if (!configuration.save()) {
+            flash.message = message(code: 'config.not.updated')
+            render view: 'index', model: [config: config]
+        }
+
+        flash.message = message(code: 'config.updated')
 
         redirect uri: '/configuration'
     }
