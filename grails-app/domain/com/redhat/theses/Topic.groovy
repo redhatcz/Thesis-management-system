@@ -39,6 +39,7 @@ class Topic extends Article {
             tags {
                 'in' 'id', tagList*.id
             }
+            order 'dateCreated', 'desc'
         }
     }
 
