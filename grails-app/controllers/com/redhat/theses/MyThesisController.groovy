@@ -2,14 +2,16 @@ package com.redhat.theses
 
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
 class MyThesisController {
 
     def springSecurityService
-    def uploadHandlerService
     def gridFileService
+    def thesisService
 
 
+    @Secured(['ROLE_STUDENT'])
     def edit(Long id) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
@@ -28,7 +30,8 @@ class MyThesisController {
         [thesisInstance: thesisInstance]
     }
 
-    def save() {
+    @Secured(['ROLE_STUDENT'])
+    def update() {
         Long id = params.thesis.long("id")
         Long version = params.thesis.long("version")
 
@@ -65,7 +68,7 @@ class MyThesisController {
         redirect action: "show", id: thesisInstance.id
     }
 
-
+    @Secured(['ROLE_STUDENT'])
     def show(Long id) {
         def thesisInstance = Thesis.get(id)
 
