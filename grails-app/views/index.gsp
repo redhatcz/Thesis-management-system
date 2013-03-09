@@ -64,14 +64,6 @@
                 <div class="panel-content">You must be <g:link controller="login">logged in</g:link> to view your theses.</div>
             </sec:ifNotLoggedIn>
         </div>
-
-        <!-- <ul class="nav nav-tabs nav-stacked">
-            <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                <li class="controller">
-                    <g:link controller="${c.logicalPropertyName}">${c.name}</g:link>
-                </li>
-            </g:each>
-        </ul> -->
     </div>
 </body>
 </html>
