@@ -48,7 +48,7 @@
 
 <div class="span4">
     <div class="panel right">
-        <h4>Manage applications</h4>
+        <h4>Manage Applications</h4>
         <div class="panel-content">
             <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link>
         </div>
