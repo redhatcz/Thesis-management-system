@@ -553,7 +553,7 @@ for example): see Web Browser Programming for details.'''
         new Comment(content: 'Thesis', user: vaclav, article: kubaThesis).save()
 
         // APPLICATIONS
-        new Application(applicant: vaclav, topic: autocompletePlugin, university: muni, supervisor: jiriKolar, note: 'ahoj').save()
+        new Application(applicant: vaclav, topic: autocompletePlugin, university: muni, note: 'ahoj').save()
     }
     def destroy = {
     }

@@ -9,7 +9,7 @@
 <body>
     <h2 class="header"><g:message code="default.create.label" args="[entityName]" /></h2>
     <g:form class="form-inline" action="save" >
-        <g:render template="formCreate"/>
+        <g:render template="/shared/thesis/formCreate"/>
         <div class="control-group">
             <div class="controls">
                 <g:submitButton name="create"

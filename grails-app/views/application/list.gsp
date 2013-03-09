@@ -10,26 +10,31 @@
 <body>
 <div class="span8">
     <h1 class="header"><g:message code="default.list.label" args="[entityName]"/></h1>
+    <g:if test="${!applicationInstanceList?.empty}">
     <table class="table">
         <thead>
         <tr>
+            <g:sortableColumn property="id"
+                              title="${message(code: 'id.label', default: 'Id')}"/>
             <g:sortableColumn property="applicant"
-                              title="${message(code: 'application.applicant', default: 'Applicant')}"/>
+                              title="${message(code: 'application.applicant.label', default: 'Applicant')}"/>
             <g:sortableColumn property="topic"
                               title="${message(code: 'topic.label', default: 'Topic')}"/>
-            <g:sortableColumn property="supervisor"
-                              title="${message(code: 'application.supervisor', default: 'Supervisor')}"/>
-            <td>${message(code: 'actions', default: 'Actions')}</td>
         </tr>
         </thead>
         <tbody>
         <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
             <tr>
                 <td>
-                    <g:link action="show" id="${applicationInstance.id}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
+                    <g:link action="show" id="${applicationInstance.id}">${fieldValue(bean: applicationInstance, field: "id")}</g:link>
+
                 </td>
-                <td>${fieldValue(bean: applicationInstance.topic, field: "title")}</td>
-                <td>${fieldValue(bean: applicationInstance.supervisor, field: "fullName")}</td>
+                <td>
+                    <g:link controller="user" action="show" id="${applicationInstance.applicantId}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
+                </td>
+                <td>
+                    <g:link controller="topic" action="show" id="${applicationInstance.topicId}">${fieldValue(bean: applicationInstance.topic, field: "title")}</g:link>
+                </td>
             </tr>
         </g:each>
         </tbody>
@@ -37,6 +42,8 @@
     <g:if test="${Util.isPaginationVisible(applicationInstanceTotal, params.max)}">
         <g:paginate total="${applicationInstanceTotal}" class="pagination-centered"/>
     </g:if>
+    </g:if>
+    <g:else>No applications found.</g:else>
 </div>
 
 <div class="span4">

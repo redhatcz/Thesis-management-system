@@ -6,14 +6,14 @@ class ApplicationService {
 
     def thesisService
 
-    Application approve(Application application) {
-        if (application.approvedByOwner) {
-            application.errors.reject('application.already.approved', 'Application has been already approved.')
+    Application approve(Application application, Thesis thesis) {
+        if (application.approved) {
+            application.errors.reject('application.already.approved')
             return null
         }
 
-        application.approvedByOwner = true
-        def createdThesis = thesisService.createFromApplication(application)
+        application.approved = true
+        def createdThesis = thesisService.save(thesis)
         application.thesis = createdThesis
 
         def persistedApplication = application.save()

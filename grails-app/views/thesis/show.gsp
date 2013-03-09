@@ -13,8 +13,8 @@
         <markdown:renderHtml text="${thesisInstance?.description}"/>
     </g:if>
 
-    <h3>Abstract</h3>
     <g:if test="${thesisInstance?.thesisAbstract}">
+        <h3>Abstract</h3>
         <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
     </g:if>
 
@@ -37,12 +37,14 @@
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.assigneeId}"><g:fieldValue field="assignee" bean="${thesisInstance}"/></g:link>
                 </dd>
+                <g:if test="${thesisInstance?.supervisor}">
                 <dt>
                     <span class="entypo-user mini"></span><g:message code="thesis.supervisor.label" default="supervisor"/>
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.supervisorId}"><g:fieldValue field="fullName" bean="${thesisInstance?.supervisor}"/></g:link>
                 </dd>
+                </g:if>
                 <dt>
                     <span class="entypo-clock mini"></span><g:message code="thesis.dateCreated.label" default="created"/>
                 </dt>

@@ -8,20 +8,19 @@ class Application {
     Topic topic
     Thesis thesis
     University university
-    User supervisor
     Date dateCreated
     String note
-    Boolean approvedByOwner = false
+    Boolean approved = false
+
+    static hibernateFilters = {
+        notApprovedFilter(condition:"approved='0'", default: true)
+    }
 
     static constraints = {
         thesis nullable: true
 
         university validator: { university, application ->
             university.id in application.topic.universities*.id
-        }
-
-        supervisor validator: { supervisor, application ->
-            supervisor.id in application.topic.supervisions*.supervisor*.id
         }
     }
 }

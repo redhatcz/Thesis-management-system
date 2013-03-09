@@ -1,6 +1,5 @@
 package com.redhat.theses
 
-import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
@@ -18,7 +17,7 @@ class ApplicationController {
      */
     def applicationService
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", approveSave: "POST"]
 
     def index() {
         redirect(action: "list", params: params, permanent: true)
@@ -67,10 +66,16 @@ class ApplicationController {
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def approve(Long id) {
         def applicationInstance = Application.get(id)
+        println applicationInstance
         if (!applicationInstance) {
             flash.message = message(code: 'application.not.found', args: [id])
-            redirect(controller: 'application', action: 'list')
+            redirect(action: 'list')
             return
+        }
+
+        if (applicationInstance.approved) {
+            flash.message = message(code: 'application.already.approved')
+            redirect(action: 'show', id: applicationInstance.id)
         }
 
         User user = springSecurityService.currentUser
@@ -79,17 +84,57 @@ class ApplicationController {
             && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'action.permission.denied')
-            redirect(controller: 'application', action: 'list')
+            redirect(action: 'list')
             return
         }
 
-        if (!applicationService.approve(applicationInstance)) {
-            render view: 'show', model: [applicationInstance: applicationInstance]
+        def thesisInstance = new Thesis(params.thesis)
+
+        // Set topic
+        thesisInstance.topic = applicationInstance.topic
+
+        // Set default title to topic title
+        thesisInstance.title = applicationInstance.topic.title
+
+        // Set assignee
+        thesisInstance.assignee = applicationInstance.applicant
+
+        [thesisInstance: thesisInstance, applicationInstance: applicationInstance,
+                disabledAssigneeField: true, disabledTopicField: true]
+    }
+
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def approveSave(Long id) {
+        def applicationInstance = Application.get(id)
+        if (!applicationInstance) {
+            flash.message = message(code: 'application.not.found', args: [id])
+            redirect(action: 'list')
             return
         }
+
+        User user = springSecurityService.currentUser
+
+        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
+                && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+
+            flash.message = message(code: 'action.permission.denied')
+            redirect(action: 'list')
+            return
+        }
+
+        def thesisInstance = new Thesis(params.thesis)
+
+        thesisInstance.status = Status.IN_PROGRESS
+
+        if (!applicationService.approve(applicationInstance, thesisInstance)) {
+            render view: 'approve', model: [thesisInstance: thesisInstance, applicationInstance: applicationInstance,
+                    disabledAssigneeField: true, disabledTopicField: true]
+            return
+        }
+
         flash.message = message(code: 'application.approved')
 
-        redirect(controller: 'application', action: 'show', id: applicationInstance.id)
+        redirect(controller: 'thesis', action: 'show', id: thesisInstance.id)
     }
 
     def show(Long id) {

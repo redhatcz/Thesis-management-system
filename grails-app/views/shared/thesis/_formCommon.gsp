@@ -15,6 +15,7 @@
         <g:hiddenField name="thesis.assignee.id" value="${thesisInstance?.assignee?.id}"/>
         <a4g:textField name="thesis.assignee.fullName"
                        value="${thesisInstance?.assignee?.fullName}"
+                       disabled="${disabledAssigneeField}"
                        autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
                        autocomplete-target="thesis.assignee.id"
                        placeholder="Assignee"/>

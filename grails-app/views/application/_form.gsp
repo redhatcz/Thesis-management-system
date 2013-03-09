@@ -14,22 +14,7 @@
         </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: applicationInstance, field: 'supervisor', 'error')} required">
-    <label class="control-label" for="application.supervisor.id">
-    	 <strong><g:message code="application.supervisor.label" default="Preferred supervisor" /></strong>
-    </label>
-        <div class="controls">
-            <a4g:select id="application.supervisor.id"
-                        name="application.supervisor.id"
-                        source="application.university.id"
-                        noSelection="${['null':'-- no selection --']}"
-                        remote-url="${createLink(controller: 'json', action: 'listSupervisorsFromUniversity')}"
-                        remote-opts="application.topic.id@topicId application.university.id@universityId"
-                        class="many-to-one"/>
-        </div>
-</div>
-
-<div class="control-group ${hasErrors(bean: applicationInstance, field: 'supervisor', 'error')} required">
+<div class="control-group ${hasErrors(bean: applicationInstance, field: 'note', 'error')} required">
     <label class="control-label" for="application.note">
         <strong><g:message code="application.note" default="Note" /></strong>
     </label>

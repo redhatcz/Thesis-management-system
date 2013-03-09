@@ -7,9 +7,10 @@
         <a4g:textField name="thesis.topic.title"
                        value="${thesisInstance?.topic?.title}"
                        disabled="${disabledTopicField}"
+                       placeholder="Topic"
                        autocomplete-url="${createLink(controller: 'json', action: 'listTopicsByTitle')}"
                        autocomplete-target="thesis.topic.id" />
     </div>
 </div>
 
-<g:render template="formCommon"/>
+<g:render template="/shared/thesis/formCommon"/>
