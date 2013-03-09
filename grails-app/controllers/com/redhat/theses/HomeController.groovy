@@ -1,5 +1,6 @@
 package com.redhat.theses
 
+import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
 
 class HomeController {
@@ -21,10 +22,16 @@ class HomeController {
             yourTheses = Thesis.findAllByAssignee(springSecurityService.currentUser, [sort:'dateCreated', order:'desc'])
         }
 
-        params.sort = 'dateCreated'
-        params.order= 'desc'
-        params.max = Util.max(params.max)
-        render view: '/index', model:
-                [feedList: Feed.findAll(params), feedListTotal: Feed.count(), yourTheses: yourTheses]
+        def topicList = Topic.list(sort: 'dateCreated', order: 'desc', max: 5)
+
+        //statistics
+        def statistics = [
+                topicCount: Topic.count(),
+                thesisCount: Thesis.count(),
+                thesisSuccessfulCount: Thesis.countByStatus(Status.FINISHED) - Thesis.countByGrade(Grade.F),
+                userCount: User.count()
+        ]
+
+        render view: '/index', model: [topicList: topicList, yourTheses: yourTheses, statistics: statistics]
     }
 }

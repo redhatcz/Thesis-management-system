@@ -7,25 +7,18 @@
 </head>
 <body>
     <div class="span8 content">
-        <g:each in="${feedList}" var="feed">
+        <h3>Latest topics</h3>
+        <g:each in="${topicList}" var="topic">
             <div class="table-layout">
-                <g:message code="${feed?.messageCode}" args="${feed?.args}"/>
+                <g:link controller="topic" action="show" id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"><g:fieldValue field="title" bean="${topic}"/></g:link>
             </div>
         </g:each>
-        <g:if test="${Util.isPaginationVisible(feedListTotal, params?.max)}">
-            <ul class="pager">
-                <g:if test="${!Util.isLastPage(feedListTotal, params?.max, params?.offset)}">
-                    <li class="next">
-                        <g:link params="[max: Util.max(params?.max), offset: Util.nextOffset(params?.offset, params?.max)]">Older &rarr;</g:link>
-                    </li>
-                </g:if>
-                <g:if test="${!Util.isFirstPage(params?.offset)}">
-                    <li class="previous">
-                        <g:link params="[max: Util.max(params?.max), offset: Util.previousOffset(params?.offset, params?.max)]">&larr; Newer</g:link>
-                    </li>
-                </g:if>
-            </ul>
-        </g:if>
+
+        <h3>Statistics</h3>
+        <span>All topics: ${statistics?.topicCount}</span><br/>
+        <span>All theses: ${statistics?.thesisCount}</span><br/>
+        <span>Successfully finished theses: ${statistics?.thesisSuccessfulCount}</span><br/>
+        <span>Members registered: ${statistics?.userCount}</span>
     </div>
 
     <div class="span4 sidebar">
