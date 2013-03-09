@@ -20,10 +20,8 @@
                                     <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
                                 </li>
                                 <sec:ifAllGranted roles="ROLE_ADMIN">
-                                <li id="configuration"
-                                    class="${controllerName == 'configuration' ? 'active' : ''}">
-                                    <g:link controller="configuration"
-                                            action="edit">Configuration</g:link>
+                                <li id="configuration">
+                                    <g:link controller="configuration" action="edit">Site Configuration</g:link>
                                 </li>
                                 </sec:ifAllGranted>
                                 <li class="divider"></li>

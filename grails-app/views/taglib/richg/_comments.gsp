@@ -20,7 +20,7 @@
 </g:if>
 
 <div id="commentMessages"></div>
-<h4 class="header">Leave a comment</h4>
+<h4 class="header">Leave a Comment</h4>
 <g:form controller="comment" action="create" name="create-comment-form">
     <g:hiddenField name="comment.article.id" value="${article?.id}" />
     <g:textArea class="comment" name="comment.content" rows="5" />
