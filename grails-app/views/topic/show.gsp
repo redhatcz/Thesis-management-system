@@ -16,15 +16,16 @@
         <markdown:renderHtml text="${topicInstance?.description}"/>
         </g:if>
 
-        %{--<g:set var="topicTags" value="${topicInstance?.tags}"/>--}%
-        %{--<g:if test="${topicTags}">--}%
-        %{--<p class="tag-list">--}%
-            %{--<span class="entypo-tag big"></span><g:message code="topic.tags.label" default="tags" />:--}%
-            %{--<g:each in="${topicTags}" var="tag" status="i">--}%
-                %{--<g:link action="tag" id="${tag.id}">${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>--}%
-            %{--</g:each>--}%
-        %{--</p>--}%
-        %{--</g:if>--}%
+        %{--<g:set var="topicTags" value="${topicInstance?.tags}"/>
+        <g:if test="${topicTags}">
+        <p class="tag-list">
+            <i class="icon-tags icon-large"></i>
+            <g:message code="topic.tags.label" default="tags" />:
+            <g:each in="${topicTags}" var="tag" status="i">
+                <g:link action="tag" id="${tag.id}">${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
+            </g:each>
+        </p>
+        </g:if>--}%
 
         <richg:comments comments="${comments}" article="${topicInstance}" commentsTotal="${commentsTotal}"/>
     </div>
@@ -36,7 +37,8 @@
                 <dl>
                 <g:if test="${topicInstance?.owner}">
                     <dt>
-                        <span class="entypo-user mini"></span><g:message code="topic.owner.label" default="owner" />
+                        <i class="icon-user"></i>
+                        <g:message code="topic.owner.label" default="owner" />
                     </dt>
                     <dd>
                         <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>
@@ -45,7 +47,8 @@
 
                 <g:if test="${topicInstance?.dateCreated}">
                     <dt>
-                        <span class="entypo-clock mini"></span><g:message code="topic.dateCreated.label" default="created" />
+                        <i class="icon-time"></i>
+                        <g:message code="topic.dateCreated.label" default="created" />
                     </dt>
                     <dd>
                         <g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" />
@@ -54,7 +57,8 @@
 
                 <g:if test="${!supervisions.empty}">
                     <dt>
-                        <span class="entypo-users mini"></span><g:message code="topic.supervisions.label" default="supervisions" />
+                        <i class="icon-group"></i>
+                        <g:message code="topic.supervisions.label" default="supervisions" />
                     </dt>
                     <g:each in="${supervisions}" status="i" var="supervision">
                     <dd>
@@ -65,7 +69,8 @@
 
                 <g:if test="${!topicInstance?.types?.empty}">
                     <dt>
-                        <span class="entypo-thesis mini"></span><g:message code="topic.types.label" default="types" />
+                        <i class="icon-book"></i>
+                        <g:message code="topic.types.label" default="types" />
                     </dt>
                     <dd>
                     <g:each in="${topicInstance?.types}" status="i" var="type">

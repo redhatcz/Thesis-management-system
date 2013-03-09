@@ -26,33 +26,38 @@
         <div class="panel-content">
             <dl>
                 <dt>
-                    <span class="entypo-thesis mini"></span><g:message code="thesis.topic.label" default="topic"/>
+                    <i class="icon-book"></i>
+                    <g:message code="thesis.topic.label" default="topic"/>
                 </dt>
                 <dd>
                     <g:link action="show" controller="topic" id="${thesisInstance?.topicId}"><g:fieldValue field="topic" bean="${thesisInstance}"/></g:link>
                 </dd>
                 <dt>
-                    <span class="entypo-user mini"></span><g:message code="thesis.assignee.label" default="assignee"/>
+                    <i class="icon-user"></i>
+                    <g:message code="thesis.assignee.label" default="assignee"/>
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.assigneeId}"><g:fieldValue field="assignee" bean="${thesisInstance}"/></g:link>
                 </dd>
                 <g:if test="${thesisInstance?.supervisor}">
                 <dt>
-                    <span class="entypo-user mini"></span><g:message code="thesis.supervisor.label" default="supervisor"/>
+                    <i class="icon-user mini"></i>
+                    <g:message code="thesis.supervisor.label" default="supervisor"/>
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.supervisorId}"><g:fieldValue field="fullName" bean="${thesisInstance?.supervisor}"/></g:link>
                 </dd>
                 </g:if>
                 <dt>
-                    <span class="entypo-clock mini"></span><g:message code="thesis.dateCreated.label" default="created"/>
+                    <i class="icon-time"></i>
+                    <g:message code="thesis.dateCreated.label" default="created"/>
                 </dt>
                 <dd>
                     <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
                 <dt>
-                    <span class="entypo-status mini"></span><g:message code="thesis.status.label" default="status"/>
+                    <i class="icon-question-sign"></i>
+                    <g:message code="thesis.status.label" default="status"/>
                 </dt>
                 <dd>
                 <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">

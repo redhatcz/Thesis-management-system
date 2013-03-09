@@ -29,14 +29,14 @@
                     <div class="panel-content">
                     <g:each in="${yourTheses}" var="yourThesis">
                         <dl>
-                            <dt><span class="entypo-thesis mini"></span>topic</dt>
+                            <dt><i class="icon-book"></i> topic</dt>
                             <dd>
                                 <g:link controller="topic" action="show" id="${yourThesis?.topicId}"
                                         params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
                             </dd>
-                            <dt><span class="entypo-user mini"></span>suprevisor</dt>
+                            <dt><i class="icon-user"></i> suprevisor</dt>
                             <dd><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></dd>
-                            <dt><span class="entypo-status mini"></span>status</dt>
+                            <dt><i class="icon-question-sign"></i> status</dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
                                     <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />

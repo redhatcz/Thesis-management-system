@@ -14,22 +14,45 @@
         <h4>User Information</h4>
         <div class="panel-content">
             <dl>
-                <dt><span class="entypo-mail mini"></span><g:message code="user.email.label" default="email" /></dt>
-                <dd><g:fieldValue bean="${userInstance}" field="email"/></dd>
-
-                <dt><span class="entypo-user mini"></span><g:message code="user.fullName.label" default="full name" /></dt>
-                <dd><g:fieldValue bean="${userInstance}" field="fullName"/></dd>
-
-                <dt><span class="entypo-clock mini"></span><g:message code="user.show.dateCreated.label" default="registered" /></dt>
-                <dd><g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" /></dd>
+                <dt>
+                    <i class="icon-envelope-alt"></i>
+                    <g:message code="user.email.label" default="email" />
+                </dt>
+                <dd>
+                    <g:fieldValue bean="${userInstance}" field="email"/>
+                </dd>
+                <dt>
+                    <i class="icon-user"></i>
+                    <g:message code="user.fullName.label" default="full name" />
+                </dt>
+                <dd>
+                    <g:fieldValue bean="${userInstance}" field="fullName"/>
+                </dd>
+                <dt>
+                    <i class="icon-time"></i>
+                    <g:message code="user.show.dateCreated.label" default="registered" />
+                </dt>
+                <dd>
+                    <g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" />
+                </dd>
 
             <g:if test="${userInstance?.accountExpired}">
-                <dt><span class="entypo-clock mini"></span><g:message code="user.accountExpired.label" default="account Expired" /></dt>
-                <dd><g:formatBoolean boolean="${userInstance?.accountExpired}" /></dd>
+                <dt>
+                    <i class="icon-time"></i>
+                    <g:message code="user.accountExpired.label" default="account Expired" />
+                </dt>
+                <dd>
+                    <g:formatBoolean boolean="${userInstance?.accountExpired}" />
+                </dd>
             </g:if>
             <g:if test="${userInstance?.accountLocked}">
-                <dt><span class="entypo-lock mini"></span><g:message code="user.accountLocked.label" default="Account Locked" /></dt>
-                <dd><g:formatBoolean boolean="${userInstance?.accountLocked}" /></dd>
+                <dt>
+                    <i class="icon-lock"></i>
+                    <g:message code="user.accountLocked.label" default="Account Locked" />
+                </dt>
+                <dd>
+                    <g:formatBoolean boolean="${userInstance?.accountLocked}" />
+                </dd>
             </g:if>
             </dl>
         </div>

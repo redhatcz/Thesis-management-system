@@ -13,15 +13,15 @@
                 </g:link>
             </h3>
             <ul class="inline">
-                <li><span class="entypo-user"></span>
+                <li><i class="icon-user"></i>
                     <g:link controller="user" action="show" id="${topic?.ownerId}">${topic?.owner?.fullName}</g:link>
                 </li>
-                <li><span class="entypo-clock"></span>
+                <li><i class="icon-time"></i>
                     <g:formatDate date="${topic?.dateCreated}"
                                   dateStyle="LONG"
                                   type="date" />
                 </li>
-                <li><span class="entypo-comment"></span>
+                <li><i class="icon-comment"></i>
                     <g:link action="show" id="${topic.id}" fragment="comments">${commentCounts[topic] ?: 0} comments</g:link>
                 </li>
             </ul>

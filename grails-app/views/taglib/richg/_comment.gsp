@@ -2,7 +2,7 @@
 
 <div class="comment" id="comment-${index}">
     <div class="dropdown pull-right">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="entypo-settings"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog large"></i></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <%-- this button shows edit form bellow by javascript (see in richg.js) --%>
             <li>

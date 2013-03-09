@@ -6,7 +6,7 @@
     <content tag="manage-box">
         <div class="container">
             <div class="pull-right">
-                <a href="#"><span class="entypo-rss"></span> News Feed</a>
+                <a href="#"><i class="icon-rss"></i> News Feed</a>
             </div>
         </div>
     </content>

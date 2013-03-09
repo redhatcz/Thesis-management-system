@@ -17,7 +17,9 @@
                 <div class="pull-right">
                     <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
                     <div class="dropdown" style="display: inline;">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="entypo-settings medium-big"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-cog large"></i>
+                        </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li>
                                 <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
@@ -38,7 +40,7 @@
                 <sec:ifNotLoggedIn>
                 <div class="pull-right">
                     <g:link controller="login" action="auth">Sign In</g:link>
-                    <span class="entypo-dot micro"></span>
+                    <i class="icon-circle mini"></i>
                     <g:link controller="registration">Sign Up</g:link>
                 </div>
                 </sec:ifNotLoggedIn>

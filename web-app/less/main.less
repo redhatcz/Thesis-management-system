@@ -210,22 +210,36 @@ h4.header {
     }
 }
 
-.head a [class*="entypo-"] {
+.head a [class*="icon-"] {
     .transition(color linear .2s);
     color: @grayTitles;
 
     &:hover {
         color: @white;
-        .transition(color linear .2s)
+        .transition(color linear .2s);
     }
-}
-
-.head .entypo-dot {
-    vertical-align: middle;
 }
 
 img#logo {
     padding: 5px 0 9px;
+}
+
+
+/*---------ICONS---------*/
+
+.icon-circle.mini {
+    vertical-align: middle;
+    font-size: 10px;
+    padding: 0 5px;
+}
+
+a .icon-cog.large:hover {
+    text-decoration: none;
+}
+
+.icon-cog.large {
+    font-size: 18px;
+    padding-left: 3px;
 }
 
 
@@ -420,56 +434,6 @@ ul form {
 }
 
 
-/*---------ICONS---------*/
-
-@media screen, print {
-    [class*="entypo-"] {
-        font-style: inherit;
-        font-weight: normal;
-        vertical-align: bottom;
-        &:before {
-            font-family: Entypo;
-            font-size: 2em;
-            vertical-align: middle;
-            display: inline-block;
-            content: "";
-            width: 0.5em;
-            text-align: center;
-        }
-    }
-    .entypo-stroke:before {
-        font-family: Entypo;
-    }
-
-    .entypo-thesis:before      { content: '\1F393'; }
-    .entypo-tag:before         { content: '\E789'; }
-    .entypo-tag2:before        { content: '\1F4D1'; }
-    .entypo-mail:before        { content: '\2709'; }
-    .entypo-clock:before       { content: '\1F554'; }
-    .entypo-user:before        { content: '\1F464'; }
-    .entypo-users:before       { content: '\1F465'; }
-    .entypo-add-user:before    { content: '\E700'; }
-    .entypo-comment:before     { content: '\E718'; }
-    .entypo-quote:before       { content: '\275E'; }
-    .entypo-settings:before    { content: '\2699'; }
-    .entypo-book:before        { content: '\1F4D5'; }
-    .entypo-rss:before         { content: '\E73A'; }
-    .entypo-status:before      { content: '\E704'; }
-    .entypo-lock:before        { content: '\1F512'; }
-    .entypo-dot:before         { content: '\25CF'; }
-    .entypo-upload:before      { content: '\2B06'; }
-
-    .entypo-github:before      { content: '\F300'; font-family: 'Entypo Social'; }
-    .entypo-twitter:before     { content: '\F309'; font-family: 'Entypo Social'; }
-    .entypo-gplus:before       { content: '\F30F'; font-family: 'Entypo Social'; }
-
-    .micro { padding: 0 3px; font-size: 0.5em; }
-    .mini { padding-right: 10px; font-size: 1.05em;}
-    .big { font-size: 2em; }
-    .medium-big { font-size: 1.33em; }
-}
-
-
 /*---------CATEGORIES---------*/
 
 a.category {
@@ -557,11 +521,11 @@ div.comment {
     margin-bottom: 30px;
     border: 1px solid @grayBorder;
 
-    .entypo-settings {
+    .icon-cog {
         visibility: hidden;
     }
 
-    &:hover .entypo-settings {
+    &:hover .icon-cog {
         visibility: visible;
     }
 }
@@ -593,8 +557,7 @@ div.comment {
         text-decoration: none;
     }
 
-    li span {
-        padding: 0 5px 5px 0;
+    li i {
         color: @gray;
     }
 
