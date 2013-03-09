@@ -1,10 +1,7 @@
 package com.redhat.grails.upload
-
 import grails.converters.JSON
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
-
-import javax.servlet.http.HttpServletRequest
 
 class UploadController {
 
@@ -17,34 +14,14 @@ class UploadController {
             MultipartFile file = ((MultipartHttpServletRequest) request).getFile('qqfile')
             String topic = params?.topic
 
-            Boolean success = uploadService.upload(file, topic, params)
+            def result = uploadService.upload(file, topic, params)
 
-            return render(text: [success: success] as JSON, contentType: 'text/json')
+            return render(text: result as JSON, contentType: 'text/json')
         } catch (Exception e) {
             log.error('Error during file upload', e)
-            def errorMessage = message(code: 'uploader.error.upload', default: 'An error has occurred during the file upload')
-            return render(text: [success: false, message: errorMessage] as JSON, contentType: 'text/json')
+            def errorMessage = message(code: 'uploader.error.upload')
+            return render(text: [success: false, message: errorMessage] as JSON,
+                    contentType: 'text/json')
         }
     }
-
-
-
-
-    private InputStream getInputStream(HttpServletRequest request) {
-        if (request instanceof MultipartHttpServletRequest) {
-
-            return uploaded.inputStream
-        }
-        request.inputStream
-    }
-
-
-    def file() {
-        def user = springSecurityService.currentUser
-
-        def file = gridFileService.getFile(user, 'id', 'avatar')
-        gridFileService.serveFile(response, file)
-    }
-
-
 }

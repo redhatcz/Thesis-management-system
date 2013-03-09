@@ -1,37 +1,50 @@
 package com.redhat.theses.listeners
 import com.redhat.theses.Thesis
-import com.redhat.theses.auth.User
 import grails.events.Listener
+import org.springframework.context.i18n.LocaleContextHolder as LCH
 
-// TODO: error messages when its integrated in uploader plugin -- for now we return null
 class UploadListenerService {
 
     def springSecurityService
     def gridFileService
+    def messageSource
 
     @Listener(topic = "avatar", namespace = 'uploader')
     boolean avatar( event) {
+        def response = [success: false, message: null]
         def user = springSecurityService.currentUser
-        if (!user) {
-            return null
+
+        if (user) {
+            def saved = gridFileService.save(file: event.file, object: user, group: 'avatar')
+            // true if file was saved
+            response.success = saved || false
         }
 
-        gridFileService.save(file: event.file, object: user, group: 'avatar')
+        return  response
     }
 
     @Listener(topic = "thesis" ,namespace = 'uploader')
     def thesis( event) {
-        def thesis = Thesis.get(event.params.id)
-        User user = springSecurityService.currentUser
+        def response = [success: false, message: null]
+        def id = event.params.id
+        def thesis = Thesis.get(id)
+        def user = springSecurityService.currentUser
 
         if (!thesis){
-            return null
+            response.message = messageSource.getMessage('thesis.not.found', [id].toArray(), LCH.locale)
+            return response
         }
 
         if (thesis.assigneeId != user.id) {
-            return null
+            response.message = messageSource.getMessage('action.permission.denied',[].toArray(),
+                    LCH.locale )
+            return response
         }
 
-        gridFileService.save(file: event.file, object: thesis)
+        def saved = gridFileService.save(file: event.file, object: thesis)
+        // true if file was saved
+        response.success = saved || false
+
+        return response
     }
 }

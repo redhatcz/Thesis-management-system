@@ -1,30 +1,29 @@
 package com.redhat.grails.upload
-
 import com.redhat.grails.upload.events.UploaderEvent
-import com.redhat.grails.upload.exceptions.FileUploadException
+import org.grails.plugin.platform.events.EventReply
 import org.springframework.web.multipart.MultipartFile
 
-// Todo error handling from events
 class UploadService {
 
     def gridFileService
     def springSecurityService
 
-    def upload(MultipartFile file, String topic = null, Map params = [:]) {
+    Map upload(MultipartFile file, String topic = null, Map params = [:]) {
+        def response = [success: false, message: null]
+
         try {
             def data = new UploaderEvent(file, params)
 
-            def reply = event(topic: topic, for: 'uploader', data: data, fork: false).waitFor()
+            EventReply reply = event(topic: topic, for: 'uploader', data: data, fork: false).waitFor()
+            response = reply.value
 
             if (reply.hasErrors()) {
-                throw new FileUploadException(reply.getErrors()[1])
+                log.error('Error during file upload', e)
             }
-            return true
         } catch (Exception e) {
             log.error('Error during file upload', e)
-            throw new FileUploadException(e)
         }
-        return false
+        return response
     }
 
     private defaultUpload(MultipartFile file, Map params) {
