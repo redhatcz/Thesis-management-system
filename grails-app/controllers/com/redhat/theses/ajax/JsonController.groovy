@@ -1,6 +1,6 @@
 package com.redhat.theses.ajax
-import com.redhat.theses.Tag
 import com.redhat.theses.Topic
+import com.redhat.theses.Category
 import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
 import grails.converters.JSON
@@ -40,13 +40,13 @@ class JsonController {
         render userMap as JSON
     }
 
-    def listTagsByName(String term){
-        def tags = Tag.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS])
-        def tagMap = [:]
-        tags.each {
-            tagMap[it.id] = it.title
+    def listCategoriesByName(String term){
+        def categories = Category.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS])
+        def categoryMap = [:]
+        categories.each {
+            categoryMap[it.id] = it.title
         }
-        render tagMap as JSON
+        render categoryMap as JSON
     }
 
     def listTopicsByTitle(String term) {

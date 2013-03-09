@@ -44,9 +44,16 @@
         <div class="panel-content">
             <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
         </div>
-        <h4>Tags</h4>
+
+        <g:if test="${currentCategory}">
+            <h4>${currentCategory?.title}</h4>
+        </g:if>
+        <g:else>
+            <h4>Categories</h4>
+        </g:else>
         <div class="panel-content">
-            <g:render template="tagList" />
+            <g:render template="categoryList" />
         </div>
+
     </div>
 </div>

@@ -66,13 +66,13 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'tags', 'error')}">
-    <label class="control-label" for="topic.tags">
-        <strong><g:message code="topic.tags.label" default="Tags" /></strong>
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'categories', 'error')}">
+    <label class="control-label" for="topic.categories">
+        <strong><g:message code="topic.categories.label" default="Categories" /></strong>
     </label>
     <div class="controls">
-        <g:select name="topic.tags" from="${com.redhat.theses.Tag.list()}" multiple="multiple"
-                  optionKey="id" size="5" value="${topicInstance?.tags*.id}" class="many-to-many"/>
+        <g:select name="topic.categories" from="${com.redhat.theses.Category.list()}" multiple="multiple"
+                  optionKey="id" size="5" value="${topicInstance?.categories*.id}" class="many-to-many"/>
     </div>
 </div>
 

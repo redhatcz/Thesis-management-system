@@ -27,43 +27,36 @@ class TopicController {
 
     def list(Integer max) {
         params.max = Util.max(max)
-        def rootTags = Tag.findAllByParentIsNull()
+        def categoryList = Category.findAll()
         def topics = Topic.list(params)
         def commentCounts = commentService.countByArticles(topics)
 
         [topicInstanceList: topics, topicInstanceTotal: Topic.count(),
-                commentCounts: commentCounts, tags: rootTags]
+                commentCounts: commentCounts, categoryList: categoryList]
     }
 
-    def tag(Long id, Integer max) {
+    def category(Long id, Integer max) {
         if (!id){
-            redirect(action: "list", permanent: true)
-            return
-        }
-
-        params.max = Util.max(max)
-        def tag = Tag.get(id)
-
-        if (!tag) {
-            flash.message = message(code: 'tag.not.found', args: [id])
             redirect(action: "list")
             return
         }
 
-        // TODO: possible refactoring
-        def topicInstanceList = Topic.findAllByTags(tag.allSubTags + tag)
-        println topicInstanceList
-        def topicInstanceTotal = topicInstanceList.size()
-        if (params.max && params.offset) {
-            def fromIndex = params.int('offset')
-            def toIndex = Math.min(fromIndex + params.('max'), topicInstanceTotal)
-            topicInstanceList = topicInstanceList.subList(fromIndex, toIndex)
+        params.max = Util.max(max)
+        def category = Category.get(id)
+
+        if (!category) {
+            flash.message = message(code: 'category.not.found', args: [id])
+            redirect(action: "list")
+            return
         }
+
+        def topicInstanceList = Topic.findAllByCategory(category, params)
+        def topicInstanceTotal = Topic.countByCategory(category)
 
         def commentCounts = commentService.countByArticles(topicInstanceList)
 
         [topicInstanceList: topicInstanceList, topicInstanceTotal: topicInstanceTotal,
-                currentTag: tag, tags: tag.subTags, commentCounts: commentCounts]
+                currentCategory: category, commentCounts: commentCounts]
     }
 
     def create() {
@@ -139,6 +132,11 @@ class TopicController {
         }
 
         topicInstance.properties = params.topic
+        // when no categories selected, set them to empty list
+        if (!params.topic.categories) {
+            topicInstance.categories = []
+        }
+
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
         supervisionCommand.supervisions = supervisionCommand.supervisions.findAll()

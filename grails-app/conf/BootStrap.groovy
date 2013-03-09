@@ -82,27 +82,21 @@ class BootStrap {
                 roles: [Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
         ).save()
 
-        // TAGS
-        def javaTag = new Tag(title: 'java').save()
-        def groovyTag = new Tag(title: 'groovy').save()
-        def pythonTag = new Tag(title: 'python').save()
-        def rubyTag = new Tag(titile: 'ruby').save()
-        def othersTag = new Tag(title: 'others').save()
-        def jbossTag = new Tag(title: 'jboss', parent: javaTag).save()
-        def redhatTag = new Tag(title: 'redhat', parent: javaTag).save()
-        def seam2Tag = new Tag(title: 'seam2', parent: jbossTag).save()
-        def seam3Tag = new Tag(title: 'seam3', parent: jbossTag).save()
-        def eapTag = new Tag(title: 'eap', parent: redhatTag).save()
-        def wfkTag = new Tag(title: 'wfk', parent: redhatTag).save()
-        def grailsTag = new Tag(title: 'grails', parent: groovyTag).save()
-        def djangoTag = new Tag(title: 'django', parent: pythonTag).save()
-        def python3Tag = new Tag(title: 'python3', parent: pythonTag).save()
+        // CATEGORIES
+        def javaCategory = new Category(title: 'Java', description: 'Very verbose programming language').save(flush: true)
+        def groovyCategory = new Category(title: 'Groovy', description: 'Programming language with a good community').save(flush: true)
+        def pythonCategory = new Category(title: 'Python', description: 'Programming language for beginners').save(flush: true)
+        def rubyCategory = new Category(titile: 'Ruby', description: 'Programming language for writers').save(flush: true)
+        def othersCategory = new Category(title: 'Others', description: 'All stuff that don\'t fit anywhere else').save(flush: true)
+        def wfkCategory = new Category(title: 'Web Framework Kit', description: 'Red hat JBoss kit of web frameworks').save(flush: true)
+        def grailsCategory = new Category(title: 'Grails', description: 'Web framework written in Groovy').save(flush: true)
+        def djangoCategory = new Category(title: 'Django', description: 'Web framework written in Python').save(flush: true)
 
         // TOPICS
         def tms = new Topic(
                 title: 'Theses management system',
                 owner: jiriPechanec,
-                tags: [grailsTag, jbossTag],
+                categories: [grailsCategory],
                 types: [Type.BACHELOR],
                 universities: [muni, vut],
                 lead: '''Application for managing theses for Red Hat''',
@@ -111,7 +105,7 @@ class BootStrap {
 using the most *state-of-the-art* technologies and will be deployed on OpenShift.
 ###Requirements
 
-* Categories (or hierarchical tags)
+* Categories (or hierarchical categories)
 * List of universities that the thesis is offered for
 * Fulltext search
 * Discussion on topics
@@ -135,7 +129,7 @@ _Note: You should also consider management of school projects._
         def torquebox = new Topic(
                 title: 'Torquebox productization',
                 owner: admin,
-                tags: [javaTag, rubyTag, wfkTag],
+                categories: [javaCategory, rubyCategory, wfkCategory],
                 universities: [muni, vut],
                 lead: '''TorqueBox is a new kind of Ruby application platform that supports popular technologies such
 as Ruby on Rails and Sinatra, while extending the footprint of Ruby applications to include built-in support for
@@ -160,7 +154,7 @@ Download ePub manual Highlights of major......'''
         def pythonFramework = new Topic(
                 title: 'Framework for Python',
                 owner: jiriPechanec,
-                tags: [pythonTag],
+                categories: [pythonCategory],
                 universities: [muni, vut],
                 lead: '''Python is a general-purpose, high-level programming language whose design philosophy
 emphasizes code readability. Its syntax is said to be clear and expressive. Python has a large and comprehensive
@@ -186,7 +180,7 @@ language with the greatest growth in popularity over the course of a year, as me
         def testsForWFK = new Topic(
                 title: 'Tests for WFK',
                 owner: jiriPechanec,
-                tags: [jbossTag, wfkTag],
+                categories: [wfkCategory],
                 universities: [muni],
                 lead: '''All-in-one solution with enterprise-ready versions of popular open source frameworks''',
                 description:
@@ -204,7 +198,7 @@ simple web applications.'''
         def mavenThingy = new Topic(
                 title: 'Maven Thingy',
                 owner: jiriPechanec,
-                tags: [javaTag],
+                categories: [javaCategory],
                 universities: [muni, vut],
                 lead: '''Apache Maven is a software project management and comprehension tool. Based on the concept of
 a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of
@@ -236,7 +230,7 @@ If you are looking for a quick reference, you can use *the documentation* index.
         def grailsPluginForLess = new Topic(
                 title: 'Grails plugin for less resources',
                 owner: admin,
-                tags: [grailsTag, jbossTag],
+                categories: [grailsCategory],
                 universities: [muni, vut],
                 lead: '''This plugin supports server-side compilation of .less CSS files to their .css counterparts.''',
                 description:
@@ -256,9 +250,9 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
         def djangoPluginForLess = new Topic(
                 title: 'Django plugin for less resources',
                 owner: admin,
-                tags: [djangoTag, python3Tag, jbossTag],
+                categories: [djangoCategory],
                 universities: [muni, vut],
-                lead: '''Django LESS provides template tags to compile LESS into CSS from templates. It works with both
+                lead: '''Django LESS provides template categories to compile LESS into CSS from templates. It works with both
 inline code and extenal files.''',
                 description:
                         '''##Instalation
@@ -299,7 +293,7 @@ _Note: none_
         def markdownCompiler = new Topic(
                 title: 'Markdown compiler in groovy',
                 owner: jiriPechanec,
-                tags: [othersTag, groovyTag, jbossTag],
+                categories: [othersCategory, groovyCategory],
                 universities: [muni],
                 lead: '''Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write
 using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).''',
@@ -310,7 +304,7 @@ to Markdown’s formatting syntax. You can try it out, right now, using the onli
 
 The overriding design goal for Markdown’s formatting syntax is to make it as readable as possible. The idea is that
 a Markdown-formatted document should be publishable as-is, as plain text, without looking like it’s been marked up
-with tags or formatting instructions. *While Markdown’s* syntax has been influenced by several existing text-to-HTML
+with categories or formatting instructions. *While Markdown’s* syntax has been influenced by several existing text-to-HTML
 filters, the single biggest source of inspiration for Markdown’s syntax is the format of plain text email.
 
 The best way to get a feel for Markdown’s formatting syntax is simply to look at a Markdown-formatted document. For
@@ -323,7 +317,7 @@ http://daringfireball.net/projects/markdown/index.text'''
         def jbossMavenPlugin = new Topic(
                 title: 'JBoss AS maven plugin',
                 owner: jiriPechanec,
-                tags: [javaTag, jbossTag, redhatTag],
+                categories: [javaCategory],
                 universities: [muni, vut],
                 lead: '''Jboss AS maven plugin for deployment, undeployment and redeployment of a Java EE application
 on JBoss AS''',
@@ -357,7 +351,7 @@ to your question as part of an older thread. Hence, it is also worth browsing/se
         def twitterBootstrapPlugin = new Topic(
                 title: 'Twitter bootstrap plugin for picking date',
                 owner: admin,
-                tags: [othersTag],
+                categories: [othersCategory],
                 universities: [muni, vut],
                 lead: '''Add datepicker picker to field or to any other element.''',
                 description:
@@ -394,7 +388,7 @@ Set a new value for the datepicker. It cand be a string in the specified format 
         def autocompletePlugin = new Topic(
                 title: 'Autocomplete plugin for grails',
                 owner: jiriPechanec,
-                tags: [grailsTag, jbossTag],
+                categories: [grailsCategory],
                 universities: [muni, vut],
                 lead: '''Typeahead is a feature of computers and software (and some typewriters) that enables users
 to continue typing regardless of program or computer operation—the user may type in whatever speed he or she desires,
@@ -420,7 +414,7 @@ specifications of the computer with which one is communicating, it is not often 
         def hibernateProductization = new Topic(
                 title: 'Productization of hibernate',
                 owner: jiriPechanec,
-                tags: [redhatTag],
+                categories: [],
                 universities: [muni],
                 lead: '''Hibernate is an object-relational mapping (ORM) library for the Java language, providing a
 framework for mapping an object-oriented domain model to a traditional relational database. ''',
@@ -447,7 +441,7 @@ Hibernate supports the mapping of custom value types. This makes the following s
         def rubyKillingMachine = new Topic(
                 title: 'Killing machine for Ruby',
                 owner: jiriPechanec,
-                tags: [rubyTag, jbossTag, othersTag],
+                categories: [rubyCategory, othersCategory],
                 universities: [muni, vut],
                 lead: '''Killing Machine (also known as Hell Bent for Leather) is the fifth studio album by British
 heavy metal band Judas Priest. With its release in October 1978, the album pushed the band towards a more commercial

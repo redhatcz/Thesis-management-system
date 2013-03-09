@@ -1,9 +1,9 @@
-<%@ page import="com.redhat.theses.Tag" %>
+<%@ page import="com.redhat.theses.Category" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'tag.label', default: 'Tag')}" />
+    <g:set var="entityName" value="${message(code: 'category.label', default: 'Category')}" />
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -39,12 +39,7 @@
     <div class="panel right">
         <h4>Application Management</h4>
         <div class="panel-content">
-            <g:form>
-                <fieldset class="buttons">
-                    <g:hiddenField name="tag.id" value="${applicationInstance?.id}" />
-                    <g:link class="tms-btn tms-warning" action="approve" id="${applicationInstance?.id}"><g:message code="application.button.approve.label" default="Approve" /></g:link>
-                 </fieldset>
-            </g:form>
+            <g:link class="tms-btn tms-warning" action="approve" id="${applicationInstance?.id}"><g:message code="application.button.approve.label" default="Approve" /></g:link>
         </div>
     </div>
 </div>
