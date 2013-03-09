@@ -15,6 +15,7 @@
     <g:each in="${tags}" var="tag">
     <li>
         <g:link class="tag" action="tag" id="${tag.id}">${fieldValue(bean: tag, field: "title")}</g:link>
+        &#215; 5
     </li>
     </g:each>
     </ul>
