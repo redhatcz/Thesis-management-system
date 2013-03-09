@@ -14,7 +14,7 @@
 
 <g:if test="${Util.isPaginationVisible(commentsTotal, params.max)}">
     <g:paginate total="${commentsTotal}"
-                params="[id: params.id]"
+                params="${params}"
                 class="pagination-centered"
                 offset="${Util.lastOffset(commentsTotal, params.max, params.offset)}"/>
 </g:if>
