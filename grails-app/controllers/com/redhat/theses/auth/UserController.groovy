@@ -29,11 +29,15 @@ class UserController {
     }
 
     def create() {
-        [userInstance: new User(params.user)]
+        def userInstance = new User(params.user)
+        userInstance.roles = [Role.STUDENT]
+        [userInstance: userInstance]
     }
 
     def save() {
         def userInstance = new User(params.user)
+        // when only one role selected, it is not considered a list by default
+        userInstance.roles = params.user?.list('roles')?.collect {Role.valueOf(it)}
         if (!userService.save(userInstance)) {
             render(view: "create", model: [userInstance: userInstance])
             return
@@ -117,6 +121,8 @@ class UserController {
         }
 
         userInstance.properties = params.user
+        // when only one role selected, it is not considered a list by default
+        userInstance.roles = params.user?.list('roles')?.collect {Role.valueOf(it)}
 
         if (!userService.save(userInstance)) {
             render(view: "edit", model: [userInstance: userInstance])

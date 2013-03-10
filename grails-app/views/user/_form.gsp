@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.auth.User" %>
+<%@ page import="com.redhat.theses.auth.Role; com.redhat.theses.auth.User" %>
 <div class="control-group ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
     <label class="control-label" for="user.email">
         <strong><g:message code="user.email.label" default="Email" />
@@ -18,6 +18,17 @@
     <div class="controls">
 	    <g:textField name="user.fullName" value="${userInstance?.fullName}"
                      placeholder="${message(code: 'user.fullName.label', default: 'Full Name')}" />
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: userInstance, field: 'roles', 'error')}">
+    <label class="control-label" for="user.roles">
+        <strong><g:message code="user.roles.label" default="Roles" />
+            <span class="required-indicator">*</span></strong>
+    </label>
+    <div class="controls">
+        <g:select name="user.roles" from="${Role.values()}" multiple="multiple"
+                  size="4" value="${userInstance?.roles}" class="many-to-many"/>
     </div>
 </div>
 
