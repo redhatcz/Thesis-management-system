@@ -60,7 +60,7 @@ class ApplicationController {
         }
 
         flash.message = message(code: 'application.created', args: [application.id])
-        redirect(action: "show", id: topicInstance?.id)
+        redirect(action: "show", id: application?.id)
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
