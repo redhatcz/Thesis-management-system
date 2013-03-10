@@ -19,7 +19,7 @@
             <g:each in="${thesisInstanceList}" status="i" var="thesisInstance">
                 <tr>
                     <td>
-                        <g:link action="show" id="${thesisInstance.id}"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
+                        <g:link controller="thesis" action="show" id="${thesisInstance.id}"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
                     </td>
                 </tr>
             </g:each>
