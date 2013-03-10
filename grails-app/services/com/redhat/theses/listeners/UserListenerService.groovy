@@ -19,9 +19,15 @@ class UserListenerService {
         log.info "User with email ${e.user.email} created."
 
         // send confirmation email
+        def subject = "You have signed up for Theses management system, please confirm your registration"
+        if (e.createdByAdmin) {
+            subject = "You have been signed up for Theses management system, please confirm your registration"
+        }
         emailConfirmationService.sendConfirmation(
             to: e.user.email,
-            subject: "You have signed up for Theses management system, please confirm your email address",
+            subject: subject,
+            view: '/emailConfirmation/registrationConfirm',
+            model: [fullName: e.user.fullName, password: e.password],
             id: e.user.id
         )
 

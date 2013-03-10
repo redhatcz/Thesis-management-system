@@ -9,8 +9,10 @@ class UserService {
     def save(User user) {
         String eventType = user.id ? 'update' : 'create'
 
+        def createdByAdmin = false
         String password = user.password
         if (!password) {
+            createdByAdmin = true
             password = RandomStringUtils.random(8, true, true)
             user.password = password
         }
@@ -20,7 +22,7 @@ class UserService {
         if (persistedUser) {
             if (eventType == 'create') {
                 event('userCreated',
-                    new UserCreatedEvent(persistedUser, password))
+                    new UserCreatedEvent(persistedUser, password, createdByAdmin))
             }
         }
         persistedUser
