@@ -14,19 +14,10 @@ class TopicService {
     Boolean saveWithSupervisions(Topic topic, List supervisions) {
         String type = topic.id ? 'topicUpdated' : 'topicCreated'
         def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it in supervisions)} : []
-        println removedSupervisions
         def savedTopic = topic.save(flush: true)
         def success = savedTopic &&
-                supervisions.every {
-                    if (!it.id) {
-                        it.topic = savedTopic
-                        it.save()
-                    } else {
-                        true
-                    }
-                } &&
+                supervisions.every { it.save(failOnError: true) } &&
                 removedSupervisions.every { Commons.delete(it) }
-        println success
 
         if (!success) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()

@@ -23,7 +23,7 @@ class ConfigurationController {
 
     def update() {
         ConfigObject config = new ConfigObject()
-        config.putAll(params.configuration ?: [])
+        config.putAll(params.configuration ?: [:])
         configuration.setConfig(config)
 
         if (!configuration.save()) {

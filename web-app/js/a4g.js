@@ -65,13 +65,17 @@ function autocomplete(id) {
                 });
             },
             updater: function(item, type) {
-                if (type == "value") {
-                    $('#' + escapeRegex($this.attr('autocomplete-target'))).val(item);
+                var autocompleteTarget = $this.attr('autocomplete-target')
+                if (type == "value" && autocompleteTarget) {
+                    $('#' + escapeRegex(autocompleteTarget)).val(item);
                 }
                 return item;
             },
             deleter: function () {
-                $('#' + escapeRegex($this.attr('autocomplete-target'))).val(null);
+                var autocompleteTarget = $this.attr('autocomplete-target')
+                if (autocompleteTarget) {
+                    $('#' + escapeRegex(autocompleteTarget)).val(null);
+                }
             },
             detailsType: detailsType
         });

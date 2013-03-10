@@ -4,6 +4,8 @@ import com.redhat.theses.util.Util
 
 class TopicController {
 
+    static final Long TAG_MAX = 10
+
     /**
      * Dependency injection of com.redhat.theses.TopicService
      */
@@ -19,44 +21,64 @@ class TopicController {
      */
     def commentService
 
+    /**
+     * Dependency injection of com.redhat.theses.TagService
+     */
+    def tagService
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params, permanent: true)
     }
 
-    def list(Integer max) {
-        params.max = Util.max(max)
+    def list(Long categoryId, String tagTitle) {
+        params.max = Util.max(params.max)
+
+        def category = null
+        if (categoryId) {
+            category = Category.get(categoryId)
+
+            if (!category) {
+                flash.message = message(code: 'category.not.found', args: [categoryId])
+                redirect(action: "list")
+                return
+            }
+        }
+        def tag = null
+        if (tagTitle) {
+            tag = Tag.get(new Tag(title: tagTitle))
+
+            if (!tag) {
+                flash.message = message(code: 'tag.not.found', args: [tagTitle])
+                redirect(action: "list")
+                return
+            }
+        }
+
+        def topics
+        def topicCount
+        if (category && tag) {
+            topics = Topic.findAllByCategoryAndTag(category, tag, params)
+            topicCount = Topic.countByCategoryAndTag(category, tag)
+        } else if (category && !tag) {
+            topics = Topic.findAllByCategory(category, params)
+            topicCount = Topic.countByCategory(category)
+        } else if (tag && !category) {
+            topics = Topic.findAllByTag(tag, params)
+            topicCount = Topic.countByTag(tag)
+        } else {
+            topics = Topic.list(params)
+            topicCount = Topic.count()
+        }
+
         def categoryList = Category.findAll()
-        def topics = Topic.list(params)
+        def tagListWithUsage = tagService.findAllWithCountUsage([max: TAG_MAX])
         def commentCounts = commentService.countByArticles(topics)
 
-        [topicInstanceList: topics, topicInstanceTotal: Topic.count(),
-                commentCounts: commentCounts, categoryList: categoryList]
-    }
-
-    def category(Long id, Integer max) {
-        if (!id){
-            redirect(action: "list")
-            return
-        }
-
-        params.max = Util.max(max)
-        def category = Category.get(id)
-
-        if (!category) {
-            flash.message = message(code: 'category.not.found', args: [id])
-            redirect(action: "list")
-            return
-        }
-
-        def topicInstanceList = Topic.findAllByCategory(category, params)
-        def topicInstanceTotal = Topic.countByCategory(category)
-
-        def commentCounts = commentService.countByArticles(topicInstanceList)
-
-        [topicInstanceList: topicInstanceList, topicInstanceTotal: topicInstanceTotal,
-                currentCategory: category, commentCounts: commentCounts]
+        [topicInstanceList: topics, topicInstanceTotal: topicCount, commentCounts: commentCounts,
+                categoryList: categoryList, currentCategory: category, currentTag: tag,
+                tagListWithUsage: tagListWithUsage]
     }
 
     def create(Long categoryId) {
@@ -83,6 +105,14 @@ class TopicController {
         def topicInstance = new Topic(params.topic)
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
+
+        // setup supervisions
+        supervisionCommand.supervisions.each {
+            it.topic = topicInstance
+        }
+
+        // setup tags
+        topicInstance.tags = params.topic.tags.list('title').collect { new Tag(title: it) }.unique{[it.title]}
 
         if (!topicService.saveWithSupervisions(topicInstance, supervisionCommand.supervisions)) {
             render(view: "create", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
@@ -145,10 +175,19 @@ class TopicController {
         }
 
         topicInstance.properties = params.topic
+
+        // when no types selected, set them to empty list
+        if (!params.topic.types) {
+            topicInstance.types = []
+        }
+
         // when no categories selected, set them to empty list
         if (!params.topic.categories) {
             topicInstance.categories = []
         }
+
+        // setup tags
+        topicInstance.tags = params.topic.tags.list('title').collect { new Tag(title: it) }.unique{[it.title]}
 
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
@@ -161,15 +200,15 @@ class TopicController {
             return
         }
 
-        //TODO: refactoring?
-        def withExistingSupervisions = supervisionCommand.supervisions.collect {
-            def supervision = Supervision.findByTopicAndSupervisorAndUniversity(topicInstance, it.supervisor, it.university)
-            if (supervision) {
-                supervision
-            } else {
-                it
+        def previousSupervisions = Supervision.findAllByTopic(topicInstance)
+        def withExistingSupervisions = supervisionCommand.supervisions.collect { s ->
+            def supervision = previousSupervisions.find { it.supervisor == s.supervisor && it.university == s.university }
+            if (!supervision){
+                supervision = s
+                supervision.topic = topicInstance
             }
-        }
+            supervision
+        }.unique{[it.supervisor, it.university]}
         if (!topicService.saveWithSupervisions(topicInstance, withExistingSupervisions))  {
             render(view: "edit", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                     universities: University.all, types: Type.values()])

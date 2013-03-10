@@ -16,16 +16,17 @@
         <markdown:renderHtml text="${topicInstance?.description}"/>
         </g:if>
 
-        %{--<g:set var="topicTags" value="${topicInstance?.tags}"/>
+        <g:set var="topicTags" value="${topicInstance?.tags}"/>
         <g:if test="${topicTags}">
         <p class="tag-list">
             <i class="icon-tags icon-large"></i>
             <g:message code="topic.tags.label" default="tags" />:
             <g:each in="${topicTags}" var="tag" status="i">
-                <g:link action="tag" id="${tag.id}">${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
+                <g:link action="list" params="${[tagTitle: tag.title] + (params.categoryId ? [categoryId: params.categoryId] : [])}"
+                >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
             </g:each>
         </p>
-        </g:if>--}%
+        </g:if>
 
         <richg:comments comments="${comments}" article="${topicInstance}" commentsTotal="${commentsTotal}"/>
     </div>

@@ -11,4 +11,8 @@ class Supervision implements Serializable {
     static constraints = {
         supervisor unique: ['university', 'topic']
     }
+
+    static mapping = {
+        version false
+    }
 }

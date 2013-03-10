@@ -7,4 +7,7 @@ class Subscription {
     User subscriber
     Article article
 
+    static mapping = {
+        version false
+    }
 }

@@ -1,9 +1,12 @@
 package com.redhat.theses.ajax
-import com.redhat.theses.Topic
+
 import com.redhat.theses.Category
+import com.redhat.theses.Tag
+import com.redhat.theses.Topic
 import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
 import grails.converters.JSON
+
 /**
  * TODO: if the key of the map that is returned as JSON is not unique,
  * we should return something that is unique, e.g. "Full Name (id)"
@@ -47,6 +50,10 @@ class JsonController {
             categoryMap[it.id] = it.title
         }
         render categoryMap as JSON
+    }
+
+    def listTagsByTitle(String term){
+        render Tag.findAllByTitleIlike("%${term}%", [max: MAX_RESULTS]).collect {it.title} as JSON
     }
 
     def listTopicsByTitle(String term) {

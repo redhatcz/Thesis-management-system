@@ -19,6 +19,15 @@
     </div>
 </div>
 
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')} ">
+    <div class="controls">
+        <label class="checkbox" for="topic.enabled">
+            <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
+            <g:message code="topic.enabled.label" default="Enabled" />
+        </label>
+    </div>
+</div>
+
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
     <label class="control-label" for="topic.universities">
         <strong><g:message code="topic.universities.label" default="Universities" /></strong>
@@ -76,11 +85,15 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')} ">
+<div class="control-group">
+    <label class="control-label" for="tag-list">
+        <strong><g:message code="tag.label" default="Tags" /></strong>
+    </label>
     <div class="controls">
-        <label class="checkbox" for="topic.enabled">
-            <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
-            <g:message code="topic.enabled.label" default="Enabled" />
-        </label>
+        <richg:dynamicField id="tag-list" for="${topicInstance?.tags}" var="tag" index="i">
+            <a4g:textField name="topic.tags.title" id="topic.tags[${i}].title" value="${tag?.title}"
+                           autocomplete-url="${createLink(controller: 'json', action: 'listTagsByTitle')}"
+                           autocomplete-detailsType="none"/>
+        </richg:dynamicField>
     </div>
 </div>

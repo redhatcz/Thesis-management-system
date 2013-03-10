@@ -51,13 +51,18 @@
         </div>
 
         <g:if test="${currentCategory}">
-            <h4>${currentCategory?.title}</h4>
+            <h4>Category: ${currentCategory?.title}</h4>
         </g:if>
         <g:else>
             <h4>Categories</h4>
         </g:else>
         <div class="panel-content">
             <g:render template="categoryList" />
+        </div>
+
+        <h4>Tags</h4>
+        <div class="panel-content">
+            <g:render template="tagList" />
         </div>
 
     </div>
