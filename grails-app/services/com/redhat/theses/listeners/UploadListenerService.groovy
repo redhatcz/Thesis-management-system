@@ -58,7 +58,7 @@ class UploadListenerService {
         def user = springSecurityService.currentUser
 
         if (!thesis) {
-            response.message = messageSource.getMessage('thesis.not.found', [id].toArray(), LCH.locale)
+            response.message = messageSource.getMessage('thesis.not.found', [thesisId].toArray(), LCH.locale)
             return response
         }
 
