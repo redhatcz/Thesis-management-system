@@ -31,7 +31,9 @@ class Topic extends Article {
     }
 
     static List<Topic> findAllByCategory(Category category, Map params = [:]){
-        Topic.findAll('from Topic t where :category member of t.categories', [category: category], params)
+        Topic.findAll(
+                'from Topic t where :category member of t.categories order by t.dateCreated desc',
+                [category: category], params)
     }
 
     static Long countByCategory(Category category){
@@ -40,7 +42,7 @@ class Topic extends Article {
     }
 
     static List<Topic> findAllByTag(Tag tag, Map params = [:]){
-        Topic.findAll('from Topic t where :tag member of t.tags', [tag: tag], params)
+        Topic.findAll('from Topic t where :tag member of t.tags order by t.dateCreated desc', [tag: tag], params)
     }
 
     static Long countByTag(Tag tag){
@@ -49,7 +51,7 @@ class Topic extends Article {
 
     static List<Topic> findAllByCategoryAndTag(Category category, Tag tag, Map params = [:]){
         Topic.findAll(
-                'from Topic t where :tag member of t.tags and :category member of t.categories',
+                'from Topic t where :tag member of t.tags and :category member of t.categories order by t.dateCreated desc',
                 [tag: tag, category: category], params)
     }
 
