@@ -10,20 +10,19 @@
 <body>
 <h2 class="header"><g:fieldValue bean="${thesisInstance?.topic}" field="title"/></h2>
 
-<div class="span8">
-
     <h3>Abstract</h3>
     <g:if test="${thesisInstance?.thesisAbstract}">
         <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
     </g:if>
     <g:else>
-        <p>
-            Thesis abstract is missing, please provide a brief description of your thesis.
-        </p>
+        <p>Thesis abstract is missing, please provide a brief description of your thesis.</p>
     </g:else>
-    <g:link class="tms-btn tms-warning" controller="myThesis" action="edit"
-            id="${thesisInstance?.id}"><g:message code="thesis.asignee.edit"
-                                                  default="Update Abstract"/></g:link>
+    <g:link class="tms-btn tms-warning"
+            controller="myThesis"
+            action="edit"
+            id="${thesisInstance?.id}">
+        <g:message code="thesis.asignee.edit" default="Update Abstract"/>
+    </g:link>
 
     <h3>Related files</h3>
     <g:if test="${files}">

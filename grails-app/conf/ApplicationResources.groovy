@@ -22,8 +22,7 @@ modules = {
     }
     'fine-uploader' {
         dependsOn 'jquery'
-
-        resource url: [dir: 'css', file: 'fineuploader-3.2.css']
+        resource url: [dir: 'less', file: 'fineuploader.less'], attrs: [rel: 'stylesheet/less', type: 'css']
         resource url:  [dir: 'js', file: 'jquery.fineuploader-3.2.min.js']
     }
 
