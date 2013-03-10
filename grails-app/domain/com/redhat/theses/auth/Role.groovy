@@ -5,8 +5,4 @@ enum Role {
     SUPERVISOR,
     OWNER,
     STUDENT
-
-    String toString() {
-        "ROLE_${this.name()}"
-    }
 }

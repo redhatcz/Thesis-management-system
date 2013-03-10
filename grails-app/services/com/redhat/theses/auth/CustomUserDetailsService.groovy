@@ -55,7 +55,7 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
             return []
         }
 
-        def authorities = user.roles.collect { new GrantedAuthorityImpl(it.toString()) }
+        def authorities = user.roles.collect { new GrantedAuthorityImpl("ROLE_${it.toString()}") }
         authorities ?: NO_ROLES
     }
 
