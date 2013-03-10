@@ -9,6 +9,7 @@ class UploaderTagLib {
     def groovyPageRenderer
 
     def final DEF_WRAPPER_ID = 'uploader-wrapper'
+    def final DEF_WRAPPER_TEMPLATE = '/taglib/uploader/uploader'
     def final DEF_TEMPLATE = '/taglib/uploader/uploaderBootstrapTemplate'
 
     def final MULTIPLE_FILES_CONFIG = [
@@ -20,6 +21,10 @@ class UploaderTagLib {
             multiple: true,
             sizeLimit: 1000000,
             template: null,
+            deleteFile: [
+                enabled: true,
+                forceConfirm: true
+            ]
     ]
 
     /**
@@ -29,6 +34,7 @@ class UploaderTagLib {
      * @attr params             Request params to be sent together with file
      * @attr template           Template used to generate uploader
      * @attr topic              Name of the topic used when UploaderEvent is fired
+     * @wrapperId               Id of div used as a wrapper for uploader
      *
      */
     def uploader = { attrs, body ->
@@ -39,8 +45,31 @@ class UploaderTagLib {
                 wrapperId: attrs.wrapperId ?: DEF_WRAPPER_ID
         ]
 
-        out << render(template: '/taglib/uploader/uploader', model: model);
+        out << render(template: DEF_WRAPPER_TEMPLATE, model: model);
 
+    }
+
+    /**
+     * Creates link which can be used to delete uploaded file.
+     * See g.remoteLink for more documentation.
+     *
+     * @param id Id of uploaded file (e.g. it's name, db id or any other identifier you use)
+     * @param topic Name of listener used to handle this delete request.
+     */
+    def deleteLink = { attrs, body ->
+        if (!attrs.id) {
+            throw new IllegalArgumentException('[id] attribute must be specified for the <u:deleteLink> tag')
+        }
+
+        def model = attrs.findAll { !(it.key in ['topic']) }
+        model.controller = 'upload'
+        model.action = 'delete'
+        if (!model.params) {
+            model.params = [:]
+        }
+        model.params.topic = attrs.topic
+
+        out << g.remoteLink(model, body)
     }
 
     private String buildConfig(attrs) {
@@ -51,7 +80,8 @@ class UploaderTagLib {
         // adding request params to the configuration
         config.request.params = attrs?.params ?: []
         // upload link generation workaround
-        config.request.endpoint = createLink(controller: 'upload', action: 'upload', params: [topic: attrs.topic])
+        config.request.endpoint = createLink(controller: 'upload', action: 'upload',
+                params: [topic: attrs.topic])
         // text labels
         config.text = textConfig
         // uploader template
