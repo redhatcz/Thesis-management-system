@@ -13,9 +13,12 @@
     </label>
     <div class="controls">
         <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
+        <g:hiddenField name="a4g-role" value="${com.redhat.theses.auth.Role.OWNER}"/>
         <a4g:textField name="topic.owner.fullName" value="${topicInstance?.owner?.fullName}"
-                       autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
-                       autocomplete-target="topic.owner.id" placeholder="Owner" />
+                       autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
+                       autocomplete-target="topic.owner.id"
+                       autocomplete-opts="a4g-role@role"
+                       placeholder="Owner" />
     </div>
 </div>
 

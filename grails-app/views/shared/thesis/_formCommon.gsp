@@ -29,10 +29,12 @@
     <div class="controls">
         <g:hiddenField name="thesis.supervisor.id"
                        value="${thesisInstance?.supervisor?.id}"/>
+        <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
         <a4g:textField name="thesis.supervisor.fullName"
                        value="${thesisInstance?.supervisor?.fullName}"
-                       autocomplete-url="${createLink(controller: 'json', action: 'listSupervisorsByName')}"
+                       autocomplete-url="${createLink(controller: 'json', action: 'listUserByNameAndRole')}"
                        autocomplete-target="thesis.supervisor.id"
+                       autocomplete-opts="a4g-role[${i}]@role"
                        placeholder="Supervisor"/>
     </div>
 </div>

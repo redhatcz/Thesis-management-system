@@ -11,9 +11,11 @@
     <g:hiddenField name="supervisionCommand.supervisions[${i}].supervisor.id"
                    value="${supervision?.supervisor?.id}"/>
 
+    <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
     <a4g:textField name="supervisionCommand.supervisions[${i}].supervisor.fullName"
                    value="${supervision?.supervisor?.fullName}"
-                   autocomplete-url="${createLink(controller: 'json', action: 'listSupervisorsByName')}"
-                   autocomplete-target="supervisionCommand.supervisions[${i}].supervisor.id"/>
+                   autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
+                   autocomplete-target="supervisionCommand.supervisions[${i}].supervisor.id"
+                   autocomplete-opts="a4g-role[${i}]@role"/>
 
 </richg:dynamicField>

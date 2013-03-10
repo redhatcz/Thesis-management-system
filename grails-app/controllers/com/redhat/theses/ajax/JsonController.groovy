@@ -1,12 +1,9 @@
 package com.redhat.theses.ajax
-
 import com.redhat.theses.Category
 import com.redhat.theses.Tag
 import com.redhat.theses.Topic
-import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
 import grails.converters.JSON
-
 /**
  * TODO: if the key of the map that is returned as JSON is not unique,
  * we should return something that is unique, e.g. "Full Name (id)"
@@ -21,10 +18,10 @@ class JsonController {
 
     static final Integer MAX_RESULTS = 5
 
-    def listSupervisorsByName(String term) {
+    def listUsersByNameAndRole(String term, String role) {
         def supervisors = User.executeQuery(
                 "from User where :role in elements(roles) and fullName like :fullName",
-                [role: Role.SUPERVISOR.name(), fullName: "%${term}%"],
+                [role: role, fullName: "%${term}%"],
                 [max: MAX_RESULTS])
         def userMap = [:]
 
