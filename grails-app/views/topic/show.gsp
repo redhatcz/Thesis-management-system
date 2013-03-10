@@ -82,6 +82,22 @@
                 </dl>
             </div>
 
+            <h4>Theses</h4>
+            <div class="panel-content">
+                <g:if test="${!thesisList?.empty}">
+                    <ul class="unstyled">
+                    <g:each in="${thesisList}" var="thesis">
+                        <li>
+                            <g:link controller="thesis" action="show" id="${thesis.id}">${thesis.title}</g:link>
+                        </li>
+                    </g:each>
+                    </ul>
+                </g:if>
+                <g:else>
+                    <p>There are no theses for this topic.</p>
+                </g:else>
+            </div>
+
             <h4>Topic Management</h4>
             <div class="panel-content">
 

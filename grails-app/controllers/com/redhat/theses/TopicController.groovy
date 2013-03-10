@@ -146,7 +146,9 @@ class TopicController {
 
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, topicInstance)
 
-        [topicInstance: topicInstance, supervisions: supervisions,
+        def thesisList = Thesis.findAllByTopic(topicInstance)
+
+        [topicInstance: topicInstance, supervisions: supervisions, thesisList: thesisList,
                 comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
     }
 
