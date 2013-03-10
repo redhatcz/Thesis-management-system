@@ -112,7 +112,7 @@ class TopicController {
         }
 
         // setup tags
-        topicInstance.tags = params.topic.tags.list('title').collect { new Tag(title: it) }.unique{[it.title]}
+        topicInstance.tags = params.topic?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
 
         if (!topicService.saveWithSupervisions(topicInstance, supervisionCommand.supervisions)) {
             render(view: "create", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
@@ -189,7 +189,7 @@ class TopicController {
         }
 
         // setup tags
-        topicInstance.tags = params.topic.tags.list('title').collect { new Tag(title: it) }.unique{[it.title]}
+        topicInstance.tags = params.topic?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
 
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
