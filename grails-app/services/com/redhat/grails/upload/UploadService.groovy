@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile
 
 class UploadService {
 
-    def gridFileService
     def springSecurityService
 
     Map upload(MultipartFile file, String topic = null, Map params = [:]) {
@@ -19,9 +18,9 @@ class UploadService {
         return response
     }
 
-    Map delete(String id, String bucket, String topic = null, Map params = [:]) {
+    Map delete(String id, String topic = null, Map params = [:]) {
         def response = [success: false, message: null]
-        def data =  new UploaderDeleteEvent(id, bucket, params)
+        def data =  new UploaderDeleteEvent(id,  params)
 
         EventReply reply = event(topic: topic, for: 'uploader-delete', data: data, fork: false)
         response = reply.value
