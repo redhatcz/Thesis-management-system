@@ -1,0 +1,68 @@
+.taggy-multiselect {
+  margin: 0;
+  padding: 4px 8px;
+  display: inline-block;
+  width: 100%;
+  cursor: text;
+  height: auto !important;
+  .box-sizing(border-box);
+  border: 1px solid #aaa;
+  background-color: #fff;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.taggy-elem {
+  display: block;
+  float: left;
+}
+
+.taggy-multiselect input {
+  background: transparent !important;
+  height: 15px;
+  padding: 5px;
+  margin: 1px 0;
+  border-width: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+
+  -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  -moz-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+}
+.taggy-multiselect input:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 0 rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: 0 0 0 rgba(82, 168, 236, 0.6);
+  box-shadow: 0 0 0 rgba(82, 168, 236, 0.6);
+}
+
+.taggy-choice {
+  -webkit-transition: background-color linear .2s;
+  -moz-transition: background-color linear .2s;
+  -o-transition: background-color linear .2s;
+  transition: background-color linear .2s;
+  cursor: default;
+  background: none repeat scroll 0 0 silver;
+  border: 1px solid #8e8e8e;
+  color: #363636;
+
+  padding: 2px 3px 1px 3px;
+  margin: 2px 2px;
+  text-decoration: none;
+
+  vertical-align: middle;
+  line-height: 20px;
+  height: 20px;
+}
+
+.taggy-choice.exists {
+  background-color: #ed1c24;
+}
+
+.taggy-choice-close {
+  padding-left: 3px;
+  color: #363636;
+}

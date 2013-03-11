@@ -93,10 +93,8 @@
         <strong><g:message code="tag.label" default="Tags" /></strong>
     </label>
     <div class="controls">
-        <richg:dynamicField id="tag-list" for="${topicInstance?.tags}" var="tag" index="i">
-            <a4g:textField name="topic.tags.title" id="topic.tags[${i}].title" value="${tag?.title}"
-                           autocomplete-url="${createLink(controller: 'json', action: 'listTagsByTitle')}"
-                           autocomplete-detailsType="none"/>
-        </richg:dynamicField>
+        <g:select id="topic-tags" name="topic.tags.title" multiple="multiple" from="${topicInstance?.tags}"
+                  value="${topicInstance?.tags}"/>
+        <script type="text/javascript">$('#topic-tags').taggy();</script>
     </div>
 </div>

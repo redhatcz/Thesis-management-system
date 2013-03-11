@@ -27,5 +27,10 @@ modules = {
         resource url: [dir: 'js', file: 'jquery.fineuploader.min.js']
         resource url: [dir: 'js', file: 'iframe.xss.response.js']
     }
+    'taggy' {
+        dependsOn 'jquery'
+
+        resource url: [dir: 'js', file: 'taggy.js'], disposition: 'head'
+    }
 
 }

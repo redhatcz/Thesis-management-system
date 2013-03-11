@@ -11,5 +11,6 @@
 <r:require module="richg"/>
 <r:require module="application"/>
 <r:require module="fine-uploader"/>
+<r:require module="taggy"/>
 <g:layoutHead/>
 <r:layoutResources />
