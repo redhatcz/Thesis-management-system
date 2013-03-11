@@ -54,7 +54,9 @@
                 </g:else>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
-                <div class="panel-content">You must be <g:link controller="login">logged in</g:link> to view your theses.</div>
+                <div class="panel-content">
+                    <p>You must be <g:link controller="login">logged in</g:link> to view your theses.</p>
+                </div>
             </sec:ifNotLoggedIn>
         </div>
     </div>
