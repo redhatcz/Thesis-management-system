@@ -80,8 +80,11 @@
                 this.removeTag(this.taggyElem.find('.taggy-choice:last').find('.taggy-choice-text').text());
             }
 
-            // if tab or space was not pressed, don't continue
-            if (e.keyCode != 32 && e.keyCode != 9) {
+            // if tab, space or enter was not pressed, don't continue
+            if (e.keyCode != 32 // spacebar
+                && e.keyCode != 9 // tab
+                && e.keyCode != 13 // enter
+                ) {
                 return;
             }
 
