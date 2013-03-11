@@ -28,9 +28,9 @@
         constructor: Taggy
 
         , addTag: function (label) {
-            var filledTag = this.tagTpl.replace(/\$placeholder/g, label);
+            var filledTag = $(this.tagTpl.replace(/\$placeholder/g, label));
 
-            filledTag = $(filledTag).on('click', $.proxy(function() {this.removeTag(label)}, this));
+            filledTag.find('.taggy-choice-close').on('click', $.proxy(function() {this.removeTag(label)}, this));
             this.tagInput.parent().before(filledTag);
 
             this.updateTagInputWidth();
