@@ -9,7 +9,7 @@
         <div class="container">
             <div class="span4">
                 <g:link uri="/">
-                    <img id="logo" src="${resource(dir: 'images', file: 'redhat.png')}">
+                    <img id="logo" src="${resource(dir: 'images', file: 'redhat.png')}"/>
                 </g:link>
             </div>
             <div class="head">
