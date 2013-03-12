@@ -29,14 +29,14 @@
                     <div class="panel-content">
                     <g:each in="${yourTheses}" var="yourThesis">
                         <dl>
-                            <dt><i class="icon-book"></i> topic</dt>
+                            <dt><i class="icon-book"></i> ${message(code: 'topic.label').toString().toLowerCase()}</dt>
                             <dd>
                                 <g:link controller="topic" action="show" id="${yourThesis?.topicId}"
                                         params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
                             </dd>
-                            <dt><i class="icon-user"></i> <g:message code="thesis.supervisor.label"/></dt>
+                            <dt><i class="icon-user"></i> ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}</dt>
                             <dd><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></dd>
-                            <dt><i class="icon-question-sign"></i> <g:message code="thesis.status.failed.label"/></dt>
+                            <dt><i class="icon-question-sign"></i> ${message(code: 'thesis.status.label').toString().toLowerCase()}</dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
                                     <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />
