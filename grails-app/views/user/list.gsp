@@ -4,18 +4,17 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <title><g:message code="user.list.title" /></title>
 </head>
 <body>
     <div class="span8 content">
-        <h1 class="header"><g:message code="default.list.label" args="[entityName]" /></h1>
+        <h1 class="header"><g:message code="user.list.header" /></h1>
         <table class="table">
             <thead>
                 <tr>
-                    <g:sortableColumn property="id" title="${message(code: 'user.id.label', default: 'Id')}" />
-                    <g:sortableColumn property="fullName" title="${message(code: 'user.fullName.label', default: 'Full Name')}" />
-                    <g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Registration date')}" />
+                    <g:sortableColumn property="id" title="${message(code: 'id.label')}" />
+                    <g:sortableColumn property="fullName" title="${message(code: 'user.fullName.label')}" />
+                    <g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label')}" />
                 </tr>
             </thead>
             <tbody>
@@ -36,9 +35,9 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4>Manage Users</h4>
+            <h4><g:message code="user.list.manage.label"/></h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="user.create.button" /></g:link>
             </div>
         </div>
     </div>

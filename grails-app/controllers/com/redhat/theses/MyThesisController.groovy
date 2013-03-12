@@ -22,7 +22,7 @@ class MyThesisController {
 
         User user = springSecurityService.currentUser
         if (thesisInstance.assignee != user) {
-            flash.message = message(code: 'action.permission.denied')
+            flash.message = message(code: 'security.denied.message')
             redirect(controller: 'thesis', action: "list")
             return
         }
@@ -44,7 +44,7 @@ class MyThesisController {
 
         User user = springSecurityService.currentUser
         if (thesisInstance.assignee != user) {
-            flash.message = message(code: 'action.permission.denied')
+            flash.message = message(code: 'security.denied.message')
             redirect(controller: 'thesis', action: "list")
             return
         }

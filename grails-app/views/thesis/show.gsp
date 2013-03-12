@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'thesis.label', default: 'Thesis')}"/>
-    <title><g:message code="default.show.label" args="[entityName]"/></title>
+    <title><g:message code="thesis.show.title"/></title>
 </head>
 <body>
 <div class="span8 content">
@@ -14,7 +13,7 @@
     </g:if>
 
     <g:if test="${thesisInstance?.thesisAbstract}">
-        <h3>Abstract</h3>
+        <h3><g:message code="thesis.thesisAbstract.label"/></h3>
         <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
     </g:if>
 
@@ -22,19 +21,19 @@
 </div>
 <div class="span4 sidebar">
     <div class="panel right">
-        <h4>Thesis Information</h4>
+        <h4><g:message code="thesis.information.label"/></h4>
         <div class="panel-content">
             <dl>
                 <dt>
                     <i class="icon-book"></i>
-                    <g:message code="thesis.topic.label" default="topic"/>
+                    ${message(code: 'topic.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link action="show" controller="topic" id="${thesisInstance?.topicId}"><g:fieldValue field="topic" bean="${thesisInstance}"/></g:link>
                 </dd>
                 <dt>
                     <i class="icon-user"></i>
-                    <g:message code="thesis.assignee.label" default="assignee"/>
+                    ${message(code: 'thesis.assignee.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.assigneeId}"><g:fieldValue field="assignee" bean="${thesisInstance}"/></g:link>
@@ -42,7 +41,7 @@
                 <g:if test="${thesisInstance?.supervisor}">
                 <dt>
                     <i class="icon-user mini"></i>
-                    <g:message code="thesis.supervisor.label" default="supervisor"/>
+                    ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.supervisorId}"><g:fieldValue field="fullName" bean="${thesisInstance?.supervisor}"/></g:link>
@@ -50,35 +49,35 @@
                 </g:if>
                 <dt>
                     <i class="icon-time"></i>
-                    <g:message code="thesis.dateCreated.label" default="created"/>
+                    ${message(code: 'thesis.dateCreated.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
                 <dt>
                     <i class="icon-question-sign"></i>
-                    <g:message code="thesis.status.label" default="status"/>
+                    ${message(code: 'thesis.status.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                 <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">
                     <g:message code="thesis.status.${thesisInstance?.status?.toString()?.toLowerCase()}.label" />
                 </g:if>
                 <g:else>
-                    This has been awarded the grade <strong>${thesisInstance?.grade}</strong>.
+                    <g:message code="thesis.status.awarded.grade" args="[thesisInstance?.grade]"/>
                 </g:else>
                 </dd>
             </dl>
         </div>
 
-        <h4>Thesis Management</h4>
+        <h4><g:message code="thesis.management.label"/></h4>
         <div class="panel-content">
-            <g:link class="tms-btn tms-warning" controller="thesis" action="edit" id="${thesisInstance?.id}"><g:message code="thesis.edit.button" default="Edit" /></g:link>
+            <g:link class="tms-btn tms-warning" controller="thesis" action="edit" id="${thesisInstance?.id}"><g:message code="default.edit.button"/></g:link>
             <g:form style="display: inline;">
                 <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
                 <g:actionSubmit class="tms-btn tms-danger"
                                 action="delete"
-                                value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                                value="${message(code: 'default.delete.button')}"
+                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
             </g:form>
 
             <g:if test="${!subscriber}">

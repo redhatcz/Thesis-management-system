@@ -6,7 +6,7 @@
     <content tag="manage-box">
         <div class="container">
             <div class="pull-right">
-                <a href="#"><i class="icon-rss"></i> News Feed</a>
+                <a href="#"><i class="icon-rss"></i> <g:message code="feed.news.label"/></a>
             </div>
         </div>
     </content>

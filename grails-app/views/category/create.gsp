@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <g:set var="entityName" value="${message(code: 'category.label', default: 'Category')}" />
-    <title><g:message code="default.create.label" args="[entityName]" /></title>
+    <title><g:message code="category.create.title" /></title>
 </head>
 <body>
+    <h2 class="header"><g:message code="category.create.title" /></h2>
     <g:render template="/shared/create"/>
 </body>
 </html>

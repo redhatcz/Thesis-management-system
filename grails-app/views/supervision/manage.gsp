@@ -2,18 +2,17 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <g:set var="entityName" value="${message(code: 'supervision.label', default: 'Supervisions')}" />
-    <title><g:message code="default.edit.label" args="[entityName]" /></title>
+    <title><g:message code="supervision.manage.title"/></title>
 </head>
 <body>
-    <h2 class="header"><g:message code="default.edit.label" args="[entityName]" /></h2>
+    <h2 class="header"><g:message code="supervision.manage.header"/></h2>
     <g:form class="form-inline" method="post">
         <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
                 <g:actionSubmit class="tms-btn"
                                 action="save"
-                                value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                                value="${message(code: 'default.update.button')}" />
             </div>
         </div>
     </g:form>

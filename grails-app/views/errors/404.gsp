@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>404: Page not found</title>
+    <title><g:message code="error.404.title"/></title>
     <meta name="layout" content="main">
 </head>
 <body>
     <div class="span12">
         <div class="alert alert-error">
-            Error 404 - the requested page was not found on the server.
+            <g:message code="error.404.message"/>
         </div>
     </div>
 </body>

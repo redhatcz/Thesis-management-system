@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><g:if env="development">Grails Runtime Exception</g:if><g:else>500 - Error on the server</g:else></title>
+    <title><g:if env="development">Grails Runtime Exception</g:if><g:else><g:message code="error.500.title"/></g:else></title>
     <meta name="layout" content="main">
     <g:if env="development"><link rel="stylesheet" href="${resource(dir: 'css', file: 'errors.css')}" type="text/css"></g:if>
 </head>
@@ -12,7 +12,7 @@
         </g:if>
         <g:else>
             <div class="alert alert-error">
-                Error 500 - an error on the server has occurred.
+                <g:message code="error.500.message"/>
             </div>
         </g:else>
     </div>

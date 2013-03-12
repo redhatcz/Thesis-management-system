@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="user/showLayout"/>
-    <title>Show user: theses</title>
+    <title><g:message code="user.supervisions.title"/></title>
 </head>
 <body>
 <content tag="active-button">theses</content>

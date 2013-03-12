@@ -37,7 +37,7 @@ class UploadListenerService {
         }
 
         if (thesis.assigneeId != user.id) {
-            response.message = messageSource.getMessage('action.permission.denied', [].toArray(),
+            response.message = messageSource.getMessage('security.denied.message', [].toArray(),
                     LCH.locale)
             return response
         }
@@ -63,7 +63,7 @@ class UploadListenerService {
         }
 
         if (thesis.assigneeId != user.id) {
-            response.message = messageSource.getMessage('action.permission.denied', [].toArray(),
+            response.message = messageSource.getMessage('security.denied.message', [].toArray(),
                     LCH.locale)
             return response
         }

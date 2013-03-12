@@ -3,10 +3,10 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.create.label" args="[entityName]" /></title>
+    <title><g:message code="user.create.title" /></title>
 </head>
 <body>
+    <h2 class="header"><g:message code="user.create.header"/></h2>
     <g:render template="/shared/create"/>
 </body>
 </html>

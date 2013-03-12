@@ -1,15 +1,15 @@
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'title', 'error')} ">
     <label class="control-label" for="thesis.title">
-        <strong><g:message code="thesis.title.label" default="Title" /></strong>
+        <strong><g:message code="thesis.title.label"/></strong>
     </label>
     <div class="controls">
-        <g:textField name="thesis.title" value="${thesisInstance?.title}" placeholder="Title" />
+        <g:textField name="thesis.title" value="${thesisInstance?.title}" placeholder="${message(code: 'thesis.title.label')}" />
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: thesisInstance?.assignee, field: 'fullName', 'error')}">
     <label class="control-label" for="thesis.assignee.fullName">
-        <strong><g:message code="thesis.assignee.label" default="Assignee" /></strong>
+        <strong><g:message code="thesis.assignee.label"/></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="thesis.assignee.id" value="${thesisInstance?.assignee?.id}"/>
@@ -18,13 +18,13 @@
                        disabled="${disabledAssigneeField}"
                        autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
                        autocomplete-target="thesis.assignee.id"
-                       placeholder="Assignee"/>
+                       placeholder="${message(code: 'thesis.assignee.label')}"/>
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
     <label class="control-label" for="thesis.supervisor.id">
-        <strong><g:message code="thesis.supervisor.label" default="Supervisor" /></strong>
+        <strong><g:message code="thesis.supervisor.label"/></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="thesis.supervisor.id"
@@ -35,13 +35,13 @@
                        autocomplete-url="${createLink(controller: 'json', action: 'listUserByNameAndRole')}"
                        autocomplete-target="thesis.supervisor.id"
                        autocomplete-opts="a4g-role[${i}]@role"
-                       placeholder="Supervisor"/>
+                       placeholder="${message(code: 'thesis.supervisor.label')}"/>
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'description', 'error')}">
     <label class="control-label" for="thesis.description">
-        <strong><g:message code="thesis.description.label" default="Description" /></strong>
+        <strong><g:message code="thesis.description.label"/></strong>
     </label>
     <div class="controls">
         <g:textArea name="thesis.description" rows="15" value="${thesisInstance?.description}"/>

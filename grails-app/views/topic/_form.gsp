@@ -1,15 +1,15 @@
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'title', 'error')} ">
     <label class="control-label" for="topic.title">
-        <strong><g:message code="topic.title.label" default="Title" /></strong>
+        <strong><g:message code="topic.title.label"/></strong>
     </label>
     <div class="controls">
-        <g:textField name="topic.title" value="${topicInstance?.title}" placeholder="Title" />
+        <g:textField name="topic.title" value="${topicInstance?.title}" placeholder="${message(code:'topic.title.label')}" />
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
-    <label class="control-label" for="topic.owner">
-        <strong><g:message code="topic.owner.label" default="Owner" /></strong>
+    <label class="control-label" for="topic.owner.fullName">
+        <strong><g:message code="topic.owner.label"/></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
@@ -18,7 +18,7 @@
                        autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
                        autocomplete-target="topic.owner.id"
                        autocomplete-opts="a4g-role@role"
-                       placeholder="Owner" />
+                       placeholder="${message(code:'topic.owner.label')}" />
     </div>
 </div>
 
@@ -26,14 +26,14 @@
     <div class="controls">
         <label class="checkbox" for="topic.enabled">
             <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
-            <g:message code="topic.enabled.label" default="Enabled" />
+            <g:message code="topic.enabled.label"/>
         </label>
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
     <label class="control-label" for="topic.universities">
-        <strong><g:message code="topic.universities.label" default="Universities" /></strong>
+        <strong><g:message code="topic.universities.label"/></strong>
     </label>
     <div class="controls">
         <g:select name="topic.universities" from="${universities}" multiple="multiple"
@@ -43,7 +43,7 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'types', 'error')}">
     <label class="control-label" for="topic.types">
-        <strong><g:message code="topic.types.label" default="Types" /></strong>
+        <strong><g:message code="topic.types.label"/></strong>
     </label>
     <div class="controls">
         <g:select name="topic.types" from="${types}" multiple="multiple"
@@ -53,7 +53,7 @@
 
 <div class="control-group">
     <label class="control-label" for="supervison-list">
-        <strong><g:message code="supervision.label" default="Supervision" /></strong>
+        <strong><g:message code="topic.supervision.label"/></strong>
     </label>
     <div class="controls">
         <g:render template="supervision"/>
@@ -62,7 +62,7 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'lead', 'error')}">
     <label class="control-label" for="topic.lead">
-        <strong><g:message code="topic.lead.label" default="Lead Paragraph" /></strong>
+        <strong><g:message code="topic.lead.label"/></strong>
     </label>
     <div class="controls">
         <g:textArea name="topic.lead" rows="5" value="${topicInstance?.lead}"/>
@@ -71,7 +71,7 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'description', 'error')}">
 	<label class="control-label" for="topic.description">
-		<strong><g:message code="topic.description.label" default="Description" /></strong>
+		<strong><g:message code="topic.description.label"/></strong>
 	</label>
     <div class="controls">
 	   <g:textArea name="topic.description" rows="15" value="${topicInstance?.description}"/>
@@ -80,7 +80,7 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'categories', 'error')}">
     <label class="control-label" for="topic.categories">
-        <strong><g:message code="topic.categories.label" default="Categories" /></strong>
+        <strong><g:message code="topic.categories.label"/></strong>
     </label>
     <div class="controls">
         <g:select name="topic.categories" from="${com.redhat.theses.Category.list()}" multiple="multiple"
@@ -90,7 +90,7 @@
 
 <div class="control-group">
     <label class="control-label" for="tag-list">
-        <strong><g:message code="tag.label" default="Tags" /></strong>
+        <strong><g:message code="topic.tags.label"/></strong>
     </label>
     <div class="controls">
         <g:select id="topic-tags" name="topic.tags.title" multiple="multiple" from="${topicInstance?.tags}"

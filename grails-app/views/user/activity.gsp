@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="user/showLayout"/>
-    <title>Show user: activity</title>
+    <title><g:message code="user.activity.title"/></title>
 </head>
 <body>
     <content tag="active-button">activity</content>
@@ -18,7 +18,7 @@
         </g:if>
 
         <g:else>
-        <p>No activity.</p>
+        <p><g:message code="user.no.activity.found"/></p>
         </g:else>
     </content>
 </body>

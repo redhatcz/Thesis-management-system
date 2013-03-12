@@ -21,6 +21,12 @@ class Topic extends Article {
         description widget: 'textarea' , nullable: false, blank: false
         title nullable: false, blank: false
         lead nullable: false, blank: false
+
+        owner validator: {owner ->
+            if (owner?.id == null || !User.get(owner.id)) {
+                'not.found'
+            }
+        }
     }
 
     static mapping = {

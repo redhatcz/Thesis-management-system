@@ -1,8 +1,8 @@
-<g:render template="formCommon"/>
+<g:render template="/shared/thesis/formCommon"/>
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'status', 'error')}">
     <label class="control-label" for="thesis.status">
-        <strong><g:message code="thesis.status.label" default="Status" /></strong>
+        <strong><g:message code="thesis.status.label"/></strong>
     </label>
     <div class="controls">
         <g:select name="thesis.status"
@@ -13,7 +13,7 @@
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'grade', 'error')}">
     <label class="control-label" for="thesis.grade">
-        <strong><g:message code="thesis.grade.label" default="Grade" /></strong>
+        <strong><g:message code="thesis.grade.label"/></strong>
     </label>
     <div class="controls">
         <g:select name="thesis.grade"
@@ -25,7 +25,7 @@
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'thesisAbstract', 'error')}">
     <label class="control-label" for="thesis.thesisAbstract">
-        <strong><g:message code="thesis.abstract.label" default="Abstract" /></strong>
+        <strong><g:message code="thesis.thesisAbstract.label" /></strong>
     </label>
     <div class="controls">
         <g:textArea name="thesis.thesisAbstract"

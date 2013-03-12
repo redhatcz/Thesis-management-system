@@ -6,14 +6,14 @@
             <g:link class="category-root"
                     controller="category"
                     action="edit"
-                    params="${currentCategory?.id}">Edit category</g:link>
+                    params="${currentCategory?.id}"><g:message code="category.edit.button"/></g:link>
         </li>
         <li>
             <g:link class="category-root"
                     controller="category"
                     action="delete"
                     id="${currentCategory?.id}"
-                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">Delete category</g:link>
+                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');"><g:message code="category.delete.button"/></g:link>
         </li>
         </sec:ifAllGranted>
         </g:if>
@@ -30,7 +30,7 @@
         <li>
             <g:link class="category-root"
                     controller="category"
-                    action="create">Create new category</g:link>
+                    action="create"><g:message message="category.new.button"/></g:link>
         </li>
         </sec:ifAllGranted>
     </ul>

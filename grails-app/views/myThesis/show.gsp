@@ -3,25 +3,24 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <g:set var="entityName" value="${message(code: 'thesis.label', default: 'Thesis')}"/>
-    <title><g:message code="default.show.label" args="[entityName]"/></title>
+    <title><g:message code="thesis.show.title"/></title>
 </head>
 
 <body>
 <h2 class="header"><g:fieldValue bean="${thesisInstance?.topic}" field="title"/></h2>
 
-    <h3>Abstract</h3>
+    <h3><g:message code="thesis.thesisAbstract.label"/></h3>
     <g:if test="${thesisInstance?.thesisAbstract}">
         <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
     </g:if>
     <g:else>
-        <p>Thesis abstract is missing, please provide a brief description of your thesis.</p>
+        <p><g:message code="thesis.thesisAbstract.missing"/></p>
     </g:else>
     <g:link class="tms-btn tms-warning"
             controller="myThesis"
             action="edit"
             id="${thesisInstance?.id}">
-        <g:message code="thesis.asignee.edit" default="Update Abstract"/>
+        <g:message code="thesis.thesisAbstract.edit.button"/>
     </g:link>
 
     <h3>Related files</h3>
@@ -29,9 +28,9 @@
         <table class="table">
             <thead>
             <tr>
-                <th>File</th>
-                <th>Type</th>
-                <th>Uploaded</th>
+                <th><g:message code="file.label"/></th>
+                <th><g:message code="file.type.label"/></th>
+                <th><g:message code="file.uploadDate.label"/></th>
             </tr>
             </thead>
             <g:each in="${files}" var="f">
@@ -49,9 +48,7 @@
         </table>
     </g:if>
     <g:else>
-        <p>
-            No files has been uploaded.
-        </p>
+        <p><g:message code="file.no.files.uploaded"/></p>
     </g:else>
 
     <u:uploader topic="thesis" params="${[id: thesisInstance.id]}"/>

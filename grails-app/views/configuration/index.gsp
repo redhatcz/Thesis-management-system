@@ -3,19 +3,19 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <title><g:message code="configuration.edit.title" default="Site Configuration" /></title>
+    <title><g:message code="config.edit.title" /></title>
 </head>
 <body>
-<h2 class="header"><g:message code="configuration.edit.header" default="Site Configuration" /></h2>
+<h2 class="header"><g:message code="config.edit.title" /></h2>
 <g:form class="form-inline" method="post" name="thesis-form">
     <g:render template="form"/>
     <div class="control-group">
         <div class="controls">
             <g:actionSubmit class="tms-btn"
                             action="update"
-                            value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                            value="${message(code: 'default.update.button')}" />
             <g:link class="tms-btn tms-danger"
-                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">${message(code: 'default.button.cancel.label', default: 'Cancel')}</g:link>
+                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">${message(code: 'default.cancel.button')}</g:link>
         </div>
     </div>
 </g:form>

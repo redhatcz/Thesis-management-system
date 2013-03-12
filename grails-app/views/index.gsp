@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Thesis management system</title>
+    <title><g:message code="home.title"/></title>
 </head>
 <body>
     <div class="span8 content">
-        <h3>Latest topics</h3>
+        <h3><g:message code="home.latest.topics.header"/></h3>
         <g:each in="${topicList}" var="topic">
             <div class="table-layout">
                 <g:link controller="topic" action="show" id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"><g:fieldValue field="title" bean="${topic}"/></g:link>
@@ -23,7 +23,7 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4>Your Theses</h4>
+            <h4><g:message code="home.your.theses.header"/></h4>
             <sec:ifLoggedIn>
                 <g:if test="${yourTheses?.size() != 0}">
                     <div class="panel-content">
@@ -34,15 +34,15 @@
                                 <g:link controller="topic" action="show" id="${yourThesis?.topicId}"
                                         params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
                             </dd>
-                            <dt><i class="icon-user"></i> suprevisor</dt>
+                            <dt><i class="icon-user"></i> <g:message code="thesis.supervisor.label"/></dt>
                             <dd><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></dd>
-                            <dt><i class="icon-question-sign"></i> status</dt>
+                            <dt><i class="icon-question-sign"></i> <g:message code="thesis.status.failed.label"/></dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
                                     <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />
                                 </g:if>
                                 <g:else>
-                                    This has been awarded the grade <strong>${yourThesis?.grade}</strong>.
+                                    <g:message code="thesis.status.awarded.grade" args="[yourThesis?.grade]"/>
                                 </g:else>
                             </dd>
                         </dl>
@@ -50,12 +50,12 @@
                     </div>
                 </g:if>
                 <g:else>
-                    <div class="panel-content">You have currently no theses.</div>
+                    <div class="panel-content"><g:message code="home.no.your.theses.found"/></div>
                 </g:else>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
                 <div class="panel-content">
-                    <p>You must be <g:link controller="login">logged in</g:link> to view your theses.</p>
+                    <p><g:message code="home.loggin.to.show.theses" args="[createLink(controller: 'login')]"/></p>
                 </div>
             </sec:ifNotLoggedIn>
         </div>

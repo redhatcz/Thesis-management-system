@@ -1,7 +1,7 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 <div class="span8 content">
 <g:if test="${topicInstanceList.isEmpty()}">
-    <p class="center muted">No topics were found.</p>
+    <p class="center muted"><g:message code="topic.no.topics.found"/></p>
 </g:if>
 
 <g:else>
@@ -27,7 +27,7 @@
             </ul>
             <div class="table-text">
                 <g:fieldValue bean="${topic}" field="lead"/>
-                <g:link class="gray-link" action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]"><g:message code="topic.text.more" default="Read more" />&hellip;</g:link>
+                <g:link class="gray-link" action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]"><g:message code="topic.read.more.label"/>&hellip;</g:link>
             </div>
         </div>
     </g:each>
@@ -40,7 +40,7 @@
 
 <div class="span4 sidebar">
     <div class="panel right">
-        <h4>Manage Topics</h4>
+        <h4><g:message code="topic.management.label"/></h4>
         <div class="panel-content">
             <g:if test="${currentCategory}">
                 <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]">Create topic</g:link>
@@ -51,16 +51,16 @@
         </div>
 
         <g:if test="${currentCategory}">
-            <h4>Category: ${currentCategory?.title}</h4>
+            <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>
         </g:if>
         <g:else>
-            <h4>Categories</h4>
+            <h4><g:message code="topic.categories.label"/></h4>
         </g:else>
         <div class="panel-content">
             <g:render template="categoryList" />
         </div>
 
-        <h4>Tags</h4>
+        <h4><g:message code="topic.tags.label"/></h4>
         <div class="panel-content">
             <g:render template="tagList" />
         </div>

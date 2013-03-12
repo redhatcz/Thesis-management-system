@@ -12,8 +12,8 @@
             <g:render template="/layouts/messages" />
             <g:render template="form" />
             <p class="bottom">
-                <g:link class="link pull-left" uri="/">&larr; Back</g:link>
-                <a class="link pull-right" href="#">Lost your password?</a>
+                <g:link class="link pull-left" uri="/">&larr; <g:message code="default.back.button"/></g:link>
+                <a class="link pull-right" href="#"><g:message code="security.lost.password.button"/></a>
             </p>
         </form>
     </div>

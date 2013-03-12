@@ -33,9 +33,9 @@ class RegistrationController {
         user.passwordExpired = false
         user.roles = [Role.STUDENT]
 
-        if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
-            registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
-        }
+//        if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
+//            registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
+//        }
 
         if (registrationCommand.hasErrors() || !userService.save(user)) {
             render(view: "index", model: [registrationCommand: registrationCommand])
@@ -46,11 +46,29 @@ class RegistrationController {
     }
 
     def complete() {
+        render view: 'lifecycle', model: [
+                redirect: false,
+                title: message(code: 'registration.complete.title'),
+                header: message(code: 'registration.complete.header'),
+                message: message(code: 'registration.complete.message')
+        ]
     }
 
     def confirmed() {
+        render view: 'lifecycle', model: [
+                redirect: true,
+                title: message(code: 'registration.confirmed.title'),
+                header: message(code: 'registration.confirmed.header'),
+                message: message(code: 'registration.confirmed.message')
+        ]
     }
 
     def expired() {
+        render view: 'lifecycle', model: [
+                redirect: false,
+                title: message(code: 'registration.expired.title'),
+                header: message(code: 'registration.expired.header'),
+                message: message(code: 'registration.expired.message')
+        ]
     }
 }

@@ -1,6 +1,6 @@
 <div class="control-group">
     <label class="control-label" for="email-domain-list">
-        <strong><g:message code="configuration.email.domains.label" default="Allowed email domains" /></strong>
+        <strong><g:message code="config.email.domains.label" /></strong>
     </label>
     <div class="controls">
         <g:set var="emailDomains" value="${config?.emailDomains ? [config?.emailDomains].flatten() : []}"/>

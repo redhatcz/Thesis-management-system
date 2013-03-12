@@ -22,16 +22,16 @@
                         </a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <li>
-                                <g:link tabindex="-1" controller="profile" action="edit">Edit Profile</g:link>
+                                <g:link tabindex="-1" controller="profile" action="edit"><g:message code="profile.edit.button"/></g:link>
                             </li>
                             <sec:ifAllGranted roles="ROLE_ADMIN">
                             <li id="configuration">
-                                <g:link controller="configuration">Site Configuration</g:link>
+                                <g:link controller="configuration"><g:message code="config.edit.button"/></g:link>
                             </li>
                             </sec:ifAllGranted>
                             <li class="divider"></li>
                             <li>
-                                <g:link tabindex="-1" controller="logout">Sign Out</g:link>
+                                <g:link tabindex="-1" controller="logout"><g:message code="security.logout.button"/></g:link>
                             </li>
                         </ul>
                     </div>
@@ -39,9 +39,9 @@
                 </sec:ifLoggedIn>
                 <sec:ifNotLoggedIn>
                 <div class="pull-right">
-                    <g:link controller="login" action="auth">Sign In</g:link>
+                    <g:link controller="login" action="auth"><g:message code="security.login.button"/></g:link>
                     <i class="icon-circle mini"></i>
-                    <g:link controller="registration">Sign Up</g:link>
+                    <g:link controller="registration"><g:message code="registration.create.button"/></g:link>
                 </div>
                 </sec:ifNotLoggedIn>
             </div>

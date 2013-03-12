@@ -30,11 +30,21 @@ class Thesis extends Article{
         thesisAbstract nullable: true
 
         topic validator: {topic ->
-            topic?.id != null && Topic.get(topic.id)
+            if (topic?.id == null || !Topic.get(topic.id)) {
+                'not.found'
+            }
         }
 
         assignee validator: {assignee ->
-            assignee?.id != null && User.get(assignee.id)
+            if (assignee?.id == null || !User.get(assignee.id)) {
+                'not.found'
+            }
+        }
+
+        supervisor validator: {supervisor ->
+            if (supervisor?.id == null || !User.get(supervisor.id)) {
+                'not.found'
+            }
         }
     }
 

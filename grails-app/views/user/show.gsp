@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="user/showLayout"/>
-    <title>Show user: theses</title>
+    <title><g:message code="user.theses.title"/></title>
 </head>
 <body>
 <content tag="active-button">theses</content>
@@ -12,7 +12,7 @@
         <table class="table">
             <thead>
             <tr>
-                <g:sortableColumn property="title" title="${message(code: 'thesis.title.label', default: 'Thesis title')}"/>
+                <g:sortableColumn property="title" title="${message(code: 'thesis.title.label')}"/>
             </tr>
             </thead>
             <tbody>
@@ -27,12 +27,8 @@
         </table>
     </g:if>
     <g:else>
-        <p>There are no theses.</p>
+        <p><g:message code="user.no.theses.found"/></p>
     </g:else>
-    <g:if test="${thesisInstanceList?.size() > 5}">
-        <!-- TODO: link to more theses -->
-        <a href="#">More ...</a>
-    </g:if>
 </content>
 </body>
 </html>

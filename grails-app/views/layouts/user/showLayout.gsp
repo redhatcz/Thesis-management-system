@@ -2,58 +2,68 @@
 <g:applyLayout name="profile">
 <html>
 <head>
-    <title><g:layoutTitle default="Show user"/></title>
+    <title><g:layoutTitle /></title>
     <g:layoutHead/>
 </head>
 <body>
 <div class="span4 sidebar">
     <div class="panel left">
         <div class="avatar">
-            %{--Profile picture will be here soon!--}%
+            %{-- TODO: Profile picture will be here soon! --}%
         </div>
         <h4>User Information</h4>
         <div class="panel-content">
             <dl>
                 <dt>
                     <i class="icon-envelope-alt"></i>
-                    <g:message code="user.email.label" default="email" />
+                    ${message(code: 'user.email.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:fieldValue bean="${userInstance}" field="email"/>
                 </dd>
                 <dt>
                     <i class="icon-user"></i>
-                    <g:message code="user.fullName.label" default="full name" />
+                    ${message(code: 'user.fullName.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:fieldValue bean="${userInstance}" field="fullName"/>
                 </dd>
                 <dt>
                     <i class="icon-time"></i>
-                    <g:message code="user.show.dateCreated.label" default="registered" />
+                    ${message(code: 'user.dateCreated.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
 
-            <g:if test="${userInstance?.accountExpired}">
+                <g:if test="${userInstance?.enabled}">
+                    <dt>
+                        <i class="icon-lock"></i>
+                        ${message(code: 'user.enabled.label').toString().toLowerCase()}
+                    </dt>
+                    <dd>
+                        <g:formatBoolean boolean="${userInstance?.enabled}" />
+                    </dd>
+                </g:if>
+
+                <g:if test="${userInstance?.accountExpired}">
                 <dt>
                     <i class="icon-time"></i>
-                    <g:message code="user.accountExpired.label" default="account Expired" />
+                    ${message(code: 'user.accountExpired.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatBoolean boolean="${userInstance?.accountExpired}" />
                 </dd>
-            </g:if>
-            <g:if test="${userInstance?.accountLocked}">
+                </g:if>
+                <g:if test="${userInstance?.accountLocked}">
                 <dt>
                     <i class="icon-lock"></i>
-                    <g:message code="user.accountLocked.label" default="Account Locked" />
+                    ${message(code: 'user.accountLocked.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatBoolean boolean="${userInstance?.accountLocked}" />
                 </dd>
-            </g:if>
+                </g:if>
             </dl>
         </div>
     </div>
@@ -68,12 +78,12 @@
                     <g:link class="tms-btn tms-warning"
                             controller="user"
                             action="edit"
-                            id="${userInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                            id="${userInstance?.id}"><g:message code="default.edit.button" /></g:link>
                     <g:hiddenField name="user.id" value="${userInstance?.id}" />
                     <g:actionSubmit class="tms-btn tms-danger"
                                     action="delete"
-                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                                    value="${message(code: 'default.delete.button')}"
+                                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
                 </g:form>
             </div>
         </ul>

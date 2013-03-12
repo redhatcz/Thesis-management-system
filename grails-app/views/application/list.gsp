@@ -3,23 +3,22 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <title><g:message code="application.list.title"/></title>
 </head>
 
 <body>
 <div class="span8 content">
-    <h1 class="header"><g:message code="default.list.label" args="[entityName]"/></h1>
+    <h1 class="header"><g:message code="application.list.title"/></h1>
     <g:if test="${!applicationInstanceList?.empty}">
     <table class="table">
         <thead>
         <tr>
             <g:sortableColumn property="id"
-                              title="${message(code: 'id.label', default: 'Id')}"/>
+                              title="${message(code: 'id.label')}"/>
             <g:sortableColumn property="applicant"
-                              title="${message(code: 'application.applicant.label', default: 'Applicant')}"/>
+                              title="${message(code: 'application.applicant.label')}"/>
             <g:sortableColumn property="topic"
-                              title="${message(code: 'topic.label', default: 'Topic')}"/>
+                              title="${message(code: 'topic.label')}"/>
         </tr>
         </thead>
         <tbody>
@@ -50,7 +49,7 @@
     <div class="panel right">
         <h4>Manage Applications</h4>
         <div class="panel-content">
-            <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link>
+            <g:link class="tms-btn tms-info" action="create"><g:message code="application.create.button"/></g:link>
         </div>
     </div>
 </div>

@@ -83,7 +83,7 @@ class ApplicationController {
         if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
             && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
 
-            flash.message = message(code: 'action.permission.denied')
+            flash.message = message(code: 'security.denied.message')
             redirect(action: 'list')
             return
         }
@@ -117,7 +117,7 @@ class ApplicationController {
         if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
                 && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
 
-            flash.message = message(code: 'action.permission.denied')
+            flash.message = message(code: 'security.denied.message')
             redirect(action: 'list')
             return
         }

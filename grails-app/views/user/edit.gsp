@@ -3,11 +3,10 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.edit.label" args="[entityName]" /></title>
+    <title><g:message code="user.edit.title" /></title>
 </head>
 <body>
-    <h2 class="header"><g:message code="default.edit.label" args="[entityName]" /></h2>
+    <h2 class="header"><g:message code="user.edit.header" /></h2>
     <g:form class="form-inline" method="post" >
         <g:hiddenField name="user.id" value="${userInstance?.id}" />
         <g:hiddenField name="user.version" value="${userInstance?.version}" />
@@ -15,9 +14,9 @@
         <div class="control-group">
             <div class="controls">
                 <g:actionSubmit class="tms-btn" action="update"
-                                value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                                value="${message(code: 'default.update.button')}" />
                 <g:link class="tms-btn tms-danger" action="show" id="${userInstance?.id}"
-                        onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">${message(code: 'default.button.cancel.label', default: 'Cancel')}</g:link>
+                        onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">${message(code: 'default.cancel.button')}</g:link>
             </div>
         </div>
     </g:form>

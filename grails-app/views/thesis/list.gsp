@@ -3,8 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'thesis.label', default: 'Thesis')}"/>
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <title><g:message code="thesis.list.title" /></title>
 </head>
 <body>
     <div class="span8 content">
@@ -12,8 +11,8 @@
         <table class="table">
             <thead>
             <tr>
-                <g:sortableColumn property="title" title="${message(code: 'thesis.title.label', default: 'Thesis title')}"/>
-                <g:sortableColumn property="assignee" title="${message(code: 'thesis.assingee.label', default: 'Assignee')}"/>
+                <g:sortableColumn property="title" title="${message(code: 'thesis.title.label')}"/>
+                <g:sortableColumn property="assignee" title="${message(code: 'thesis.assignee.label')}"/>
             </tr>
             </thead>
             <tbody>
@@ -37,9 +36,9 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4>Manage Theses</h4>
+            <h4><g:message code="thesis.management.label"/></h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="thesis.create.button"/></g:link>
             </div>
         </div>
     </div>

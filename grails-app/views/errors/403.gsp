@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>403: Forbidden</title>
+    <title><g:message code="error.403.title"/></title>
     <meta name="layout" content="main">
 </head>
 <body>
     <div class="span12">
         <div class="alert alert-error">
-            Error 403 - you don't have permission to access this page.
+            <g:message code="error.403.message"/>
         </div>
     </div>
 </body>

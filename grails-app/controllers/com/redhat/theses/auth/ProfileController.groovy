@@ -38,7 +38,7 @@ class ProfileController {
         Long version = params.user.long('version')
         def user = User.get(id)
         if (user.id != springSecurityService.currentUser.id) {
-            flash.message = message(code: 'action.permission.denied')
+            flash.message = message(code: 'security.denied.message')
             redirect uri: '/'
             return
         }

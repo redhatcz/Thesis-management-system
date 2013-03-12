@@ -1,7 +1,7 @@
 <g:hiddenField id="application.topic.id" name="application.topic.id" value="${application.topic.id}" />
 <div class="control-group ${hasErrors(bean: applicationInstance, field: 'university', 'error')} required">
   	<label class="control-label" for="application.university.id">
-  		  <strong><g:message code="application.university.label" default="University" /></strong>
+  		  <strong><g:message code="university.label"/></strong>
   	</label>
         <div class="controls">
             <g:select id="application.university.id"
@@ -16,7 +16,7 @@
 
 <div class="control-group ${hasErrors(bean: applicationInstance, field: 'note', 'error')} required">
     <label class="control-label" for="application.note">
-        <strong><g:message code="application.note" default="Note" /></strong>
+        <strong><g:message code="application.note.label"/></strong>
     </label>
     <div class="controls">
         <g:textArea name="application.note" value="${application.note}" />

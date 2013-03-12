@@ -3,19 +3,16 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'university.label', default: 'University')}" />
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <title><g:message code="university.list.title" /></title>
 </head>
 <body>
     <div class="span8 content">
-        <h1 class="header">
-            <g:message code="default.list.label" args="[entityName]" />
-        </h1>
+        <h2 class="header"><g:message code="university.list.header" /></h2>
         <table class="table">
             <thead>
                 <tr>
                     <g:sortableColumn property="name"
-                                      title="${message(code: 'university.name.label', default: 'Name')}" />
+                                      title="${message(code: 'university.name.label')}" />
                 </tr>
             </thead>
             <tbody>
@@ -35,9 +32,9 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4>Manage Universities</h4>
+            <h4><g:message code="university.list.manage.label"/></h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="university.create.button" /></g:link>
             </div>
         </div>
     </div>

@@ -25,14 +25,25 @@ class ProfileCommand {
         email blank: false, email: true
         fullName blank: false
         repeatPassword validator: { val, obj ->
-            val == obj.password
+            if (val != obj.password) {
+                'not.match'
+            }
         }
         repeatEmail validator: {val, obj ->
             def user = User.findByEmail(obj.email)
-            user || val == obj.email
+            if (!user && val != obj.email) {
+                'not.match'
+            }
         }
         oldPassword blank: false, validator: { val, obj ->
-            User.findByPassword(obj.springSecurityService.encodePassword(val)) != null
+            if (User.findByPassword(obj.springSecurityService.encodePassword(val)) == null) {
+                'wrong'
+            }
+        }
+        email validator: {val, obj ->
+            if (User.findByEmail(val)) {
+                'not.unique'
+            }
         }
     }
 }

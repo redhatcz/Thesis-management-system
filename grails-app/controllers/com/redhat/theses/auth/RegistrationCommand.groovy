@@ -17,10 +17,19 @@ class RegistrationCommand {
         email blank: false, email: true
         fullName blank: false
         repeatPassword validator: { val, obj ->
-            val == obj.password
+            if (val != obj.password) {
+                'not.match'
+            }
         }
         repeatEmail validator: {val, obj ->
-            val == obj.email
+            if (val != obj.email) {
+                'not.match'
+            }
+        }
+        email validator: {val, obj ->
+            if (User.findByEmail(val)) {
+                'not.unique'
+            }
         }
     }
 }
