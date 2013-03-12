@@ -105,9 +105,9 @@ environments {
 log4j = {
     // Example of changing the log pattern for the default console appender:
     //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    appenders {
+        file name: 'sqlAppender', file: '/tmp/logs/tms-sql.log'
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -121,14 +121,14 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    all additivity: false, console: [
-            'grails.app.controllers.com.redhat.theses',
-            'grails.app.domain.your.com.redhat.theses',
-            'grails.app.services.com.redhat.theses',
-            'grails.app.taglib.com.redhat.theses',
-            'grails.app.conf.com.redhat.theses',
-            'grails.app.filters.com.redhat.theses'
-    ]
+    debug  sqlAppender: ['org.hibernate.SQL'], additivity: false
+
+    debug  'grails.app.controllers.com.redhat',
+           'grails.app.domain.your.com.redhat',
+           'grails.app.services.com.redhat',
+           'grails.app.taglib.com.redhat',
+           'grails.app.conf.com.redhat',
+           'grails.app.filters.com.redhat'
 }
 
 // Added by the Spring Security Core plugin:
