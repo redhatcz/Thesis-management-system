@@ -35,7 +35,7 @@
                                         params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
                             </dd>
                             <dt><i class="icon-user"></i> ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}</dt>
-                            <dd><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></dd>
+                            <dd><g:link controller="user" action="show" id="${yourThesis?.supervisorId}"><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></g:link></dd>
                             <dt><i class="icon-question-sign"></i> ${message(code: 'thesis.status.label').toString().toLowerCase()}</dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
