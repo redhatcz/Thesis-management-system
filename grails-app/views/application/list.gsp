@@ -8,7 +8,7 @@
 
 <body>
 <div class="span8 content">
-    <h1 class="header"><g:message code="application.list.title"/></h1>
+    <h1 class="header"><g:message code="application.list.header"/></h1>
     <g:if test="${!applicationInstanceList?.empty}">
     <table class="table">
         <thead>

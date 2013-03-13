@@ -8,7 +8,7 @@
     </g:if>
 
     <g:else>
-    <p>${message(code: 'article.comments.nocomments', default: 'There are no comments for this article.')}</p>
+    <p>${message(code: 'comment.no.comments')}</p>
     </g:else>
 </div>
 
@@ -26,7 +26,7 @@
     <g:textArea class="comment" name="comment.content" rows="5" />
     <g:submitButton name="create-comment"
                     class="tms-btn pull-right"
-                    value="${message(code: 'default.button.post.label', default: 'Post Comment')}"/>
+                    value="${message(code: 'comment.post.button')}"/>
 </g:form>
 <script type="text/javascript">
     var form = $('#create-comment-form');

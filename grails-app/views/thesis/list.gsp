@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="span8 content">
-        <h1 class="header"><g:message code="default.list.label" args="[entityName]"/></h1>
+        <h1 class="header"><g:message code="thesis.list.header"/></h1>
         <table class="table">
             <thead>
             <tr>

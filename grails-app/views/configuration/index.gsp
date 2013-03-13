@@ -6,7 +6,7 @@
     <title><g:message code="config.edit.title" /></title>
 </head>
 <body>
-<h2 class="header"><g:message code="config.edit.title" /></h2>
+<h2 class="header"><g:message code="config.edit.header" /></h2>
 <g:form class="form-inline" method="post" name="thesis-form">
     <g:render template="form"/>
     <div class="control-group">

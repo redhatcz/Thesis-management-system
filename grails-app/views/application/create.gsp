@@ -6,7 +6,7 @@
     <title><g:message code="application.create.title" /></title>
 </head>
 <body>
-    <h2 class="header"><g:message code="application.create.title"/></h2>
+    <h2 class="header"><g:message code="application.create.header"/></h2>
     <g:render template="/shared/create"/>
 </body>
 </html>

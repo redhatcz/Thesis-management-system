@@ -11,7 +11,7 @@
         <div class="avatar">
             %{-- TODO: Profile picture will be here soon! --}%
         </div>
-        <h4>User Information</h4>
+        <h4><g:message code="user.information.label"/></h4>
         <div class="panel-content">
             <dl>
                 <dt>

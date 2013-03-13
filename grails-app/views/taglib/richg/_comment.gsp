@@ -18,7 +18,7 @@
             action="delete"
             style="display: none;"
             class="delete-comment-form"
-            confirm-message="${message(code: 'default.delete.confirm.message', default: 'Are you sure?')}">
+            confirm-message="${message(code: 'default.delete.confirm.message')}">
         <g:hiddenField name="comment.id" value="${comment?.id}" id="commet-${index}-id-del"/>
     </g:form>
     <g:form controller="comment"
@@ -45,7 +45,7 @@
         <g:submitButton name="update-comment"
                         class="tms-btn pull-right"
                         id="comment-${index}-submit"
-                        value="${message(code: 'default.update.button', default: 'Update')}"/>
+                        value="${message(code: 'default.update.button')}"/>
     </g:form>
     <div class="comment-content">
         <markdown:renderHtml text="${comment?.content}"/>

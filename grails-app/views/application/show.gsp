@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <title><g:message code="application.show.title" args="[applicationInstance?.id]"/></title>
+    <title><g:message code="application.show.title"/></title>
 </head>
 <body>
 <div class="span8 content">

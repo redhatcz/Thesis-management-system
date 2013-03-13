@@ -5,7 +5,7 @@
     <title><g:message code="application.approve.title"/></title>
 </head>
 <body>
-<h2 class="header"><g:message code="application.approve.title"/></h2>
+<h2 class="header"><g:message code="application.approve.header"/></h2>
 <g:form class="form-inline" action="approveSave" id="${applicationInstance?.id}">
     <g:render template="/shared/thesis/formCreate"/>
     <div class="control-group">
