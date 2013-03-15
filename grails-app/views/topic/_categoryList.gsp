@@ -28,9 +28,8 @@
 
         <sec:ifAllGranted roles="ROLE_ADMIN">
         <li>
-            <g:link class="category-root"
-                    controller="category"
-                    action="create"><g:message message="category.new.button"/></g:link>
+            <g:link class="category-root" controller="category"
+                    action="create"><g:message code="category.create.button"/></g:link>
         </li>
         </sec:ifAllGranted>
     </ul>
