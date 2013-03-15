@@ -41,7 +41,7 @@ class ProfileCommand {
             }
         }
         email validator: {val, obj ->
-            if (User.findByEmail(val)) {
+            if (obj.repeatEmail && User.findByEmail(val)) {
                 'not.unique'
             }
         }

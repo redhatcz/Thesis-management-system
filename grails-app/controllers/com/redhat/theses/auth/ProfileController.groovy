@@ -1,9 +1,8 @@
 package com.redhat.theses.auth
-
+import com.redhat.theses.events.EmailChangedEvent
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
 
-@Secured(['IS_AUTHENTICATED_FULLY'])
 class ProfileController {
 
     static allowedMethods = [update: 'POST']
@@ -13,6 +12,7 @@ class ProfileController {
      */
     def springSecurityService
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def index() {
         if (Util.isActionInUrl(request, 'index')) {
             redirect uri: '/profile', permanent: true
@@ -24,6 +24,7 @@ class ProfileController {
         redirect controller: 'user', action: 'show', id: userInstance.id
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def edit() {
         def user = springSecurityService.currentUser
         def profileCommand = new ProfileCommand()
@@ -33,6 +34,7 @@ class ProfileController {
         [profileCommand: profileCommand, userInstance: user]
     }
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def update(ProfileCommand profileCommand) {
         Long id = params.user.long('id')
         Long version = params.user.long('version')
@@ -49,7 +51,6 @@ class ProfileController {
             return
         }
 
-        user.email = profileCommand.email
         user.fullName = profileCommand.fullName
         if (profileCommand.password) {
             user.password = profileCommand.password
@@ -61,7 +62,40 @@ class ProfileController {
         }
 
         springSecurityService.reauthenticate(user.email, user.password)
-        flash.message = message(code: 'profile.updated')
-        redirect action: 'index'
+
+        if (user.email != profileCommand.email) {
+            event('emailChanged', new EmailChangedEvent(user, profileCommand.email))
+            redirect action: 'emailChanged'
+        } else {
+            flash.message = message(code: 'profile.updated')
+            redirect action: 'index'
+        }
+    }
+
+    def emailChanged() {
+        render view: '/emailConfirmation/lifecycle', model: [
+                redirect: false,
+                title: message(code: 'profile.email.changed.title'),
+                header: message(code: 'profile.email.changed.header'),
+                message: message(code: 'profile.email.changed.message')
+        ]
+    }
+
+    def emailConfirmed() {
+        render view: '/emailConfirmation/lifecycle', model: [
+                redirect: false,
+                title: message(code: 'profile.email.confirmed.title'),
+                header: message(code: 'profile.email.confirmed.header'),
+                message: message(code: 'profile.email.confirmed.message')
+        ]
+    }
+
+    def emailConfirmationExpired() {
+        render view: '/emailConfirmation/lifecycle', model: [
+                redirect: false,
+                title: message(code: 'profile.email.confirmation.expired.title'),
+                header: message(code: 'profile.email.confirmation.expired.header'),
+                message: message(code: 'profile.email.confirmation.expired.message')
+        ]
     }
 }

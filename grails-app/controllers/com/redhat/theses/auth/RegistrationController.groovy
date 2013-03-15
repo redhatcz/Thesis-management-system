@@ -46,7 +46,7 @@ class RegistrationController {
     }
 
     def complete() {
-        render view: 'lifecycle', model: [
+        render view: '/emailConfirmation/lifecycle', model: [
                 redirect: false,
                 title: message(code: 'registration.complete.title'),
                 header: message(code: 'registration.complete.header'),
@@ -55,7 +55,7 @@ class RegistrationController {
     }
 
     def confirmed() {
-        render view: 'lifecycle', model: [
+        render view: '/emailConfirmation/lifecycle', model: [
                 redirect: true,
                 title: message(code: 'registration.confirmed.title'),
                 header: message(code: 'registration.confirmed.header'),
@@ -64,7 +64,7 @@ class RegistrationController {
     }
 
     def expired() {
-        render view: 'lifecycle', model: [
+        render view: '/emailConfirmation/lifecycle', model: [
                 redirect: false,
                 title: message(code: 'registration.expired.title'),
                 header: message(code: 'registration.expired.header'),

@@ -1,0 +1,1 @@
+<g:message code="mail.email.confirmation" args="[email, uri]" />

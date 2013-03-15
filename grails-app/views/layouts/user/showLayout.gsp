@@ -79,6 +79,10 @@
                             controller="user"
                             action="edit"
                             id="${userInstance?.id}"><g:message code="default.edit.button" /></g:link>
+                    <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
+                        <g:link class="tms-btn tms-warning" controller="profile"
+                                action="edit"><g:message code="profile.edit.button" /></g:link>
+                    </g:if>
                     <g:hiddenField name="user.id" value="${userInstance?.id}" />
                     <g:actionSubmit class="tms-btn tms-danger"
                                     action="delete"
