@@ -11,9 +11,15 @@
         <h1 class="header"><g:fieldValue bean="${topicInstance}" field="title"/></h1>
         </g:if>
 
-        <g:if test="${topicInstance?.description}">
-        <markdown:renderHtml text="${topicInstance?.description}"/>
-        </g:if>
+        <h3 id="description">
+            <i class="icon-pencil"></i>
+            <g:message code="thesis.thesisDescription.label"/>
+        </h3>
+        <div class="tms-description">
+            <g:if test="${topicInstance?.description}">
+            <markdown:renderHtml text="${topicInstance?.description}"/>
+            </g:if>
+        </div>
 
         <g:set var="topicTags" value="${topicInstance?.tags}"/>
         <g:if test="${topicTags}">
@@ -26,6 +32,9 @@
             </g:each>
         </p>
         </g:if>
+        <g:else>
+        <div class="tms-separator"></div>
+        </g:else>
 
         <richg:comments comments="${comments}" article="${topicInstance}" commentsTotal="${commentsTotal}"/>
     </div>

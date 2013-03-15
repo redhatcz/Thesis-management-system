@@ -37,8 +37,7 @@
         <g:hiddenField name="comment.dateCreated"
                        value="${comment?.dateCreated}"
                        id="comment-${index}-dateCreated"/>
-        <g:textArea class="comment"
-                    name="comment.content"
+        <g:textArea name="comment.content"
                     rows="5"
                     value="${comment?.content}"
                     id="comment-${index}-content" />

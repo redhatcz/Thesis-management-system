@@ -120,6 +120,11 @@ i[class*="icon-"] {
 
 /*---------HEADER---------*/
 
+h1.header {
+    border-bottom: 1px solid @grayBorder;
+    margin-bottom: 26px;
+}
+
 h1.header,
 h2.header,
 h3.header,
@@ -133,17 +138,20 @@ h1.header {
 }
 
 h2.header {
-    font-size: @titleFontSize - 5;
+    font-size: @titleFontSize - 2;
+    line-height: 35px;
 }
 
 h3.header {
-    font-size: @titleFontSize - 10;
-    padding-top: @marginSmall - 3;
+    font-size: @titleFontSize - 5;
+    padding-top: 15px;
+    line-height: 30px;
 }
 
 h4.header {
-    font-size: @titleFontSize - 15;
-    padding-top: @marginSmall - 6;
+    font-size: @titleFontSize - 8;
+    padding-top: 10px;
+    line-height: 25px;
 }
 
 
@@ -489,9 +497,38 @@ a.tag-selected {
     padding-top: 5px;
 }
 
+
+/*---------THESIS/TOPIC---------*/
+
 .tag-list {
     padding: 15px 0;
     border-bottom: 1px solid @grayBorder;
+}
+
+.tms-separator {
+    padding: 5px 0 8px;
+    border-bottom: 1px solid @grayBorder;
+}
+
+.tms-description {
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 18px;
+        font-family: @sansFontFamily;
+        line-height: 25px;
+        margin: 0 0 5px;
+    }
+}
+
+.tms-abstract {
+    font-style: italic;
+    padding-bottom: 15px;
+}
+
+h3#abstract,
+h3#description {
+    font-size: 24px;
+    color: @grayLight;
+    line-height: 25px;
 }
 
 
@@ -559,10 +596,10 @@ a.gray-link {
 
 /*---------COMMENTS---------*/
 
-div.comment {
+.comment {
     color: @gray;
     padding: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border: 1px solid @grayBorder;
 
     .icon-cog {
@@ -571,6 +608,12 @@ div.comment {
 
     &:hover .icon-cog {
         visibility: visible;
+    }
+}
+
+.comment-content {
+    p:last-child {
+        margin-bottom: 2px;
     }
 }
 

@@ -8,14 +8,27 @@
 <body>
 <div class="span8 content">
     <h1 class="header"><g:fieldValue bean="${thesisInstance}" field="title"/></h1>
-    <g:if test="${thesisInstance?.description}">
-        <markdown:renderHtml text="${thesisInstance?.description}"/>
-    </g:if>
 
     <g:if test="${thesisInstance?.thesisAbstract}">
-        <h3><g:message code="thesis.thesisAbstract.label"/></h3>
+    <h3 id="abstract">
+        <i class="icon-quote-left"></i>
+        <g:message code="thesis.thesisAbstract.label"/>
+    </h3>
+    <div class="tms-abstract">
         <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
+    </div>
     </g:if>
+
+    <h3 id="description">
+        <i class="icon-pencil"></i>
+        <g:message code="thesis.thesisDescription.label"/>
+    </h3>
+    <div class="tms-description">
+        <g:if test="${thesisInstance?.description}">
+            <markdown:renderHtml text="${thesisInstance?.description}"/>
+        </g:if>
+    </div>
+    <div class="tms-separator"></div>
 
     <richg:comments comments="${comments}" article="${thesisInstance}" commentsTotal="${commentsTotal}"/>
 </div>

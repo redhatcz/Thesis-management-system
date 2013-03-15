@@ -7,28 +7,39 @@
 </head>
 <body>
     <div class="span8 content">
-        <h1 class="header"><g:message code="thesis.list.header"/></h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <g:sortableColumn property="title" title="${message(code: 'thesis.title.label')}"/>
-                <g:sortableColumn property="assignee" title="${message(code: 'thesis.assignee.label')}"/>
-            </tr>
-            </thead>
-            <tbody>
-            <g:each in="${thesisInstanceList}" status="i" var="thesisInstance">
-                <tr>
-                    <td>
-                        <g:link action="show" id="${thesisInstance.id}"
-                                params="[headline: Util.hyphenize(thesisInstance?.title)]"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
-                    </td>
-                    <td>
-                        <g:link controller="user" action="show" id="${thesisInstance.assigneeId}"><g:fieldValue field="fullName" bean="${thesisInstance?.assignee}"/></g:link>
-                    </td>
-                </tr>
-            </g:each>
-            </tbody>
-        </table>
+        <g:each var="thesis" in="${thesisInstanceList}">
+        <div class="table-layout">
+            <h3>
+                <g:link action="show" id="${thesis.id}"
+                        params="[headline: Util.hyphenize(thesis?.title)]">
+                    <g:fieldValue bean="${thesis}" field="title"/>
+                </g:link>
+            </h3>
+            <ul class="inline">
+                <li><i class="icon-user"></i>
+                    <g:link controller="user" action="show" id="${thesis.assigneeId}">${thesis?.assignee?.fullName}</g:link>
+                </li>
+                <li><i class="icon-time"></i>
+                    <g:formatDate date="${thesis?.dateCreated}"
+                                  dateStyle="LONG"
+                                  type="date" />
+                </li>
+                <li><i class="icon-user"></i>
+                    <g:link controller="user" action="show" id="${thesis.supervisorId}">${thesis?.supervisor?.fullName}</g:link>
+                </li>
+            </ul>
+            <div class="table-text">
+                <g:if test="${thesis?.thesisAbstract}">
+                    <g:fieldValue field="thesisAbstract" bean="${thesis}"/>
+                </g:if>
+                <g:link class="gray-link"
+                        action="show"
+                        id="${thesis.id}"
+                        params="[headline: Util.hyphenize(thesis?.title)]"
+                    ><g:message code="topic.read.more.label"/>&hellip;</g:link>
+            </div>
+        </div>
+        </g:each>
 
         <g:if test="${Util.isPaginationVisible(thesisInstanceTotal, params.max)}">
             <g:paginate total="${thesisInstanceTotal}" class="pagination-centered"/>

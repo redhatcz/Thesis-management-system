@@ -23,7 +23,7 @@
 <h4 class="header">Leave a Comment</h4>
 <g:form controller="comment" action="create" name="create-comment-form">
     <g:hiddenField name="comment.article.id" value="${article?.id}" />
-    <g:textArea class="comment" name="comment.content" rows="5" />
+    <g:textArea name="comment.content" rows="5" />
     <g:submitButton name="create-comment"
                     class="tms-btn pull-right"
                     value="${message(code: 'comment.post.button')}"/>
