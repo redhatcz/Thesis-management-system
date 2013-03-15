@@ -65,11 +65,33 @@
                         <i class="icon-group"></i>
                         ${message(code: 'topic.supervision.label').toString().toLowerCase()}
                     </dt>
-                    <g:each in="${supervisions}" status="i" var="supervision">
                     <dd>
-                        <g:link controller="user" action="show" id="${supervision?.supervisor?.id}" title="${supervision?.university?.name}">${supervision?.supervisor?.encodeAsHTML()}</g:link>
+                        <g:each in="${supervisions}" status="i" var="supervision">
+                        <g:link controller="user"
+                                action="show"
+                                id="${supervision?.supervisor?.id}"
+                                title="${supervision?.university?.name}"
+                            >${supervision?.supervisor?.encodeAsHTML()}</g:link>
+                        <br />
+                        </g:each>
                     </dd>
-                    </g:each>
+                </g:if>
+
+                <g:if test="${topicInstance?.universities && !topicInstance?.universities?.empty}">
+                    <dt>
+                        <i class="icon-suitcase"></i>
+                        ${message(code: 'topic.universities.label').toString().toLowerCase()}
+                    </dt>
+                    <dd>
+                        <g:each in="${topicInstance?.universities}" status="i" var="university">
+                        <g:link controller="university"
+                                action="show"
+                                id="${university?.id}"
+                                title="${university?.name}"
+                            ><g:fieldValue bean="${university}" field="name"/></g:link>
+                        <br />
+                        </g:each>
+                    </dd>
                 </g:if>
 
                 <g:if test="${!topicInstance?.types?.empty}">
@@ -116,28 +138,40 @@
                 <g:if test="${!subscriber}">
                 <g:form style="display: inline;" controller="subscription" action="subscribe">
                     <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-subscription">
-                        <g:message code="subscription.subscribe.button"/>
-                    </g:submitButton>
+                    <g:submitButton class="tms-btn tms-info" name="submit-subscription"
+                                    value="${message(code: 'subscription.subscribe.button')}" />
                 </g:form>
                 </g:if>
-
                 <g:else>
                 <g:form style="display: inline;" controller="subscription" action="unsubscribe">
                     <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-unsubscription">
-                        <g:message code="subscription.unsubscribe.button"/>
-                    </g:submitButton>
+                    <g:submitButton class="tms-btn tms-info" name="submit-unsubscription"
+                                    value="${message(code: 'subscription.unsubscribe.button')}"/>
                 </g:form>
                 </g:else>
 
-                <g:link class="tms-btn tms-success" controller="application" action="create" id="${topicInstance?.id}"><g:message code="application.apply.button" /></g:link>
+                <g:link class="tms-btn tms-success"
+                        controller="application"
+                        action="create"
+                        id="${topicInstance?.id}"
+                    ><g:message code="application.apply.button" /></g:link>
 
-                <g:link class="tms-btn tms-info" controller="thesis" action="create" id="${topicInstance?.id}"><g:message code="thesis.create.button"/></g:link>
+                <g:link class="tms-btn tms-info"
+                        controller="thesis"
+                        action="create"
+                        id="${topicInstance?.id}"
+                    ><g:message code="thesis.create.button"/></g:link>
 
-                <g:link class="tms-btn tms-warning" action="edit" id="${topicInstance?.id}"><g:message code="default.edit.button"/></g:link>
+                <g:link class="tms-btn tms-warning"
+                        action="edit"
+                        id="${topicInstance?.id}"
+                    ><g:message code="default.edit.button"/></g:link>
 
-                <g:link class="tms-btn tms-warning" controller="supervision" action="manage" id="${topicInstance?.id}"><g:message code="supervision.edit.mine.button" /></g:link>
+                <g:link class="tms-btn tms-warning"
+                        controller="supervision"
+                        action="manage"
+                        id="${topicInstance?.id}"
+                    ><g:message code="supervision.edit.mine.button" /></g:link>
 
             </div>
         </div>
