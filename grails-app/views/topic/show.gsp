@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.Topic" %>
+<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Topic" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -83,7 +83,8 @@
                     <ul class="unstyled">
                     <g:each in="${thesisList}" var="thesis">
                         <li>
-                            <g:link controller="thesis" action="show" id="${thesis.id}">${thesis.title}</g:link>
+                            <g:link controller="thesis" action="show" id="${thesis.id}"
+                                    params="[headline: Util.hyphenize(thesis?.title)]">${thesis.title}</g:link>
                         </li>
                     </g:each>
                     </ul>

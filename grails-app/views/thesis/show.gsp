@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.Topic" %>
+<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Topic" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -29,7 +29,8 @@
                     ${message(code: 'topic.label').toString().toLowerCase()}
                 </dt>
                 <dd>
-                    <g:link action="show" controller="topic" id="${thesisInstance?.topicId}"><g:fieldValue field="topic" bean="${thesisInstance}"/></g:link>
+                    <g:link action="show" controller="topic" id="${thesisInstance?.topicId}"
+                            params="[headline: Util.hyphenize(thesisInstance?.topic?.title)]"><g:fieldValue field="topic" bean="${thesisInstance}"/></g:link>
                 </dd>
                 <dt>
                     <i class="icon-user"></i>

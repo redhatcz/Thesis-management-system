@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.Category" %>
+<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Category" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,8 @@
         <dd><g:link controller="user" action="show" id="${applicationInstance?.applicantId}"><g:fieldValue bean="${applicationInstance?.applicant}" field="fullName"/></g:link></dd>
 
         <dt><g:message code="topic.label"/></dt>
-        <dd><g:link controller="topic" action="show" id="${applicationInstance?.topicId}"><g:fieldValue bean="${applicationInstance?.topic}" field="title"/></g:link></dd>
+        <dd><g:link controller="topic" action="show" id="${applicationInstance?.topicId}"
+                    params="[headline: Util.hyphenize(applicationInstance?.topic?.title)]"><g:fieldValue bean="${applicationInstance?.topic}" field="title"/></g:link></dd>
 
         <dt><g:message code="university.label"/></dt>
         <dd><g:fieldValue bean="${applicationInstance?.university}" field="name"/></dd>

@@ -36,7 +36,8 @@ class ThesisListenerService {
         def args = [
                 e.user.fullName,
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
-                grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id, absolute: true),
+                grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id,
+                        params: [headline: Util.hyphenize(e.thesis.title)], absolute: true),
                 e.thesis.topic.title,
                 grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id,
                         params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
@@ -74,7 +75,8 @@ class ThesisListenerService {
         def args = [
                 e.user.fullName,
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
-                grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id, absolute: true),
+                grailsLinkGenerator.link(controller: 'thesis', action: 'show', id: e.thesis.id,
+                        params: [headline: Util.hyphenize(e.thesis.title)], absolute: true),
                 e.thesis.topic.title,
                 grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.thesis.topic.id,
                         params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)

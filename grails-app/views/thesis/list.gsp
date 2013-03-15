@@ -19,10 +19,11 @@
             <g:each in="${thesisInstanceList}" status="i" var="thesisInstance">
                 <tr>
                     <td>
-                        <g:link action="show" id="${thesisInstance.id}"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
+                        <g:link action="show" id="${thesisInstance.id}"
+                                params="[headline: Util.hyphenize(thesisInstance?.title)]"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
                     </td>
                     <td>
-                        <g:link action="show" id="${thesisInstance.assigneeId}"><g:fieldValue field="fullName" bean="${thesisInstance?.assignee}"/></g:link>
+                        <g:link controller="user" action="show" id="${thesisInstance.assigneeId}"><g:fieldValue field="fullName" bean="${thesisInstance?.assignee}"/></g:link>
                     </td>
                 </tr>
             </g:each>

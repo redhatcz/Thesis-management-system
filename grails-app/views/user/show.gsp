@@ -1,3 +1,4 @@
+<%@ page import="com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,8 @@
             <g:each in="${thesisInstanceList}" status="i" var="thesisInstance">
                 <tr>
                     <td>
-                        <g:link controller="thesis" action="show" id="${thesisInstance.id}"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
+                        <g:link controller="thesis" action="show" id="${thesisInstance.id}"
+                                params="[headline: Util.hyphenize(thesisInstance?.title)]"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
                     </td>
                 </tr>
             </g:each>

@@ -25,12 +25,16 @@ class ThesisController {
         [thesisInstanceList: Thesis.list(params), thesisInstanceTotal: Thesis.count]
     }
 
-    def show(Long id) {
+    def show(Long id, String headline) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
             flash.message = message(code: 'thesis.not.found', args: [id])
             redirect(action: "list")
             return
+        }
+
+        if (Util.hyphenize(thesisInstance.title) != headline) {
+            redirect(action: 'show', id: id, params: [headline: Util.hyphenize(thesisInstance.title)], permanent: true)
         }
 
         def commentsTotal = Comment.countByArticle(thesisInstance)

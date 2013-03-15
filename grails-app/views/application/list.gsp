@@ -32,7 +32,8 @@
                     <g:link controller="user" action="show" id="${applicationInstance.applicantId}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
                 </td>
                 <td>
-                    <g:link controller="topic" action="show" id="${applicationInstance.topicId}">${fieldValue(bean: applicationInstance.topic, field: "title")}</g:link>
+                    <g:link controller="topic" action="show" id="${applicationInstance.topicId}"
+                            params="[headline: Util.hyphenize(applicationInstance?.topic?.title)]">${fieldValue(bean: applicationInstance.topic, field: "title")}</g:link>
                 </td>
             </tr>
         </g:each>
