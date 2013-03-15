@@ -43,10 +43,10 @@
         <h4><g:message code="topic.management.label"/></h4>
         <div class="panel-content">
             <g:if test="${currentCategory}">
-                <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]">Create topic</g:link>
+                <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]"><g:message code="topic.create.button"/></g:link>
             </g:if>
             <g:else>
-                <g:link class="tms-btn tms-info" action="create">Create topic</g:link>
+                <g:link class="tms-btn tms-info" action="create"><g:message code="topic.create.button"/></g:link>
             </g:else>
         </div>
 
