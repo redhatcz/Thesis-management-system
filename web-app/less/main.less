@@ -473,7 +473,7 @@ a.category-root {
         padding: 6px 8px 5px;
 
         &:hover {
-            background-color: #fffddc;
+            background-color: @yellowLight;
         }
     }
 }
@@ -529,6 +529,31 @@ h3#description {
     font-size: 24px;
     color: @grayLight;
     line-height: 25px;
+}
+
+
+/*---------USER-PROFILE---------*/
+
+.nav.nav-tabs {
+    li a {
+        padding: 12px 14px 12px 8px;
+        font-size: 17px;
+    }
+
+    li:not(.active) a {
+        color: @grayLight;
+
+        &:hover {
+            background-color: @white;
+            border-color: @white;
+            border-bottom-color: #ddd;
+            color: @red;
+        }
+    }
+
+    i[class*="icon-"] {
+        font-size: 18px;
+    }
 }
 
 
@@ -708,6 +733,36 @@ a.gray-link {
 
 .alert {
     border-radius: 0px;
+}
+
+
+/*---------TABLES--------*/
+
+.tms-table {
+    border: 3px solid @grayBorder;
+    margin-bottom: 20px;
+
+    .table {
+        margin-bottom: 0px;
+        border: 1px solid @grayLighter;
+    }
+
+    thead {
+        background-color: @graySuperLight;
+    }
+
+    th, td {
+        padding: 12px 16px;
+    }
+
+    tr:hover {
+        background-color: @yellowLight;
+    }
+
+    a {
+        .pretty-link();
+        border-bottom: none;
+    }
 }
 
 

@@ -10,6 +10,7 @@
 
 <content tag="main-box">
     <g:if test="${thesisInstanceList && thesisInstanceList.size() != 0}">
+    <div class="tms-table">
         <table class="table">
             <thead>
             <tr>
@@ -27,6 +28,7 @@
             </g:each>
             </tbody>
         </table>
+    </div>
     </g:if>
     <g:else>
         <p><g:message code="user.no.theses.found"/></p>

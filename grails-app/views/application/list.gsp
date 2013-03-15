@@ -8,37 +8,33 @@
 
 <body>
 <div class="span8 content">
-    <h1 class="header"><g:message code="application.list.header"/></h1>
+    <h2 class="header"><g:message code="application.list.header"/></h2>
     <g:if test="${!applicationInstanceList?.empty}">
-    <table class="table">
-        <thead>
-        <tr>
-            <g:sortableColumn property="id"
-                              title="${message(code: 'id.label')}"/>
-            <g:sortableColumn property="applicant"
-                              title="${message(code: 'application.applicant.label')}"/>
-            <g:sortableColumn property="topic"
-                              title="${message(code: 'topic.label')}"/>
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
+    <div class="tms-table">
+        <table class="table">
+            <thead>
             <tr>
-                <td>
-                    <g:link action="show" id="${applicationInstance.id}">${fieldValue(bean: applicationInstance, field: "id")}</g:link>
-
-                </td>
-                <td>
-                    <g:link controller="user" action="show" id="${applicationInstance.applicantId}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
-                </td>
-                <td>
-                    <g:link controller="topic" action="show" id="${applicationInstance.topicId}"
-                            params="[headline: Util.hyphenize(applicationInstance?.topic?.title)]">${fieldValue(bean: applicationInstance.topic, field: "title")}</g:link>
-                </td>
+                <g:sortableColumn property="applicant"
+                                  title="${message(code: 'application.applicant.label')}"/>
+                <g:sortableColumn property="topic"
+                                  title="${message(code: 'topic.label')}"/>
             </tr>
-        </g:each>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
+                <tr>
+                    <td>
+                        <g:link controller="user" action="show" id="${applicationInstance.applicantId}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
+                    </td>
+                    <td>
+                        <g:link controller="topic" action="show" id="${applicationInstance.topicId}"
+                                params="[headline: Util.hyphenize(applicationInstance?.topic?.title)]">${fieldValue(bean: applicationInstance.topic, field: "title")}</g:link>
+                    </td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
+    </div>
     <g:if test="${Util.isPaginationVisible(applicationInstanceTotal, params.max)}">
         <g:paginate total="${applicationInstanceTotal}" class="pagination-centered"/>
     </g:if>

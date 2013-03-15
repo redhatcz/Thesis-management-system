@@ -8,23 +8,25 @@
 <body>
     <div class="span8 content">
         <h2 class="header"><g:message code="university.list.header" /></h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <g:sortableColumn property="name"
-                                      title="${message(code: 'university.name.label')}" />
-                </tr>
-            </thead>
-            <tbody>
-                <g:each in="${universityInstanceList}" status="i" var="universityInstance">
-                <tr>
-                    <td>
-                        <g:link action="show" id="${universityInstance.id}">${fieldValue(bean: universityInstance, field: "name")}</g:link>
-                    </td>
-                </tr>
-                </g:each>
-            </tbody>
-        </table>
+        <div class="tms-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <g:sortableColumn property="name"
+                                          title="${message(code: 'university.name.label')}" />
+                    </tr>
+                </thead>
+                <tbody>
+                    <g:each in="${universityInstanceList}" status="i" var="universityInstance">
+                    <tr>
+                        <td>
+                            <g:link action="show" id="${universityInstance.id}">${fieldValue(bean: universityInstance, field: "name")}</g:link>
+                        </td>
+                    </tr>
+                    </g:each>
+                </tbody>
+            </table>
+        </div>
         <g:if test="${Util.isPaginationVisible(universityInstanceTotal, params.max)}">
             <g:paginate total="${universityInstanceTotal}" class="pagination-centered"/>
         </g:if>

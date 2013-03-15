@@ -71,8 +71,8 @@
 <div class="span8 content">
     <div class="control-group">
         <ul class="nav nav-tabs">
-            <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}"><g:link action="show" id="${userInstance?.id}">Theses</g:link></li>
-            <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}"><g:link action="activity" id="${userInstance?.id}">Activity</g:link></li>
+            <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}"><g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i>Theses</g:link></li>
+            <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}"><g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i>Activity</g:link></li>
             <div class="controls pull-right">
                 <g:form controller="user">
                     <g:link class="tms-btn tms-warning"
