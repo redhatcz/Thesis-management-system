@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="profile">
+    <meta name="layout" content="main">
     <title><g:message code="university.show.title" /></title>
 </head>
 <body>
@@ -14,8 +14,13 @@
             <div class="panel-content">
                 <dl>
                     <g:if test="${universityInstance?.name}">
-                    <dt>${message(code: 'university.name.label').toString().toLowerCase()}</dt>
-                    <dd><g:fieldValue bean="${universityInstance}" field="name"/></dd>
+                    <dt>
+                        <i class="icon-suitcase"></i>
+                        ${message(code: 'university.name.label').toString().toLowerCase()}
+                    </dt>
+                    <dd>
+                        <g:fieldValue bean="${universityInstance}" field="name"/>
+                    </dd>
                     </g:if>
                 </dl>
             </div>

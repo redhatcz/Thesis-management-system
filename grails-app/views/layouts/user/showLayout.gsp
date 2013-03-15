@@ -1,5 +1,5 @@
 <%@ page import="com.redhat.theses.util.Util; com.redhat.theses.auth.User" %>
-<g:applyLayout name="profile">
+<g:applyLayout name="main">
 <html>
 <head>
     <title><g:layoutTitle /></title>
