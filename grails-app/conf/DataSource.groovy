@@ -61,6 +61,7 @@ environments {
 }
 grails {
     mongo {
+        configDBName = "configuration"
         databaseName = "db"
     }
 }

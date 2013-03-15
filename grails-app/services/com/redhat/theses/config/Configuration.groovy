@@ -15,6 +15,9 @@ class Configuration {
     ConfigObject getConfig() {
         if (config == null) {
             config = configurationProvider.load()
+            if (!config) {
+                config = createDefaultConfig()
+            }
         }
         config
     }
@@ -29,6 +32,13 @@ class Configuration {
         } else {
             false
         }
+    }
+
+    private ConfigObject createDefaultConfig() {
+        Class configClass = getClass().classLoader.loadClass('DefaultRuntimeConfig')
+        def config = new ConfigSlurper().parse(configClass)
+        configurationProvider.save(config)
+        config
     }
 
     def propertyMissing(String name) {
