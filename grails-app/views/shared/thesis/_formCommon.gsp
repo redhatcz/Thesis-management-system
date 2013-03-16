@@ -23,7 +23,7 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
-    <label class="control-label" for="thesis.supervisor.id">
+    <label class="control-label" for="thesis.supervisor.fullName">
         <strong><g:message code="thesis.supervisor.label"/></strong>
     </label>
     <div class="controls">
@@ -32,7 +32,7 @@
         <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
         <a4g:textField name="thesis.supervisor.fullName"
                        value="${thesisInstance?.supervisor?.fullName}"
-                       autocomplete-url="${createLink(controller: 'json', action: 'listUserByNameAndRole')}"
+                       autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
                        autocomplete-target="thesis.supervisor.id"
                        autocomplete-opts="a4g-role[${i}]@role"
                        placeholder="${message(code: 'thesis.supervisor.label')}"/>
