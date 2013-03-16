@@ -37,13 +37,13 @@
                 </dd>
 
                 <g:if test="${userInstance?.enabled}">
-                    <dt>
-                        <i class="icon-lock"></i>
-                        ${message(code: 'user.enabled.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                        <g:formatBoolean boolean="${userInstance?.enabled}" />
-                    </dd>
+                <dt>
+                    <i class="icon-lock"></i>
+                    ${message(code: 'user.enabled.label').toString().toLowerCase()}
+                </dt>
+                <dd>
+                    <g:formatBoolean boolean="${userInstance?.enabled}" />
+                </dd>
                 </g:if>
 
                 <g:if test="${userInstance?.accountExpired}">
@@ -69,31 +69,28 @@
     </div>
 </div>
 <div class="span8 content">
-    <div class="control-group">
-        <ul class="nav nav-tabs">
-            <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}"><g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i>Theses</g:link></li>
-            <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}"><g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i>Activity</g:link></li>
-            <div class="controls pull-right">
-                <g:form controller="user">
-                    <g:link class="tms-btn tms-warning"
-                            controller="user"
-                            action="edit"
-                            id="${userInstance?.id}"><g:message code="default.edit.button" /></g:link>
-                    <sec:ifLoggedIn>
-                        <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
-                            <g:link class="tms-btn tms-warning" controller="profile"
-                                    action="edit"><g:message code="profile.edit.button" /></g:link>
-                        </g:if>
-                    </sec:ifLoggedIn>
-                    <g:hiddenField name="user.id" value="${userInstance?.id}" />
-                    <g:actionSubmit class="tms-btn tms-danger"
-                                    action="delete"
-                                    value="${message(code: 'default.delete.button')}"
-                                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
-                </g:form>
-            </div>
-        </ul>
-    </div>
+    <ul class="nav nav-tabs">
+        <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}">
+            <g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i>Theses</g:link>
+        </li>
+        <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}">
+            <g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i>Activity</g:link>
+        </li>
+        <div class="controls pull-right">
+            <sec:ifAllGranted roles="ROLE_ADMIN">
+            <g:link class="tms-btn" controller="user"
+                    action="edit" id="${userInstance?.id}"
+                ><i class="icon-wrench"></i><g:message code="default.edit.button" /></g:link>
+            </sec:ifAllGranted>
+
+            <sec:ifLoggedIn>
+                <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
+                <g:link class="tms-btn" controller="profile" action="edit"
+                    ><i class="icon-wrench"></i><g:message code="profile.edit.button" /></g:link>
+                </g:if>
+            </sec:ifLoggedIn>
+        </div>
+    </ul>
     <div>
         <g:pageProperty name="page.main-box"/>
     </div>

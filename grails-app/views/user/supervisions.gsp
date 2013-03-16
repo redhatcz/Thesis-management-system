@@ -15,7 +15,11 @@
     <g:else>
     <g:each var="topic" in="${topicInstanceList}">
     <div class="table-layout">
-        <h4><g:link controller="supervision" action="manage" id="${topic.id}"><g:fieldValue bean="${topic}" field="title"/></g:link></h4>
+        <h4>
+            <g:link controller="supervision"
+                    action="manage" id="${topic.id}"
+                ><g:fieldValue bean="${topic}" field="title"/></g:link>
+        </h4>
         <g:fieldValue bean="${topic}" field="lead"/>
     </div>
     </g:each>

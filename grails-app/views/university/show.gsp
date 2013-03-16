@@ -27,23 +27,11 @@
         </div>
     </div>
     <div class="span8 content">
-        <g:form>
-            <div class="control-group">
-                <ul class="nav nav-tabs">
-                    <div class="controls pull-right">
-                        <g:hiddenField name="university.id"
-                                       value="${universityInstance?.id}" />
-                        <g:link class="tms-btn tms-warning"
-                                action="edit"
-                                id="${universityInstance?.id}"><g:message code="default.edit.button"/></g:link>
-                        <g:actionSubmit class="tms-btn tms-danger"
-                                        action="delete"
-                                        value="${message(code: 'default.delete.button')}"
-                                        onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
-                    </div>
-                </ul>
-            </div>
-        </g:form>
+        <div class="controls pull-right">
+            <g:link class="tms-btn" action="edit"
+                    id="${universityInstance?.id}"
+                ><i class="icon-wrench"></i><g:message code="default.edit.button"/></g:link>
+        </div>
     </div>
 </body>
 </html>

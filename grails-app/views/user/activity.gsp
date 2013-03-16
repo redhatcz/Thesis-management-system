@@ -18,7 +18,9 @@
         </g:if>
 
         <g:else>
-        <p><g:message code="user.no.activity.found"/></p>
+        <div class="well well-large">
+            <g:message code="user.no.activity.found"/>
+        </div>
         </g:else>
     </content>
 </body>

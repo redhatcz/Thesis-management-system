@@ -22,7 +22,8 @@
                 <tr>
                     <td>
                         <g:link controller="thesis" action="show" id="${thesisInstance.id}"
-                                params="[headline: Util.hyphenize(thesisInstance?.title)]"><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
+                                params="[headline: Util.hyphenize(thesisInstance?.title)]"
+                            ><g:fieldValue field="title" bean="${thesisInstance}"/></g:link>
                     </td>
                 </tr>
             </g:each>
@@ -31,7 +32,9 @@
     </div>
     </g:if>
     <g:else>
-        <p><g:message code="user.no.theses.found"/></p>
+    <div class="well well-large">
+        <g:message code="user.no.theses.found"/>
+    </div>
     </g:else>
 </content>
 </body>

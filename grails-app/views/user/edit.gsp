@@ -17,6 +17,10 @@
                                 value="${message(code: 'default.update.button')}" />
                 <g:link class="tms-btn tms-danger" action="show" id="${userInstance?.id}"
                         onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">${message(code: 'default.cancel.button')}</g:link>
+                <g:actionSubmit class="tms-btn tms-danger"
+                                action="delete"
+                                value="${message(code: 'default.delete.button')}"
+                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
             </div>
         </div>
     </g:form>

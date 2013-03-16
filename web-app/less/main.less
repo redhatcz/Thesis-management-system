@@ -551,9 +551,13 @@ h3#description {
         }
     }
 
-    i[class*="icon-"] {
-        font-size: 18px;
+    .controls {
+        margin-top: 8px;
     }
+}
+
+.well {
+    color: @grayLight;
 }
 
 
@@ -578,11 +582,6 @@ h3#description {
         .box-shadow(0px 1px 1px @redDark);
     }
 
-    &.active,
-    &:active {
-        box-shadow: none;
-    }
-
     &.tms-warning:hover {
         background: @btnWarningBackground;
         .box-shadow(0px 1px 1px @btnWarningBackgroundHighlight);
@@ -590,7 +589,7 @@ h3#description {
 
     &.tms-danger:hover {
         background: red;
-        .box-shadow(0px 1px 1px darken(red, 20%));
+        .box-shadow(0px 1px 1px darken(red, 10%));
     }
 
     &.tms-success:hover {
@@ -602,6 +601,24 @@ h3#description {
         background: @btnInfoBackground;
         .box-shadow(0px 1px 1px @btnInfoBackgroundHighlight);
     }
+
+    &.active,
+    &:active,
+    &.tms-info:active,
+    &.tms-danger:active,
+    &.tms-warning:active,
+    &.tms-success:active {
+        box-shadow: none;
+    }
+
+    i[class*="icon-"] {
+        padding-left: 0;
+        padding-right: 4px;
+    }
+}
+
+input.tms-btn {
+    padding: 4px 9px;
 }
 
 
@@ -755,7 +772,7 @@ a.gray-link {
         padding: 12px 16px;
     }
 
-    tr:hover {
+    tbody tr:hover {
         background-color: @yellowLight;
     }
 
