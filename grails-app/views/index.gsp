@@ -50,12 +50,17 @@
                     </div>
                 </g:if>
                 <g:else>
-                    <div class="panel-content"><g:message code="home.no.your.theses.found"/></div>
+                    <div class="panel-content">
+                        <g:message code="home.no.your.theses.found"/>
+                    </div>
                 </g:else>
             </sec:ifLoggedIn>
             <sec:ifNotLoggedIn>
                 <div class="panel-content">
-                    <p><g:message code="home.loggin.to.show.theses" args="[createLink(controller: 'login')]"/></p>
+                    <p>
+                        <g:message code="home.loggin.to.show.theses"
+                                   args="[createLink(controller: 'login')]"/>
+                    </p>
                 </div>
             </sec:ifNotLoggedIn>
         </div>
