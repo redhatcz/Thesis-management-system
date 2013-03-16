@@ -9,8 +9,9 @@ class UploadListenerService {
     def springSecurityService
     def gridFileService
     def messageSource
+    def gspTagLibraryLookup
 
-    @Listener(topic = "avatar", namespace = 'uploader')
+    def @Listener(topic = "avatar", namespace = 'uploader')
     Map avatar(event) {
         def response = [success: false, message: null]
         def user = springSecurityService.currentUser
@@ -43,8 +44,17 @@ class UploadListenerService {
         }
 
         def saved = gridFileService.save(file: event.file, object: thesis)
-        // true if file was saved
-        response.success = saved || false
+        if (saved) {
+            def g = gspTagLibraryLookup.lookupNamespaceDispatcher('g')
+            response.id = saved.id.toString()
+            response.filename = saved.filename
+            response.type = saved.contentType
+            // This needs to be formatted -- don't know how yet.
+            response.date = g.formatDate(date: saved.uploadDate, dateStyle: 'LONG',
+                    type: 'datetime')
+            response.bucket = Thesis.bucketMapping
+            response.success = true
+        }
 
         return response
     }
@@ -52,7 +62,6 @@ class UploadListenerService {
     @Listener(topic = "thesis", namespace = 'uploader-delete')
     Map deleteThesis(event) {
         def response = [success: false, message: null]
-        println event.params
         def thesisId = event.params.thesisId
         def thesis = Thesis.get(thesisId)
         def user = springSecurityService.currentUser
@@ -68,16 +77,23 @@ class UploadListenerService {
             return response
         }
 
-        def existsBefore = gridFileService.getFileByMongoId(event.id, Thesis.bucketMapping)
+        def before = gridFileService.getFileByMongoId(event.id, Thesis.bucketMapping)
 
-        if (existsBefore) {
+        if (before) {
             gridFileService.deleteFileByMongoId(event.id, Thesis.bucketMapping)
-        } else {
-            response.message =  messageSource.getMessage('uploader.error.not_found', [].toArray(),
-                    LCH.locale)
-            def existsAfter = gridFileService.getFileByMongoId(event.id, Thesis.bucketMapping)
+            def after = gridFileService.getFileByMongoId(event.id, Thesis.bucketMapping)
             // true if file existed and was deleted, false otherwise
-            response.success = existsBefore && !existsAfter
+            if (after) {
+                response.message = messageSource.getMessage('uploader.error.delete', [].toArray(),
+                        LCH.locale)
+            } else {
+                response.success = true
+                response.id = before.id.toString()
+                response.name = before.filename
+            }
+        } else {
+            response.message = messageSource.getMessage('uploader.error.not.found', [].toArray(),
+                    LCH.locale)
         }
 
         return response
