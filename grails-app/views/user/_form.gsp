@@ -38,14 +38,20 @@
             <g:checkBox name="user.enabled" value="${userInstance?.enabled}" />
             <g:message code="user.enabled.label" default="Enabled" />
         </label>
+    </div>
+    <div class="controls">
         <label class="checkbox" for="user.passwordExpired">
             <g:checkBox name="user.passwordExpired" value="${userInstance?.passwordExpired}" />
             <g:message code="user.passwordExpired.label"/>
         </label>
+    </div>
+    <div class="controls">
         <label class="checkbox" for="user.accountLocked">
             <g:checkBox name="user.accountLocked" value="${userInstance?.accountLocked}" />
             <g:message code="user.accountLocked.label"/>
         </label>
+    </div>
+    <div class="controls">
         <label class="checkbox" for="user.accountExpired">
             <g:checkBox name="user.accountExpired" value="${userInstance?.accountExpired}" />
             <g:message code="user.accountExpired.label"/>

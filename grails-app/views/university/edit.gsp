@@ -5,7 +5,15 @@
     <title><g:message code="university.edit.title" /></title>
 </head>
 <body>
-    <h2 class="header"><g:message code="university.edit.header" /></h2>
+    <h2 class="header">
+        <g:message code="university.edit.header" />
+        <small class="pull-right">
+            <g:link action="show" id="${universityInstance?.id}">
+                <i class="icon-double-angle-left"></i>
+                ${message(code: 'default.back.button')}
+            </g:link>
+        </small>
+    </h2>
     <g:form class="form-inline" method="post" >
         <g:hiddenField name="university.id" value="${universityInstance?.id}" />
         <g:hiddenField name="university.version" value="${universityInstance?.version}" />
@@ -15,10 +23,6 @@
                 <g:actionSubmit class="tms-btn"
                                 action="update"
                                 value="${message(code: 'default.update.button')}" />
-                <g:link class="tms-btn tms-danger"
-                        action="show"
-                        id="${universityInstance?.id}"
-                        onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">${message(code: 'default.cancel.button')}</g:link>
                 <g:actionSubmit class="tms-btn tms-danger"
                                 action="delete"
                                 value="${message(code: 'default.delete.button')}"

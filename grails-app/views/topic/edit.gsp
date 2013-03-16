@@ -6,7 +6,15 @@
     <title><g:message code="topic.edit.title" /></title>
 </head>
 <body>
-    <h2 class="header"><g:message code="topic.edit.header" /></h2>
+    <h2 class="header">
+        <g:message code="topic.edit.header" />
+        <small class="pull-right">
+            <g:link action="show" id="${topicInstance?.id}">
+                <i class="icon-double-angle-left"></i>
+                ${message(code: 'default.back.button')}
+            </g:link>
+        </small>
+    </h2>
     <g:form class="form-inline" method="post" >
         <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
         <g:hiddenField name="topic.version" value="${topicInstance?.version}" />
@@ -16,11 +24,6 @@
                 <g:actionSubmit class="tms-btn"
                                 action="update"
                                 value="${message(code: 'default.update.button')}" />
-                <g:link class="tms-btn tms-danger"
-                        action="show"
-                        id="${topicInstance?.id}"
-                        params="[headline: Util.hyphenize(topicInstance?.title)]"
-                        onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">${message(code: 'default.cancel.button')}</g:link>
             </div>
         </div>
     </g:form>
