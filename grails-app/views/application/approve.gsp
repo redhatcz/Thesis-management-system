@@ -10,7 +10,8 @@
     <g:render template="/shared/thesis/formCreate"/>
     <div class="control-group">
         <div class="controls">
-            <g:submitButton name="create" class="tms-btn"  value="${message(code: 'default.create.button')}" />
+            <g:submitButton name="create" class="tms-btn btn-large"
+                            value="${message(code: 'default.create.button')}" />
         </div>
     </div>
 </g:form>

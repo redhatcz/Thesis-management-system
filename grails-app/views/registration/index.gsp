@@ -19,7 +19,7 @@
         <div class="control-group">
             <div class="controls">
                 <g:actionSubmit name="register"
-                                class="tms-btn"
+                                class="tms-btn btn-large"
                                 value="${message(code: 'registration.register.button')}" />
             </div>
         </div>

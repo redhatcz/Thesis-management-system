@@ -20,10 +20,10 @@
         <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
-                <g:actionSubmit class="tms-btn"
+                <g:actionSubmit class="tms-btn btn-large"
                                 action="update"
                                 value="${message(code: 'default.update.button')}" />
-                <g:actionSubmit class="tms-btn tms-danger"
+                <g:actionSubmit class="tms-btn tms-danger btn-large"
                                 action="delete"
                                 value="${message(code: 'default.delete.button')}"
                                 onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />

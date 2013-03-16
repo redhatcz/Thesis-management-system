@@ -10,7 +10,7 @@
         <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
-                <g:actionSubmit class="tms-btn"
+                <g:actionSubmit class="tms-btn btn-large"
                                 action="save"
                                 value="${message(code: 'default.update.button')}" />
             </div>

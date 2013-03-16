@@ -3,7 +3,7 @@
     <div class="control-group">
         <div class="controls">
             <g:submitButton name="create"
-                            class="tms-btn"
+                            class="tms-btn btn-large"
                             value="${message(code: 'default.create.button')}" />
         </div>
     </div>
