@@ -106,6 +106,16 @@
                     </g:each>
                     </dd>
                 </g:if>
+
+                <g:if test="${!topicInstance?.enabled}">
+                    <dt>
+                        <i class="icon-question-sign"></i>
+                        ${message(code: 'topic.enabled.label').toString().toLowerCase()}
+                    </dt>
+                    <dd>
+                        <g:formatBoolean boolean="${topicInstance.enabled}"/>
+                    </dd>
+                </g:if>
                 </dl>
             </div>
 
@@ -151,11 +161,13 @@
                 </g:form>
                 </g:else>
 
-                <g:link class="tms-btn tms-success"
-                        controller="application"
-                        action="create"
-                        id="${topicInstance?.id}"
-                    ><g:message code="application.apply.button" /></g:link>
+                <g:if test="${topicInstance.enabled}">
+                    <g:link class="tms-btn tms-success"
+                            controller="application"
+                            action="create"
+                            id="${topicInstance?.id}"
+                        ><g:message code="application.apply.button" /></g:link>
+                </g:if>
 
                 <g:link class="tms-btn tms-info"
                         controller="thesis"

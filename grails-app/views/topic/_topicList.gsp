@@ -6,7 +6,7 @@
 
 <g:else>
     <g:each var="topic" in="${topicInstanceList}">
-        <div class="table-layout">
+        <div class="table-layout ${!topic?.enabled ? 'disabled' : ''}">
             <h3>
                 <g:link action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]">
                     <g:fieldValue bean="${topic}" field="title"/>

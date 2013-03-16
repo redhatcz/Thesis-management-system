@@ -36,6 +36,13 @@ class ApplicationController {
             redirect(controller: 'topic', action: "list")
             return
         }
+
+        if (!topicInstance.enabled) {
+            flash.message = message(code: 'application.topic.disabled')
+            redirect(controller: 'topic', action: 'show', id: topicInstance.id)
+            return
+        }
+
         if (topicInstance.universities.empty) {
             flash.message = message(code: 'application.impossible.no.university', args: [id])
             redirect(controller: 'topic', action: "list")
