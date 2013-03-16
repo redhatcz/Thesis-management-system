@@ -32,7 +32,7 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
         User.withTransaction { status ->
             def user = User.findByEmail(email)
             if (!user) {
-                log.warn "User not found: $email"
+                log.info "User not found: $email"
                 throw new UsernameNotFoundException('User not found', email)
             }
 

@@ -1,10 +1,13 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
+import com.redhat.theses.util.Commons
 import grails.converters.JSON
-import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 //TODO: error messages
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class CommentController {
     static allowedMethods = [create: 'POST', update: 'POST', delete: 'POST']
 
@@ -36,7 +39,21 @@ class CommentController {
     def update() {
         Long id = params.comment.int('id')
         Comment comment = Comment.get(id)
+
+        if (!comment) {
+            def message = richg.alert type: 'error', code: 'comment.not.found', args: [id]
+            render([success: false, message: message] as JSON)
+            return
+        }
+
         comment.properties = params.comment
+
+        if (springSecurityService.currentUser != comment.user &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER')) {
+            def message = richg.alert type: 'error', code: 'security.denied.action.message'
+            render([success: false, message: message] as JSON)
+            return
+        }
 
         if (!comment.content) {
             def message = richg.alert type: 'error', code: 'comment.empty.error'
@@ -58,8 +75,24 @@ class CommentController {
         Long id = params.comment.int('id')
         Comment comment = Comment.get(id)
 
-        //TODO: some error might occur
-        comment.delete()
+        if (!comment) {
+            def message = richg.alert type: 'error', code: 'comment.not.found', args: [id]
+            render([success: false, message: message] as JSON)
+            return
+        }
+
+        if (springSecurityService.currentUser != comment.user &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER')) {
+            def message = richg.alert type: 'error', code: 'security.denied.action.message'
+            render([success: false, message: message] as JSON)
+            return
+        }
+
+        if (!Commons.delete(comment)) {
+            def message = richg.alert type: 'error', code: 'comment.not.deleted'
+            render([success: false, message: message] as JSON)
+            return
+        }
 
         flash.message = message(code: 'comment.deleted')
         render([success: true] as JSON)

@@ -20,7 +20,8 @@
 </g:if>
 
 <div id="commentMessages"></div>
-<h4 class="header">Leave a Comment</h4>
+<sec:ifLoggedIn>
+<h4 class="header"><g:message code="comment.post.title"/></h4>
 <g:form controller="comment" action="create" name="create-comment-form">
     <g:hiddenField name="comment.article.id" value="${article?.id}" />
     <g:textArea name="comment.content" rows="5" />
@@ -39,3 +40,4 @@
         }
     });
 </script>
+</sec:ifLoggedIn>
