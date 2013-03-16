@@ -4,7 +4,6 @@ import com.redhat.theses.auth.User
 
 class Topic extends Article {
 
-    String title
     String lead
     String description
     Date dateCreated
@@ -19,7 +18,6 @@ class Topic extends Article {
 
     static constraints = {
         description widget: 'textarea' , nullable: false, blank: false
-        title nullable: false, blank: false
         lead nullable: false, blank: false
 
         owner validator: {owner ->

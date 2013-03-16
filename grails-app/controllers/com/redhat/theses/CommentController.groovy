@@ -1,12 +1,12 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
+import com.redhat.theses.events.CommentEvent
 import com.redhat.theses.util.Commons
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
-//TODO: error messages
 @Secured(['IS_AUTHENTICATED_FULLY'])
 class CommentController {
     static allowedMethods = [create: 'POST', update: 'POST', delete: 'POST']
@@ -31,6 +31,8 @@ class CommentController {
             render([success: false, message: message] as JSON)
             return
         }
+
+        event("commentCreated", new CommentEvent(comment))
 
         flash.message = message(code: 'comment.created')
         render([success: true] as JSON)

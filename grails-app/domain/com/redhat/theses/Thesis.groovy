@@ -4,7 +4,6 @@ import com.redhat.theses.auth.User
 
 class Thesis extends Article{
 
-    String title
     String description
 
     Topic topic
@@ -23,7 +22,6 @@ class Thesis extends Article{
     }
 
     static constraints = {
-        title blank: false
         description blank: false
         grade nullable: true
         supervisor nullable: true
