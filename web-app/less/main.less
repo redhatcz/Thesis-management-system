@@ -87,12 +87,12 @@ li a {
     .pretty-link()
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: @titleFontFamily;
     font-color: @gray;
 }
 
-h4, h5, h6 {
+h5, h6 {
     font-color: @gray;
 }
 
@@ -170,7 +170,12 @@ h4.header {
 }
 
 .header a {
-    .pretty-link();
+    color: @gray;
+
+    &:hover {
+        text-decoration: none;
+        color: @red;
+    }
 }
 
 
@@ -650,12 +655,14 @@ input.tms-btn {
 a.gray-link {
     font-size: @fontSizeSmall;
     color: @grayLight;
-    display: block;
-    margin-top: @marginMin;
 
     &:hover {
         color: @grayLight;
     }
+}
+
+.read-more {
+    margin-top: 10px;
 }
 
 
@@ -663,7 +670,7 @@ a.gray-link {
 
 .comment {
     color: @gray;
-    padding: 12px 16px;
+    padding: 14px 22px;
     margin-bottom: 20px;
     border: 1px solid @grayBorder;
 
@@ -702,8 +709,14 @@ a.gray-link {
         margin: 0;
     }
 
+    h4 {
+        margin: 10px 0 14px;
+    }
+
     h3 a,
-    h3 a:hover {
+    h4 a,
+    h3 a:hover,
+    h4 a:hover {
         color: @gray;
         border-bottom: none;
         text-decoration: none;
@@ -714,10 +727,12 @@ a.gray-link {
     }
 
     ul {
-        border-bottom: 1px dotted @grayBorder;
+        border-top: 1px dotted @grayBorder;
+        padding-top: 12px;
 
         & > li {
-            padding: 0 20px 10px 0;
+            padding-right: 20px;
+            padding-left: 0px;
             color: @grayLight;
             font-size: @fontSizeSmall;
         }
@@ -779,12 +794,12 @@ a.gray-link {
 /*---------TABLES--------*/
 
 .tms-table {
-    border: 3px solid @grayBorder;
+    border: 3px solid @graySuperLight;
     margin-bottom: 20px;
 
     .table {
         margin-bottom: 0px;
-        border: 1px solid @grayLighter;
+        border: 1px solid @grayBorder;
     }
 
     thead {

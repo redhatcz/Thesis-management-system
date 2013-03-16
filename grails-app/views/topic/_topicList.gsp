@@ -27,7 +27,11 @@
             </ul>
             <div class="table-text">
                 <g:fieldValue bean="${topic}" field="lead"/>
-                <g:link class="gray-link" action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]"><g:message code="topic.read.more.label"/>&hellip;</g:link>
+                <div class="read-more">
+                    <g:link class="gray-link" action="show"
+                            id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]"
+                        ><g:message code="topic.read.more.label"/>&hellip;</g:link>
+                </div>
             </div>
         </div>
     </g:each>
