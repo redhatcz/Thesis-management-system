@@ -1,4 +1,4 @@
-<div id="${id}" class="dynamic-field">
+<div id="${id}" class="dynamic-field ${classes}">
     ${body}
     <div id="add-${var}-button">
         <input class="tms-btn"

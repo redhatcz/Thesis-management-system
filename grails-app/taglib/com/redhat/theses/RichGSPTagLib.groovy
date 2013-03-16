@@ -11,6 +11,9 @@ class RichGSPTagLib {
      * @attr for - collection that will be used to initialize the dynamic list
      * @attr var - the name of the variable that will be used to store every item from the collection 'for'
      * @attr index - status of the collection
+     * @attr class - additional classes of enclosing div (by default dynamic-filed  is set)
+     * @attr childClass - additional classes of each child element (by default dynamic-filed-child is set
+     * @attrs initSize - number of empty child elements displayed
      */
     def dynamicField = { attrs, body ->
         def result = ""
@@ -18,23 +21,37 @@ class RichGSPTagLib {
         def var = attrs?.var;
         def index = attrs?.index;
         def list = attrs?.for;
+        def size = list?.size() ?: 0
+        def initSize = attrs?.initSize != null ? attrs.initSize.toInteger() : 0
 
         def cloneModel = [var: var, i: "clone",
                           body: body((index): "clone"),
-                          classes: "dynamic-field-child clone",
+                          classes: "dynamic-field-child clone ${attrs?.childClass}",
                           id: "dynamic-field-${var}-clone"]
         result += render(template: "/taglib/richg/dynamicFieldInner", model: cloneModel)
 
         list?.eachWithIndex { item, i ->
             def model = [var: var, i: i,
                          body: body((var): item, (index): i),
-                         classes: "dynamic-field-child",
+                         classes: "dynamic-field-child ${attrs?.childClass}",
                          id: "dynamic-field-${var}-${i}"]
             result += render(template: "/taglib/richg/dynamicFieldInner", model: model)
         }
 
+        initSize.times {
+            def i = size + it
+            def model = [var: var, i: i,
+                    body: body((var): null, (index): i),
+                    classes: "dynamic-field-child ${attrs?.childClass}",
+                    id: "dynamic-field-${var}-${i}"]
+            result += render(template: "/taglib/richg/dynamicFieldInner", model: model)
+        }
+
+
         def modelOuter = [id: attrs?.id, var: var,
-                          size: list?.size() ?: 0 , body: result]
+                          classes: attrs?.class,
+                          size: initSize + size,
+                          body: result]
         out << render(template: "/taglib/richg/dynamicFieldOuter", model: modelOuter)
     }
 
