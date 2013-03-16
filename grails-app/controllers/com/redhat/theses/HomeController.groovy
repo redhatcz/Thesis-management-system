@@ -12,6 +12,11 @@ class HomeController {
      */
     def springSecurityService
 
+    /**
+     * Dependency injection of com.redhat.theses.CommentService
+     */
+    def commentService
+
     def index() {
         if (Util.isControllerOrActionInUrl(request, 'home', 'index')) {
             redirect uri: '/', permanent: true, params: params
@@ -32,6 +37,9 @@ class HomeController {
                 userCount: User.count()
         ]
 
-        render view: '/index', model: [topicList: topicList, yourTheses: yourTheses, statistics: statistics]
+        def commentCounts = commentService.countByArticles(topicList)
+
+        render view: '/index', model: [topicList: topicList, yourTheses: yourTheses,
+             statistics: statistics, commentCounts: commentCounts]
     }
 }

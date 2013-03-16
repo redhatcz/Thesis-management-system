@@ -8,11 +8,27 @@
 <body>
     <div class="span8 content">
         <h2><g:message code="home.latest.topics.header"/></h2>
-        <g:each in="${topicList}" var="topic">
-            <div class="table-layout">
-                <g:link controller="topic" action="show" id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"><g:fieldValue field="title" bean="${topic}"/></g:link>
-            </div>
-        </g:each>
+        <ul class="tms-list unstyled">
+            <g:each in="${topicList}" var="topic">
+            <li class="tms-elem">
+                <i class="icon-book"></i>
+                <g:link controller="topic" action="show"
+                        id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"
+                    ><g:fieldValue field="title" bean="${topic}"/></g:link>
+                <span class="pull-right">
+                    <i class="icon-comment-alt"></i> ${commentCounts[topic] ?: 0}
+                </span>
+                <ul class="inline">
+                    <li>
+                        <i class="icon-time"></i>
+                        <g:formatDate date="${topic?.dateCreated}"
+                                      dateStyle="LONG"
+                                      type="date" />
+                    </li>
+                </ul>
+            </li>
+            </g:each>
+        </ul>
 
         <h2>Statistics</h2>
         <span>All topics: ${statistics?.topicCount}</span><br/>
@@ -29,20 +45,36 @@
                     <div class="panel-content">
                     <g:each in="${yourTheses}" var="yourThesis">
                         <dl>
-                            <dt><i class="icon-book"></i> ${message(code: 'topic.label').toString().toLowerCase()}</dt>
+                            <dt>
+                                <i class="icon-book"></i>
+                                ${message(code: 'topic.label').toString().toLowerCase()}
+                            </dt>
                             <dd>
-                                <g:link controller="topic" action="show" id="${yourThesis?.topicId}"
-                                        params="[headline: Util.hyphenize(yourThesis?.topic?.title)]">${yourThesis?.topic?.title}</g:link>
+                                <g:link controller="topic" action="show"
+                                        id="${yourThesis?.topicId}"
+                                        params="[headline: Util.hyphenize(yourThesis?.topic?.title)]"
+                                    >${yourThesis?.topic?.title}</g:link>
                             </dd>
-                            <dt><i class="icon-user"></i> ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}</dt>
-                            <dd><g:link controller="user" action="show" id="${yourThesis?.supervisorId}"><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></g:link></dd>
-                            <dt><i class="icon-question-sign"></i> ${message(code: 'thesis.status.label').toString().toLowerCase()}</dt>
+                            <dt>
+                                <i class="icon-user"></i>
+                                ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}
+                            </dt>
+                            <dd>
+                                <g:link controller="user" action="show"
+                                        id="${yourThesis?.supervisorId}"
+                                    ><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></g:link>
+                                </dd>
+                            <dt>
+                                <i class="icon-question-sign"></i>
+                                ${message(code: 'thesis.status.label').toString().toLowerCase()}
+                            </dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
                                     <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />
                                 </g:if>
                                 <g:else>
-                                    <g:message code="thesis.status.awarded.grade" args="[yourThesis?.grade]"/>
+                                    <g:message code="thesis.status.awarded.grade"
+                                                args="[yourThesis?.grade]"/>
                                 </g:else>
                             </dd>
                         </dl>

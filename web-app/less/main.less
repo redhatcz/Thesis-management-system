@@ -743,6 +743,53 @@ a.gray-link {
     margin-top: @marginSmall;
 }
 
+ul.tms-list {
+    a {
+        border-bottom: none;
+        margin-left: 10px;
+        /*font-family: @titleFontFamily;*/
+
+        &:hover {
+            border-bottom: 1px solid @red;
+        }
+    }
+
+    & > li {
+        padding: 16px 0;
+        border-top: 1px solid @grayBorder;
+
+        &:last-child {
+            border-bottom: 1px solid @grayBorder;
+        }
+    }
+
+    .icon-book {
+        float: left;
+        color: @grayLighter;
+        font-size: 3em;
+    }
+
+    .tms-elem li {
+        font-size: @fontSizeSmall;
+        color: @grayLight;
+        padding-top: 5px;
+        margin-right: 30px;
+
+        i[class*="icon-"] {
+            color: @gray;
+        }
+    }
+
+    .tms-elem span {
+        font-size: @fontSizeSmall;
+        color: @grayLight;
+        margin-right: 15px;
+
+        i[class*="icon-"] {
+            color: @gray;
+        }
+    }
+}
 
 /*---------LOGIN-FORM---------*/
 
