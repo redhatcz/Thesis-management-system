@@ -1,6 +1,6 @@
 package com.redhat.theses
 
-import com.redhat.theses.events.ThesisEvent
+import com.redhat.theses.events.ArticleEvent
 import com.redhat.theses.util.Commons
 
 class ThesisService {
@@ -11,20 +11,24 @@ class ThesisService {
     def springSecurityService
 
     Thesis save(Thesis thesis) {
-        String type = thesis.id ? 'thesisUpdated' : 'thesisCreated'
+        String type = thesis.id ? 'articleUpdated' : 'articleCreated'
         def persistedThesis = thesis.save()
 
         if (persistedThesis) {
-            event(type, new ThesisEvent(persistedThesis, springSecurityService.currentUser))
+            event(type, new ArticleEvent(persistedThesis, springSecurityService.currentUser,
+                    [thesis.supervisor, thesis.assignee, thesis.topic.owner]))
         }
         persistedThesis
     }
 
     Boolean delete(Thesis thesis) {
-        def success = Commons.delete(thesis)
+        def subscriptions = Subscription.findAllByArticle(thesis)
+        def success = Comment.findAllByArticle(thesis).every { Commons.delete(it) } &&
+                subscriptions.every { Commons.delete(it) } &&
+                Commons.delete(thesis)
 
         if (success) {
-            event('thesisDeleted', new ThesisEvent(thesis, springSecurityService.currentUser))
+            event('articleDeleted', new ArticleEvent(thesis, springSecurityService.currentUser, subscriptions*.subscriber))
         }
         success
     }

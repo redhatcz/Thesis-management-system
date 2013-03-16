@@ -183,6 +183,12 @@ class TopicController {
             topicInstance.types = []
         }
 
+        // when no types selected, set them to empty list
+        if (!params.topic.universities) {
+            topicInstance.universities = []
+        }
+
+
         // when no categories selected, set them to empty list
         if (!params.topic.categories) {
             topicInstance.categories = []

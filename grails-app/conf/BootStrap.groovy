@@ -2,8 +2,7 @@ import com.gmongo.GMongo
 import com.redhat.theses.*
 import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
-import com.redhat.theses.events.ThesisEvent
-import com.redhat.theses.events.TopicEvent
+import com.redhat.theses.events.ArticleEvent
 
 class BootStrap {
 
@@ -131,7 +130,7 @@ _Note: You should also consider management of school projects._
 '''
         ).save(flush: true)
         new Supervision(topic: tms, supervisor: jiriKolar, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(tms, tms.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(tms, tms.owner, [tms.owner]))
 
         def torquebox = new Topic(
                 title: 'Torquebox productization',
@@ -157,7 +156,7 @@ Download ePub manual Highlights of major......'''
         ).save(flush: true)
         new Supervision(topic: torquebox, supervisor: admin, university: muni).save(flush: true)
         new Supervision(topic: torquebox, supervisor: person, university: vut).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(torquebox, torquebox.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(torquebox, torquebox.owner, [torquebox.owner]))
 
         def pythonFramework = new Topic(
                 title: 'Framework for Python',
@@ -184,7 +183,7 @@ Python has been awarded a TIOBE Programming Language of the Year award twice (in
 language with the greatest growth in popularity over the course of a year, as measured by the TIOBE index.[22]'''
         ).save(flush: true)
         new Supervision(topic: pythonFramework, supervisor: admin, university: vut).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(pythonFramework, pythonFramework.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(pythonFramework, pythonFramework.owner, [pythonFramework.owner]))
 
         def testsForWFK = new Topic(
                 title: 'Tests for WFK',
@@ -203,7 +202,7 @@ Kit is a single solution that includes certified and integrated software—every
 simple web applications.'''
         ).save(flush: true)
         new Supervision(topic: testsForWFK, supervisor: jiriKolar, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(testsForWFK, testsForWFK.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(testsForWFK, testsForWFK.owner, [testsForWFK.owner]))
 
         def mavenThingy = new Topic(
                 title: 'Maven Thingy',
@@ -236,7 +235,7 @@ If you are looking for a quick reference, you can use *the documentation* index.
         new Supervision(topic: mavenThingy, supervisor: jiriKolar, university: muni).save(flush: true)
         new Supervision(topic: mavenThingy, supervisor: admin, university: muni).save(flush: true)
         new Supervision(topic: mavenThingy, supervisor: person, university: vut).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(mavenThingy, mavenThingy.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(mavenThingy, mavenThingy.owner, [mavenThingy.owner]))
 
         def grailsPluginForLess = new Topic(
                 title: 'Grails plugin for less resources',
@@ -256,7 +255,7 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
     a much more stable and future-proof platform. It is highly recommended that you use this version.'''
         ).save(flush: true)
         new Supervision(topic: grailsPluginForLess, supervisor: admin, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(grailsPluginForLess, grailsPluginForLess.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(grailsPluginForLess, grailsPluginForLess.owner, [grailsPluginForLess.owner]))
 
 
         def djangoPluginForLess = new Topic(
@@ -301,7 +300,7 @@ _Note: none_
 '''
         ).save(flush: true)
         new Supervision(topic: djangoPluginForLess, supervisor: admin, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(djangoPluginForLess, djangoPluginForLess.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(djangoPluginForLess, djangoPluginForLess.owner, [djangoPluginForLess.owner]))
 
         def markdownCompiler = new Topic(
                 title: 'Markdown compiler in groovy',
@@ -326,7 +325,7 @@ example, you can view the Markdown source for the article text on this page here
 http://daringfireball.net/projects/markdown/index.text'''
         ).save(flush: true)
         new Supervision(topic: markdownCompiler, supervisor: jiriKolar, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(markdownCompiler, markdownCompiler.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(markdownCompiler, markdownCompiler.owner, [markdownCompiler.owner]))
 
         def jbossMavenPlugin = new Topic(
                 title: 'JBoss AS maven plugin',
@@ -361,7 +360,7 @@ contact the user mailing list. The posts to the mailing list are archived and co
 to your question as part of an older thread. Hence, it is also worth browsing/searching the mail archive.'''
         ).save(flush: true)
         new Supervision(topic: jbossMavenPlugin, supervisor: jiriKolar, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(jbossMavenPlugin, jbossMavenPlugin.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(jbossMavenPlugin, jbossMavenPlugin.owner, [jbossMavenPlugin.owner]))
 
         def twitterBootstrapPlugin = new Topic(
                 title: 'Twitter bootstrap plugin for picking date',
@@ -399,7 +398,7 @@ Updates the date picker's position relative to the element
 Set a new value for the datepicker. It cand be a string in the specified format or a Date object.'''
         ).save(flush: true)
         new Supervision(topic: twitterBootstrapPlugin, supervisor: admin, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(twitterBootstrapPlugin, twitterBootstrapPlugin.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(twitterBootstrapPlugin, twitterBootstrapPlugin.owner, [twitterBootstrapPlugin.owner]))
 
         def autocompletePlugin = new Topic(
                 title: 'Autocomplete plugin for grails',
@@ -426,7 +425,7 @@ program manages to keep up, using the recipient's typeahead functions. However, 
 specifications of the computer with which one is communicating, it is not often used.'''
         ).save(flush: true)
         new Supervision(topic: autocompletePlugin, supervisor: jiriKolar, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(autocompletePlugin, autocompletePlugin.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(autocompletePlugin, autocompletePlugin.owner, [autocompletePlugin.owner]))
 
         def hibernateProductization = new Topic(
                 title: 'Productization of hibernate',
@@ -454,7 +453,7 @@ Hibernate supports the mapping of custom value types. This makes the following s
 '''
         ).save(flush: true)
         new Supervision(topic: hibernateProductization, supervisor: jiriKolar, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(hibernateProductization, hibernateProductization.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(hibernateProductization, hibernateProductization.owner, [hibernateProductization.owner]))
 
         def rubyKillingMachine = new Topic(
                 title: 'Killing machine for Ruby',
@@ -474,7 +473,7 @@ early Fleetwood Mac cover, being added to the recording.'''
         ).save(flush: true)
         new Supervision(topic: rubyKillingMachine, supervisor: jiriKolar, university: muni).save(flush: true)
         new Supervision(topic: rubyKillingMachine, supervisor: admin, university: muni).save(flush: true)
-        grailsEvents.event('app', 'topicCreated', new TopicEvent(rubyKillingMachine, rubyKillingMachine.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(rubyKillingMachine, rubyKillingMachine.owner, [rubyKillingMachine.owner]))
 
         // THESES
         def kubaThesis = new Thesis(
@@ -486,7 +485,7 @@ they are done with their thesis and application management.''',
                 supervisor: jiriKolar,
                 status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
-        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(kubaThesis, tms.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(kubaThesis, tms.owner, [kuba, jiriKolar, tms.owner]))
 
         def vaclavThesis = new Thesis(
                 title: "Implementation of Theses management system",
@@ -498,7 +497,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 supervisor: jiriKolar,
                 status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
-        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis, tms.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis, tms.owner, [vaclav, jiriKolar, tms.owner]))
 
         def pavelThesis = new Thesis(
                 title: "Design for Theses management system",
@@ -508,7 +507,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 supervisor: jiriKolar,
                 status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
-        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(pavelThesis, tms.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis, tms.owner, [pavel, jiriKolar, tms.owner]))
 
         def pavelThesis2 = new Thesis(
                 title: "Implementation of a python framework",
@@ -527,7 +526,7 @@ with the particularly tricky task of programming (client-side) the user's browse
 Web Frameworks is technology that can use the web browser as a full-blown application execution environment (a la gmail
 for example): see Web Browser Programming for details.'''
         ).save(failOnError: true, flush: true)
-        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(pavelThesis2, pythonFramework.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis2, pythonFramework.owner, [pavel, admin, pythonFramework.owner]))
 
         def vaclavThesis2 = new Thesis(
                 title: "Implementation of Ruby Killing Machine",
@@ -539,7 +538,7 @@ for example): see Web Browser Programming for details.'''
                 grade: Grade.A,
                 thesisAbstract: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.'''
         ).save(failOnError: true, flush: true)
-        grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis2, rubyKillingMachine.owner))
+        grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis2, rubyKillingMachine.owner, [vaclav, jiriKolar, rubyKillingMachine.owner]))
 
         // COMMENTS
         new Comment(content: 'That is cool', user: vaclav, article: tms).save(flush: true)
