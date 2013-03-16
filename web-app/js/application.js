@@ -16,3 +16,45 @@ if ($(".span8.content").height() < $(".span4.sidebar").height()) {
         $(".span4.sidebar").height()
     );
 }
+
+addToFileList = function (tableId, infoId) {
+    var inner = function (event, id, name, data) {
+        var table = $("#" + tableId);
+        var info =  $("#" + infoId);
+
+        table.show();
+        info.hide();
+
+        var clone = table.find('tr.clone-me');
+        var newRow = clone.clone();
+        newRow.removeClass('clone-me');
+        newRow.attr('data-file', data.id);
+
+        //TODO: this is somewhat clumsy and should be improved
+        newRow.html(decodeURIComponent(newRow.html()))
+        newRow.html(newRow.html().replace(/\{filename\}/g, data.filename));
+        newRow.html(newRow.html().replace(/\{bucket\}/g, data.bucket));
+        newRow.html(newRow.html().replace(/\{id\}/g, data.id));
+        newRow.html(newRow.html().replace(/\{type\}/g, data.type));
+        newRow.html(newRow.html().replace(/\{date\}/g, data.date));
+
+        newRow.insertBefore(clone)
+        newRow.show()
+    }
+    return inner
+}
+
+removeFromFileList = function (tableId, infoId, data) {
+    var table = $("#" + tableId);
+    var info =  $("#" + infoId);
+
+    var row = table.find("tr[data-file='" + data.id + "']")
+    row.remove()
+
+    var rowCount = table.find('tbody tr').length - 1
+
+    if (rowCount == 0) {
+        table.hide()
+        info.show()
+    }
+}
