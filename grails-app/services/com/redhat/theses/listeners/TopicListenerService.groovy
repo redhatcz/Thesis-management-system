@@ -3,7 +3,6 @@ package com.redhat.theses.listeners
 import com.redhat.theses.Feed
 import com.redhat.theses.Subscription
 import com.redhat.theses.events.TopicEvent
-import com.redhat.theses.events.TopicUpdatedEvent
 import com.redhat.theses.util.Util
 import grails.events.Listener
 import org.springframework.context.i18n.LocaleContextHolder as LCH
@@ -64,21 +63,21 @@ class TopicListenerService{
     }
 
     @Listener(topic = "topicUpdated")
-    void topicUpdated(TopicUpdatedEvent e) {
+    void topicUpdated(TopicEvent e) {
         def args = [
                 e.user.fullName,
                 grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
-                e.newTopic.title,
-                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.newTopic.id,
-                        params: [headline: Util.hyphenize(e.newTopic.title)], absolute: true)
+                e.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: e.topic.id,
+                        params: [headline: Util.hyphenize(e.topic.title)], absolute: true)
         ]
 
         def feed = new Feed(messageCode: "feed.topic.update", user: e.user, args: args).save()
 
-        def subscribers = Subscription.findAllByArticle(e.newTopic)*.subscriber.unique()
+        def subscribers = Subscription.findAllByArticle(e.topic)*.subscriber.unique()
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}
 
-        def subject = messageSource.getMessage('mail.topic.update.subject', [e.newTopic.id].toArray(), LCH.locale)
+        def subject = messageSource.getMessage('mail.topic.update.subject', [e.topic.id].toArray(), LCH.locale)
         def body = messageSource.getMessage(feed.messageCode, feed.args.toArray(), LCH.locale)
         subscriptionService.notifyAll(filteredSubscribers, subject, body)
     }
