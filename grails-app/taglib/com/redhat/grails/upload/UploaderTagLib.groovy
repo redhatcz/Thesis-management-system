@@ -21,20 +21,17 @@ class UploaderTagLib {
             multiple: true,
             sizeLimit: 1000000,
             template: null,
-            deleteFile: [
-                enabled: true,
-                forceConfirm: true
-            ]
     ]
 
     /**
      * Ajax uploader
      *
-     * @attr config             Config attributes in form of map structure
-     * @attr params             Request params to be sent together with file
-     * @attr template           Template used to generate uploader
-     * @attr topic              Name of the topic used when UploaderEvent is fired
-     * @wrapperId               Id of div used as a wrapper for uploader
+     * @param config Config attributes in form of map structure
+     * @param params Request params to be sent together with file
+     * @param template Template used to generate uploader
+     * @param topic Name of the topic used when UploaderEvent is fired
+     * @param callbacks Map of FineUploader callbacks [callback: function]
+     * @param wrapperId  Id of div used as a wrapper for uploader
      *
      */
     def uploader = { attrs, body ->
@@ -42,7 +39,8 @@ class UploaderTagLib {
 
         def model = [
                 config: config,
-                wrapperId: attrs.wrapperId ?: DEF_WRAPPER_ID
+                wrapperId: attrs.wrapperId ?: DEF_WRAPPER_ID,
+                callbacks: getCallbacks(attrs)
         ]
 
         out << render(template: DEF_WRAPPER_TEMPLATE, model: model);
@@ -55,15 +53,20 @@ class UploaderTagLib {
      *
      * @param id Id of uploaded file (e.g. it's name, db id or any other identifier you use)
      * @param topic Name of listener used to handle this delete request.
+     * @param confirm Text of the confirmation dialog. If empty no dialog will appear
      */
     def deleteLink = { attrs, body ->
         if (!attrs.id) {
             throw new IllegalArgumentException('[id] attribute must be specified for the <u:deleteLink> tag')
         }
 
-        def model = attrs.findAll { !(it.key in ['topic']) }
+        def model = attrs.findAll { !(it.key in ['topic', 'confirm']) }
         model.controller = 'upload'
         model.action = 'delete'
+
+        if (attrs.confirm) {
+            model.before = "if(!confirm('${attrs.confirm}')) return false"
+        }
         if (!model.params) {
             model.params = [:]
         }
@@ -111,5 +114,12 @@ class UploaderTagLib {
                 success: 'alert alert-success',
                 fail: 'alert alert-error'
         ]
+    }
+
+    private String getCallbacks(attrs) {
+        Map callbacks = attrs.callbacks ?: [:]
+        callbacks.inject('') {s, k, v  ->
+            s  + ".on('$k', $v)"
+        }
     }
 }

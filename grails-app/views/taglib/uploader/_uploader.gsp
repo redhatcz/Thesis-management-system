@@ -13,7 +13,7 @@
     $(document).ready(function () {
         var uploader = $('#${wrapperId}').fineUploader(
             ${config}
-        );
+        )${callbacks};
 
         $("#triggerUpload").click(function() {
             uploader.fineUploader('uploadStoredFiles');
