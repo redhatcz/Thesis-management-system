@@ -3,13 +3,12 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <title><g:message code="application.show.title"/></title>
+    <title><g:message code="application.show.title" args="[applicationInstance.topic.title]"/></title>
 </head>
 <body>
 <div class="span8 content">
     <h1 class="header">
-        <g:fieldValue bean="${applicationInstance?.applicant}" field="fullName"/>  -
-        <g:fieldValue bean="${applicationInstance?.topic}" field="title"/>
+        <g:message code="application.show.header" args="[applicationInstance.topic.title]"/>
     </h1>
 
     <dl class="dl-horizontal">

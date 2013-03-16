@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="light">
-    <title><g:message code="thesis.show.title"/></title>
+    <title><g:message code="thesis.show.title" args="[thesisInstance.title]"/></title>
 </head>
 
 <body>

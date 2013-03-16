@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="user/showLayout"/>
-    <title><g:message code="user.theses.title"/></title>
+    <title><g:message code="user.show.title" args="[userInstance.fullName]"/></title>
 </head>
 <body>
 <content tag="active-button">theses</content>

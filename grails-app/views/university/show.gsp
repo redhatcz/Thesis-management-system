@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <title><g:message code="university.show.title" /></title>
+    <title><g:message code="university.show.title" args="[universityInstance.name]" /></title>
 </head>
 <body>
     <div class="span4 sidebar">

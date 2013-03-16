@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="layout" content="main">
-    <title><g:message code="thesis.show.title"/></title>
+    <title><g:message code="thesis.show.title" args="[thesisInstance.title]"/></title>
 </head>
 <body>
 <div class="span8 content">
