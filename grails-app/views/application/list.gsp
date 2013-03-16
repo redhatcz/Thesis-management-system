@@ -39,16 +39,7 @@
         <g:paginate total="${applicationInstanceTotal}" class="pagination-centered"/>
     </g:if>
     </g:if>
-    <g:else>No applications found.</g:else>
-</div>
-
-<div class="span4 sidebar">
-    <div class="panel right">
-        <h4>Manage Applications</h4>
-        <div class="panel-content">
-            <g:link class="tms-btn tms-info" action="create"><g:message code="application.create.button"/></g:link>
-        </div>
-    </div>
+    <g:else><g:message code="application.no.applications.found"/></g:else>
 </div>
 </body>
 </html>
