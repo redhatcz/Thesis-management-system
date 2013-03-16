@@ -26,6 +26,10 @@ class SubscriptionService {
     def notify(User subscriber, Feed feed, String articleTitle) {
         def subj = messageSource.getMessage("mail.subscription.subject", [articleTitle].toArray(), LCH.locale)
         def body = messageSource.getMessage(feed.messageCode, feed.args.toArray(), LCH.locale)
+
+        // create notification
+        new Notification(user: subscriber, feed: feed).save()
+        // send mail
         log.debug "Sending mail to ${subscriber.email}"
         try {
             sendMail {

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.redhat.theses.auth.User; com.redhat.theses.Notification" contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +16,9 @@
                 <sec:ifLoggedIn>
                 <div class="pull-right">
                     <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
+                    <a href="#">
+                        <i class="icon-lightbulb large"></i><sub>${Notification.countByUser(User.get(sec.loggedInUserInfo(field: 'id').toLong()))}</sub>
+                    </a>
                     <div class="dropdown" style="display: inline;">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="icon-cog large"></i>
