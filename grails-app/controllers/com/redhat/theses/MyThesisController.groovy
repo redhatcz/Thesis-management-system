@@ -87,7 +87,8 @@ class MyThesisController {
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser,
                                                                  thesisInstance)
 
+        def files = gridFileService.getAllFiles(thesisInstance).sort {it.uploadDate}
         [thesisInstance: thesisInstance, comments: comments, commentsTotal: commentsTotal,
-         subscriber: subscriber, files: gridFileService.getAllFiles(thesisInstance)]
+         subscriber: subscriber, files: files]
     }
 }
