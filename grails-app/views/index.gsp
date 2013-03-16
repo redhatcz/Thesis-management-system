@@ -7,14 +7,14 @@
 </head>
 <body>
     <div class="span8 content">
-        <h3><g:message code="home.latest.topics.header"/></h3>
+        <h2><g:message code="home.latest.topics.header"/></h2>
         <g:each in="${topicList}" var="topic">
             <div class="table-layout">
                 <g:link controller="topic" action="show" id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"><g:fieldValue field="title" bean="${topic}"/></g:link>
             </div>
         </g:each>
 
-        <h3>Statistics</h3>
+        <h2>Statistics</h2>
         <span>All topics: ${statistics?.topicCount}</span><br/>
         <span>All theses: ${statistics?.thesisCount}</span><br/>
         <span>Successfully finished theses: ${statistics?.thesisSuccessfulCount}</span><br/>

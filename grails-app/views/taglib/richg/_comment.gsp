@@ -1,4 +1,4 @@
-<strong>${comment?.user?.fullName}</strong>
+<h4>${comment?.user?.fullName}</h4>
 
 <div class="comment" id="comment-${index}">
     <div class="dropdown pull-right">
