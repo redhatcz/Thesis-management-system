@@ -18,7 +18,7 @@ class SubscriptionService {
     }
 
     def notify(User subscriber, String subj, String body) {
-        log.info "Sending mail to ${subscriber.email}"
+        log.debug "Sending mail to ${subscriber.email}"
         try {
             sendMail {
                 to subscriber.email

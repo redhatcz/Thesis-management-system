@@ -1,7 +1,8 @@
 package com.redhat.theses.listeners
 
-import com.redhat.theses.events.TopicEvent
+import com.redhat.theses.Feed
 import com.redhat.theses.Subscription
+import com.redhat.theses.events.TopicEvent
 import com.redhat.theses.events.TopicUpdatedEvent
 import com.redhat.theses.util.Util
 import grails.events.Listener
@@ -11,11 +12,6 @@ import org.springframework.context.i18n.LocaleContextHolder as LCH
  * @author vdedik@redhat.com
  */
 class TopicListenerService{
-
-    /**
-     * Dependency injection of com.redhat.theses.FeedService
-     */
-    def feedService
 
     /**
      * Dependency injection of com.redhat.theses.SubscriptionService
@@ -42,7 +38,7 @@ class TopicListenerService{
                         params: [headline: Util.hyphenize(e.topic.title)], absolute: true)
         ]
 
-        def feed = feedService.createFeed("feed.topic.insert", e.user, args)
+        def feed = new Feed(messageCode: 'feed.topic.insert', user: e.user, args: args).save()
 
         def subscribers = [e.topic.owner].unique()
         subscribers.each {
@@ -64,7 +60,7 @@ class TopicListenerService{
                 e.topic.title
         ]
 
-        feedService.createFeed("feed.topic.delete", e.user, args)
+        new Feed(messageCode: "feed.topic.delete", user: e.user, args: args).save()
     }
 
     @Listener(topic = "topicUpdated")
@@ -77,7 +73,7 @@ class TopicListenerService{
                         params: [headline: Util.hyphenize(e.newTopic.title)], absolute: true)
         ]
 
-        def feed = feedService.createFeed("feed.topic.update", e.user, args)
+        def feed = new Feed(messageCode: "feed.topic.update", user: e.user, args: args).save()
 
         def subscribers = Subscription.findAllByArticle(e.newTopic)*.subscriber.unique()
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}

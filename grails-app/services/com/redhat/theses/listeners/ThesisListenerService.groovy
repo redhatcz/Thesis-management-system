@@ -1,5 +1,6 @@
 package com.redhat.theses.listeners
 
+import com.redhat.theses.Feed
 import com.redhat.theses.Subscription
 import com.redhat.theses.events.ThesisEvent
 import com.redhat.theses.util.Util
@@ -10,11 +11,6 @@ import org.springframework.context.i18n.LocaleContextHolder as LCH
  * @author vdedik@redhat.com
  */
 class ThesisListenerService {
-
-    /**
-     * Dependency injection of com.redhat.theses.FeedService
-     */
-    def feedService
 
     /**
      * Dependency injection of com.redhat.theses.SubscriptionService
@@ -43,7 +39,7 @@ class ThesisListenerService {
                         params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
         ]
 
-        def feed = feedService.createFeed("feed.thesis.insert", e.user, args)
+        def feed = new Feed(messageCode: "feed.thesis.insert", user: e.user, args: args).save()
 
         def subscribers = [e.thesis.supervisor, e.thesis.assignee].unique()
         subscribers.each {
@@ -67,7 +63,7 @@ class ThesisListenerService {
                         params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
         ]
 
-        feedService.createFeed("feed.thesis.delete", e.user, args)
+        new Feed(messageCode: "feed.thesis.delete", user: e.user, args: args).save()
     }
 
     @Listener(topic = "thesisUpdated")
@@ -82,7 +78,7 @@ class ThesisListenerService {
                         params: [headline: Util.hyphenize(e.thesis.topic.title)], absolute: true)
         ]
 
-        def feed = feedService.createFeed("feed.thesis.update", e.user, args)
+        def feed = new Feed(messageCode: "feed.thesis.update", user: e.user, args: args).save()
 
         def subscribers = Subscription.findAllByArticle(e.thesis)*.subscriber.unique()
         def filteredSubscribers = subscribers.findAll {it.id != e.user.id}

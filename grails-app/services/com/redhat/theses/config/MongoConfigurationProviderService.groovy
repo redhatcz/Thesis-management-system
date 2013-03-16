@@ -20,7 +20,7 @@ class MongoConfigurationProviderService implements ConfigurationProvider {
     def mongo
 
     private getDB() {
-        def dbName = grailsApplication.config.grails.mongo.configDBName
+        def dbName = grailsApplication.config.grails.mongo.databaseName
         if (!dbName) {
             dbName = DEFAULT_DB
         }

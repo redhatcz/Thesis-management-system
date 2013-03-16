@@ -1,3 +1,4 @@
+import com.gmongo.GMongo
 import com.redhat.theses.*
 import com.redhat.theses.auth.Role
 import com.redhat.theses.auth.User
@@ -17,8 +18,8 @@ class BootStrap {
         }
 
         // UNIVERSITIES
-        def muni = new University(name: 'Masaryk University').save()
-        def vut = new University(name: 'VUT').save()
+        def muni = new University(name: 'Masaryk University').save(flush: true)
+        def vut = new University(name: 'VUT').save(flush: true)
 
         // USERS
         def admin = new User(
@@ -27,7 +28,7 @@ class BootStrap {
                 password: "admin",
                 enabled: true,
                 roles: [Role.ADMIN, Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
-        ).save()
+        ).save(flush: true)
 
         def person = new User(
                 email: 'person@gmail.com',
@@ -35,7 +36,7 @@ class BootStrap {
                 password: "person",
                 enabled: true,
                 roles: [Role.SUPERVISOR, Role.STUDENT]
-        ).save()
+        ).save(flush: true)
 
         def padmin = new User(
                 username: 'padmin',
@@ -44,7 +45,7 @@ class BootStrap {
                 enabled: true,
                 email: 'padmin@gmail.com',
                 roles: [Role.SUPERVISOR, Role.STUDENT]
-        ).save()
+        ).save(flush: true)
 
         def vaclav = new User(
                 email: 'vaclav.dedik@gmail.com',
@@ -52,35 +53,35 @@ class BootStrap {
                 password: "vaclav.dedik",
                 enabled: true,
                 roles: [Role.STUDENT]
-        ).save()
+        ).save(flush: true)
         def pavel = new User(
                 email: 'dedikx@gmail.com',
                 fullName: 'Pavel Dedik',
                 password: "dedikx",
                 enabled: true,
                 roles: [Role.STUDENT]
-        ).save()
+        ).save(flush: true)
         def kuba = new User(
                 email: 'jcechace@gmail.com',
                 fullName: 'Jakub Cechacek',
                 password: "jcechace",
                 enabled: true,
                 roles: [Role.STUDENT]
-        ).save()
+        ).save(flush: true)
         def jiriKolar = new User(
                 email: 'jiri.kolar@gmail.com',
                 fullName: 'Jiri Kolar',
                 password: "jiri.kolar",
                 enabled: true,
                 roles: [Role.SUPERVISOR, Role.STUDENT]
-        ).save()
+        ).save(flush: true)
         def jiriPechanec = new User(
                 email: 'jpechanec@redhat.com',
                 fullName: 'Jiri Pechanec',
                 password: "jpechanec",
                 enabled: true,
                 roles: [Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
-        ).save()
+        ).save(flush: true)
 
         // TAGS
         def javaTag = new Tag(title: 'java').save(flush: true)
@@ -128,7 +129,7 @@ using the most *state-of-the-art* technologies and will be deployed on OpenShift
 
 _Note: You should also consider management of school projects._
 '''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: tms, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(tms, tms.owner))
 
@@ -153,7 +154,7 @@ We're as happy as a moth in a sweater factory to announce the immediate availabi
 bug-fix only release and is a recommended upgrade for anyone running TorqueBox 2.1.0 or 2.1.1. Download TorqueBox
 2.1.2 (ZIP) Browse Getting Started Guide Browse HTML manual Browse JavaDocs Browse Gem RDocs Download PDF manual
 Download ePub manual Highlights of major......'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: torquebox, supervisor: admin, university: muni).save(flush: true)
         new Supervision(topic: torquebox, supervisor: person, university: vut).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(torquebox, torquebox.owner))
@@ -181,7 +182,7 @@ Python 3.0 (also called Python 3000 or py3k), a major, backwards-incompatible re
 Python 2.6 and 2.7.[21]
 Python has been awarded a TIOBE Programming Language of the Year award twice (in 2007 and 2010), which is given to the
 language with the greatest growth in popularity over the course of a year, as measured by the TIOBE index.[22]'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: pythonFramework, supervisor: admin, university: vut).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(pythonFramework, pythonFramework.owner))
 
@@ -200,7 +201,7 @@ available separately for JBoss Enterprise Web Server.
 Simplify your use of popular open source frameworks. Avoid integration and version conflicts. The JBoss Web Framework
 Kit is a single solution that includes certified and integrated software—everything you need to build and maintain
 simple web applications.'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: testsForWFK, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(testsForWFK, testsForWFK.owner))
 
@@ -231,7 +232,7 @@ You can access the guides at any time from the left navigation.
 ###Documentation Index
 If you are looking for a quick reference, you can use *the documentation* index.
 '''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: mavenThingy, supervisor: jiriKolar, university: muni).save(flush: true)
         new Supervision(topic: mavenThingy, supervisor: admin, university: muni).save(flush: true)
         new Supervision(topic: mavenThingy, supervisor: person, university: vut).save(flush: true)
@@ -253,7 +254,7 @@ LESS extends CSS with dynamic behavior such as variables, mixins, operations and
 
     This plugin is seen as a replacement for the lesscss plugin . It utilizes the resources plugin which will provide
     a much more stable and future-proof platform. It is highly recommended that you use this version.'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: grailsPluginForLess, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(grailsPluginForLess, grailsPluginForLess.owner))
 
@@ -298,7 +299,7 @@ renders to
 
 _Note: none_
 '''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: djangoPluginForLess, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(djangoPluginForLess, djangoPluginForLess.owner))
 
@@ -323,7 +324,7 @@ filters, the single biggest source of inspiration for Markdown’s syntax is the
 The best way to get a feel for Markdown’s formatting syntax is simply to look at a Markdown-formatted document. For
 example, you can view the Markdown source for the article text on this page here:
 http://daringfireball.net/projects/markdown/index.text'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: markdownCompiler, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(markdownCompiler, markdownCompiler.owner))
 
@@ -358,7 +359,7 @@ additional examples, tips or errata to the JBoss Application Server wiki page.
 In case you still have questions regarding the plugin's usage, please have a look at the FAQ and feel free to
 contact the user mailing list. The posts to the mailing list are archived and could already contain the answer
 to your question as part of an older thread. Hence, it is also worth browsing/searching the mail archive.'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: jbossMavenPlugin, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(jbossMavenPlugin, jbossMavenPlugin.owner))
 
@@ -396,7 +397,7 @@ Updates the date picker's position relative to the element
     .datepicker('setValue', value)
 
 Set a new value for the datepicker. It cand be a string in the specified format or a Date object.'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: twitterBootstrapPlugin, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(twitterBootstrapPlugin, twitterBootstrapPlugin.owner))
 
@@ -423,7 +424,7 @@ calling kernel interrupts.
 In some network operations, one might attempt to dispatch information over a network, regardless whether the receiving
 program manages to keep up, using the recipient's typeahead functions. However, as this is far too reliant on the
 specifications of the computer with which one is communicating, it is not often used.'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: autocompletePlugin, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(autocompletePlugin, autocompletePlugin.owner))
 
@@ -451,7 +452,7 @@ Hibernate supports the mapping of custom value types. This makes the following s
 * Mapping Java Enum to columns as if they were regular properties.
 * Mapping a single property to multiple columns.
 '''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: hibernateProductization, supervisor: jiriKolar, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(hibernateProductization, hibernateProductization.owner))
 
@@ -470,7 +471,7 @@ members adopted their now-famous "leather-and-studs" image.''',
 Killing Machine was retitled Hell Bent for Leather for release in the US, because the US branch of Columbia/CBS did not
 like the "murderous implications" of the album title and with "The Green Manalishi (With the Two-Pronged Crown)" an
 early Fleetwood Mac cover, being added to the recording.'''
-        ).save()
+        ).save(flush: true)
         new Supervision(topic: rubyKillingMachine, supervisor: jiriKolar, university: muni).save(flush: true)
         new Supervision(topic: rubyKillingMachine, supervisor: admin, university: muni).save(flush: true)
         grailsEvents.event('app', 'topicCreated', new TopicEvent(rubyKillingMachine, rubyKillingMachine.owner))
@@ -541,32 +542,40 @@ for example): see Web Browser Programming for details.'''
         grailsEvents.event('app', 'thesisCreated', new ThesisEvent(vaclavThesis2, rubyKillingMachine.owner))
 
         // COMMENTS
-        new Comment(content: 'That is cool', user: vaclav, article: tms).save()
-        new Comment(content: 'There is missing something', user: jiriPechanec, article: tms).save()
-        new Comment(content: 'Yes you are right', user: kuba, article: tms).save()
-        new Comment(content: 'I am a spammer and I don\'t even mind', user: kuba, article: tms).save()
+        new Comment(content: 'That is cool', user: vaclav, article: tms).save(flush: true)
+        new Comment(content: 'There is missing something', user: jiriPechanec, article: tms).save(flush: true)
+        new Comment(content: 'Yes you are right', user: kuba, article: tms).save(flush: true)
+        new Comment(content: 'I am a spammer and I don\'t even mind', user: kuba, article: tms).save(flush: true)
         new Comment(content: 'Generally, frameworks provide support for a number of activities such as interpreting requests (getting form parameters,\n' +
                 'handling cookies and sessions), producing responses (presenting data as HTML or in other formats), storing data\n' +
-                'persistently, and so on. Since a non-trivial Web application will require', user: kuba, article: tms).save()
-        new Comment(content: 'Spam once again', user: kuba, article: tms).save()
+                'persistently, and so on. Since a non-trivial Web application will require', user: kuba, article: tms).save(flush: true)
+        new Comment(content: 'Spam once again', user: kuba, article: tms).save(flush: true)
         new Comment(content: 'Generally, frameworks provide support for a number of activities such as interpreting requests (getting form parameters,\n' +
                 'handling cookies and sessions), producing responses (presenting data as HTML or in other formats), storing data\n' +
                 'persistently, and so on. Since a non-trivial Web application will require a number of different kinds of abstractions,\n' +
                 'often stacked upon each other, those frameworks which attempt to provide a complete solution for applications are often\n' +
-                'known as full-stack frameworks in that they attempt to supply components for each layer in the stack.\'\'\'', user: jiriPechanec, article: tms).save()
-        new Comment(content: 'Nothing imported', user: jiriKolar, article: tms).save()
-        new Comment(content: 'Another absolutely useless comment', user: vaclav, article: tms).save()
-        new Comment(content: 'Empty comment', user: kuba, article: tms).save()
-        new Comment(content: '> The goal of this project is to create a theses management system for company Red Hat.', user: kuba, article: tms).save()
-        new Comment(content: '**** you', user: pavel, article: tms).save()
-        new Comment(content: '**** you too', user: kuba, article: tms).save()
-        new Comment(content: 'Ok', user: jiriKolar, article: tms).save()
+                'known as full-stack frameworks in that they attempt to supply components for each layer in the stack.\'\'\'', user: jiriPechanec, article: tms).save(flush: true)
+        new Comment(content: 'Nothing imported', user: jiriKolar, article: tms).save(flush: true)
+        new Comment(content: 'Another absolutely useless comment', user: vaclav, article: tms).save(flush: true)
+        new Comment(content: 'Empty comment', user: kuba, article: tms).save(flush: true)
+        new Comment(content: '> The goal of this project is to create a theses management system for company Red Hat.', user: kuba, article: tms).save(flush: true)
+        new Comment(content: '**** you', user: pavel, article: tms).save(flush: true)
+        new Comment(content: '**** you too', user: kuba, article: tms).save(flush: true)
+        new Comment(content: 'Ok', user: jiriKolar, article: tms).save(flush: true)
 
-        new Comment(content: 'Thesis', user: vaclav, article: kubaThesis).save()
+        new Comment(content: 'Thesis', user: vaclav, article: kubaThesis).save(flush: true)
 
         // APPLICATIONS
-        new Application(applicant: vaclav, topic: autocompletePlugin, university: muni, note: 'ahoj').save()
+        new Application(applicant: vaclav, topic: autocompletePlugin, university: muni, note: 'ahoj').save(flush: true)
     }
     def destroy = {
+        environments {
+            development {
+                // drop database
+                def mongo = new GMongo()
+                def db = mongo.getDB('tms')
+                db.dropDatabase()
+            }
+        }
     }
 }
