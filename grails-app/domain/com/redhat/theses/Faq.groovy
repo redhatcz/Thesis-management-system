@@ -9,4 +9,8 @@ class Faq {
         question unique: true, nullable: false, blank: false
         answer nullable: false, blank: false
     }
+
+    static mapping = {
+        answer type: 'text'
+    }
 }
