@@ -1,6 +1,7 @@
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'title', 'error')} ">
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'title', 'error')} required">
     <label class="control-label" for="topic.title">
         <strong><g:message code="topic.title.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:textField name="topic.title" value="${topicInstance?.title}" placeholder="${message(code:'topic.title.label')}" />
@@ -10,6 +11,7 @@
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
     <label class="control-label" for="topic.owner.fullName">
         <strong><g:message code="topic.owner.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
@@ -22,7 +24,7 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')} ">
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')}">
     <div class="controls">
         <label class="checkbox" for="topic.enabled">
             <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
@@ -60,18 +62,20 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'lead', 'error')}">
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'lead', 'error')} required">
     <label class="control-label" for="topic.lead">
         <strong><g:message code="topic.lead.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:textArea name="topic.lead" rows="5" value="${topicInstance?.lead}"/>
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'description', 'error')}">
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'description', 'error')} required">
 	<label class="control-label" for="topic.description">
 		<strong><g:message code="topic.description.label"/></strong>
+        <span class="required-indicator">*</span></strong>
 	</label>
     <div class="controls">
 	   <g:textArea name="topic.description" rows="15" value="${topicInstance?.description}"/>

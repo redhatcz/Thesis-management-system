@@ -1,5 +1,5 @@
 <g:hiddenField id="application.topic.id" name="application.topic.id" value="${application.topic.id}" />
-<div class="control-group ${hasErrors(bean: applicationInstance, field: 'university', 'error')} required">
+<div class="control-group ${hasErrors(bean: applicationInstance, field: 'university', 'error')}">
   	<label class="control-label" for="application.university.id">
   		  <strong><g:message code="university.label"/></strong>
   	</label>
@@ -14,7 +14,7 @@
         </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: applicationInstance, field: 'note', 'error')} required">
+<div class="control-group ${hasErrors(bean: applicationInstance, field: 'note', 'error')}">
     <label class="control-label" for="application.note">
         <strong><g:message code="application.note.label"/></strong>
     </label>

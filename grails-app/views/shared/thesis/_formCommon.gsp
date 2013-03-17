@@ -1,15 +1,17 @@
-<div class="control-group ${hasErrors(bean: thesisInstance, field: 'title', 'error')} ">
+<div class="control-group ${hasErrors(bean: thesisInstance, field: 'title', 'error')} required">
     <label class="control-label" for="thesis.title">
         <strong><g:message code="thesis.title.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:textField name="thesis.title" value="${thesisInstance?.title}" placeholder="${message(code: 'thesis.title.label')}" />
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: thesisInstance?.assignee, field: 'fullName', 'error')}">
+<div class="control-group ${hasErrors(bean: thesisInstance?.assignee, field: 'fullName', 'error')} required">
     <label class="control-label" for="thesis.assignee.fullName">
         <strong><g:message code="thesis.assignee.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="thesis.assignee.id" value="${thesisInstance?.assignee?.id}"/>
@@ -25,6 +27,7 @@
 <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
     <label class="control-label" for="thesis.supervisor.fullName">
         <strong><g:message code="thesis.supervisor.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="thesis.supervisor.id"
@@ -39,9 +42,10 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: thesisInstance, field: 'description', 'error')}">
+<div class="control-group ${hasErrors(bean: thesisInstance, field: 'description', 'error')} required">
     <label class="control-label" for="thesis.description">
         <strong><g:message code="thesis.description.label"/></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:textArea name="thesis.description" rows="15" value="${thesisInstance?.description}"/>
