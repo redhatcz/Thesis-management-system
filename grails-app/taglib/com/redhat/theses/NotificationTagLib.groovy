@@ -26,6 +26,8 @@ class NotificationTagLib {
                     model: [isNew: !it.seen, message: message])
         }
 
+        popoverContent = popoverContent.replaceAll('\n', '').replaceAll("'", "\\'")
+
         out << g.render(template: "/taglib/notification/notifications",
                 model: [notificationCount: notificationCount, popoverTitle: popoverTitle, popoverContent: popoverContent])
     }
