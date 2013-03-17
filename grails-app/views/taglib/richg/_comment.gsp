@@ -1,5 +1,12 @@
 <%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils" %>
-<h4>${comment?.user?.fullName}</h4>
+<div class="comment-head">
+    <img class="img-circle" src="${resource(dir: 'images', file: 'avatar-mini.png')}"/>
+    <h4>${comment?.user?.fullName}</h4>
+    <div class="pull-right">
+        <i class="icon-time"></i>
+        <g:formatDate date="${comment?.dateCreated}" dateStyle="LONG" type="date" />
+    </div>
+</div>
 
 <div class="comment" id="comment-${index}">
     <sec:ifLoggedIn>

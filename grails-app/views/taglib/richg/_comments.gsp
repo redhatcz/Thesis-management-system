@@ -1,5 +1,8 @@
 <%@ page import="com.redhat.theses.util.Util" %>
-<h3 id="comments" class="header">Comments</h3>
+<h3 id="comments" class="header">
+    <i class="icon-comments"></i>
+    Comments
+</h3>
 <div class="comments">
     <g:if test="${comments}">
     <g:each in="${comments}" var="comment" status="i">

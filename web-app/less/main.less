@@ -501,7 +501,7 @@ ul form {
     height: 296px;
     margin: 20px;
     border: 1px solid @grayBorder;
-    background-color: @white;
+    background-image: url('../images/avatar.png');
 }
 
 
@@ -573,7 +573,8 @@ a.tag-selected {
 }
 
 h3#abstract,
-h3#description {
+h3#description,
+h3#comments {
     font-size: 24px;
     color: @grayLight;
     line-height: 25px;
@@ -688,7 +689,7 @@ a.gray-link {
 
 .comment {
     color: @gray;
-    padding: 14px 22px;
+    padding: 14px 18px;
     margin-bottom: 20px;
     border: 1px solid @grayBorder;
 
@@ -705,9 +706,30 @@ a.gray-link {
     }
 }
 
+.comment-head {
+    h4 {
+        margin: 16px 16px 10px 10px;
+        display: inline-block;
+    }
+
+    img {
+        margin-bottom: 5px;
+    }
+
+    .pull-right {
+        margin-top: 16px;
+        color: @grayLight;
+        font-size: @fontSizeSmall;
+    }
+}
+
 .comment-content {
     p:last-child {
         margin-bottom: 2px;
+    }
+
+    blockquote {
+        margin-bottom: 0px;
     }
 }
 
