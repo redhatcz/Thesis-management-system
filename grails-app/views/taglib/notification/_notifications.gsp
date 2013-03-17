@@ -1,5 +1,5 @@
 <a href="#" id="notifications">
-    <i class="icon-lightbulb large"></i><span id="notifications-count">${notificationCount}</span>
+    <i class="icon-lightbulb large"></i><sub id="notifications-count">${notificationCount}</sub>
 </a>
 <script type="text/javascript">
     $(document).ready(function() {

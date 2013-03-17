@@ -181,6 +181,11 @@ h4.header {
 
 /*---------BLOCKS---------*/
 
+.container {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
 .span3:first-child,
 .span4,
 .span8,
@@ -241,7 +246,6 @@ h4.header {
 
 .head {
     padding-top: 15px;
-    color: @white;
 }
 
 .head > a,
@@ -256,6 +260,11 @@ h4.header {
     }
 }
 
+.head > [class*="icon-"],
+.head .pull-right > [class*="icon-"] {
+    color: @white;
+}
+
 img#logo {
     padding: 5px 0 9px;
 }
@@ -264,7 +273,8 @@ img#logo {
     display: inline;
     padding-left: 10px;
 
-    a, [class*="icon-"] {
+    & > a,
+    .dropdown > a {
         color: @white;
 
         &:hover {
@@ -291,6 +301,36 @@ img#logo {
 .dropdown-menu a,
 .dropdown-menu a:hover {
     border-bottom: none;
+}
+
+
+/*---------POPOVER---------*/
+
+.popover {
+    width: 320px;
+    .border-radius(0px);
+    .box-shadow(0px 1px 3px @grayTitles);
+}
+
+.popover-title {
+    font-family: @sansFontFamily;
+}
+
+.notification {
+    padding: 8px 10px;
+    border-bottom: 1px solid @grayBorder;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &.old {
+        background-color: @grayBackground;
+
+        a {
+            color: @grayLight;
+        }
+    }
 }
 
 
