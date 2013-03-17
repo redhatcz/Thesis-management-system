@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.auth.User" %>
+<%@ page import="com.redhat.theses.auth.Role; com.redhat.theses.util.Util; com.redhat.theses.auth.User" %>
 <g:applyLayout name="main">
 <html>
 <head>
@@ -34,6 +34,13 @@
                 </dt>
                 <dd>
                     <g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" />
+                </dd>
+                <dt>
+                    <i class="icon-group"></i>
+                    ${message(code: 'user.role.label').toString().toLowerCase()}
+                </dt>
+                <dd>
+                    <g:message code="role.${Role.getHighest(userInstance?.roles).toString().toLowerCase()}.label"/>
                 </dd>
 
                 <g:if test="${userInstance?.enabled}">
