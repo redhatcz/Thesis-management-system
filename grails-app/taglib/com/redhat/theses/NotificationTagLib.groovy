@@ -19,6 +19,7 @@ class NotificationTagLib {
                 [max: Math.max(notificationCount, MAX_SHOWN_NOTIFICATIONS), sort: 'dateCreated', order: 'desc'])
 
         def popoverTitle = g.message(code: "notification.${notificationCount ? 'new' : 'no.new'}.title")
+        def popoverNoNotificationsTitle = g.message(code: "notification.no.new.title")
         def popoverContent = ''
 
         if (!notifications || notifications.empty) {
@@ -34,6 +35,7 @@ class NotificationTagLib {
         popoverContent = popoverContent.replaceAll('\n', '').replaceAll("\\'", "\\\\'")
 
         out << g.render(template: "/taglib/notification/notifications",
-                model: [notificationCount: notificationCount, popoverTitle: popoverTitle, popoverContent: popoverContent])
+                model: [notificationCount: notificationCount, popoverTitle: popoverTitle,
+                        popoverContent: popoverContent, popoverNoNotificationsTitle: popoverNoNotificationsTitle])
     }
 }

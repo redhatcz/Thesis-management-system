@@ -20,7 +20,8 @@
             } else {
                 $(this).addClass('active');
                 if ($('#notifications-count').text() == '0') {
-                    $('.notification.new').removeClass('new');
+                    $('.notification').addClass('old');
+                    $('.notification').parent().parent().find('.popover-title').text("${popoverNoNotificationsTitle}");
                 }
             }
             e.preventDefault();
