@@ -19,14 +19,16 @@
                        href="#faq${faq.id}">
                         ${faq?.question?.encodeAsHTML()}
                     </a>
-                    <g:link action="edit" id="${faq.id}">
-                        <i class="icon-wrench"></i>
-                    </g:link>
-                    <g:link action="delete"
-                            id="${faq.id}"
-                            onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
-                        <i class="icon-trash"></i>
-                    </g:link>
+                    <sec:ifAllGranted roles="ROLE_ADMIN">
+                        <g:link action="edit" id="${faq.id}">
+                            <i class="icon-wrench"></i>
+                        </g:link>
+                        <g:link action="delete"
+                                id="${faq.id}"
+                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
+                            <i class="icon-trash"></i>
+                        </g:link>
+                    </sec:ifAllGranted>
                 </div>
 
                 <div id="faq${faq.id}" class="accordion-body collapse">
@@ -48,6 +50,7 @@
     </g:javascript>
 </div>
 
+<sec:ifAllGranted roles="ROLE_ADMIN">
 <div class="span4 sidebar">
     <div class="panel right">
         <h4><g:message code="faq.list.manage.label"/></h4>
@@ -58,7 +61,6 @@
         </div>
     </div>
 
-    <sec:ifAllGranted roles="ROLE_ADMIN">
         <div class="panel right">
             <h4><g:message code="faq.locales.label"/></h4>
 
@@ -75,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </sec:ifAllGranted>
 </div>
+</sec:ifAllGranted>
 </body>
 </html>
