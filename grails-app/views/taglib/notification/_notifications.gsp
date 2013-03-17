@@ -8,23 +8,30 @@
             content: '${popoverContent}',
             placement: 'bottom',
             html: true
-        }).click(function(e) {
-            var $this = $(this);
-            if ($this.hasClass('active')) {
-                $this.removeClass('active');
+        });
 
-                if ($('#notifications-count').text() != '0') {
-                    $.get('${createLink(controller: 'notification', action: 'dismissNotifications')}')
-                    $('#notifications-count').text('0');
-                }
-            } else {
-                $(this).addClass('active');
-                if ($('#notifications-count').text() == '0') {
-                    $('.notification').addClass('old');
-                    $('.notification').parent().parent().find('.popover-title').text("${popoverNoNotificationsTitle}");
+        $(document).on('click',function(e) {
+            var $target = $(e.target);
+            if (!$target.closest('.popover').length) {
+                if (popover.hasClass('active')) {
+                    popover.removeClass('active');
+
+                    if ($('#notifications-count').text() != '0') {
+                        $.get('${createLink(controller: 'notification', action: 'dismissNotifications')}')
+                        $('#notifications-count').text('0');
+                    }
+                } else {
+                    popover.addClass('active');
+                    if ($('#notifications-count').text() == '0') {
+                        $('.notification').addClass('old').parent().parent()
+                                .find('.popover-title').text("${popoverNoNotificationsTitle}");
+                    }
                 }
             }
-            e.preventDefault();
+
+            if (!$target.closest('.popover').length && !$target.closest('#notifications').length) {
+                popover.popover('hide');
+            }
         });
     });
 </script>
