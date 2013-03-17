@@ -7,19 +7,27 @@
 </head>
 <body>
     <div class="span8 content">
-        <g:if test="${topicInstance?.title}">
         <h1 class="header"><g:fieldValue bean="${topicInstance}" field="title"/></h1>
+        <g:if test="${topicInstance?.secondaryTitle}">
+            <h2 class="header" style="color: gray"><g:fieldValue bean="${topicInstance}" field="secondaryTitle"/></h2>
         </g:if>
 
         <h3 id="description">
             <i class="icon-pencil"></i>
-            <g:message code="thesis.thesisDescription.label"/>
+            <g:message code="topic.description.label"/>
         </h3>
         <div class="tms-description">
-            <g:if test="${topicInstance?.description}">
             <markdown:renderHtml text="${topicInstance?.description}"/>
-            </g:if>
         </div>
+        <g:if test="${topicInstance?.secondaryDescription}">
+        <h3 id="description">
+            <i class="icon-pencil"></i>
+            <g:message code="topic.secondaryDescription.label"/>
+        </h3>
+        <div class="tms-description">
+            <markdown:renderHtml text="${topicInstance?.secondaryDescription}"/>
+        </div>
+        </g:if>
 
         <g:set var="topicTags" value="${topicInstance?.tags}"/>
         <g:if test="${topicTags}">

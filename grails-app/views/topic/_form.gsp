@@ -8,6 +8,15 @@
     </div>
 </div>
 
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryTitle', 'error')}">
+    <label class="control-label" for="topic.secondaryTitle">
+        <strong><g:message code="topic.secondaryTitle.label"/></strong>
+    </label>
+    <div class="controls">
+        <g:textField name="topic.secondaryTitle" value="${topicInstance?.secondaryTitle}" placeholder="${message(code:'topic.secondaryTitle.label')}" />
+    </div>
+</div>
+
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
     <label class="control-label" for="topic.owner.fullName">
         <strong><g:message code="topic.owner.label"/></strong>
@@ -79,6 +88,16 @@
 	</label>
     <div class="controls">
 	   <g:textArea name="topic.description" rows="15" value="${topicInstance?.description}"/>
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryDescription', 'error')} required">
+    <label class="control-label" for="topic.secondaryDescription">
+        <strong><g:message code="topic.secondaryDescription.label"/></strong>
+        <span class="required-indicator">*</span></strong>
+    </label>
+    <div class="controls">
+        <g:textArea name="topic.secondaryDescription" rows="15" value="${topicInstance?.secondaryDescription}"/>
     </div>
 </div>
 

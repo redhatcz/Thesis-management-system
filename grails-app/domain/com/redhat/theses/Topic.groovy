@@ -4,8 +4,11 @@ import com.redhat.theses.auth.User
 
 class Topic extends Article {
 
+    String secondaryTitle
+
     String lead
     String description
+    String secondaryDescription
     Date dateCreated
     User owner
     Boolean enabled = true
@@ -19,6 +22,8 @@ class Topic extends Article {
     static constraints = {
         description widget: 'textarea' , nullable: false, blank: false
         lead nullable: false, blank: false
+        secondaryTitle nullable: true
+        secondaryDescription nullable: true
 
         owner validator: {owner ->
             if (owner?.id == null || !User.get(owner.id)) {
@@ -30,6 +35,7 @@ class Topic extends Article {
     static mapping = {
         description type: 'text'
         lead type: 'text'
+        secondaryDescription type: 'text'
         sort 'dateCreated'
         order 'desc'
     }

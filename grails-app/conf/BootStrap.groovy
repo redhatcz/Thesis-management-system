@@ -457,6 +457,7 @@ Hibernate supports the mapping of custom value types. This makes the following s
 
         def rubyKillingMachine = new Topic(
                 title: 'Killing machine for Ruby',
+                secondaryTitle: 'Zabíjecí stroj pro Ruby',
                 owner: jiriPechanec,
                 tags: [rubyTag, othersTag],
                 categories: [redhatCategory, jbossCategory],
@@ -469,7 +470,13 @@ members adopted their now-famous "leather-and-studs" image.''',
                         '''##Different titles
 Killing Machine was retitled Hell Bent for Leather for release in the US, because the US branch of Columbia/CBS did not
 like the "murderous implications" of the album title and with "The Green Manalishi (With the Two-Pronged Crown)" an
-early Fleetwood Mac cover, being added to the recording.'''
+early Fleetwood Mac cover, being added to the recording.''',
+                secondaryDescription:
+                        '''##Jiné nadpisy
+Zabíjeci stroj je pátým albem heavy metalové legendy Judas Priest a v USA se prodává pod názvem Hell Bent for Leather.
+Deska vyšla 1978 u společnosti Columbia Records a produkci tentokrát do svých rukou vzal James Guthrie. V roce 2001
+bylo remasterováno a přidány bonusy, stejně jako tomu bylo u dalších 11 řadových alb Judas Priest a dvou výběrů.
+Mohli jste si jej opatřit samostatně, nebo jako Box Set všech 12 remasterovaných studiových alb.'''
         ).save(flush: true)
         new Supervision(topic: rubyKillingMachine, supervisor: jiriKolar, university: muni).save(flush: true)
         new Supervision(topic: rubyKillingMachine, supervisor: admin, university: muni).save(flush: true)
