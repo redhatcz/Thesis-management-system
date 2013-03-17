@@ -6,6 +6,8 @@ class Notification {
 
     User user
     Feed feed
+    Date dateCreated
+    Boolean seen = false
 
     static mapWith = "mongo"
 

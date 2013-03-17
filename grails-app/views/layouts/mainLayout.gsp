@@ -17,10 +17,7 @@
                 <div class="pull-right">
                     <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
                     <div class="tms-usermenu">
-                        <a href="#">
-                            <i class="icon-lightbulb large"></i>
-                            <sub>${Notification.countByUser(User.get(sec.loggedInUserInfo(field: 'id').toLong()))}</sub>
-                        </a>
+                        <notification:render/>
                         <div class="dropdown" style="display: inline;">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="icon-cog large"></i>

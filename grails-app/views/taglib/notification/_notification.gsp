@@ -1,0 +1,1 @@
+<div class="notification ${isNew ? 'new' : ''}"><small>${message}</small></div>
