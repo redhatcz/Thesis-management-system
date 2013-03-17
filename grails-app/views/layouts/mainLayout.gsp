@@ -16,27 +16,30 @@
                 <sec:ifLoggedIn>
                 <div class="pull-right">
                     <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
-                    <a href="#">
-                        <i class="icon-lightbulb large"></i><sub>${Notification.countByUser(User.get(sec.loggedInUserInfo(field: 'id').toLong()))}</sub>
-                    </a>
-                    <div class="dropdown" style="display: inline;">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-cog large"></i>
+                    <div class="tms-usermenu">
+                        <a href="#">
+                            <i class="icon-lightbulb large"></i>
+                            <sub>${Notification.countByUser(User.get(sec.loggedInUserInfo(field: 'id').toLong()))}</sub>
                         </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <li>
-                                <g:link tabindex="-1" controller="profile" action="edit"><g:message code="profile.edit.button"/></g:link>
-                            </li>
-                            <sec:ifAllGranted roles="ROLE_ADMIN">
-                            <li id="configuration">
-                                <g:link controller="configuration"><g:message code="config.edit.button"/></g:link>
-                            </li>
-                            </sec:ifAllGranted>
-                            <li class="divider"></li>
-                            <li>
-                                <g:link tabindex="-1" controller="logout"><g:message code="security.logout.button"/></g:link>
-                            </li>
-                        </ul>
+                        <div class="dropdown" style="display: inline;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-cog large"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li>
+                                    <g:link tabindex="-1" controller="profile" action="edit"><g:message code="profile.edit.button"/></g:link>
+                                </li>
+                                <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <li id="configuration">
+                                    <g:link controller="configuration"><g:message code="config.edit.button"/></g:link>
+                                </li>
+                                </sec:ifAllGranted>
+                                <li class="divider"></li>
+                                <li>
+                                    <g:link tabindex="-1" controller="logout"><g:message code="security.logout.button"/></g:link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 </sec:ifLoggedIn>
