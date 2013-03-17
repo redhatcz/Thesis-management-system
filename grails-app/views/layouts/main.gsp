@@ -6,8 +6,8 @@
     <content tag="manage-box">
         <div class="container">
             <div class="pull-right">
-                <a href="${createLink(controller: 'faq', action: 'list')}"><i class="icon-question-sign"></i> <g:message code="faq.label"/></a>
-                <a href="#"><i class="icon-rss"></i> <g:message code="feed.news.label"/></a>
+                <a id="faq" href="${createLink(controller: 'faq', action: 'list')}"><i class="icon-question-sign"></i> <g:message code="faq.label"/></a>
+                <a id="news" href="#"><i class="icon-rss"></i> <g:message code="feed.news.label"/></a>
             </div>
         </div>
     </content>

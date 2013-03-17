@@ -233,8 +233,19 @@ h4.header {
 
         &:hover {
             text-decoration: none;
-            color: @orange;
             .transition(color linear .1s);
+        }
+
+        &#news:hover {
+            color: @orange;
+        }
+
+        &#faq:hover {
+            color: @green;
+        }
+
+        i[class*="icon-"] {
+            padding-left: 0px;
         }
     }
 }
@@ -260,8 +271,8 @@ h4.header {
     }
 }
 
-.head > [class*="icon-"],
-.head .pull-right > [class*="icon-"] {
+.head > i[class*="icon-"],
+.head .pull-right > i[class*="icon-"] {
     color: @white;
 }
 
@@ -342,7 +353,7 @@ img#logo {
     padding: 0 5px;
 }
 
-[class*="icon-"].large {
+i[class*="icon-"].large {
     font-size: 18px;
 }
 
