@@ -10,6 +10,10 @@ class Category {
         description maxSize: 255, nullable: true
     }
 
+    static mapping = {
+        sort 'title'
+    }
+
     String toString(){
         title
     }

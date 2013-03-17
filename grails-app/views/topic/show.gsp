@@ -34,7 +34,7 @@
         <p class="tag-list">
             <i class="icon-tags icon-large"></i>
             <g:message code="topic.tags.label" default="tags" />:
-            <g:each in="${topicTags}" var="tag" status="i">
+            <g:each in="${topicTags?.sort{it?.title}}" var="tag" status="i">
                 <g:link action="list"
                         params="${[tagTitle: tag.title] + (params.categoryId ? [categoryId: params.categoryId] : [])}"
                 >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
@@ -92,7 +92,7 @@
                         ${message(code: 'topic.universities.label').toString().toLowerCase()}
                     </dt>
                     <dd>
-                        <g:each in="${topicInstance?.universities}" status="i" var="university">
+                        <g:each in="${topicInstance?.universities?.sort{it?.name}}" status="i" var="university">
                         <g:link controller="university"
                                 action="show"
                                 id="${university?.id}"
@@ -109,7 +109,7 @@
                         ${message(code: 'topic.types.label').toString().toLowerCase()}
                     </dt>
                     <dd>
-                    <g:each in="${topicInstance?.types}" status="i" var="type">
+                    <g:each in="${topicInstance?.types?.sort{it.name()}}" status="i" var="type">
                         <g:message code="topic.type.${type?.toString()?.toLowerCase()}.label"/><g:if test="${i != topicInstance?.types?.size() - 1}"><span>, </span></g:if>
                     </g:each>
                     </dd>
@@ -131,7 +131,7 @@
             <div class="panel-content">
                 <g:if test="${!thesisList?.empty}">
                     <ul class="unstyled">
-                    <g:each in="${thesisList}" var="thesis">
+                    <g:each in="${thesisList?.sort{it.title}}" var="thesis">
                         <li>
                             <g:link controller="thesis" action="show" id="${thesis.id}"
                                     params="[headline: Util.hyphenize(thesis?.title)]">${thesis.title}</g:link>
