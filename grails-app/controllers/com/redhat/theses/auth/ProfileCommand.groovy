@@ -19,6 +19,7 @@ class ProfileCommand {
     String password
     String repeatPassword
     String oldPassword
+    boolean sendMail
 
     static constraints = {
         password minSize: 6

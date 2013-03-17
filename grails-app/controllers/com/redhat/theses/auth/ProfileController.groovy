@@ -30,6 +30,7 @@ class ProfileController {
         def profileCommand = new ProfileCommand()
         profileCommand.email = user.email
         profileCommand.fullName = user.fullName
+        profileCommand.sendMail = user.sendMail
 
         [profileCommand: profileCommand, userInstance: user]
     }
@@ -51,6 +52,7 @@ class ProfileController {
             return
         }
 
+        user.sendMail = profileCommand.sendMail
         user.fullName = profileCommand.fullName
         if (profileCommand.password) {
             user.password = profileCommand.password

@@ -49,6 +49,15 @@
     </div>
 </div>
 
+<div class="control-group ${hasErrors(bean: profileCommand, field: 'sendMail', 'error')} ">
+    <div class="controls">
+        <label class="checkbox" for="sendMail">
+            <g:checkBox name="sendMail" value="${profileCommand?.sendMail}" />
+            <g:message code="user.sendMail.label"/>
+        </label>
+    </div>
+</div>
+
 <div class="control-group ${hasErrors(bean: profileCommand, field: 'oldPassword', 'error')} required">
     <label class="control-label" for="repeatPassword">
         <strong><g:message code="user.oldPassword.label" />

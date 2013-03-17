@@ -50,7 +50,7 @@ class SubscriptionService {
 
     def notifyAll(List<User> subscribers, User currentUser, Feed feed, String articleTitle) {
         subscribers.unique().each { subscriber ->
-            if (subscriber.id != currentUser.id) {
+            if (subscriber.id != currentUser.id && subscriber.sendMail) {
                 notify(subscriber, feed, articleTitle)
             }
         }

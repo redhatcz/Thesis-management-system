@@ -15,6 +15,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+    boolean sendMail = true
 
     static hasMany = [roles: Role]
 
