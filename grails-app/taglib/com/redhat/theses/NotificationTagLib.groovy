@@ -20,13 +20,18 @@ class NotificationTagLib {
 
         def popoverTitle = g.message(code: "notification.${notificationCount ? 'new' : 'no.new'}.title")
         def popoverContent = ''
-        notifications.each {
-            def message = g.message(code: it.feed.messageCode, args: it.feed.args)
-            popoverContent += g.render(template: '/taglib/notification/notification',
-                    model: [isNew: !it.seen, message: message])
+
+        if (!notifications || notifications.empty) {
+            popoverContent = "<div>${g.message(code: 'notification.no.notifications').toString()}</div>"
+        } else {
+            notifications.each {
+                def message = g.message(code: it.feed.messageCode, args: it.feed.args)
+                popoverContent += g.render(template: '/taglib/notification/notification',
+                        model: [isNew: !it.seen, message: message])
+            }
         }
 
-        popoverContent = popoverContent.replaceAll('\n', '').replaceAll("'", "\\'")
+        popoverContent = popoverContent.replaceAll('\n', '').replaceAll("\\'", "\\\\'")
 
         out << g.render(template: "/taglib/notification/notifications",
                 model: [notificationCount: notificationCount, popoverTitle: popoverTitle, popoverContent: popoverContent])
