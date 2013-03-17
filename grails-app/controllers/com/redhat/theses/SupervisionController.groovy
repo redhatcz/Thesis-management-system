@@ -20,7 +20,7 @@ class SupervisionController {
 
         if (topicInstance == null){
             flash.message = message(code: 'topic.not.found', args: [id])
-            redirect(action: "list")
+            redirect(controller: 'topic', action: "list")
             return
         }
 
@@ -51,15 +51,14 @@ class SupervisionController {
             }
         }
 
-        //TODO: this doesn't remove supervisions !!!!!!
-        if (universityCommand.hasErrors() || !supervisionService.saveAll(supervisions)) {
+        if (universityCommand.hasErrors() || !supervisionService.saveMany(supervisions, user, topicInstance)) {
             render(view: "manage", model: [topicInstance: topicInstance, universityCommand:
                     universityCommand, universities: topicInstance.universities])
             return
         }
 
         flash.message = message(code: 'supervision.updated', args: [topicInstance.id])
-        redirect(controller: 'user', action: 'supervisions', id: user.id)
+        redirect(controller: 'topic', action: 'show', id: topicInstance.id)
 
     }
 
