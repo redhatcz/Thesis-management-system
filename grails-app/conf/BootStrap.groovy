@@ -566,6 +566,52 @@ for example): see Web Browser Programming for details.'''
 
         // APPLICATIONS
         new Application(applicant: vaclav, topic: autocompletePlugin, university: muni, note: 'ahoj').save(flush: true)
+
+        // FAQ
+        new Faq(question: 'What is the current status of OpenShift Online?',
+                answer: 'A free Developer Preview version of OpenShift Online has been available for the past year. ' +
+                        'Based on requests from users for expanded capability, we are planning to expand the OpenShift Online ' +
+                        'offering to provide users increased capacity, functionality and support. The information below provides' +
+                        ' an overview of what we intend to offer when a paid OpenShift Online service becomes available. While the ' +
+                        'details below provide our pricing plans, some of the information may be subject to change as we continue ' +
+                        'to fine-tune the offering to address our customers needs.').save(flush: true)
+        new Faq(question: 'What is Red Hat\'s plan with respect to OpenShift Online pricing?',
+                answer: 'OpenShift Online is being offered in a pricing model comprised of different tiers intended to fit your ' +
+                        'organization\'s needs, whether you are a hobbyist, a fast growing startup or an enterprise. There is a ' +
+                        'base monthly platform fee plus costs for additional gear usage.').save(flush: true)
+        new Faq(question: 'What is a gear?',
+                answer: 'A gear is a container with a set of resources that allows users to run their applications. OpenShift ' +
+                        'Online runs many gears on each virtual machine and dynamically distributes gears across them.').save(flush: true)
+        new Faq(question: 'What is a Cartridge?',
+                answer: 'Cartridges are the containers that house the framework or components that can be used to create an application. ' +
+                        'One or more cartridges run on each gear or the same cartridge can run on many gears for clustering or scaling. ' +
+                        'We currently have catridges that are enabled for PHP, JBoss, Ruby, Perl & NodeJS. We also offer embedded cartridges ' +
+                        'in support of MySQL, MongoDB, phpmyadmin.').save(flush: true)
+        new Faq(question: 'How are applications, cartridges and gears related?',
+                answer: 'Applications are made up of at least one framework that is contained in a cartridge and runs on one or more gears. ' +
+                        'Additional cartridges can be added to the application on the same or different gears.').save(flush: true)
+        new Faq(question: 'Are there different gear sizes and how much do they cost?',
+                answer: 'We plan to offer small gears for FreeShift and small and medium gears for MegaShift. ' +
+                        'In the future we may offer larger gears at other tiers.').save(flush: true)
+        new Faq(question: 'What is FreeShift?',
+                answer: 'FreeShift is the name of the free tier that is offered on OpenShift Online.')
+        new Faq(question: 'What is MegaShift?',
+                answer: 'We plan to offer MegaShift as a paid tier on OpenShift Online that provides larger capacity.' +
+                        ' Please see the pricing page for more information.').save(flush: true)
+
+        def cs = new Locale('cs')
+        new Faq(locale: cs,
+                question: 'Soubor se mi nestáhl do konce, můžu stahování nějak napojit, nebo musím stahovat znovu?',
+                answer: 'V současné době nelze napojovat částečně stažené soubory, je tedy nutné soubor stáhnout znovu. ' +
+                        'Přehrávače pro systém Windows většinou nejsou schopny částečně stažené soubory přehrát.').save(flush: true)
+        new Faq(locale: cs,
+                question: 'Při pokusu o stažení se mi zobrazí text: Neautorizovaný přístup.',
+                answer: 'Pokoušíte se o stažení video souboru jinou cestou než pres IS MU. ' +
+                        'Je nutné přistupovat přes stránky univerzitního informačního systému.').save(flush: true)
+        new Faq(locale: cs,
+                question: 'Při pokusu o stažení se mi zobrazí text: Chyba databáze.',
+                answer: 'Jde o technickou závadu v systému, kterou se snažíme ihned řešit, ' +
+                        'zkuste Váš požadavek za chvíli znovu nebo se obraťte na kontaktní adresu: support@video.muni.cz.').save(flush: true)
     }
     def destroy = {
         environments {
