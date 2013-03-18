@@ -15,20 +15,18 @@
         <g:each in="${faqInstanceList}" var="faq">
             <div class="accordion-group">
                 <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2"
-                       href="#faq${faq.id}">
+                    <sec:ifAllGranted roles="ROLE_ADMIN">
+                    <div class="pull-right icons">
+                        <g:link action="edit" id="${faq.id}"><i class="icon-wrench large"></i></g:link>
+                        <g:link action="delete" id="${faq.id}"
+                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');"
+                            ><i class="icon-trash large"></i></g:link>
+                    </div>
+                    </sec:ifAllGranted>
+                    <a class="accordion-toggle" data-toggle="collapse"
+                       data-parent="#accordion2" href="#faq${faq.id}">
                         ${faq?.question?.encodeAsHTML()}
                     </a>
-                    <sec:ifAllGranted roles="ROLE_ADMIN">
-                        <g:link action="edit" id="${faq.id}">
-                            <i class="icon-wrench"></i>
-                        </g:link>
-                        <g:link action="delete"
-                                id="${faq.id}"
-                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
-                            <i class="icon-trash"></i>
-                        </g:link>
-                    </sec:ifAllGranted>
                 </div>
 
                 <div id="faq${faq.id}" class="accordion-body collapse">
