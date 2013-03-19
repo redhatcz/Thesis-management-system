@@ -441,6 +441,6 @@ class GridFileService {
 
     // Todo: retrieve Grid db name from app configuration
     private String getGridDB() {
-        DEFAULT_DB
+        grailsApplication?.config?.grails?.mongo?.databaseName ?: DEFAULT_DB
     }
 }
