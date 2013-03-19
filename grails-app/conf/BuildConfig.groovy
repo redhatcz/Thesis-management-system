@@ -68,5 +68,6 @@ grails.project.dependency.resolution = {
         compile ":email-confirmation:2.0.8"
         compile ":lesscss-resources:1.3.1"
         compile ":hibernate-filter:0.3.2"
+        compile ":feeds:1.5"
     }
 }
