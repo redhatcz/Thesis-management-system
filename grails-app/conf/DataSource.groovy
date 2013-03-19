@@ -9,6 +9,15 @@ def credentials = [
         name:"theses"
 ]
 
+def mongoCredentials = [
+        host: System.getenv("OPENSHIFT_MONGODB_DB_HOST"),
+        port: System.getenv("OPENSHIFT_MONGODB_DB_PORT"),
+        //TODO: Change these later
+        username: "admin",
+        password: "2jsmnZGz4mnx",
+        name:"theses"
+]
+
 dataSource {
     pooled = true
     configClass = HibernateFilterDomainConfiguration
@@ -29,6 +38,12 @@ environments {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
+
+        grails {
+            mongo {
+                databaseName = "theses"
+            }
+        }
     }
     test {
         dataSource {
@@ -37,6 +52,12 @@ environments {
             password = ""
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+        }
+
+        grails {
+            mongo {
+                databaseName = "theses"
+            }
         }
     }
     production {
@@ -57,10 +78,15 @@ environments {
                validationQuery="SELECT 1"
             }
         }
-    }
-}
-grails {
-    mongo {
-        databaseName = "tms"
+
+        grails {
+            mongo {
+                host = mongoCredentials.host
+                port = mongoCredentials.port
+                username = mongoCredentials.username
+                password = mongoCredentials.password
+                databaseName = "theses"
+            }
+        }
     }
 }
