@@ -3,7 +3,9 @@
         <g:message code="security.login.email.label" default="Email"/>
     </label>
     <div class="controls">
-        <input class="input-block-level" type='text' name='j_username' id='username' placeholder="${message(code: 'security.login.email.label')}" />
+        <input class="input-block-level wide"
+               type='text' name='j_username'
+               id='username' placeholder="${message(code: 'security.login.email.label')}" />
     </div>
 </div>
 
@@ -12,7 +14,9 @@
         <g:message code="springSecurity.login.password.label"/>
     </label>
     <div class="controls">
-        <input class="input-block-level" type='password' name='j_password' id='password' placeholder="${message(code: 'security.login.password.label')}" />
+        <input class="input-block-level wide"
+               type='password' name='j_password'
+               id='password' placeholder="${message(code: 'security.login.password.label')}" />
     </div>
 </div>
 

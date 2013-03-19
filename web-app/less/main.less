@@ -10,8 +10,9 @@
     }
 }
 
-.pretty-input(@height) {
-    height: @height;
+.pretty-input() {
+    height: @inputHeight;
+    width: @inputWidth;
     border-color: @grayLighter;
     .border-radius(0);
     padding: 4px 8px;
@@ -22,9 +23,11 @@
     }
 }
 
-.pretty-select(@height) {
-    height: @height;
+.pretty-select() {
+    height: @inputHeight + 10;
+    width: @inputWidth;
     border-color: @grayLighter;
+    padding: 9px 10px;
     .border-radius(0);
     .transition(border-color linear .2s);
 
@@ -126,7 +129,7 @@ p {
 }
 
 select {
-    .pretty-select(40px);
+    .pretty-select();
 }
 
 textarea {
@@ -135,7 +138,14 @@ textarea {
 
 input[type="text"],
 input[type="password"] {
-    .pretty-input(30px);
+    .pretty-input();
+}
+
+input.wide {
+    height: 100%;
+    width: 100%;
+    .box-sizing(border-box);
+    padding: 9px 10px;
 }
 
 i[class*="icon-"] {
@@ -854,7 +864,6 @@ ul.tms-list {
     a {
         border-bottom: none;
         margin-left: 10px;
-        /*font-family: @titleFontFamily;*/
 
         &:hover {
             border-bottom: 1px solid @red;
@@ -913,7 +922,9 @@ ul.tms-list {
 
     input#username,
     input#password {
-        .pretty-input(40px);
+        .pretty-input();
+        height: 40px;
+        width: 100%;
         background-color: @graySuperLight;
     }
 
@@ -1016,6 +1027,42 @@ div#file-uploader {
         }
     }
 }
+
+.control-group{
+    &.faq-question {
+        overflow: hidden;
+
+        .controls {
+            padding-right: 10px;
+        }
+    }
+
+    &.faq-locale {
+        float: right;
+
+        select {
+            width: 150px;
+        }
+    }
+}
+
+#add-faq-button {
+    margin-bottom: 25px;
+}
+
+.dynamic-delete-button {
+    float: right;
+}
+
+div[id*="dynamic-field-faq-"] {
+    margin-top: 80px;
+
+    &:nth-child(2) {
+        margin-top: 0px;
+    }
+}
+
+
 
 
 /*---------OTHER---------*/

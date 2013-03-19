@@ -15,22 +15,10 @@
         </div>
     </g:hasErrors>
 
-    <div class="control-group ${hasErrors(bean: faq, field: 'question', 'error')} required">
-        <label class="control-label" for="faqCommand.faq[${i}].question">
-            <strong><g:message code="faq.question.label"/></strong>
-        </label>
-
-        <div class="controls">
-            <g:textField name="faqCommand.faq[${i}].question" value="${faq?.question}"
-                         placeholder="${message(code: 'faq.question.label')}"/>
-        </div>
-    </div>
-
-    <div class="control-group ${hasErrors(bean: faq, field: 'locale', 'error')} required">
-        <label class="control-label" for="faqCommand.faq[${i}].question">
+    <div class="control-group ${hasErrors(bean: faq, field: 'locale', 'error')} required faq-locale">
+        <label class="control-label" for="faqCommand.faq[${i}].locale">
             <strong><g:message code="faq.locale.label"/></strong>
         </label>
-
         <div class="controls">
             <g:select name="faqCommand.faq[${i}].locale"
                       from="${locales.entrySet()}"
@@ -40,13 +28,24 @@
         </div>
     </div>
 
-    <div class="control-group ${hasErrors(bean: faq, field: 'answer', 'error')} required">
+    <div class="control-group ${hasErrors(bean: faq, field: 'question', 'error')} required faq-question">
         <label class="control-label" for="faqCommand.faq[${i}].question">
+            <strong><g:message code="faq.question.label"/></strong>
+        </label>
+        <div class="controls">
+            <g:textField name="faqCommand.faq[${i}].question"
+                         value="${faq?.question}" class="wide"
+                         placeholder="${message(code: 'faq.question.label')}"/>
+        </div>
+    </div>
+
+    <div class="control-group ${hasErrors(bean: faq, field: 'answer', 'error')} required">
+        <label class="control-label" for="faqCommand.faq[${i}].answer">
             <strong><g:message code="faq.answer.label"/></strong>
         </label>
-
         <div class="controls">
-            <g:textArea name="faqCommand.faq[${i}].answer" value="${faq?.answer}"
+            <g:textArea name="faqCommand.faq[${i}].answer"
+                        value="${faq?.answer}" rows="10"
                         placeholder="${message(code: 'faq.answer.label')}"/>
         </div>
     </div>

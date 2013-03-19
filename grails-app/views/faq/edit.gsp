@@ -23,7 +23,7 @@
         <div class="controls">
             <g:submitButton name="edit"
                             class="tms-btn btn-large"
-                            value="${message(code: 'default.edit.button')}"/>
+                            value="${message(code: 'default.update.button')}"/>
         </div>
     </div>
 </g:form>

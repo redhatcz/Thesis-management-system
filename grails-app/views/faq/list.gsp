@@ -52,29 +52,27 @@
 <div class="span4 sidebar">
     <div class="panel right">
         <h4><g:message code="faq.list.manage.label"/></h4>
-
         <div class="panel-content">
             <g:link class="tms-btn tms-info" action="create"><g:message
                     code="faq.create.button"/></g:link>
         </div>
-    </div>
 
-        <div class="panel right">
-            <h4><g:message code="faq.locales.label"/></h4>
-
-            <div class="panel-content">
-                <div role="navigation">
-                    <ul class="unstyled nav-categories">
-                        <g:each in="${locales}" var="locale">
-                            <g:set var="isCurrent" value="${locale.key == currentLocale}"/>
-                            <g:link action="list"
-                                    id="${locale.key}"
-                                    class="${isCurrent ? 'category-root' : 'category'}" >${locale.value.encodeAsHTML()}</g:link>
-                        </g:each>
-                    </ul>
-                </div>
+        <h4><g:message code="faq.locales.label"/></h4>
+        <div class="panel-content">
+            <div role="navigation">
+                <ul class="unstyled nav-categories">
+                    <g:each in="${locales}" var="locale">
+                    <li>
+                        <g:set var="isCurrent" value="${locale.key == currentLocale}"/>
+                        <g:link action="list"
+                                id="${locale.key}"
+                                class="${isCurrent ? 'category-root' : 'category'}" >${locale.value.encodeAsHTML()}</g:link>
+                    </li>
+                    </g:each>
+                </ul>
             </div>
         </div>
+    </div>
 </div>
 </sec:ifAllGranted>
 </body>
