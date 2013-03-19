@@ -19,7 +19,7 @@
                     <div class="tms-usermenu">
                         <notification:render/>
                         <div class="dropdown" style="display: inline;">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-cog large"></i>
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

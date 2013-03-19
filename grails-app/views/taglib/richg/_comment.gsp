@@ -13,15 +13,15 @@
         <g:if test="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER') ||
                 sec.loggedInUserInfo(field: 'id').toLong() == comment?.userId}">
         <div class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog large"></i></a>
+            <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cog large"></i></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <%-- this button shows edit form bellow by javascript (see in richg.js) --%>
                 <li>
-                    <a class="edit-comment" tabindex="-1" href="#">Edit</a>
+                    <a class="edit-comment" tabindex="-1">Edit</a>
                 </li>
                 <%-- this button triggers delete form bellow by javascript (see in richg.js) --%>
                 <li>
-                    <a class="delete-comment" tabindex="-1" href="#">Delete</a>
+                    <a class="delete-comment" tabindex="-1">Delete</a>
                 </li>
             </ul>
         </div>
