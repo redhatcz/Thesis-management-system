@@ -22,7 +22,7 @@
         <div class="controls">
             <g:select name="faqCommand.faq[${i}].locale"
                       from="${locales.entrySet()}"
-                      value="${faq?.locale ?: 'en'}"
+                      value="${faq?.locale?.toString() ?: 'en'}"
                       optionKey="key"
                       optionValue="value"/>
         </div>

@@ -6,7 +6,7 @@
     <div class="controls">
         <g:select name="faq.locale"
                   from="${locales.entrySet()}"
-                  value="${faqInstance?.locale ?: 'en'}"
+                  value="${faqInstance?.locale?.toString() ?: 'en'}"
                   optionKey="key"
                   optionValue="value"/>
     </div>
