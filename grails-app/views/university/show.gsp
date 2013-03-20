@@ -60,7 +60,7 @@
                 </ul>
             </g:if>
             <g:else>
-                <p><g:message code="university.no.topics.found" /></p>
+                <p class="center muted"><g:message code="university.no.topics.found" /></p>
             </g:else>
         </div>
     </div>

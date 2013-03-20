@@ -69,7 +69,7 @@
                         <g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" />
                     </dd>
 
-                <g:if test="${!supervisions.empty}">
+                <g:if test="${supervisions && !supervisions?.empty}">
                     <dt>
                         <i class="icon-group"></i>
                         ${message(code: 'topic.supervision.label').toString().toLowerCase()}
@@ -103,7 +103,7 @@
                     </dd>
                 </g:if>
 
-                <g:if test="${!topicInstance?.types?.empty}">
+                <g:if test="${topicInstance?.types && !topicInstance?.types?.empty}">
                     <dt>
                         <i class="icon-book"></i>
                         ${message(code: 'topic.types.label').toString().toLowerCase()}
@@ -129,7 +129,7 @@
 
             <h4><g:message code="topic.theses.label"/></h4>
             <div class="panel-content">
-                <g:if test="${!thesisList?.empty}">
+                <g:if test="${thesisList && !thesisList?.empty}">
                     <ul class="unstyled">
                     <g:each in="${thesisList?.sort{it.title}}" var="thesis">
                         <li>

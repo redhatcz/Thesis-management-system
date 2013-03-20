@@ -9,7 +9,7 @@
 <body>
 <div class="span8 content">
     <h2 class="header"><g:message code="application.list.header"/></h2>
-    <g:if test="${!applicationInstanceList?.empty}">
+    <g:if test="${applicationInstanceList && !applicationInstanceList?.empty}">
     <div class="tms-table">
         <table class="table">
             <thead>

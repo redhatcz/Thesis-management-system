@@ -1,10 +1,6 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 <div class="span8 content">
-<g:if test="${topicInstanceList.isEmpty()}">
-    <p class="center muted"><g:message code="topic.no.topics.found"/></p>
-</g:if>
-
-<g:else>
+<g:if test="${topicInstanceList && !topicInstanceList.empty}">
     <g:each var="topic" in="${topicInstanceList}">
         <div class="table-layout ${!topic?.enabled ? 'disabled' : ''}">
             <h3>
@@ -30,11 +26,15 @@
                 <div class="read-more">
                     <g:link class="gray-link" action="show"
                             id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]"
-                        ><g:message code="topic.read.more.label"/>&hellip;</g:link>
+                    ><g:message code="topic.read.more.label"/>&hellip;</g:link>
                 </div>
             </div>
         </div>
     </g:each>
+</g:if>
+
+<g:else>
+    <p class="center muted"><g:message code="topic.no.topics.found"/></p>
 </g:else>
 
 <g:if test="${Util.isPaginationVisible(topicInstanceTotal, params.max)}">
