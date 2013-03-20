@@ -91,10 +91,9 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryDescription', 'error')} required">
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryDescription', 'error')}">
     <label class="control-label" for="topic.secondaryDescription">
         <strong><g:message code="topic.secondaryDescription.label"/></strong>
-        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:textArea name="topic.secondaryDescription" rows="15" value="${topicInstance?.secondaryDescription}"/>
