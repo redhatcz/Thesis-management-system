@@ -16,7 +16,7 @@
                         id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"
                     ><g:fieldValue field="title" bean="${topic}"/></g:link>
                 <span class="pull-right">
-                    <i class="icon-comment-alt"></i> ${commentCounts[topic] ?: 0}
+                    <i class="icon-comment"></i> ${commentCounts[topic] ?: 0}
                 </span>
                 <ul class="inline">
                     <li>
