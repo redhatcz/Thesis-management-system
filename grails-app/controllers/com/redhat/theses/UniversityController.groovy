@@ -6,15 +6,17 @@ class UniversityController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    static Long UNIVERSITY_MAX_TOPICS = 10
+
     /**
      * Dependency injection of com.redhat.theses.UniversityService
      */
     def universityService
 
     /**
-     * Dependency injection of org.codehaus.groovy.grails.commons.GrailsApplication
+     * Dependency injection of com.redhat.theses.CommentService
      */
-    def grailsApplication
+    def commentService
 
     def index() {
         redirect(action: "list", params: params, permanent: true)
@@ -49,7 +51,10 @@ class UniversityController {
             return
         }
 
-        [universityInstance: universityInstance]
+        def topicInstanceList = Topic.findAllByUniversity(universityInstance, [max: UNIVERSITY_MAX_TOPICS])
+        def commentCounts = commentService.countByArticles(topicInstanceList)
+
+        [universityInstance: universityInstance, topicInstanceList: topicInstanceList, commentCounts: commentCounts]
     }
 
     def edit(Long id) {

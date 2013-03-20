@@ -40,6 +40,12 @@ class Topic extends Article {
         order 'desc'
     }
 
+    static List<Topic> findAllByUniversity(University university, Map params = [:]) {
+        Topic.findAll(
+                'from Topic t where :university member of t.universities order by t.dateCreated desc',
+                [university: university], params)
+    }
+
     static List<Topic> findAllByCategory(Category category, Map params = [:]){
         Topic.findAll(
                 'from Topic t where :category member of t.categories order by t.dateCreated desc',
