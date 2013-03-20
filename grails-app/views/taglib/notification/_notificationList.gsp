@@ -4,7 +4,10 @@
                   model="[isNew: !notification?.seen, message: message(code: notification?.feed?.messageCode, args: notification?.feed?.args)]"/>
     </g:each>
     <g:if test="${showMoreButton}">
-        <div><small><g:link action="list" controller="notification"><g:message code="notification.more.button"/></g:link></small></div>
+        <div class="more">
+            <i class="icon-reorder"></i>
+            <g:link action="list" controller="notification"><g:message code="notification.more.button"/></g:link>
+        </div>
     </g:if>
 </g:if>
 <g:else>

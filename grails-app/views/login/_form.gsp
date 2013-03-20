@@ -1,5 +1,5 @@
 <div class="control-group">
-    <label class="control-label" for='email'>
+    <label class="control-label" for='username'>
         <g:message code="security.login.email.label" default="Email"/>
     </label>
     <div class="controls">

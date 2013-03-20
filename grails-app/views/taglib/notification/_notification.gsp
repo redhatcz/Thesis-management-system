@@ -1,1 +1,1 @@
-<div class="notification ${isNew ? '' : 'old'}"><small>${message}</small></div>
+<div class="notification ${isNew ? '' : 'old'}">${message}</div>

@@ -136,6 +136,7 @@
                     <ul class="unstyled">
                     <g:each in="${thesisList?.sort{it.title}}" var="thesis">
                         <li>
+                            <i class="icon-book"></i>
                             <g:link controller="thesis" action="show" id="${thesis.id}"
                                     params="[headline: Util.hyphenize(thesis?.title)]">${thesis.title}</g:link>
                         </li>

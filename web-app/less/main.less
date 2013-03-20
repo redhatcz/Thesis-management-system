@@ -353,9 +353,17 @@ img#logo {
     margin-left: 120px;
 }
 
+.popover-content {
+    .more {
+        padding: 8px 10px;
+        font-size: @fontSizeSmall;
+    }
+}
+
 .notification {
     padding: 8px 10px;
     border-bottom: 1px solid @grayBorder;
+    font-size: @fontSizeSmall;
 
     &:last-child {
         border-bottom: none;
@@ -367,6 +375,13 @@ img#logo {
         a {
             color: @grayLight;
         }
+    }
+}
+
+.notification-list {
+    .notification {
+        padding: 16px 16px;
+        font-size: @baseFontSize;
     }
 }
 
@@ -530,47 +545,50 @@ ul form {
 .panel-content {
     margin: 8px 20px;
 
-    li {
-        margin-bottom: 10px;
-        color: @grayLight;
+    dl, ul {
+        font-size: @fontSizeSmall;
     }
 
-    li:last-child {
-        margin-bottom: 0;
+    li {
+        margin-bottom: 10px;
+        /*color: @grayLight;*/
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     ul.unstyled {
         margin-bottom: 0;
     }
-}
 
-.panel-content dl {
-    .dl-horizontal();
-    font-size: @fontSizeSmall;
-    border-top: 1px solid @grayLighter;
-    margin: 0;
-    color: @gray;
-    padding: 10px 0;
+    dl {
+        .dl-horizontal();
+        border-top: 1px solid @grayLighter;
+        margin: 0;
+        color: @gray;
+        padding: 10px 0;
 
-    &:first-child {
-        border-top: none;
-        padding-top: 0;
-    }
+        &:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
 
-    &:last-child {
-        padding-bottom: 0;
-    }
+        &:last-child {
+            padding-bottom: 0;
+        }
 
-    dt {
-        padding: 7px 0;
-        width: 110px;
-        text-align: left;
-        font-weight: normal;
-    }
+        dt {
+            padding: 7px 0;
+            width: 110px;
+            text-align: left;
+            font-weight: normal;
+        }
 
-    dd {
-        padding: 7px 0 8px;
-        margin-left: 125px;
+        dd {
+            padding: 7px 0 8px;
+            margin-left: 125px;
+        }
     }
 }
 
@@ -588,8 +606,9 @@ a.category-root {
     font-weight: bold;
 }
 
-.nav-categories {
+ul.nav-categories {
     padding-top: 3px;
+    font-size: @baseFontSize;
 
     a {
         .pretty-link();
@@ -617,8 +636,9 @@ a.tag-selected {
     }
 }
 
-.tags-panel {
+ul.tags-panel {
     padding-top: 5px;
+    font-size: @baseFontSize;
 }
 
 
@@ -947,6 +967,10 @@ ul.tms-list {
 
     .bottom {
         padding: 15px 0;
+    }
+
+    .control-group {
+        margin-bottom: 10px;
     }
 }
 
