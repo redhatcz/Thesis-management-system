@@ -7,7 +7,7 @@
         <div class="container">
             <div class="pull-right">
                 <a id="faq" href="${createLink(controller: 'faq', action: 'list')}"><i class="icon-question-sign"></i> <g:message code="faq.label"/></a>
-                <a id="news" href="${createLink(controller: 'rss', action: 'feed')}"><i class="icon-rss"></i> <g:message code="feed.news.label"/></a>
+                <a id="news" href="${createLink(uri: '/rss')}"><i class="icon-rss"></i> <g:message code="feed.news.label"/></a>
             </div>
         </div>
     </content>

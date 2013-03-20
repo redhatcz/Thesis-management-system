@@ -20,12 +20,10 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params, permanent: true)
-    }
+    static defaultAction = "list"
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Util.max(max)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 

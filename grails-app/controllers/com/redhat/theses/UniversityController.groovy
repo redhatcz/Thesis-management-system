@@ -19,9 +19,7 @@ class UniversityController {
      */
     def commentService
 
-    def index() {
-        redirect(action: "list", params: params, permanent: true)
-    }
+    static defaultAction = "list"
 
     def list(Integer max) {
         params.max = Util.max(max)

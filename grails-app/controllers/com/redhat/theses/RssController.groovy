@@ -1,8 +1,16 @@
 package com.redhat.theses
 
+import com.redhat.theses.util.Util
+
 class RssController {
 
+    static defaultAction = "feed"
+
     def feed() {
+
+        if (Util.isActionInUrl(request, 'feed')) {
+            redirect uri: '/rss', permanent: true
+        }
 
         def topicList = Topic.findAll(max: 20, sort: 'dateCreated', order: 'desc')
         render(feedType: 'rss') {

@@ -20,9 +20,7 @@ class NotificationController {
      */
     def notificationService
 
-    def index() {
-        redirect action: 'list', params: params, permanent: true
-    }
+    static defaultAction = "list"
 
     def list() {
         def user = springSecurityService.currentUser

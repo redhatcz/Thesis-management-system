@@ -29,9 +29,7 @@ class TopicController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params, permanent: true)
-    }
+    static defaultAction = "list"
 
     def list(Long categoryId, String tagTitle) {
         params.max = Util.max(params.max)

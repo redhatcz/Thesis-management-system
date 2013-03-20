@@ -7,9 +7,7 @@ class FaqController {
 
     def faqService
 
-    def index() {
-        redirect(action: "list", params: params, permanent: true)
-    }
+    static defaultAction = "list"
 
     // Id parameter is being used for locale in this action
     def list(String id) {
