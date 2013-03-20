@@ -13,7 +13,6 @@
         //initialize tags
         $this = this;
         this.selectElem.find('option').each(function () {
-            console.log($(this));
             $this.addTag($(this).attr('value'));
         });
 
@@ -59,8 +58,8 @@
             });
 
             var newTagInputWidth = taggyElemWidth - tagsWidth - tagInputOuterSpaceWidth;
-            newTagInputWidth = newTagInputWidth < 30 ? 30 : newTagInputWidth
-            this.tagInput.width(newTagInputWidth - 5);
+            newTagInputWidth = newTagInputWidth < 30 ? taggyElemWidth : newTagInputWidth;
+            this.tagInput.width(newTagInputWidth - 4);
         }
 
         , isTagPresent: function (label) {
