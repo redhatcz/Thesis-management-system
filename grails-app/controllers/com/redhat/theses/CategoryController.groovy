@@ -1,6 +1,9 @@
 package com.redhat.theses
+
+import grails.plugins.springsecurity.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
+@Secured(['ROLE_ADMIN'])
 class CategoryController {
 
     static allowedMethods = [save: "POST", update: "POST"]

@@ -88,7 +88,7 @@ class ApplicationController {
         User user = springSecurityService.currentUser
 
         if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
-            && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+            && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.message')
             redirect(action: 'list')

@@ -44,15 +44,17 @@
 
 <div class="span4 sidebar">
     <div class="panel right">
-        <h4><g:message code="topic.management.label"/></h4>
-        <div class="panel-content">
-            <g:if test="${currentCategory}">
-                <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]"><g:message code="topic.create.button"/></g:link>
-            </g:if>
-            <g:else>
-                <g:link class="tms-btn tms-info" action="create"><g:message code="topic.create.button"/></g:link>
-            </g:else>
-        </div>
+        <sec:ifAnyGranted roles="ROLE_OWNER">
+            <h4><g:message code="topic.list.manage.label"/></h4>
+            <div class="panel-content">
+                <g:if test="${currentCategory}">
+                    <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]"><g:message code="topic.create.button"/></g:link>
+                </g:if>
+                <g:else>
+                    <g:link class="tms-btn tms-info" action="create"><g:message code="topic.create.button"/></g:link>
+                </g:else>
+            </div>
+        </sec:ifAnyGranted>
 
         <g:if test="${currentCategory}">
             <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>

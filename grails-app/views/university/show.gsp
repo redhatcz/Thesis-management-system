@@ -28,11 +28,13 @@
         </div>
     </div>
     <div class="span8 content">
-        <div class="controls pull-right">
-            <g:link class="tms-btn" action="edit"
-                    id="${universityInstance?.id}"
-                ><i class="icon-wrench"></i><g:message code="default.edit.button"/></g:link>
-        </div>
+        <sec:ifAnyGranted roles="ROLE_ADMIN">
+            <div class="controls pull-right">
+                <g:link class="tms-btn" action="edit"
+                        id="${universityInstance?.id}"
+                    ><i class="icon-wrench"></i><g:message code="default.edit.button"/></g:link>
+            </div>
+        </sec:ifAnyGranted>
 
         <div>
             <h2><g:message code="university.show.topics.header"/></h2>

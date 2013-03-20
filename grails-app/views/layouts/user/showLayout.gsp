@@ -86,11 +86,11 @@
             <g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i>Activity</g:link>
         </li>
         <div class="controls pull-right">
-            <sec:ifAllGranted roles="ROLE_ADMIN">
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
             <g:link class="tms-btn" controller="user"
                     action="edit" id="${userInstance?.id}"
                 ><i class="icon-wrench"></i><g:message code="default.edit.button" /></g:link>
-            </sec:ifAllGranted>
+            </sec:ifAnyGranted>
 
             <sec:ifLoggedIn>
                 <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">

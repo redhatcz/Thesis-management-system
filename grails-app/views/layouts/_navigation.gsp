@@ -12,15 +12,13 @@
         <li id="users" class="${controllerName == 'user' ? 'active' : ''}">
             <g:link controller="user">Members</g:link>
         </li>
-        <sec:ifAllGranted roles="ROLE_OWNER">
-        <li id="applications" class="${controllerName == 'application' ? 'active' : ''}">
-            <g:link controller="application">Applications</g:link>
-        </li>
-        </sec:ifAllGranted>
-        <sec:ifAllGranted roles="ROLE_ADMIN">
         <li id="universities" class="${controllerName == 'university' ? 'active' : ''}">
             <g:link controller="university">Universities</g:link>
         </li>
-        </sec:ifAllGranted>
+        <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_SUPERVISOR">
+        <li id="applications" class="${controllerName == 'application' ? 'active' : ''}">
+            <g:link controller="application">Applications</g:link>
+        </li>
+        </sec:ifAnyGranted>
     </ul>
 </div>

@@ -144,55 +144,67 @@
                 </g:else>
             </div>
 
-            <h4><g:message code="topic.management.label"/></h4>
+            <h4><g:message code="topic.manage.label"/></h4>
             <div class="panel-content">
 
-                <g:form style="display: inline;">
-                    <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
-                    <g:actionSubmit class="tms-btn tms-danger" action="delete"
-                                    value="${message(code: 'default.delete.button')}"
-                                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
-                </g:form>
+                <sec:ifLoggedIn>
+                    <g:if test="${!subscriber}">
+                    <g:form style="display: inline;" controller="subscription" action="subscribe">
+                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                        <g:submitButton class="tms-btn tms-info" name="submit-subscription"
+                                        value="${message(code: 'subscription.subscribe.button')}" />
+                    </g:form>
+                    </g:if>
+                    <g:else>
+                    <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                        <g:submitButton class="tms-btn tms-info" name="submit-unsubscription"
+                                        value="${message(code: 'subscription.unsubscribe.button')}"/>
+                    </g:form>
+                    </g:else>
+                </sec:ifLoggedIn>
 
-                <g:if test="${!subscriber}">
-                <g:form style="display: inline;" controller="subscription" action="subscribe">
-                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-subscription"
-                                    value="${message(code: 'subscription.subscribe.button')}" />
-                </g:form>
-                </g:if>
-                <g:else>
-                <g:form style="display: inline;" controller="subscription" action="unsubscribe">
-                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-unsubscription"
-                                    value="${message(code: 'subscription.unsubscribe.button')}"/>
-                </g:form>
-                </g:else>
+                <sec:ifAnyGranted roles="ROLE_STUDENT">
+                    <g:if test="${topicInstance.enabled}">
+                        <g:link class="tms-btn tms-success"
+                                controller="application"
+                                action="create"
+                                id="${topicInstance?.id}"
+                            ><g:message code="application.apply.button" /></g:link>
+                    </g:if>
+                </sec:ifAnyGranted>
 
-                <g:if test="${topicInstance.enabled}">
-                    <g:link class="tms-btn tms-success"
-                            controller="application"
+                <sec:ifAnyGranted roles="ROLE_OWNER">
+                    <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
+                    <g:if test="${topicInstance?.ownerId == currentUserId}">
+                    <g:form style="display: inline;">
+                        <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
+                        <g:actionSubmit class="tms-btn tms-danger" action="delete"
+                                        value="${message(code: 'default.delete.button')}"
+                                        onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
+                    </g:form>
+
+                    <g:link class="tms-btn tms-info"
+                            controller="thesis"
                             action="create"
                             id="${topicInstance?.id}"
-                        ><g:message code="application.apply.button" /></g:link>
-                </g:if>
+                        ><g:message code="thesis.create.button" /></g:link>
 
-                <g:link class="tms-btn tms-info"
-                        controller="thesis"
-                        action="create"
-                        id="${topicInstance?.id}"
-                    ><g:message code="thesis.create.button" /></g:link>
+                    <g:link class="tms-btn tms-warning"
+                            action="edit"
+                            id="${topicInstance?.id}"
+                        ><g:message code="default.edit.button" /></g:link>
 
-                <g:link class="tms-btn tms-warning"
-                        action="edit"
-                        id="${topicInstance?.id}"
-                    ><g:message code="default.edit.button" /></g:link>
+                    </g:if>
+                </sec:ifAnyGranted>
 
-                <g:link class="tms-btn tms-warning"
-                        controller="supervision"
-                        action="manage"
-                        id="${topicInstance?.id}"
-                    ><g:message code="supervision.edit.mine.button" /></g:link>
+                <sec:ifAnyGranted roles="ROLE_SUPERVISOR">
+                    <g:link class="tms-btn tms-warning"
+                            controller="supervision"
+                            action="manage"
+                            id="${topicInstance?.id}"
+                        ><g:message code="supervision.edit.mine.button" /></g:link>
+                </sec:ifAnyGranted>
 
             </div>
         </div>

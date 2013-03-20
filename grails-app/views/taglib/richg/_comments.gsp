@@ -37,7 +37,7 @@
     sendForm(form, function(data) {
         $('.alert > .close').click();
         if (data.success) {
-            window.location = '${createLink(action: 'show', params: [id: params.id])}';
+            window.location = '${createLink(action: 'show', params: [id: params.id, headline: params.headline])}';
         } else {
             $(data.message).appendTo('#commentMessages').hide().fadeIn();
         }

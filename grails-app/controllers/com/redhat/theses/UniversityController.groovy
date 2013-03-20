@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
 class UniversityController {
 
@@ -27,10 +28,12 @@ class UniversityController {
         [universityInstanceList: University.list(params), universityInstanceTotal: University.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         [universityInstance: new University(params.university)]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save() {
         def universityInstance = new University(params.university)
 
@@ -57,6 +60,7 @@ class UniversityController {
         [universityInstance: universityInstance, topicInstanceList: topicInstanceList, commentCounts: commentCounts]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Long id) {
         def universityInstance = University.get(id)
         if (!universityInstance) {
@@ -67,6 +71,7 @@ class UniversityController {
         [universityInstance: universityInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update() {
         Long id = params.university.long("id")
         Long version = params.university.long("version")
@@ -95,6 +100,7 @@ class UniversityController {
         redirect(action: "show", id: universityInstance.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete() {
         Long id = params.university.long("id")
 

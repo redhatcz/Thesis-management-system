@@ -58,6 +58,7 @@ class FaqController {
         redirect(action: "list")
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Long id) {
         def faqInstance = Faq.get(id)
 
@@ -69,6 +70,7 @@ class FaqController {
         [faqInstance: faqInstance, locales: locales]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update() {
         Long id = params.faq.long("id")
         Long version = params.faq.long("version")
@@ -96,6 +98,7 @@ class FaqController {
         redirect(action: "list")
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete(Long id) {
         def faqInstance = Faq.get(id)
 

@@ -1,6 +1,7 @@
-<div class="control-group ${hasErrors(bean: thesisInstance?.topic, field: 'title', 'error')}">
+<div class="control-group ${hasErrors(bean: thesisInstance?.topic, field: 'title', 'error')} required">
     <label class="control-label" for="thesis.topic.title">
         <strong><g:message code="topic.label" /></strong>
+        <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
         <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}" />

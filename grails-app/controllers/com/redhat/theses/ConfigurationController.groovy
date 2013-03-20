@@ -1,10 +1,12 @@
 package com.redhat.theses
 
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
 /**
  * @author vdedik@redhat.com
  */
+@Secured(['ROLE_ADMIN'])
 class ConfigurationController {
 
     static allowedMethods = [update: 'POST']

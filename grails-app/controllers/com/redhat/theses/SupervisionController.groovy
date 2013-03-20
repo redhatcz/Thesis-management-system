@@ -1,5 +1,8 @@
 package com.redhat.theses
 
+import grails.plugins.springsecurity.Secured
+
+@Secured(['ROLE_SUPERVISOR'])
 class SupervisionController {
 
     /**

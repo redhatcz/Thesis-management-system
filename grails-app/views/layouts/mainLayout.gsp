@@ -26,11 +26,11 @@
                                 <li>
                                     <g:link tabindex="-1" controller="profile" action="edit"><g:message code="profile.edit.button"/></g:link>
                                 </li>
-                                <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <sec:ifAnyGranted roles="ROLE_ADMIN">
                                 <li id="configuration">
                                     <g:link controller="configuration"><g:message code="config.edit.button"/></g:link>
                                 </li>
-                                </sec:ifAllGranted>
+                                </sec:ifAnyGranted>
                                 <li class="divider"></li>
                                 <li>
                                     <g:link tabindex="-1" controller="logout"><g:message code="security.logout.button"/></g:link>

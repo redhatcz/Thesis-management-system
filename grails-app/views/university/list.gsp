@@ -32,13 +32,15 @@
         </g:if>
     </div>
 
-    <div class="span4 sidebar">
-        <div class="panel right">
-            <h4><g:message code="university.list.manage.label"/></h4>
-            <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create"><g:message code="university.create.button" /></g:link>
+    <sec:ifAnyGranted roles="ROLE_ADMIN">
+        <div class="span4 sidebar">
+            <div class="panel right">
+                <h4><g:message code="university.list.manage.label"/></h4>
+                <div class="panel-content">
+                    <g:link class="tms-btn tms-info" action="create"><g:message code="university.create.button" /></g:link>
+                </div>
             </div>
         </div>
-    </div>
+    </sec:ifAnyGranted>
 </body>
 </html>

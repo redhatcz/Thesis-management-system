@@ -33,9 +33,9 @@ class RegistrationController {
         user.passwordExpired = false
         user.roles = [Role.STUDENT]
 
-//        if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
-//            registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
-//        }
+        if (!Util.hasAnyDomain(user.email, configuration.emailDomains)) {
+            registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
+        }
 
         if (registrationCommand.hasErrors() || !userService.save(user)) {
             render(view: "index", model: [registrationCommand: registrationCommand])

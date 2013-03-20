@@ -42,6 +42,7 @@
         </g:if>
     </div>
 
+    <sec:ifAnyGranted roles="ROLE_ADMIN">
     <div class="span4 sidebar">
         <div class="panel right">
             <h4><g:message code="user.list.manage.label"/></h4>
@@ -50,5 +51,6 @@
             </div>
         </div>
     </div>
+    </sec:ifAnyGranted>
 </body>
 </html>

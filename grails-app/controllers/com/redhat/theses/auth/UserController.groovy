@@ -4,6 +4,7 @@ import com.redhat.theses.Feed
 import com.redhat.theses.Thesis
 import com.redhat.theses.Topic
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
 class UserController {
 
@@ -28,12 +29,14 @@ class UserController {
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         def userInstance = new User(params.user)
         userInstance.roles = [Role.STUDENT]
         [userInstance: userInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save() {
         def userInstance = new User(params.user)
         // when only one role selected, it is not considered a list by default
@@ -93,6 +96,7 @@ class UserController {
                 userInstance: userInstance, isCurrentUser: currentUser]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Long id) {
         def userInstance = User.get(id)
         if (!userInstance) {
@@ -104,6 +108,7 @@ class UserController {
         [userInstance: userInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update() {
         Long id = params.user.long("id")
         Long version = params.user.long("version")
@@ -133,6 +138,7 @@ class UserController {
         redirect(action: "show", id: userInstance.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete() {
         Long id = params.user.long("id")
         def userInstance = User.get(id)

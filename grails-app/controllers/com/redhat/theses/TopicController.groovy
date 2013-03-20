@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
 class TopicController {
 
@@ -81,6 +82,7 @@ class TopicController {
                 tagListWithUsage: tagListWithUsage]
     }
 
+    @Secured(['ROLE_OWNER'])
     def create(Long categoryId) {
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
@@ -101,6 +103,7 @@ class TopicController {
                 universities: University.all, types: Type.values()]
     }
 
+    @Secured(['ROLE_OWNER'])
     def save() {
         def topicInstance = new Topic(params.topic)
         def supervisionCommand = new SupervisionCommand()
@@ -152,10 +155,17 @@ class TopicController {
                 comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
     }
 
+    @Secured(['ROLE_OWNER'])
     def edit(Long id, SupervisionCommand supervisionCommand) {
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'topic.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        if (topicInstance.owner != springSecurityService.currentUser) {
+            flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return
         }
@@ -166,12 +176,19 @@ class TopicController {
                 universities: University.all, types: Type.values()]
     }
 
+    @Secured(['ROLE_OWNER'])
     def update() {
         Long id = params.topic.long("id")
         Long version = params.topic.long("version")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'topic.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        if (topicInstance.owner != springSecurityService.currentUser) {
+            flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return
         }
@@ -227,11 +244,18 @@ class TopicController {
         redirect(action: "show", id: topicInstance.id, params: [headline: Util.hyphenize(topicInstance.title)])
     }
 
+    @Secured(['ROLE_OWNER'])
     def delete() {
         Long id = params.topic.long("id")
         def topicInstance = Topic.get(id)
         if (!topicInstance) {
             flash.message = message(code: 'topic.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        if (topicInstance.owner != springSecurityService.currentUser) {
+            flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return
         }

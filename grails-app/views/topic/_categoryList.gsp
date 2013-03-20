@@ -1,7 +1,7 @@
 <div role="navigation">
     <ul class="unstyled nav-categories">
         <g:if test="${currentCategory}">
-        <sec:ifAllGranted roles="ROLE_ADMIN">
+        <sec:ifAnyGranted roles="ROLE_ADMIN">
         <li>
             <g:link class="category-root"
                     controller="category"
@@ -15,7 +15,7 @@
                     id="${currentCategory?.id}"
                     onclick="return confirm('${message(code: 'default.delete.confirm.message')}');"><g:message code="category.delete.button"/></g:link>
         </li>
-        </sec:ifAllGranted>
+        </sec:ifAnyGranted>
         </g:if>
 
         <g:each in="${categoryList}" var="category">
@@ -26,11 +26,11 @@
         </li>
         </g:each>
 
-        <sec:ifAllGranted roles="ROLE_ADMIN">
+        <sec:ifAnyGranted roles="ROLE_ADMIN">
         <li>
             <g:link class="category-root" controller="category"
                     action="create"><g:message code="category.create.button"/></g:link>
         </li>
-        </sec:ifAllGranted>
+        </sec:ifAnyGranted>
     </ul>
 </div>

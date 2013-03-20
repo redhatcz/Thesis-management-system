@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.util.Util
+import grails.plugins.springsecurity.Secured
 
 class ThesisController {
 
@@ -48,6 +49,7 @@ class ThesisController {
         [thesisInstance: thesisInstance, comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
     }
 
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def create(Long id) {
         def thesisInstance = new Thesis(params.thesis)
 
@@ -70,6 +72,7 @@ class ThesisController {
         [thesisInstance: thesisInstance, disabledTopicField: disabledTopicField]
     }
 
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def save() {
         def thesisInstance = new Thesis(params.thesis)
 
@@ -81,13 +84,22 @@ class ThesisController {
         }
 
         flash.message = message(code: 'thesis.created', args: [ thesisInstance.id])
-        redirect action: 'show', id: thesisInstance.id
+        redirect action: 'show', id: thesisInstance.id, params: [headline: Util.hyphenize(thesisInstance.title)]
     }
 
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def edit(Long id) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
             flash.message = message(code: 'thesis.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        if (thesisInstance.supervisor != springSecurityService.currentUser &&
+                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser) {
+
+            flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return
         }
@@ -98,12 +110,21 @@ class ThesisController {
          supervisors: supervisors]
     }
 
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def update() {
         Long id = params.thesis.long("id")
         Long version = params.thesis.long("version")
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
             flash.message = message(code: 'thesis.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        if (thesisInstance.supervisor != springSecurityService.currentUser &&
+                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser) {
+
+            flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return
         }
@@ -123,9 +144,10 @@ class ThesisController {
         }
 
         flash.message = message(code: 'thesis.updated', args: [thesisInstance.id])
-        redirect action: "show", id: thesisInstance.id
+        redirect action: "show", id: thesisInstance.id, params: [headline: Util.hyphenize(thesisInstance.title)]
     }
 
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def delete() {
         Long id = params.thesis.int('id')
         def thesisInstance = Thesis.get(id)
@@ -135,12 +157,19 @@ class ThesisController {
             return
         }
 
+        if (thesisInstance.supervisor != springSecurityService.currentUser &&
+                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser) {
+            flash.message = message(code: 'security.denied.action.message', args: [id])
+            redirect(action: "list")
+            return
+        }
+
         if (thesisService.delete(thesisInstance)) {
             flash.message = message(code: 'thesis.deleted', args: [id])
             redirect(action: "list")
         } else {
             flash.message = message(code: 'thesis.not.deleted', args: [id])
-            redirect(action: "show", id: id)
+            redirect(action: "show", id: id, params: [headline: Util.hyphenize(thesisInstance.title)])
         }
     }
 }

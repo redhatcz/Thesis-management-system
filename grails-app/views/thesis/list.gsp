@@ -37,13 +37,15 @@
         </g:if>
     </div>
 
+    <sec:ifAnyGranted roles="ROLE_SUPERVISOR, ROLE_OWNER">
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4><g:message code="thesis.management.label"/></h4>
+            <h4><g:message code="thesis.list.manage.label"/></h4>
             <div class="panel-content">
                 <g:link class="tms-btn tms-info" action="create"><g:message code="thesis.create.button"/></g:link>
             </div>
         </div>
     </div>
+    </sec:ifAnyGranted>
 </body>
 </html>
