@@ -19,7 +19,9 @@
                     ${message(code: 'user.email.label').toString().toLowerCase()}
                 </dt>
                 <dd>
-                    <g:fieldValue bean="${userInstance}" field="email"/>
+                    <!-- let's make it really hard for crawlers by first reversing the text and replacing
+                         at character with html entity :) -->
+                    <bdo dir="rtl">${userInstance?.email?.reverse()?.replaceAll('\\@', '&#64;')}</bdo>
                 </dd>
                 <dt>
                     <i class="icon-user"></i>
