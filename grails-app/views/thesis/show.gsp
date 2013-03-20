@@ -15,7 +15,7 @@
         <g:message code="thesis.thesisAbstract.label"/>
     </h3>
     <div class="tms-abstract">
-        <g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/>
+        <p><g:fieldValue field="thesisAbstract" bean="${thesisInstance}"/></p>
     </div>
     </g:if>
 

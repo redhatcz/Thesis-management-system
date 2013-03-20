@@ -136,6 +136,10 @@ textarea {
     .pretty-textarea(auto);
 }
 
+input {
+    line-height: normal;
+}
+
 input[type="text"],
 input[type="password"] {
     .pretty-input();
@@ -399,8 +403,8 @@ i[class*="icon-"].large {
     border-right: 1px solid @grayLighter;
 
     a {
-        height: 35px;
-        padding-top: 15px;
+        height: 37px;
+        padding-top: 13px;
         text-align: center;
         border-bottom: none;
         color: @gray;
@@ -518,7 +522,7 @@ ul form {
         border-bottom: 2px solid lighten(@grayLighter, 5%);
 
         &:first-child {
-            padding-top: 10px;
+            padding-top: 0px;
         }
     }
 }
@@ -642,7 +646,11 @@ a.tag-selected {
 
 .tms-abstract {
     font-style: italic;
-    padding-bottom: 15px;
+}
+
+.tms-description,
+.tms-abstract {
+    padding-bottom: 4px;
 }
 
 h3#abstract,
@@ -888,7 +896,7 @@ ul.tms-list {
     .tms-elem li {
         font-size: @fontSizeSmall;
         color: @grayLight;
-        padding-top: 5px;
+        padding-top: 3px;
         margin-right: 30px;
 
         i[class*="icon-"] {

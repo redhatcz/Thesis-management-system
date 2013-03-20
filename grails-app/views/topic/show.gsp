@@ -7,10 +7,13 @@
 </head>
 <body>
     <div class="span8 content">
-        <h1 class="header"><g:fieldValue bean="${topicInstance}" field="title"/></h1>
-        <g:if test="${topicInstance?.secondaryTitle}">
-            <h2 class="header" style="color: gray"><g:fieldValue bean="${topicInstance}" field="secondaryTitle"/></h2>
-        </g:if>
+        <h1 class="header">
+            <g:fieldValue bean="${topicInstance}" field="title"/>
+            <g:if test="${topicInstance?.secondaryTitle}">
+                <br />
+                <small><g:fieldValue bean="${topicInstance}" field="secondaryTitle"/></small>
+            </g:if>
+        </h1>
 
         <h3 id="description">
             <i class="icon-pencil"></i>
