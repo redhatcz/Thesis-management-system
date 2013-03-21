@@ -19,6 +19,12 @@
         <dd><g:link controller="topic" action="show" id="${applicationInstance?.topicId}"
                     params="[headline: Util.hyphenize(applicationInstance?.topic?.title)]"><g:fieldValue bean="${applicationInstance?.topic}" field="title"/></g:link></dd>
 
+        <g:if test="${applicationInstance?.thesis}">
+            <dt><g:message code="thesis.label"/></dt>
+            <dd><g:link controller="thesis" action="show" id="${applicationInstance?.thesisId}"
+                        params="[headline: Util.hyphenize(applicationInstance?.thesis?.title)]"><g:fieldValue bean="${applicationInstance?.thesis}" field="title"/></g:link></dd>
+        </g:if>
+
         <dt><g:message code="university.label"/></dt>
         <dd><g:fieldValue bean="${applicationInstance?.university}" field="name"/></dd>
 

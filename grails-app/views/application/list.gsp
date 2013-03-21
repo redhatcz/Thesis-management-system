@@ -14,6 +14,8 @@
         <table class="table">
             <thead>
             <tr>
+                <g:sortableColumn property="id"
+                                  title="${message(code: 'id.label')}"/>
                 <g:sortableColumn property="applicant"
                                   title="${message(code: 'application.applicant.label')}"/>
                 <g:sortableColumn property="topic"
@@ -23,6 +25,9 @@
             <tbody>
             <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
                 <tr>
+                    <td>
+                        <g:link action="show" id="${applicationInstance?.id}">${fieldValue(bean: applicationInstance, field: "id")}</g:link>
+                    </td>
                     <td>
                         <g:link controller="user" action="show" id="${applicationInstance.applicantId}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
                     </td>
