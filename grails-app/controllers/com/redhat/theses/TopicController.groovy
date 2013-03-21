@@ -2,6 +2,7 @@ package com.redhat.theses
 
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class TopicController {
 
@@ -73,7 +74,9 @@ class TopicController {
 
         def categoryList = Category.findAll()
         def tagListWithUsage = tagService.findAllWithCountUsage([max: TAG_MAX])
-        def commentCounts = commentService.countByArticles(topics)
+
+        def publicCommentsOnly = !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')
+        def commentCounts = commentService.countByArticles(topics, publicCommentsOnly)
 
         [topicInstanceList: topics, topicInstanceTotal: topicCount, commentCounts: commentCounts,
                 categoryList: categoryList, currentCategory: category, currentTag: tag,
@@ -139,11 +142,19 @@ class TopicController {
 
         def supervisions = topicInstance.supervisions
 
-        def commentsTotal = Comment.countByArticle(topicInstance)
-        def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
-
-        def comments = Comment.findAllByArticle(topicInstance,
-                [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
+        def commentsTotal
+        def comments
+        if (SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')) {
+            commentsTotal = Comment.countByArticle(topicInstance)
+            def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
+            comments = Comment.findAllByArticle(topicInstance,
+                    [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
+        } else {
+            commentsTotal = Comment.countByArticleAndPrivateComment(topicInstance, false)
+            def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
+            comments = Comment.findAllByArticleAndPrivateComment(topicInstance, false,
+                    [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
+        }
 
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, topicInstance)
 

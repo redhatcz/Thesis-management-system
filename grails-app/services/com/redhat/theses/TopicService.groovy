@@ -15,7 +15,7 @@ class TopicService {
         def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it in supervisions)} : []
         def savedTopic = topic.save(flush: true)
         def success = savedTopic &&
-                supervisions.every { it.save(failOnError: true) } &&
+                supervisions.every { it.save() } &&
                 removedSupervisions.every { Commons.delete(it) }
 
         if (!success) {

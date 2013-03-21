@@ -5,7 +5,7 @@ package com.redhat.theses
  */
 class CommentService {
 
-    Map<Article, Integer> countByArticles(List<Article> articles) {
+    Map<Article, Integer> countByArticles(List<Article> articles, publicOnly = true) {
         def result = [:]
         if (articles && articles.size() != 0) {
             result = Comment.createCriteria().list {
@@ -14,6 +14,9 @@ class CommentService {
                     countDistinct 'id'
                 }
                 'in' 'article', articles
+                if (publicOnly) {
+                    eq 'privateComment', false
+                }
             }.collectEntries { [it[0], it[1]] }
         }
         result

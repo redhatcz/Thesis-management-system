@@ -10,6 +10,7 @@ class Comment {
     Date dateCreated
     User user
     Article article
+    boolean privateComment = false
 
     static constraints = {
         content widget: 'textarea', nullable: false, blank: false

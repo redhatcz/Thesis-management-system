@@ -3,12 +3,15 @@
     <img class="img-circle" src="${resource(dir: 'images', file: 'avatar-mini.png')}"/>
     <h4>${comment?.user?.fullName}</h4>
     <div class="pull-right">
+        <g:if test="${comment?.privateComment}">
+            <span class="comment-private-label"><g:message code="comment.privateComment.label"/></span>,
+        </g:if>
         <i class="icon-time"></i>
         <g:formatDate date="${comment?.dateCreated}" dateStyle="LONG" type="date" />
     </div>
 </div>
 
-<div class="comment" id="comment-${index}">
+<div class="comment ${comment?.privateComment ? 'private' : 'public'}" id="comment-${index}">
     <sec:ifLoggedIn>
         <g:if test="${SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER') ||
                 sec.loggedInUserInfo(field: 'id').toLong() == comment?.userId}">
@@ -48,6 +51,15 @@
                             class="tms-btn pull-right"
                             id="comment-${index}-submit"
                             value="${message(code: 'default.update.button')}"/>
+
+            <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR">
+                <label for="comment-${index}-private">
+                    <g:checkBox name="comment.privateComment"
+                                value="${comment?.privateComment}"
+                                id="comment-${index}-private"/>
+                    <g:message code="comment.privateComment.label"/>
+                </label>
+            </sec:ifAnyGranted>
         </g:form>
 
         </g:if>
