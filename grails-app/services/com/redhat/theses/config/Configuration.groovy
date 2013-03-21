@@ -13,12 +13,7 @@ class Configuration {
     ConfigObject config = null
 
     ConfigObject getConfig() {
-        if (config == null) {
-            config = configurationProvider.load()
-            if (!config) {
-                config = createDefaultConfig()
-            }
-        }
+        initConfig()
         config
     }
 
@@ -34,24 +29,29 @@ class Configuration {
         }
     }
 
+    def propertyMissing(String name) {
+        initConfig()
+        config.getProperty(name)
+    }
+
+    def propertyMissing(String name, value) {
+        initConfig()
+        config.setProperty(name, value)
+    }
+
+    private initConfig() {
+        if (config == null) {
+            config = configurationProvider.load()
+            if (!config) {
+                config = createDefaultConfig()
+            }
+        }
+    }
+
     private ConfigObject createDefaultConfig() {
         Class configClass = getClass().classLoader.loadClass('DefaultRuntimeConfig')
         def config = new ConfigSlurper().parse(configClass)
         configurationProvider.save(config)
         config
-    }
-
-    def propertyMissing(String name) {
-        if (config == null) {
-            config = configurationProvider.load()
-        }
-        config.getProperty(name)
-    }
-
-    def propertyMissing(String name, value) {
-        if (config == null) {
-            config = configurationProvider.load()
-        }
-        config.setProperty(name, value)
     }
 }

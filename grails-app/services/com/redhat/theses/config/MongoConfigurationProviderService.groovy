@@ -40,7 +40,7 @@ class MongoConfigurationProviderService implements ConfigurationProvider {
 
     @Override
     def save(ConfigObject config) {
-        def backup = getDB().config.findOne()
+        def backup = getDB().config.findOne(ID)
         getDB().config.remove([_id: ID])
 
         def object = [_id: ID, content: config] as BasicDBObject
