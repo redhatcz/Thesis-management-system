@@ -59,7 +59,7 @@
 
             var newTagInputWidth = taggyElemWidth - tagsWidth - tagInputOuterSpaceWidth;
             newTagInputWidth = newTagInputWidth < 30 ? taggyElemWidth : newTagInputWidth;
-            this.tagInput.width(newTagInputWidth - 4);
+            this.tagInput.width(newTagInputWidth - 5);
         }
 
         , isTagPresent: function (label) {

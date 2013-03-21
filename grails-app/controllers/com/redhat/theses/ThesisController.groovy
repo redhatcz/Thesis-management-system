@@ -2,6 +2,7 @@ package com.redhat.theses
 
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class ThesisController {
 
@@ -95,7 +96,8 @@ class ThesisController {
         }
 
         if (thesisInstance.supervisor != springSecurityService.currentUser &&
-                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser) {
+                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
@@ -120,7 +122,8 @@ class ThesisController {
         }
 
         if (thesisInstance.supervisor != springSecurityService.currentUser &&
-                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser) {
+                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
@@ -156,7 +159,8 @@ class ThesisController {
         }
 
         if (thesisInstance.supervisor != springSecurityService.currentUser &&
-                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser) {
+                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return

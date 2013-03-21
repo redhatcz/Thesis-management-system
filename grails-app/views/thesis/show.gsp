@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Topic" %>
+<%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils; com.redhat.theses.util.Util; com.redhat.theses.Topic" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -88,7 +88,9 @@
         <div class="panel-content">
             <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_SUPERVISOR">
                 <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
-                <g:if test="${thesisInstance?.supervisorId == currentUserId || thesisInstance?.topic?.ownerId == currentUserId}">
+                <g:if test="${thesisInstance?.supervisorId == currentUserId ||
+                        thesisInstance?.topic?.ownerId == currentUserId ||
+                        SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
                 <g:link class="tms-btn tms-warning" controller="thesis" action="edit" id="${thesisInstance?.id}"><g:message code="default.edit.button"/></g:link>
                 <g:form style="display: inline;">
                     <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />

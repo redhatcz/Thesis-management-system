@@ -173,9 +173,10 @@ class TopicController {
             return
         }
 
-        if (topicInstance.owner != springSecurityService.currentUser) {
+        if (topicInstance.owner != springSecurityService.currentUser &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
-            redirect(action: "list")
+            redirect(action: "show", id: topicInstance.id, params: [headline: Util.hyphenize(topicInstance.title)])
             return
         }
 
@@ -196,9 +197,10 @@ class TopicController {
             return
         }
 
-        if (topicInstance.owner != springSecurityService.currentUser) {
+        if (topicInstance.owner != springSecurityService.currentUser&&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
-            redirect(action: "list")
+            redirect(action: "show", id: topicInstance.id, params: [headline: Util.hyphenize(topicInstance.title)])
             return
         }
 
@@ -263,7 +265,8 @@ class TopicController {
             return
         }
 
-        if (topicInstance.owner != springSecurityService.currentUser) {
+        if (topicInstance.owner != springSecurityService.currentUser &&
+                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
             redirect(action: "list")
             return

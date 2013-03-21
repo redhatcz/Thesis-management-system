@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Topic" %>
+<%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils; com.redhat.theses.util.Util; com.redhat.theses.Topic" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
@@ -179,7 +179,7 @@
 
                 <sec:ifAnyGranted roles="ROLE_OWNER">
                     <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
-                    <g:if test="${topicInstance?.ownerId == currentUserId}">
+                    <g:if test="${topicInstance?.ownerId == currentUserId || SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
                     <g:form style="display: inline;">
                         <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
                         <g:actionSubmit class="tms-btn tms-danger" action="delete"
