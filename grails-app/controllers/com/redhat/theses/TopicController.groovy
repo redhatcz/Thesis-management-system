@@ -98,7 +98,7 @@ class TopicController {
         }
 
         // set default types to Bachelor and master
-        topicInstance.types = [Type.BACHELOR, Type.MASTER]
+        topicInstance.types = [Type.BACHELOR, Type.DIPLOMA]
 
         [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                 universities: University.all, types: Type.values()]

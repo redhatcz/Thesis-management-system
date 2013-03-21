@@ -34,7 +34,7 @@ class ArticleListenerService{
             subscriptionService.subscribe(it, e.article)
         }
 
-        def feed = new Feed(messageCode: "feed.${className}.insert", user: e.user, args: args).save()
+        def feed = new Feed(messageCode: "feed.${className}.created", user: e.user, args: args).save()
         subscriptionService.notifyAll(e.article, e.user, feed)
     }
 
@@ -47,7 +47,7 @@ class ArticleListenerService{
                 e.article.title
         ]
 
-        def feed = new Feed(messageCode: "feed.${className}.delete", user: e.user, args: args).save()
+        def feed = new Feed(messageCode: "feed.${className}.deleted", user: e.user, args: args).save()
         subscriptionService.notifyAll(e.extraSubscribers, e.user, feed, e.article.title)
     }
 
@@ -62,7 +62,7 @@ class ArticleListenerService{
                         params: [headline: Util.hyphenize(e.article.title)], absolute: true)
         ]
 
-        def feed = new Feed(messageCode: "feed.${className}.update", user: e.user, args: args).save()
+        def feed = new Feed(messageCode: "feed.${className}.updated", user: e.user, args: args).save()
         subscriptionService.notifyAll(e.article, e.user, feed)
     }
 }

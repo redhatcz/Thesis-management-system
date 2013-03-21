@@ -20,8 +20,8 @@ class JsonController {
 
     def listUsersByNameAndRole(String term, String role) {
         def supervisors = User.executeQuery(
-                "from User where :role in elements(roles) and fullName like :fullName",
-                [role: role, fullName: "%${term}%"],
+                "from User where :role in elements(roles) and lower(fullName) like :fullName",
+                [role: role, fullName: "%${term?.toLowerCase()}%"],
                 [max: MAX_RESULTS])
         def userMap = [:]
 

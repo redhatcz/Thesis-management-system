@@ -1,6 +1,7 @@
 package com.redhat.theses
 
 import com.redhat.theses.auth.User
+import com.redhat.theses.events.ApplicationEvent
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
@@ -64,6 +65,7 @@ class ApplicationController {
             return
         }
 
+        event("applicationCreated", new ApplicationEvent(application, user))
         flash.message = message(code: 'application.created', args: [application.id])
         redirect(action: "show", id: application?.id)
     }
@@ -71,7 +73,6 @@ class ApplicationController {
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
     def approve(Long id) {
         def applicationInstance = Application.get(id)
-        println applicationInstance
         if (!applicationInstance) {
             flash.message = message(code: 'application.not.found', args: [id])
             redirect(action: 'list')
@@ -137,8 +138,8 @@ class ApplicationController {
             return
         }
 
+        event("applicationApproved", new ApplicationEvent(applicationInstance, user))
         flash.message = message(code: 'application.approved')
-
         redirect(controller: 'thesis', action: 'show', id: thesisInstance.id)
     }
 

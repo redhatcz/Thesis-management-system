@@ -36,7 +36,7 @@ class CommentListenerService {
                         params: [headline: Util.hyphenize(article.title)], fragment: 'comments', absolute: true)
         ]
 
-        def feed = new Feed(messageCode: 'feed.comment.insert', user: user, args: args).save()
+        def feed = new Feed(messageCode: 'feed.comment.created', user: user, args: args).save()
 
         subscriptionService.notifyAll(e.comment.article, user, feed)
     }
