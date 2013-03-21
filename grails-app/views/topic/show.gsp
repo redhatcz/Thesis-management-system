@@ -148,25 +148,24 @@
                 </g:else>
             </div>
 
+            <sec:ifLoggedIn>
             <h4><g:message code="topic.manage.label"/></h4>
             <div class="panel-content">
 
-                <sec:ifLoggedIn>
-                    <g:if test="${!subscriber}">
-                    <g:form style="display: inline;" controller="subscription" action="subscribe">
-                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                        <g:submitButton class="tms-btn tms-info" name="submit-subscription"
-                                        value="${message(code: 'subscription.subscribe.button')}" />
-                    </g:form>
-                    </g:if>
-                    <g:else>
-                    <g:form style="display: inline;" controller="subscription" action="unsubscribe">
-                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                        <g:submitButton class="tms-btn tms-info" name="submit-unsubscription"
-                                        value="${message(code: 'subscription.unsubscribe.button')}"/>
-                    </g:form>
-                    </g:else>
-                </sec:ifLoggedIn>
+                <g:if test="${!subscriber}">
+                <g:form style="display: inline;" controller="subscription" action="subscribe">
+                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                    <g:submitButton class="tms-btn tms-info" name="submit-subscription"
+                                    value="${message(code: 'subscription.subscribe.button')}" />
+                </g:form>
+                </g:if>
+                <g:else>
+                <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                    <g:submitButton class="tms-btn tms-info" name="submit-unsubscription"
+                                    value="${message(code: 'subscription.unsubscribe.button')}"/>
+                </g:form>
+                </g:else>
 
                 <sec:ifAnyGranted roles="ROLE_STUDENT">
                     <g:if test="${topicInstance.enabled}">
@@ -211,6 +210,7 @@
                 </sec:ifAnyGranted>
 
             </div>
+            </sec:ifLoggedIn>
         </div>
     </div>
 </body>

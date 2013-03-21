@@ -83,6 +83,7 @@
             </dl>
         </div>
 
+        <sec:ifLoggedIn>
         <h4><g:message code="thesis.manage.label"/></h4>
         <div class="panel-content">
             <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_SUPERVISOR">
@@ -99,23 +100,21 @@
                 </g:if>
             </sec:ifAnyGranted>
 
-            <sec:ifLoggedIn>
-                <g:if test="${!subscriber}">
-                <g:form style="display: inline;" controller="subscription" action="subscribe">
-                    <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-subscription" value="Subscribe"/>
-                </g:form>
-                </g:if>
+            <g:if test="${!subscriber}">
+            <g:form style="display: inline;" controller="subscription" action="subscribe">
+                <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
+                <g:submitButton class="tms-btn tms-info" name="submit-subscription" value="Subscribe"/>
+            </g:form>
+            </g:if>
 
-                <g:else>
-                <g:form style="display: inline;" controller="subscription" action="unsubscribe">
-                    <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-unsubscription" value="Unsubscribe"/>
-                </g:form>
-                </g:else>
-            </sec:ifLoggedIn>
-
+            <g:else>
+            <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
+                <g:submitButton class="tms-btn tms-info" name="submit-unsubscription" value="Unsubscribe"/>
+            </g:form>
+            </g:else>
         </div>
+        </sec:ifLoggedIn>
     </div>
 </div>
 </body>
