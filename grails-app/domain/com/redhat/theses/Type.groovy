@@ -5,5 +5,5 @@ package com.redhat.theses
  */
 enum Type {
     BACHELOR,
-    MASTER
+    DIPLOMA
 }
