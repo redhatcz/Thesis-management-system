@@ -140,3 +140,6 @@ grails.plugins.twitterbootstrap.fixtaglib = true
 
 // use hyphenated url
 grails.web.url.converter = 'hyphenated'
+
+// remove html from markdown
+markdown.removeHtml = true
