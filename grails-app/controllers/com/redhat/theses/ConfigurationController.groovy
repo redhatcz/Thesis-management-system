@@ -2,6 +2,7 @@ package com.redhat.theses
 
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
+import org.springframework.context.i18n.LocaleContextHolder as LCH
 
 /**
  * @author vdedik@redhat.com
@@ -20,7 +21,9 @@ class ConfigurationController {
         if (Util.isActionInUrl(request, 'index')) {
             redirect uri: '/configuration', permanent: true
         }
-        [config: configuration.getConfig()]
+
+        def locale = LCH.getLocale()
+        [config: configuration.getConfig(), locale: locale]
     }
 
     def update() {
