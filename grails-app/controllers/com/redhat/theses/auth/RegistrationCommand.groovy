@@ -11,11 +11,17 @@ class RegistrationCommand {
     String password
     String repeatPassword
     String fullName
+    Boolean termsOfUse = false
 
     static constraints = {
         password blank: false, minSize: 6
         email blank: false, email: true
         fullName blank: false
+        termsOfUse validator: {val ->
+            if (val != true){
+                'disagree'
+            }
+        }
         repeatPassword validator: { val, obj ->
             if (val != obj.password) {
                 'not.match'

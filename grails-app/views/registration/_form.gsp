@@ -56,3 +56,14 @@
     </div>
 </div>
 
+<div class="control-group ${hasErrors(bean: registrationCommand, field: 'repeatPassword', 'error')} required">
+    <div class="controls">
+        <label class="checkbox" for="termsOfUse">
+            <g:checkBox name="termsOfUse"
+                        value="${registrationCommand?.termsOfUse}"/> <span class="required-indicator">*</span>
+            <g:set var="touLink" value="${link(controller: 'termsOfUse', action: 'index',
+                        message(code: 'registration.termsOfUse'), target: '_blank')}" />
+            <g:message code="registration.termsOfUse.agreement.label" args="[touLink]"/>
+        </label>
+    </div>
+</div>
