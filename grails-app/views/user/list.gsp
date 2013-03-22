@@ -47,7 +47,12 @@
         <div class="panel right">
             <h4><g:message code="user.list.manage.label"/></h4>
             <div class="panel-content">
-                <g:link class="tms-btn tms-info" action="create"><g:message code="user.create.button" /></g:link>
+                <div class="panel-buttons">
+                    <g:link class="tms-link tms-link" action="create">
+                        <i class="icon-plus"></i>
+                        <g:message code="user.create.button" />
+                    </g:link>
+                </div>
             </div>
         </div>
     </div>

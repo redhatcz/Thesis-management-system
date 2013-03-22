@@ -21,8 +21,12 @@
     <div class="panel right">
         <h4><g:message code="notification.list.manage.label"/></h4>
         <div class="panel-content">
-            <i class="icon-ok"></i>
-            <g:link action="dismiss"><g:message code="notification.dismiss.button" /></g:link>
+            <div class="panel-buttons">
+                <g:link action="dismiss" class="tms-link btn-link">
+                    <i class="icon-ok"></i>
+                    <g:message code="notification.dismiss.button" />
+                </g:link>
+            </div>
         </div>
     </div>
 </div>

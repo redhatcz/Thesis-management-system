@@ -44,18 +44,6 @@
 
 <div class="span4 sidebar">
     <div class="panel right">
-        <sec:ifAnyGranted roles="ROLE_OWNER">
-            <h4><g:message code="topic.list.manage.label"/></h4>
-            <div class="panel-content">
-                <g:if test="${currentCategory}">
-                    <g:link class="tms-btn tms-info" action="create" params="[categoryId: currentCategory?.id]"><g:message code="topic.create.button"/></g:link>
-                </g:if>
-                <g:else>
-                    <g:link class="tms-btn tms-info" action="create"><g:message code="topic.create.button"/></g:link>
-                </g:else>
-            </div>
-        </sec:ifAnyGranted>
-
         <g:if test="${currentCategory}">
             <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>
         </g:if>
@@ -70,6 +58,24 @@
         <div class="panel-content">
             <g:render template="tagList" />
         </div>
-
+        <sec:ifAnyGranted roles="ROLE_OWNER">
+            <h4><g:message code="topic.list.manage.label"/></h4>
+            <div class="panel-content">
+                <div class="panel-buttons">
+                    <g:if test="${currentCategory}">
+                        <g:link class="tms-link btn-link" action="create" params="[categoryId: currentCategory?.id]">
+                            <i class="icon-plus"></i>
+                            <g:message code="topic.create.button" />
+                        </g:link>
+                    </g:if>
+                    <g:else>
+                        <g:link class="tms-link btn-link" action="create">
+                            <i class="icon-plus"></i>
+                            <g:message code="topic.create.button"/>
+                        </g:link>
+                    </g:else>
+                </div>
+            </div>
+        </sec:ifAnyGranted>
     </div>
 </div>

@@ -151,64 +151,68 @@
             <sec:ifLoggedIn>
             <h4><g:message code="topic.manage.label"/></h4>
             <div class="panel-content">
-
-                <g:if test="${!subscriber}">
-                <g:form style="display: inline;" controller="subscription" action="subscribe">
-                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-subscription"
-                                    value="${message(code: 'subscription.subscribe.button')}" />
-                </g:form>
-                </g:if>
-                <g:else>
-                <g:form style="display: inline;" controller="subscription" action="unsubscribe">
-                    <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
-                    <g:submitButton class="tms-btn tms-info" name="submit-unsubscription"
-                                    value="${message(code: 'subscription.unsubscribe.button')}"/>
-                </g:form>
-                </g:else>
-
-                <sec:ifAnyGranted roles="ROLE_STUDENT">
-                    <g:if test="${topicInstance.enabled}">
-                        <g:link class="tms-btn tms-success"
-                                controller="application"
-                                action="create"
-                                id="${topicInstance?.id}"
-                            ><g:message code="application.apply.button" /></g:link>
+                <div class="panel-buttons">
+                    <g:if test="${!subscriber}">
+                    <g:form style="display: inline;" controller="subscription" action="subscribe">
+                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                        <button type="submit" class="tms-link btn-link">
+                            <i class="icon-rss"></i>
+                            <g:message code="subscription.subscribe.button" />
+                        </button>
+                    </g:form>
                     </g:if>
-                </sec:ifAnyGranted>
+                    <g:else>
+                    <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                        <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
+                        <button type="submit" class="tms-link btn-link">
+                            <i class="icon-rss"></i>
+                            <g:message code="subscription.unsubscribe.button" />
+                        </button>
+                    </g:form>
+                    </g:else>
 
-                <sec:ifAnyGranted roles="ROLE_OWNER">
+                    <sec:ifAnyGranted roles="ROLE_STUDENT">
+                    <g:if test="${topicInstance.enabled}">
+                        <g:link class="tms-link" controller="application"
+                                action="create" id="${topicInstance?.id}" >
+                            <i class="icon-file"></i>
+                            <g:message code="application.apply.button" />
+                        </g:link>
+                    </g:if>
+                    </sec:ifAnyGranted>
+
+                    <sec:ifAnyGranted roles="ROLE_SUPERVISOR">
+                    <g:link class="tms-link" controller="supervision"
+                            action="manage" id="${topicInstance?.id}">
+                        <i class="icon-briefcase"></i>
+                        <g:message code="supervision.edit.mine.button" />
+                    </g:link>
+                    </sec:ifAnyGranted>
+
+                    <sec:ifAnyGranted roles="ROLE_OWNER">
                     <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
                     <g:if test="${topicInstance?.ownerId == currentUserId || SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
-                    <g:form style="display: inline;">
-                        <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
-                        <g:actionSubmit class="tms-btn tms-danger" action="delete"
-                                        value="${message(code: 'default.delete.button')}"
-                                        onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
-                    </g:form>
-
-                    <g:link class="tms-btn tms-info"
-                            controller="thesis"
-                            action="create"
-                            id="${topicInstance?.id}"
-                        ><g:message code="thesis.create.button" /></g:link>
-
-                    <g:link class="tms-btn tms-warning"
-                            action="edit"
-                            id="${topicInstance?.id}"
-                        ><g:message code="default.edit.button" /></g:link>
-
+                        <g:link class="tms-link" controller="thesis"
+                                action="create" id="${topicInstance?.id}">
+                            <i class="icon-plus"></i>
+                            <g:message code="thesis.create.button" />
+                        </g:link>
+                        <g:form style="display: inline;" action="delete">
+                            <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
+                            <button type="submit" class="tms-link btn-link"
+                                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
+                                <i class="icon-trash"></i>
+                                <g:message code="default.delete.button" />
+                            </button>
+                        </g:form>
+                        <g:link class="tms-link" action="edit"
+                                id="${topicInstance?.id}">
+                            <i class="icon-wrench"></i>
+                            <g:message code="default.edit.button" />
+                        </g:link>
                     </g:if>
-                </sec:ifAnyGranted>
-
-                <sec:ifAnyGranted roles="ROLE_SUPERVISOR">
-                    <g:link class="tms-btn tms-warning"
-                            controller="supervision"
-                            action="manage"
-                            id="${topicInstance?.id}"
-                        ><g:message code="supervision.edit.mine.button" /></g:link>
-                </sec:ifAnyGranted>
-
+                    </sec:ifAnyGranted>
+                </div>
             </div>
             </sec:ifLoggedIn>
         </div>

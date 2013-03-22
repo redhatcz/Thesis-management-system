@@ -86,35 +86,48 @@
         <sec:ifLoggedIn>
         <h4><g:message code="thesis.manage.label"/></h4>
         <div class="panel-content">
-            <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_SUPERVISOR">
-                <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
-                <g:if test="${thesisInstance?.supervisorId == currentUserId ||
-                        thesisInstance?.topic?.ownerId == currentUserId ||
-                        SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
-                <g:link class="tms-btn tms-warning" controller="thesis" action="edit" id="${thesisInstance?.id}"><g:message code="default.edit.button"/></g:link>
-                <g:form style="display: inline;">
-                    <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
-                    <g:actionSubmit class="tms-btn tms-danger"
-                                    action="delete"
-                                    value="${message(code: 'default.delete.button')}"
-                                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');" />
-                </g:form>
+            <div class="panel-buttons">
+                <g:if test="${!subscriber}">
+                    <g:form controller="subscription" action="subscribe">
+                        <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
+                        <button class="tms-link btn-link" name="submit-subscription">
+                            <i class="icon-rss"></i>
+                            <g:message code="subscription.subscribe.button" />
+                        </button>
+                    </g:form>
                 </g:if>
-            </sec:ifAnyGranted>
 
-            <g:if test="${!subscriber}">
-            <g:form style="display: inline;" controller="subscription" action="subscribe">
-                <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
-                <g:submitButton class="tms-btn tms-info" name="submit-subscription" value="Subscribe"/>
-            </g:form>
-            </g:if>
+                <g:else>
+                    <g:form controller="subscription" action="unsubscribe">
+                        <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
+                        <button class="tms-link btn-link" name="submit-unsubscription">
+                            <i class="icon-rss"></i>
+                            <g:message code="subscription.unsubscribe.button" />
+                        </button>
+                    </g:form>
+                </g:else>
 
-            <g:else>
-            <g:form style="display: inline;" controller="subscription" action="unsubscribe">
-                <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>
-                <g:submitButton class="tms-btn tms-info" name="submit-unsubscription" value="Unsubscribe"/>
-            </g:form>
-            </g:else>
+                <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_SUPERVISOR">
+                    <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
+                    <g:if test="${thesisInstance?.supervisorId == currentUserId ||
+                            thesisInstance?.topic?.ownerId == currentUserId ||
+                            SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
+                        <g:link class="tms-link btn-link" controller="thesis"
+                                action="edit" id="${thesisInstance?.id}">
+                            <i class="icon-wrench"></i>
+                            <g:message code="default.edit.button"/>
+                        </g:link>
+                    <g:form action="delete">
+                        <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
+                        <button type="submit" class="tms-link btn-link"
+                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
+                            <i class="icon-trash"></i>
+                            <g:message code="default.delete.button" />
+                        </button>
+                    </g:form>
+                    </g:if>
+                </sec:ifAnyGranted>
+            </div>
         </div>
         </sec:ifLoggedIn>
     </div>

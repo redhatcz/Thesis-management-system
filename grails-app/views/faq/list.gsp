@@ -53,8 +53,12 @@
     <div class="panel right">
         <h4><g:message code="faq.list.manage.label"/></h4>
         <div class="panel-content">
-            <g:link class="tms-btn tms-info" action="create"><g:message
-                    code="faq.create.button"/></g:link>
+            <div class="panel-buttons">
+                <g:link class="tms-link btn-link" action="create">
+                    <i class="icon-plus"></i>
+                    <g:message code="faq.create.button"/>
+                </g:link>
+            </div>
         </div>
 
         <h4><g:message code="faq.locales.label"/></h4>

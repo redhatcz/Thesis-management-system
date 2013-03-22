@@ -11,7 +11,7 @@
         <small class="pull-right">
             <g:link action="show" id="${topicInstance?.id}">
                 <i class="icon-double-angle-left"></i>
-                ${message(code: 'default.back.button')}
+                <g:message code="default.back.button" />
             </g:link>
         </small>
     </h2>

@@ -528,6 +528,37 @@ ul form {
       padding-top: 0px;
     }
   }
+
+  .panel-buttons {
+    margin: 5px 5px;
+
+    .tms-link {
+      display: block;
+      text-align: left;
+      padding: 4px 8px;
+      margin: 5px 0;
+      color: @gray;
+      border: 1px solid @grayBorder;
+
+      &:hover {
+        text-decoration: none;
+        color: @red;
+        background-color: @yellowLight;
+      }
+    }
+
+    button.tms-link {
+      width: 100%;
+    }
+
+    form {
+      margin: 0px;
+    }
+
+    &:first-child {
+      padding-top: 4px;
+    }
+  }
 }
 
 .panel-content {
