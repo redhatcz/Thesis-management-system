@@ -12,11 +12,7 @@
     <g:render template="form"/>
     <div class="control-group">
         <div class="controls">
-            <g:actionSubmit class="tms-btn" action="update" value="${message(code: 'default.update.button')}" />
-            <g:link class="tms-btn tms-danger"
-                    action="show"
-                    id="${categoryInstance?.id}"
-                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">${message(code: 'default.cancel.button')}</g:link>
+            <g:actionSubmit class="tms-btn btn-large" action="update" value="${message(code: 'default.update.button')}" />
         </div>
     </div>
 </g:form>

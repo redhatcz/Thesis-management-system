@@ -14,7 +14,7 @@
         <strong><g:message code="category.description.label"/></strong>
     </label>
     <div class="controls">
-        <g:textArea name="category.description" rows="15" value="${categoryInstance?.description}"/>
+        <g:textArea name="category.description" rows="7" value="${categoryInstance?.description}"/>
     </div>
 </div>
 

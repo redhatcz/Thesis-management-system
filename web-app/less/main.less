@@ -620,15 +620,17 @@ ul form {
 
 /*---------CATEGORIES---------*/
 
-a.category-root {
-  font-weight: bold;
-}
+.nav-categories {
+  ul {
+    padding-top: 3px;
+    font-size: @baseFontSize;
+  }
 
-ul.nav-categories {
-  padding-top: 3px;
-  font-size: @baseFontSize;
+  button.btn-link {
+    border-width: 0px;
+  }
 
-  a {
+  a, button.btn-link {
     .pretty-link();
     display: block;
     padding: 6px 8px 5px;
@@ -636,6 +638,30 @@ ul.nav-categories {
     &:hover {
       background-color: @yellowLight;
     }
+
+    &.category-root {
+      font-weight: bold;
+    }
+
+    &.category,
+    &.category-root {
+      overflow: hidden;
+    }
+
+    &.category-settings {
+      float: right;
+      padding-left: 0;
+      padding-right: 0;
+      color: @gray;
+
+      &:hover {
+        color: @red;
+      }
+    }
+  }
+
+  .panel-buttons {
+    padding-top: 10px;
   }
 }
 

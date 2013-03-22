@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_ADMIN'])
 class CategoryController {
 
-    static allowedMethods = [save: "POST", update: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def create() {
         [categoryInstance: new Category(params.category)]
@@ -61,7 +61,8 @@ class CategoryController {
         redirect(controller: 'topic', action: "category", id: categoryInstance.id)
     }
 
-    def delete(Long id) {
+    def delete() {
+        Long id = params.category.long("id")
         def categoryInstance = Category.get(id)
         if (!categoryInstance) {
             flash.message = message(code: 'category.not.found', args: [id])
@@ -75,7 +76,7 @@ class CategoryController {
             redirect(controller: 'topic', action: "list")
         } catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'category.not.deleted', args: [id])
-            redirect(controller: 'topic', action: "category", id: id)
+            redirect(controller: 'topic', action: "list")
         }
     }
 }

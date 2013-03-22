@@ -153,7 +153,7 @@
             <div class="panel-content">
                 <div class="panel-buttons">
                     <g:if test="${!subscriber}">
-                    <g:form style="display: inline;" controller="subscription" action="subscribe">
+                    <g:form controller="subscription" action="subscribe">
                         <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
                         <button type="submit" class="tms-link btn-link">
                             <i class="icon-rss"></i>
@@ -162,7 +162,7 @@
                     </g:form>
                     </g:if>
                     <g:else>
-                    <g:form style="display: inline;" controller="subscription" action="unsubscribe">
+                    <g:form controller="subscription" action="unsubscribe">
                         <g:hiddenField name="articleId" value="${topicInstance?.id}"/>
                         <button type="submit" class="tms-link btn-link">
                             <i class="icon-rss"></i>
@@ -197,7 +197,7 @@
                             <i class="icon-plus"></i>
                             <g:message code="thesis.create.button" />
                         </g:link>
-                        <g:form style="display: inline;" action="delete">
+                        <g:form action="delete">
                             <g:hiddenField name="topic.id" value="${topicInstance?.id}" />
                             <button type="submit" class="tms-link btn-link"
                                     onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
