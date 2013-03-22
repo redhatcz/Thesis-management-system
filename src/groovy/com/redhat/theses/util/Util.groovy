@@ -1,9 +1,6 @@
 package com.redhat.theses.util
-
 import javax.servlet.http.HttpServletRequest
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter
 import java.text.Normalizer
-
 /**
  * @author vdedik@redhat.com
  */
@@ -78,7 +75,7 @@ class Util {
         email =~ /@${domain.replaceAll('.', '\\.')}$/
     }
 
-    static Boolean hasAnyDomain(String email, List<String> domains) {
+    static Boolean hasAnyDomain(String email, domains) {
         domains.any {hasDomain(email, it)}
     }
 
