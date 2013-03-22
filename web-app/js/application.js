@@ -19,6 +19,10 @@ if ($(".span8.content").height() < $(".span4.sidebar").height()) {
 
 addToFileList = function (tableId, infoId) {
     var inner = function (event, id, name, data) {
+        if (data.success == false) {
+            return false
+        }
+
         var table = $("#" + tableId);
         var info =  $("#" + infoId);
 
@@ -45,6 +49,10 @@ addToFileList = function (tableId, infoId) {
 }
 
 removeFromFileList = function (tableId, infoId, data) {
+    if (data.success == false) {
+        return false
+    }
+
     var table = $("#" + tableId);
     var info =  $("#" + infoId);
 
