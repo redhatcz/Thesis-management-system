@@ -817,10 +817,15 @@ a.gray-link {
   &:hover .icon-cog {
     visibility: visible;
   }
-}
 
-.private.comment {
-  border: 1px solid @red;
+  &.private {
+    border: 1px solid @errorBorder;
+    background-color: @errorBackground;
+  }
+
+  input[type="checkbox"] {
+    margin-top: 0px;
+  }
 }
 
 .comment-private-label {
