@@ -2,6 +2,7 @@ package com.redhat.theses.listeners
 
 import com.redhat.theses.Thesis
 import grails.events.Listener
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils as SSU
 import org.springframework.context.i18n.LocaleContextHolder as LCH
 
 class UploadListenerService {
@@ -37,10 +38,19 @@ class UploadListenerService {
             return response
         }
 
+        // if user is not asignee
         if (thesis.assigneeId != user.id) {
-            response.message = messageSource.getMessage('security.denied.message', [].toArray(),
-                    LCH.locale)
-            return response
+            // check if he is topic owner, thesis supervisor or admin
+            def isAdmin = SSU.ifAllGranted('ROLE_ADMIN')
+            def isSupervisor = thesis.supervisorId == user.id
+            def isOwner = thesis.topic.ownerId == user.id
+
+            // if he isn't then return response
+            if (!isAdmin && !isSupervisor && !isOwner) {
+                response.message = messageSource.getMessage('security.denied.message', [].toArray(),
+                        LCH.locale)
+                return response
+            }
         }
 
         def saved = gridFileService.save(file: event.file, object: thesis)
@@ -66,16 +76,27 @@ class UploadListenerService {
         def thesis = Thesis.get(thesisId)
         def user = springSecurityService.currentUser
 
+
         if (!thesis) {
             response.message = messageSource.getMessage('thesis.not.found', [thesisId].toArray(), LCH.locale)
             return response
         }
 
+        // if user is not asignee
         if (thesis.assigneeId != user.id) {
-            response.message = messageSource.getMessage('security.denied.message', [].toArray(),
-                    LCH.locale)
-            return response
+            // check if he is topic owner, thesis supervisor or admin
+            def isAdmin = SSU.ifAllGranted('ROLE_ADMIN')
+            def isSupervisor = thesis.supervisorId == user.id
+            def isOwner = thesis.topic.ownerId == user.id
+
+            // if he isn't then return response
+            if (!isAdmin && !isSupervisor && !isOwner) {
+                response.message = messageSource.getMessage('security.denied.message', [].toArray(),
+                        LCH.locale)
+                return response
+            }
         }
+
 
         def before = gridFileService.getFileByMongoId(event.id, Thesis.bucketMapping)
 
