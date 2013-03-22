@@ -13,9 +13,9 @@
                 <g:link class="category-settings" controller="category" action="edit"
                         id="${category?.id}"><i class="icon-wrench"></i></g:link>
             </sec:ifAnyGranted>
-            <g:link class="${category == currentCategory ? 'category-root' : 'category'}" action="list"
-                    params="${[categoryId: category.id] + (params.tagTitle ? [tagTitle: params.tagTitle] : [])}"
-                >${fieldValue(bean: category, field: "title")}</g:link>
+            <richg:link class="${category == currentCategory ? 'category-root' : 'category'}" action="list"
+                        params="${['filter.categories.id': category.id]}" removeParams="['max', 'offset']"
+            >${fieldValue(bean: category, field: "title")}</richg:link>
         </li>
         </g:each>
     </ul>

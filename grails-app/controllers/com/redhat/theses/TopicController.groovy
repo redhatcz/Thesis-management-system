@@ -28,49 +28,30 @@ class TopicController {
      */
     def tagService
 
+    /**
+     * Dependency injection of com.redhat.theses.FilterService
+     */
+    def filterService
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     static defaultAction = "list"
 
-    def list(Long categoryId, String tagTitle) {
+    def list() {
         params.max = Util.max(params.max)
 
         def category = null
-        if (categoryId) {
-            category = Category.get(categoryId)
-
-            if (!category) {
-                flash.message = message(code: 'category.not.found', args: [categoryId])
-                redirect(action: "list")
-                return
-            }
+        if (params.filter?.categories?.id) {
+            category = Category.get(params.filter?.categories?.long('id'))
         }
+
         def tag = null
-        if (tagTitle) {
-            tag = Tag.get(new Tag(title: tagTitle))
-
-            if (!tag) {
-                flash.message = message(code: 'tag.not.found', args: [tagTitle])
-                redirect(action: "list")
-                return
-            }
+        if (params.filter?.tags?.title) {
+            tag = Tag.get(new Tag(title: params.filter?.tags?.title))
         }
 
-        def topics
-        def topicCount
-        if (category && tag) {
-            topics = Topic.findAllByCategoryAndTag(category, tag, params)
-            topicCount = Topic.countByCategoryAndTag(category, tag)
-        } else if (category && !tag) {
-            topics = Topic.findAllByCategory(category, params)
-            topicCount = Topic.countByCategory(category)
-        } else if (tag && !category) {
-            topics = Topic.findAllByTag(tag, params)
-            topicCount = Topic.countByTag(tag)
-        } else {
-            topics = Topic.list(params)
-            topicCount = Topic.count()
-        }
+        def topics = filterService.filter(params, Topic)
+        def topicCount = filterService.count(params, Topic)
 
         def categoryList = Category.findAll()
         def tagListWithUsage = tagService.findAllWithCountUsage([max: TAG_MAX])

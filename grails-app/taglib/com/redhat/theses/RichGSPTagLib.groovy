@@ -1,5 +1,7 @@
 package com.redhat.theses
 
+import com.redhat.theses.util.Util
+
 class RichGSPTagLib {
     static namespace = "richg"
 
@@ -118,5 +120,16 @@ class RichGSPTagLib {
 
         def modelOuter = [id: attrs.id, body: result]
         out << render(template: '/taglib/richg/multiCheckBoxOuter', model: modelOuter);
+    }
+
+    def link = { attrs, body ->
+        def attrsParams = attrs?.params
+        // remove all 'remove params' and 'params' because multiple params are not currently supported
+        def removeParams = attrs.removeParams ?: []
+        removeParams = removeParams + attrsParams.keySet()
+
+        attrs?.params = Util.formatParams(request, attrsParams, removeParams)
+
+        out << g.link(attrs, {body()})
     }
 }

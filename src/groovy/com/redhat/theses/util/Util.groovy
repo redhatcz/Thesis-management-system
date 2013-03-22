@@ -1,4 +1,6 @@
 package com.redhat.theses.util
+
+import org.codehaus.groovy.grails.web.util.WebUtils
 import javax.servlet.http.HttpServletRequest
 import java.text.Normalizer
 /**
@@ -92,6 +94,21 @@ class Util {
         link = link.toLowerCase()
 
         return link
+    }
+
+    static Map formatParams(request, Map params = [:], List removeParams = []) {
+        // remove all 'remove params' and 'params' because multiple params are not currently supported
+        def allRemoveParams = removeParams + params.keySet()
+
+        def result = WebUtils.fromQueryString(request.queryString ?: '')
+        allRemoveParams.each {
+            result.remove(it)
+        }
+
+        params.each {key, val ->
+            result[key] = val
+        }
+        return result
     }
 
     private static List getControllerAndAction(HttpServletRequest request) {
