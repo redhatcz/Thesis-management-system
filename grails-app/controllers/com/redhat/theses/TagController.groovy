@@ -1,0 +1,27 @@
+package com.redhat.theses
+
+/**
+ * @author vdedik@redhat.com
+ */
+class TagController {
+
+    static defaultAction = "list"
+
+    /**
+     * Dependency injection of com.redhat.theses.TagService
+     */
+    def tagService
+
+    def list() {
+        params.max = 30
+        def args = [max: params.max]
+        if (params.offset) {
+            args << [offset: params.offset]
+        }
+        def tagsWithUsage = tagService.findAllWithCountUsage(args)
+        def tags = tagsWithUsage.collect {it.key}
+        def tagCount = Tag.count()
+
+        [tags: tags, tagsWithUsage: tagsWithUsage, tagCount: tagCount]
+    }
+}
