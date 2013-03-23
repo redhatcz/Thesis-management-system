@@ -138,6 +138,11 @@ input {
   line-height: normal;
 }
 
+input[type="checkbox"] {
+  float: left;
+  margin-right: 5px;
+}
+
 input[type="text"],
 input[type="password"] {
   .pretty-input();
@@ -849,10 +854,6 @@ a.gray-link {
     border: 1px solid @errorBorder;
     background-color: @errorBackground;
   }
-
-  input[type="checkbox"] {
-    margin-top: 0px;
-  }
 }
 
 .comment-private-label {
@@ -1077,6 +1078,16 @@ div#file-uploader {
   margin-top: 20px;
   padding: 15px 20px;
   border: 1px dotted @grayTitles;
+}
+
+/*--------FILTERS--------*/
+
+.filter {
+  padding-top: 10px;
+
+  select {
+    width: 100%
+  }
 }
 
 /*---------FAQ---------*/

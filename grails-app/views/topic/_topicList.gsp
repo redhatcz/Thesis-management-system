@@ -45,43 +45,6 @@
 
 <div class="span4 sidebar">
     <div class="panel right">
-        <g:if test="${currentCategory}">
-            <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>
-        </g:if>
-        <g:else>
-            <h4><g:message code="topic.categories.label"/></h4>
-        </g:else>
-        <div class="panel-content">
-            <g:render template="categoryList" />
-        </div>
-
-        <h4><g:message code="filters.label"/></h4>
-        <div class="panel-content">
-            <g:form method="get" class="filter">
-                <g:hiddenField name="filtering" value="true"/>
-                <g:hiddenField name="filter.categories.id" value="${params?.filter?.categories?.id}"/>
-                <g:hiddenField name="filter.tags.id" value="${params?.filter?.tags?.id}"/>
-                <g:textField name="filter.title" value="${params?.filter?.title}" placeholder="${message(code: 'topic.title.label')}"/>
-                <g:textField name="filter.owner.fullName" value="${params?.filter?.owner?.fullName}" placeholder="${message(code: 'topic.owner.label')}"/>
-                <g:select name="filter.universities.id" style="width: 100%"
-                          from="${universities}"
-                          noSelection="['':'-- select university --']"
-                          optionKey="id"
-                          value="${params?.filter?.universities?.id}"
-                          class="many-to-one"/>
-                <label>
-                    <g:checkBox name="filter.enabled" value="${params?.filter?.enabled}"/>
-                    <g:message code="topic.enabled.label"/>
-                </label>
-
-                <g:submitButton name="filter-button" value="${message(code: 'filter.button')}"/>
-            </g:form>
-        </div>
-
-        <h4><g:message code="topic.tags.label"/></h4>
-        <div class="panel-content">
-            <g:render template="tagList" />
-        </div>
         <sec:ifAnyGranted roles="ROLE_OWNER">
             <h4><g:message code="topic.list.manage.label"/></h4>
             <div class="panel-content">
@@ -101,5 +64,41 @@
                 </div>
             </div>
         </sec:ifAnyGranted>
+        <g:if test="${currentCategory}">
+            <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>
+        </g:if>
+        <g:else>
+            <h4><g:message code="topic.categories.label"/></h4>
+        </g:else>
+        <div class="panel-content">
+            <g:render template="categoryList" />
+        </div>
+
+        <h4><g:message code="filters.label"/></h4>
+        <div class="panel-content">
+            <g:form method="get" class="filter">
+                <g:hiddenField name="filtering" value="true"/>
+                <g:hiddenField name="filter.categories.id" value="${params?.filter?.categories?.id}"/>
+                <g:hiddenField name="filter.tags.id" value="${params?.filter?.tags?.id}"/>
+                <g:textField value="${params?.filter?.title}" class="wide"
+                             name="filter.title" placeholder="${message(code: 'topic.title.label')}"/>
+                <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
+                             name="filter.owner.fullName" placeholder="${message(code: 'topic.owner.label')}"/>
+                <g:select name="filter.universities.id" from="${universities}"
+                          noSelection="['':'-- select university --']"
+                          optionKey="id" value="${params?.filter?.universities?.id}"
+                          class="many-to-one"/>
+                <g:submitButton class="tms-btn pull-right" name="filter-button"
+                                value="${message(code: 'filter.button')}"/>
+                <label>
+                    <g:checkBox name="filter.enabled" value="${params?.filter?.enabled}"/> <g:message code="topic.enabled.label"/>
+                </label>
+            </g:form>
+        </div>
+
+        <h4><g:message code="topic.tags.label"/></h4>
+        <div class="panel-content">
+            <g:render template="tagList" />
+        </div>
     </div>
 </div>
