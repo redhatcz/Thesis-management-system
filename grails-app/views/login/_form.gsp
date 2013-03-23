@@ -5,7 +5,7 @@
     <div class="controls">
         <input class="input-block-level wide"
                type='text' name='j_username'
-               id='username' placeholder="${message(code: 'security.login.email.label')}" />
+               id='email' placeholder="${message(code: 'security.login.email.label')}" />
     </div>
 </div>
 

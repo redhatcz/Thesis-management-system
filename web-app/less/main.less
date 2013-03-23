@@ -224,6 +224,13 @@ h4.header {
   margin-bottom: 50px;
   background-color: white;
   .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
+
+  & > h1:first-child,
+  & > h2:first-child,
+  & > h3:first-child {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
 }
 
 .span9.content {
@@ -903,11 +910,6 @@ a.gray-link {
   border-top: 1px solid @tableBorder;
   padding: @marginSmall 7px;
 
-  &:first-child {
-    border-top: none;
-    padding-top: 5px;
-  }
-
   h3 {
     margin: 0;
   }
@@ -938,6 +940,15 @@ a.gray-link {
       padding-left: 0px;
       color: @grayLight;
       font-size: @fontSizeSmall;
+    }
+  }
+
+  &:first-child {
+    border-top: none;
+    padding-top: 5px;
+
+    h4 {
+      margin-top: 3px;
     }
   }
 }
@@ -1006,7 +1017,7 @@ ul.tms-list {
     padding: 30px;
   }
 
-  input#username,
+  input#email,
   input#password {
     .pretty-input();
     height: 40px;
@@ -1027,8 +1038,16 @@ ul.tms-list {
     padding: 15px 0;
   }
 
+  .bottom-lost {
+    padding: 5px 0 15px;
+  }
+
   .control-group {
     margin-bottom: 10px;
+  }
+
+  .recovery {
+    padding-right: 14px;
   }
 }
 
