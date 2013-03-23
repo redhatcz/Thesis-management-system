@@ -198,7 +198,11 @@ class FilterService {
                     // Ignore this.  val is not a valid enum value (probably an empty string).
                 }
             } else if ("boolean".equals(clsName)) {
-                val = val.toBoolean()
+                if (val.toBoolean() || val == 'on') {
+                    val = true
+                } else {
+                    val = false
+                }
             } else if ( "int".equals(clsName) || "integer".equals(clsName) ) {
                 val = val.isInteger() ? val.toInteger() : null
             } else if ("long".equals(clsName)) {

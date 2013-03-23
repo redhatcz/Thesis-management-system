@@ -66,3 +66,13 @@ removeFromFileList = function (tableId, infoId, data) {
         info.show()
     }
 }
+
+// disable all empty fields on submit for filter
+$(document).ready(function() {
+    $('form.filter').submit(function() {
+        $(this).find(':input[value=""]').attr('disabled', true);
+        $(this).find(':input[type="submit"]').attr('disabled', true);
+
+        return true;
+    });
+});

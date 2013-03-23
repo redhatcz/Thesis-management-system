@@ -40,6 +40,13 @@ class TopicController {
     def list() {
         params.max = Util.max(params.max)
 
+        if (!params.filter) {
+            params.filter = [:]
+        }
+        if (!params?.filtering) {
+            params.filter << [enabled: 'true']
+        }
+
         def category = null
         if (params.filter?.categories?.id) {
             category = Category.get(params.filter?.categories?.long('id'))
@@ -61,7 +68,7 @@ class TopicController {
 
         [topicInstanceList: topics, topicInstanceTotal: topicCount, commentCounts: commentCounts,
                 categoryList: categoryList, currentCategory: category, currentTag: tag,
-                tagListWithUsage: tagListWithUsage]
+                tagListWithUsage: tagListWithUsage, universities: University.all]
     }
 
     @Secured(['ROLE_OWNER'])
