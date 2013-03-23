@@ -36,22 +36,13 @@
                 confirm-message="${message(code: 'default.delete.confirm.message')}">
             <g:hiddenField name="comment.id" value="${comment?.id}" id="commet-${index}-id-del"/>
         </g:form>
-        <g:form controller="comment"
-                action="update"
-                style="display: none; padding: 5px;"
-                class="edit-comment-form">
-            <g:hiddenField name="comment.id"
-                           value="${comment?.id}"
-                           id="comment-${index}-id"/>
-            <g:textArea name="comment.content"
-                        rows="5"
-                        value="${comment?.content}"
-                        id="comment-${index}-content" />
-            <g:submitButton name="update-comment"
-                            class="tms-btn pull-right"
-                            id="comment-${index}-submit"
-                            value="${message(code: 'default.update.button')}"/>
-
+        <g:form controller="comment" action="update" class="edit-comment-form" style="display: none;">
+            <g:hiddenField name="comment.id" value="${comment?.id}" id="comment-${index}-id"/>
+            <g:textArea name="comment.content" rows="5" value="${comment?.content}" id="comment-${index}-content" />
+            <button type="submit" name="update-comment" class="tms-btn pull-right" id="comment-${index}-submit">
+                <i class="icon-refresh"></i>
+                <g:message code="default.update.button"/>
+            </button>
             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR">
                 <label for="comment-${index}-private">
                     <g:checkBox name="comment.privateComment"

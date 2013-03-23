@@ -28,7 +28,7 @@
                     ${f.contentType.encodeAsHTML()}
                 </td>
                 <td>
-                    <g:formatDate date="${f.uploadDate}" dateStyle="LONG" type="datetime"/>
+                    <g:formatDate date="${f.uploadDate}" dateStyle="LONG" type="date"/>
                 </td>
                 <g:if test="${isAuthorized}">
                 <td>

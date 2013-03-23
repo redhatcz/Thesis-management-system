@@ -2,9 +2,9 @@
 
 <g:if test="${!autoUpload}">
 <div class="qq-trigger-btn">
-    <span id="triggerUpload" class="tms-btn">
+    <span id="triggerUpload" class="tms-btn pull-right">
         <i class="icon-upload"></i>
-        ${message(code: 'uploader.text.startUploadButton', default: 'Start Upload')}
+        <g:message code="uploader.text.startUploadButton"/>
     </span>
 </div>
 </g:if>
