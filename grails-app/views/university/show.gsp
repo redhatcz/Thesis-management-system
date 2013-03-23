@@ -60,6 +60,12 @@
                     </li>
                 </g:each>
                 </ul>
+                <div class="more">
+                    <i class="icon-reorder"></i>
+                    <g:link controller="topic" action="list" params="['filter.universities.id': universityInstance?.id]">
+                        <g:message code="more.button"/>
+                    </g:link>
+                </div>
             </g:if>
             <g:else>
                 <p class="center muted"><g:message code="university.no.topics.found" /></p>
