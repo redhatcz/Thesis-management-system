@@ -722,7 +722,8 @@ ul.tags-panel {
 
 h3#abstract,
 h3#description,
-h3#comments {
+h3#comments,
+h3#file-upload {
   font-size: 24px;
   color: @grayLight;
   line-height: 25px;
@@ -1069,15 +1070,25 @@ ul.tms-list {
 
 /*-----FILE-UPLOADER-----*/
 
-.qq-upload-button {
-  display: inline-block;
-  width: auto;
-}
+.file-uploader {
+  padding: 15px 0 25px;
+  border-bottom: 1px solid @grayBorder;
 
-div#file-uploader {
-  margin-top: 20px;
-  padding: 15px 20px;
-  border: 1px dotted @grayTitles;
+  a {
+    i[class*="icon-"] {
+      font-size: 18px;
+      color: @gray;
+    }
+
+    &:hover i[class*="icon-"] {
+      text-decoration: none;
+      color: @red;
+    }
+  }
+
+  .well {
+    margin-bottom: 10px;
+  }
 }
 
 /*--------FILTERS--------*/

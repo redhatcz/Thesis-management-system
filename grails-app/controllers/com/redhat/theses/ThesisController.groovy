@@ -18,6 +18,8 @@ class ThesisController {
      */
     def springSecurityService
 
+    def gridFileService
+
     static defaultAction = "list"
 
     def list(Integer max) {
@@ -44,8 +46,15 @@ class ThesisController {
                 [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
 
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, thesisInstance)
+        def files = gridFileService.getAllFiles(thesisInstance).sort {it.uploadDate}
 
-        [thesisInstance: thesisInstance, comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
+        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
+                springSecurityService.currentUser == thesisInstance.assignee ||
+                springSecurityService.currentUser == thesisInstance.supervisor ||
+                springSecurityService.currentUser == thesisInstance.topic.owner
+
+        [thesisInstance: thesisInstance, comments: comments, isAuthorized: isAuthorized,
+         commentsTotal: commentsTotal, subscriber: subscriber, files: files]
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])

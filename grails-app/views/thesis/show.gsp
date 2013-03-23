@@ -30,6 +30,8 @@
     </div>
     <div class="tms-separator"></div>
 
+    <g:render template="fileUpload" />
+
     <richg:comments comments="${comments}" article="${thesisInstance}" commentsTotal="${commentsTotal}"/>
 </div>
 <div class="span4 sidebar">

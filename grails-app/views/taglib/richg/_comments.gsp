@@ -11,7 +11,7 @@
     </g:if>
 
     <g:else>
-    <p>${message(code: 'comment.no.comments')}</p>
+    <p class="well">${message(code: 'comment.no.comments')}</p>
     </g:else>
 </div>
 
