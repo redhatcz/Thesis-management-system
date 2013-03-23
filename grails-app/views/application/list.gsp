@@ -14,26 +14,29 @@
         <table class="table">
             <thead>
             <tr>
-                <g:sortableColumn property="id"
-                                  title="${message(code: 'id.label')}"/>
-                <g:sortableColumn property="applicant"
-                                  title="${message(code: 'application.applicant.label')}"/>
                 <g:sortableColumn property="topic"
                                   title="${message(code: 'topic.label')}"/>
+                <g:sortableColumn property="applicant"
+                                  title="${message(code: 'application.applicant.label')}"/>
+                <th><g:message code="application.approved.label"/></th>
+                <th><g:message code="action.label"/></th>
             </tr>
             </thead>
             <tbody>
-            <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
+            <g:each in="${applicationInstanceList}" status="i" var="application">
                 <tr>
                     <td>
-                        <g:link action="show" id="${applicationInstance?.id}">${fieldValue(bean: applicationInstance, field: "id")}</g:link>
+                        <g:link controller="topic" action="show" id="${application.topicId}"
+                                params="[headline: Util.hyphenize(application?.topic?.title)]">${fieldValue(bean: application.topic, field: "title")}</g:link>
                     </td>
                     <td>
-                        <g:link controller="user" action="show" id="${applicationInstance.applicantId}">${fieldValue(bean: applicationInstance.applicant, field: "fullName")}</g:link>
+                        <g:link controller="user" action="show" id="${application.applicantId}">${fieldValue(bean: application.applicant, field: "fullName")}</g:link>
                     </td>
                     <td>
-                        <g:link controller="topic" action="show" id="${applicationInstance.topicId}"
-                                params="[headline: Util.hyphenize(applicationInstance?.topic?.title)]">${fieldValue(bean: applicationInstance.topic, field: "title")}</g:link>
+                        <g:formatBoolean boolean="${application?.approved}"/>
+                    </td>
+                    <td>
+                        <g:link controller="application" action="show" id="${application?.id}"><g:message code="action.show.label" /></g:link>
                     </td>
                 </tr>
             </g:each>

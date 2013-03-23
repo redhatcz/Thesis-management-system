@@ -80,11 +80,18 @@
 <div class="span8 content">
     <ul class="nav nav-tabs">
         <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}">
-            <g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i>Theses</g:link>
+            <g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i><g:message code="user.theses.label"/></g:link>
         </li>
         <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}">
-            <g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i>Activity</g:link>
+            <g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i><g:message code="user.activity.label"/></g:link>
         </li>
+        <sec:ifLoggedIn>
+        <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
+            <li class="${pageProperty(name: 'page.active-button') == 'applications' ? 'active' : ''}">
+                <g:link action="applications" id="${userInstance?.id}"><g:message code="user.applications.label"/></g:link>
+            </li>
+        </g:if>
+        </sec:ifLoggedIn>
         <div class="controls pull-right">
             <sec:ifAnyGranted roles="ROLE_ADMIN">
             <g:link class="tms-btn" controller="user"

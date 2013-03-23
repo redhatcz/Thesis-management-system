@@ -1,5 +1,6 @@
 package com.redhat.theses.auth
 
+import com.redhat.theses.Application
 import com.redhat.theses.Feed
 import com.redhat.theses.Thesis
 import com.redhat.theses.Topic
@@ -78,6 +79,23 @@ class UserController {
         def feedListTotal = Feed.countByUser(userInstance)
 
         [userInstance: userInstance, feedList: feedList, feedListTotal: feedListTotal]
+    }
+
+    def applications(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'user.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        params.sort = 'dateCreated'
+        params.order= 'desc'
+        params.max = Util.DEFAULT_MAX
+        def applicationList = Application.findAllByApplicant(userInstance, params)
+        def applicationCount = Application.countByApplicant(userInstance)
+
+        [userInstance: userInstance, applicationList: applicationList, applicationCount: applicationCount]
     }
 
     def supervisions(Long id, Integer max) {
