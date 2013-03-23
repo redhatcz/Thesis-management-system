@@ -91,13 +91,4 @@ class ProfileController {
                 message: message(code: 'profile.email.confirmed.message')
         ]
     }
-
-    def emailConfirmationExpired() {
-        render view: '/emailConfirmation/lifecycle', model: [
-                redirect: false,
-                title: message(code: 'profile.email.confirmation.expired.title'),
-                header: message(code: 'profile.email.confirmation.expired.header'),
-                message: message(code: 'profile.email.confirmation.expired.message')
-        ]
-    }
 }

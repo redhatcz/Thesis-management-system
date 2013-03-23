@@ -37,10 +37,10 @@ class SubscriptionService {
                 subject subj
                 html body
             }
+            log.debug "Mail to ${subscriber.email} sent"
         } catch (Exception ex) {
             log.error ex.getMessage()
         }
-        log.debug "Mail to ${subscriber.email} sent"
     }
 
     def notifyAll(Article article, User currentUser, Feed feed) {

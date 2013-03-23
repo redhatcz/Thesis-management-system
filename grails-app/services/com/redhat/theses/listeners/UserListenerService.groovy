@@ -2,8 +2,10 @@ package com.redhat.theses.listeners
 
 import com.redhat.theses.auth.User
 import com.redhat.theses.events.EmailChangedEvent
+import com.redhat.theses.events.LostPasswordEvent
 import com.redhat.theses.events.UserCreatedEvent
 import grails.events.Listener
+import org.apache.commons.lang.RandomStringUtils
 import org.springframework.context.i18n.LocaleContextHolder as LCH
 
 /**
@@ -33,8 +35,8 @@ class UserListenerService {
         emailConfirmationService.sendConfirmation(
             to: e.user.email,
             subject: subject,
-            view: '/emailConfirmation/registrationConfirm',
-            model: [fullName: e.user.fullName, password: e.password],
+            view: '/emailConfirmation/message',
+            model: [code: 'mail.registration.confirmation', args: [e.user.fullName, e.password]],
             id: e.user.id,
             event: "userCreated"
         )
@@ -60,10 +62,10 @@ class UserListenerService {
         User.get(info.id).delete()
     }
 
-    @Listener(topic ='userCreated.invalid', namespace = 'plugin.emailConfirmation')
-    def userConfirmationWasInvalid(info) {
+    @Listener(topic ='invalid', namespace = 'plugin.emailConfirmation')
+    def emailConfirmationInvalid(info) {
         log.debug "User ${info.email} failed to confirm for application id data ${info.id}"
-        return [controller:'registration', action:'expired']
+        return [controller:'emailConfirmation', action:'expired']
     }
 
     @Listener(topic = 'emailChanged')
@@ -76,18 +78,17 @@ class UserListenerService {
         emailConfirmationService.sendConfirmation(
                 to: e.email,
                 subject: subject,
-                view: '/emailConfirmation/emailConfirm',
-                model: [email: e.email],
+                view: '/emailConfirmation/message',
+                model: [code: 'mail.email.confirmation', args: [e.email]],
                 id: e.user.id,
                 event: "emailChanged"
         )
 
-        log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} send."
+        log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} sent."
     }
 
     @Listener(topic ='emailChanged.confirmed', namespace ='plugin.emailConfirmation')
     def userConfirmedEmail(info) {
-        // set the user enabled
         def user = User.get(info.id)
         user.email = info.email
         user.save(flush: true)
@@ -96,9 +97,45 @@ class UserListenerService {
         return [controller:'profile', action:'emailConfirmed']
     }
 
-    @Listener(topic ='emailChanged.invalid', namespace = 'plugin.emailConfirmation')
-    def userConfirmationOfEmailWasInvalid(info) {
-        log.debug "User ${info.email} failed to confirm email for application id data ${info.id}"
-        return [controller:'profile', action:'emailConfirmationExpired']
+    @Listener(topic = 'lostPassword')
+    def lostPassword(LostPasswordEvent e) {
+        log.debug "User with email ${e.user.email} lost password."
+
+        def subject = messageSource.getMessage('mail.lost.password.subject', [].toArray(), LCH.locale)
+
+        emailConfirmationService.sendConfirmation(
+                to: e.user.email,
+                subject: subject,
+                view: '/emailConfirmation/message',
+                model: [code: 'mail.lost.password.verify'],
+                id: e.user.id,
+                event: "lostPassword"
+        )
+
+        log.debug "Verification email for user ${e.user.email} with id ${e.user.id} sent."
+    }
+
+    @Listener(topic ='lostPassword.confirmed', namespace ='plugin.emailConfirmation')
+    def lostPasswordVerificationValid(info) {
+        def user = User.get(info.id)
+        def password = RandomStringUtils.random(8, true, true)
+        user.password = password
+        user.save(flush: true)
+
+        def subj = messageSource.getMessage('mail.new.password.set.subject', [].toArray(), LCH.locale)
+        try {
+            sendMail {
+                to user.email
+                subject subj
+                text view: '/emailConfirmation/message',
+                     model: [code: 'mail.new.password.set', args: [user.email, password]]
+            }
+
+            log.debug "User ${info.email} successfully verified email with application id data ${info.id}"
+        } catch (Exception ex) {
+            log.error ex.getMessage()
+        }
+
+        return [controller:'login', action:'lostPasswordVerified']
     }
 }

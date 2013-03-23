@@ -1,5 +1,6 @@
 package com.redhat.theses.auth
 
+import com.redhat.theses.events.LostPasswordEvent
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletResponse
@@ -15,6 +16,8 @@ import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 class LoginController {
+
+    static allowedMethods = [lostPasswordConfirm: 'POST']
 
 	/**
 	 * Dependency injection of org.springframework.security.authentication.AuthenticationTrustResolver
@@ -120,6 +123,44 @@ class LoginController {
 			redirect action: 'auth', params: params
 		}
 	}
+
+    def lostPassword() {
+        [emailCommand: new EmailCommand()]
+    }
+
+    def lostPasswordConfirm() {
+        def emailCommand = new EmailCommand()
+        bindData(emailCommand, params.emailCommand)
+        emailCommand.validate()
+
+        if (emailCommand.hasErrors()) {
+            render view: 'lostPassword', model: [emailCommand: emailCommand]
+            return
+        }
+
+        def user = User.findByEmail(emailCommand.email)
+
+        event("lostPassword", new LostPasswordEvent(user))
+        redirect(action: 'lostPasswordVerify')
+    }
+
+    def lostPasswordVerify() {
+        render view: '/emailConfirmation/lifecycle', model: [
+                redirect: false,
+                title: message(code: 'security.lost.password.verify.title'),
+                header: message(code: 'security.lost.password.verify.header'),
+                message: message(code: 'security.lost.password.verify.message')
+        ]
+    }
+
+    def lostPasswordVerified() {
+        render view: '/emailConfirmation/lifecycle', model: [
+                redirect: false,
+                title: message(code: 'security.lost.password.verified.title'),
+                header: message(code: 'security.lost.password.verified.header'),
+                message: message(code: 'security.lost.password.verified.message')
+        ]
+    }
 
 	/**
 	 * The Ajax success redirect url.

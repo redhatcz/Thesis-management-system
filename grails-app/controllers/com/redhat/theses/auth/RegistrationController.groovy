@@ -62,13 +62,4 @@ class RegistrationController {
                 message: message(code: 'registration.confirmed.message')
         ]
     }
-
-    def expired() {
-        render view: '/emailConfirmation/lifecycle', model: [
-                redirect: false,
-                title: message(code: 'registration.expired.title'),
-                header: message(code: 'registration.expired.header'),
-                message: message(code: 'registration.expired.message')
-        ]
-    }
 }

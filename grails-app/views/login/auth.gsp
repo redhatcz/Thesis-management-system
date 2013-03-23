@@ -1,7 +1,7 @@
 <html>
 <head>
 	<meta name='layout' content='loginLayout'/>
-	<title><g:message code="springSecurity.login.title"/></title>
+	<title><g:message code="security.login.title"/></title>
 </head>
 <body>
     <div class="login-logo">
@@ -13,7 +13,7 @@
             <g:render template="form" />
             <p class="bottom">
                 <g:link class="link pull-left" uri="/">&larr; <g:message code="default.back.button"/></g:link>
-                <a class="link pull-right" href="#"><g:message code="security.lost.password.button"/></a>
+                <g:link class="link pull-right" action="lostPassword"><g:message code="security.lost.password.button"/></g:link>
             </p>
         </form>
     </div>
