@@ -99,7 +99,7 @@ class BootStrap {
 
         // TOPICS
         def tms = new Topic(
-                title: 'Theses management system',
+                title: 'Thesis management system',
                 owner: jiriPechanec,
                 tags: [grailsTag],
                 categories: [redhatCategory, jbossCategory],
@@ -107,7 +107,7 @@ class BootStrap {
                 universities: [muni, vut],
                 lead: '''Application for managing theses for Red Hat''',
                 description:
-'''The goal of this project is to create a theses management system for company Red Hat. This system will be implemented
+'''The goal of this project is to create a Thesis management system for company Red Hat. This system will be implemented
 using the most *state-of-the-art* technologies and will be deployed on OpenShift.
 ###Requirements
 
@@ -484,7 +484,7 @@ Mohli jste si jej opatřit samostatně, nebo jako Box Set všech 12 remasterovan
 
         // THESES
         def kubaThesis = new Thesis(
-                title: "Implementation of Theses management system",
+                title: "Implementation of Thesis management system",
                 description: '''Create Topic, file upload for theses so that students can upload their work after
 they are done with their thesis and application management.''',
                 assignee: kuba,
@@ -496,7 +496,7 @@ they are done with their thesis and application management.''',
         grailsEvents.event('app', 'articleCreated', new ArticleEvent(kubaThesis, tms.owner, [kuba, jiriKolar, tms.owner]))
 
         def vaclavThesis = new Thesis(
-                title: "Implementation of Theses management system",
+                title: "Implementation of Thesis management system",
                 description: '''Create User, University management, news feed system so
 that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
 in one of those can follow it, mail service for sending these feeds to subscribers and overall configuration.''',
@@ -509,7 +509,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
         grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis, tms.owner, [vaclav, jiriKolar, tms.owner]))
 
         def pavelThesis = new Thesis(
-                title: "Design for Theses management system",
+                title: "Design for Thesis management system",
                 description: '''Paint all graphic stuff that anyone can do and create views for the TMS.''',
                 assignee: pavel,
                 topic: tms,
@@ -569,7 +569,7 @@ for example): see Web Browser Programming for details.'''
         new Comment(content: 'Nothing imported', user: jiriKolar, article: tms).save(flush: true)
         new Comment(content: 'Another absolutely useless comment', user: vaclav, article: tms).save(flush: true)
         new Comment(content: 'Empty comment', user: kuba, article: tms).save(flush: true)
-        new Comment(content: '> The goal of this project is to create a theses management system for company Red Hat.', user: kuba, article: tms).save(flush: true)
+        new Comment(content: '> The goal of this project is to create a Thesis management system for company Red Hat.', user: kuba, article: tms).save(flush: true)
         new Comment(content: '**** you', user: pavel, article: tms).save(flush: true)
         new Comment(content: '**** you too', user: kuba, article: tms).save(flush: true)
         new Comment(content: 'Ok', user: jiriKolar, article: tms).save(flush: true)

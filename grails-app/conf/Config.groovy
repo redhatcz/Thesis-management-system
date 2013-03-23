@@ -83,7 +83,7 @@ environments {
         // TODO: set plugin.emailConfirmation.from to something more representative
         plugin.emailConfirmation.from = '"Do not reply" <noreply@localhost>'
         // TODO: change this to the actual server url
-        grails.serverURL = "http://theses-managementsystem.rhcloud.com"
+        grails.serverURL = "http://thesis-managementsystem.rhcloud.com"
         // TODO: changed the mail configuration to something more representative
         grails {
             mail {
