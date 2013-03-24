@@ -98,7 +98,7 @@
 
         <h4><g:message code="topic.tags.label"/></h4>
         <div class="panel-content">
-            <g:render template="tagList" />
+            <g:render template="/shared/tags/tagList" />
         </div>
     </div>
 </div>
