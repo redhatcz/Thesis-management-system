@@ -4,7 +4,6 @@ package com.redhat.theses
  * @author vdedik@redhat.com
  */
 class TagService {
-    // TODO: following two method probably could be merged into one with Class parameter
 
     Map<Tag, Long> findAllWithCountUsage(Class articleClass, Map params) {
         def result = Tag.executeQuery(
