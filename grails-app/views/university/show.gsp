@@ -8,7 +8,7 @@
 <body>
     <div class="span4 sidebar">
         <div class="panel left">
-            <div class="avatar">
+            <div class="avatar-university">
                 %{--University logo will be here soon!--}%
             </div>
             <h4><g:message code="university.information.label"/></h4>
