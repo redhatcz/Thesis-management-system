@@ -61,7 +61,7 @@ class TopicController {
         def topicCount = filterService.count(params, Topic)
 
         def categoryList = Category.findAll()
-        def tagListWithUsage = tagService.findAllWithCountUsage([max: TAG_MAX])
+        def tagListWithUsage = tagService.findAlTopicslWithCountUsage([max: TAG_MAX])
 
         def publicCommentsOnly = !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')
         def commentCounts = commentService.countByArticles(topics, publicCommentsOnly)
