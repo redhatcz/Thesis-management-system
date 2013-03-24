@@ -1,10 +1,11 @@
 package com.redhat.theses
-
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class ThesisController {
+
+    static final Long TAG_MAX = 10
 
     static allowedMethods = [save: 'POST', update: 'POST']
 
@@ -18,13 +19,37 @@ class ThesisController {
      */
     def springSecurityService
 
+    /**
+     * Dependency injection of com.redhat.grails.mongodb.GridFileService
+     */
     def gridFileService
+
+    /**
+     * Dependency injection of com.redhat.theses.TagService
+     */
+    def tagService
+
+    /**
+     * Dependency injection of com.redhat.theses.FilterService
+     */
+    def filterService
 
     static defaultAction = "list"
 
-    def list(Integer max) {
-        params.max = Util.max(max)
-        [thesisInstanceList: Thesis.list(params), thesisInstanceTotal: Thesis.count]
+    def list() {
+        params.max = Util.max(params.max)
+
+        def tag = null
+        if (params.filter?.tags?.title) {
+            tag = Tag.get(new Tag(title: params.filter?.tags?.title))
+        }
+
+        def tagListWithUsage = tagService.findAlTheseslWithCountUsage([max: TAG_MAX])
+
+        def theses = filterService.filter(params, Thesis)
+        def thesesCount = filterService.count(params, Thesis)
+        [thesisInstanceList: theses, thesisInstanceTotal: thesesCount,
+                currentTag: tag, tagListWithUsage: tagListWithUsage,]
     }
 
     def show(Long id, String headline) {
@@ -68,6 +93,7 @@ class ThesisController {
 
             if (topicInstance) {
                 thesisInstance.topic = topicInstance
+                thesisInstance.tags = topicInstance.tags
                 disabledTopicField = true
             }
         }
@@ -86,6 +112,8 @@ class ThesisController {
 
         thesisInstance.status = Status.IN_PROGRESS
 
+        thesisInstance.tags = params.thesis?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
+
         if (!thesisService.save(thesisInstance)) {
             render view: 'create', model: [thesisInstance: thesisInstance]
             return
@@ -95,7 +123,7 @@ class ThesisController {
         redirect action: 'show', id: thesisInstance.id, params: [headline: Util.hyphenize(thesisInstance.title)]
     }
 
-    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER', 'ROLE_STUDENT'])
     def edit(Long id) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
@@ -104,12 +132,16 @@ class ThesisController {
             return
         }
 
-        if (thesisInstance.supervisor != springSecurityService.currentUser &&
-                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser &&
-                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
+        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
+                springSecurityService.currentUser == thesisInstance.assignee ||
+                springSecurityService.currentUser == thesisInstance.supervisor ||
+                springSecurityService.currentUser == thesisInstance.topic.owner
+
+
+        if (!isAuthorized) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
-            redirect(action: "list")
+            redirect(action: 'show', id: id, params: [headline: Util.hyphenize(thesisInstance.title)])
             return
         }
 
@@ -119,10 +151,12 @@ class ThesisController {
          supervisors: supervisors]
     }
 
-    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER', 'ROLE_STUDENT'])
     def update() {
         Long id = params.thesis.long("id")
         Long version = params.thesis.long("version")
+        def user = springSecurityService.currentUser
+
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
             flash.message = message(code: 'thesis.not.found', args: [id])
@@ -130,12 +164,14 @@ class ThesisController {
             return
         }
 
-        if (thesisInstance.supervisor != springSecurityService.currentUser &&
-                thesisInstance.topic && thesisInstance.topic.owner != springSecurityService.currentUser &&
-                !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
+        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
+                springSecurityService.currentUser == thesisInstance.assignee ||
+                springSecurityService.currentUser == thesisInstance.supervisor ||
+                springSecurityService.currentUser == thesisInstance.topic.owner
 
+        if (!isAuthorized) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
-            redirect(action: "list")
+            redirect(action: 'show', id: id, params: [headline: Util.hyphenize(thesisInstance.title)])
             return
         }
 
@@ -146,8 +182,22 @@ class ThesisController {
             return
         }
 
-        thesisInstance.properties = params.thesis
-        if (!thesisService.save(thesisInstance)) {
+        def updated
+        def isAssignee = thesisInstance.assignee == user
+        if (isAssignee) {
+            def allowed = ['tags.title', 'thesisAbstract']
+            updated = params.thesis.findAll {key, val -> key in allowed}
+        } else {
+            updated = params.thesis
+        }
+
+        // setup tags
+        thesisInstance.tags = params.thesis?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
+
+        thesisInstance.properties = updated
+
+
+        if (!thesisService.save(thesisInstance, !isAssignee)) {
             render view: 'edit', model:
                     [thesisInstance: thesisInstance, statusList: Status.values(), gradeList: Grade.values()]
             return

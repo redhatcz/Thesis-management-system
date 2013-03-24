@@ -32,6 +32,23 @@
 
     <g:render template="fileUpload" />
 
+    <g:set var="thesisTags" value="${thesisInstance?.tags}"/>
+    <g:if test="${thesisTags}">
+        <p class="tag-list">
+            <i class="icon-tags icon-large"></i>
+            <g:message code="thesis.tags.label" default="tags" />:
+            <g:each in="${thesisTags?.sort{it?.title}}" var="tag" status="i">
+                <g:link action="list"
+                        params="${[tagTitle: tag.title] + (params.categoryId ? [categoryId: params.categoryId] : [])}"
+                >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${thesisTags?.size() - 1 != i}">,</g:if>
+            </g:each>
+        </p>
+    </g:if>
+    <g:else>
+        <div class="tms-separator"></div>
+    </g:else>
+
+
     <richg:comments comments="${comments}" article="${thesisInstance}" commentsTotal="${commentsTotal}"/>
 </div>
 <div class="span4 sidebar">
@@ -109,26 +126,32 @@
                     </g:form>
                 </g:else>
 
-                <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_SUPERVISOR">
+                <sec:ifLoggedIn>
                     <g:set var="currentUserId" value="${sec.loggedInUserInfo(field: 'id')?.toLong()}"/>
                     <g:if test="${thesisInstance?.supervisorId == currentUserId ||
                             thesisInstance?.topic?.ownerId == currentUserId ||
+                            thesisInstance?.assigneeId == currentUserId ||
                             SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
                         <g:link class="tms-link btn-link" controller="thesis"
                                 action="edit" id="${thesisInstance?.id}">
                             <i class="icon-wrench"></i>
                             <g:message code="default.edit.button"/>
                         </g:link>
-                    <g:form action="delete">
-                        <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
-                        <button type="submit" class="tms-link btn-link"
-                                onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
-                            <i class="icon-trash"></i>
-                            <g:message code="default.delete.button" />
-                        </button>
-                    </g:form>
                     </g:if>
-                </sec:ifAnyGranted>
+                    <g:if test="${thesisInstance?.supervisorId == currentUserId ||
+                            thesisInstance?.topic?.ownerId == currentUserId ||
+                            SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')}">
+                        <g:form action="delete">
+                            <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
+                            <button type="submit" class="tms-link btn-link"
+                                    onclick="return confirm('${message(code: 'default.delete.confirm.message')}');">
+                                <i class="icon-trash"></i>
+                                <g:message code="default.delete.button" />
+                            </button>
+                        </g:form>
+                    </g:if>
+                </sec:ifLoggedIn>
+
             </div>
         </div>
         </sec:ifLoggedIn>

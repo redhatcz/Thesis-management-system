@@ -37,20 +37,25 @@
         </g:if>
     </div>
 
-    <sec:ifAnyGranted roles="ROLE_SUPERVISOR, ROLE_OWNER">
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4><g:message code="thesis.list.manage.label"/></h4>
-            <div class="panel-content">
-                <div class="panel-buttons">
-                    <g:link class="tms-link btn-link" action="create">
-                        <i class="icon-plus"></i>
-                        <g:message code="thesis.create.button"/>
-                    </g:link>
+            <sec:ifAnyGranted roles="ROLE_SUPERVISOR, ROLE_OWNER">
+                <h4><g:message code="thesis.list.manage.label"/></h4>
+                <div class="panel-content">
+                    <div class="panel-buttons">
+                        <g:link class="tms-link btn-link" action="create">
+                            <i class="icon-plus"></i>
+                            <g:message code="thesis.create.button"/>
+                        </g:link>
+                    </div>
                 </div>
-            </div>
+            </sec:ifAnyGranted>
+
+            <h4><g:message code="topic.tags.label"/></h4>
+            <div class="panel-content">
+                <g:render template="/shared/tags/tagList" />
         </div>
     </div>
-    </sec:ifAnyGranted>
+</div>
 </body>
 </html>

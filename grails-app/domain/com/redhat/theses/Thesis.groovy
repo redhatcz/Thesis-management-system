@@ -14,6 +14,8 @@ class Thesis extends Article{
     String thesisAbstract
     Date dateCreated
 
+    static hasMany = [tags: Tag]
+
     static mapping = {
         description type: 'text'
         thesisAbstract type: 'text'
