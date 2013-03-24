@@ -18,7 +18,15 @@ class TagController {
         if (params.offset) {
             args << [offset: params.offset]
         }
-        def tagsWithUsage = tagService.findAllWithCountUsage(args)
+
+        def articleClass
+        if (params.tagsOf == 'thesis') {
+            articleClass = Thesis
+        } else {
+            articleClass = Topic
+        }
+
+        def tagsWithUsage = tagService.findAllWithCountUsage(articleClass, args)
         def tags = tagsWithUsage.collect {it.key}
         def tagCount = Tag.count()
 

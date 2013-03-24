@@ -51,6 +51,22 @@
                 </div>
             </sec:ifAnyGranted>
 
+            <h4><g:message code="filters.label"/></h4>
+            <div class="panel-content">
+                <g:form method="get" class="filter">
+                    <g:hiddenField name="filtering" value="true"/>
+                    <g:hiddenField name="filter.tags.id" value="${params?.filter?.tags?.id}"/>
+                    <g:textField value="${params?.filter?.title}" class="wide"
+                                 name="filter.title" placeholder="${message(code: 'thesis.title.label')}"/>
+                    <g:textField value="${params?.filter?.supervisor?.fullName}" class="wide"
+                                 name="filter.supervisor.fullName" placeholder="${message(code: 'thesis.supervisor.label')}"/>
+                    <g:textField value="${params?.filter?.assignee?.fullName}" class="wide"
+                                 name="filter.assignee.fullName" placeholder="${message(code: 'thesis.assignee.label')}"/>
+                    <g:submitButton class="tms-btn pull-right" name="filter-button"
+                                    value="${message(code: 'filter.button')}"/>
+                </g:form>
+            </div>
+
             <h4><g:message code="topic.tags.label"/></h4>
             <div class="panel-content">
                 <g:render template="/shared/tags/tagList" />

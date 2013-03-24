@@ -44,7 +44,7 @@ class ThesisController {
             tag = Tag.get(new Tag(title: params.filter?.tags?.title))
         }
 
-        def tagListWithUsage = tagService.findAlTheseslWithCountUsage([max: TAG_MAX])
+        def tagListWithUsage = tagService.findAllWithCountUsage(Thesis, [max: TAG_MAX])
 
         def theses = filterService.filter(params, Thesis)
         def thesesCount = filterService.count(params, Thesis)
