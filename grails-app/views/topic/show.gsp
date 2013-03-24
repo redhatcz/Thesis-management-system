@@ -34,18 +34,18 @@
 
         <g:set var="topicTags" value="${topicInstance?.tags}"/>
         <g:if test="${topicTags}">
-        <p class="tag-list">
-            <i class="icon-tags icon-large"></i>
-            <g:message code="topic.tags.label" default="tags" />:
-            <g:each in="${topicTags?.sort{it?.title}}" var="tag" status="i">
-                <g:link action="list"
-                        params="['filter.tags.title': tag.title]"
-                >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
-            </g:each>
-        </p>
+            <p class="tag-list">
+                <i class="icon-tags icon-large"></i>
+                <g:message code="topic.tags.label" default="tags" />:
+                <g:each in="${topicTags?.sort{it?.title}}" var="tag" status="i">
+                    <g:link action="list" class="tag"
+                            params="['filter.tags.title': tag.title]"
+                    >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
+                </g:each>
+            </p>
         </g:if>
         <g:else>
-        <div class="tms-separator"></div>
+            <div class="tms-separator"></div>
         </g:else>
 
         <richg:comments comments="${comments}" article="${topicInstance}" commentsTotal="${commentsTotal}"/>
@@ -175,7 +175,7 @@
                     <g:if test="${topicInstance.enabled}">
                         <g:link class="tms-link" controller="application"
                                 action="create" id="${topicInstance?.id}" >
-                            <i class="icon-file"></i>
+                            <i class="icon-file-alt"></i>
                             <g:message code="application.apply.button" />
                         </g:link>
                     </g:if>

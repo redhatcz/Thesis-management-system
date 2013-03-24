@@ -680,7 +680,11 @@ ul form {
 /*---------TAGS---------*/
 
 a.tag {
-  .pretty-tag(lighten(@red, 27%))
+  .pretty-tag(lighten(@red, 27%));
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 a.tag-selected {
@@ -699,12 +703,13 @@ ul.tags-panel {
 /*---------THESIS/TOPIC---------*/
 
 .tag-list {
-  padding: 15px 0;
+  padding: 15px 0 20px;
+  margin-bottom: 10px;
   border-bottom: 1px solid @grayBorder;
 }
 
 .tms-separator {
-  padding: 5px 0 8px;
+  margin: 15px 0 10px;
   border-bottom: 1px solid @grayBorder;
 }
 
@@ -1095,7 +1100,7 @@ ul.tms-list {
 /*-----FILE-UPLOADER-----*/
 
 .file-uploader {
-  padding: 15px 0 25px;
+  padding: 6px 0 25px;
   border-bottom: 1px solid @grayBorder;
 
   table {

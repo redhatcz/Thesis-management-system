@@ -28,25 +28,24 @@
             <markdown:renderHtml text="${thesisInstance?.description}"/>
         </g:if>
     </div>
-    <div class="tms-separator"></div>
-
-    <g:render template="fileUpload" />
 
     <g:set var="thesisTags" value="${thesisInstance?.tags}"/>
     <g:if test="${thesisTags}">
-        <p class="tag-list">
+        <div class="tag-list">
             <i class="icon-tags icon-large"></i>
             <g:message code="thesis.tags.label" default="tags" />:
             <g:each in="${thesisTags?.sort{it?.title}}" var="tag" status="i">
-                <g:link action="list"
+                <g:link action="list" class="tag"
                         params="${[tagTitle: tag.title] + (params.categoryId ? [categoryId: params.categoryId] : [])}"
                 >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${thesisTags?.size() - 1 != i}">,</g:if>
             </g:each>
-        </p>
+        </div>
     </g:if>
     <g:else>
         <div class="tms-separator"></div>
     </g:else>
+
+    <g:render template="fileUpload" />
 
 
     <richg:comments comments="${comments}" article="${thesisInstance}" commentsTotal="${commentsTotal}"/>

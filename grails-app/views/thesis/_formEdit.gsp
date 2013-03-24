@@ -1,3 +1,14 @@
+<div class="control-group ${hasErrors(bean: thesisInstance, field: 'thesisAbstract', 'error')}">
+    <label class="control-label" for="thesis.thesisAbstract">
+        <strong><g:message code="thesis.thesisAbstract.label" /></strong>
+    </label>
+    <div class="controls">
+        <g:textArea name="thesis.thesisAbstract"
+                    cols="80" rows="5"
+                    value="${thesisInstance?.thesisAbstract}"/>
+    </div>
+</div>
+
 <g:render template="/shared/thesis/formCommon"/>
 
 <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_ADMIN, ROLE_SUPERVISOR">
@@ -24,14 +35,3 @@
         </div>
     </div>
 </sec:ifAnyGranted>
-
-<div class="control-group ${hasErrors(bean: thesisInstance, field: 'thesisAbstract', 'error')}">
-    <label class="control-label" for="thesis.thesisAbstract">
-        <strong><g:message code="thesis.thesisAbstract.label" /></strong>
-    </label>
-    <div class="controls">
-        <g:textArea name="thesis.thesisAbstract"
-                    cols="80" rows="5"
-                    value="${thesisInstance?.thesisAbstract}"/>
-    </div>
-</div>

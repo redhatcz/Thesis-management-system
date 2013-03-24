@@ -88,7 +88,7 @@
         <sec:ifLoggedIn>
         <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
             <li class="${pageProperty(name: 'page.active-button') == 'applications' ? 'active' : ''}">
-                <g:link action="applications" id="${userInstance?.id}"><g:message code="user.applications.label"/></g:link>
+                <g:link action="applications" id="${userInstance?.id}"><i class="icon-file-alt"></i><g:message code="user.applications.label"/></g:link>
             </li>
         </g:if>
         </sec:ifLoggedIn>
