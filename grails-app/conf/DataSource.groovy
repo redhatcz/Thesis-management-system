@@ -3,19 +3,17 @@ import org.grails.plugin.hibernate.filter.HibernateFilterDomainConfiguration
 def credentials = [
         host: System.getenv("OPENSHIFT_POSTGRESQL_DB_HOST"),
         port: System.getenv("OPENSHIFT_POSTGRESQL_DB_PORT"),
-        //TODO: Change these later
-        username: "admin",
-        password: "FI_TGbqAvNxP",
-        name:"theses"
+        username: System.getenv("OPENSHIFT_POSTGRESQL_DB_USERNAME"),
+        password: System.getenv("OPENSHIFT_POSTGRESQL_DB_PASSWORD"),
+        name: System.getenv("OPENSHIFT_APP_NAME")
 ]
 
 def mongoCredentials = [
         host: System.getenv("OPENSHIFT_MONGODB_DB_HOST"),
         port: System.getenv("OPENSHIFT_MONGODB_DB_PORT"),
-        //TODO: Change these later
-        username: "admin",
-        password: "2jsmnZGz4mnx",
-        name:"theses"
+        username: System.getenv("OPENSHIFT_MONGODB_DB_USERNAME"),
+        password: System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD"),
+        name: System.getenv("OPENSHIFT_APP_NAME")
 ]
 
 dataSource {
@@ -85,7 +83,7 @@ environments {
                 port = mongoCredentials.port
                 username = mongoCredentials.username
                 password = mongoCredentials.password
-                databaseName = "theses"
+                databaseName = mongoCredentials.name
             }
         }
     }
