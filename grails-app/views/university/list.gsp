@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util" %>
+<%@ page import="com.redhat.theses.auth.Role; com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,46 +6,46 @@
     <title><g:message code="university.list.title" /></title>
 </head>
 <body>
-    <div class="span8 content">
-        <h2 class="header"><g:message code="university.list.header" /></h2>
-        <div class="tms-table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <g:sortableColumn property="name"
-                                          title="${message(code: 'university.name.label')}" />
-                    </tr>
-                </thead>
-                <tbody>
-                    <g:each in="${universityInstanceList}" status="i" var="universityInstance">
-                    <tr>
-                        <td>
-                            <g:link action="show" id="${universityInstance.id}">${fieldValue(bean: universityInstance, field: "name")}</g:link>
-                        </td>
-                    </tr>
-                    </g:each>
-                </tbody>
-            </table>
-        </div>
-        <g:if test="${Util.isPaginationVisible(universityInstanceTotal, params.max)}">
-            <g:paginate total="${universityInstanceTotal}" class="pagination-centered"/>
-        </g:if>
-    </div>
-
-    <sec:ifAnyGranted roles="ROLE_ADMIN">
-        <div class="span4 sidebar">
-            <div class="panel right">
-                <h4><g:message code="university.list.manage.label"/></h4>
-                <div class="panel-content">
-                    <div class="panel-buttons">
-                        <g:link class="tms-link btn-link" action="create">
-                            <i class="icon-plus"></i>
-                            <g:message code="university.create.button" />
-                        </g:link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </sec:ifAnyGranted>
+<div class="span12 content">
+    <h2 class="header"><g:message code="university.list.header" /></h2>
+    <table class="table table-users">
+        <tbody>
+        <g:each in="${(0..(Math.ceil(universityInstanceList?.size() / 4) - 1))}" var="i">
+            <tr>
+                <g:each in="${((4*i)..(4*i + 3))}" var="j">
+                    <td>
+                        <g:if test="${j < universityInstanceList.size()}">
+                        <div class="user-info">
+                            <img class="img-polaroid avatar-mini" height="36" width="36"
+                                 src="${resource(dir: 'images', file: 'avatar-university.png')}"/>
+                            <div class="user-text">
+                                <h6>
+                                    <g:link action="show" id="${universityInstanceList?.get(j)?.id}">
+                                        <g:fieldValue bean="${universityInstanceList?.get(j)}" field="name"/>
+                                    </g:link>
+                                </h6>
+                            </div>
+                        </div>
+                        </g:if>
+                    </td>
+                </g:each>
+            </tr>
+        </g:each>
+        <sec:ifAnyGranted roles="ROLE_ADMIN">
+            <tr>
+                <td>
+                    <g:link class="tms-create" action="create">
+                        <i class="icon-plus-sign"></i>
+                        <g:message code="university.create.button" />
+                    </g:link>
+                </td>
+            </tr>
+        </sec:ifAnyGranted>
+        </tbody>
+    </table>
+    <g:if test="${Util.isPaginationVisible(universityInstanceTotal, params.max)}">
+        <g:paginate total="${universityInstanceTotal}" class="pagination-centered"/>
+    </g:if>
+</div>
 </body>
 </html>

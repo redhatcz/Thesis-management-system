@@ -15,6 +15,7 @@
                 <tr>
                     <g:each in="${((4*i)..(4*i + 3))}" var="j">
                     <td>
+                        <g:if test="${j < userInstanceList.size()}">
                         <div class="user-info">
                             <img class="img-polaroid avatar-mini" height="36" width="36"
                                  src="${resource(dir: 'images', file: 'avatar.png')}"/>
@@ -28,6 +29,7 @@
                                 <g:message code="role.${Role.getHighest(userInstanceList?.get(j).roles).toString().toLowerCase()}.label"/>
                             </div>
                         </div>
+                        </g:if>
                     </td>
                     </g:each>
                 </tr>
