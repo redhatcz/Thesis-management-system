@@ -490,6 +490,7 @@ they are done with their thesis and application management.''',
                 assignee: kuba,
                 topic: tms,
                 supervisor: jiriKolar,
+                tags: [grailsTag, groovyTag],
                 status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'articleCreated', new ArticleEvent(kubaThesis, tms.owner, [kuba, jiriKolar, tms.owner]))
@@ -502,6 +503,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 assignee: vaclav,
                 topic: tms,
                 supervisor: jiriKolar,
+                tags: [grailsTag, groovyTag],
                 status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis, tms.owner, [vaclav, jiriKolar, tms.owner]))
@@ -512,6 +514,7 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                 assignee: pavel,
                 topic: tms,
                 supervisor: jiriKolar,
+                tags: [othersTag, groovyTag],
                 status: Status.IN_PROGRESS
         ).save(failOnError: true, flush: true)
         grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis, tms.owner, [pavel, jiriKolar, tms.owner]))
@@ -526,6 +529,7 @@ both a small and large scale.''',
                 topic: pythonFramework,
                 supervisor: admin,
                 status: Status.FINISHED,
+                tags: [pythonTag],
                 grade: Grade.F,
                 thesisAbstract: '''The majority of Web frameworks are exclusively server-side technology, although,
 with the increased prevalence of AJAX, some Web frameworks are beginning to include AJAX code that helps developers
@@ -542,6 +546,7 @@ for example): see Web Browser Programming for details.'''
                 topic: rubyKillingMachine,
                 supervisor: jiriKolar,
                 status: Status.FINISHED,
+                tags: [rubyTag],
                 grade: Grade.A,
                 thesisAbstract: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.'''
         ).save(failOnError: true, flush: true)
