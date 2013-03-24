@@ -1,120 +1,97 @@
-Repo layout
-=========== 
-deployments/ - location for built wars (Details below)
-src/ - Maven src structure
-pom.xml - Maven build file  
-.openshift/ - location for openshift specific files
-.openshift/config/ - location for configuration files such as standalone.xml (used to modify jboss config such as datasources) 
-.openshift/action_hooks/pre_build - Script that gets run every git push before the build (on the CI system if available)
-.openshift/action_hooks/build - Script that gets run every git push as part of the build process (on the CI system if available)
-.openshift/action_hooks/deploy - Script that gets run every git push after build but before the app is restarted
-.openshift/action_hooks/post_deploy - Script that gets run every git push after the app is restarted
-.openshift/action_hooks/pre_start_jbosseap-6.0 - Script that gets run prior to starting EAP6.0
-.openshift/action_hooks/post_start_jbosseap-6.0 - Script that gets run after EAP6.0 is started
-.openshift/action_hooks/pre_stop_jbosseap-6.0 - Script that gets run prior to stopping EAP6.0
-.openshift/action_hooks/post_stop_jbosseap-6.0 - Script that gets run after EAP6.0 is stopped
-.openshift/markers - directory for files used to control application behavior. See README in markers directory
+How to use the Thesis management system
+=======================================
 
+Basics
+------
 
-Notes about layout
-==================
-Note: Every time you push, everything in your remote repo dir gets recreated
-      please store long term items (like an sqlite database) in the OpenShift
-      data directory, which will persist between pushes of your repo.
-      The OpenShift data directory is accessible relative to the remote repo
-      directory (../data) or via an environment variable OPENSHIFT_DATA_DIR.
+The Thesis management system is a system for management of theses, there are 
+two main entities: Topic, which represents the topic of a thesis and Thesis, 
+which is based upon the topic and represents the thesis at a university. 
+More detail description follows.
 
+###Topic
+Topic represents the topic of a thesis, the whole idea is that a person from 
+a company, which we call the owner, creates a topic of a thesis that students 
+can apply for. When a student applies for a topic, the owner can approve the 
+application and create a thesis for the student. 
 
-Details about layout and deployment options
-==================
-There are two options for deploying content to the JBoss Application Server within OpenShift. Both options
-can be used together (i.e. build one archive from source and others pre-built)
+These are the fields of Topic:
 
-NOTE: Under most circumstances the .dodeploy file markers should not be added to the deployments directory.
-These lifecycle files will be created in the runtime deployments directory (can be seen by SSHing into the application),
-but should not be added to the git repo.
+ * Title [required] - Represents the title of the topic.
+ * Secondary Title - Represents the title in a different language.
+ * Lead Paragraph [required] - Lead Paragraph of the topic that is visible on 
+ the page with the list of topics.
+ * Description [required] - Description of the topic, you can use markdown.
+ * Secondary Description - Description of the topic in a different language.
+ * Owner [required] - Owner of the topic, which is the person that supervises 
+ the topic for the company.
+ * Supervisions - Supervisor is a user that supervises the thesis created from 
+ a topic at the university and every supervisor is assigned a university. This 
+ combination is called supervision. There can be zero or more supervisions for 
+ one topic. 
+ * Enabled - This flag marks if the topic is enabled or disabled, i.e. if a 
+ student can apply for it.
+ * Univerisites - The universities that the topic is offered for.
+ * Types - Bachelor, Diploma or both.
+ * Categories and Tags - Topic can belong to zero or more catogories and/or 
+ tags.
 
-1) (Preferred) You can upload your content in a Maven src structure as is this sample project and on 
-git push have the application built and deployed.  For this to work you'll need your pom.xml at the 
-root of your repository and a maven-war-plugin like in this sample to move the output from the build
-to the deployments directory.  By default the warName is ROOT within pom.xml.  This will cause the 
-webapp contents to be rendered at http://app_name-namespace.rhcloud.com/.  If you change the warName in 
-pom.xml to app_name, your base url would then become http://app_name-namespace.rhcloud.com/app_name.
+###Thesis
+Thesis represents the student's thesis at the university. There can be zero or 
+more theses created for one topic, but the topic is required.
 
-Note: If you are building locally you'll also want to add any output wars/ears under deployments 
-from the build to your .gitignore file.
+Thesis fields:
 
-Note: If you are running scaled EAP6.0 then you need an application deployed to the root context (i.e. 
-http://app_name-namespace.rhcloud.com/) for the HAProxy load-balancer to recognize that the EAP6.0 instance 
-is active.
+ * Title [required] - The title of the thesis thet should be the same as at the 
+ university.
+ * Assignee [required] - The student assigned to the thesis.
+ * Supervisor [required] - Supervisor that also supervises the thesis at the 
+ university.
+ * Status - Can be either In progress, Finished, Failed or Postponed.
+ * Grade - A, B, C, D, E or F
+ * Abstract - Abstract of the thesis, the student should fill this one in.
+ * Tags - The student should also fill in the tags.
 
-or
+###Comments
+Both topics and theses can be commented on, users with role Admin or Owner can 
+add private comments that are visible only to them.
 
-2) You can git push pre-built wars into deployments/.  To do this
-with the default repo you'll want to first run 'git rm -r src/ pom.xml' from the root of your repo.
+###Applications
+Any student can apply for a topic as long as it is enabled. When applying for 
+a topic, the user must enter the university which they apply for. The student 
+can show his applications in his profile.
+Owner of the topic can approve the application by clicking on the button 
+'approve' and then filling in the thesis creation form.
 
-Basic workflows for deploying pre-built content (each operation will require associated git add/commit/push operations to take effect):
+###Configuration
+The administrator can configure some of the properties of the system, e.g. 
+email domain addresses that a user can sign up for the system with. The 
+configuration can be accessed by clicking on the gear icon in the right top 
+corner and then clicking on the button 'Site Configuration'.
 
-A) Add new zipped content and deploy it:
+Registration
+------------
+Only students with email domains that are allowed by the administrator can sign 
+up for the Thesis management system.
 
-1. cp target/example.war deployments/
+Roles
+-----
+There are four roles - Admin, Owner, Supervisor and Student. The Admin has the 
+highest authority and can configure the system, manage users and universities, 
+manage any topic or thesis and add private commments. Owner can create topics 
+and manage topics that are owned by them or manage theses that are created 
+from their topic and add private comments. Supervisor can create theses and 
+manage theses that are supervised by them. Student can apply for any topic and 
+upload files and add abstract or tags to their theses.
 
-B) Add new unzipped/exploded content and deploy it:
+How to deploy the Thesis management system
+==========================================
 
-1. cp -r target/example.war/ deployments/
-2. edit .openshift/config/standalone.xml and replace
-<deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout="300"/>
-with 
-<deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout="300" auto-deploy-exploded="true"/>
-
-C) Undeploy currently deployed content:
-
-1. git rm deployments/example.war
-
-D) Replace currently deployed zipped content with a new version and deploy it:
-
-1. cp target/example.war deployments/
-
-E) Replace currently deployed unzipped content with a new version and deploy it:
-
-1. git rm -rf deployments/example.war/
-2. cp -r target/example.war/ deployments/
-
-Note: You can get the information in the uri above from running 'rhc domain show'
-
-If you have already committed large files to your git repo, you rewrite or reset the history of those files in git
-to an earlier point in time and then 'git push --force' to apply those changes on the remote OpenShift server.  A 
-git gc on the remote OpenShift repo can be forced with (Note: tidy also does other cleanup including clearing log
-files and tmp dirs):
-
-rhc app tidy -a appname
-
-
-Whether you choose option 1) or 2) the end result will be the application 
-deployed into the deployments directory. The deployments directory in the 
-JBoss Application Server distribution is the location end users can place 
-their deployment content (e.g. war, ear, jar, sar files) to have it 
-automatically deployed into the server runtime.
-
-Environment Variables
-=====================
-
-OpenShift provides several environment variables to reference for ease
-of use.  The following list are some common variables but far from exhaustive:
-
-    System.getenv("OPENSHIFT_APP_NAME")  - Application name
-    System.getenv("OPENSHIFT_DATA_DIR")  - For persistent storage (between pushes)
-    System.getenv("OPENSHIFT_TMP_DIR")   - Temp storage (unmodified files deleted after 10 days)
-    System.getenv("OPENSHIFT_INTERNAL_IP")  - The IP address used to bind EAP6.0
-
-When embedding a database using 'rhc cartridge add', you can reference environment
-variables for username, host and password. For example, when embedding MySQL 5.1, the 
-following variables will be available:
-
-    System.getenv("OPENSHIFT_MYSQL_DB_HOST")      - DB host
-    System.getenv("OPENSHIFT_MYSQL_DB_PORT")      - DB Port
-    System.getenv("OPENSHIFT_MYSQL_DB_USERNAME")  - DB Username
-    System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD")  - DB Password
-
-To get a full list of environment variables, simply add a line in your
-.openshift/action_hooks/build script that says "export" and push.
+1. Create an openshift JBoss EAP 6 cartridge and add Postgres and MongoDB 
+cartridge.
+2. Add remote openshift repository to your local project git repository.
+3. Build the application with command `$ grails war`
+4. Move the built war file from directory ${project.dir}/target to directory 
+${project.dir}/deployments and rename it to ROOT.war
+5. Add deployments directory to stage and commit it.
+6. Push the commit to openshift repository.
