@@ -217,12 +217,11 @@ h4.header {
   margin-bottom: 50px;
 }
 
-.span8.content {
-/*The height is set by javascript (see 'js/application.js')*/
-  width: 580px;
+.span8.content,
+.span9.content,
+.span12.content {
   padding: 30px;
-  margin-bottom: 50px;
-  background-color: white;
+  background-color: @white;
   .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
 
   & > h1:first-child,
@@ -233,11 +232,19 @@ h4.header {
   }
 }
 
+.span8.content {
+/*The height is set by javascript (see 'js/application.js')*/
+  width: 580px;
+  margin-bottom: 50px;
+}
+
 .span9.content {
-  padding: 30px;
   margin-bottom: 70px;
-  background-color: white;
-  .box-shadow(2px 2px 1px rgba(0, 0, 0, 0.1));
+}
+
+.span12.content {
+  .box-sizing(border-box);
+  margin-bottom: 50px;
 }
 
 /*---------NAVBAR---------*/
@@ -835,6 +842,23 @@ h3#file-upload {
   margin-right: 10px;
 }
 
+.tms-create {
+  border: 1px dotted @grayBorder;
+  text-align: center;
+  display: block;
+  padding: 8px;
+  color: @gray;
+
+  &:hover {
+    color: @red;
+    text-decoration: none;
+  }
+
+  i[class*="icon-"] {
+    color: @green;
+  }
+}
+
 /*---------LINKS---------*/
 
 a.gray-link {
@@ -1102,6 +1126,45 @@ ul.tms-list {
   a {
     .pretty-link();
     border-bottom: none;
+  }
+}
+
+.table.table-users {
+  table-layout: fixed;
+}
+
+.table.table-users td {
+  border: none;
+
+  .user-info {
+    padding: 10px 10px;
+    border: 1px solid @grayBorder;
+
+    .avatar-mini {
+      float: left;
+      margin-right: 10px;
+      margin-top: 1px;
+    }
+
+    .user-text {
+      font-size: @fontSizeSmall;
+      color: @grayLight;
+    }
+
+    h6 {
+      margin: 0px;
+
+      a {
+        font-size: @baseFontSize;
+        font-family: @titleFontFamily;
+        color: @gray;
+
+        &:hover {
+          color: @red;
+          text-decoration: none;
+        }
+      }
+    }
   }
 }
 

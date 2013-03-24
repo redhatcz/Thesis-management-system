@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.auth.User" %>
+<%@ page import="com.redhat.theses.auth.Role; com.redhat.theses.util.Util; com.redhat.theses.auth.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -7,55 +7,46 @@
     <title><g:message code="user.list.title" /></title>
 </head>
 <body>
-    <div class="span8 content">
+    <div class="span12 content">
         <h2 class="header"><g:message code="user.list.header" /></h2>
-        <div class="tms-table">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <g:sortableColumn property="fullName"
-                                          title="${message(code: 'user.fullName.label')}" />
-                        <g:sortableColumn property="dateCreated"
-                                          title="${message(code: 'user.dateCreated.label')}" />
-                    </tr>
-                </thead>
-                <tbody>
-                <g:each in="${userInstanceList}" status="i" var="userInstance">
-                    <tr>
-                        <td>
-                            <g:link action="show" id="${userInstance.id}">
-                                <g:fieldValue bean="${userInstance}" field="fullName"/>
-                            </g:link>
-                        </td>
-                        <td>
-                            <g:formatDate date="${userInstance?.dateCreated}"
-                                          dateStyle="LONG" type="date" />
-                        </td>
-                    </tr>
-                </g:each>
-                </tbody>
-            </table>
-        </div>
-
+        <table class="table table-users">
+            <tbody>
+            <g:each in="${(0..(Math.ceil(userInstanceList?.size() / 4) - 1))}" var="i">
+                <tr>
+                    <g:each in="${((4*i)..(4*i + 3))}" var="j">
+                    <td>
+                        <div class="user-info">
+                            <img class="img-polaroid avatar-mini" height="36" width="36"
+                                 src="${resource(dir: 'images', file: 'avatar.png')}"/>
+                            <div class="user-text">
+                                <h6>
+                                    <g:link action="show" id="${userInstanceList?.get(j)?.id}">
+                                        <g:fieldValue bean="${userInstanceList?.get(j)}" field="fullName"/>
+                                    </g:link>
+                                </h6>
+                                <i class="icon-group"></i>
+                                <g:message code="role.${Role.getHighest(userInstanceList?.get(j).roles).toString().toLowerCase()}.label"/>
+                            </div>
+                        </div>
+                    </td>
+                    </g:each>
+                </tr>
+            </g:each>
+                <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <tr>
+                    <td>
+                        <g:link class="tms-create" action="create">
+                            <i class="icon-plus-sign"></i>
+                            <g:message code="user.create.button" />
+                        </g:link>
+                    </td>
+                </tr>
+                </sec:ifAnyGranted>
+            </tbody>
+        </table>
         <g:if test="${Util.isPaginationVisible(userInstanceTotal, params.max)}">
             <g:paginate total="${userInstanceTotal}" class="pagination-centered"/>
         </g:if>
     </div>
-
-    <sec:ifAnyGranted roles="ROLE_ADMIN">
-    <div class="span4 sidebar">
-        <div class="panel right">
-            <h4><g:message code="user.list.manage.label"/></h4>
-            <div class="panel-content">
-                <div class="panel-buttons">
-                    <g:link class="tms-link tms-link" action="create">
-                        <i class="icon-plus"></i>
-                        <g:message code="user.create.button" />
-                    </g:link>
-                </div>
-            </div>
-        </div>
-    </div>
-    </sec:ifAnyGranted>
 </body>
 </html>
