@@ -10,11 +10,11 @@ class ThesisService {
      */
     def springSecurityService
 
-    Thesis save(Thesis thesis) {
+    Thesis save(Thesis thesis, fireEvent = true) {
         String type = thesis.id ? 'articleUpdated' : 'articleCreated'
         def persistedThesis = thesis.save()
 
-        if (persistedThesis) {
+        if (persistedThesis && fireEvent) {
             event(type, new ArticleEvent(persistedThesis, springSecurityService.currentUser,
                     [thesis.supervisor, thesis.assignee, thesis.topic.owner]))
         }
