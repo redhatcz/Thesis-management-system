@@ -9,7 +9,9 @@
 <div class="span4 sidebar">
     <div class="panel left">
         <div class="avatar">
-            %{-- TODO: Profile picture will be here soon! --}%
+
+                <richg:avatar user="${userInstance}"/>
+
         </div>
         <h4><g:message code="user.information.label"/></h4>
         <div class="panel-content">

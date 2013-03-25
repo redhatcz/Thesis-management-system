@@ -1,9 +1,13 @@
 package com.redhat.theses.listeners
-
 import com.redhat.theses.Thesis
+import com.redhat.theses.auth.User
+import com.redhat.theses.util.UploadUtil
 import grails.events.Listener
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils as SSU
+import org.imgscalr.Scalr
 import org.springframework.context.i18n.LocaleContextHolder as LCH
+
+import java.awt.image.BufferedImage
 
 class UploadListenerService {
 
@@ -15,13 +19,67 @@ class UploadListenerService {
     def @Listener(topic = "avatar", namespace = 'uploader')
     Map avatar(event) {
         def response = [success: false, message: null]
-        def user = springSecurityService.currentUser
+        def user = User.get(event?.params?.id)
+        def currentUser = springSecurityService.currentUser
 
-        if (user) {
-            def saved = gridFileService.save(file: event.file, object: user, group: 'avatar')
-            // true if file was saved
-            response.success = saved || false
+        if (!user) {
+            response.message = messageSource.getMessage('user.not.found', [id].toArray(), LCH.locale)
+            return response
         }
+
+        if (user != currentUser && SSU.ifNotGranted('ROLE_ADMIN')) {
+            response.message = messageSource.getMessage('security.denied.message', [].toArray(),
+                    LCH.locale)
+            return response
+        }
+
+        // Convert MultipartFile into BufferedImage
+        BufferedImage image = UploadUtil.toImage(event?.file)
+
+        if (!image) {
+            response.message = messageSource.getMessage('file.image.type.error',[].toArray(),
+                    LCH.locale)
+            return response
+        }
+
+        if (image.width != image.height) {
+            response.message = messageSource.getMessage('file.avatar.aspectRatio.error',[].toArray(),
+                    LCH.locale)
+            return response
+        }
+        // Resize it to
+        def avatar =  Scalr.resize(image, 296)
+        def smallAvatar = Scalr.resize(image, 36)
+
+        // Free the resources
+        image.flush()
+
+        def saved = gridFileService.save(content: UploadUtil.toBytes(avatar),
+                                         object: user,
+                                         filename: 'avatar.png',
+                                         group: 'avatar',
+                                         delete: true)
+
+        def saved2 = gridFileService.save(content: UploadUtil.toBytes(smallAvatar),
+                                          object: user,
+                                          filename: 'avatar_small.png',
+                                          group: 'avatar_small',
+                                          delete: true)
+
+        if (saved && saved2) {
+            response.id = saved.id.toString()
+            response.group = saved?.metaData?.group
+            response.bucket = User.bucketMapping
+            response.success = true
+        } else {
+            if (saved) {
+                gridFileService.deleteFileByRawMongoId(saved.id , User.bucketMapping)
+            }
+            if (saved2) {
+                gridFileService.deleteFileByRawMongoId(saved2.id , User.bucketMapping)
+            }
+        }
+
 
         return response
     }
@@ -53,7 +111,7 @@ class UploadListenerService {
             }
         }
 
-        def saved = gridFileService.save(file: event.file, object: thesis)
+        def saved = gridFileService.save(content: event.file, object: thesis)
         if (saved) {
             def g = gspTagLibraryLookup.lookupNamespaceDispatcher('g')
             response.id = saved.id.toString()

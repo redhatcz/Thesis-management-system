@@ -1,8 +1,15 @@
 package com.redhat.theses
 
+import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
+import org.grails.plugin.platform.util.TagLibUtils
 
 class RichGSPTagLib {
+    /**
+     *  Dependency injection of com.redhat.grails.mongodb.GridFileService
+     */
+    def gridFileService
+
     static namespace = "richg"
 
     /**
@@ -131,5 +138,34 @@ class RichGSPTagLib {
         attrs?.params = Util.formatParams(request, attrsParams, removeParams)
 
         out << g.link(attrs, {body()})
+    }
+
+    /**
+     * Generets <img> tag with the source url of given users avatar
+     *
+     * @attr user User
+     * @attr small If true small version of avatar will be used
+     *
+     */
+    def avatar = {attrs, body ->
+        def user = attrs?.user
+        def group = attrs?.small ? 'avatar_small' : 'avatar'
+
+        if (!(user instanceof  User)) {
+            throw IllegalArgumentException('user')
+        }
+
+        def avatar = gridFileService.getBoundFile(user, 'id', group)
+
+        if (avatar) {
+            def uri = grid.createLink(mongoId: avatar?.id?.toString(), bucket: User.bucketMapping)
+
+            def excludes = ['user', 'small']
+            def attrsAsString = TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
+
+            out << "<img src=\"${uri.encodeAsHTML()}\"${attrsAsString} />"
+        } else {
+            out << img(file: 'avatar.png')
+        }
     }
 }
