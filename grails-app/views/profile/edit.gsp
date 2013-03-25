@@ -15,6 +15,11 @@
             </g:link>
         </small>
     </h2>
+
+<u:uploader topic="avatar"
+            params="${[id: userInstance.id]}"/>
+
+
     <g:form class="form-inline" method="post" >
         <g:hiddenField name="user.id" value="${userInstance?.id}" />
         <g:hiddenField name="user.version" value="${userInstance?.version}" />
