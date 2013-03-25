@@ -42,6 +42,9 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.20'
         runtime 'postgresql:postgresql:8.4-702.jdbc4'
+
+        compile 'org.apache.tika:tika-core:1.3'
+        compile 'org.imgscalr:imgscalr-lib:4.2'
     }
 
     plugins {
