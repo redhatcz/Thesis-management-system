@@ -12,14 +12,13 @@ class UploaderTagLib {
     def final DEF_WRAPPER_TEMPLATE = '/taglib/uploader/uploader'
     def final DEF_TEMPLATE = '/taglib/uploader/uploaderBootstrapTemplate'
 
-    def final MULTIPLE_FILES_CONFIG = [
+    def final DEF_CONFIG = [
             request: [
                     endpoint: null
             ],
             text: [:],
             autoUpload: false,
             multiple: true,
-            sizeLimit: 1000000,
             template: null,
     ]
 
@@ -32,6 +31,7 @@ class UploaderTagLib {
      * @param topic Name of the topic used when UploaderEvent is fired
      * @param callbacks Map of FineUploader callbacks [callback: function]
      * @param wrapperId  Id of div used as a wrapper for uploader
+     * @attr validation Validation option map
      *
      */
     def uploader = { attrs, body ->
@@ -76,7 +76,7 @@ class UploaderTagLib {
     }
 
     private String buildConfig(attrs) {
-        def defaultConfig = MULTIPLE_FILES_CONFIG
+        def defaultConfig = DEF_CONFIG
 
         def config = attrs?.config ?: defaultConfig
 
@@ -85,6 +85,10 @@ class UploaderTagLib {
         // upload link generation workaround
         config.request.endpoint = createLink(controller: 'upload', action: 'upload',
                 params: [topic: attrs.topic])
+        // validation
+        if (attrs.validation && attrs?.validation instanceof Map){
+            config.validation = attrs.validation
+        }
         // text labels
         config.text = textConfig
         // uploader template
@@ -98,14 +102,20 @@ class UploaderTagLib {
 
     private Map getTextConfig() {
         [
-                uploadButton: message(code: 'uploader.text.uploadButon', default: 'Upload a file'),
-                cancelButton: message(code: 'uploader.text.cancelButton', default: 'Cancel'),
-                retry: message(code: 'uploader.text.retry', default: 'Retry'),
-                failUpload: message(code: 'uploader.text.failUpload', default: 'Upload failed'),
-                dragZone: message(code: 'uploader.text.dragZone', default: 'Drop files here to upload'),
-                dropProcessing: message(code: 'uploader.text.dropProcessing', default: 'Processing dropped files...'),
-                formatProgress: message(code: 'uploader.text.formatProgress', default: '{percent}% of {total_size}'),
-                waitingForResponse: message(code: 'uploader.text.waitingForResponse', default: 'Processing...')
+                uploadButton: message(code: 'uploader.text.uploadButon'),
+                cancelButton: message(code: 'uploader.text.cancel.button'),
+                retry: message(code: 'uploader.text.retry.message'),
+                failUpload: message(code: 'uploader.text.failUpload.message'),
+                dragZone: message(code: 'uploader.text.dragZone.title'),
+                dropProcessing: message(code: 'uploader.text.dropProcessing.message'),
+                formatProgress: message(code: 'uploader.text.formatProgress.message'),
+                waitingForResponse: message(code: 'uploader.text.waitingForResponse.message'),
+                typeError: message(code:  'uploader.text.typeError.message'),
+                sizeError: message(code: 'uploader.text.sizeError.message'),
+                minSizeError: message(code: 'uploader.text.minSizeError.message'),
+                emptyError: message(code: 'uploader.text.emptyError.message'),
+                noFilesError: message(code: 'uploader.text.noFilesError.message'),
+                onLeave: message(code: 'uploader.text.noFilesError.message')
         ]
     }
 
