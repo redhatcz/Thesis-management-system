@@ -51,7 +51,9 @@ class GridFileTagLib {
         }
         model.params.mongoId = attrs.mongoId
         model.params.bucket = attrs.bucket
-        model.params.save = attrs.save
+        if (attrs?.save) {
+            model.params.save = attrs.save
+        }
 
         out << g.createLink(model)
     }
