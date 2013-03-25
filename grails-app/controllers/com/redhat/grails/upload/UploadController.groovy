@@ -14,6 +14,10 @@ class UploadController {
             String topic = params?.topic
             def result = uploadService.upload(file, topic, params)
 
+            if (!result.success && !result.message) {
+                result.messge = message(code: 'uploader.error.upload')
+            }
+
             return render(text: result as JSON, contentType: 'text/json')
         } catch (Exception e) {
             log.error('Error during file upload', e)
