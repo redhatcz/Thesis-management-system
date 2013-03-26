@@ -82,8 +82,7 @@ environments {
         grails.logging.jul.usebridge = false
         // TODO: set plugin.emailConfirmation.from to something more representative
         plugin.emailConfirmation.from = '"Do not reply" <noreply@localhost>'
-        // TODO: change this to the actual server url
-        grails.serverURL = "http://thesis-managementsystem.rhcloud.com"
+        grails.serverURL = "http://${System.getenv('OPENSHIFT_APP_DNS')}"
         // TODO: changed the mail configuration to something more representative
         grails {
             mail {
@@ -103,32 +102,60 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    appenders {
-        file name: 'sqlAppender', file: '/tmp/logs/tms-sql.log'
+
+    environments {
+        development {
+            appenders {
+                file name: 'sqlAppender', file: '/tmp/logs/tms-sql.log'
+            }
+
+            error 'org.codehaus.groovy.grails.web.servlet',        // controllers
+                  'org.codehaus.groovy.grails.web.pages',          // GSP
+                  'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+                  'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+                  'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+                  'org.codehaus.groovy.grails.commons',            // core / classloading
+                  'org.codehaus.groovy.grails.plugins',            // plugins
+                  'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+                  'org.springframework',
+                  'org.hibernate',
+                  'net.sf.ehcache.hibernate'
+
+            debug sqlAppender: ['org.hibernate.SQL'], additivity: false
+
+            debug 'grails.app.controllers.com.redhat',
+                  'grails.app.domain.your.com.redhat',
+                  'grails.app.services.com.redhat',
+                  'grails.app.taglib.com.redhat',
+                  'grails.app.conf.com.redhat',
+                  'grails.app.filters.com.redhat'
+        }
+
+        production {
+            appenders {
+                rollingFile name: "jbossews", file: "${System.getenv('OPENSHIFT_JBOSSEWS_LOG_DIR')}/tms.log"
+            }
+
+            error jbossews: ['org.codehaus.groovy.grails.web.servlet',        // controllers
+                             'org.codehaus.groovy.grails.web.pages',          // GSP
+                             'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+                             'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+                             'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+                             'org.codehaus.groovy.grails.commons',            // core / classloading
+                             'org.codehaus.groovy.grails.plugins',            // plugins
+                             'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+                             'org.springframework',
+                             'org.hibernate',
+                             'net.sf.ehcache.hibernate']
+
+            info jbossews: ['grails.app.controllers.com.redhat',
+                            'grails.app.domain.your.com.redhat',
+                            'grails.app.services.com.redhat',
+                            'grails.app.taglib.com.redhat',
+                            'grails.app.conf.com.redhat',
+                            'grails.app.filters.com.redhat']
+        }
     }
-
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
-
-    debug  sqlAppender: ['org.hibernate.SQL'], additivity: false
-
-    debug  'grails.app.controllers.com.redhat',
-           'grails.app.domain.your.com.redhat',
-           'grails.app.services.com.redhat',
-           'grails.app.taglib.com.redhat',
-           'grails.app.conf.com.redhat',
-           'grails.app.filters.com.redhat'
 }
 
 // Added by the Spring Security Core plugin:
