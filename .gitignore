@@ -43,3 +43,6 @@ PutObjectStoreDirHere
 /.m2
 # Visual paradigm
 *.vpp~*
+# grails specifics
+/plugins
+/null
