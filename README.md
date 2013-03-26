@@ -87,11 +87,7 @@ upload files and add abstract or tags to their theses.
 How to deploy the Thesis management system
 ==========================================
 
-1. Create an openshift JBoss EAP 6 cartridge and add Postgres and MongoDB 
+1. Create an openshift JBoss EWS 2 cartridge and add Postgres and MongoDB 
 cartridge.
 2. Add remote openshift repository to your local project git repository.
-3. Build the application with command `$ grails war`
-4. Move the built war file from directory ${project.dir}/target to directory 
-${project.dir}/deployments and rename it to ROOT.war
-5. Add deployments directory to stage and commit it.
-6. Push the commit to openshift repository.
+3. Push it in openshift.
