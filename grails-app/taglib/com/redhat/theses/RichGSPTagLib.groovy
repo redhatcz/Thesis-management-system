@@ -34,16 +34,16 @@ class RichGSPTagLib {
         def initSize = attrs?.initSize != null ? attrs.initSize.toInteger() : 0
 
         def cloneModel = [var: var, i: "clone",
-                          body: body((index): "clone"),
-                          classes: "dynamic-field-child clone ${attrs?.childClass}",
-                          id: "dynamic-field-${var}-clone"]
+                body: body((index): "clone"),
+                classes: "dynamic-field-child clone ${attrs?.childClass}",
+                id: "dynamic-field-${var}-clone"]
         result += render(template: "/taglib/richg/dynamicFieldInner", model: cloneModel)
 
         list?.eachWithIndex { item, i ->
             def model = [var: var, i: i,
-                         body: body((var): item, (index): i),
-                         classes: "dynamic-field-child ${attrs?.childClass}",
-                         id: "dynamic-field-${var}-${i}"]
+                    body: body((var): item, (index): i),
+                    classes: "dynamic-field-child ${attrs?.childClass}",
+                    id: "dynamic-field-${var}-${i}"]
             result += render(template: "/taglib/richg/dynamicFieldInner", model: model)
         }
 
@@ -58,9 +58,9 @@ class RichGSPTagLib {
 
 
         def modelOuter = [id: attrs?.id, var: var,
-                          classes: attrs?.class,
-                          size: initSize + size,
-                          body: result]
+                classes: attrs?.class,
+                size: initSize + size,
+                body: result]
         out << render(template: "/taglib/richg/dynamicFieldOuter", model: modelOuter)
     }
 
@@ -103,9 +103,9 @@ class RichGSPTagLib {
     }
 
     def multiCheckBox = { attrs, body ->
-        def from  = attrs.from
-        def name  = attrs.name
-        def id    = attrs.id ?: name
+        def from = attrs.from
+        def name = attrs.name
+        def id = attrs.id ?: name
         def classes = attrs['class']
         def value = attrs.value
         def optionKey = attrs.optionKey
@@ -113,7 +113,7 @@ class RichGSPTagLib {
         def isChecked
 
         from?.eachWithIndex { item, i ->
-            isChecked = value?.find {it?."${optionKey}" == item."${optionKey}"}
+            isChecked = value?.find { it?."${optionKey}" == item."${optionKey}" }
 
             def model = [name: "${name}[${i}].${optionKey}",
                     id: "${id}[${i}]",
@@ -137,7 +137,7 @@ class RichGSPTagLib {
 
         attrs?.params = Util.formatParams(request, attrsParams, removeParams)
 
-        out << g.link(attrs, {body()})
+        out << g.link(attrs, { body() })
     }
 
     /**
@@ -147,25 +147,26 @@ class RichGSPTagLib {
      * @attr small If true small version of avatar will be used
      *
      */
-    def avatar = {attrs, body ->
+    def avatar = { attrs, body ->
         def user = attrs?.user
         def group = attrs?.small ? 'avatar_small' : 'avatar'
 
-        if (!(user instanceof  User)) {
+        if (!(user instanceof User)) {
             throw IllegalArgumentException('user')
         }
 
         def avatar = gridFileService.getBoundFile(user, 'id', group)
+        def uri
 
         if (avatar) {
-            def uri = grid.createLink(mongoId: avatar?.id?.toString(), bucket: User.bucketMapping)
-
-            def excludes = ['user', 'small']
-            def attrsAsString = TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
-
-            out << "<img src=\"${uri.encodeAsHTML()}\"${attrsAsString} />"
+            uri = grid.createLink(mongoId: avatar?.id?.toString(), bucket: User.bucketMapping)
         } else {
-            out << img(file: 'avatar.png')
+            uri = resource(dir: 'images', file: attrs?.small ? 'avatar-mini.png' : 'avatar.png')
         }
+
+        def excludes = ['user', 'small']
+        def attrsAsString = TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
+
+        out << "<img src=\"${uri.encodeAsHTML()}\"${attrsAsString} />"
     }
 }
