@@ -17,8 +17,8 @@
                     <td>
                         <g:if test="${j < userInstanceList.size()}">
                         <div class="user-info">
-                            <img class="img-polaroid avatar-mini" height="36" width="36"
-                                 src="${resource(dir: 'images', file: 'avatar.png')}"/>
+                            <richg:avatar user="${userInstanceList?.get(j)}" small="true"
+                                          class="img-polaroid avatar-mini" height="36" width="36"/>
                             <div class="user-text">
                                 <h6>
                                     <g:link action="show" id="${userInstanceList?.get(j)?.id}">
