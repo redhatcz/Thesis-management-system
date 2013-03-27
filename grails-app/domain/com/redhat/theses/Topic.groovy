@@ -56,7 +56,7 @@ class Topic extends Article {
     }
 
     List<User> getSupervisors() {
-        Supervision.findAllByTopic(this)*.supervisor.unique()
+        getSupervisions()*.supervisor.unique()
     }
 
     String toString(){
