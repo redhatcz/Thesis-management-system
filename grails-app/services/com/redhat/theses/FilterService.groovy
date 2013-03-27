@@ -31,7 +31,8 @@ class FilterService {
         keyList.each() { propName ->
 
             // Skip associated property entries.  (They'll have a dot in them.)  We'll use the map instead later.
-            if (! propName.contains(".")) {
+            // And skip all password properties for security purposes
+            if (! propName.contains(".") && ! propName.contains("password")) {
 
                 def rawValue = filterParams[propName]
 
@@ -74,6 +75,7 @@ class FilterService {
 
     private filterParams(Map params, Class filterClass, boolean doCount) {
         def filterParams = params.filter
+
         def domainClass = resolveDomainClass(filterClass)
 
         if (filterParams != null && filterParams.size() > 0) {
