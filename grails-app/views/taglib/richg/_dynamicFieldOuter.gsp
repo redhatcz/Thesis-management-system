@@ -3,7 +3,7 @@
     <div id="add-${var}-button">
         <input class="tms-btn"
                type="button"
-               value="Add ${var}"
+               value="${message(code: "dynamicField.add.${var}.button", default: "Add")}"
                onclick="addDynamicField('${var}', ${size})"/>
     </div>
     <script type="text/javascript">
