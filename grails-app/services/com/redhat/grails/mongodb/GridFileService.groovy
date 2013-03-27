@@ -359,8 +359,6 @@ class GridFileService {
         def grid = getGrid(bucket)
         def query = transformToQuery(metadata)
 
-        println("Searching GridFS for file. \nBucket: $bucket\nQuery: $query")
-
         grid.findOne(query)
     }
 
