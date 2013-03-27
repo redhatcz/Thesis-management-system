@@ -8,6 +8,7 @@
 <body>
 <div class="span8 content">
     <h2 class="header"><g:message code="tag.list.header" /></h2>
+    <g:if test="${tags && tags.size() != 0}">
     <div class="tms-table">
         <table class="table">
             <g:each in="${(0..(Math.ceil(tagsWithUsage.size() / 3) - 1))}" var="i">
@@ -26,6 +27,10 @@
             </g:each>
         </table>
     </div>
+    </g:if>
+    <g:else>
+        <p class="center muted"><g:message code="tag.no.tags.found"/></p>
+    </g:else>
     <g:if test="${Util.isPaginationVisible(tagCount, params.max)}">
         <g:paginate total="${tagCount}" class="pagination-centered"/>
     </g:if>

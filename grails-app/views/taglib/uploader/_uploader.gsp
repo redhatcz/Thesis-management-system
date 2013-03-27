@@ -4,7 +4,7 @@
 <div class="qq-trigger-btn">
     <span id="triggerUpload" class="tms-btn pull-right">
         <i class="icon-upload"></i>
-        <g:message code="uploader.text.startUploadButton"/>
+        <g:message code="uploader.text.startUpload.button"/>
     </span>
 </div>
 </g:if>

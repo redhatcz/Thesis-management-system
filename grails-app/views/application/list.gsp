@@ -47,7 +47,9 @@
         <g:paginate total="${applicationInstanceTotal}" class="pagination-centered"/>
     </g:if>
     </g:if>
-    <g:else><g:message code="application.no.applications.found"/></g:else>
+    <g:else>
+        <p class="center muted"><g:message code="application.no.applications.found"/></p>
+    </g:else>
 </div>
 </body>
 </html>

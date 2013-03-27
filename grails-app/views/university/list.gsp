@@ -8,6 +8,7 @@
 <body>
 <div class="span12 content">
     <h2 class="header"><g:message code="university.list.header" /></h2>
+    <g:if test="${universityInstanceList && universityInstanceList.size() != 0}">
     <table class="table table-users">
         <tbody>
         <g:each in="${(0..(Math.ceil(universityInstanceList?.size() / 4) - 1))}" var="i">
@@ -43,6 +44,11 @@
         </sec:ifAnyGranted>
         </tbody>
     </table>
+    </g:if>
+    <g:else>
+        <p class="center muted"><g:message code="university.no.universities.found"/></p>
+    </g:else>
+
     <g:if test="${Util.isPaginationVisible(universityInstanceTotal, params.max)}">
         <g:paginate total="${universityInstanceTotal}" class="pagination-centered"/>
     </g:if>

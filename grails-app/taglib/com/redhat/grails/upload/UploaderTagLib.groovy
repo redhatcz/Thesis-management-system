@@ -102,7 +102,7 @@ class UploaderTagLib {
 
     private Map getTextConfig() {
         [
-                uploadButton: message(code: 'uploader.text.uploadButon'),
+                uploadButton: message(code: 'uploader.text.upload.button'),
                 cancelButton: message(code: 'uploader.text.cancel.button'),
                 retry: message(code: 'uploader.text.retry.message'),
                 failUpload: message(code: 'uploader.text.failUpload.message'),

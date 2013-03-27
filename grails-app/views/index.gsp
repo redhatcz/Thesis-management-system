@@ -8,6 +8,7 @@
 <body>
     <div class="span8 content">
         <h2><g:message code="home.latest.topics.header"/></h2>
+        <g:if test="${topicList && topicList.size() != 0}">
         <ul class="tms-list unstyled">
             <g:each in="${topicList}" var="topic">
             <li class="tms-elem">
@@ -29,6 +30,10 @@
             </li>
             </g:each>
         </ul>
+        </g:if>
+        <g:else>
+        <p class="muted"><g:message code="topic.no.topics.found"/></p>
+        </g:else>
 
         <h2>Statistics</h2>
         <span>All topics: ${statistics?.topicCount}</span><br/>

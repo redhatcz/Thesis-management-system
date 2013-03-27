@@ -1,5 +1,6 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 <div role="navigation">
+    <g:if test="${tagListWithUsage && tagListWithUsage.size() != 0}">
     <ul class="unstyled tags-panel">
         <g:each in="${tagListWithUsage}" var="tagEntry">
         <li>
@@ -16,4 +17,8 @@
             </g:link>
         </li>
     </ul>
+    </g:if>
+    <g:else>
+        <p class="muted"><g:message code="tag.no.tags.found"/></p>
+    </g:else>
 </div>

@@ -11,6 +11,7 @@
 <div class="span8 content">
     <h2 class="header"><g:message code="faq.list.header"/></h2>
 
+    <g:if test="${faqInstanceList && faqInstanceList.size() != 0}">
     <div class="accordion faq-list" id="accordion2">
         <g:each in="${faqInstanceList}" var="faq">
             <div class="accordion-group">
@@ -37,6 +38,11 @@
             </div>
         </g:each>
     </div>
+    </g:if>
+    <g:else>
+        <p class="center muted"><g:message code="faq.no.faqs.found"/></p>
+    </g:else>
+
     <g:javascript>
         $(document).ready(function () {
             var hash = window.location.hash.replace("#", "")

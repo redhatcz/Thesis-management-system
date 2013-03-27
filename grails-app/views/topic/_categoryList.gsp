@@ -1,4 +1,5 @@
 <div role="navigation" class="nav-categories">
+    <g:if test="${categoryList && categoryList.size() != 0}">
     <ul class="unstyled">
         <g:each in="${categoryList}" var="category">
         <li>
@@ -19,6 +20,11 @@
         </li>
         </g:each>
     </ul>
+    </g:if>
+    <g:else>
+        <p class="muted"><g:message code="category.no.categories.found"/></p>
+    </g:else>
+
     <div class="panel-buttons">
         <sec:ifAnyGranted roles="ROLE_ADMIN">
             <g:link class="tms-link btn-link" controller="category" action="create">

@@ -9,6 +9,7 @@
 <body>
     <div class="span12 content">
         <h2 class="header"><g:message code="user.list.header" /></h2>
+        <g:if test="${userInstanceList && userInstanceList.size() != 0}">
         <table class="table table-users">
             <tbody>
             <g:each in="${(0..(Math.ceil(userInstanceList?.size() / 4) - 1))}" var="i">
@@ -46,6 +47,11 @@
                 </sec:ifAnyGranted>
             </tbody>
         </table>
+        </g:if>
+        <g:else>
+            <p class="center muted"><g:message code="user.no.users.found"/></p>
+        </g:else>
+
         <g:if test="${Util.isPaginationVisible(userInstanceTotal, params.max)}">
             <g:paginate total="${userInstanceTotal}" class="pagination-centered"/>
         </g:if>
