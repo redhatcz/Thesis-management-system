@@ -6,8 +6,8 @@ class Faq {
     Locale locale = Locale.ENGLISH
 
     static constraints = {
-        question unique: true, nullable: false, blank: false
-        answer nullable: false, blank: false
+        question unique: true, blank: false
+        answer blank: false
     }
 
     static mapping = {

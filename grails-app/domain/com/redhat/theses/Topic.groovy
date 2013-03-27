@@ -20,8 +20,8 @@ class Topic extends Article {
     }
 
     static constraints = {
-        description widget: 'textarea' , nullable: false, blank: false
-        lead nullable: false, blank: false
+        description widget: 'textarea', blank: false
+        lead blank: false
         secondaryTitle nullable: true
         secondaryDescription nullable: true
 

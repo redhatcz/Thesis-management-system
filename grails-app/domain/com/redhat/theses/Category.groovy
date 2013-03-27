@@ -6,7 +6,7 @@ class Category {
     String description
 
     static constraints = {
-        title   unique: true
+        title unique: true, blank: false
         description maxSize: 255, nullable: true
     }
 
