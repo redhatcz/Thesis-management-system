@@ -9,9 +9,19 @@
 <div class="span4 sidebar">
     <div class="panel left">
         <div class="avatar">
-
-                <richg:avatar user="${userInstance}"/>
-
+            <richg:avatar user="${userInstance}"/>
+            <!-- Button to trigger modal -->
+            <a href="#change-avatar" role="button" id="avatar-button" data-toggle="modal">Change Avatar</a>
+        </div>
+        <!-- Modal -->
+        <div id="change-avatar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Change Avatar</h3>
+            </div>
+            <div class="modal-body">
+                <u:uploader topic="avatar" params="${[id: userInstance.id]}"/>
+            </div>
         </div>
         <h4><g:message code="user.information.label"/></h4>
         <div class="panel-content">

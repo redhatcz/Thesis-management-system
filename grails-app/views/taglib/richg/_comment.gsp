@@ -1,6 +1,7 @@
 <%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils" %>
 <div class="comment-head">
-    <img class="img-circle" src="${resource(dir: 'images', file: 'avatar-mini.png')}"/>
+    <richg:avatar user="${comment?.user}" small="true"
+                  class="img-circle" height="36" width="36"/>
     <h4>${comment?.user?.fullName}</h4>
     <div class="pull-right">
         <g:if test="${comment?.privateComment}">
