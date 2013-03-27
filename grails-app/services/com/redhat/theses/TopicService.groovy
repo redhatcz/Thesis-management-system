@@ -12,10 +12,11 @@ class TopicService {
 
     Boolean saveWithSupervisions(Topic topic, List supervisions) {
         String type = topic.id ? 'articleUpdated' : 'articleCreated'
-        def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it in supervisions)} : []
+        def filteredSupervisions = supervisions.findAll {it.topic?.id && it.supervisor?.id && it.university?.id}
+        def removedSupervisions = topic.id ? topic.supervisions.findAll {!(it in filteredSupervisions)} : []
         def savedTopic = topic.save(flush: true)
         def success = savedTopic &&
-                supervisions.every { it.save() } &&
+                filteredSupervisions.every { it.save() } &&
                 removedSupervisions.every { Commons.delete(it) }
 
         if (!success) {

@@ -216,6 +216,7 @@ class TopicController {
         def supervisionCommand = new SupervisionCommand()
         bindData(supervisionCommand, params.supervisionCommand)
         supervisionCommand.supervisions = supervisionCommand.supervisions.findAll()
+        supervisionCommand.validate()
 
         if (version != null && topicInstance.version > version) {
             topicInstance.errors.rejectValue("version", "topic.optimistic.lock.error")
@@ -233,7 +234,7 @@ class TopicController {
             }
             supervision
         }.unique{[it.supervisor, it.university]}
-        if (!topicService.saveWithSupervisions(topicInstance, withExistingSupervisions))  {
+        if (supervisionCommand.hasErrors() || !topicService.saveWithSupervisions(topicInstance, withExistingSupervisions))  {
             render(view: "edit", model: [topicInstance: topicInstance, supervisionCommand: supervisionCommand,
                     universities: University.all, types: Type.values()])
             return

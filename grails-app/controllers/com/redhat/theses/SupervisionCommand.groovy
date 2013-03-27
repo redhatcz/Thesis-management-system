@@ -8,4 +8,12 @@ import grails.validation.Validateable
 class SupervisionCommand {
 
     List<Supervision> supervisions = ListUtils.lazyList(new ArrayList<Supervision>(), FactoryUtils.instantiateFactory(Supervision.class));
+
+    static constraints = {
+        supervisions validator: { supervisions ->
+            if (supervisions.any { !it.supervisor?.id && it.supervisor?.fullName}) {
+                'supervisor.not.found'
+            }
+        }
+    }
 }
