@@ -90,4 +90,7 @@ How to deploy the Thesis management system
 1. Create an openshift JBoss EWS 2 cartridge and add Postgres and MongoDB 
 cartridge.
 2. Add remote openshift repository to your local project git repository.
-3. Push it in openshift.
+3. Push it in the openshift.
+
+_Note:_ You need medium gear, otherwise grails won't be able to build the app. 
+Or you can use small gear and build the application your self.
