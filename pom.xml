@@ -268,7 +268,6 @@
                 <configuration>
                     <!-- Whether for Fork a JVM to run Grails commands -->
                     <fork>true</fork>
-                    <forkDebug>true</forkDebug>
                 </configuration>
                 <extensions>true</extensions>
             </plugin>
