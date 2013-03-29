@@ -6,5 +6,7 @@
 
 emailDomains = [
     'mail.muni.cz',
-    'fit.vutbr.cz'
+    'fi.muni.cz',
+    'fit.vutbr.cz',
+    'redhat.com'
 ]
