@@ -7,6 +7,13 @@
 </head>
 <body>
     <div class="span8 content">
+
+        <g:if test="${config?.announcement}">
+            <div class="alert alert-error">
+                <markdown:renderHtml text="${config?.announcement}" />
+            </div>
+        </g:if>
+
         <h2><g:message code="home.latest.topics.header"/></h2>
         <g:if test="${topicList && topicList.size() != 0}">
         <ul class="tms-list unstyled">

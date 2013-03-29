@@ -17,6 +17,11 @@ class HomeController {
      */
     def commentService
 
+    /**
+     * Dependency injection of com.redhat.theses.config.Configuration
+     */
+    def configuration
+
     def index() {
         if (Util.isControllerOrActionInUrl(request, 'home', 'index')) {
             redirect uri: '/', permanent: true, params: params
@@ -40,6 +45,6 @@ class HomeController {
         def commentCounts = commentService.countByArticles(topicList)
 
         render view: '/index', model: [topicList: topicList, yourTheses: yourTheses,
-             statistics: statistics, commentCounts: commentCounts]
+             statistics: statistics, commentCounts: commentCounts, config: configuration.getConfig()]
     }
 }
