@@ -14,6 +14,17 @@
             </g:link>
         </small>
     </h2>
+    <p>
+        <g:message code="registration.allowedEmails.message"/>
+        <g:each in="${config.emailDomains}" var="emailDomain" status="i">
+            <g:if test="${config.emailDomains?.size() - 1 != i}">
+                <strong>${emailDomain}</strong>,
+            </g:if>
+            <g:else>
+                <strong>${emailDomain}</strong>
+            </g:else>
+        </g:each>
+    </p>
     <g:form class="form-inline" action="register" >
         <g:render template="form"/>
         <div class="control-group">

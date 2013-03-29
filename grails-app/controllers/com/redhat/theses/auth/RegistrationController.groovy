@@ -22,7 +22,7 @@ class RegistrationController {
             redirect uri: '/registration', permanent: true
         }
 
-        [registrationCommand: new RegistrationCommand()]
+        [registrationCommand: new RegistrationCommand(), config: configuration.getConfig()]
     }
 
     def register(RegistrationCommand registrationCommand) {
@@ -38,7 +38,7 @@ class RegistrationController {
         }
 
         if (registrationCommand.hasErrors() || !userService.save(user)) {
-            render(view: "index", model: [registrationCommand: registrationCommand])
+            render(view: "index", model: [registrationCommand: registrationCommand, config: configuration.getConfig()])
             return
         }
 
