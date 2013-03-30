@@ -1,5 +1,6 @@
 package com.redhat.theses
 import com.redhat.theses.util.Util
+import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
@@ -232,5 +233,65 @@ class ThesisController {
             flash.message = message(code: 'thesis.not.deleted', args: [id])
             redirect(action: "show", id: id, params: [headline: Util.hyphenize(thesisInstance.title)])
         }
+    }
+
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def notes(Long id) {
+        def thesisInstance = Thesis.get(id)
+        def result = [success: false, message: null, content: null]
+
+        if (!thesisInstance) {
+            result.message = message(code: 'thesis.not.found', args: [id])
+            return render(text: result as JSON, contentType: 'text/json')
+        }
+
+        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
+                springSecurityService.currentUser == thesisInstance.supervisor ||
+                springSecurityService.currentUser == thesisInstance.topic.owner
+
+        if (!isAuthorized) {
+            result.message= message(code: 'security.denied.action.message', args: [id])
+            return render(text: result as JSON, contentType: 'text/json')
+        }
+        result.success = true
+        result.content = thesisInstance.notes
+
+        return render(text: result as JSON, contentType: 'text/json')
+    }
+
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def updateNotes() {
+        Long id = params.thesis.long("id")
+        def user = springSecurityService.currentUser
+
+        def result = [success: false, message: null, content: null]
+
+        def thesisInstance = Thesis.get(id)
+        if (!thesisInstance) {
+            result.message = message(code: 'thesis.not.found', args: [id])
+            return render(text: result as JSON, contentType: 'text/json')
+        }
+
+        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
+                springSecurityService.currentUser == thesisInstance.supervisor ||
+                springSecurityService.currentUser == thesisInstance.topic.owner
+
+        if (!isAuthorized) {
+            result.message= message(code: 'security.denied.action.message', args: [id])
+            return render(text: result as JSON, contentType: 'text/json')
+        }
+
+        def allowed = ['notes']
+        def updated = params.thesis.findAll {key, val -> key in allowed}
+
+        thesisInstance.properties = updated
+
+        if (!thesisService.save(thesisInstance, false)) {
+            return render(text: result as JSON, contentType: 'text/json')
+        }
+
+        result.success = true
+        result.content = thesisInstance.notes
+        return render(text: result as JSON, contentType: 'text/json')
     }
 }

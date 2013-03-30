@@ -105,6 +105,7 @@
         <h4><g:message code="thesis.manage.label"/></h4>
         <div class="panel-content">
             <div class="panel-buttons">
+                <g:render template="notes"/>
                 <g:if test="${!subscriber}">
                     <g:form controller="subscription" action="subscribe">
                         <g:hiddenField name="articleId" value="${thesisInstance?.id}"/>

@@ -12,6 +12,7 @@ class Thesis extends Article{
     Status status
     Grade grade
     String thesisAbstract
+    String notes
     Date dateCreated
 
     static hasMany = [tags: Tag]
@@ -19,6 +20,7 @@ class Thesis extends Article{
     static mapping = {
         description type: 'text'
         thesisAbstract type: 'text'
+        notes type: 'text'
         sort 'dateCreated'
         order 'desc'
     }
@@ -28,6 +30,7 @@ class Thesis extends Article{
         grade nullable: true
         supervisor nullable: true
         thesisAbstract nullable: true
+        notes nullable: true
 
         topic validator: {topic ->
             if (topic?.id == null || !Topic.get(topic.id)) {
