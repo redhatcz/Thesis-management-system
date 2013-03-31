@@ -39,7 +39,7 @@ environments {
 
         grails {
             mongo {
-                databaseName = mongoCredentials.name
+                databaseName = 'thesis-management'
             }
         }
     }
@@ -54,7 +54,7 @@ environments {
 
         grails {
             mongo {
-                databaseName = mongoCredentials.name
+                databaseName = 'thesis-management'
             }
         }
     }
