@@ -30,7 +30,7 @@
         <div class="controls">
             <g:select name="thesis.grade"
                       from="${gradeList}"
-                      noSelection="['':'-- no selection --']"
+                      noSelection="['':message(code: 'no.selection.label')]"
                       value="${thesisInstance?.grade?.toString()}"/>
         </div>
     </div>

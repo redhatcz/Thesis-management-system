@@ -7,7 +7,7 @@
             <g:select id="application.university.id"
                     name="application.university.id"
                     from="${universities}"
-                    noSelection="${['null':'-- no selection --']}"
+                    noSelection="['':message(code: 'no.selection.label')]"
                     optionKey="id"
                     value="${applicationInstance?.university?.id}"
                     class="many-to-one"/>

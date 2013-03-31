@@ -68,12 +68,12 @@
                     <g:textField value="${params?.filter?.assignee?.fullName}" class="wide"
                                  name="filter.assignee.fullName" placeholder="${message(code: 'thesis.assignee.label')}"/>
                     <g:select name="filter.status" from="${Status.values()}"
-                              noSelection="['':'-- select status --']"
+                              noSelection="['':message(code:'thesis.status.select.label')]"
                               optionValue="${{g.message(code:"thesis.status.${it?.toString()?.toLowerCase()}.label")}}"
                               value="${params?.filter?.status}"
                               class="many-to-one"/>
                     <g:select name="filter.grade" from="${Grade.values()}"
-                              noSelection="['':'-- select grade --']"
+                              noSelection="['':message(code:'thesis.grade.select.label')]"
                               value="${params?.filter?.grade}"
                               class="many-to-one"/>
                     <g:submitButton class="tms-btn pull-right" name="filter-button"

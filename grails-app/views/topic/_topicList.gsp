@@ -85,7 +85,7 @@
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
                              name="filter.owner.fullName" placeholder="${message(code: 'topic.owner.label')}"/>
                 <g:select name="filter.universities.id" from="${universities}"
-                          noSelection="['':'-- select university --']"
+                          noSelection="['':message(code:'topic.university.select.label')]"
                           optionKey="id" value="${params?.filter?.universities?.id}"
                           class="many-to-one"/>
                 <g:submitButton class="tms-btn pull-right" name="filter-button"
