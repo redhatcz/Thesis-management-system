@@ -7,5 +7,5 @@ enum Status {
     IN_PROGRESS,
     FINISHED,
     FAILED,
-    POSPONED
+    POSTPONED
 }
