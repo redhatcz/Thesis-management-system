@@ -309,9 +309,9 @@ class GridFileService {
      * @param mongoId
      * @param bucket
      */
-    def deleteFileByRawMongoId(String mongoId, String bucket = null) {
+    def deleteFileByRawMongoId(Object mongoId, String bucket = null) {
         def grid = getGrid(bucket)
-        def _id = new ObjectId(mongoId)
+        def _id = mongoId
 
         grid.remove(grid.findOne(_id))
     }
