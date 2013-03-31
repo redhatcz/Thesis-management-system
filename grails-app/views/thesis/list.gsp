@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util" %>
+<%@ page import="com.redhat.theses.Grade; com.redhat.theses.Status; com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,6 +67,15 @@
                                  name="filter.supervisor.fullName" placeholder="${message(code: 'thesis.supervisor.label')}"/>
                     <g:textField value="${params?.filter?.assignee?.fullName}" class="wide"
                                  name="filter.assignee.fullName" placeholder="${message(code: 'thesis.assignee.label')}"/>
+                    <g:select name="filter.status" from="${Status.values()}"
+                              noSelection="['':'-- select status --']"
+                              optionValue="${{g.message(code:"thesis.status.${it?.toString()?.toLowerCase()}.label")}}"
+                              value="${params?.filter?.status}"
+                              class="many-to-one"/>
+                    <g:select name="filter.grade" from="${Grade.values()}"
+                              noSelection="['':'-- select grade --']"
+                              value="${params?.filter?.grade}"
+                              class="many-to-one"/>
                     <g:submitButton class="tms-btn pull-right" name="filter-button"
                                     value="${message(code: 'filter.button')}"/>
                 </g:form>
