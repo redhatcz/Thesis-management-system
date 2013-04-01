@@ -7,18 +7,12 @@
 
 <body>
 <div class="span8 content">
-    <h1 class="header">
+    <h2 class="header">
         <g:message code="termsOfUse.header"/>
-    </h1>
+    </h2>
 
     <div class="tms-description">
         <markdown:renderHtml text="${termsOfUse}"/>
-    </div>
-</div>
-
-<div class="span4 sidebar">
-    <div class="panel right">
-
     </div>
 </div>
 </body>

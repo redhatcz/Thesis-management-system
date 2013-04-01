@@ -14,7 +14,8 @@
             </g:link>
         </small>
     </h2>
-    <p>
+    <p class="alert alert-info">
+        <i class="icon-info-sign"></i>
         <g:message code="registration.allowedEmails.message"/>
         <g:each in="${config.emailDomains}" var="emailDomain" status="i">
             <g:if test="${config.emailDomains?.size() - 1 != i}">
