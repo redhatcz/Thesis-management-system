@@ -9,7 +9,7 @@ class UploaderTagLib {
 
     def groovyPageRenderer
 
-    def final DEF_WRAPPER_ID = 'uploader-wrapper'
+    def final DEF_UPLOADER_ID = 'uploader'
     def final DEF_OUTER_TEMPLATE = '/taglib/uploader/uploaderOuter'
     def final DEF_INNER_TEMPLATE = '/taglib/uploader/uploaderInner'
 
@@ -18,8 +18,6 @@ class UploaderTagLib {
                     endpoint: null
             ],
             text: [:],
-            autoUpload: false,
-            multiple: true,
             template: null,
     ]
 
@@ -31,8 +29,9 @@ class UploaderTagLib {
      * @param template Template used to generate uploader
      * @param topic Name of the topic used when UploaderEvent is fired
      * @param callbacks Map of FineUploader callbacks [callback: function]
-     * @param wrapperId  Id of div used as a wrapper for uploader
+     * @param uploaderId  Id of div used as uploader
      * @attr validation Validation option map
+     * @attr multiple Determines whether this uploader should accept multiple files.
      *
      */
     def uploader = { attrs, body ->
@@ -40,12 +39,17 @@ class UploaderTagLib {
         def bodyResult = body()
         def config = buildConfig(attrs)
 
+        // Separate wrapper attributes from remaining attributes
+        def excludes = ['config', 'params', 'template', 'callbacks',
+                        'topic', 'uploaderId', 'validation']
+        def attrsAsString = TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
 
         def model = [
                 config: config,
-                wrapperId: attrs.wrapperId ?: DEF_WRAPPER_ID,
+                uploaderId: attrs.uploaderId ?: DEF_UPLOADER_ID,
                 callbacks: getCallbacks(attrs),
-                body: bodyResult
+                body: bodyResult,
+                attrs: attrsAsString
         ]
 
         out << render(template: DEF_OUTER_TEMPLATE, model: model);
@@ -102,6 +106,8 @@ class UploaderTagLib {
 
         def config = attrs?.config ?: defaultConfig
 
+        // multiple
+        config.multiple = attrs?.multiple != null ? attrs.multiple : true
         // adding request params to the configuration
         config.request.params = attrs?.params ?: []
         // upload link generation workaround
@@ -115,7 +121,7 @@ class UploaderTagLib {
             config.validation = attrs.validation
         }
         // text labels
-        config.text = textConfig
+        config.text = buildTextConfig(attrs)
         // uploader template
         config.template = groovyPageRenderer.render(template: attrs?.template ?: DEF_INNER_TEMPLATE);
         // classes
@@ -125,22 +131,37 @@ class UploaderTagLib {
         json.toPrettyString()
     }
 
-    private Map getTextConfig() {
+    private Map buildTextConfig(attrs) {
+        def text = attrs?.text
         [
-                uploadButton: message(code: 'uploader.text.upload.button'),
-                cancelButton: message(code: 'uploader.text.cancel.button'),
-                retry: message(code: 'uploader.text.retry.message'),
-                failUpload: message(code: 'uploader.text.failUpload.message'),
-                dragZone: message(code: 'uploader.text.dragZone.title'),
-                dropProcessing: message(code: 'uploader.text.dropProcessing.message'),
-                formatProgress: message(code: 'uploader.text.formatProgress.message'),
-                waitingForResponse: message(code: 'uploader.text.waitingForResponse.message'),
-                typeError: message(code:  'uploader.text.typeError.message'),
-                sizeError: message(code: 'uploader.text.sizeError.message'),
-                minSizeError: message(code: 'uploader.text.minSizeError.message'),
-                emptyError: message(code: 'uploader.text.emptyError.message'),
-                noFilesError: message(code: 'uploader.text.noFilesError.message'),
-                onLeave: message(code: 'uploader.text.noFilesError.message')
+                uploadButton:       text?.uploadButton          ?:
+                                    message(code: 'uploader.text.upload.button'),
+                cancelButton:       text?.cancelButton          ?:
+                                    message(code: 'uploader.text.cancel.button'),
+                retry:              text?.retry                 ?:
+                                    message(code: 'uploader.text.retry.message'),
+                failUpload:         text?.failUpload            ?:
+                                    message(code: 'uploader.text.failUpload.message'),
+                dragZone:           text?.dragZone              ?:
+                                    message(code: 'uploader.text.dragZone.title'),
+                dropProcessing:     text?.dropProcessing        ?:
+                                    message(code: 'uploader.text.dropProcessing.message'),
+                formatProgress:     text?.formatProgress        ?:
+                                    message(code: 'uploader.text.formatProgress.message'),
+                waitingForResponse: text?.waitingForResponse    ?:
+                                    message(code: 'uploader.text.waitingForResponse.message'),
+                typeError:          text?.typeError             ?:
+                                    message(code:  'uploader.text.typeError.message'),
+                sizeError:          text?.sizeError             ?:
+                                    message(code: 'uploader.text.sizeError.message'),
+                minSizeError:       text?.minSizeError          ?:
+                                    message(code: 'uploader.text.minSizeError.message'),
+                emptyError:         text?.emptyError            ?:
+                                    message(code: 'uploader.text.emptyError.message'),
+                noFilesError:       text?.noFilesError          ?:
+                                    message(code: 'uploader.text.noFilesError.message'),
+                onLeave:            text?.onLeave               ?:
+                                    message(code: 'uploader.text.noFilesError.message')
         ]
     }
 

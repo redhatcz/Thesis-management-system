@@ -1,13 +1,13 @@
 <script>
     $(document).ready(function () {
-       _uploader = $('#${wrapperId}').fineUploader(
+       _uploader = $('#${uploaderId}').fineUploader(
                 ${config}
         )${callbacks};
     });
 </script>
 
-<div>
-    <div id="${wrapperId}"></div>
+<div ${attrs}>
+    <div id="${uploaderId}"></div>
     ${body}
 </div>
 
