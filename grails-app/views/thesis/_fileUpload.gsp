@@ -65,6 +65,11 @@
 
     <g:if test="${isAuthorized}">
         <u:uploader topic="thesis" params="${[id: thesisInstance.id]}"
-                    callbacks="[complete: 'addToFileList(\'file-list\',\'list-info\')']"/>
+                    callbacks="[complete: 'addToFileList(\'file-list\',\'list-info\')']">
+            <u:trigger id="triggerUpload" class="tms-btn pull-right">
+                <i class="icon-upload"></i>
+                <g:message code="uploader.text.startUpload.button"/>
+            </u:trigger>
+        </u:uploader>
     </g:if>
 </div>

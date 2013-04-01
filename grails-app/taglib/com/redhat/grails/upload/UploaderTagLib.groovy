@@ -1,6 +1,7 @@
 package com.redhat.grails.upload
 
 import groovy.json.JsonBuilder
+import org.grails.plugin.platform.util.TagLibUtils
 
 class UploaderTagLib {
 
@@ -9,8 +10,8 @@ class UploaderTagLib {
     def groovyPageRenderer
 
     def final DEF_WRAPPER_ID = 'uploader-wrapper'
-    def final DEF_WRAPPER_TEMPLATE = '/taglib/uploader/uploader'
-    def final DEF_TEMPLATE = '/taglib/uploader/uploaderBootstrapTemplate'
+    def final DEF_OUTER_TEMPLATE = '/taglib/uploader/uploaderOuter'
+    def final DEF_INNER_TEMPLATE = '/taglib/uploader/uploaderInner'
 
     def final DEF_CONFIG = [
             request: [
@@ -35,23 +36,44 @@ class UploaderTagLib {
      *
      */
     def uploader = { attrs, body ->
+
+        def bodyResult = body()
         def config = buildConfig(attrs)
+
 
         def model = [
                 config: config,
                 wrapperId: attrs.wrapperId ?: DEF_WRAPPER_ID,
-                callbacks: getCallbacks(attrs)
+                callbacks: getCallbacks(attrs),
+                body: bodyResult
         ]
 
-        out << render(template: DEF_WRAPPER_TEMPLATE, model: model);
+        out << render(template: DEF_OUTER_TEMPLATE, model: model);
+    }
 
+
+    def trigger = {attrs, body ->
+
+        pageScope.uploader = [autoUpload: false]
+
+
+        def excludes = []
+        def attrsAsString = TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
+
+        def model = [body: body(),
+                     id: attrs.id,
+                     attrs: attrsAsString]
+        out << render(template: '/taglib/uploader/uploaderTrigger', model: model)
     }
 
     /**
      * Creates link which can be used to delete uploaded file.
      * See g.remoteLink for more documentation.
      *
-     * @param id Id of uploaded file (e.g. it's name, db id or any other identifier you use)
+     * @param id Id used to identify the file you wish to be deleted -- Default delete listener
+     *           is expecting this to be MongoId, however for user defined listeners this
+     *           can be any value which will uniquely identify the file.
+     *
      * @param topic Name of listener used to handle this delete request.
      * @param confirm Text of the confirmation dialog. If empty no dialog will appear
      */
@@ -85,6 +107,9 @@ class UploaderTagLib {
         // upload link generation workaround
         config.request.endpoint = createLink(controller: 'upload', action: 'upload',
                 params: [topic: attrs.topic])
+        //autoupload
+        def autoUpload = pageScope?.uploader?.autoUpload
+        config.autoUpload =  autoUpload != null ? autoUpload : true
         // validation
         if (attrs.validation && attrs?.validation instanceof Map){
             config.validation = attrs.validation
@@ -92,7 +117,7 @@ class UploaderTagLib {
         // text labels
         config.text = textConfig
         // uploader template
-        config.template = groovyPageRenderer.render(template: attrs?.template ?: DEF_TEMPLATE);
+        config.template = groovyPageRenderer.render(template: attrs?.template ?: DEF_INNER_TEMPLATE);
         // classes
         config.classes = classesConfig
 
