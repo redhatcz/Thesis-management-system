@@ -146,6 +146,11 @@ input[type="checkbox"] {
 input[type="text"],
 input[type="password"] {
   .pretty-input();
+
+  &[disabled] {
+    background-color: @grayBorder;
+    .box-shadow(none);
+  }
 }
 
 input.wide {
@@ -639,14 +644,14 @@ ul form {
     }
 
     dt {
-      padding: 7px 0;
+      padding: 5px 0;
       width: 110px;
       text-align: left;
       font-weight: normal;
     }
 
     dd {
-      padding: 7px 0 8px;
+      padding: 5px 0 6px;
       margin-left: 125px;
     }
   }
@@ -1349,6 +1354,24 @@ div#faq-list .dynamic-delete-button {
       -ms-transition: opacity .2s linear, none;
        -o-transition: opacity .2s linear, none;
           transition: opacity .2s linear, none;
+}
+
+/*-----DEFINITION-LIST-----*/
+
+.dl-horizontal.tms-dl {
+  margin-bottom: 0px;
+  margin-left: 20px;
+
+  dt {
+    font-weight: normal;
+    padding: 5px 0px;
+    text-align: left;
+    color: @grayLight;
+  }
+
+  dd {
+    padding: 5px 0px;
+  }
 }
 
 /*---------OTHER---------*/

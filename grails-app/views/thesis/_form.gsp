@@ -50,6 +50,7 @@
         <div class="controls">
             <g:select name="thesis.status"
                       from="${statusList}"
+                      noSelection="['':message(code: 'no.selection.label')]"
                       value="${thesisInstance?.status?.toString()}"/>
         </div>
     </div>
@@ -65,7 +66,20 @@
                       value="${thesisInstance?.grade?.toString()}"/>
         </div>
     </div>
+</sec:ifAnyGranted>
 
+<div class="control-group ${hasErrors(bean: thesisInstance, field: 'thesisAbstract', 'error')}">
+    <label class="control-label" for="thesis.thesisAbstract">
+        <strong><g:message code="thesis.thesisAbstract.label" /></strong>
+    </label>
+    <div class="controls">
+        <g:textArea name="thesis.thesisAbstract"
+                    cols="80" rows="5"
+                    value="${thesisInstance?.thesisAbstract}"/>
+    </div>
+</div>
+
+<sec:ifAnyGranted roles="ROLE_OWNER, ROLE_ADMIN, ROLE_SUPERVISOR">
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'description', 'error')} required">
         <div class="small-msg pull-right">
             <i class="icon-info-sign"></i>
@@ -80,17 +94,6 @@
         </div>
     </div>
 </sec:ifAnyGranted>
-
-<div class="control-group ${hasErrors(bean: thesisInstance, field: 'thesisAbstract', 'error')}">
-    <label class="control-label" for="thesis.thesisAbstract">
-        <strong><g:message code="thesis.thesisAbstract.label" /></strong>
-    </label>
-    <div class="controls">
-        <g:textArea name="thesis.thesisAbstract"
-                    cols="80" rows="5"
-                    value="${thesisInstance?.thesisAbstract}"/>
-    </div>
-</div>
 
 <div class="control-group">
     <label class="control-label" for="tag-list">
