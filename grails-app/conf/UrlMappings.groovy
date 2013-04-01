@@ -8,9 +8,13 @@ class UrlMappings {
 		}
 
 		"/"(controller: 'home', action: 'index')
-        "400"(view:'/errors/400')
-        "403"(view:'/errors/403')
-        "404"(view:'/errors/404')
-        "500"(view:'/errors/500')
+        "400"(controller: 'errors', action: '400')
+        "403"(controller: 'errors', action: '403')
+        "404"(controller: 'errors', action: '404')
+        "500"(controller: 'errors', action: '500')
+
+        //exclude searchable controller
+        "/searchable"(controller: 'errors', action: '404')
+        "/searchable/$action?"(controller: 'errors', action: '404')
 	}
 }
