@@ -15,7 +15,24 @@
         </small>
     </h2>
     <g:form class="form-inline" action="save" >
-        <g:render template="/shared/thesis/formCreate"/>
+        <div class="control-group ${hasErrors(bean: thesisInstance?.topic, field: 'title', 'error')} required">
+            <label class="control-label" for="thesis.topic.title">
+                <strong><g:message code="topic.label" /></strong>
+                <span class="required-indicator">*</span></strong>
+            </label>
+            <div class="controls">
+                <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}" />
+                <a4g:textField name="thesis.topic.title"
+                               value="${thesisInstance?.topic?.title}"
+                               disabled="${disabledTopicField}"
+                               placeholder="${message(code: 'topic.label')}"
+                               autocomplete-url="${createLink(controller: 'json', action: 'listTopicsByTitle')}"
+                               autocomplete-target="thesis.topic.id" />
+            </div>
+        </div>
+
+        <g:render template="form"/>
+
         <div class="control-group">
             <div class="controls">
                 <g:submitButton name="create"

@@ -19,7 +19,9 @@
         <g:hiddenField name="thesis.id" value="${thesisInstance?.id}" />
         <g:hiddenField name="thesis.version" value="${thesisInstance?.version}" />
         <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}" />
-        <g:render template="formEdit"/>
+
+        <g:render template="form"/>
+
         <div class="control-group">
             <div class="controls">
                 <g:actionSubmit class="tms-btn btn-large"

@@ -24,9 +24,9 @@
 
 .pretty-select() {
   height: @inputHeight + 10;
-  width: @inputWidth;
+  width: @selectWidth;
   border-color: @grayLighter;
-  padding: 9px 10px;
+  padding: 9px 6px;
   .border-radius(0);
   .transition(border-color linear .2s);
 
@@ -226,7 +226,10 @@ h4.header {
 
   & > h1:first-child,
   & > h2:first-child,
-  & > h3:first-child {
+  & > h3:first-child,
+  & > h1:first-of-type,
+  & > h2:first-of-type,
+  & > h3:first-of-type {
     margin-top: 0px;
     padding-top: 0px;
   }
@@ -468,6 +471,14 @@ i[class*="icon-"].large {
 form.form-inline {
   background-color: @graySuperLight;
   padding: 15px 20px;
+
+  fieldset {
+    margin-bottom: 20px;
+
+    legend {
+      margin-bottom: 0px;
+    }
+  }
 }
 
 ul form {
@@ -479,6 +490,18 @@ ul form {
 
   &:last-child {
     margin-bottom: 10px;
+  }
+
+  &.error {
+    input:focus,
+    select:focus,
+    textarea:focus {
+      .box-shadow(none);
+    }
+  }
+
+  #thesis-enabled {
+    padding: 0px 0px 5px;
   }
 }
 
@@ -589,7 +612,6 @@ ul form {
 
   li {
     margin-bottom: 10px;
-  /*color: @grayLight;*/
 
     &:last-child {
       margin-bottom: 0;
@@ -673,6 +695,9 @@ ul form {
 .nav-categories {
   ul {
     padding-top: 3px;
+  }
+
+  li {
     font-size: @baseFontSize;
   }
 
@@ -1367,4 +1392,13 @@ div#faq-list .dynamic-delete-button {
 
 label.text {
   padding-top: 5px;
+}
+
+.small-msg {
+  font-size: @fontSizeSmall;
+  color: @grayLight;
+}
+
+#conf-update-btn {
+  margin-top: 20px;
 }

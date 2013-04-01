@@ -36,41 +36,39 @@
             </div>
         </sec:ifAnyGranted>
 
-        <div>
-            <h2><g:message code="university.show.topics.header"/></h2>
-            <g:if test="${topicInstanceList && !topicInstanceList?.empty}">
-                <ul class="tms-list unstyled">
-                <g:each in="${topicInstanceList}" var="topic">
-                    <li class="tms-elem">
-                        <i class="icon-book"></i>
-                        <g:link controller="topic" action="show"
-                                id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"
-                        ><g:fieldValue field="title" bean="${topic}"/></g:link>
-                        <span class="pull-right">
-                            <i class="icon-comment-alt"></i> ${commentCounts[topic] ?: 0}
-                        </span>
-                        <ul class="inline">
-                            <li>
-                                <i class="icon-time"></i>
-                                <g:formatDate date="${topic?.dateCreated}"
-                                              dateStyle="LONG"
-                                              type="date" />
-                            </li>
-                        </ul>
-                    </li>
-                </g:each>
-                </ul>
-                <div class="more">
-                    <i class="icon-reorder"></i>
-                    <g:link controller="topic" action="list" params="['filter.universities.id': universityInstance?.id]">
-                        <g:message code="more.button"/>
-                    </g:link>
-                </div>
-            </g:if>
-            <g:else>
-                <p class="center muted"><g:message code="university.no.topics.found" /></p>
-            </g:else>
-        </div>
+        <h2><g:message code="university.show.topics.header"/></h2>
+        <g:if test="${topicInstanceList && !topicInstanceList?.empty}">
+            <ul class="tms-list unstyled">
+            <g:each in="${topicInstanceList}" var="topic">
+                <li class="tms-elem">
+                    <i class="icon-book"></i>
+                    <g:link controller="topic" action="show"
+                            id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"
+                    ><g:fieldValue field="title" bean="${topic}"/></g:link>
+                    <span class="pull-right">
+                        <i class="icon-comment"></i> ${commentCounts[topic] ?: 0}
+                    </span>
+                    <ul class="inline">
+                        <li>
+                            <i class="icon-time"></i>
+                            <g:formatDate date="${topic?.dateCreated}"
+                                          dateStyle="LONG"
+                                          type="date" />
+                        </li>
+                    </ul>
+                </li>
+            </g:each>
+            </ul>
+            <div class="more">
+                <i class="icon-reorder"></i>
+                <g:link controller="topic" action="list" params="['filter.universities.id': universityInstance?.id]">
+                    <g:message code="more.button"/>
+                </g:link>
+            </div>
+        </g:if>
+        <g:else>
+            <p class="center muted"><g:message code="university.no.topics.found" /></p>
+        </g:else>
     </div>
 </body>
 </html>

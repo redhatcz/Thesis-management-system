@@ -28,6 +28,10 @@
 <g:form controller="comment" action="create" name="create-comment-form">
     <g:hiddenField name="comment.article.id" value="${article?.id}" />
     <g:textArea name="comment.content" rows="5" />
+    <div class="small-msg pull-left">
+        <i class="icon-info-sign"></i>
+        <g:message code="form.label" />
+    </div>
     <button type="submit" name="create-comment" class="tms-btn pull-right">
         <i class="icon-comment"></i>
         <g:message code="comment.post.button"/>

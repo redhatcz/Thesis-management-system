@@ -33,15 +33,6 @@
     </div>
 </div>
 
-<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')}">
-    <div class="controls">
-        <label class="checkbox" for="topic.enabled">
-            <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
-            <g:message code="topic.enabled.label"/>
-        </label>
-    </div>
-</div>
-
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
     <label class="control-label" for="topic.universities">
         <strong><g:message code="topic.universities.label"/></strong>
@@ -82,6 +73,10 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'description', 'error')} required">
+    <div class="small-msg pull-right">
+        <i class="icon-info-sign"></i>
+        <g:message code="form.label" />
+    </div>
 	<label class="control-label" for="topic.description">
 		<strong><g:message code="topic.description.label"/></strong>
         <span class="required-indicator">*</span></strong>
@@ -92,6 +87,10 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryDescription', 'error')}">
+    <div class="small-msg pull-right">
+        <i class="icon-info-sign"></i>
+        <g:message code="form.label" />
+    </div>
     <label class="control-label" for="topic.secondaryDescription">
         <strong><g:message code="topic.secondaryDescription.label"/></strong>
     </label>
@@ -115,8 +114,17 @@
         <strong><g:message code="topic.tags.label"/></strong>
     </label>
     <div class="controls">
-        <g:select id="topic-tags" name="topic.tags.title" multiple="multiple" from="${topicInstance?.tags}"
-                  value="${topicInstance?.tags}"/>
+        <g:select id="topic-tags" name="tag-list" multiple="multiple"
+                  from="${topicInstance?.tags}" value="${topicInstance?.tags}"/>
         <script type="text/javascript">$('#topic-tags').taggy();</script>
+    </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')}">
+    <div class="controls">
+        <label class="checkbox" for="topic.enabled" id="thesis-enabled">
+            <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
+            <g:message code="topic.enabled.label"/>
+        </label>
     </div>
 </div>

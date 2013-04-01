@@ -5,7 +5,8 @@
             <strong><g:message code="locale.en.label" /></strong>
         </label>
         <div class="controls">
-            <g:textArea name="configuration.termsOfUse_en" value="${config?.termsOfUse_en}"/>
+            <g:textArea name="configuration.termsOfUse_en" rows="5"
+                        value="${config?.termsOfUse_en}"/>
         </div>
     </div>
 
@@ -14,7 +15,8 @@
             <strong><g:message code="locale.cs.label" /></strong>
         </label>
         <div class="controls">
-            <g:textArea name="configuration.termsOfUse_cs" value="${config?.termsOfUse_cs}"/>
+            <g:textArea name="configuration.termsOfUse_cs" rows="5"
+                        value="${config?.termsOfUse_cs}"/>
         </div>
     </div>
 </fieldset>
@@ -22,11 +24,16 @@
 <fieldset>
     <legend><g:message code="config.announcement.header" /></legend>
     <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="form.label" />
+        </div>
         <label class="control-label" for="configuration.announcement">
             <strong><g:message code="config.announcement.label" /></strong>
         </label>
         <div class="controls">
-            <g:textArea name="configuration.announcement" value="${config?.announcement}"/>
+            <g:textArea name="configuration.announcement" rows="5"
+                        value="${config?.announcement}"/>
         </div>
     </div>
 </fieldset>
