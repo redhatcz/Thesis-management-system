@@ -43,7 +43,7 @@ class UploadListenerService {
         }
 
         if (image.width != image.height) {
-            response.message = messageSource.getMessage('file.avatar.aspectRatio.error',[].toArray(),
+            response.message = messageSource.getMessage('avatar.aspectRatio.error',[].toArray(),
                     LCH.locale)
             return response
         }
@@ -80,6 +80,50 @@ class UploadListenerService {
             }
         }
 
+
+        return response
+    }
+
+    def @Listener(topic = "avatar", namespace = 'uploader-delete')
+    Map deleteAvatar(event) {
+        def response = [success: false, message: null]
+        def user = User.get(event?.id)
+        def currentUser = springSecurityService.currentUser
+
+        if (!user) {
+            response.message = messageSource.getMessage('user.not.found', [id].toArray(), LCH.locale)
+            return response
+        }
+
+        if (user != currentUser && SSU.ifNotGranted('ROLE_ADMIN')) {
+            response.message = messageSource.getMessage('security.denied.message', [].toArray(),
+                    LCH.locale)
+            return response
+        }
+
+        def before = gridFileService.getBoundFile(user, 'id', 'avatar')
+        def beforeSmall = gridFileService.getBoundFile(user, 'id', 'avatar_small')
+
+        if (before || beforeSmall) {
+            gridFileService.deleteFileByRawMongoId(before.id, User.bucketMapping)
+            gridFileService.deleteFileByRawMongoId(beforeSmall.id, User.bucketMapping)
+
+            def after = gridFileService.getBoundFile(user, 'id', 'avatar')
+            def afterSmall = gridFileService.getBoundFile(user, 'id', 'avatar_small')
+
+            // true if file existed and was deleted, false otherwise
+            if (after && afterSmall) {
+                response.message = messageSource.getMessage('uploader.error.delete', [].toArray(),
+                        LCH.locale)
+            } else {
+                response.success = true
+                response.message = messageSource.getMessage('avatar.delete.message',[].toArray(),
+                        LCH.locale)
+            }
+        } else {
+            response.message = messageSource.getMessage('uploader.error.not.found', [].toArray(),
+                    LCH.locale)
+        }
 
         return response
     }

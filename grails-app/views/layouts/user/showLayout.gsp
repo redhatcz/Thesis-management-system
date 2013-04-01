@@ -22,7 +22,16 @@
                 <h3><g:message code="uploader.text.changeAvatar.title"/></h3>
             </div>
             <div class="modal-body">
-                <u:uploader topic="avatar" params="${[id: userInstance.id]}"/>
+                <u:uploader topic="avatar" params="${[id: userInstance.id]}">
+                    <u:deleteLink class="tms-btn pull-right"
+                                  id="${userInstance.id}" topic="avatar" >
+                        <g:message code="avatar.delete.button"/>
+                    </u:deleteLink>
+                    <u:trigger id="triggerUpload" class="tms-btn pull-right">
+                        <i class="icon-upload"></i>
+                        <g:message code="uploader.text.startUpload.button"/>
+                    </u:trigger>
+                </u:uploader>
             </div>
         </div>
         <h4><g:message code="user.information.label"/></h4>
