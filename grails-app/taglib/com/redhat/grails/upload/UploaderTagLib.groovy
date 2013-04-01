@@ -29,14 +29,22 @@ class UploaderTagLib {
      * @param template Template used to generate uploader
      * @param topic Name of the topic used when UploaderEvent is fired
      * @param callbacks Map of FineUploader callbacks [callback: function]
-     * @param uploaderId  Id of div used as uploader
      * @attr validation Validation option map
      * @attr multiple Determines whether this uploader should accept multiple files.
      *
      */
     def uploader = { attrs, body ->
+        pageScope.uploader = [:]
 
         def bodyResult = body()
+
+        def uploaderId = pageScope.uploader?.id
+
+        if (!uploaderId) {
+            uploaderId = DEF_UPLOADER_ID
+            bodyResult = u.body() + bodyResult
+        }
+
         def config = buildConfig(attrs)
 
         // Separate wrapper attributes from remaining attributes
@@ -46,7 +54,7 @@ class UploaderTagLib {
 
         def model = [
                 config: config,
-                uploaderId: attrs.uploaderId ?: DEF_UPLOADER_ID,
+                uploaderId: uploaderId,
                 callbacks: getCallbacks(attrs),
                 body: bodyResult,
                 attrs: attrsAsString
@@ -58,7 +66,7 @@ class UploaderTagLib {
 
     def trigger = {attrs, body ->
 
-        pageScope.uploader = [autoUpload: false]
+        pageScope.uploader.autoUpload = false
 
 
         def excludes = []
@@ -68,6 +76,15 @@ class UploaderTagLib {
                      id: attrs.id,
                      attrs: attrsAsString]
         out << render(template: '/taglib/uploader/uploaderTrigger', model: model)
+    }
+
+    def body = {attrs ->
+
+        pageScope.uploader.id = attrs.get('id', DEF_UPLOADER_ID)
+
+        def attrsAsString = TagLibUtils.attrsToString(attrs)
+
+        out << "<div$attrsAsString></div>"
     }
 
     /**

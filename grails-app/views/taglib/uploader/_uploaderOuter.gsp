@@ -7,7 +7,6 @@
 </script>
 
 <div ${attrs}>
-    <div id="${uploaderId}"></div>
     ${body}
 </div>
 
