@@ -16,8 +16,15 @@ class UploadListenerService {
     def messageSource
     def gspTagLibraryLookup
 
-    def @Listener(topic = "avatar", namespace = 'uploader')
-    Map avatar(event) {
+    /**
+     * Handles upload of user avatar. On success this methods will return JSON response containing
+     * bucket, group and id of user's main avatar together with success property set to true
+     *
+     * @param event
+     * @return
+     */
+     @Listener(topic = "avatar", namespace = 'uploader')
+     Map avatar(event) {
         def response = [success: false, message: null]
         def user = User.get(event?.params?.id)
         def currentUser = springSecurityService.currentUser
@@ -159,9 +166,6 @@ class UploadListenerService {
         if (saved) {
             def g = gspTagLibraryLookup.lookupNamespaceDispatcher('g')
             response.id = saved.id.toString()
-            response.filename = saved.filename
-            response.type = saved.contentType
-            // This needs to be formatted -- don't know how yet.
             response.date = g.formatDate(date: saved.uploadDate, dateStyle: 'LONG',
                     type: 'datetime')
             response.bucket = Thesis.bucketMapping
