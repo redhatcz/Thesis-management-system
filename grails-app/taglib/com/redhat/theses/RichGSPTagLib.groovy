@@ -2,6 +2,7 @@ package com.redhat.theses
 
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
+import org.codehaus.groovy.grails.web.pages.discovery.GrailsConventionGroovyPageLocator
 import org.grails.plugin.platform.util.TagLibUtils
 
 class RichGSPTagLib {
@@ -9,6 +10,11 @@ class RichGSPTagLib {
      *  Dependency injection of com.redhat.grails.mongodb.GridFileService
      */
     def gridFileService
+
+    /**
+     * Dependency injection of org.codehaus.groovy.grails.web.pages.discovery.GrailsConventionGroovyPageLocator
+     */
+    GrailsConventionGroovyPageLocator groovyPageLocator
 
     static namespace = "richg"
 
@@ -168,5 +174,29 @@ class RichGSPTagLib {
         def attrsAsString = TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
 
         out << "<img src=\"${uri.encodeAsHTML()}\"${attrsAsString} />"
+    }
+
+    def ifResourceExists = { attrs, body ->
+        def resFile
+
+        if (attrs?.template) {
+            if (attrs?.template?.startsWith('/')) {
+                resFile = groovyPageLocator.findTemplateByPath(attrs?.template)
+            } else {
+                resFile = groovyPageLocator.findTemplate(params.controller, attrs?.template)
+            }
+        } else if (attrs?.view) {
+            if (attrs?.view?.startsWith('/')){
+                resFile = groovyPageLocator.findViewByPath(attrs?.view)
+            } else {
+                resFile = groovyPageLocator.findView(params.controller, attrs?.view)
+            }
+        } else {
+            return
+        }
+
+        if (resFile) {
+            out << body()
+        }
     }
 }

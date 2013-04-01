@@ -13,40 +13,42 @@
                 </g:link>
             </div>
             <div class="head">
-                <sec:ifLoggedIn>
                 <div class="pull-right">
-                    <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
-                    <div class="tms-usermenu">
-                        <notification:render/>
-                        <div class="dropdown" style="display: inline;">
-                            <a class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-cog large"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li>
-                                    <g:link tabindex="-1" controller="profile" action="edit"><g:message code="profile.edit.button"/></g:link>
-                                </li>
-                                <sec:ifAnyGranted roles="ROLE_ADMIN">
-                                <li id="configuration">
-                                    <g:link controller="configuration"><g:message code="config.edit.button"/></g:link>
-                                </li>
-                                </sec:ifAnyGranted>
-                                <li class="divider"></li>
-                                <li>
-                                    <g:link tabindex="-1" controller="logout"><g:message code="security.logout.button"/></g:link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                </sec:ifLoggedIn>
-                <sec:ifNotLoggedIn>
-                <div class="pull-right">
-                    <g:link controller="login" action="auth"><g:message code="security.login.button"/></g:link>
+                    <g:form method="get" controller="search" action="index" class="pull-left" style="margin: 0">
+                        <g:textField value="${params.q}" name="q" placeholder="${message(code: 'search.label')}" style="height: 15px"/>
+                    </g:form>
                     <i class="icon-circle mini"></i>
-                    <g:link controller="registration"><g:message code="registration.create.button"/></g:link>
+                    <sec:ifLoggedIn>
+                        <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
+                        <div class="tms-usermenu">
+                            <notification:render/>
+                            <div class="dropdown" style="display: inline;">
+                                <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-cog large"></i>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <li>
+                                        <g:link tabindex="-1" controller="profile" action="edit"><g:message code="profile.edit.button"/></g:link>
+                                    </li>
+                                    <sec:ifAnyGranted roles="ROLE_ADMIN">
+                                    <li id="configuration">
+                                        <g:link controller="configuration"><g:message code="config.edit.button"/></g:link>
+                                    </li>
+                                    </sec:ifAnyGranted>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <g:link tabindex="-1" controller="logout"><g:message code="security.logout.button"/></g:link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </sec:ifLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <g:link controller="login" action="auth"><g:message code="security.login.button"/></g:link>
+                        <i class="icon-circle mini"></i>
+                        <g:link controller="registration"><g:message code="registration.create.button"/></g:link>
+                    </sec:ifNotLoggedIn>
                 </div>
-                </sec:ifNotLoggedIn>
             </div>
         </div>
     </div>

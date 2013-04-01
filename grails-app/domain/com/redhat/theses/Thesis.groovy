@@ -15,6 +15,12 @@ class Thesis extends Article{
     String notes
     Date dateCreated
 
+    static searchable = {
+        root true
+        assignee component: true
+        supervisor component: true
+    }
+
     static hasMany = [tags: Tag]
 
     static mapping = {

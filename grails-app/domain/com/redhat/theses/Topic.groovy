@@ -13,6 +13,11 @@ class Topic extends Article {
     User owner
     Boolean enabled = true
 
+    static searchable = {
+        root true
+        owner component: true
+    }
+
     static hasMany = [universities: University, categories: Category, tags: Tag, types: Type]
 
     static hibernateFilters = {
