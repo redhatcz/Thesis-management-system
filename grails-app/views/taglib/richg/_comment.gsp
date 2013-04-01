@@ -45,7 +45,7 @@
                 <g:message code="default.update.button"/>
             </button>
             <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR">
-                <label for="comment-${index}-private">
+                <label for="comment-${index}-private" class="pull-left">
                     <g:checkBox name="comment.privateComment"
                                 value="${comment?.privateComment}"
                                 id="comment-${index}-private"/>

@@ -7,29 +7,32 @@
 </div>
 <!-- Modal -->
 <div id="change-avatar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3><g:message code="uploader.text.changeAvatar.title"/></h3>
-    </div>
-    <div class="modal-body">
-        <u:uploader id="avatar-uploader"
-                    topic="avatar"
-                    text="[uploadButton: message(code: 'avatar.select.button')]"
-                    multiple="${false}"
-                    params="${[id: userInstance.id]}"
-                    callbacks="[complete: 'avatarUploaded']">
-            <u:deleteLink class="tms-btn pull-right"
-                          id="${userInstance.id}"
-                          topic="avatar"
-                          onSuccess="avatarUpdated(data)">
-                <g:message code="avatar.delete.button"/>
-            </u:deleteLink>
+    <div class="modal-wrapper">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3><g:message code="uploader.text.changeAvatar.title"/></h3>
+        </div>
+        <div class="modal-body">
+            <u:uploader id="avatar-uploader"
+                        topic="avatar"
+                        text="[uploadButton: message(code: 'avatar.select.button')]"
+                        multiple="${false}"
+                        params="${[id: userInstance.id]}"
+                        callbacks="[complete: 'avatarUploaded']">
+                <u:deleteLink class="tms-btn pull-right"
+                              id="${userInstance.id}"
+                              topic="avatar"
+                              onSuccess="avatarUpdated(data)">
+                    <i class="icon-remove-sign"></i>
+                    <g:message code="avatar.delete.button"/>
+                </u:deleteLink>
 
-            <u:trigger id="triggerUpload" class="tms-btn pull-right">
-                <i class="icon-upload"></i>
-                <g:message code="uploader.text.startUpload.button"/>
-            </u:trigger>
-        </u:uploader>
+                <u:trigger id="triggerUpload" class="tms-btn pull-right">
+                    <i class="icon-upload"></i>
+                    <g:message code="uploader.text.startUpload.button"/>
+                </u:trigger>
+            </u:uploader>
+        </div>
     </div>
 </div>
 

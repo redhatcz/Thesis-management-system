@@ -1229,6 +1229,10 @@ table#tags {
   .well {
     margin-bottom: 10px;
   }
+
+  .uploader-manage {
+    padding-bottom: 40px;
+  }
 }
 
 /*--------FILTERS--------*/
@@ -1307,6 +1311,17 @@ div#faq-list .dynamic-delete-button {
 
 .modal {
   border-radius: 0px;
+  border: 5px solid @grayBackground;
+
+  .modal-wrapper {
+    border: 1px solid @grayBorder;
+  }
+
+  .modal-footer {
+    border-top: none;
+    border-radius: 0px;
+    .box-shadow(none);
+  }
 }
 
 .modal.fade,
