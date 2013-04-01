@@ -7,17 +7,19 @@
 <body>
     <div class="navbar navbar-static-top">
         <div class="container">
-            <div class="span4">
-                <g:link uri="/">
-                    <img id="logo" src="${resource(dir: 'images', file: 'redhat.png')}"/>
-                </g:link>
-            </div>
             <div class="head">
-                <div class="pull-right">
-                    <g:form method="get" controller="search" action="index" class="pull-left" style="margin: 0">
-                        <g:textField value="${params.q}" name="q" placeholder="${message(code: 'search.label')}" style="height: 15px"/>
+                <div class="pull-left">
+                    <g:link uri="/">
+                        <img id="logo" src="${resource(dir: 'images', file: 'redhat.png')}"/>
+                    </g:link>
+                    <g:form id="search-field" method="get" controller="search" action="index">
+                        <g:textField value="${params.q}" name="q" placeholder="${message(code: 'search.label')}"/>
+                        <button type="submit" class="btn-link">
+                            <i class="icon-search"></i>
+                        </button>
                     </g:form>
-                    <i class="icon-circle mini"></i>
+                </div>
+                <div class="pull-right">
                     <sec:ifLoggedIn>
                         <g:link controller="profile"><sec:loggedInUserInfo field="fullName"/></g:link>
                         <div class="tms-usermenu">

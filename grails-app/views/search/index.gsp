@@ -31,8 +31,11 @@
         <h4><g:message code="search.label"/></h4>
         <div class="panel-content">
             <g:form method="get">
-                <g:textField value="${params.q}" name="q" placeholder="${message(code: 'search.label')}"/>
-                <button type="submit" class="tms-btn pull-right"><g:message code="search.button"/></button>
+                <g:textField class="wide" value="${params.q}" name="q" placeholder="${message(code: 'search.label')}"/>
+                <button type="submit" class="tms-btn pull-right">
+                    <i class="icon-search"></i>
+                    <g:message code="search.button"/>
+                </button>
             </g:form>
         </div>
     </div>

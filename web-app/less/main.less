@@ -134,7 +134,8 @@ textarea {
   .pretty-textarea(auto);
 }
 
-input {
+input,
+button {
   line-height: normal;
 }
 
@@ -294,12 +295,49 @@ h4.header {
   height: 50px;
 }
 
-.head {
+.head > .pull-right {
   padding-top: 14px;
 }
 
-.head > a,
-.head .pull-right > a {
+.head > .pull-left {
+
+  img#logo {
+    padding: 5px 0 9px;
+  }
+
+  form {
+    display: inline-block;
+    margin-bottom: 0px;
+
+    input[type="text"] {
+      font-size: @fontSizeSmall;
+      line-height: normal;
+      height: 22px;
+      margin: 3px 0px 3px 20px;
+      background-color: @gray;
+      color: @white;
+      border-color: lighten(@gray, 10%);
+      width: 250px;
+      .box-shadow(none);
+    }
+
+    button {
+      padding: 0px;
+      text-decoration: none;
+
+      .icon-search {
+        color: @white;
+      }
+
+      &:hover .icon-search {
+        color: @grayLight;
+      }
+    }
+  }
+}
+
+.head .pull-right > a,
+.head .pull-left > a {
   font-size: 17px;
   font-family: @titleFontFamily;
   color: @white;
@@ -313,10 +351,6 @@ h4.header {
 .head > i[class*="icon-"],
 .head .pull-right > i[class*="icon-"] {
   color: @white;
-}
-
-img#logo {
-  padding: 5px 0 9px;
 }
 
 .tms-usermenu {
@@ -586,6 +620,7 @@ ul form {
       margin: 5px 0;
       color: @gray;
       border: 1px solid @grayBorder;
+      line-height: @baseLineHeight;
 
       &:hover {
         text-decoration: none;
