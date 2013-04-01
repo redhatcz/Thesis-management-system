@@ -19,7 +19,7 @@
                         multiple="${false}"
                         params="${[id: userInstance.id]}"
                         callbacks="[complete: 'avatarUploaded']">
-                <u:deleteLink class="tms-btn pull-right"
+                <u:deleteLink class="tms-btn pull-left"
                               id="${userInstance.id}"
                               topic="avatar"
                               onSuccess="avatarUpdated(data)">
