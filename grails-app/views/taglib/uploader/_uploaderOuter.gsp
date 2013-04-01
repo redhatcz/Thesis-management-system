@@ -6,7 +6,7 @@
     });
 </script>
 
-<div ${attrs}>
+<div class="uploader-manage" ${attrs}>
     ${body}
 </div>
 
