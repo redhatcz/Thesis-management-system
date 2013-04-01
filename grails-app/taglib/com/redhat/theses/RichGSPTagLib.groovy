@@ -199,4 +199,34 @@ class RichGSPTagLib {
             out << body()
         }
     }
+
+    /**
+     * Generets url of given users avatar
+     *
+     * @EmptyTag
+     *
+     * @attr user User
+     * @attr small If true small version of avatar will be used
+     *
+     */
+    def avatarLink = { attrs, body ->
+        def user = attrs?.user
+        def group = attrs?.small ? 'avatar_small' : 'avatar'
+
+        if (!(user instanceof User)) {
+            throw IllegalArgumentException('user')
+        }
+
+        def avatar = gridFileService.getBoundFile(user, 'id', group)
+        def uri
+
+        if (avatar) {
+            uri = grid.createLink(mongoId: avatar?.id?.toString(), bucket: User.bucketMapping)
+        } else {
+            uri = resource(dir: 'images', file: attrs?.small ? 'avatar-mini.png' : 'avatar.png')
+        }
+
+        out << uri
+    }
+
 }
