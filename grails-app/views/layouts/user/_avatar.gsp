@@ -1,10 +1,17 @@
 <div class="avatar">
     <richg:avatar user="${userInstance}" id="avatar"/>
-    <!-- Button to trigger modal -->
-    <a href="#change-avatar" role="button" id="avatar-button" data-toggle="modal">
-        <g:message code="uploader.text.changeAvatar.button"/>
-    </a>
+    <sec:ifLoggedIn>
+    <g:if test="${sec.loggedInUserInfo(field: 'id').toLong() == userInstance.id}">
+        <!-- Button to trigger modal -->
+        <a href="#change-avatar" role="button" id="avatar-button" data-toggle="modal">
+            <g:message code="uploader.text.changeAvatar.button"/>
+        </a>
+    </g:if>
+    </sec:ifLoggedIn>
 </div>
+
+<sec:ifLoggedIn>
+<g:if test="${sec.loggedInUserInfo(field: 'id').toLong() == userInstance.id}">
 <!-- Modal -->
 <div id="change-avatar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-wrapper">
@@ -60,3 +67,5 @@
         avatarUpdated(data);
     }
 </script>
+</g:if>
+</sec:ifLoggedIn>
