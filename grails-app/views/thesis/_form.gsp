@@ -83,7 +83,7 @@
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'description', 'error')} required">
         <div class="small-msg pull-right">
             <i class="icon-info-sign"></i>
-            <g:message code="form.label" />
+            <g:message code="field.markdown.label" />
         </div>
         <label class="control-label" for="thesis.description">
             <strong><g:message code="thesis.description.label"/></strong>

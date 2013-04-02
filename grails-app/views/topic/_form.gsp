@@ -75,7 +75,7 @@
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'description', 'error')} required">
     <div class="small-msg pull-right">
         <i class="icon-info-sign"></i>
-        <g:message code="form.label" />
+        <g:message code="field.markdown.label" />
     </div>
 	<label class="control-label" for="topic.description">
 		<strong><g:message code="topic.description.label"/></strong>
@@ -89,7 +89,7 @@
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryDescription', 'error')}">
     <div class="small-msg pull-right">
         <i class="icon-info-sign"></i>
-        <g:message code="form.label" />
+        <g:message code="field.markdown.label" />
     </div>
     <label class="control-label" for="topic.secondaryDescription">
         <strong><g:message code="topic.secondaryDescription.label"/></strong>

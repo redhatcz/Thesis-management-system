@@ -30,7 +30,7 @@
     <g:textArea name="comment.content" rows="5" />
     <div class="small-msg pull-left">
         <i class="icon-info-sign"></i>
-        <g:message code="form.label" />
+        <g:message code="field.markdown.label" />
     </div>
     <button type="submit" name="create-comment" class="tms-btn pull-right">
         <i class="icon-comment"></i>

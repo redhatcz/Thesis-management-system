@@ -26,7 +26,7 @@
     <div class="control-group">
         <div class="small-msg pull-right">
             <i class="icon-info-sign"></i>
-            <g:message code="form.label" />
+            <g:message code="field.markdown.label" />
         </div>
         <label class="control-label" for="configuration.announcement">
             <strong><g:message code="config.announcement.label" /></strong>
