@@ -10,7 +10,16 @@ class TopicService {
      */
     def springSecurityService
 
+    /**
+     * Dependency injection of grails.plugin.searchable.SearchableService
+     */
+    def searchableService
+
     Boolean saveWithSupervisions(Topic topic, List supervisions) {
+        //hibernate and searchable collision causes saving of many to many entities not working properly
+        //so we need to stop mirroring for a while and then start it again
+        searchableService.stopMirroring()
+
         String type = topic.id ? 'articleUpdated' : 'articleCreated'
         def savedTopic = topic.save(flush: true)
         def filteredSupervisions = supervisions.findAll {it.topic?.id && it.supervisor?.id && it.university?.id}
@@ -23,7 +32,13 @@ class TopicService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
             event(type, new ArticleEvent(savedTopic, springSecurityService.currentUser, [topic.owner]))
+            searchableService.index(savedTopic)
         }
+
+        //hibernate and searchable collision causes saving of many to many entities not working properly
+        //so we need to stop mirroring for a while and then start it again
+        searchableService.startMirroring()
+
         success
     }
 

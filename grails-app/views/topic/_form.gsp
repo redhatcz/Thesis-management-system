@@ -110,11 +110,11 @@
 </div>
 
 <div class="control-group">
-    <label class="control-label" for="tag-list">
+    <label class="control-label" for="topic.tags.title">
         <strong><g:message code="topic.tags.label"/></strong>
     </label>
     <div class="controls">
-        <g:select id="topic-tags" name="tag-list" multiple="multiple"
+        <g:select id="topic-tags" name="topic.tags.title" multiple="multiple"
                   from="${topicInstance?.tags}" value="${topicInstance?.tags}"/>
         <script type="text/javascript">$('#topic-tags').taggy();</script>
     </div>

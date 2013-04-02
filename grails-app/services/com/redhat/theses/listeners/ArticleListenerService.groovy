@@ -1,4 +1,6 @@
 package com.redhat.theses.listeners
+
+import com.redhat.theses.Article
 import com.redhat.theses.Feed
 import com.redhat.theses.events.ArticleEvent
 import com.redhat.theses.util.Util
@@ -31,7 +33,7 @@ class ArticleListenerService{
 
         // subscribe extra subscribers
         e.extraSubscribers.unique().each {
-            subscriptionService.subscribe(it, e.article)
+            subscriptionService.subscribe(it, Article.get(e.article.id))
         }
 
         def feed = new Feed(messageCode: "feed.${className}.created", user: e.user, args: args).save()
