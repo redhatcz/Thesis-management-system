@@ -1,5 +1,7 @@
 package com.redhat.theses.listeners
 import com.redhat.theses.Feed
+import com.redhat.theses.Subscription
+import com.redhat.theses.auth.Role
 import com.redhat.theses.events.CommentEvent
 import com.redhat.theses.util.Util
 import grails.events.Listener
@@ -38,6 +40,12 @@ class CommentListenerService {
 
         def feed = new Feed(messageCode: 'feed.comment.created', user: user, args: args).save()
 
-        subscriptionService.notifyAll(e.comment.article, user, feed)
+        def subscribers = Subscription.findAllByArticle(article)*.subscriber
+        if (e.comment.privateComment) {
+            subscribers = subscribers.findAll {
+                Role.ADMIN in it.roles || Role.OWNER in it.roles || Role.SUPERVISOR in it.roles 
+            }
+        }
+        subscriptionService.notifyAll(subscribers, user, feed, article.title)
     }
 }

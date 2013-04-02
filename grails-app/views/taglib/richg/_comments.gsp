@@ -36,6 +36,13 @@
         <i class="icon-comment"></i>
         <g:message code="comment.post.button"/>
     </button>
+    <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR">
+        <label id="private-checkbox" for="comment-new-private" class="pull-right">
+            <g:checkBox name="comment.privateComment"
+                        id="comment-new-private"/>
+            <g:message code="comment.privateComment.label"/>
+        </label>
+    </sec:ifAnyGranted>
 </g:form>
 <script type="text/javascript">
     var form = $('#create-comment-form');
