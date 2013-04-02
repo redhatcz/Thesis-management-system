@@ -9,15 +9,18 @@
                 </g:link>
             </h3>
             <ul class="inline">
-                <li><i class="icon-user"></i>
+                <li>
+                    <i class="icon-user" title="${message(code:'topic.owner.label')}"></i>
                     <g:link controller="user" action="show" id="${topic?.ownerId}">${topic?.owner?.fullName}</g:link>
                 </li>
-                <li><i class="icon-time"></i>
+                <li>
+                    <i class="icon-time" title="${message(code:'topic.dateCreated.label')}"></i>
                     <g:formatDate date="${topic?.dateCreated}"
                                   dateStyle="LONG"
                                   type="date" />
                 </li>
-                <li><i class="icon-comment"></i>
+                <li>
+                    <i class="icon-comment" title="${message(code:'comment.title')}"></i>
                     <g:link action="show" id="${topic.id}" fragment="comments">${commentCounts[topic] ?: 0} comments</g:link>
                 </li>
             </ul>

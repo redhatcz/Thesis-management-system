@@ -17,17 +17,20 @@
                     </g:link>
                 </h4>
                 <ul class="inline">
-                    <li><i class="icon-user"></i>
+                    <li>
+                        <i class="icon-user" title="${message(code:'thesis.assignee.label')}"></i>
                         <g:link controller="user" action="show"
                                 id="${thesis.assigneeId}">${thesis?.assignee?.fullName}</g:link>
                     </li>
-                    <li><i class="icon-time"></i>
+                    <li>
+                        <i class="icon-time" title="${message(code:'thesis.dateCreated.label')}"></i>
                         <g:formatDate date="${thesis?.dateCreated}"
                                       dateStyle="LONG"
                                       type="date" />
                     </li>
-                    <li><i class="icon-user"></i>
-                        <g:link controller="user" action="show" id="${thesis.supervisorId}">${thesis?.supervisor?.fullName}</g:link>
+                    <li>
+                        <i class="icon-comment" title="${message(code:'comment.title')}"></i>
+                        <g:link action="show" id="${thesis?.id}" fragment="comments">${commentCounts[thesis] ?: 0} comments</g:link>
                     </li>
                 </ul>
             </div>

@@ -35,6 +35,11 @@ class ThesisController {
      */
     def filterService
 
+    /**
+     * Dependency injection of com.redhat.theses.CommentService
+     */
+    def commentService
+
     static defaultAction = "list"
 
     def list() {
@@ -49,8 +54,12 @@ class ThesisController {
 
         def theses = filterService.filter(params, Thesis)
         def thesesCount = filterService.count(params, Thesis)
+
+        def publicCommentsOnly = !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')
+        def commentCounts = commentService.countByArticles(theses, publicCommentsOnly)
+
         [thesisInstanceList: theses, thesisInstanceTotal: thesesCount,
-                currentTag: tag, tagListWithUsage: tagListWithUsage,]
+                currentTag: tag, tagListWithUsage: tagListWithUsage, commentCounts: commentCounts]
     }
 
     def show(Long id, String headline) {
