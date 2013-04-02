@@ -1,7 +1,7 @@
 <%@ page import="com.redhat.theses.util.Util" %>
 <h3 id="comments" class="header">
     <i class="icon-comments"></i>
-    Comments
+    <g:message code="comment.title"/>
 </h3>
 <div class="comments">
     <g:if test="${comments}">
