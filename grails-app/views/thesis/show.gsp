@@ -21,7 +21,7 @@
 
     <h3 id="description">
         <i class="icon-pencil"></i>
-        <g:message code="thesis.thesisDescription.label"/>
+        <g:message code="thesis.description.label"/>
     </h3>
     <div class="tms-description">
         <g:if test="${thesisInstance?.description}">

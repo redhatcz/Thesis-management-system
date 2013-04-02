@@ -27,7 +27,7 @@ class CommentController {
         }
 
         if (!comment.save(flush: true)) {
-            def message = richg.alert type: 'error', code: 'comment.error'
+            def message = richg.alert type: 'error', code: 'comment.not.created'
             render([success: false, message: message] as JSON)
             return
         }
@@ -64,7 +64,7 @@ class CommentController {
         }
 
         if (!comment.save(flush: true)) {
-            def message = richg.alert type: 'error', code: 'comment.error'
+            def message = richg.alert type: 'error', code: 'comment.not.updated'
             render([success: false, message: message] as JSON)
             return
         }
