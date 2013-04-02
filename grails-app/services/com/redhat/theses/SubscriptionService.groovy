@@ -1,8 +1,6 @@
 package com.redhat.theses
-
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Commons
-import org.springframework.context.i18n.LocaleContextHolder as LCH
 
 class SubscriptionService {
 
@@ -24,8 +22,9 @@ class SubscriptionService {
     }
 
     def notify(User subscriber, Feed feed, String articleTitle) {
-        def subj = messageSource.getMessage("mail.subscription.subject", [articleTitle].toArray(), LCH.locale)
-        def body = messageSource.getMessage(feed.messageCode, feed.args.toArray(), LCH.locale)
+        //Setting english locale as the subscriber's locale is not stored anywhere
+        def subj = messageSource.getMessage("mail.subscription.subject", [articleTitle].toArray(), Locale.ENGLISH)
+        def body = messageSource.getMessage(feed.messageCode, feed.args.toArray(), Locale.ENGLISH)
 
         // create notification
         new Notification(user: subscriber, feed: feed).save()
