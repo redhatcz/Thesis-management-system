@@ -19,14 +19,18 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3><g:message code="uploader.text.changeAvatar.title"/></h3>
         </div>
-        <div class="modal-body">
-            <u:uploader id="avatar-uploader"
-                        topic="avatar"
-                        text="[uploadButton: message(code: 'avatar.select.button')]"
-                        multiple="${false}"
-                        params="${[id: userInstance.id]}"
-                        callbacks="[complete: 'avatarUploaded']">
-                <u:deleteLink class="tms-btn pull-left"
+        <u:uploader id="avatar-uploader"
+                    topic="avatar"
+                    text="[uploadButton: message(code: 'avatar.select.button')]"
+                    multiple="${false}"
+                    params="${[id: userInstance.id]}"
+                    callbacks="[complete: 'avatarUploaded(data)']">
+            <div class="modal-body">
+               <u:messages template=""/>
+               <u:body/>
+            </div>
+            <div class="modal-footer">
+               <u:deleteLink class="tms-btn pull-left"
                               id="${userInstance.id}"
                               topic="avatar"
                               onSuccess="avatarUpdated(data)">
@@ -38,8 +42,8 @@
                     <i class="icon-upload"></i>
                     <g:message code="uploader.text.startUpload.button"/>
                 </u:trigger>
-            </u:uploader>
-        </div>
+            </div>
+        </u:uploader>
     </div>
 </div>
 
@@ -63,7 +67,7 @@
     }
 
     %{-- Hack to user function from above as fine uploader callback --}%
-    avatarUploaded = function (event, id, name, data) {
+    avatarUploaded = function (data) {
         avatarUpdated(data);
     }
 </script>
