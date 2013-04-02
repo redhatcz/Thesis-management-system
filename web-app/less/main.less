@@ -1025,7 +1025,7 @@ a.gray-link {
 
 .table-layout {
   border-top: 1px solid @tableBorder;
-  padding: @marginSmall 7px;
+  padding: @marginSmall 7px @marginSmall + 2;
 
   h3 {
     margin: 0;
@@ -1060,7 +1060,8 @@ a.gray-link {
     }
   }
 
-  &:first-child {
+  &:first-child,
+  &:first-of-type {
     border-top: none;
     padding-top: 5px;
 
@@ -1088,8 +1089,8 @@ ul.tms-list {
     padding: 16px 0;
     border-top: 1px solid @grayBorder;
 
-    &:last-child {
-      border-bottom: 1px solid @grayBorder;
+    &:first-child {
+      border-top: none;
     }
   }
 
@@ -1099,24 +1100,23 @@ ul.tms-list {
     font-size: 3em;
   }
 
-  .tms-elem li {
-    font-size: @fontSizeSmall;
-    color: @grayLight;
-    padding-top: 3px;
-    margin-right: 30px;
+  .tms-elem {
+    li, span {
+      font-size: @fontSizeSmall;
+      color: @grayLight;
 
-    i[class*="icon-"] {
-      color: @gray;
+      i[class*="icon-"] {
+        color: @gray;
+      }
     }
-  }
 
-  .tms-elem span {
-    font-size: @fontSizeSmall;
-    color: @grayLight;
-    margin-right: 15px;
+    li {
+      padding-top: 3px;
+      margin-right: 30px;
+    }
 
-    i[class*="icon-"] {
-      color: @gray;
+    span {
+      margin-right: 15px;
     }
   }
 }
@@ -1406,6 +1406,44 @@ div#faq-list .dynamic-delete-button {
 
   dd {
     padding: 5px 0px;
+  }
+}
+
+/*--------SEARCH---------*/
+
+.search-result {
+  h6 {
+    font-weight: normal;
+    font-size: 17px;
+    margin: 0px 7px 4px;
+
+    a:hover {
+      border-bottom: 1px solid @red;
+      text-decoration: none;
+    }
+  }
+
+  h4 {
+    margin: 4px 0;
+    padding-top: 8px;
+  }
+
+  .avatar-mini {
+    margin-left: 4px;
+  }
+
+  ul {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .icon-book {
+    color: @grayLighter;
+  }
+
+  .result-content {
+    margin-left: 60px;
   }
 }
 
