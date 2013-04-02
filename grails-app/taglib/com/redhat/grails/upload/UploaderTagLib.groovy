@@ -55,12 +55,20 @@ class UploaderTagLib {
         def model = [
                 config: config,
                 uploaderId: uploaderId,
+                onComplete: attrs?.callbacks?.complete,
                 callbacks: getCallbacks(attrs),
                 body: bodyResult,
                 attrs: attrsAsString
         ]
 
+        def errorId = pageScope.uploader?.errorId
+        if (errorId) {
+            model.errorId = errorId
+        }
+
         out << render(template: DEF_OUTER_TEMPLATE, model: model);
+
+        pageScope.uploader = null
     }
 
 
@@ -76,6 +84,22 @@ class UploaderTagLib {
                      id: attrs.id,
                      attrs: attrsAsString]
         out << render(template: '/taglib/uploader/uploaderTrigger', model: model)
+    }
+
+     def messages = {attrs, body ->
+        def template = attrs?.template
+        def excludes = ['template', 'model']
+
+        // save id of error container into pageScope
+        // if id isn't specified then set default value
+        pageScope.uploader.errorId = attrs.get('id', 'uploader-error')
+
+        if (template) {
+            out << render(template: template, model: attrs?.model ?: [])
+        }  else {
+            def attrsAsString =  TagLibUtils.attrsToString(attrs.findAll { !(it.key in excludes) })
+            out << "<div$attrsAsString></div>"
+        }
     }
 
     def body = {attrs ->
@@ -191,6 +215,8 @@ class UploaderTagLib {
 
     private String getCallbacks(attrs) {
         Map callbacks = attrs.callbacks ?: [:]
+        def excludes = ['complete']
+        callbacks = callbacks.findAll { !(it.key in excludes)}
         callbacks.inject('') {s, k, v  ->
             s  + ".on('$k', $v)"
         }
