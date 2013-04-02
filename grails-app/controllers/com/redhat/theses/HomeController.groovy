@@ -1,6 +1,5 @@
 package com.redhat.theses
 
-import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
 
 class HomeController {
@@ -22,6 +21,8 @@ class HomeController {
      */
     def configuration
 
+    static final Long MAX_LATEST_TOPICS = 10
+
     def index() {
         if (Util.isControllerOrActionInUrl(request, 'home', 'index')) {
             redirect uri: '/', permanent: true, params: params
@@ -32,19 +33,11 @@ class HomeController {
             yourTheses = Thesis.findAllByAssignee(springSecurityService.currentUser, [sort:'dateCreated', order:'desc'])
         }
 
-        def topicList = Topic.list(sort: 'dateCreated', order: 'desc', max: 5)
-
-        //statistics
-        def statistics = [
-                topicCount: Topic.count(),
-                thesisCount: Thesis.count(),
-                thesisSuccessfulCount: Thesis.countByStatus(Status.FINISHED) - Thesis.countByGrade(Grade.F),
-                userCount: User.count()
-        ]
+        def topicList = Topic.list(sort: 'dateCreated', order: 'desc', max: MAX_LATEST_TOPICS)
 
         def commentCounts = commentService.countByArticles(topicList)
 
         render view: '/index', model: [topicList: topicList, yourTheses: yourTheses,
-             statistics: statistics, commentCounts: commentCounts, config: configuration.getConfig()]
+             commentCounts: commentCounts, config: configuration.getConfig()]
     }
 }

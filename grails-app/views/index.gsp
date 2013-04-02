@@ -41,12 +41,6 @@
         <g:else>
         <p class="muted"><g:message code="topic.no.topics.found"/></p>
         </g:else>
-
-        <h2>Statistics</h2>
-        <span>All topics: ${statistics?.topicCount}</span><br/>
-        <span>All theses: ${statistics?.thesisCount}</span><br/>
-        <span>Successfully finished theses: ${statistics?.thesisSuccessfulCount}</span><br/>
-        <span>Members registered: ${statistics?.userCount}</span>
     </div>
 
     <div class="span4 sidebar">
