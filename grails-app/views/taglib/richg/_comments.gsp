@@ -24,9 +24,16 @@
 
 <div id="commentMessages"></div>
 <sec:ifLoggedIn>
-<h4 class="header"><g:message code="comment.post.title"/></h4>
 <g:form controller="comment" action="create" name="create-comment-form">
     <g:hiddenField name="comment.article.id" value="${article?.id}" />
+    <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR">
+        <label id="private-checkbox" for="comment-new-private" class="pull-right">
+            <g:checkBox name="comment.privateComment"
+                        id="comment-new-private"/>
+            <g:message code="comment.privateComment.label"/>
+        </label>
+    </sec:ifAnyGranted>
+    <h4 class="header"><g:message code="comment.post.title"/></h4>
     <g:textArea name="comment.content" rows="5" />
     <div class="small-msg pull-left">
         <i class="icon-info-sign"></i>
@@ -36,13 +43,6 @@
         <i class="icon-comment"></i>
         <g:message code="comment.post.button"/>
     </button>
-    <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR">
-        <label id="private-checkbox" for="comment-new-private" class="pull-right">
-            <g:checkBox name="comment.privateComment"
-                        id="comment-new-private"/>
-            <g:message code="comment.privateComment.label"/>
-        </label>
-    </sec:ifAnyGranted>
 </g:form>
 <script type="text/javascript">
     var form = $('#create-comment-form');
