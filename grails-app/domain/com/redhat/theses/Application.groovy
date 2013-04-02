@@ -12,10 +12,6 @@ class Application {
     String note
     Boolean approved = false
 
-    static hibernateFilters = {
-        notApprovedFilter(condition:"approved='0'", default: true)
-    }
-
     static constraints = {
         thesis nullable: true
 

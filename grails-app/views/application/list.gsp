@@ -51,5 +51,25 @@
         <p class="center muted"><g:message code="application.no.applications.found"/></p>
     </g:else>
 </div>
+
+<div class="span4 sidebar">
+    <div class="panel right">
+        <h4><g:message code="filters.label"/></h4>
+        <div class="panel-content">
+            <g:form method="get" class="filter">
+                <g:hiddenField name="filtering" value="true"/>
+                <g:textField value="${params?.filter?.applicant?.fullName}" class="wide"
+                             name="filter.applicant.fullName" placeholder="${message(code: 'application.applicant.label')}"/>
+                <g:textField value="${params?.filter?.topic?.title}" class="wide"
+                             name="filter.topic.title" placeholder="${message(code: 'topic.label')}"/>
+                <g:submitButton class="tms-btn pull-right" name="filter-button"
+                                value="${message(code: 'filter.button')}"/>
+                <label>
+                    <g:checkBox name="filter.approved" value="${params?.filter?.approved}"/> <g:message code="application.approved.label"/>
+                </label>
+            </g:form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

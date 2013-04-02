@@ -44,7 +44,9 @@ class TopicController {
             params.filter = [:]
         }
         if (!params?.filtering) {
-            params.filter << [enabled: 'true']
+            params.filter << [enabled: true]
+        } else if (!params?.filter?.enabled) {
+            params.filter?.enabled = false
         }
 
         def category = null

@@ -20,10 +20,6 @@ class Topic extends Article {
 
     static hasMany = [universities: University, categories: Category, tags: Tag, types: Type]
 
-    static hibernateFilters = {
-        enabledFilter(condition:"enabled='1'", default: true)
-    }
-
     static constraints = {
         description widget: 'textarea', blank: false
         lead blank: false

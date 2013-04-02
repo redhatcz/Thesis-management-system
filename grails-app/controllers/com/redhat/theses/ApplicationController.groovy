@@ -18,13 +18,29 @@ class ApplicationController {
      */
     def applicationService
 
+    /**
+     * Dependency injection of com.redhat.theses.FilterService
+     */
+    def filterService
+
     static allowedMethods = [save: "POST", approveSave: "POST"]
 
     static defaultAction = "list"
 
     def list(Integer max) {
         params.max = Util.max(max)
-        [applicationInstanceList: Application.list(params), applicationInstanceTotal: Application.count]
+
+        if (!params.filter) {
+            params.filter = [:]
+        }
+        if (!params?.filtering) {
+            params.filter << [approved: false]
+        }
+
+        def applicationInstanceList = filterService.filter(params, Application)
+        def applicationInstanceTotal = filterService.count(params, Application)
+
+        [applicationInstanceList: applicationInstanceList, applicationInstanceTotal: applicationInstanceTotal]
     }
 
     @Secured(['ROLE_STUDENT'])
@@ -140,7 +156,8 @@ class ApplicationController {
 
         event("applicationApproved", new ApplicationEvent(applicationInstance, user))
         flash.message = message(code: 'application.approved')
-        redirect(controller: 'thesis', action: 'show', id: thesisInstance.id)
+        redirect(controller: 'thesis', action: 'show', id: thesisInstance.id,
+                params: [headline: Util.hyphenize(thesisInstance.title)])
     }
 
     def show(Long id) {
