@@ -159,7 +159,10 @@ environments {
 
     production {
         searchable {
-            // add your production settings here
+            def dataDir = System.getenv('OPENSHIFT_DATA_DIR')
+            compassConnection = new File(
+                    "${dataDir}/.grails/projects/${appName}/searchable-index/prod"
+            ).absolutePath
         }
     }
 }
