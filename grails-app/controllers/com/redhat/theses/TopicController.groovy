@@ -134,7 +134,7 @@ class TopicController {
 
         def commentsTotal
         def comments
-        if (SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')) {
+        if (springSecurityService.isLoggedIn() && SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')) {
             commentsTotal = Comment.countByArticle(topicInstance)
             def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
             comments = Comment.findAllByArticle(topicInstance,

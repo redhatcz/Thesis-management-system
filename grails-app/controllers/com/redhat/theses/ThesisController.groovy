@@ -74,11 +74,19 @@ class ThesisController {
             redirect(action: 'show', id: id, params: [headline: Util.hyphenize(thesisInstance.title)], permanent: true)
         }
 
-        def commentsTotal = Comment.countByArticle(thesisInstance)
-        def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
-
-        def comments = Comment.findAllByArticle(thesisInstance,
-                [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
+        def commentsTotal
+        def comments
+        if (springSecurityService.isLoggedIn() && SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')) {
+            commentsTotal = Comment.countByArticle(thesisInstance)
+            def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
+            comments = Comment.findAllByArticle(thesisInstance,
+                    [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
+        } else {
+            commentsTotal = Comment.countByArticleAndPrivateComment(thesisInstance, false)
+            def defaultOffset = Util.lastOffset(commentsTotal, params.max, params.offset)
+            comments = Comment.findAllByArticleAndPrivateComment(thesisInstance, false,
+                    [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
+        }
 
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, thesisInstance)
         def files = gridFileService.getAllFiles(thesisInstance).sort {it.uploadDate}
