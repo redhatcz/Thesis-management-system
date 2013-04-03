@@ -62,7 +62,6 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-        plugin.emailConfirmation.from = '"Do not reply" <noreply@localhost>'
 
         grails {
             mail {
@@ -80,17 +79,15 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: set plugin.emailConfirmation.from to something more representative
-        plugin.emailConfirmation.from = '"Do not reply" <noreply@localhost>'
         grails.serverURL = "http://${System.getenv('OPENSHIFT_APP_DNS')}"
-        // TODO: changed the mail configuration to something more representative
+
+        grails.mail.default.from="noreply@thesis.redhat.com"
         grails {
             mail {
                 host = "smtp.gmail.com"
                 port = 465
-                username = "noone.localhost@gmail.com"
-                password = "noone.local"
-                overrideAddress = "noone.localhost@gmail.com"
+                username = "thesismanagementsystem@gmail.com"
+                password = "thesis management system"
                 props = ["mail.smtp.auth":"true",
                         "mail.smtp.socketFactory.port":"465",
                         "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
