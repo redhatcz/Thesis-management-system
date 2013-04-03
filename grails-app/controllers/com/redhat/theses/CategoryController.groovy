@@ -20,7 +20,7 @@ class CategoryController {
         }
 
         flash.message = message(code: 'category.created', args: [categoryInstance.id])
-        redirect(controller: 'topic', action: "category", id: categoryInstance.id)
+        redirect(controller: 'topic', action: "list")
     }
 
     def edit(Long id) {
