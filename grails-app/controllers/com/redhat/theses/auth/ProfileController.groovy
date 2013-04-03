@@ -79,7 +79,7 @@ class ProfileController {
                 redirect: false,
                 title: message(code: 'profile.email.changed.title'),
                 header: message(code: 'profile.email.changed.header'),
-                message: message(code: 'profile.email.changed.message')
+                content: message(code: 'profile.email.changed.message')
         ]
     }
 
@@ -88,7 +88,7 @@ class ProfileController {
                 redirect: false,
                 title: message(code: 'profile.email.confirmed.title'),
                 header: message(code: 'profile.email.confirmed.header'),
-                message: message(code: 'profile.email.confirmed.message')
+                content: message(code: 'profile.email.confirmed.message')
         ]
     }
 }

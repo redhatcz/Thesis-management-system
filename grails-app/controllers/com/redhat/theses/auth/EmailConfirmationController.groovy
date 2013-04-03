@@ -10,7 +10,7 @@ class EmailConfirmationController {
                 redirect: false,
                 title: message(code: 'link.expired.title'),
                 header: message(code: 'link.expired.header'),
-                message: message(code: 'link.expired.message')
+                content: message(code: 'link.expired.message')
         ]
     }
 }

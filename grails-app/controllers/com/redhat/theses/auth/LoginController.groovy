@@ -149,7 +149,7 @@ class LoginController {
                 redirect: false,
                 title: message(code: 'security.lost.password.verify.title'),
                 header: message(code: 'security.lost.password.verify.header'),
-                message: message(code: 'security.lost.password.verify.message')
+                content: message(code: 'security.lost.password.verify.message')
         ]
     }
 
@@ -158,7 +158,7 @@ class LoginController {
                 redirect: false,
                 title: message(code: 'security.lost.password.verified.title'),
                 header: message(code: 'security.lost.password.verified.header'),
-                message: message(code: 'security.lost.password.verified.message')
+                content: message(code: 'security.lost.password.verified.message')
         ]
     }
 

@@ -50,7 +50,7 @@ class RegistrationController {
                 redirect: false,
                 title: message(code: 'registration.complete.title'),
                 header: message(code: 'registration.complete.header'),
-                message: message(code: 'registration.complete.message')
+                content: message(code: 'registration.complete.message')
         ]
     }
 
@@ -59,7 +59,7 @@ class RegistrationController {
                 redirect: true,
                 title: message(code: 'registration.confirmed.title'),
                 header: message(code: 'registration.confirmed.header'),
-                message: message(code: 'registration.confirmed.message')
+                content: message(code: 'registration.confirmed.message')
         ]
     }
 }

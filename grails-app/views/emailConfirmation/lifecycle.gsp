@@ -9,6 +9,6 @@
 </head>
 <body>
     <h3>${header}</h3>
-    <p>${message}</p>
+    <p>${content}</p>
 </body>
 </html>
