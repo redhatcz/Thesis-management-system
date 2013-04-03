@@ -32,16 +32,22 @@ class UserListenerService {
         if (e.createdByAdmin) {
             subject = messageSource.getMessage('mail.registration.by.admin.confirmation.subject', [].toArray(), LCH.locale)
         }
-        emailConfirmationService.sendConfirmation(
-            to: e.user.email,
-            subject: subject,
-            view: '/emailConfirmation/message',
-            model: [code: 'mail.registration.confirmation', args: [e.user.fullName, e.password]],
-            id: e.user.id,
-            event: "userCreated"
-        )
+        try {
+            emailConfirmationService.sendConfirmation(
+                to: e.user.email,
+                subject: subject,
+                view: '/emailConfirmation/message',
+                model: [code: 'mail.registration.confirmation', args: [e.user.fullName, e.password]],
+                id: e.user.id,
+                event: "userCreated"
+            )
+            log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} sent."
+        } catch (ex) {
+            log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} not sent."
+            log.error ex.message
+        }
 
-        log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} send."
+
     }
 
     @Listener(topic ='userCreated.confirmed', namespace ='plugin.emailConfirmation')
@@ -75,16 +81,20 @@ class UserListenerService {
         // send confirmation email
         def subject = messageSource.getMessage('mail.email.confirmation.subject', [].toArray(), LCH.locale)
 
-        emailConfirmationService.sendConfirmation(
-                to: e.email,
-                subject: subject,
-                view: '/emailConfirmation/message',
-                model: [code: 'mail.email.confirmation', args: [e.email]],
-                id: e.user.id,
-                event: "emailChanged"
-        )
-
-        log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} sent."
+        try{
+            emailConfirmationService.sendConfirmation(
+                    to: e.email,
+                    subject: subject,
+                    view: '/emailConfirmation/message',
+                    model: [code: 'mail.email.confirmation', args: [e.email]],
+                    id: e.user.id,
+                    event: "emailChanged"
+            )
+            log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} sent."
+        } catch (ex) {
+            log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} not sent."
+            log.error ex.message
+        }
     }
 
     @Listener(topic ='emailChanged.confirmed', namespace ='plugin.emailConfirmation')
@@ -103,16 +113,20 @@ class UserListenerService {
 
         def subject = messageSource.getMessage('mail.lost.password.subject', [].toArray(), LCH.locale)
 
-        emailConfirmationService.sendConfirmation(
-                to: e.user.email,
-                subject: subject,
-                view: '/emailConfirmation/message',
-                model: [code: 'mail.lost.password.verify'],
-                id: e.user.id,
-                event: "lostPassword"
-        )
-
-        log.debug "Verification email for user ${e.user.email} with id ${e.user.id} sent."
+        try {
+            emailConfirmationService.sendConfirmation(
+                    to: e.user.email,
+                    subject: subject,
+                    view: '/emailConfirmation/message',
+                    model: [code: 'mail.lost.password.verify'],
+                    id: e.user.id,
+                    event: "lostPassword"
+            )
+            log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} sent."
+        } catch (ex) {
+            log.debug "Confirmation email for user ${e.user.email} with id ${e.user.id} not sent."
+            log.error ex.message
+        }
     }
 
     @Listener(topic ='lostPassword.confirmed', namespace ='plugin.emailConfirmation')
