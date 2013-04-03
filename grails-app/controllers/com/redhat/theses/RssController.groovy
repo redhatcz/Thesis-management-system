@@ -6,13 +6,15 @@ class RssController {
 
     static defaultAction = "feed"
 
+    static final Long MAX_RSS_FEEDS
+
     def feed() {
 
         if (Util.isActionInUrl(request, 'feed')) {
             redirect uri: '/rss', permanent: true
         }
 
-        def topicList = Topic.findAll(max: 20, sort: 'dateCreated', order: 'desc')
+        def topicList = Topic.findAllByEnabled(true, [sort: 'dateCreated', order: 'desc', max: MAX_RSS_FEEDS])
         render(feedType: 'rss') {
             title = message(code: 'rss.main.feed.title')
             link = createLink(controller: 'rss', action: 'feed', absolute: true)

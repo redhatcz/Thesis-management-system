@@ -33,7 +33,7 @@ class HomeController {
             yourTheses = Thesis.findAllByAssignee(springSecurityService.currentUser, [sort:'dateCreated', order:'desc'])
         }
 
-        def topicList = Topic.list(sort: 'dateCreated', order: 'desc', max: MAX_LATEST_TOPICS)
+        def topicList = Topic.findAllByEnabled(true, [sort: 'dateCreated', order: 'desc', max: MAX_LATEST_TOPICS])
 
         def commentCounts = commentService.countByArticles(topicList)
 
