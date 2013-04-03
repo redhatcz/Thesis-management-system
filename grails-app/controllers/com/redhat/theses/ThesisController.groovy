@@ -83,13 +83,17 @@ class ThesisController {
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, thesisInstance)
         def files = gridFileService.getAllFiles(thesisInstance).sort {it.uploadDate}
 
-        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
-                springSecurityService.currentUser == thesisInstance.assignee ||
+
+        def isThesisAdmin = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
                 springSecurityService.currentUser == thesisInstance.supervisor ||
                 springSecurityService.currentUser == thesisInstance.topic.owner
 
+        def isAuthorized = isThesisAdmin ||
+                springSecurityService.currentUser == thesisInstance.assignee
+
         [thesisInstance: thesisInstance, comments: comments, isAuthorized: isAuthorized,
-         commentsTotal: commentsTotal, subscriber: subscriber, files: files]
+         isThesisAdmin: isThesisAdmin, commentsTotal: commentsTotal, subscriber: subscriber,
+         files: files]
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
