@@ -36,11 +36,12 @@
                                   url="[controller: 'thesis', action: 'updateNotes']"
                                   onSuccess="notesUpdated(data)"/>
             </div>
-        </g:formRemote>
-    </div>
+        </div>
+    </g:formRemote>
+</div>
 
-    <g:set var="notesUrl"
-           value="${createLink(controller: 'thesis', action: 'notes', id: thesisInstance?.id)}"/>
+<g:set var="notesUrl"
+       value="${createLink(controller: 'thesis', action: 'notes', id: thesisInstance?.id)}"/>
     <script type="text/javascript">
         checkNotesDiff = function() {
             var current = $('#notes-text').val();
