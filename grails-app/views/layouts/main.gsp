@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
 <g:applyLayout name="mainLayout">
     <head>
         <title><g:layoutTitle/></title>
@@ -6,8 +7,18 @@
     <content tag="manage-box">
         <div class="container">
             <div class="pull-right">
-                <a id="faq" href="${createLink(controller: 'faq', action: 'list')}"><i class="icon-question-sign"></i> <g:message code="faq.label"/></a>
-                <a id="news" href="${createLink(uri: '/rss')}"><i class="icon-rss"></i> <g:message code="feed.news.label"/></a>
+                <g:if test="${RequestContextUtils.getLocale(request) == Locale.ENGLISH}">
+                    <a id="lang" href="?lang=cs"><i class="icon-globe"></i>
+                        <g:message code="lang.cs.label"/></a>
+                </g:if>
+                <g:else>
+                    <a id="lang" href="?lang=en"><i class="icon-globe"></i>
+                        <g:message code="lang.en.label"/></a>
+                </g:else>
+                <a id="faq" href="${createLink(controller: 'faq', action: 'list')}"><i class="icon-question-sign"></i>
+                    <g:message code="faq.label"/></a>
+                <a id="news" href="${createLink(uri: '/rss')}"><i class="icon-rss"></i>
+                    <g:message code="feed.news.label"/></a>
             </div>
         </div>
     </content>

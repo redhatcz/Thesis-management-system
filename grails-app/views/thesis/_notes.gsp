@@ -29,16 +29,15 @@
                                     onkeyup="updateNotesDiff();"/>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <g:submitToRemote class="tms-btn" name="save"
+                                      value="${message(code: 'thesis.notes.update.button')}"
+                                      url="[controller: 'thesis', action: 'updateNotes']"
+                                      onSuccess="notesUpdated(data)"/>
+                </div>
             </div>
-            <div class="modal-footer">
-                <g:submitToRemote class="tms-btn" name="save"
-                                  value="${message(code: 'thesis.notes.update.button')}"
-                                  url="[controller: 'thesis', action: 'updateNotes']"
-                                  onSuccess="notesUpdated(data)"/>
-            </div>
-        </div>
-    </g:formRemote>
-</div>
+        </g:formRemote>
+    </div>
 
 <g:set var="notesUrl"
        value="${createLink(controller: 'thesis', action: 'notes', id: thesisInstance?.id)}"/>

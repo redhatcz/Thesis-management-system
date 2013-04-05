@@ -39,8 +39,7 @@
                 </u:deleteLink>
 
                 <u:trigger id="triggerUpload" class="tms-btn pull-right">
-                    <i class="icon-upload"></i>
-                    <g:message code="uploader.text.startUpload.button"/>
+                    <g:message code="uploader.text.save.button"/>
                 </u:trigger>
             </div>
         </u:uploader>

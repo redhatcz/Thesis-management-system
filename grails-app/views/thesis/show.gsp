@@ -151,7 +151,6 @@
                         </g:form>
                     </g:if>
                 </sec:ifLoggedIn>
-
             </div>
         </div>
         </sec:ifLoggedIn>
