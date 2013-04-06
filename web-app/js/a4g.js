@@ -57,22 +57,22 @@ function autocomplete(id) {
         var map = undefined
         $this.typeahead({
             source: function(term, process) {
-                var params = buildParams($this.attr('autocomplete-opts'));
+                var params = buildParams($this.attr('data-autocomplete-opts'));
                 params['term'] = term;
-                $.get($this.attr('autocomplete-url'), params, function(data) {
+                $.get($this.attr('data-autocomplete-url'), params, function(data) {
                     map = data;
                     process(data);
                 });
             },
             updater: function(item, type) {
-                var autocompleteTarget = $this.attr('autocomplete-target')
+                var autocompleteTarget = $this.attr('data-autocomplete-target')
                 if (type == "value" && autocompleteTarget) {
                     $('#' + escapeRegex(autocompleteTarget)).val(item);
                 }
                 return item;
             },
             deleter: function () {
-                var autocompleteTarget = $this.attr('autocomplete-target')
+                var autocompleteTarget = $this.attr('data-autocomplete-target')
                 if (autocompleteTarget) {
                     $('#' + escapeRegex(autocompleteTarget)).val(null);
                 }

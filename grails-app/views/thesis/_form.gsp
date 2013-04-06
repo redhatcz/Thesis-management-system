@@ -19,8 +19,8 @@
             <a4g:textField name="thesis.assignee.fullName"
                            value="${thesisInstance?.assignee?.fullName}"
                            disabled="${disabledAssigneeField}"
-                           autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
-                           autocomplete-target="thesis.assignee.id"
+                           data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByName')}"
+                           data-autocomplete-target="thesis.assignee.id"
                            placeholder="${message(code: 'thesis.assignee.label')}"/>
         </div>
     </div>
@@ -36,9 +36,9 @@
             <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
             <a4g:textField name="thesis.supervisor.fullName"
                            value="${thesisInstance?.supervisor?.fullName}"
-                           autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
-                           autocomplete-target="thesis.supervisor.id"
-                           autocomplete-opts="a4g-role[${i}]@role"
+                           data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
+                           data-autocomplete-target="thesis.supervisor.id"
+                           data-autocomplete-opts="a4g-role[${i}]@role"
                            placeholder="${message(code: 'thesis.supervisor.label')}"/>
         </div>
     </div>

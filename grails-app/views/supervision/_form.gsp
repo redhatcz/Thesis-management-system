@@ -5,6 +5,6 @@
                              from="${universities}"
                              value="${universityCommand.universities}"
                              optionKey="id"
-                             label="name" />
+                             optionLabel="name" />
     </div>
 </div>

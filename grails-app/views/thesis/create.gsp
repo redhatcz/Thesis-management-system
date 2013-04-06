@@ -26,8 +26,8 @@
                                value="${thesisInstance?.topic?.title}"
                                disabled="${disabledTopicField}"
                                placeholder="${message(code: 'topic.label')}"
-                               autocomplete-url="${createLink(controller: 'json', action: 'listTopicsByTitle')}"
-                               autocomplete-target="thesis.topic.id" />
+                               data-autocomplete-url="${createLink(controller: 'json', action: 'listTopicsByTitle')}"
+                               data-autocomplete-target="thesis.topic.id" />
             </div>
         </div>
 

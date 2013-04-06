@@ -22,11 +22,11 @@
         <u:uploader id="avatar-uploader"
                     topic="avatar"
                     text="[uploadButton: message(code: 'avatar.select.button')]"
-                    multiple="${false}"
+                    multiple="${ false}"
                     params="${[id: userInstance.id]}"
                     callbacks="[complete: 'avatarUploaded(data)']">
             <div class="modal-body">
-               <u:messages template=""/>
+               <u:messages />
                <u:body/>
             </div>
             <div class="modal-footer">
@@ -45,7 +45,6 @@
         </u:uploader>
     </div>
 </div>
-
 <script type="text/javascript">
     function avatarUpdated(data) {
         if (!data.success) {

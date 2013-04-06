@@ -114,20 +114,25 @@ class RichGSPTagLib {
         def id = attrs.id ?: name
         def classes = attrs['class']
         def value = attrs.value
-        def optionKey = attrs.optionKey
+        def optionKey = attrs?.optionKey
+        def optionLabel = attrs?.optionLabel
+        def useIndex =  attrs?.useIndex != null ? attrs.useIndex : true
         def result = ''
         def isChecked
 
         from?.eachWithIndex { item, i ->
-            isChecked = value?.find { it?."${optionKey}" == item."${optionKey}" }
+            def localValue = optionKey ? item."${optionKey}" : item.toString()
+            def index = useIndex ? "[$i]" : ''
+            isChecked = value?.find {
+                (optionKey ? it."${optionKey}" : it.toString()) == localValue
+            }
 
-            def model = [name: "${name}[${i}].${optionKey}",
-                    id: "${id}[${i}]",
-                    value: item."${optionKey}",
-                    label: item."${attrs.label}",
-                    checked: isChecked,
-                    classes: classes
-            ]
+            def model = [name: optionLabel ? "${name}$index.${optionKey}" : "${name}$index",
+                         id: "${id}[$i]",
+                         value: localValue,
+                         label: optionLabel ? item."${optionLabel}" : item?.toString(),
+                         checked: isChecked,
+                         classes: classes]
             result += render(template: '/taglib/richg/multiCheckBoxInner', model: model)
         }
 

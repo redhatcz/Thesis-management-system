@@ -19,7 +19,7 @@ class CategoryController {
             return
         }
 
-        flash.message = message(code: 'category.created', args: [categoryInstance.id])
+        flash.message = message(code: 'category.created', args: [categoryInstance.title])
         redirect(controller: 'topic', action: "list")
     }
 

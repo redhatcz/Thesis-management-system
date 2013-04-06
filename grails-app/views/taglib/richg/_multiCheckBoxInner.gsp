@@ -1,10 +1,12 @@
-<div id="${id}" class="multi-checkbox">
+<div class="multi-checkbox-child">
+    <input type="hidden" name="_${name}"/>
     <label class="checkbox" for="${id}">
-        <g:checkBox name="${name}"
-                    id="${id}"
-                    value="${value}"
-                    checked="${checked}"
-                    class="${classes}" />
+        <input type="checkbox"
+               name="${name}"
+               id="${id}"
+               class="${classes}"
+               value="${value}"
+               ${checked ? checked="checked" : ''}/>
         ${label.encodeAsHTML()}
     </label>
 </div>
