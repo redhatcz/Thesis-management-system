@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.Grade; com.redhat.theses.Status; com.redhat.theses.util.Util" %>
+<%@ page import="com.redhat.theses.Type; com.redhat.theses.Grade; com.redhat.theses.Status; com.redhat.theses.util.Util" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,6 +78,15 @@
                     <g:select name="filter.grade" from="${Grade.values()}"
                               noSelection="['':message(code:'thesis.grade.select.label')]"
                               value="${params?.filter?.grade}"
+                              class="many-to-one"/>
+                    <g:select name="filter.type" from="${Type.values()}"
+                              noSelection="['':message(code:'thesis.type.select.label')]"
+                              optionValue="${{g.message(code:"thesis.type.${it?.toString()?.toLowerCase()}.label")}}"
+                              value="${params?.filter?.type}"
+                              class="many-to-one"/>
+                    <g:select name="filter.university.id" from="${universityList}"
+                              noSelection="['':message(code:'thesis.university.select.label')]"
+                              optionKey="id" value="${params?.filter?.university?.id}"
                               class="many-to-one"/>
                     <g:submitButton class="tms-btn pull-right" name="filter-button"
                                     value="${message(code: 'filter.button')}"/>

@@ -14,7 +14,7 @@
             </g:link>
         </small>
     </h2>
-    <g:form class="form-inline" action="save" >
+    <g:form class="form-inline" action="save" id="${params.id}">
         <div class="control-group ${hasErrors(bean: thesisInstance?.topic, field: 'title', 'error')} required">
             <label class="control-label" for="thesis.topic.title">
                 <strong><g:message code="topic.label" /></strong>

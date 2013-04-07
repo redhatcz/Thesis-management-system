@@ -65,7 +65,7 @@ class ApplicationController {
         }
 
         def application = new Application(topic: topicInstance)
-        [application: application, universities: topicInstance?.universities]
+        [applicationInstance: application, universities: topicInstance?.universities]
     }
 
     @Secured(['ROLE_STUDENT'])
@@ -74,10 +74,9 @@ class ApplicationController {
         User user = springSecurityService.currentUser
         application.applicant = user
 
-        def topicInstance = Topic.get(application.topic.id)
-
         if (!application.validate() || !application.save()) {
-            render(view: "create", model: [application: application, universities: topicInstance?.universities])
+            def topicInstance = Topic.get(application.topic.id)
+            render(view: "create", model: [applicationInstance: application, universities: topicInstance?.universities])
             return
         }
 
@@ -121,8 +120,14 @@ class ApplicationController {
         // Set assignee
         thesisInstance.assignee = applicationInstance.applicant
 
-        [thesisInstance: thesisInstance, applicationInstance: applicationInstance,
-                disabledAssigneeField: true, disabledTopicField: true]
+        // Set university
+        thesisInstance.university = applicationInstance.university
+
+        // Set type
+        thesisInstance.type = applicationInstance.type
+
+        [thesisInstance: thesisInstance, applicationInstance: applicationInstance, disabledAssigneeField: true,
+                disabledTopicField: true, universityList: University.all, typeList: Type.values()]
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
@@ -150,7 +155,8 @@ class ApplicationController {
 
         if (!applicationService.approve(applicationInstance, thesisInstance)) {
             render view: 'approve', model: [thesisInstance: thesisInstance, applicationInstance: applicationInstance,
-                    disabledAssigneeField: true, disabledTopicField: true]
+                    disabledAssigneeField: true, disabledTopicField: true, universityList: University.all,
+                    typeList: Type.values()]
             return
         }
 

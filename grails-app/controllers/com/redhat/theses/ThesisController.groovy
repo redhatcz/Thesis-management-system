@@ -58,7 +58,7 @@ class ThesisController {
         def publicCommentsOnly = !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN, ROLE_OWNER, ROLE_SUPERVISOR')
         def commentCounts = commentService.countByArticles(theses, publicCommentsOnly)
 
-        [thesisInstanceList: theses, thesisInstanceTotal: thesesCount,
+        [thesisInstanceList: theses, thesisInstanceTotal: thesesCount, universityList: University.all,
                 currentTag: tag, tagListWithUsage: tagListWithUsage, commentCounts: commentCounts]
     }
 
@@ -125,11 +125,12 @@ class ThesisController {
             thesisInstance.title = thesisInstance.topic.title
         }
 
-        [thesisInstance: thesisInstance, disabledTopicField: disabledTopicField]
+        [thesisInstance: thesisInstance, disabledTopicField: disabledTopicField,
+                universityList: University.all, typeList: Type.values()]
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
-    def save() {
+    def save(Long id) {
         def thesisInstance = new Thesis(params.thesis)
 
         thesisInstance.status = Status.IN_PROGRESS
@@ -137,7 +138,8 @@ class ThesisController {
         thesisInstance.tags = params.thesis?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
 
         if (!thesisService.save(thesisInstance)) {
-            render view: 'create', model: [thesisInstance: thesisInstance]
+            render view: 'create', model: [thesisInstance: thesisInstance, disabledTopicField: id && true,
+                    universityList: University.all, typeList: Type.values()]
             return
         }
 
@@ -170,7 +172,7 @@ class ThesisController {
         def supervisors = Supervision.findAllByTopic(thesisInstance.topic)*.supervisor
 
         [thesisInstance: thesisInstance, statusList: Status.values(), gradeList: Grade.values(),
-         supervisors: supervisors]
+         supervisors: supervisors, universityList: University.all, typeList: Type.values()]
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER', 'ROLE_STUDENT'])

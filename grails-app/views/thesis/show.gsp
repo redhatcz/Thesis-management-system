@@ -87,6 +87,21 @@
                     <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
                 <dt>
+                    <i class="icon-book mini"></i>
+                    ${message(code: 'thesis.type.label').toString().toLowerCase()}
+                </dt>
+                <dd>
+                    <g:message code="thesis.type.${fieldValue(bean: thesisInstance, field: 'type')?.toString()?.toLowerCase()}.label"/>
+                </dd>
+                <dt>
+                    <i class="icon-suitcase"></i>
+                    ${message(code: 'university.label').toString().toLowerCase()}
+                </dt>
+                <dd>
+                    <g:link controller="university" action="show" id="${thesisInstance?.universityId}"
+                    ><g:fieldValue bean="${thesisInstance?.university}" field="name"/></g:link>
+                </dd>
+                <dt>
                     <i class="icon-question-sign"></i>
                     ${message(code: 'thesis.status.label').toString().toLowerCase()}
                 </dt>

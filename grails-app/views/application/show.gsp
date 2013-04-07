@@ -42,6 +42,12 @@
             </dd>
         </g:if>
         <dt>
+            <g:message code="application.type.label"/>
+        </dt>
+        <dd>
+            <g:message code="application.type.${fieldValue(bean: applicationInstance, field: 'type')?.toString()?.toLowerCase()}.label"/>
+        </dd>
+        <dt>
             <g:message code="university.label"/>
         </dt>
         <dd>

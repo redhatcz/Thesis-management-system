@@ -1,7 +1,10 @@
-<g:hiddenField id="application.topic.id" name="application.topic.id" value="${application.topic.id}" />
-<div class="control-group ${hasErrors(bean: applicationInstance, field: 'university', 'error')}">
+<%@ page import="com.redhat.theses.Type" %>
+
+<g:hiddenField id="application.topic.id" name="application.topic.id" value="${applicationInstance.topic.id}" />
+<div class="control-group ${hasErrors(bean: applicationInstance, field: 'university', 'error')} required">
   	<label class="control-label" for="application.university.id">
   		  <strong><g:message code="university.label"/></strong>
+          <strong><span class="required-indicator">*</span></strong>
   	</label>
         <div class="controls">
             <g:select id="application.university.id"
@@ -12,6 +15,20 @@
                     value="${applicationInstance?.university?.id}"
                     class="many-to-one"/>
         </div>
+</div>
+
+<div class="control-group ${hasErrors(bean: applicationInstance, field: 'type', 'error')} required">
+    <label class="control-label" for="application.type">
+        <strong><g:message code="application.type.label"/></strong>
+        <strong><span class="required-indicator">*</span></strong>
+    </label>
+    <div class="controls">
+        <g:select name="application.type"
+                  from="${Type.values()}"
+                  noSelection="['':message(code: 'no.selection.label')]"
+                  optionValue="${{g.message(code:"application.type.${it?.toString()?.toLowerCase()}.label")}}"
+                  value="${applicationInstance?.type?.toString()}"/>
+    </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: applicationInstance, field: 'note', 'error')}">

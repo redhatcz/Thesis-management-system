@@ -505,7 +505,9 @@ they are done with their thesis and application management.''',
                         topic: tms,
                         supervisor: jiriKolar,
                         tags: [grailsTag, groovyTag],
-                        status: Status.IN_PROGRESS
+                        status: Status.IN_PROGRESS,
+                        university: muni,
+                        type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(kubaThesis, tms.owner, [kuba, jiriKolar, tms.owner]))
 
@@ -518,7 +520,9 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                         topic: tms,
                         supervisor: jiriKolar,
                         tags: [grailsTag, groovyTag],
-                        status: Status.IN_PROGRESS
+                        status: Status.IN_PROGRESS,
+                        university: muni,
+                        type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis, tms.owner, [vaclav, jiriKolar, tms.owner]))
 
@@ -529,7 +533,9 @@ in one of those can follow it, mail service for sending these feeds to subscribe
                         topic: tms,
                         supervisor: jiriKolar,
                         tags: [othersTag, groovyTag],
-                        status: Status.IN_PROGRESS
+                        status: Status.IN_PROGRESS,
+                        university: muni,
+                        type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis, tms.owner, [pavel, jiriKolar, tms.owner]))
 
@@ -549,7 +555,9 @@ both a small and large scale.''',
 with the increased prevalence of AJAX, some Web frameworks are beginning to include AJAX code that helps developers
 with the particularly tricky task of programming (client-side) the user's browser. At the extreme end of the client-side
 Web Frameworks is technology that can use the web browser as a full-blown application execution environment (a la gmail
-for example): see Web Browser Programming for details.'''
+for example): see Web Browser Programming for details.''',
+                        university: muni,
+                        type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis2, pythonFramework.owner, [pavel, admin, pythonFramework.owner]))
 
@@ -562,7 +570,9 @@ for example): see Web Browser Programming for details.'''
                         status: Status.FINISHED,
                         tags: [rubyTag],
                         grade: Grade.A,
-                        thesisAbstract: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.'''
+                        thesisAbstract: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.''',
+                        university: muni,
+                        type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis2, rubyKillingMachine.owner, [vaclav, jiriKolar, rubyKillingMachine.owner]))
 
@@ -591,7 +601,8 @@ for example): see Web Browser Programming for details.'''
                 new Comment(content: 'Thesis', user: vaclav, article: kubaThesis).save(flush: true)
 
                 // APPLICATIONS
-                new Application(applicant: vaclav, topic: autocompletePlugin, university: muni, note: 'ahoj').save(flush: true)
+                new Application(applicant: vaclav, topic: autocompletePlugin,
+                        university: muni, note: 'ahoj', type: Type.BACHELOR).save(flush: true)
 
                 // FAQ
                 new Faq(question: 'What is the current status of OpenShift Online?',

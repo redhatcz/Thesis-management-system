@@ -14,6 +14,8 @@ class Thesis extends Article{
     String thesisAbstract
     String notes
     Date dateCreated
+    University university
+    Type type
 
     static searchable = {
         root true

@@ -2,7 +2,7 @@
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'title', 'error')} required">
         <label class="control-label" for="thesis.title">
             <strong><g:message code="thesis.title.label"/></strong>
-            <span class="required-indicator">*</span></strong>
+            <strong><span class="required-indicator">*</span></strong>
         </label>
         <div class="controls">
             <g:textField name="thesis.title" value="${thesisInstance?.title}" placeholder="${message(code: 'thesis.title.label')}" />
@@ -12,7 +12,7 @@
     <div class="control-group ${hasErrors(bean: thesisInstance?.assignee, field: 'fullName', 'error')} required">
         <label class="control-label" for="thesis.assignee.fullName">
             <strong><g:message code="thesis.assignee.label"/></strong>
-            <span class="required-indicator">*</span></strong>
+            <strong><span class="required-indicator">*</span></strong>
         </label>
         <div class="controls">
             <g:hiddenField name="thesis.assignee.id" value="${thesisInstance?.assignee?.id}"/>
@@ -28,7 +28,7 @@
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
         <label class="control-label" for="thesis.supervisor.fullName">
             <strong><g:message code="thesis.supervisor.label"/></strong>
-            <span class="required-indicator">*</span></strong>
+            <strong><span class="required-indicator">*</span></strong>
         </label>
         <div class="controls">
             <g:hiddenField name="thesis.supervisor.id"
@@ -43,6 +43,34 @@
         </div>
     </div>
 
+    <div class="control-group ${hasErrors(bean: thesisInstance, field: 'university', 'error')} required">
+        <label class="control-label" for="thesis.university.id">
+            <strong><g:message code="university.label"/></strong>
+            <strong><span class="required-indicator">*</span></strong>
+        </label>
+        <div class="controls">
+            <g:select name="thesis.university.id"
+                      from="${universityList}"
+                      noSelection="['':message(code: 'no.selection.label')]"
+                      optionKey="id"
+                      value="${thesisInstance?.university?.id}"/>
+        </div>
+    </div>
+
+    <div class="control-group ${hasErrors(bean: thesisInstance, field: 'type', 'error')} required">
+        <label class="control-label" for="thesis.type">
+            <strong><g:message code="thesis.type.label"/></strong>
+            <strong><span class="required-indicator">*</span></strong>
+        </label>
+        <div class="controls">
+            <g:select name="thesis.type"
+                      from="${typeList}"
+                      noSelection="['':message(code: 'no.selection.label')]"
+                      optionValue="${{g.message(code:"thesis.type.${it?.toString()?.toLowerCase()}.label")}}"
+                      value="${thesisInstance?.type?.toString()}"/>
+        </div>
+    </div>
+
     <!-- If creating new thesis disable status and grade fields -->
     <g:if test="${thesisInstance?.id}">
         <div class="control-group ${hasErrors(bean: thesisInstance, field: 'status', 'error')}">
@@ -53,6 +81,7 @@
                 <g:select name="thesis.status"
                           from="${statusList}"
                           noSelection="['':message(code: 'no.selection.label')]"
+                          optionValue="${{g.message(code:"thesis.status.${it?.toString()?.toLowerCase()}.label")}}"
                           value="${thesisInstance?.status?.toString()}"/>
             </div>
         </div>

@@ -8,6 +8,7 @@ class Application {
     Topic topic
     Thesis thesis
     University university
+    Type type
     Date dateCreated
     String note
     Boolean approved = false

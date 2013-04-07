@@ -3,7 +3,7 @@
         <i class="icon-file-alt"></i>
         <g:message code="thesis.notes.view.button"/>
         <span id="notes-changed" class="pull-right" style="display: none"
-              data-toggle="tooltip" title="${message(code: 'tehsis.notes.unsaved.tooltip')}">
+              data-toggle="tooltip" title="${message(code: 'thesis.notes.unsaved.tooltip')}">
             <i class="icon-warning-sign"></i>
         </span>
     </a>
