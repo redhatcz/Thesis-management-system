@@ -15,6 +15,11 @@ class TopicService {
      */
     def searchableService
 
+    /**
+     * Saves topic with all its supervisions, deletes missing supervisions in the supervision list
+     *
+     * @return true if success, false otherwise
+     */
     Boolean saveWithSupervisions(Topic topic, List supervisions) {
         //hibernate and searchable collision causes saving of many to many entities not working properly
         //so we need to stop mirroring for a while and then start it again
@@ -42,7 +47,11 @@ class TopicService {
         success
     }
 
-
+    /**
+     * Deletes topic with all its supervisions
+     *
+     * @return true if success, false otherwise
+     */
     Boolean deleteWithSupervisions(Topic topic) {
         def subscriptions = Subscription.findAllByArticle(topic)
         def success = topic?.supervisions?.every { Commons.delete(it) } &&

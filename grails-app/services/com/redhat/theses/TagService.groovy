@@ -5,6 +5,13 @@ package com.redhat.theses
  */
 class TagService {
 
+    /**
+     * Finds all tags with the number of usages in a map
+     *
+     * @param articleClass - Class subclass of Article
+     * @param params - pagination params
+     * @return - Map containing tag as a key and number of usages as a value
+     */
     Map<Tag, Long> findAllWithCountUsage(Class articleClass, Map params) {
         def result = Tag.executeQuery(
                 "select tg, count(tg) from ${articleClass.simpleName} t join t.tags tg " +

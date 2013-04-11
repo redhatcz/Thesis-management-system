@@ -4,6 +4,11 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport as T
 
 class FaqService {
 
+    /**
+     * Saves all FAQs in List faq
+     *
+     * @return true on success, false otherwise
+     */
     def saveMany(List faq) {
         def success = faq.inject(true) { acc, q -> q?.save() && acc}
 

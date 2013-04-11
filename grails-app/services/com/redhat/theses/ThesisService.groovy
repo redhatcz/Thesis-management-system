@@ -10,6 +10,13 @@ class ThesisService {
      */
     def springSecurityService
 
+    /**
+     * Saves a thesis
+     *
+     * @param thesis - thesis to be saved
+     * @param fireEvent - if to fire event on success
+     * @return true if success, false otherwise
+     */
     Thesis save(Thesis thesis, fireEvent = true) {
         String type = thesis.id ? 'articleUpdated' : 'articleCreated'
         def persistedThesis = thesis.save()
@@ -21,6 +28,11 @@ class ThesisService {
         persistedThesis
     }
 
+    /**
+     * Deletes thesis safely
+     *
+     * @return true if success, false otherwise
+     */
     Boolean delete(Thesis thesis) {
         def subscriptions = Subscription.findAllByArticle(thesis)
         def success = Comment.findAllByArticle(thesis).every { Commons.delete(it) } &&

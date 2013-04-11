@@ -5,6 +5,12 @@ package com.redhat.theses
  */
 class CommentService {
 
+    /**
+     * Counts comments by articles
+     *
+     * @param publicOnly - if to count only public comments
+     * @return number of comments
+     */
     Map<Article, Integer> countByArticles(List<Article> articles, publicOnly = true) {
         def result = [:]
         if (articles && articles.size() != 0) {

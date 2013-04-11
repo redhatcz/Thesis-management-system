@@ -7,6 +7,9 @@ import com.redhat.theses.auth.User
  */
 class NotificationService {
 
+    /**
+     * Dismisses all notifications of a user
+     */
     def dismissNotificationsByUser(User user) {
         def notifications = Notification.findAllByUserAndSeen(user, false)
 

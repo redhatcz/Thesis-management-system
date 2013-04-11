@@ -14,10 +14,20 @@ class FilterService {
      */
     def grailsApplication
 
+    /**
+     * Filters domain objects of filterClass
+     *
+     * @param params - params, pagination params and filter params prefixed by filter.
+     * @param filterClass - domain class type, e.g. Topic
+     * @return the result
+     */
     def filter(Map params, Class filterClass) {
         return filterParams(params, filterClass, false)
     }
 
+    /**
+     * Returns number of all filtered objects
+     */
     def count(Map params, Class filterClass) {
         return filterParams(params, filterClass, true)
     }
