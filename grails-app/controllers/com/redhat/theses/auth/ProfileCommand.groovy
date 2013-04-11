@@ -42,7 +42,7 @@ class ProfileCommand {
             }
         }
         email validator: {val, obj ->
-            if (obj.repeatEmail && User.findByEmail(val)) {
+            if (User.findByEmail(val) != obj.springSecurityService.currentUser && User.findByEmail(val)) {
                 'not.unique'
             }
         }

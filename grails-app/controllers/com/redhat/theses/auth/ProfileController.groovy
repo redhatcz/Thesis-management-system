@@ -59,6 +59,8 @@ class ProfileController {
         }
 
         if (profileCommand.hasErrors() || !user.save(flush: true)) {
+            //password will get persisted if not discarded
+            user.discard()
             render view: 'edit', model: [profileCommand: profileCommand, userInstance: user]
             return
         }
@@ -70,7 +72,7 @@ class ProfileController {
             redirect action: 'emailChanged'
         } else {
             flash.message = message(code: 'profile.updated')
-            redirect action: 'index'
+            redirect controller: 'user', action: 'show', id: user.id
         }
     }
 

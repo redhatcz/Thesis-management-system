@@ -66,6 +66,6 @@
     <div class="controls">
         <g:passwordField name="oldPassword"
                          placeholder="${message(code: 'user.oldPassword.label')}"
-                         value="${profileCommand?.repeatPassword}"/>
+                         value="${profileCommand?.oldPassword}"/>
     </div>
 </div>
