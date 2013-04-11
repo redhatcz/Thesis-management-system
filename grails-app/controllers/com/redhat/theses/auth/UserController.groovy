@@ -19,12 +19,14 @@ class UserController {
      */
     def userService
 
+    static final Integer MAX_USERS = 20
+
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     static defaultAction = "list"
 
     def list(Integer max) {
-        params.max = Util.max(max)
+        params.max = Util.max(max, MAX_USERS)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 

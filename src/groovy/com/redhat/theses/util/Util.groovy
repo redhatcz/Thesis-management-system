@@ -12,14 +12,15 @@ class Util {
     public static final Integer MAX_LIMIT = 100
 
     /**
-     * Returns either the value of maximum as integer or the DEFAULT_MAX
+     * Returns either the value of maximum as integer or the defaultMaximum
      *
-     * @param maximum - value in any type
-     * @return maximum
+     * @param maximum - maximum
+     * @param defaultMaximum - default maximum
+     * @return maximum if maximum is not null, defaultMaximum otherwise
      */
-    static Integer max(maximum) {
+    static Integer max(maximum, defaultMaximum = DEFAULT_MAX) {
         maximum = toInt(maximum)
-        Math.min(maximum ?: DEFAULT_MAX, MAX_LIMIT)
+        Math.min(maximum ?: defaultMaximum, MAX_LIMIT)
     }
 
     /**

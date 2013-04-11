@@ -19,10 +19,12 @@ class UniversityController {
      */
     def commentService
 
+    static final Integer MAX_UNIVERSITIES = 20
+
     static defaultAction = "list"
 
     def list(Integer max) {
-        params.max = Util.max(max)
+        params.max = Util.max(max, MAX_UNIVERSITIES)
         [universityInstanceList: University.list(params), universityInstanceTotal: University.count()]
     }
 
