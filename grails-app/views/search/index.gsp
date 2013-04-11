@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <title><g:message code="search.title" /></title>
+    <title><g:message code="search.title" args="[params.q]"/></title>
 </head>
 <body>
 <div class="span8 content">
