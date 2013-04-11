@@ -16,15 +16,14 @@ class CommentListenerService {
     def subscriptionService
 
     /**
-     * Dependency injection of org.springframework.context.MessageSource
-     */
-    def messageSource
-
-    /**
      * Dependency injection of org.codehaus.groovy.grails.web.mapping.LinkGenerator
      */
     def grailsLinkGenerator
 
+    /**
+     * Creates new feed about comment creation, notifies subscribers. If the comment is private, notifies only
+     * admins, owners and supervisors
+     */
     @Listener(topic = "commentCreated")
     def commentCreated(CommentEvent e) {
         def user = e.comment.user

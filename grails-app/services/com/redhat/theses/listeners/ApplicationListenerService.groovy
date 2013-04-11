@@ -21,6 +21,9 @@ class ApplicationListenerService {
      */
     def grailsLinkGenerator
 
+    /**
+     * Creates new feed and notifies owner of applied topic about creation of new application
+     */
     @Listener(topic = "applicationCreated")
     def applicationCreated(ApplicationEvent e) {
         def application = Application.get(e.application.id)
@@ -38,6 +41,9 @@ class ApplicationListenerService {
         subscriptionService.notify(application.topic.owner, feed, application.topic.title)
     }
 
+    /**
+     * Creates new feed and notifies applicant about approval of their application
+     */
     @Listener(topic = "applicationApproved")
     def applicationApproved(ApplicationEvent e) {
         def application = Application.get(e.application.id)

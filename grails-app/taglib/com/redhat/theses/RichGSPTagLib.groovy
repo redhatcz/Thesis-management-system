@@ -108,6 +108,15 @@ class RichGSPTagLib {
                 model: [comments: attrs.comments, article: attrs.article, commentsTotal: attrs.commentsTotal])
     }
 
+    /**
+     * Creates multiCheckBox - a list of checkboxes, similar to multiple select
+     *
+     * @attr from - list of items
+     * @attr value - list of items that will be checked by default
+     * @attr optionKey - name of the property that will be used as the key
+     * @attr optionLabel - name of the property that will be used as the label
+     * @attr useIndex - boolean whether or not to use index in names of generated checkboxes
+     */
     def multiCheckBox = { attrs, body ->
         def from = attrs.from
         def name = attrs.name
@@ -140,6 +149,11 @@ class RichGSPTagLib {
         out << render(template: '/taglib/richg/multiCheckBoxOuter', model: modelOuter);
     }
 
+    /**
+     * The same as g:link but adds property removeParams
+     *
+     * @attr removeParams - params to be removed from the url
+     */
     def link = { attrs, body ->
         def attrsParams = attrs?.params
         // remove all 'remove params' and 'params' because multiple params are not currently supported
@@ -181,6 +195,12 @@ class RichGSPTagLib {
         out << "<img src=\"${uri.encodeAsHTML()}\"${attrsAsString} />"
     }
 
+    /**
+     * Test if resource exists, if so, renders the body, you can use either template name or view name
+     *
+     * @attr template - template name
+     * @attr view - view name
+     */
     def ifResourceExists = { attrs, body ->
         def resFile
 

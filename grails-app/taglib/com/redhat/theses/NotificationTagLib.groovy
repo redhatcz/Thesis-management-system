@@ -13,6 +13,9 @@ class NotificationTagLib {
      */
     def springSecurityService
 
+    /**
+     * Renders notifications
+     */
     def render = { attrs, body ->
         def notificationCount = Notification.countByUserAndSeen(springSecurityService.currentUser, false)
         def notifications = Notification.findAllByUser(springSecurityService.currentUser,

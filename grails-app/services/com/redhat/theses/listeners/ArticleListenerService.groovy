@@ -20,6 +20,10 @@ class ArticleListenerService{
      */
     def grailsLinkGenerator
 
+    /**
+     * Creates new feed, subscribes all extra subscribers (usually the owner of supervisor of a topic/thesis)
+     * and notifies the subscribers
+     */
     @Listener(topic = "articleCreated")
     void articleCreated(ArticleEvent e) {
         def className = e.article.class.simpleName.toLowerCase()
@@ -40,6 +44,9 @@ class ArticleListenerService{
         subscriptionService.notifyAll(e.article, e.user, feed)
     }
 
+    /**
+     * Creates new feed about deletion of an article and notifies subscribers
+     */
     @Listener(topic = "articleDeleted")
     void articleDeleted(ArticleEvent e) {
         def className = e.article.class.simpleName.toLowerCase()
@@ -53,6 +60,9 @@ class ArticleListenerService{
         subscriptionService.notifyAll(e.extraSubscribers, e.user, feed, e.article.title)
     }
 
+    /**
+     * Creates new feed about update of an article and notifies subscribers
+     */
     @Listener(topic = "articleUpdated")
     void articleUpdated(ArticleEvent e) {
         def className = e.article.class.simpleName.toLowerCase()

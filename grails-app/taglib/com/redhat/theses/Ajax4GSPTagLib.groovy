@@ -21,6 +21,9 @@ class Ajax4GSPTagLib {
         out << "<script type='text/javascript'>autocomplete('${id}')</script>"
     }
 
+    /**
+     * Autocomplete select
+     */
     def select = { attrs, body ->
         def id = attrs.id
         if (!id) {

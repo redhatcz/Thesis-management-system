@@ -1,5 +1,8 @@
 package com.redhat.theses
 
+/**
+ * Adds security headers to http response
+ */
 class SecurityFilters {
 
     def filters = {

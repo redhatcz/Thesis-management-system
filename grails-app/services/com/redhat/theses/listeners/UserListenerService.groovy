@@ -23,6 +23,9 @@ class UserListenerService {
      */
     def messageSource
 
+    /**
+     * Sends confirmation mail to newly created user
+     */
     @Listener(topic = "userCreated")
     def userCreated(UserCreatedEvent e) {
         log.debug "User with email ${e.user.email} created."
@@ -50,6 +53,9 @@ class UserListenerService {
 
     }
 
+    /**
+     * Enables account with given id
+     */
     @Listener(topic ='userCreated.confirmed', namespace ='plugin.emailConfirmation')
     def userConfirmed(info) {
         // set the user enabled
@@ -61,6 +67,9 @@ class UserListenerService {
         return [controller:'registration', action:'confirmed']
     }
 
+    /**
+     * Deletes user with given id
+     */
     @Listener(topic ='userCreated.timeout', namespace = 'plugin.emailConfirmation')
     def userConfirmationTimedOut(info) {
         log.debug "User with ${info.email} failed to confirm, the token in their link was ${info.token}"
@@ -68,12 +77,18 @@ class UserListenerService {
         User.get(info.id).delete()
     }
 
+    /**
+     * Invalid link
+     */
     @Listener(topic ='invalid', namespace = 'plugin.emailConfirmation')
     def emailConfirmationInvalid(info) {
         log.debug "User ${info.email} failed to confirm for application id data ${info.id}"
         return [controller:'emailConfirmation', action:'expired']
     }
 
+    /**
+     * Sends confirmation email to confirm email change
+     */
     @Listener(topic = 'emailChanged')
     def emailChanged(EmailChangedEvent e) {
         log.debug "User with email ${e.user.email} changing email."
@@ -97,6 +112,9 @@ class UserListenerService {
         }
     }
 
+    /**
+     * Sets new email for the user
+     */
     @Listener(topic ='emailChanged.confirmed', namespace ='plugin.emailConfirmation')
     def userConfirmedEmail(info) {
         def user = User.get(info.id)
@@ -107,6 +125,9 @@ class UserListenerService {
         return [controller:'profile', action:'emailConfirmed']
     }
 
+    /**
+     * Sends verification email
+     */
     @Listener(topic = 'lostPassword')
     def lostPassword(LostPasswordEvent e) {
         log.debug "User with email ${e.user.email} lost password."
@@ -129,6 +150,9 @@ class UserListenerService {
         }
     }
 
+    /**
+     * Sets new password and sends it to the user
+     */
     @Listener(topic ='lostPassword.confirmed', namespace ='plugin.emailConfirmation')
     def lostPasswordVerificationValid(info) {
         def user = User.get(info.id)
