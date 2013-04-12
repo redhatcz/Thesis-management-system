@@ -7,7 +7,7 @@ import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
-@Secured(['IS_AUTHENTICATED_FULLY'])
+@Secured(['isAuthenticated()'])
 class CommentController {
     static allowedMethods = [create: 'POST', update: 'POST', delete: 'POST']
 

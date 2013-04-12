@@ -12,7 +12,7 @@ class ProfileController {
      */
     def springSecurityService
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    @Secured(['isAuthenticated()'])
     def index() {
         if (Util.isActionInUrl(request, 'index')) {
             redirect uri: '/profile', permanent: true
@@ -24,7 +24,7 @@ class ProfileController {
         redirect controller: 'user', action: 'show', id: userInstance.id
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    @Secured(['isAuthenticated()'])
     def edit() {
         def user = springSecurityService.currentUser
         def profileCommand = new ProfileCommand()
@@ -35,7 +35,7 @@ class ProfileController {
         [profileCommand: profileCommand, userInstance: user]
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    @Secured(['isAuthenticated()'])
     def update(ProfileCommand profileCommand) {
         Long id = params.user.long('id')
         Long version = params.user.long('version')

@@ -2,7 +2,7 @@ package com.redhat.theses
 
 import grails.plugins.springsecurity.Secured
 
-@Secured(['IS_AUTHENTICATED_FULLY'])
+@Secured(['isAuthenticated()'])
 class SubscriptionController {
 
     /**

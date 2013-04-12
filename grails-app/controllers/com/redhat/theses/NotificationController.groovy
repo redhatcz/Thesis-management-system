@@ -7,7 +7,7 @@ import grails.plugins.springsecurity.Secured
 /**
  * @author vdedik@redhat.com
  */
-@Secured(['IS_AUTHENTICATED_FULLY'])
+@Secured(['isAuthenticated()'])
 class NotificationController {
 
     /**
