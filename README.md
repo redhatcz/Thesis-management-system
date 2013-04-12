@@ -98,4 +98,4 @@ Or you can use small gear and build the application your self.
 License
 =======
 
-The Thesis Management System is released under the {MIT License}[http://www.opensource.org/licenses/MIT].
+The Thesis Management System is released under the [MIT License](http://www.opensource.org/licenses/MIT).
