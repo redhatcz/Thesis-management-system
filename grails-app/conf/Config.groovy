@@ -79,7 +79,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://${System.getenv('OPENSHIFT_APP_DNS')}"
+        grails.serverURL = "https://${System.getenv('OPENSHIFT_APP_DNS')}"
 
         grails.mail.default.from="noreply@thesis.redhat.com"
         grails {
