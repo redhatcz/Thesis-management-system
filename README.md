@@ -94,3 +94,8 @@ cartridge.
 
 _Note:_ You need medium gear, otherwise grails won't be able to build the app. 
 Or you can use small gear and build the application your self.
+
+License
+=======
+
+The Thesis Management System is released under the {MIT License}[http://www.opensource.org/licenses/MIT].
