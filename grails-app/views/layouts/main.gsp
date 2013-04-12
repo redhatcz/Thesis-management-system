@@ -7,13 +7,13 @@
     <content tag="manage-box">
         <div class="container">
             <div class="pull-right">
-                <g:if test="${RequestContextUtils.getLocale(request) == Locale.ENGLISH}">
-                    <a id="lang" href="?lang=cs"><i class="icon-globe"></i>
-                        <g:message code="lang.cs.label"/></a>
+                <g:if test="${RequestContextUtils.getLocale(request).toString().startsWith("cs")}">
+                    <a id="lang" href="?lang=en"><i class="icon-globe"></i>
+                        English</a>
                 </g:if>
                 <g:else>
-                    <a id="lang" href="?lang=en"><i class="icon-globe"></i>
-                        <g:message code="lang.en.label"/></a>
+                    <a id="lang" href="?lang=cs"><i class="icon-globe"></i>
+                        Česky</a>
                 </g:else>
                 <a id="faq" href="${createLink(controller: 'faq', action: 'list')}"><i class="icon-question-sign"></i>
                     <g:message code="faq.label"/></a>
