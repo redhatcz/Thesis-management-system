@@ -53,8 +53,9 @@ Thesis fields:
  * Tags - The student should also fill in the tags.
 
 ###Comments
-Both topics and theses can be commented on, users with role Admin or Owner can 
-add private comments that are visible only to them.
+Both topics and theses can be commented on, users with role Admin, Owner or 
+Supervisor can add private comments that are not visible to students and 
+anonymous.
 
 ###Applications
 Any student can apply for a topic as long as it is enabled. When applying for 
