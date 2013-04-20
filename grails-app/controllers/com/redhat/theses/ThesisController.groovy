@@ -188,10 +188,12 @@ class ThesisController {
             return
         }
 
-        def isAuthorized = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
-                springSecurityService.currentUser == thesisInstance.assignee ||
+        def isThesisAdmin = SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN') ||
                 springSecurityService.currentUser == thesisInstance.supervisor ||
                 springSecurityService.currentUser == thesisInstance.topic.owner
+
+        def isAuthorized = isThesisAdmin ||
+                springSecurityService.currentUser == thesisInstance.assignee
 
         if (!isAuthorized) {
             flash.message = message(code: 'security.denied.action.message', args: [id])
@@ -208,11 +210,11 @@ class ThesisController {
 
         def updated
         def isAssignee = thesisInstance.assignee == user
-        if (isAssignee) {
+        if (isThesisAdmin) {
+            updated = params.thesis
+        } else {
             def allowed = ['tags.title', 'thesisAbstract']
             updated = params.thesis.findAll {key, val -> key in allowed}
-        } else {
-            updated = params.thesis
         }
 
         // setup tags
