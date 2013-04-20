@@ -58,7 +58,7 @@
                 <dl>
                     <dt>
                         <i class="icon-user"></i>
-                        ${message(code: 'topic.owner.label').toString().toLowerCase()}
+                        ${message(code: 'role.owner.label').toString().toLowerCase()}
                     </dt>
                     <dd>
                         <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>

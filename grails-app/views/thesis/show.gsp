@@ -73,7 +73,7 @@
                 <g:if test="${thesisInstance?.supervisor}">
                 <dt>
                     <i class="icon-user mini"></i>
-                    ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}
+                    ${message(code: 'role.supervisor.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.supervisorId}"><g:fieldValue field="fullName" bean="${thesisInstance?.supervisor}"/></g:link>

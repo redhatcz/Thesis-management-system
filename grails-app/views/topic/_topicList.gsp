@@ -14,7 +14,7 @@
             </h3>
             <ul class="inline">
                 <li>
-                    <i class="icon-user" title="${message(code:'topic.owner.label')}"></i>
+                    <i class="icon-user" title="${message(code:'role.owner.label')}"></i>
                     <g:link controller="user" action="show" id="${topic?.ownerId}">${topic?.owner?.fullName}</g:link>
                 </li>
                 <li>
@@ -90,7 +90,7 @@
                 <g:textField value="${params?.filter?.title}" class="wide"
                              name="filter.title" placeholder="${message(code: 'topic.title.label')}"/>
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
-                             name="filter.owner.fullName" placeholder="${message(code: 'topic.owner.label')}"/>
+                             name="filter.owner.fullName" placeholder="${message(code: 'role.owner.label')}"/>
                 <g:select name="filter.universities.id" from="${universities}"
                           noSelection="['':message(code:'topic.university.select.label')]"
                           optionKey="id" value="${params?.filter?.universities?.id}"

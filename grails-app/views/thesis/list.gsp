@@ -67,7 +67,7 @@
                     <g:textField value="${params?.filter?.title}" class="wide"
                                  name="filter.title" placeholder="${message(code: 'thesis.title.label')}"/>
                     <g:textField value="${params?.filter?.supervisor?.fullName}" class="wide"
-                                 name="filter.supervisor.fullName" placeholder="${message(code: 'thesis.supervisor.label')}"/>
+                                 name="filter.supervisor.fullName" placeholder="${message(code: 'role.supervisor.label')}"/>
                     <g:textField value="${params?.filter?.assignee?.fullName}" class="wide"
                                  name="filter.assignee.fullName" placeholder="${message(code: 'thesis.assignee.label')}"/>
                     <g:select name="filter.status" from="${Status.values()}"

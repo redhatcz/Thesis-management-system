@@ -27,7 +27,7 @@
 
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
         <label class="control-label" for="thesis.supervisor.fullName">
-            <strong><g:message code="thesis.supervisor.label"/></strong>
+            <strong><g:message code="role.supervisor.label"/></strong>
             <strong><span class="required-indicator">*</span></strong>
         </label>
         <div class="controls">
@@ -39,7 +39,7 @@
                            data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
                            data-autocomplete-target="thesis.supervisor.id"
                            data-autocomplete-opts="a4g-role[${i}]@role"
-                           placeholder="${message(code: 'thesis.supervisor.label')}"/>
+                           placeholder="${message(code: 'role.supervisor.label')}"/>
         </div>
     </div>
 

@@ -63,7 +63,7 @@
                             </dd>
                             <dt>
                                 <i class="icon-user"></i>
-                                ${message(code: 'thesis.supervisor.label').toString().toLowerCase()}
+                                ${message(code: 'role.supervisor.label').toString().toLowerCase()}
                             </dt>
                             <dd>
                                 <g:link controller="user" action="show"

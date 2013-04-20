@@ -31,7 +31,7 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
     <label class="control-label" for="topic.owner.fullName">
-        <strong><g:message code="topic.owner.label"/></strong>
+        <strong><g:message code="role.owner.label"/></strong>
         <span class="required-indicator">*</span>
     </label>
     <div class="controls">
@@ -41,7 +41,7 @@
                        data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
                        data-autocomplete-target="topic.owner.id"
                        data-autocomplete-opts="a4g-role@role"
-                       placeholder="${message(code:'topic.owner.label')}" />
+                       placeholder="${message(code:'role.owner.label')}" />
     </div>
 </div>
 
