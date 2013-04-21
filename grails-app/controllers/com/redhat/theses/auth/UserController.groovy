@@ -24,6 +24,8 @@ class UserController {
      */
     def filterService
 
+    static final Integer MAX_THESES_AND_TOPICS = 5
+
     static final Integer MAX_USERS = 20
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -81,10 +83,25 @@ class UserController {
             return
         }
 
-        def thesisInstanceList =
-            Thesis.findAllByAssignee(userInstance, [sort:'dateCreated', order:'desc', max: 5])
+        def ownedTopics = []
+        if (userInstance.roles?.contains(Role.OWNER)) {
+            ownedTopics = Topic.findAllByOwner(userInstance,
+                    [sort:'dateCreated', order:'desc', max: MAX_THESES_AND_TOPICS])
+        }
 
-        [userInstance: userInstance, thesisInstanceList: thesisInstanceList]
+        def supervisedTheses = []
+        if (userInstance.roles?.contains(Role.SUPERVISOR)) {
+            supervisedTheses = Thesis.findAllBySupervisor(userInstance,
+                    [sort:'dateCreated', order:'desc', max: MAX_THESES_AND_TOPICS])
+        }
+
+        def assignedTheses =
+            Thesis.findAllByAssignee(userInstance, [sort:'dateCreated', order:'desc', max: MAX_THESES_AND_TOPICS])
+
+        [userInstance: userInstance,
+                assignedTheses: assignedTheses,
+                ownedTopics: ownedTopics,
+                supervisedTheses: supervisedTheses]
     }
 
     def activity(Long id) {

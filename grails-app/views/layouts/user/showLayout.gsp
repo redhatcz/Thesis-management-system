@@ -77,8 +77,8 @@
 </div>
 <div class="span8 content">
     <ul class="nav nav-tabs">
-        <li class="${pageProperty(name: 'page.active-button') == 'theses' ? 'active' : ''}">
-            <g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i><g:message code="user.theses.label"/></g:link>
+        <li class="${pageProperty(name: 'page.active-button') == 'main' ? 'active' : ''}">
+            <g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i><g:message code="user.main.button"/></g:link>
         </li>
         <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}">
             <g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i><g:message code="user.activity.label"/></g:link>
