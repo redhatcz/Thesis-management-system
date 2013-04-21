@@ -185,12 +185,12 @@ class UserController {
         }
 
         if (!userService.delete(userInstance)) {
-            flash.message = message(code: 'user.deleted', args: [id])
+            flash.message = message(code: 'user.not.deleted', args: [id])
             redirect(action: "show", id: id)
             return
         }
 
-        flash.message = message(code: 'user.not.deleted', args: [id])
+        flash.message = message(code: 'user.deleted', args: [id])
         redirect(action: "list")
     }
 }
