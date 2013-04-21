@@ -7,6 +7,10 @@
                 <g:link action="show" id="${topic.id}" params="[headline: Util.hyphenize(topic?.title)]">
                     <g:fieldValue bean="${topic}" field="title"/>
                 </g:link>
+
+                <g:if test="${!topic?.enabled}">
+                    <span class="disabled-title">(disabled)</span>
+                </g:if>
             </h3>
             <ul class="inline">
                 <li>
