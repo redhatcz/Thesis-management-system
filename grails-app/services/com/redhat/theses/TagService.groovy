@@ -10,14 +10,15 @@ class TagService {
      *
      * @param articleClass - Class subclass of Article
      * @param params - pagination params
+     * @param sort - sort and order in string form
      * @return - Map containing tag as a key and number of usages as a value
      */
-    Map<Tag, Long> findAllWithCountUsage(Class articleClass, Map params) {
+    Map<Tag, Long> findAllWithCountUsage(Class articleClass, Map params, String sort = "count(tag) desc, tag.title asc") {
         def result = Tag.executeQuery(
-                "select tg, count(tg) from ${articleClass.simpleName} t join t.tags tg " +
-                        "group by tg order by count(tg) desc, tg.title asc", params)
+                "select tag, count(tag) from ${articleClass.simpleName} t join t.tags tag " +
+                        "group by tag order by ${sort}", params)
         def mapResult = [:]
-        result.each { mapResult[it[0]] = it[1]}
+        result.each { mapResult[it[0]] = it[1] }
         mapResult
     }
 }
