@@ -22,7 +22,9 @@ class FilterService {
      * @return the result
      */
     def filter(Map params, Class filterClass) {
-        return filterParams(params, filterClass, false)
+        filterClass.withoutHibernateFilters{
+            return filterParams(params, filterClass, false)
+        }
     }
 
     /**

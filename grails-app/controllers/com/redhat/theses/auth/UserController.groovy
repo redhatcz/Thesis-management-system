@@ -15,9 +15,14 @@ class UserController {
     def springSecurityService
 
     /**
-     * Dependency injeciton of com.redhat.theses.auth.UserService
+     * Dependency injection of com.redhat.theses.auth.UserService
      */
     def userService
+
+    /**
+     * Dependency injection of com.redhat.theses.FilterService
+     */
+    def filterService
 
     static final Integer MAX_USERS = 20
 
@@ -27,7 +32,20 @@ class UserController {
 
     def list(Integer max) {
         params.max = Util.max(max, MAX_USERS)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
+
+        if (!params.filtering || params.filter?.onlyEnabled) {
+            params.filter = [
+                    enabled: true,
+                    accountExpired: false,
+                    accountLocked: false,
+                    onlyEnabled: true
+            ]
+        }
+
+        def userInstanceList = filterService.filter(params, User)
+        def userInstanceTotal = filterService.count(params, User)
+
+        [userInstanceList: userInstanceList, userInstanceTotal: userInstanceTotal]
     }
 
     @Secured(['ROLE_ADMIN'])

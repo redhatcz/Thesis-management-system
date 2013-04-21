@@ -94,7 +94,7 @@
                 <g:submitButton class="tms-btn pull-right" name="filter-button"
                                 value="${message(code: 'filter.button')}"/>
                 <label>
-                    <g:checkBox name="filter.enabled" value="${params?.filter?.enabled}"/> <g:message code="topic.enabled.label"/>
+                    <g:checkBox name="filter.enabled" value="${params?.filter?.enabled}"/> <g:message code="topic.show.only.enabled.label"/>
                 </label>
             </g:form>
         </div>

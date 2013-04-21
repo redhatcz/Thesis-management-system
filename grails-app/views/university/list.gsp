@@ -11,9 +11,9 @@
     <g:if test="${universityInstanceList && universityInstanceList.size() != 0}">
     <table class="table table-users">
         <tbody>
-        <g:each in="${(0..(Math.ceil(universityInstanceList?.size() / 4) - 1))}" var="i">
+        <g:each in="${(0..(Math.ceil(universityInstanceList?.size() / 2) - 1))}" var="i">
             <tr>
-                <g:each in="${((4*i)..(4*i + 3))}" var="j">
+                <g:each in="${((2*i)..(2*i + 1))}" var="j">
                     <td>
                         <g:if test="${j < universityInstanceList.size()}">
                         <div class="user-info">
