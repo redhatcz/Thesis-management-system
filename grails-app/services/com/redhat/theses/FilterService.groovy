@@ -163,8 +163,8 @@ class FilterService {
         boolean added = true
 
         if(value != null) {
-            if (value instanceof String && (value.startsWith('*') || value.endsWith('*'))) {
-                criteria.ilike(propertyName, value.replaceAll("\\*", "%"))
+            if (value instanceof String) {
+                criteria.ilike(propertyName, "%${value}%")
             } else if (value instanceof Object[] || value instanceof Collection) {
                 criteria.in(propertyName, value)
             } else {
