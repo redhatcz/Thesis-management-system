@@ -1,0 +1,1 @@
+<label><input type="checkbox" name="${name}" value="${value}" ${checked}>${label}</label>

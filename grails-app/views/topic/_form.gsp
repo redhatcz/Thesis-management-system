@@ -46,24 +46,23 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
-    <label class="control-label" for="topic.universities">
+    <label class="control-label">
         <strong><g:message code="topic.universities.label"/></strong>
     </label>
     <div class="controls">
-        <g:select name="topic.universities" from="${universities}" multiple="multiple"
-                  optionKey="id" size="5" value="${topicInstance?.universities*.id}" class="one-to-many"/>
+        <richg:multiselect name="topic.universities" from="${universities}"
+                           optionKey="id" value="${topicInstance?.universities*.id}" />
     </div>
 </div>
+
+
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'types', 'error')}">
     <label class="control-label">
         <strong><g:message code="topic.types.label"/></strong>
     </label>
     <div class="controls">
-        <richg:multiCheckBox name="topic.types"
-                             from="${types}"
-                             useIndex="${false}"
-                             value="${topicInstance?.types}"/>
+        <richg:multiselect name="topic.types" from="${types}" value="${topicInstance?.types}"/>
     </div>
 </div>
 
@@ -118,8 +117,8 @@
         <strong><g:message code="topic.categories.label"/></strong>
     </label>
     <div class="controls">
-        <g:select name="topic.categories" from="${com.redhat.theses.Category.list()}" multiple="multiple"
-                  optionKey="id" size="5" value="${topicInstance?.categories*.id}" class="many-to-many"/>
+        <richg:multiselect name="topic.categories" from="${com.redhat.theses.Category.list()}"
+                  optionKey="id" value="${topicInstance?.categories*.id}"/>
     </div>
 </div>
 

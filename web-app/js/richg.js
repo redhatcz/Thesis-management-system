@@ -40,6 +40,26 @@ function sendForm(form, func) {
     });
 }
 
+jQuery.fn.multiselect = function() {
+    $(this).each(function() {
+        var checkboxes = $(this).find("input:checkbox");
+        checkboxes.each(function() {
+            var checkbox = $(this);
+            // Highlight pre-selected checkboxes
+            if (checkbox.attr("checked"))
+                checkbox.parent().addClass("multiselect-on");
+
+            // Highlight checkboxes that the user selects
+            checkbox.click(function() {
+                if (checkbox.attr("checked"))
+                    checkbox.parent().addClass("multiselect-on");
+                else
+                    checkbox.parent().removeClass("multiselect-on");
+            });
+        });
+    });
+};
+
 $(document).ready(function() {
 
     /**
@@ -94,4 +114,7 @@ $(document).ready(function() {
             return result;
         });
     });
+
+    $(".multiselect").multiselect();
 });
+

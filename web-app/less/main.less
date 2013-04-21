@@ -1499,6 +1499,27 @@ label.text {
   margin-top: 12px;
 }
 
+.multiselect {
+  background-color: @white;
+  width: @selectWidth;
+  max-height: 15em;
+  border: solid 1px #c0c0c0;
+  border-color: @grayLighter;
+  padding: 9px 6px;
+  overflow: auto;
+  overflow-y: scroll;
+  .box-sizing(border-box);
+}
+
+.multiselect label {
+  display:block;
+  margin: 0px;
+}
+
+.multiselect-on {
+  color: @white;
+  background-color: @selectedItemBackgroud;
+}
 .disabled-title {
   color: @grayLight;
 }

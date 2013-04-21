@@ -2,8 +2,11 @@ package com.redhat.theses
 
 import com.redhat.theses.auth.User
 import com.redhat.theses.util.Util
+import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import org.codehaus.groovy.grails.web.pages.discovery.GrailsConventionGroovyPageLocator
 import org.grails.plugin.platform.util.TagLibUtils
+import org.springframework.beans.SimpleTypeConverter
+import org.springframework.context.MessageSourceResolvable
 
 class RichGSPTagLib {
     /**
@@ -150,6 +153,147 @@ class RichGSPTagLib {
     }
 
     /**
+     * A helper tag for creating multiselect element (checkbox based select).<br/>
+     *
+     * @emptyTag
+     *
+     * @attr name REQUIRED the select name
+     * @attr index If evaluates to true the name will be used in form of list
+     * @attr id the DOM element id - uses the name attribute if not specified
+     * @attr from REQUIRED The list or range to select from
+     * @attr keys A list of values to be used for the value attribute of each "option" element.
+     * @attr optionKey By default value attribute of each &lt;option&gt; element will be the result of a "toString()" call on each element. Setting this allows the value to be a bean property of each element in the list.
+     * @attr optionValue By default the body of each &lt;option&gt; element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be a bean property of each element in the list.
+     * @attr value The current selected value that evaluates equals() to true for one of the elements in the from list.
+     * @attr valueMessagePrefix By default the value "option" element will be the result of a "toString()" call on each element in the "from" attribute list. Setting this allows the value to be resolved from the I18n messages. The valueMessagePrefix will be suffixed with a dot ('.') and then the value attribute of the option to resolve the message. If the message could not be resolved, the value is presented.
+     */
+    def multiselect = { attrs ->
+        //TODO: Support for html attributes
+        if (!attrs.name) {
+            throwTagError("Tag [multiselect] is missing required attribute [name]")
+        }
+        if (!attrs.containsKey('from')) {
+            throwTagError("Tag [multiselect] is missing required attribute [from]")
+        }
+
+        def name = attrs.remove('name')
+        def index = attrs.remove('index')
+        def from = attrs.remove('from')
+        def keys = attrs.remove('keys')
+        def optionKey = attrs.remove('optionKey')
+        def optionValue = attrs.remove('optionValue')
+        def value = attrs.remove('value')
+        def valueMessagePrefix = attrs.remove('valueMessagePrefix')
+        def body = new StringBuilder()
+
+        if (from) {
+            from.eachWithIndex { el, i ->
+                def keyValue = null
+                def keyValueObject = null
+                def label = null
+                def cname = name
+
+                // Value
+                if (keys) {
+                    keyValue = keys[i]
+                } else if (optionKey) {
+                    if (optionKey instanceof Closure) {
+                        keyValue = optionKey(el)
+                    } else if (el != null && optionKey == 'id' && grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, el.getClass().name)) {
+                        keyValue = el.ident()
+                        keyValueObject = el
+                    } else {
+                        keyValue = el[optionKey]
+                        keyValueObject = el
+                    }
+                } else {
+                    keyValue = el
+                }
+
+                // Label
+                if (optionValue) {
+                    if (optionValue instanceof Closure) {
+                        label = optionValue(el).toString().encodeAsHTML()
+                    } else {
+                        label = el[optionValue].toString().encodeAsHTML()
+                    }
+                } else if (el instanceof MessageSourceResolvable) {
+                    label = messageSource.getMessage(el, locale)
+                } else if (valueMessagePrefix) {
+                    def message = messageSource.getMessage("${valueMessagePrefix}.${keyValue}", null, null, locale)
+                    if (message != null) {
+                        label = message.encodeAsHTML()
+                    } else if (keyValue && keys) {
+                        def s = el.toString()
+                        if (s) writer << s.encodeAsHTML()
+                    } else if (keyValue) {
+                        label = keyValue.encodeAsHTML()
+                    } else {
+                        def s = el.toString()
+                        if (s) label = s.encodeAsHTML()
+                    }
+                } else {
+                    def s = el.toString()
+                    if (s)label = s.encodeAsHTML()
+                }
+
+                if (index) {
+                    cname = "${name}[$i].${optionKey}"
+                }
+                def checkbox = renderMultiselectCheckbox(cname, label, keyValue, value, keyValueObject)
+
+                body.append(checkbox)
+            }
+        }
+
+
+        def model = [body: body]
+        out << render(template: '/taglib/richg/multiselectOuter', model: model)
+    }
+
+
+    private renderMultiselectCheckbox(name, label, keyValue, value, el) {
+
+        boolean checked = false
+        def keyName = name
+        def keyClass = keyValue?.getClass()
+        if (keyClass.isInstance(value)) {
+            checked = (keyValue == value)
+        }
+        else if (value instanceof Collection) {
+            // first try keyValue
+            checked = value.contains(keyValue)
+            if (! checked && el != null) {
+                checked = value.contains(el)
+            }
+        }
+        // GRAILS-3596: Make use of Groovy truth to handle GString <-> String
+        // and other equivalent types (such as numbers, Integer <-> Long etc.).
+        else if (keyValue == value) {
+            checked = true
+        }
+        else if (keyClass && value != null) {
+            try {
+                def typeConverter = new SimpleTypeConverter()
+                value = typeConverter.convertIfNecessary(value, keyClass)
+                checked = (keyValue == value)
+            }
+            catch (e) {
+                // ignore
+            }
+        }
+
+//        if (i != null) {
+//            keyName = "$name[$i]"
+//        }
+
+        def model = [name: keyName,
+                     value: keyValue,
+                     label: label,
+                     checked: checked ? 'checked' : '']
+        render(template: '/taglib/richg/multiselectInner', model: model)
+    }
+/**
      * The same as g:link but adds property removeParams
      *
      * @attr removeParams - params to be removed from the url

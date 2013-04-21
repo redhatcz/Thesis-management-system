@@ -28,7 +28,7 @@ class SupervisionController {
         }
 
         def user = springSecurityService.currentUser
-        def universities = topicInstance.universities
+        List universities = topicInstance.universities?.sort {it.name}
         universityCommand.universities += Supervision.findAllByTopicAndSupervisor(topicInstance, user)*.university
         [topicInstance: topicInstance, universityCommand: universityCommand, universities: universities]
     }
