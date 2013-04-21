@@ -40,13 +40,14 @@ class TopicController {
     def list() {
         params.max = Util.max(params.max)
 
-        if (!params.filter) {
-            params.filter = [:]
-        }
-        if (!params?.filtering) {
-            params.filter << [enabled: true]
-        } else if (!params?.filter?.enabled) {
-            params.filter?.enabled = false
+        if (!params?.filtering || params.filter?.onlyEnabled) {
+            if (!params.filter) {
+                params.filter = [:]
+            }
+            params.filter += [
+                    enabled: true,
+                    onlyEnabled: true
+            ]
         }
 
         def category = null

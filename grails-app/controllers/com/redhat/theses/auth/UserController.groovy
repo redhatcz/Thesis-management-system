@@ -34,7 +34,10 @@ class UserController {
         params.max = Util.max(max, MAX_USERS)
 
         if (!params.filtering || params.filter?.onlyEnabled) {
-            params.filter = [
+            if (!params.filter) {
+                params.filter = [:]
+            }
+            params.filter += [
                     enabled: true,
                     accountExpired: false,
                     accountLocked: false,
