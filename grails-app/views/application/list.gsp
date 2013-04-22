@@ -44,7 +44,8 @@
         </table>
     </div>
     <g:if test="${Util.isPaginationVisible(applicationInstanceTotal, params.max)}">
-        <g:paginate total="${applicationInstanceTotal}" class="pagination-centered"/>
+        <g:paginate total="${applicationInstanceTotal}" class="pagination-centered"
+                    params="${Util.formatParams(request)}"/>
     </g:if>
     </g:if>
     <g:else>

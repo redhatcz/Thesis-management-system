@@ -53,7 +53,8 @@
         </g:else>
 
         <g:if test="${Util.isPaginationVisible(userInstanceTotal, params.max)}">
-            <g:paginate total="${userInstanceTotal}" class="pagination-centered"/>
+            <g:paginate total="${userInstanceTotal}" class="pagination-centered"
+                        params="${Util.formatParams(request)}"/>
         </g:if>
     </div>
 
