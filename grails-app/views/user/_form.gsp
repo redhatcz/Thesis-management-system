@@ -27,8 +27,8 @@
             <span class="required-indicator">*</span></strong>
     </label>
     <div class="controls">
-        <g:select name="user.roles" from="${Role.values()}" multiple="multiple"
-                  size="4" value="${userInstance?.roles}" class="many-to-many"/>
+        <richg:multiselect name="user.roles" from="${Role.values()}" value="${userInstance?.roles}" size="4"
+                           optionValue="${{g.message(code:"role.${it?.toString()?.toLowerCase()}.label")}}"/>
     </div>
 </div>
 
