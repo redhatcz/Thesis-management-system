@@ -67,12 +67,16 @@ removeFromFileList = function (tableId, infoId, data) {
     }
 }
 
-// disable all empty fields on submit for filter
 $(document).ready(function() {
+
+    // disable all empty fields on submit for filter
     $('form.filter').submit(function() {
         $(this).find(':input[value=""]').attr('disabled', true);
         $(this).find(':input[type="submit"]').attr('disabled', true);
 
         return true;
     });
+
+    // tooltip initialization
+    $('.tms-tooltip').tooltip();
 });

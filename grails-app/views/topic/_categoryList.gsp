@@ -14,8 +14,9 @@
                 <g:link class="category-settings" controller="category" action="edit"
                         id="${category?.id}"><i class="icon-wrench"></i></g:link>
             </sec:ifAnyGranted>
-            <richg:link class="${category == currentCategory ? 'category-root' : 'category'}" action="list"
+            <richg:link class="${category == currentCategory ? 'category-root' : 'category'} tms-tooltip" action="list"
                         params="${['filter.categories.id': category.id]}" removeParams="['max', 'offset']"
+                        data-placement="left" title="${fieldValue(bean: category, field: "description")}"
             >${fieldValue(bean: category, field: "title")}</richg:link>
         </li>
         </g:each>
