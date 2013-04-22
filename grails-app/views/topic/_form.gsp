@@ -62,7 +62,8 @@
         <strong><g:message code="topic.types.label"/></strong>
     </label>
     <div class="controls">
-        <richg:multiselect name="topic.types" from="${types}" value="${topicInstance?.types}"/>
+        <richg:multiselect name="topic.types" from="${types}" value="${topicInstance?.types}"
+                           optionValue="${{g.message(code:"topic.type.${it?.toString()?.toLowerCase()}.label")}}"/>
     </div>
 </div>
 
