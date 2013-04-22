@@ -31,7 +31,9 @@ class FilterService {
      * Returns number of all filtered objects
      */
     def count(Map params, Class filterClass) {
-        return filterParams(params, filterClass, true)
+        filterClass.withoutHibernateFilters{
+            return filterParams(params, filterClass, true)
+        }
     }
 
     private filterParse(c, domainClass, params, filterParams, doCount) {
