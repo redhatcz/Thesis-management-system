@@ -1,12 +1,14 @@
 package com.redhat.theses.listeners
-
 import com.redhat.theses.auth.User
 import com.redhat.theses.events.EmailChangedEvent
 import com.redhat.theses.events.LostPasswordEvent
 import com.redhat.theses.events.UserCreatedEvent
 import grails.events.Listener
 import org.apache.commons.lang.RandomStringUtils
+import org.apache.commons.lang.exception.ExceptionUtils
 import org.springframework.context.i18n.LocaleContextHolder as LCH
+
+import java.sql.SQLException
 
 /**
  * @author vdedik@redhat.com
@@ -61,9 +63,21 @@ class UserListenerService {
         // set the user enabled
         def user = User.get(info.id)
         user.enabled = true
-        user.save(flush: true)
+        try {
+            user.save(flush: true)
+            log.info "User ${info.email} successfully confirmed with application id data ${info.id}"
+        } catch (Exception ex) {
+            log.error(ex.getMessage())
+            log.error(ExceptionUtils.getStackTrace(ex))
+            log.error(ExceptionUtils.getRootCauseMessage(ex))
+            ExceptionUtils.getRootCauseStackTrace(ex).each { log.error(it) }
+            def exception = ExceptionUtils.getRootCause(ex)
+            if (exception instanceof SQLException) {
+                log.error(exception.getNextException().getMessage())
+            }
+            throw ex
+        }
 
-        log.debug "User ${info.email} successfully confirmed with application id data ${info.id}"
         return [controller:'registration', action:'confirmed']
     }
 
