@@ -43,7 +43,7 @@
                     <g:message code="role.${Role.getHighest(userInstance?.roles).toString().toLowerCase()}.label"/>
                 </dd>
 
-                <g:if test="${userInstance?.enabled}">
+                <g:if test="${!userInstance?.enabled}">
                 <dt>
                     <i class="icon-lock"></i>
                     ${message(code: 'user.enabled.label').toString().toLowerCase()}
