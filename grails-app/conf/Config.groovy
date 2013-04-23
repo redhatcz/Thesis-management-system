@@ -84,10 +84,10 @@ environments {
         grails.mail.default.from="noreply@thesis.redhat.com"
         grails {
             mail {
-                host = "smtp.gmail.com"
-                port = 465
-                username = "thesismanagementsystem@gmail.com"
-                password = "thesis management system"
+                host = System.getenv('OPENSHIFT_EMAIL_HOST')
+                port = System.getenv('OPENSHIFT_EMAIL_PORT')?.toInteger()
+                username = System.getenv('OPENSHIFT_EMAIL_USERNAME')
+                password = System.getenv('OPENSHIFT_EMAIL_PASSWORD')
                 props = ["mail.smtp.auth":"true",
                         "mail.smtp.socketFactory.port":"465",
                         "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
