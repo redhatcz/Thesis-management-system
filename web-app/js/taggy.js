@@ -88,6 +88,16 @@
                 return;
             }
 
+            // typeahead hack to select value on enter or tab
+            if ((e.keyCode == 9 // tab
+                || e.keyCode == 13) // enter
+                && this.tagInput.data('typeahead').shown
+                ) {
+                this.tagInput.data('typeahead').select();
+                // delete selected text so that no value is inserted on blur
+                this.tagInput.data('typeahead').text = '';
+            }
+
             // prevent default function of the key to take place
             e.preventDefault();
 
@@ -133,3 +143,31 @@
     }
 
 })(jQuery);
+
+$(document).ready(function(){
+    $(".taggy-tag-input").unbind('keyup').keyup(function (e) {
+        var $this = $(this).data('typeahead');
+
+        switch(e.keyCode) {
+            case 40: // down arrow
+            case 38: // up arrow
+            case 16: // shift
+            case 17: // ctrl
+            case 18: // alt
+                break
+
+            case 9: // tab
+            case 13: // enter
+            case 27: // escape
+                if (!$this.shown) return
+                $this.hide()
+                break
+
+            default:
+                $this.lookup()
+        }
+
+        e.stopPropagation()
+        e.preventDefault()
+    });
+});

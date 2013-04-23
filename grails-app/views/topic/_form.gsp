@@ -130,6 +130,19 @@
     <div class="controls">
         <g:select id="topic-tags" name="topic.tags.title" multiple="multiple"
                   from="${topicInstance?.tags}" value="${topicInstance?.tags}"/>
-        <script type="text/javascript">$('#topic-tags').taggy();</script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#topic-tags').taggy();
+            $('.taggy-tag-input').typeahead({
+                source: function(term, process) {
+                    $.get("${g.createLink(controller: 'json', action: 'listTagsByTitle')}", "term=" + term, function(data) {
+                        process(data);
+                    });
+                },
+                detailsType: 'none',
+                minWidth: ''
+            });
+        });
+        </script>
     </div>
 </div>

@@ -4,13 +4,17 @@ var _super = $.fn.typeahead;
 
 // add new default options
 $.extend(_super.defaults, {
-    detailsType: 'nextTo'
+    detailsType: 'nextTo',
+    minWidth: 'auto'
 });
 
 // constructor
 var Typeahead = function(element, options) {
     _super.Constructor.apply(this, arguments);
     this.deleter = this.options.deleter || this.deleter
+    if (this.options.minWidth != 'auto') {
+        this.$menu.css('min-width', this.options.minWidth);
+    }
 }
 
 Typeahead.prototype = $.extend({}, _super.Constructor.prototype, {

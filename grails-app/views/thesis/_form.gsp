@@ -128,12 +128,25 @@
 </sec:ifAnyGranted>
 
 <div class="control-group">
-    <label class="control-label" for="tag-list">
+    <label class="control-label" for="thesis-tags">
         <strong><g:message code="thesis.tags.label"/></strong>
     </label>
     <div class="controls">
-        <g:select id="tag-list" name="thesis.tags.title" multiple="multiple" from="${thesisInstance?.tags}"
+        <g:select id="thesis-tags" name="thesis.tags.title" multiple="multiple" from="${thesisInstance?.tags}"
                   value="${thesisInstance?.tags}"/>
-        <script type="text/javascript">$('#tag-list').taggy();</script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('#thesis-tags').taggy();
+            $('.taggy-tag-input').typeahead({
+                source: function(term, process) {
+                    $.get("${g.createLink(controller: 'json', action: 'listTagsByTitle')}", "term=" + term, function(data) {
+                        process(data);
+                    });
+                },
+                detailsType: 'none',
+                minWidth: ''
+            });
+        });
+        </script>
     </div>
 </div>
