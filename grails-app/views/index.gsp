@@ -21,7 +21,7 @@
             <li class="tms-elem">
                 <i class="icon-book"></i>
                 <g:link controller="topic" action="show"
-                        id="${topic?.id}" params="${Util.hyphenize(topic?.title)}"
+                        id="${topic?.id}" params="[headline: Util.hyphenize(topic?.title)]"
                     ><g:fieldValue field="title" bean="${topic}"/></g:link>
                 <span class="pull-right">
                     <i class="icon-comment"></i> ${commentCounts[topic] ?: 0}
