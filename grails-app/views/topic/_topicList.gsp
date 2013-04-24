@@ -86,7 +86,7 @@
             <g:form method="get" class="filter">
                 <g:hiddenField name="filtering" value="true"/>
                 <g:hiddenField name="filter.categories.id" value="${params?.filter?.categories?.id}"/>
-                <g:hiddenField name="filter.tags.id" value="${params?.filter?.tags?.id}"/>
+                <g:hiddenField name="filter.tags.title" value="${params?.filter?.tags?.title}"/>
                 <g:textField value="${params?.filter?.title}" class="wide"
                              name="filter.title" placeholder="${message(code: 'topic.title.label')}"/>
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"

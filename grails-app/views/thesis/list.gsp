@@ -63,7 +63,7 @@
             <div class="panel-content">
                 <g:form method="get" class="filter">
                     <g:hiddenField name="filtering" value="true"/>
-                    <g:hiddenField name="filter.tags.id" value="${params?.filter?.tags?.id}"/>
+                    <g:hiddenField name="filter.tags.title" value="${params?.filter?.tags?.title}"/>
                     <g:textField value="${params?.filter?.title}" class="wide"
                                  name="filter.title" placeholder="${message(code: 'thesis.title.label')}"/>
                     <g:textField value="${params?.filter?.supervisor?.fullName}" class="wide"
