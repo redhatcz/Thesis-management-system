@@ -66,10 +66,13 @@
                     <g:hiddenField name="filter.tags.title" value="${params?.filter?.tags?.title}"/>
                     <g:textField value="${params?.filter?.title}" class="wide"
                                  name="filter.title" placeholder="${message(code: 'thesis.title.label')}"/>
+                    <g:hiddenField name="type.title" value="ilike"/>
                     <g:textField value="${params?.filter?.supervisor?.fullName}" class="wide"
                                  name="filter.supervisor.fullName" placeholder="${message(code: 'role.supervisor.label')}"/>
+                    <g:hiddenField name="type.supervisor.fullName" value="ilike"/>
                     <g:textField value="${params?.filter?.assignee?.fullName}" class="wide"
                                  name="filter.assignee.fullName" placeholder="${message(code: 'thesis.assignee.label')}"/>
+                    <g:hiddenField name="type.assignee.fullName" value="ilike"/>
                     <g:select name="filter.status" from="${Status.values()}"
                               noSelection="['':message(code:'thesis.status.select.label')]"
                               optionValue="${{g.message(code:"thesis.status.${it?.toString()?.toLowerCase()}.label")}}"

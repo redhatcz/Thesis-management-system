@@ -66,8 +66,10 @@
                     <g:hiddenField name="filtering" value="true"/>
                     <g:textField value="${params?.filter?.fullName}" class="wide"
                                  name="filter.fullName" placeholder="${message(code: 'user.fullName.label')}"/>
+                    <g:hiddenField name="type.fullName" value="ilike"/>
                     <g:textField value="${params?.filter?.email}" class="wide"
                                  name="filter.email" placeholder="${message(code: 'user.email.label')}"/>
+                    <g:hiddenField name="type.email" value="ilike"/>
                     <g:submitButton class="tms-btn pull-right" name="filter-button"
                                     value="${message(code: 'filter.button')}"/>
                     <label>

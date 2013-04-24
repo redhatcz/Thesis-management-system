@@ -89,8 +89,10 @@
                 <g:hiddenField name="filter.tags.title" value="${params?.filter?.tags?.title}"/>
                 <g:textField value="${params?.filter?.title}" class="wide"
                              name="filter.title" placeholder="${message(code: 'topic.title.label')}"/>
+                <g:hiddenField name="type.title" value="ilike"/>
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
                              name="filter.owner.fullName" placeholder="${message(code: 'role.owner.label')}"/>
+                <g:hiddenField name="type.owner.fullName" value="ilike"/>
                 <g:select name="filter.universities.id" from="${universities}"
                           noSelection="['':message(code:'topic.university.select.label')]"
                           optionKey="id" value="${params?.filter?.universities?.id}"

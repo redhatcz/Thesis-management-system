@@ -36,7 +36,7 @@ class FilterService {
         }
     }
 
-    private filterParse(c, domainClass, params, filterParams, doCount) {
+    private filterParse(c, domainClass, params, filterParams, filterTypeParams, doCount) {
         // First pull out the op map and store a list of its keys.
         def keyList = []
         keyList.addAll(filterParams.keySet())
@@ -49,10 +49,12 @@ class FilterService {
             if (! propName.contains(".") && ! propName.contains("password")) {
 
                 def rawValue = filterParams[propName]
+                def rawType = filterTypeParams ? filterTypeParams[propName] : null
 
                 // If the filterOp is a Map, then the propName is an association (e.g. Book.author)
                 if (rawValue instanceof Map) {
                     def nextFilterParams = rawValue
+                    def nextFilterTypeParams = rawType
 
                     // Are any of the values non-empty?
                     if (nextFilterParams.values().find {it.size() > 0} != null) {
@@ -63,7 +65,8 @@ class FilterService {
 
                                 def nextDomainClass = nextDomainProp.referencedDomainClass
 
-                                filterParse(c, nextDomainClass, params, nextFilterParams, doCount)
+                                filterParse(c, nextDomainClass, params,
+                                        nextFilterParams, nextFilterTypeParams, doCount)
 
                                 // If they want to sort by an associated property, need to do it here.
                                 if (!doCount && params.sort && params.sort.startsWith("${propName}.")) {
@@ -80,7 +83,7 @@ class FilterService {
 
                     if (thisDomainProp) {
                         def val = this.parseValue(thisDomainProp, rawValue)
-                        this.addCriterion(c, propName, val)
+                        this.addCriterion(c, propName, val, rawType)
                     }
                 }
             }
@@ -89,6 +92,7 @@ class FilterService {
 
     private filterParams(Map params, Class filterClass, boolean doCount) {
         def filterParams = params.filter
+        def filterTypeParams = params.type
 
         def domainClass = resolveDomainClass(filterClass)
 
@@ -98,7 +102,7 @@ class FilterService {
 
             def criteriaClosure = {
                 and {
-                    filterParse(c, domainClass, params, filterParams, doCount)
+                    filterParse(c, domainClass, params, filterParams, filterTypeParams, doCount)
                 }
 
                 if (doCount) {
@@ -163,11 +167,11 @@ class FilterService {
         }
     }
 
-    private addCriterion(criteria, propertyName, value) {
+    private addCriterion(criteria, propertyName, value, type) {
         boolean added = true
 
         if(value != null) {
-            if (value instanceof String) {
+            if (value instanceof String && type == 'ilike') {
                 criteria.ilike(propertyName, "%${value}%")
             } else if (value instanceof Object[] || value instanceof Collection) {
                 criteria.in(propertyName, value)
