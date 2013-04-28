@@ -66,7 +66,7 @@ environments {
             driverClassName = "org.postgresql.Driver"
             dbCreate = "update"
             properties {
-               maxActive = -1
+               maxActive = 100
                minEvictableIdleTimeMillis=1800000
                timeBetweenEvictionRunsMillis=1800000
                numTestsPerEvictionRun=3
