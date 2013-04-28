@@ -64,7 +64,7 @@ class UserListenerService {
         def user = User.get(info.id)
         user.enabled = true
         try {
-            user.save(flush: true)
+            user.save()
             log.info "User ${info.email} successfully confirmed with application id data ${info.id}"
         } catch (Exception ex) {
             log.error(ex.getMessage())
