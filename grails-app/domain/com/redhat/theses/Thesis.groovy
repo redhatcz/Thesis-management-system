@@ -17,11 +17,11 @@ class Thesis extends Article{
     University university
     Type type
 
-    static searchable = {
-        root true
-        assignee component: true
-        supervisor component: true
-    }
+    //static searchable = {
+    //    root true
+    //    assignee component: true
+    //    supervisor component: true
+    //}
 
     static hasMany = [tags: Tag]
 

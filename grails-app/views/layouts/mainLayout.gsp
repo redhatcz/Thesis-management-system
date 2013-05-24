@@ -12,12 +12,12 @@
                     <g:link uri="/">
                         <img id="logo" src="${resource(dir: 'images', file: 'redhat.png')}"/>
                     </g:link>
-                    <g:form name="search-field" method="get" controller="search" action="index">
+                    %{--<g:form name="search-field" method="get" controller="search" action="index">
                         <g:textField value="${params.q}" name="q" placeholder="${message(code: 'search.label')}"/>
                         <button type="submit" class="btn-link">
                             <i class="icon-search"></i>
                         </button>
-                    </g:form>
+                    </g:form>--}%
                 </div>
                 <div class="pull-right">
                     <sec:ifLoggedIn>

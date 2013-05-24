@@ -17,7 +17,7 @@ class User {
 	boolean passwordExpired
     boolean sendMail = true
 
-    static searchable = true
+    //static searchable = true
 
     static hasMany = [roles: Role]
 

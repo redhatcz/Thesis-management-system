@@ -72,6 +72,6 @@ grails.project.dependency.resolution = {
         compile ":lesscss-resources:1.3.1"
         compile ":hibernate-filter:0.3.2"
         compile ":feeds:1.5"
-        compile ":searchable:0.6.4"
+        //compile ":searchable:0.6.4"
     }
 }

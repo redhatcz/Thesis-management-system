@@ -23,7 +23,7 @@ class TopicService {
     Boolean saveWithSupervisions(Topic topic, List supervisions) {
         //hibernate and searchable collision causes saving of many to many entities not working properly
         //so we need to stop mirroring for a while and then start it again
-        searchableService.stopMirroring()
+        //searchableService.stopMirroring()
 
         String type = topic.id ? 'articleUpdated' : 'articleCreated'
         def savedTopic = topic.save(flush: true)
@@ -37,12 +37,12 @@ class TopicService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
         } else {
             event(type, new ArticleEvent(savedTopic, springSecurityService.currentUser, [topic.owner]))
-            searchableService.index(savedTopic)
+            //searchableService.index(savedTopic)
         }
 
         //hibernate and searchable collision causes saving of many to many entities not working properly
         //so we need to stop mirroring for a while and then start it again
-        searchableService.startMirroring()
+        //searchableService.startMirroring()
 
         success
     }
