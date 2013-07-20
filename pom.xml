@@ -239,6 +239,29 @@
         <type>zip</type>
     </dependency>         
 
+    <dependency>
+        <groupId>org.grails.plugins</groupId>
+        <artifactId>cached-resources</artifactId>
+        <version>1.0</version>
+        <scope>runtime</scope>
+        <type>zip</type>
+    </dependency>
+
+    <dependency>
+        <groupId>org.grails.plugins</groupId>
+        <artifactId>cache-headers</artifactId>
+        <version>1.0.4</version>
+        <scope>runtime</scope>
+        <type>zip</type>
+    </dependency>
+
+    <dependency>
+        <groupId>org.grails.plugins</groupId>
+        <artifactId>zipped-resources</artifactId>
+        <version>1.0</version>
+        <scope>runtime</scope>
+        <type>zip</type>
+    </dependency>
 
     </dependencies>
 
