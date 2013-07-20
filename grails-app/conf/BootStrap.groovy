@@ -8,7 +8,15 @@ class BootStrap {
 
     def grailsEvents
 
+    /**
+     * Dependency Injection of com.grailsrocks.emailconfirmation.EmailConfirmationService
+     */
+    def emailConfirmationService
+
     def init = { servletContext ->
+
+        // Change emailConfirmation maxAge to one day instead of 30 days
+        emailConfirmationService.maxAge = 1000*10L
 
         // Do not run this script if it has been already run
         def testUsers = User.findAll()
