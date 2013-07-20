@@ -86,7 +86,7 @@ class UserListenerService {
      */
     @Listener(topic ='userCreated.timeout', namespace = 'plugin.emailConfirmation')
     def userConfirmationTimedOut(info) {
-        log.debug "User with ${info.email} failed to confirm, the token in their link was ${info.token}"
+        log.info "User with ${info.email} failed to confirm, the token in their link was ${info.token}"
         // delete the user
         User.get(info.id).delete()
     }
@@ -96,7 +96,7 @@ class UserListenerService {
      */
     @Listener(topic ='invalid', namespace = 'plugin.emailConfirmation')
     def emailConfirmationInvalid(info) {
-        log.debug "User ${info.email} failed to confirm for application id data ${info.id}"
+        log.info "User ${info.email} failed to confirm for application id data ${info.id}"
         return [controller:'emailConfirmation', action:'expired']
     }
 
