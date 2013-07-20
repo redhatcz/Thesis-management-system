@@ -33,8 +33,10 @@ class RegistrationCommand {
             }
         }
         email validator: {val, obj ->
-            if (User.findByEmail(val)) {
-                'not.unique'
+            User.withoutHibernateFilters{
+                if (User.findByEmail(val)) {
+                    'not.unique'
+                }
             }
         }
     }
