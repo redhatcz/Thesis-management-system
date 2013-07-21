@@ -88,7 +88,16 @@ class UserListenerService {
     def userConfirmationTimedOut(info) {
         log.info "User with ${info.email} failed to confirm, the token in their link was ${info.token}"
         // delete the user
-        User.get(info.id).delete()
+        try {
+            User user = null
+            User.withoutHibernateFilters {
+                user = User.findByEmail(info.email)
+            }
+            user.delete()
+            log.info "User with email ${info.email} deleted"
+        } catch (Exception ex) {
+            log.warn "User with email ${info.email} could not be deleted due to an exception. Exception message: ${ex.message}"
+        }
     }
 
     /**
