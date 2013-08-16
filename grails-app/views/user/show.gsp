@@ -44,6 +44,41 @@
             </table>
         </div>
     </g:if>
+    <g:if test="${supervisedTopics}">
+        <div class="tms-table">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><g:message code="user.supervised.topics"/></th>
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${supervisedTopics}" status="i" var="topicInstance">
+                    <tr>
+                        <td>
+                            <g:link controller="topic" action="show" id="${topicInstance.id}"
+                                    params="[headline: Util.hyphenize(topicInstance?.title)]"
+                            ><g:fieldValue field="title" bean="${topicInstance}"/></g:link>
+                        </td>
+                    </tr>
+                </g:each>
+                </tbody>
+                <g:if test="${supervisedTopics?.size() >= 5}">
+                    <tfoot>
+                    <tr>
+                        <td>
+                            <i class="icon-reorder"></i>
+                            <g:link controller="topic" action="list"
+                                    params="[filtering: true, 'filter.supervisions.supervisor.id': userInstance?.id]">
+                                <g:message code="more.button"/>
+                            </g:link>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </g:if>
+            </table>
+        </div>
+    </g:if>
     <g:if test="${supervisedTheses}">
         <div class="tms-table">
             <table class="table">

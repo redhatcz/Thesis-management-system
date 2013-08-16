@@ -93,6 +93,8 @@
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
                              name="filter.owner.fullName" placeholder="${message(code: 'role.owner.label')}"/>
                 <g:hiddenField name="type.owner.fullName" value="ilike"/>
+                <g:textField value="${params?.filter?.supervisions?.supervisor?.fullName}" class="wide"
+                             name="filter.supervisions.supervisor.fullName" placeholder="${message(code: 'role.supervisor.label')}"/>
                 <g:select name="filter.universities.id" from="${universities}"
                           noSelection="['':message(code:'topic.university.select.label')]"
                           optionKey="id" value="${params?.filter?.universities?.id}"

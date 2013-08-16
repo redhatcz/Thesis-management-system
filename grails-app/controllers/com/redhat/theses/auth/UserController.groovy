@@ -1,9 +1,6 @@
 package com.redhat.theses.auth
 
-import com.redhat.theses.Application
-import com.redhat.theses.Feed
-import com.redhat.theses.Thesis
-import com.redhat.theses.Topic
+import com.redhat.theses.*
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
 
@@ -89,6 +86,12 @@ class UserController {
                     [sort:'dateCreated', order:'desc', max: MAX_THESES_AND_TOPICS])
         }
 
+        def supervisedTopics = []
+        if (userInstance.roles?.contains(Role.SUPERVISOR)) {
+            supervisedTopics = Supervision.findAllBySupervisor(userInstance,
+                    [sort:'topic.dateCreated', order:'desc'])*.topic.unique().take(MAX_THESES_AND_TOPICS)
+        }
+
         def supervisedTheses = []
         if (userInstance.roles?.contains(Role.SUPERVISOR)) {
             supervisedTheses = Thesis.findAllBySupervisor(userInstance,
@@ -101,7 +104,8 @@ class UserController {
         [userInstance: userInstance,
                 assignedTheses: assignedTheses,
                 ownedTopics: ownedTopics,
-                supervisedTheses: supervisedTheses]
+                supervisedTheses: supervisedTheses,
+                supervisedTopics: supervisedTopics]
     }
 
     def activity(Long id) {

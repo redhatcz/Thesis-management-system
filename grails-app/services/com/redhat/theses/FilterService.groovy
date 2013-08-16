@@ -76,6 +76,31 @@ class FilterService {
                                     }
                                 }
                             }
+                        } else {
+                            def extDomainClassName = propName.capitalize()
+                            def extDomainClass = grailsApplication.domainClasses.find {
+                                it.clazz.simpleName == extDomainClassName || it.clazz.simpleName == extDomainClassName[0..-2]
+                            }
+
+                            if (extDomainClass) {
+                                def extProjectionClassName = domainClass.clazz.simpleName.toLowerCase()
+                                def extC = extDomainClass.clazz.createCriteria()
+                                def extCriteriaClosure = {
+                                    extC.projections {
+                                        "${extProjectionClassName}" {
+                                            property('id')
+                                        }
+                                    }
+
+                                    and {
+                                        filterParse(extC, extDomainClass, [], filterParams[propName], [], false)
+                                    }
+                                }
+                                def extObjectIds = extC.list(extCriteriaClosure).unique()
+
+                                c.in('id', extObjectIds)
+                            }
+
                         }
                     }
                 } else {
