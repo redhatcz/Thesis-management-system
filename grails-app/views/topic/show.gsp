@@ -84,6 +84,9 @@
                                 id="${supervision?.supervisor?.id}"
                                 title="${supervision?.university?.name}"
                             >${supervision?.supervisor?.encodeAsHTML()}</g:link>
+                            <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
+                                (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
+                            </small>
                         <br />
                         </g:each>
                     </dd>

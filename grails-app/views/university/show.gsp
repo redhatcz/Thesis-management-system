@@ -23,6 +23,15 @@
                         <g:fieldValue bean="${universityInstance}" field="name"/>
                     </dd>
                     </g:if>
+                    <g:if test="${universityInstance?.acronym}">
+                        <dt>
+                            <i class="icon-asterisk"></i>
+                            ${message(code: 'university.acronym.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                            <g:fieldValue bean="${universityInstance}" field="acronym"/>
+                        </dd>
+                    </g:if>
                 </dl>
             </div>
         </div>

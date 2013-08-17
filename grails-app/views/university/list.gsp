@@ -25,6 +25,7 @@
                                         <g:fieldValue bean="${universityInstanceList?.get(j)}" field="name"/>
                                     </g:link>
                                 </h6>
+                                <g:fieldValue bean="${universityInstanceList?.get(j)}" field="acronym"/>
                             </div>
                         </div>
                         </g:if>

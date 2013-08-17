@@ -39,8 +39,8 @@ class BootStrap {
             development {
 
                 // UNIVERSITIES
-                def muni = new University(name: 'Masaryk University').save(flush: true)
-                def vut = new University(name: 'VUT').save(flush: true)
+                def muni = new University(name: 'Masaryk University', acronym: 'MUNI').save(flush: true)
+                def vut = new University(name: 'Brno University of Technology', acronym: 'BUT').save(flush: true)
 
                 // USERS
                 def admin = new User(
