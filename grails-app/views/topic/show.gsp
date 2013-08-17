@@ -56,87 +56,69 @@
             <h4><g:message code="topic.information.label"/></h4>
             <div class="panel-content">
                 <dl>
-                    <div class="row-wrap">
-                        <dt>
-                            <i class="icon-user"></i>
-                            ${message(code: 'role.owner.label').toString().toLowerCase()}
-                        </dt>
-                        <dd>
-                            <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>
-                        </dd>
-                    </div>
-                    <div class="row-wrap">
-                        <dt>
-                            <i class="icon-time"></i>
-                            ${message(code: 'topic.dateCreated.label').toString().toLowerCase()}
-                        </dt>
-                        <dd>
-                            <g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" />
-                        </dd>
-                    </div>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'role.owner.label').toString().toLowerCase()}">
+                        <i class="icon-user"></i>
+                    </dt>
+                    <dd>
+                        <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>
+                    </dd>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'topic.dateCreated.label').toString().toLowerCase()}">
+                        <i class="icon-time"></i>
+                    </dt>
+                    <dd>
+                        <g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" />
+                    </dd>
                 <g:if test="${supervisions && !supervisions?.empty}">
-                    <div class="row-wrap">
-                        <dt>
-                            <i class="icon-group"></i>
-                            ${message(code: 'topic.supervision.label').toString().toLowerCase()}
-                        </dt>
-                        <dd>
-                            <g:each in="${supervisions}" status="i" var="supervision">
-                            <g:link controller="user"
-                                    action="show"
-                                    id="${supervision?.supervisor?.id}"
-                                    title="${supervision?.university?.name}"
-                                >${supervision?.supervisor?.encodeAsHTML()}</g:link>
-                                <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
-                                    (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
-                                </small>
-                            <br />
-                            </g:each>
-                        </dd>
-                    </div>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'topic.supervision.label').toString().toLowerCase()}">
+                        <i class="icon-group"></i>
+                    </dt>
+                    <dd>
+                        <g:each in="${supervisions}" status="i" var="supervision">
+                        <g:link controller="user" action="show" id="${supervision?.supervisor?.id}"
+                                title="${supervision?.university?.name}">
+                            <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
+                                (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
+                            </small>
+                        </g:link><g:if test="${supervisions?.size() - 1 != i}">,</g:if>
+                        </g:each>
+                    </dd>
                 </g:if>
                 <g:if test="${topicInstance?.universities && !topicInstance?.universities?.empty}">
-                    <div class="row-wrap">
-                        <dt>
-                            <i class="icon-suitcase"></i>
-                            ${message(code: 'topic.universities.label').toString().toLowerCase()}
-                        </dt>
-                        <dd>
-                            <g:each in="${topicInstance?.universities?.sort{it?.name}}" status="i" var="university">
-                            <g:link controller="university"
-                                    action="show"
-                                    id="${university?.id}"
-                                    title="${university?.name}"
-                                ><g:fieldValue bean="${university}" field="name"/></g:link>
-                            <br />
-                            </g:each>
-                        </dd>
-                    </div>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'topic.universities.label').toString().toLowerCase()}">
+                        <i class="icon-suitcase"></i>
+                    </dt>
+                    <dd>
+                        <g:each in="${topicInstance?.universities?.sort{it?.name}}" status="i" var="university">
+                        <g:link controller="university" action="show"
+                                id="${university?.id}" title="${university?.name}">
+                            <g:fieldValue bean="${university}" field="name"/>
+                        </g:link><g:if test="${topicInstance?.universities?.size() - 1 != i}">,</g:if>
+                        </g:each>
+                    </dd>
                 </g:if>
                 <g:if test="${topicInstance?.types && !topicInstance?.types?.empty}">
-                    <div class="row-wrap">
-                        <dt>
-                            <i class="icon-book"></i>
-                            ${message(code: 'topic.types.label').toString().toLowerCase()}
-                        </dt>
-                        <dd>
-                        <g:each in="${topicInstance?.types?.sort{it.name()}}" status="i" var="type">
-                            <g:message code="topic.type.${type?.toString()?.toLowerCase()}.label"/><g:if test="${i != topicInstance?.types?.size() - 1}"><span>, </span></g:if>
-                        </g:each>
-                        </dd>
-                    </div>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'topic.types.label').toString().toLowerCase()}">
+                        <i class="icon-book"></i>
+                    </dt>
+                    <dd>
+                    <g:each in="${topicInstance?.types?.sort{it.name()}}" status="i" var="type">
+                        <g:message code="topic.type.${type?.toString()?.toLowerCase()}.label"/><g:if test="${i != topicInstance?.types?.size() - 1}"><span>, </span></g:if>
+                    </g:each>
+                    </dd>
                 </g:if>
-
                 <g:if test="${!topicInstance?.enabled}">
-                    <div class="row-wrap">
-                        <dt>
-                            <i class="icon-question-sign"></i>
-                            ${message(code: 'topic.enabled.label').toString().toLowerCase()}
-                        </dt>
-                        <dd>
-                            <g:formatBoolean boolean="${topicInstance.enabled}"/>
-                        </dd>
-                    </div>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'topic.enabled.label').toString().toLowerCase()}">
+                        <i class="icon-question-sign"></i>
+                    </dt>
+                    <dd>
+                        <g:formatBoolean boolean="${topicInstance.enabled}"/>
+                    </dd>
                 </g:if>
                 </dl>
             </div>
@@ -144,15 +126,17 @@
             <h4><g:message code="topic.theses.label"/></h4>
             <div class="panel-content">
                 <g:if test="${thesisList && !thesisList?.empty}">
-                    <ul class="unstyled">
+                    <dl>
                     <g:each in="${thesisList?.sort{it.title}}" var="thesis">
-                        <li>
+                        <dt>
                             <i class="icon-book"></i>
+                        </dt>
+                        <dd>
                             <g:link controller="thesis" action="show" id="${thesis.id}"
                                     params="[headline: Util.hyphenize(thesis?.title)]">${thesis.title}</g:link>
-                        </li>
+                        </dd>
                     </g:each>
-                    </ul>
+                    </dl>
                 </g:if>
                 <g:else>
                     <p><g:message code="topic.no.theses.found"/></p>
@@ -186,7 +170,7 @@
                     <g:if test="${topicInstance.enabled}">
                         <g:link class="tms-link" controller="application"
                                 action="create" id="${topicInstance?.id}" >
-                            <i class="icon-file-alt"></i>
+                            <i class="icon-file"></i>
                             <g:message code="application.apply.button" />
                         </g:link>
                     </g:if>

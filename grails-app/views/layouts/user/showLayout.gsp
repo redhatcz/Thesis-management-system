@@ -12,41 +12,41 @@
         <h4><g:message code="user.information.label"/></h4>
         <div class="panel-content">
             <dl>
-                <dt>
-                    <i class="icon-envelope-alt"></i>
-                    ${message(code: 'user.email.label').toString().toLowerCase()}
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.email.label').toString().toLowerCase()}">
+                    <i class="icon-envelope"></i>
                 </dt>
                 <dd>
                     <!-- let's make it really hard for crawlers by first reversing the text and replacing
                          at character with html entity :) -->
                     <bdo dir="rtl">${userInstance?.email?.reverse()?.replaceAll('\\@', '&#64;')}</bdo>
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.fullName.label').toString().toLowerCase()}">
                     <i class="icon-user"></i>
-                    ${message(code: 'user.fullName.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:fieldValue bean="${userInstance}" field="fullName"/>
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.dateCreated.label').toString().toLowerCase()}">
                     <i class="icon-time"></i>
-                    ${message(code: 'user.dateCreated.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.role.label').toString().toLowerCase()}">
                     <i class="icon-group"></i>
-                    ${message(code: 'user.role.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:message code="role.${Role.getHighest(userInstance?.roles).toString().toLowerCase()}.label"/>
                 </dd>
 
                 <g:if test="${!userInstance?.enabled}">
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.enabled.label').toString().toLowerCase()}">
                     <i class="icon-lock"></i>
-                    ${message(code: 'user.enabled.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatBoolean boolean="${userInstance?.enabled}" />
@@ -54,18 +54,18 @@
                 </g:if>
 
                 <g:if test="${userInstance?.accountExpired}">
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.accountExpired.label').toString().toLowerCase()}">
                     <i class="icon-time"></i>
-                    ${message(code: 'user.accountExpired.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatBoolean boolean="${userInstance?.accountExpired}" />
                 </dd>
                 </g:if>
                 <g:if test="${userInstance?.accountLocked}">
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'user.accountLocked.label').toString().toLowerCase()}">
                     <i class="icon-lock"></i>
-                    ${message(code: 'user.accountLocked.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatBoolean boolean="${userInstance?.accountLocked}" />

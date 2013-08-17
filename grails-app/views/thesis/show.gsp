@@ -55,55 +55,55 @@
         <h4><g:message code="thesis.information.label"/></h4>
         <div class="panel-content">
             <dl>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'topic.label').toString().toLowerCase()}">
                     <i class="icon-book"></i>
-                    ${message(code: 'topic.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link action="show" controller="topic" id="${thesisInstance?.topicId}"
                             params="[headline: Util.hyphenize(thesisInstance?.topic?.title)]"><g:fieldValue field="topic" bean="${thesisInstance}"/></g:link>
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'thesis.assignee.label').toString().toLowerCase()}">
                     <i class="icon-user"></i>
-                    ${message(code: 'thesis.assignee.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.assigneeId}"><g:fieldValue field="assignee" bean="${thesisInstance}"/></g:link>
                 </dd>
                 <g:if test="${thesisInstance?.supervisor}">
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'role.supervisor.label').toString().toLowerCase()}">
                     <i class="icon-user mini"></i>
-                    ${message(code: 'role.supervisor.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link controller="user" action="show" id="${thesisInstance?.supervisorId}"><g:fieldValue field="fullName" bean="${thesisInstance?.supervisor}"/></g:link>
                 </dd>
                 </g:if>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'thesis.dateCreated.label').toString().toLowerCase()}">
                     <i class="icon-time"></i>
-                    ${message(code: 'thesis.dateCreated.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'thesis.type.label').toString().toLowerCase()}">
                     <i class="icon-book mini"></i>
-                    ${message(code: 'thesis.type.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:message code="thesis.type.${fieldValue(bean: thesisInstance, field: 'type')?.toString()?.toLowerCase()}.label"/>
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'university.label').toString().toLowerCase()}">
                     <i class="icon-suitcase"></i>
-                    ${message(code: 'university.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                     <g:link controller="university" action="show" id="${thesisInstance?.universityId}"
                     ><g:fieldValue bean="${thesisInstance?.university}" field="name"/></g:link>
                 </dd>
-                <dt>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'thesis.status.label').toString().toLowerCase()}">
                     <i class="icon-question-sign"></i>
-                    ${message(code: 'thesis.status.label').toString().toLowerCase()}
                 </dt>
                 <dd>
                 <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">

@@ -15,9 +15,9 @@
             <div class="panel-content">
                 <dl>
                     <g:if test="${universityInstance?.name}">
-                    <dt>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'university.name.label').toString().toLowerCase()}">
                         <i class="icon-suitcase"></i>
-                        ${message(code: 'university.name.label').toString().toLowerCase()}
                     </dt>
                     <dd>
                         <g:fieldValue bean="${universityInstance}" field="name"/>

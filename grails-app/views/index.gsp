@@ -51,9 +51,9 @@
                     <div class="panel-content">
                     <g:each in="${yourTheses}" var="yourThesis">
                         <dl>
-                            <dt>
+                            <dt class="tms-tooltip" data-placement="left"
+                                data-original-title="${message(code: 'topic.label').toString().toLowerCase()}">
                                 <i class="icon-book"></i>
-                                ${message(code: 'topic.label').toString().toLowerCase()}
                             </dt>
                             <dd>
                                 <g:link controller="topic" action="show"
@@ -61,18 +61,18 @@
                                         params="[headline: Util.hyphenize(yourThesis?.topic?.title)]"
                                     >${yourThesis?.topic?.title}</g:link>
                             </dd>
-                            <dt>
+                            <dt class="tms-tooltip" data-placement="left"
+                                data-original-title="${message(code: 'role.supervisor.label').toString().toLowerCase()}">
                                 <i class="icon-user"></i>
-                                ${message(code: 'role.supervisor.label').toString().toLowerCase()}
                             </dt>
                             <dd>
                                 <g:link controller="user" action="show"
                                         id="${yourThesis?.supervisorId}"
                                     ><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></g:link>
                                 </dd>
-                            <dt>
+                            <dt class="tms-tooltip" data-placement="left"
+                                data-original-title="${message(code: 'thesis.status.label').toString().toLowerCase()}">
                                 <i class="icon-question-sign"></i>
-                                ${message(code: 'thesis.status.label').toString().toLowerCase()}
                             </dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
