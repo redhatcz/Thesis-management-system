@@ -36,7 +36,7 @@
             <g:message code="thesis.tags.label" default="tags" />:
             <g:each in="${thesisTags?.sort{it?.title}}" var="tag" status="i">
                 <g:link action="list" class="tag"
-                        params="${[tagTitle: tag.title] + (params.categoryId ? [categoryId: params.categoryId] : [])}"
+                        params="['filter.tags.title': tag.title]"
                 >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${thesisTags?.size() - 1 != i}">,</g:if>
             </g:each>
         </div>
