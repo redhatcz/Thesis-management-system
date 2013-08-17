@@ -52,7 +52,7 @@
                     <g:each in="${yourTheses}" var="yourThesis">
                         <dl>
                             <dt class="tms-tooltip" data-placement="left"
-                                data-original-title="${message(code: 'topic.label').toString().toLowerCase()}">
+                                data-original-title="${message(code: 'topic.label').toString()}">
                                 <i class="icon-book"></i>
                             </dt>
                             <dd>
@@ -62,7 +62,7 @@
                                     >${yourThesis?.topic?.title}</g:link>
                             </dd>
                             <dt class="tms-tooltip" data-placement="left"
-                                data-original-title="${message(code: 'role.supervisor.label').toString().toLowerCase()}">
+                                data-original-title="${message(code: 'role.supervisor.label').toString()}">
                                 <i class="icon-user"></i>
                             </dt>
                             <dd>
@@ -71,12 +71,12 @@
                                     ><g:fieldValue field="fullName" bean="${yourThesis?.supervisor}"/></g:link>
                                 </dd>
                             <dt class="tms-tooltip" data-placement="left"
-                                data-original-title="${message(code: 'thesis.status.label').toString().toLowerCase()}">
+                                data-original-title="${message(code: 'thesis.status.label').toString()}">
                                 <i class="icon-question-sign"></i>
                             </dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
-                                    <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />
+                                    <g:message code="thesis.status.${yourThesis?.status?.toString()}.label" />
                                 </g:if>
                                 <g:else>
                                     <g:message code="thesis.status.awarded.grade"

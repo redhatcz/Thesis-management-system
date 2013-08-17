@@ -57,14 +57,14 @@
             <div class="panel-content">
                 <dl>
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'role.owner.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'role.owner.label').toString()}">
                         <i class="icon-user"></i>
                     </dt>
                     <dd>
                         <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>
                     </dd>
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'topic.dateCreated.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'topic.dateCreated.label').toString()}">
                         <i class="icon-time"></i>
                     </dt>
                     <dd>
@@ -72,7 +72,7 @@
                     </dd>
                 <g:if test="${supervisions && !supervisions?.empty}">
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'topic.supervision.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'topic.supervision.label').toString()}">
                         <i class="icon-group"></i>
                     </dt>
                     <dd>
@@ -88,7 +88,7 @@
                 </g:if>
                 <g:if test="${topicInstance?.universities && !topicInstance?.universities?.empty}">
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'topic.universities.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'topic.universities.label').toString()}">
                         <i class="icon-suitcase"></i>
                     </dt>
                     <dd>
@@ -102,7 +102,7 @@
                 </g:if>
                 <g:if test="${topicInstance?.types && !topicInstance?.types?.empty}">
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'topic.types.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'topic.types.label').toString()}">
                         <i class="icon-book"></i>
                     </dt>
                     <dd>
@@ -113,7 +113,7 @@
                 </g:if>
                 <g:if test="${!topicInstance?.enabled}">
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'topic.enabled.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'topic.enabled.label').toString()}">
                         <i class="icon-question-sign"></i>
                     </dt>
                     <dd>

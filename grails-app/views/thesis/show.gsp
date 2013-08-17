@@ -56,7 +56,7 @@
         <div class="panel-content">
             <dl>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'topic.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'topic.label').toString()}">
                     <i class="icon-book"></i>
                 </dt>
                 <dd>
@@ -64,7 +64,7 @@
                             params="[headline: Util.hyphenize(thesisInstance?.topic?.title)]"><g:fieldValue field="topic" bean="${thesisInstance}"/></g:link>
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'thesis.assignee.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'thesis.assignee.label').toString()}">
                     <i class="icon-user"></i>
                 </dt>
                 <dd>
@@ -72,7 +72,7 @@
                 </dd>
                 <g:if test="${thesisInstance?.supervisor}">
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'role.supervisor.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'role.supervisor.label').toString()}">
                     <i class="icon-user mini"></i>
                 </dt>
                 <dd>
@@ -80,21 +80,21 @@
                 </dd>
                 </g:if>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'thesis.dateCreated.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'thesis.dateCreated.label').toString()}">
                     <i class="icon-time"></i>
                 </dt>
                 <dd>
                     <g:formatDate date="${thesisInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'thesis.type.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'thesis.type.label').toString()}">
                     <i class="icon-book mini"></i>
                 </dt>
                 <dd>
-                    <g:message code="thesis.type.${fieldValue(bean: thesisInstance, field: 'type')?.toString()?.toLowerCase()}.label"/>
+                    <g:message code="thesis.type.${fieldValue(bean: thesisInstance, field: 'type')?.toString()}.label"/>
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'university.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'university.label').toString()}">
                     <i class="icon-suitcase"></i>
                 </dt>
                 <dd>
@@ -102,12 +102,12 @@
                     ><g:fieldValue bean="${thesisInstance?.university}" field="name"/></g:link>
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'thesis.status.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'thesis.status.label').toString()}">
                     <i class="icon-question-sign"></i>
                 </dt>
                 <dd>
                 <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">
-                    <g:message code="thesis.status.${thesisInstance?.status?.toString()?.toLowerCase()}.label" />
+                    <g:message code="thesis.status.${thesisInstance?.status?.toString()}.label" />
                 </g:if>
                 <g:else>
                     <g:message code="thesis.status.awarded.grade" args="[thesisInstance?.grade]"/>

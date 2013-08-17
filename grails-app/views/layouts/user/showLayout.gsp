@@ -13,7 +13,7 @@
         <div class="panel-content">
             <dl>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.email.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.email.label').toString()}">
                     <i class="icon-envelope"></i>
                 </dt>
                 <dd>
@@ -22,30 +22,30 @@
                     <bdo dir="rtl">${userInstance?.email?.reverse()?.replaceAll('\\@', '&#64;')}</bdo>
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.fullName.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.fullName.label').toString()}">
                     <i class="icon-user"></i>
                 </dt>
                 <dd>
                     <g:fieldValue bean="${userInstance}" field="fullName"/>
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.dateCreated.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.dateCreated.label').toString()}">
                     <i class="icon-time"></i>
                 </dt>
                 <dd>
                     <g:formatDate date="${userInstance?.dateCreated}" dateStyle="LONG" type="date" />
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.role.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.role.label').toString()}">
                     <i class="icon-group"></i>
                 </dt>
                 <dd>
-                    <g:message code="role.${Role.getHighest(userInstance?.roles).toString().toLowerCase()}.label"/>
+                    <g:message code="role.${Role.getHighest(userInstance?.roles).toString()}.label"/>
                 </dd>
 
                 <g:if test="${!userInstance?.enabled}">
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.enabled.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.enabled.label').toString()}">
                     <i class="icon-lock"></i>
                 </dt>
                 <dd>
@@ -55,7 +55,7 @@
 
                 <g:if test="${userInstance?.accountExpired}">
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.accountExpired.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.accountExpired.label').toString()}">
                     <i class="icon-time"></i>
                 </dt>
                 <dd>
@@ -64,7 +64,7 @@
                 </g:if>
                 <g:if test="${userInstance?.accountLocked}">
                 <dt class="tms-tooltip" data-placement="left"
-                    data-original-title="${message(code: 'user.accountLocked.label').toString().toLowerCase()}">
+                    data-original-title="${message(code: 'user.accountLocked.label').toString()}">
                     <i class="icon-lock"></i>
                 </dt>
                 <dd>

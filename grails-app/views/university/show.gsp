@@ -16,7 +16,7 @@
                 <dl>
                     <g:if test="${universityInstance?.name}">
                     <dt class="tms-tooltip" data-placement="left"
-                        data-original-title="${message(code: 'university.name.label').toString().toLowerCase()}">
+                        data-original-title="${message(code: 'university.name.label').toString()}">
                         <i class="icon-suitcase"></i>
                     </dt>
                     <dd>
@@ -24,9 +24,9 @@
                     </dd>
                     </g:if>
                     <g:if test="${universityInstance?.acronym}">
-                        <dt>
+                        <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'university.acronym.label').toString()}">
                             <i class="icon-asterisk"></i>
-                            ${message(code: 'university.acronym.label').toString().toLowerCase()}
                         </dt>
                         <dd>
                             <g:fieldValue bean="${universityInstance}" field="acronym"/>
