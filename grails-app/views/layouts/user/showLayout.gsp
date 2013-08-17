@@ -40,7 +40,7 @@
                     <i class="icon-group"></i>
                 </dt>
                 <dd>
-                    <g:message code="role.${Role.getHighest(userInstance?.roles).toString()}.label"/>
+                    <g:message code="role.${Role.getHighest(userInstance?.roles).toString()?.toLowerCase()}.label"/>
                 </dd>
 
                 <g:if test="${!userInstance?.enabled}">

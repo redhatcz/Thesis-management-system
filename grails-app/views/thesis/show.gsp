@@ -91,7 +91,7 @@
                     <i class="icon-book mini"></i>
                 </dt>
                 <dd>
-                    <g:message code="thesis.type.${fieldValue(bean: thesisInstance, field: 'type')?.toString()}.label"/>
+                    <g:message code="thesis.type.${fieldValue(bean: thesisInstance, field: 'type')?.toString()?.toLowerCase()}.label"/>
                 </dd>
                 <dt class="tms-tooltip" data-placement="left"
                     data-original-title="${message(code: 'university.label').toString()}">
@@ -107,7 +107,7 @@
                 </dt>
                 <dd>
                 <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">
-                    <g:message code="thesis.status.${thesisInstance?.status?.toString()}.label" />
+                    <g:message code="thesis.status.${thesisInstance?.status?.toString()?.toLowerCase()}.label" />
                 </g:if>
                 <g:else>
                     <g:message code="thesis.status.awarded.grade" args="[thesisInstance?.grade]"/>
