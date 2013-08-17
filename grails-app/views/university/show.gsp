@@ -70,7 +70,8 @@
             </ul>
             <div class="more">
                 <i class="icon-reorder"></i>
-                <g:link controller="topic" action="list" params="['filter.universities.id': universityInstance?.id]">
+                <g:link controller="topic" action="list"
+                        params="['filter.universities.id': universityInstance?.id]">
                     <g:message code="more.button"/>
                 </g:link>
             </div>
