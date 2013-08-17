@@ -78,29 +78,36 @@
 <div class="span8 content">
     <ul class="nav nav-tabs">
         <li class="${pageProperty(name: 'page.active-button') == 'main' ? 'active' : ''}">
-            <g:link action="show" id="${userInstance?.id}"><i class="icon-book"></i><g:message code="user.main.button"/></g:link>
+            <g:link action="show" id="${userInstance?.id}">
+                <i class="icon-book"></i> <g:message code="user.main.button"/>
+            </g:link>
         </li>
         <li class="${pageProperty(name: 'page.active-button') == 'activity' ? 'active' : ''}">
-            <g:link action="activity" id="${userInstance?.id}"><i class="icon-eye-open"></i><g:message code="user.activity.label"/></g:link>
+            <g:link action="activity" id="${userInstance?.id}">
+                <i class="icon-eye-open"></i> <g:message code="user.activity.label"/>
+            </g:link>
         </li>
         <sec:ifLoggedIn>
         <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
             <li class="${pageProperty(name: 'page.active-button') == 'applications' ? 'active' : ''}">
-                <g:link action="applications" id="${userInstance?.id}"><i class="icon-file-alt"></i><g:message code="user.applications.label"/></g:link>
+                <g:link action="applications" id="${userInstance?.id}">
+                    <i class="icon-file"></i> <g:message code="user.applications.label"/>
+                </g:link>
             </li>
         </g:if>
         </sec:ifLoggedIn>
         <div class="controls pull-right">
             <sec:ifAnyGranted roles="ROLE_ADMIN">
-            <g:link class="tms-btn" controller="user"
-                    action="edit" id="${userInstance?.id}"
-                ><i class="icon-wrench"></i><g:message code="default.edit.button" /></g:link>
+            <g:link class="tms-btn" controller="user" action="edit" id="${userInstance?.id}">
+                <i class="icon-wrench"></i> <g:message code="default.edit.button" />
+            </g:link>
             </sec:ifAnyGranted>
 
             <sec:ifLoggedIn>
                 <g:if test="${sec.loggedInUserInfo(field: 'id')?.toLong() == userInstance?.id}">
-                <g:link class="tms-btn" controller="profile" action="edit"
-                    ><i class="icon-wrench"></i><g:message code="profile.edit.button" /></g:link>
+                <g:link class="tms-btn" controller="profile" action="edit">
+                    <i class="icon-wrench"></i> <g:message code="profile.edit.button" />
+                </g:link>
                 </g:if>
             </sec:ifLoggedIn>
         </div>
