@@ -56,79 +56,87 @@
             <h4><g:message code="topic.information.label"/></h4>
             <div class="panel-content">
                 <dl>
-                    <dt>
-                        <i class="icon-user"></i>
-                        ${message(code: 'role.owner.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                        <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>
-                    </dd>
-
-                    <dt>
-                        <i class="icon-time"></i>
-                        ${message(code: 'topic.dateCreated.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                        <g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" />
-                    </dd>
-
+                    <div class="row-wrap">
+                        <dt>
+                            <i class="icon-user"></i>
+                            ${message(code: 'role.owner.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                            <g:link controller="user" action="show" id="${topicInstance?.owner?.id}">${topicInstance?.owner?.encodeAsHTML()}</g:link>
+                        </dd>
+                    </div>
+                    <div class="row-wrap">
+                        <dt>
+                            <i class="icon-time"></i>
+                            ${message(code: 'topic.dateCreated.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                            <g:formatDate date="${topicInstance?.dateCreated}" dateStyle="LONG" type="date" />
+                        </dd>
+                    </div>
                 <g:if test="${supervisions && !supervisions?.empty}">
-                    <dt>
-                        <i class="icon-group"></i>
-                        ${message(code: 'topic.supervision.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                        <g:each in="${supervisions}" status="i" var="supervision">
-                        <g:link controller="user"
-                                action="show"
-                                id="${supervision?.supervisor?.id}"
-                                title="${supervision?.university?.name}"
-                            >${supervision?.supervisor?.encodeAsHTML()}</g:link>
-                            <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
-                                (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
-                            </small>
-                        <br />
-                        </g:each>
-                    </dd>
+                    <div class="row-wrap">
+                        <dt>
+                            <i class="icon-group"></i>
+                            ${message(code: 'topic.supervision.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                            <g:each in="${supervisions}" status="i" var="supervision">
+                            <g:link controller="user"
+                                    action="show"
+                                    id="${supervision?.supervisor?.id}"
+                                    title="${supervision?.university?.name}"
+                                >${supervision?.supervisor?.encodeAsHTML()}</g:link>
+                                <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
+                                    (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
+                                </small>
+                            <br />
+                            </g:each>
+                        </dd>
+                    </div>
                 </g:if>
-
                 <g:if test="${topicInstance?.universities && !topicInstance?.universities?.empty}">
-                    <dt>
-                        <i class="icon-suitcase"></i>
-                        ${message(code: 'topic.universities.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                        <g:each in="${topicInstance?.universities?.sort{it?.name}}" status="i" var="university">
-                        <g:link controller="university"
-                                action="show"
-                                id="${university?.id}"
-                                title="${university?.name}"
-                            ><g:fieldValue bean="${university}" field="name"/></g:link>
-                        <br />
-                        </g:each>
-                    </dd>
+                    <div class="row-wrap">
+                        <dt>
+                            <i class="icon-suitcase"></i>
+                            ${message(code: 'topic.universities.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                            <g:each in="${topicInstance?.universities?.sort{it?.name}}" status="i" var="university">
+                            <g:link controller="university"
+                                    action="show"
+                                    id="${university?.id}"
+                                    title="${university?.name}"
+                                ><g:fieldValue bean="${university}" field="name"/></g:link>
+                            <br />
+                            </g:each>
+                        </dd>
+                    </div>
                 </g:if>
-
                 <g:if test="${topicInstance?.types && !topicInstance?.types?.empty}">
-                    <dt>
-                        <i class="icon-book"></i>
-                        ${message(code: 'topic.types.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                    <g:each in="${topicInstance?.types?.sort{it.name()}}" status="i" var="type">
-                        <g:message code="topic.type.${type?.toString()?.toLowerCase()}.label"/><g:if test="${i != topicInstance?.types?.size() - 1}"><span>, </span></g:if>
-                    </g:each>
-                    </dd>
+                    <div class="row-wrap">
+                        <dt>
+                            <i class="icon-book"></i>
+                            ${message(code: 'topic.types.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                        <g:each in="${topicInstance?.types?.sort{it.name()}}" status="i" var="type">
+                            <g:message code="topic.type.${type?.toString()?.toLowerCase()}.label"/><g:if test="${i != topicInstance?.types?.size() - 1}"><span>, </span></g:if>
+                        </g:each>
+                        </dd>
+                    </div>
                 </g:if>
 
                 <g:if test="${!topicInstance?.enabled}">
-                    <dt>
-                        <i class="icon-question-sign"></i>
-                        ${message(code: 'topic.enabled.label').toString().toLowerCase()}
-                    </dt>
-                    <dd>
-                        <g:formatBoolean boolean="${topicInstance.enabled}"/>
-                    </dd>
+                    <div class="row-wrap">
+                        <dt>
+                            <i class="icon-question-sign"></i>
+                            ${message(code: 'topic.enabled.label').toString().toLowerCase()}
+                        </dt>
+                        <dd>
+                            <g:formatBoolean boolean="${topicInstance.enabled}"/>
+                        </dd>
+                    </div>
                 </g:if>
                 </dl>
             </div>
