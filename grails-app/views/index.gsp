@@ -76,7 +76,7 @@
                             </dt>
                             <dd>
                                 <g:if test="${yourThesis?.status?.toString() != 'FINISHED'}">
-                                    <g:message code="thesis.status.${yourThesis?.status?.toString()}.label" />
+                                    <g:message code="thesis.status.${yourThesis?.status?.toString()?.toLowerCase()}.label" />
                                 </g:if>
                                 <g:else>
                                     <g:message code="thesis.status.awarded.grade"
