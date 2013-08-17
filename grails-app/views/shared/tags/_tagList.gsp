@@ -11,7 +11,7 @@
         </li>
         </g:each>
         <li class="more">
-            <i class="icon-reorder"></i>
+            <i class="icon-tags"></i>
             <g:link controller="tag" action="list" params="[tagsOf: params.controller]">
                 <g:message code="more.button"/>
             </g:link>
