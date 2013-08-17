@@ -79,10 +79,11 @@
                         <g:each in="${supervisions}" status="i" var="supervision">
                         <g:link controller="user" action="show" id="${supervision?.supervisor?.id}"
                                 title="${supervision?.university?.name}">
-                            <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
-                                (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
-                            </small>
-                        </g:link><g:if test="${supervisions?.size() - 1 != i}">,</g:if>
+                            <g:fieldValue bean="${supervision?.supervisor}" field="fullName"/>
+                        </g:link>
+                        <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
+                            (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
+                        </small><br>
                         </g:each>
                     </dd>
                 </g:if>
@@ -95,8 +96,8 @@
                         <g:each in="${topicInstance?.universities?.sort{it?.name}}" status="i" var="university">
                         <g:link controller="university" action="show"
                                 id="${university?.id}" title="${university?.name}">
-                            <g:fieldValue bean="${university}" field="name"/>
-                        </g:link><g:if test="${topicInstance?.universities?.size() - 1 != i}">,</g:if>
+                            <g:fieldValue bean="${university}" field="name"/></g:link>
+                            <br>
                         </g:each>
                     </dd>
                 </g:if>

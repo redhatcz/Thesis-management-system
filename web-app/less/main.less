@@ -692,6 +692,7 @@ ul form {
     dd {
       padding: 5px 0 6px;
       margin-left: 30px;
+      line-height: 26px
     }
   }
 }
@@ -1527,4 +1528,15 @@ label.text {
 
 .disabled a {
   color: @grayLight;
+}
+
+.tooltip {
+  &.in {
+    .opacity(100);
+  }
+
+  .tooltip-inner {
+    border-radius: 0;
+    font-size: @fontSizeSmall;
+  }
 }
