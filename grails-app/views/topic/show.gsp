@@ -79,8 +79,7 @@
                         <g:each in="${supervisions}" status="i" var="supervision">
                         <g:link controller="user" action="show" id="${supervision?.supervisor?.id}"
                                 title="${supervision?.university?.name}">
-                            <g:fieldValue bean="${supervision?.supervisor}" field="fullName"/>
-                        </g:link>
+                            <g:fieldValue bean="${supervision?.supervisor}" field="fullName"/></g:link>
                         <small title="${g.fieldValue(bean: supervision?.university, field: 'name')}">
                             (<g:fieldValue bean="${supervision?.university}" field="acronym"/>)
                         </small><br>
