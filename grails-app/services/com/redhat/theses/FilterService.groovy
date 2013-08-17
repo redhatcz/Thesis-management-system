@@ -93,12 +93,18 @@ class FilterService {
                                     }
 
                                     and {
-                                        filterParse(extC, extDomainClass, [], filterParams[propName], [], false)
+                                        filterParse(extC, extDomainClass, [], filterParams[propName],
+                                                filterTypeParams[propName] ?: [], false)
                                     }
                                 }
                                 def extObjectIds = extC.list(extCriteriaClosure).unique()
 
-                                c.in('id', extObjectIds)
+                                if (extObjectIds) {
+                                    c.in('id', extObjectIds)
+                                } else {
+                                    //Postgres throws error when empty set is here
+                                    c.in('id', [-1L] as Set)
+                                }
                             }
 
                         }
