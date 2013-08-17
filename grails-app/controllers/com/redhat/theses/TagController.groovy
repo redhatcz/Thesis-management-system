@@ -28,7 +28,7 @@ class TagController {
 
         def tagsWithUsage = tagService.findAllWithCountUsage(articleClass, args, "tag.title asc")
         def tags = tagsWithUsage.collect {it.key}
-        def tagCount = Tag.count()
+        def tagCount = tagService.countUsedTags(articleClass)
 
         [tags: tags, tagsWithUsage: tagsWithUsage, tagCount: tagCount]
     }

@@ -21,4 +21,15 @@ class TagService {
         result.each { mapResult[it[0]] = it[1] }
         mapResult
     }
+
+    /**
+     * Counts number of tags that are used
+     *
+     * @param articleClass -- Class subclass of Article
+     * @return number of tags with at least one usage
+     */
+    def countUsedTags(Class articleClass) {
+        Tag.executeQuery(
+                "select count(*) from ${articleClass.simpleName} t join t.tags tag group by tag").size()
+    }
 }
