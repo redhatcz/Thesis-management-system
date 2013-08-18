@@ -34,15 +34,19 @@
 
         <g:set var="topicTags" value="${topicInstance?.tags}"/>
         <g:if test="${topicTags}">
-            <p class="tag-list">
-                <i class="icon-tags icon-large"></i>
-                <g:message code="topic.tags.label" default="tags" />:
+            <dl class="tag-list">
+                <dt>
+                    <i class="icon-tags icon-large"></i>
+                    <g:message code="topic.tags.label" default="tags" />:
+                </dt>
+                <dd>
                 <g:each in="${topicTags?.sort{it?.title}}" var="tag" status="i">
                     <g:link action="list" class="tag"
                             params="['filter.tags.title': tag.title]"
                     >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${topicTags?.size() - 1 != i}">,</g:if>
                 </g:each>
-            </p>
+                </dd>
+            </dl>
         </g:if>
         <g:else>
             <div class="tms-separator"></div>

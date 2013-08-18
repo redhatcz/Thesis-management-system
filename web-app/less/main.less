@@ -58,7 +58,8 @@
   color: @white;
   background-color: @bcolor;
   border-bottom: none;
-  padding: 4px 8px 5px;
+  padding: 3px 8px;
+  display: inline-block;
 
   &:hover {
     background-color: darken(@bcolor, 20%);
@@ -803,13 +804,27 @@ ul.tags-panel {
   font-size: @baseFontSize;
 }
 
-/*---------THESIS/TOPIC---------*/
-
-.tag-list {
-  padding: 15px 0 20px;
+dl.tag-list {
+  padding-bottom: 20px;
   margin-bottom: 10px;
   border-bottom: 1px solid @grayBorder;
+
+  dt {
+    float: left;
+    margin-top: 3px;
+    font-weight: normal;
+  }
+
+  dd {
+    margin-left: 85px;
+
+    a.tag {
+      margin-bottom: 5px;
+    }
+  }
 }
+
+/*---------THESIS/TOPIC---------*/
 
 .tms-separator {
   margin: 15px 0 10px;

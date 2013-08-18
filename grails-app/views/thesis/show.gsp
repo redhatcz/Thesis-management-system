@@ -31,15 +31,19 @@
 
     <g:set var="thesisTags" value="${thesisInstance?.tags}"/>
     <g:if test="${thesisTags}">
-        <div class="tag-list">
-            <i class="icon-tags icon-large"></i>
-            <g:message code="thesis.tags.label" default="tags" />:
-            <g:each in="${thesisTags?.sort{it?.title}}" var="tag" status="i">
-                <g:link action="list" class="tag"
-                        params="['filter.tags.title': tag.title]"
-                >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${thesisTags?.size() - 1 != i}">,</g:if>
-            </g:each>
-        </div>
+        <dl class="tag-list">
+            <dt>
+                <i class="icon-tags icon-large"></i>
+                <g:message code="thesis.tags.label" default="tags" />:
+            </dt>
+            <dd>
+                <g:each in="${thesisTags?.sort{it?.title}}" var="tag" status="i">
+                    <g:link action="list" class="tag"
+                            params="['filter.tags.title': tag.title]"
+                    >${tag?.title?.encodeAsHTML()}</g:link><g:if test="${thesisTags?.size() - 1 != i}">,</g:if>
+                </g:each>
+            </dd>
+        </dl>
     </g:if>
     <g:else>
         <div class="tms-separator"></div>
