@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')} required">
+    <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')}">
         <label class="control-label" for="thesis.supervisor.fullName">
             <strong><g:message code="role.supervisor.label"/></strong>
             <strong><span class="required-indicator">*</span></strong>

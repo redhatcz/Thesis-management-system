@@ -53,7 +53,7 @@ class Thesis extends Article{
         }
 
         supervisor validator: {supervisor ->
-            if (supervisor?.id == null || !User.get(supervisor.id)) {
+            if (supervisor?.id != null && !User.get(supervisor.id)) {
                 'not.found'
             }
         }
