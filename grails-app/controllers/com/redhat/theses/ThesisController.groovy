@@ -208,20 +208,17 @@ class ThesisController {
             return
         }
 
-        def updated
-        def isAssignee = thesisInstance.assignee == user
-        if (isThesisAdmin) {
-            updated = params.thesis
-        } else {
-            def allowed = ['tags.title', 'thesisAbstract']
-            updated = params.thesis.findAll {key, val -> key in allowed}
-        }
-
         // setup tags
         thesisInstance.tags = params.thesis?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
 
-        thesisInstance.properties = updated
-
+        def isAssignee = thesisInstance.assignee == user
+        if (isThesisAdmin) {
+            thesisInstance.supervisor = null;
+            bindData(thesisInstance, params.thesis)
+        } else {
+            def include = ['tags.title', 'thesisAbstract']
+            bindData(thesisInstance, params, [include: include])
+        }
 
         if (!thesisService.save(thesisInstance, !isAssignee)) {
             render view: 'edit', model:
@@ -229,7 +226,7 @@ class ThesisController {
             return
         }
 
-        flash.message = message(code: 'thesis.updated', args: [thesisInstance.id])
+        flash.message = message(code: 'thesis.updated', args: [thesisInstance.title])
         redirect action: "show", id: thesisInstance.id, params: [headline: Util.hyphenize(thesisInstance.title)]
     }
 

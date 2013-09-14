@@ -25,24 +25,6 @@
         </div>
     </div>
 
-    <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')}">
-        <label class="control-label" for="thesis.supervisor.fullName">
-            <strong><g:message code="role.supervisor.label"/></strong>
-            <strong><span class="required-indicator">*</span></strong>
-        </label>
-        <div class="controls">
-            <g:hiddenField name="thesis.supervisor.id"
-                           value="${thesisInstance?.supervisor?.id}"/>
-            <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
-            <a4g:textField name="thesis.supervisor.fullName"
-                           value="${thesisInstance?.supervisor?.fullName}"
-                           data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
-                           data-autocomplete-target="thesis.supervisor.id"
-                           data-autocomplete-opts="a4g-role[${i}]@role"
-                           placeholder="${message(code: 'role.supervisor.label')}"/>
-        </div>
-    </div>
-
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'university', 'error')} required">
         <label class="control-label" for="thesis.university.id">
             <strong><g:message code="university.label"/></strong>
@@ -54,6 +36,23 @@
                       noSelection="['':message(code: 'no.selection.label')]"
                       optionKey="id"
                       value="${thesisInstance?.university?.id}"/>
+        </div>
+    </div>
+
+    <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')}">
+        <label class="control-label" for="thesis.supervisor.fullName">
+            <strong><g:message code="role.supervisor.label"/></strong>
+        </label>
+        <div class="controls">
+            <g:hiddenField name="thesis.supervisor.id"
+                           value="${thesisInstance?.supervisor?.id}"/>
+            <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
+            <a4g:textField name="thesis.supervisor.fullName"
+                           value="${thesisInstance?.supervisor?.fullName}"
+                           data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
+                           data-autocomplete-target="thesis.supervisor.id"
+                           data-autocomplete-opts="a4g-role[${i}]@role"
+                           placeholder="${message(code: 'role.supervisor.label')}"/>
         </div>
     </div>
 
