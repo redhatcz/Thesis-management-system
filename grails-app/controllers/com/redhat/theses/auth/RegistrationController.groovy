@@ -21,11 +21,16 @@ class RegistrationController {
         if (Util.isActionInUrl(request, 'index')) {
             redirect uri: '/registration', permanent: true
         }
+        String userAgent = request.getHeader("user-agent")
+        log.info("User accessed registration page with user-agent ${userAgent}")
 
         [registrationCommand: new RegistrationCommand(), config: configuration.getConfig()]
     }
 
     def register(RegistrationCommand registrationCommand) {
+        log.info("User ${registrationCommand.email} is trying to sign up.")
+        String userAgent = request.getHeader("user-agent")
+        log.info("    -- With user-agent ${userAgent}")
         User user = new User(params.registrationCommand)
         user.accountExpired = false
         user.enabled = false
@@ -41,6 +46,7 @@ class RegistrationController {
             render(view: "index", model: [registrationCommand: registrationCommand, config: configuration.getConfig()])
             return
         }
+        log.info("User ${user.email} registration completed.")
 
         redirect(action: 'complete')
     }
