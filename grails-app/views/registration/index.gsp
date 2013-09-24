@@ -30,7 +30,7 @@
         <g:render template="form"/>
         <div class="control-group">
             <div class="controls">
-                <g:actionSubmit name="register"
+                <g:actionSubmit action="register"
                                 class="tms-btn btn-large"
                                 value="${message(code: 'registration.register.button')}" />
             </div>
