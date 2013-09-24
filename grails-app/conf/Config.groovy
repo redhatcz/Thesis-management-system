@@ -158,6 +158,16 @@ log4j = {
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
 grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'
+environments {
+    production {
+        // Require https in production
+        grails.plugins.springsecurity.secureChannel.definition = [
+                '/**': 'REQUIRES_SECURE_CHANNEL'
+        ]
+        grails.plugins.springsecurity.portMapper.httpPort = 80
+        grails.plugins.springsecurity.portMapper.httpsPort = 443
+    }
+}
 
 // fix for g:paginate to work with bootstrap
 grails.plugins.twitterbootstrap.fixtaglib = true
