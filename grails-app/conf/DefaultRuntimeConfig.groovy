@@ -10,3 +10,13 @@ emailDomains = [
     'fit.vutbr.cz',
     'redhat.com'
 ]
+
+defaultAdmins = [
+]
+
+defaultLeaders = [
+]
+
+defaultSupervisors = [
+    'redhat.com'
+]

@@ -130,6 +130,9 @@ class Util {
      * @return true if email address is hosted at any of the given domain addresses, false otherwise
      */
     static Boolean hasAnyDomain(String email, domains) {
+        if (domains instanceof String) {
+            domains = [domains]
+        }
         domains.any {hasDomain(email, it)}
     }
 

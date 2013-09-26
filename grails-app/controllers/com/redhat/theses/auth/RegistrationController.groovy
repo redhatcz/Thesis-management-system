@@ -37,6 +37,18 @@ class RegistrationController {
             registrationCommand.errors.rejectValue('email', g.message(code: 'registration.not.allowed.email'))
         }
 
+        if (Util.hasAnyDomain(user.email, configuration.defaultSupervisors)) {
+            user.roles.add(Role.SUPERVISOR)
+        }
+
+        if (Util.hasAnyDomain(user.email, configuration.defaultLeaders)) {
+            user.roles.add(Role.OWNER)
+        }
+
+        if (Util.hasAnyDomain(user.email, configuration.defaultAdmins)) {
+            user.roles.add(Role.ADMIN)
+        }
+
         if (registrationCommand.hasErrors() || !userService.save(user)) {
             render(view: "index", model: [registrationCommand: registrationCommand, config: configuration.getConfig()])
             return
