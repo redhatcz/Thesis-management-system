@@ -14,8 +14,13 @@ class TagService {
      * @return - Map containing tag as a key and number of usages as a value
      */
     Map<Tag, Long> findAllWithCountUsage(Class articleClass, Map params, String sort = "count(tag) desc, tag.title asc") {
+        String where = ""
+        if (articleClass == Topic) {
+            where = "where t.enabled = true"
+        }
         def result = Tag.executeQuery(
-                "select tag, count(tag) from ${articleClass.simpleName} t join t.tags tag " +
+                "select tag, count(tag) from ${articleClass.simpleName} t " +
+                        "join t.tags tag ${where} " +
                         "group by tag order by ${sort}", params)
         def mapResult = [:]
         result.each { mapResult[it[0]] = it[1] }
