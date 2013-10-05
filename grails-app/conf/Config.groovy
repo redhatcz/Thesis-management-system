@@ -177,3 +177,5 @@ grails.web.url.converter = 'hyphenated'
 
 // remove html from markdown
 markdown.removeHtml = true
+// allow hardwraps etc
+markdown.all = true
