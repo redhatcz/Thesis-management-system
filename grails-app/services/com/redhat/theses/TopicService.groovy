@@ -65,4 +65,22 @@ class TopicService {
         }
         success
     }
+
+    /**
+     * Queries the database for map of topic: supervisors for given topics and university
+     *
+     * @return Map of topics as keys and list of supervisors as value
+     */
+    def findAllWithSupervisorsByTopicsAndUniversity(List topics, University university) {
+        def someTopics = Topic.executeQuery(
+                "select new list(sn.topic, sn.supervisor) from Supervision sn " +
+                        "where sn.topic in :topics and sn.university = :university",
+                [topics: topics, university: university]
+        )
+        def allTopics = topics.collectEntries {[it, []]}
+        someTopics.each { topic, supervisor ->
+            allTopics[topic] += supervisor
+        }
+        allTopics
+    }
 }

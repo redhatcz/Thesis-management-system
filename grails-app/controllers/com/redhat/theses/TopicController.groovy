@@ -74,6 +74,38 @@ class TopicController {
                 tagListWithUsage: tagListWithUsage, universities: University.all]
     }
 
+    def printableList() {
+        if (!params?.filtering || params.filter?.onlyEnabled) {
+            if (!params.filter) {
+                params.filter = [:]
+            }
+            params.filter += [
+                    enabled: true,
+                    onlyEnabled: true
+            ]
+        }
+        def topics = filterService.filter(params, Topic)
+        def topicsWithSupervisors = [:]
+        def universityId = params.filter?.universities?.long('id')
+        def university = null
+        def isUniversityFilled = universityId != null
+        if (topics) {
+            if (universityId) {
+                university = University.get(universityId)
+                topicsWithSupervisors = topicService
+                        .findAllWithSupervisorsByTopicsAndUniversity(topics, university)
+            }
+
+            if (params?.option?.noSupervisors) {
+                topicsWithSupervisors = topicsWithSupervisors.findAll { it.value == [] }
+                topics = topicsWithSupervisors.collect { it.key }
+            }
+        }
+
+        [topics: topics, topicsWithSupervisors: topicsWithSupervisors, universityView: isUniversityFilled,
+                university: university, universities: University.all]
+    }
+
     @Secured(['ROLE_OWNER'])
     def create(Long categoryId) {
         def supervisionCommand = new SupervisionCommand()
