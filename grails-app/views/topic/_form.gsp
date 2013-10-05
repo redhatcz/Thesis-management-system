@@ -1,17 +1,28 @@
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'title', 'error')} required">
-    <label class="control-label" for="topic.title">
-        <strong><g:message code="topic.title.label"/></strong>
-        <span class="required-indicator">*</span>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign" title="${message(code:'info.topic.create.title')}"></i>
+        </div>
+        <label class="control-label" for="topic.title">
+            <strong><g:message code="topic.title.label"/></strong>
+            <span class="required-indicator">*</span>
+        </label>
+    </div>
     <div class="controls">
-        <g:textField name="topic.title" value="${topicInstance?.title}" placeholder="${message(code:'topic.title.label')}" />
+        <g:textField name="topic.title" value="${topicInstance?.title}"
+                     placeholder="${message(code:'topic.title.label')}" />
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'enabled', 'error')}">
-    <label class="control-label">
-        <strong><g:message code="topic.state.label"/></strong>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign" title="${message(code:'info.topic.create.state')}"></i>
+        </div>
+        <label class="control-label">
+            <strong><g:message code="topic.state.label"/></strong>
+        </label>
+    </div>
     <div class="controls">
         <label class="checkbox" for="topic.enabled" id="thesis-enabled">
             <g:checkBox name="topic.enabled" value="${topicInstance?.enabled}" />
@@ -21,19 +32,30 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryTitle', 'error')}">
-    <label class="control-label" for="topic.secondaryTitle">
-        <strong><g:message code="topic.secondaryTitle.label"/></strong>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"
+               title="${message(code:'info.topic.create.secondaryTitle')}"></i>
+        </div>
+        <label class="control-label" for="topic.secondaryTitle">
+            <strong><g:message code="topic.secondaryTitle.label"/></strong>
+        </label>
+    </div>
     <div class="controls">
         <g:textField name="topic.secondaryTitle" value="${topicInstance?.secondaryTitle}" placeholder="${message(code:'topic.secondaryTitle.label')}" />
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'owner', 'error')} required">
-    <label class="control-label" for="topic.owner.fullName">
-        <strong><g:message code="role.owner.label"/></strong>
-        <span class="required-indicator">*</span>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign" title="${message(code:'info.topic.create.owner')}"></i>
+        </div>
+        <label class="control-label" for="topic.owner.fullName">
+            <strong><g:message code="role.owner.label"/></strong>
+            <span class="required-indicator">*</span>
+        </label>
+    </div>
     <div class="controls">
         <g:hiddenField name="topic.owner.id" value="${topicInstance?.owner?.id}"/>
         <g:hiddenField name="a4g-role" value="${com.redhat.theses.auth.Role.OWNER}"/>
@@ -46,9 +68,15 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'universities', 'error')}">
-    <label class="control-label">
-        <strong><g:message code="topic.universities.label"/></strong>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"
+               title="${message(code:'info.topic.create.universities')}"></i>
+        </div>
+        <label class="control-label">
+            <strong><g:message code="topic.universities.label"/></strong>
+        </label>
+    </div>
     <div class="controls">
         <richg:multiselect name="topic.universities" from="${universities}"
                            optionKey="id" value="${topicInstance?.universities*.id}" />
@@ -58,9 +86,14 @@
 
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'types', 'error')}">
-    <label class="control-label">
-        <strong><g:message code="topic.types.label"/></strong>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign" title="${message(code:'info.topic.create.types')}"></i>
+        </div>
+        <label class="control-label">
+            <strong><g:message code="topic.types.label"/></strong>
+        </label>
+    </div>
     <div class="controls">
         <richg:multiselect name="topic.types" from="${types}" value="${topicInstance?.types}"
                            optionValue="${{g.message(code:"topic.type.${it?.toString()?.toLowerCase()}.label")}}"/>
@@ -68,15 +101,24 @@
 </div>
 
 <div class="control-group">
-    <label class="control-label" for="supervison-list">
-        <strong><g:message code="topic.supervision.label"/></strong>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"
+               title="${message(code:'info.topic.create.supervision')}"></i>
+        </div>
+        <label class="control-label" for="supervison-list">
+            <strong><g:message code="topic.supervision.label"/></strong>
+        </label>
+    </div>
     <div class="controls">
         <g:render template="supervision"/>
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'lead', 'error')} required">
+    <div class="small-msg pull-right">
+        <i class="icon-info-sign" title="${message(code:'info.topic.create.lead')}"></i>
+    </div>
     <label class="control-label" for="topic.lead">
         <strong><g:message code="topic.lead.label"/></strong>
         <span class="required-indicator">*</span>
@@ -88,7 +130,8 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'description', 'error')} required">
     <div class="small-msg pull-right">
-        <i class="icon-info-sign"></i>
+        <i class="icon-info-sign"
+           title="${message(code:'info.topic.create.description')}"></i>
         <g:message code="field.markdown.label" />
     </div>
 	<label class="control-label" for="topic.description">
@@ -102,7 +145,8 @@
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'secondaryDescription', 'error')}">
     <div class="small-msg pull-right">
-        <i class="icon-info-sign"></i>
+        <i class="icon-info-sign"
+           title="${message(code:'info.topic.create.secondaryDescription')}"></i>
         <g:message code="field.markdown.label" />
     </div>
     <label class="control-label" for="topic.secondaryDescription">
@@ -114,9 +158,15 @@
 </div>
 
 <div class="control-group ${hasErrors(bean: topicInstance, field: 'categories', 'error')}">
-    <label class="control-label" for="topic.categories">
-        <strong><g:message code="topic.categories.label"/></strong>
-    </label>
+    <div class="control-with-msg">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"
+               title="${message(code:'info.topic.create.categories')}"></i>
+        </div>
+        <label class="control-label" for="topic.categories">
+            <strong><g:message code="topic.categories.label"/></strong>
+        </label>
+    </div>
     <div class="controls">
         <richg:multiselect name="topic.categories" from="${com.redhat.theses.Category.list()}"
                   optionKey="id" value="${topicInstance?.categories*.id}"/>
@@ -124,6 +174,9 @@
 </div>
 
 <div class="control-group">
+    <div class="small-msg pull-right">
+        <i class="icon-info-sign" title="${message(code:'info.topic.create.tags')}"></i>
+    </div>
     <label class="control-label" for="topic.tags.title">
         <strong><g:message code="topic.tags.label"/></strong>
     </label>

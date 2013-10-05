@@ -60,7 +60,13 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
-            <h4><g:message code="filters.label"/></h4>
+            <h4>
+                <div class="small-msg pull-right">
+                    <i class="icon-info-sign icon-large"
+                       title="${message(code:'info.filter.user')}"></i>
+                </div>
+                <g:message code="filters.label"/>
+            </h4>
             <div class="panel-content">
                 <g:form method="get" class="filter">
                     <g:hiddenField name="filtering" value="true"/>

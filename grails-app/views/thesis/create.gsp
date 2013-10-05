@@ -16,10 +16,16 @@
     </h2>
     <g:form class="form-inline" action="save" id="${params.id}">
         <div class="control-group ${hasErrors(bean: thesisInstance?.topic, field: 'title', 'error')} required">
-            <label class="control-label" for="thesis.topic.title">
-                <strong><g:message code="topic.label" /></strong>
-                <span class="required-indicator">*</span></strong>
-            </label>
+            <div class="control-with-msg">
+                <div class="small-msg pull-right"
+                      title="${message(code:'info.topic.create.topic')}">
+                    <i class="icon-info-sign"></i>
+                </div>
+                <label class="control-label" for="thesis.topic.title">
+                    <strong><g:message code="topic.label" /></strong>
+                    <span class="required-indicator">*</span></strong>
+                </label>
+            </div>
             <div class="controls">
                 <g:hiddenField name="thesis.topic.id" value="${thesisInstance?.topic?.id}" />
                 <a4g:textField name="thesis.topic.title"
