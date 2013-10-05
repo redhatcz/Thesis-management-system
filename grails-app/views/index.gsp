@@ -20,20 +20,24 @@
             <g:each in="${topicList}" var="topic">
             <li class="tms-elem">
                 <i class="icon-book"></i>
-                <g:link controller="topic" action="show"
-                        id="${topic?.id}" params="[headline: Util.hyphenize(topic?.title)]"
-                    ><g:fieldValue field="title" bean="${topic}"/></g:link>
-                <span class="pull-right">
-                    <i class="icon-comment"></i> ${commentCounts[topic] ?: 0}
-                </span>
-                <ul class="inline">
-                    <li>
-                        <i class="icon-time"></i>
-                        <g:formatDate date="${topic?.dateCreated}"
-                                      dateStyle="LONG"
-                                      type="date" />
-                    </li>
-                </ul>
+                <div class="tms-elem-link">
+                    <span class="pull-right">
+                        <i class="icon-comment"></i> ${commentCounts[topic] ?: 0}
+                    </span>
+                    <g:link controller="topic"
+                            action="show"
+                            id="${topic?.id}"
+                            params="[headline: Util.hyphenize(topic?.title)]"
+                        ><g:fieldValue field="title" bean="${topic}"/></g:link>
+                    <ul class="inline">
+                        <li>
+                            <i class="icon-time"></i>
+                            <g:formatDate date="${topic?.dateCreated}"
+                                          dateStyle="LONG"
+                                          type="date" />
+                        </li>
+                    </ul>
+                </div>
             </li>
             </g:each>
         </ul>
