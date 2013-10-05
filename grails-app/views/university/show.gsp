@@ -9,7 +9,7 @@
     <div class="span4 sidebar">
         <div class="panel left">
             <div class="avatar-university">
-                %{--University logo will be here soon!--}%
+                <img src="${resource(dir: 'images', file: 'avatar-university.png')}">
             </div>
             <h4><g:message code="university.information.label"/></h4>
             <div class="panel-content">
