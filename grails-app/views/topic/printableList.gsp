@@ -6,7 +6,7 @@
     <title><g:message code="topic.printable-list.title" /></title>
 </head>
 <body>
-    <div id="options">
+    <div id="options" class="no-print">
         <div class="fixed-options">
             <i class="icon-cog"></i>
             <a href="#options-modal" class="center" data-toggle="modal">
