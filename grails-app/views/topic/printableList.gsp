@@ -4,12 +4,27 @@
 <head>
     <meta name="layout" content="printable">
     <title><g:message code="topic.printable-list.title" /></title>
+    <style type="text/css">
+    @media print
+    {
+        .no-print, .no-print *
+        {
+            display: none !important;
+        }
+        a {
+            text-decoration: none;
+        }
+        table {
+            border-width: 1px;
+        }
+    }
+    </style>
 </head>
 <body>
     <div id="options" class="no-print">
         <div class="fixed-options">
             <i class="icon-cog"></i>
-            <a href="#options-modal" class="center" data-toggle="modal">
+            <a href="#options-modal" class="no-print" data-toggle="modal">
                 <g:message code="options.button"/>
             </a>
         </div>
@@ -58,10 +73,8 @@
     <table id="printable-table-topics" class="table table-hover">
         <thead>
             <tr>
-                <th><g:message code="id.label"/></th>
                 <th><g:message code="topic.title.label"/></th>
                 <th><g:message code="role.owner.label"/></th>
-                <th><g:message code="topic.dateCreated.label"/></th>
                 <th><g:message code="topic.categories.label"/></th>
                 <g:if test="${universityView}">
                 <th><g:message code="topic.supervisors.for" args="[university?.acronym]"/></th>
@@ -72,22 +85,16 @@
         <g:each var="topic" in="${topics}">
             <tr>
                 <td><g:link action="show" id="${topic?.id}" params="[headline: Util.hyphenize(topic?.title)]">
-                    <g:fieldValue bean="${topic}" field="id"/>
+                    <g:fieldValue bean="${topic}" field="title"/>
                 </g:link></td>
-                <td><g:fieldValue bean="${topic}" field="title"/></td>
-                <td><g:fieldValue bean="${topic?.owner}" field="fullName"/></td>
-                <td><g:formatDate date="${topic?.dateCreated}"
-                                  dateStyle="LONG"
-                                  type="date" /></td>
+                <td><g:link controller="user" action="show" id="${topic?.owner?.id}">
+                    <g:fieldValue bean="${topic?.owner}" field="fullName"/>
+                </g:link></td>
                 <td>
                 <g:if test="${topic?.categories}">
                     <g:each in="${topic?.categories}" var="category">
-                        <g:if test="${topic?.categories?.last() != category}">
-                            <g:fieldValue bean="${category}" field="title"/><span>, </span>
-                        </g:if>
-                        <g:else>
-                            <g:fieldValue bean="${category}" field="title"/>
-                        </g:else>
+                        <g:fieldValue bean="${category}" field="title"
+                            /><g:if test="${topic?.categories?.last() != category}"><span>, </span></g:if>
                     </g:each>
                 </g:if>
                 <g:else>
@@ -98,12 +105,9 @@
                 <td>
                 <g:if test="${topicsWithSupervisors[topic]}">
                     <g:each in="${topicsWithSupervisors[topic]}" var="supervisor">
-                        <g:if test="${topicsWithSupervisors[topic]?.last() != supervisor}">
-                            <g:fieldValue bean="${supervisor}" field="fullName"/><span>, </span>
-                        </g:if>
-                        <g:else>
-                            <g:fieldValue bean="${supervisor}" field="fullName"/>
-                        </g:else>
+                        <g:link controller="user" action="show" id="${supervisor?.id}">
+                            <g:fieldValue bean="${supervisor}" field="fullName"
+                            /></g:link><g:if test="${topicsWithSupervisors[topic]?.last() != supervisor}"><span>, </span></g:if>
                     </g:each>
                 </g:if>
                 <g:else>
