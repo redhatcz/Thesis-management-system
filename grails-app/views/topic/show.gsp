@@ -137,7 +137,11 @@
                         </dt>
                         <dd>
                             <g:link controller="thesis" action="show" id="${thesis.id}"
-                                    params="[headline: Util.hyphenize(thesis?.title)]">${thesis.title}</g:link>
+                                    params="[headline: Util.hyphenize(thesis?.title)]">${thesis.title}</g:link><br />
+                            <small><g:message code="thesis.assignee.label"/>: <g:link controller="user" action="show" id="${thesis?.assigneeId}">
+                                <g:fieldValue bean="${thesis?.assignee}" field="fullName"/></g:link>,
+                                <g:message code="thesis.dateCreated.label"/>: <g:formatDate date="${thesis?.dateCreated}" dateStyle="SHORT" type="date" />
+                            </small>
                         </dd>
                     </g:each>
                     </dl>
