@@ -40,6 +40,7 @@ class TopicController {
     def list() {
         params.max = Util.max(params.max)
 
+        // Check onlyEnabled by default
         if (!params?.filtering || params.filter?.onlyEnabled) {
             if (!params.filter) {
                 params.filter = [:]
@@ -75,6 +76,7 @@ class TopicController {
     }
 
     def printableList() {
+        // Check onlyEnabled by default
         if (!params?.filtering || params.filter?.onlyEnabled) {
             if (!params.filter) {
                 params.filter = [:]
@@ -84,6 +86,28 @@ class TopicController {
                     onlyEnabled: true
             ]
         }
+        // Check title, owner, categories and types checkboxes by default
+        if (!params?.viewing) {
+            if (!params.view) {
+                params.view = [:]
+            }
+            params.view += [
+                    title: true,
+                    owner: true,
+                    categories: true,
+                    types: true
+            ]
+        }
+        // Check supervisors checkbox by default
+        if (!params?.viewingSupervisors) {
+            if (!params.view) {
+                params.view = [:]
+            }
+            params.view += [
+                    supervisors: true
+            ]
+        }
+
         def topics = filterService.filter(params, Topic)
         def topicsWithSupervisors = [:]
         def universityId = params.filter?.universities?.long('id')
