@@ -64,7 +64,6 @@ environments {
             password = credentials.password
             url = "jdbc:postgresql://${credentials.host}:${credentials.port}/${credentials.name}"
             driverClassName = "org.postgresql.Driver"
-            dbCreate = "update"
             properties {
                maxActive = 100
                minEvictableIdleTimeMillis=1800000

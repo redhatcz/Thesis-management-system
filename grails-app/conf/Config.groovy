@@ -179,3 +179,7 @@ grails.web.url.converter = 'hyphenated'
 markdown.removeHtml = true
 // allow hardwraps etc
 markdown.all = true
+
+// database migration configuration
+grails.plugin.databasemigration.updateOnStart = true
+grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
