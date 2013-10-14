@@ -16,7 +16,7 @@
                     <tr>
                         <g:sortableColumn property="topic"
                                           title="${message(code: 'topic.label')}"/>
-                        <th><g:message code="application.approved.label"/></th>
+                        <th><g:message code="application.status.label"/></th>
                         <th><g:message code="action.label"/></th>
                     </tr>
                     </thead>
@@ -28,7 +28,7 @@
                                         params="[headline: Util.hyphenize(application?.topic?.title)]">${fieldValue(bean: application.topic, field: "title")}</g:link>
                             </td>
                             <td>
-                                <g:formatBoolean boolean="${application?.approved}"/>
+                                <g:message code="application.status.${application?.status?.toString()?.toLowerCase()}.label"/>
                             </td>
                             <td>
                                 <g:link controller="application" action="show" id="${application?.id}"><g:message code="action.show.label" /></g:link>

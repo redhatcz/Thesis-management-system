@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Category" %>
+<%@ page import="com.redhat.theses.AppStatus; com.redhat.theses.util.Util; com.redhat.theses.Category" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,15 +60,10 @@
             <g:formatDate date="${applicationInstance?.dateCreated}" dateStyle="LONG" type="date"/>
         </dd>
         <dt>
-            <g:message code="application.approved.label" default="Approved"/>
+            <g:message code="application.status.label" />
         </dt>
         <dd>
-            <g:if test="${applicationInstance?.approved}">
-                <i class="icon-ok-sign" style="color: green"></i>
-            </g:if>
-            <g:else>
-                <i class="icon-remove-sign" style="color: red"></i>
-            </g:else>
+            <g:message code="application.status.${applicationInstance?.status?.toString()?.toLowerCase()}.label"/>
         </dd>
         <g:if test="${!applicationInstance?.note?.empty}">
             <dt>
@@ -86,10 +81,19 @@
             <h4><g:message code="application.management.label"/></h4>
             <div class="panel-content">
                 <div class="panel-buttons">
-                    <g:link class="tms-link btn-link" action="approve" id="${applicationInstance?.id}">
-                        <i class="icon-ok"></i>
-                        <g:message code="application.approve.button"/>
-                    </g:link>
+                    <g:if test="${applicationInstance?.status != AppStatus.APPROVED}">
+                        <g:link class="tms-link btn-link" action="approve" id="${applicationInstance?.id}">
+                            <i class="icon-ok"></i>
+                            <g:message code="application.approve.button"/>
+                        </g:link>
+                    </g:if>
+                    <g:if test="${applicationInstance?.status != AppStatus.DECLINED}">
+                        <g:link class="tms-link btn-link" action="decline" id="${applicationInstance?.id}"
+                                onclick="return confirm('${message(code: 'default.decline.confirm.message')}');">
+                            <i class="icon-ban-circle"></i>
+                            <g:message code="application.decline.button"/>
+                        </g:link>
+                    </g:if>
                 </div>
             </div>
         </div>

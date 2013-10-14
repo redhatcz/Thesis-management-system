@@ -15,12 +15,12 @@ class ApplicationService {
      * @return persisted application on success, false otherwise
      */
     Application approve(Application application, Thesis thesis) {
-        if (application.approved) {
+        if (application.status == AppStatus.APPROVED) {
             application.errors.reject('application.already.approved')
             return null
         }
 
-        application.approved = true
+        application.status = AppStatus.APPROVED
         def createdThesis = thesisService.save(thesis)
         application.thesis = createdThesis
 

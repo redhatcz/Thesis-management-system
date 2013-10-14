@@ -60,4 +60,24 @@ class ApplicationListenerService {
 
         subscriptionService.notify(application.applicant, feed, application.topic.title)
     }
+
+    /**
+     * Creates new feed and notifies applicant that their application has been declined
+     */
+    @Listener(topic = "applicationDeclined")
+    def applicationDeclined(ApplicationEvent e) {
+        def application = Application.get(e.application.id)
+        def args = [
+                e.user.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.user.id, absolute: true),
+                grailsLinkGenerator.link(controller: 'application', action: 'show', id: application.id, absolute: true),
+                application.topic.title,
+                grailsLinkGenerator.link(controller: 'topic', action: 'show', id: application.topicId,
+                        params: [headline: Util.hyphenize(application.topic.title)], absolute: true)
+        ]
+
+        def feed = new Feed(messageCode: 'feed.application.declined', args: args, user: e.user).save()
+
+        subscriptionService.notify(application.applicant, feed, application.topic.title)
+    }
 }

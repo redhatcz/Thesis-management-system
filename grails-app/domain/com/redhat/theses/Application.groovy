@@ -11,7 +11,7 @@ class Application {
     Type type
     Date dateCreated
     String note
-    Boolean approved = false
+    AppStatus status
 
     static constraints = {
         thesis nullable: true

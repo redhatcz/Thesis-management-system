@@ -34,7 +34,7 @@ class ApplicationController {
             params.filter = [:]
         }
         if (!params?.filtering) {
-            params.filter << [approved: false]
+            params.filter << [status: AppStatus.PENDING]
         }
 
         def applicationInstanceList = filterService.filter(params, Application)
@@ -71,6 +71,7 @@ class ApplicationController {
     @Secured(['ROLE_STUDENT'])
     def save() {
         def application = new Application(params.application)
+        application.status = AppStatus.PENDING
         User user = springSecurityService.currentUser
         application.applicant = user
 
@@ -94,7 +95,7 @@ class ApplicationController {
             return
         }
 
-        if (applicationInstance.approved) {
+        if (applicationInstance.status == AppStatus.APPROVED) {
             flash.message = message(code: 'application.already.approved')
             redirect(action: 'show', id: applicationInstance.id)
         }
@@ -164,6 +165,37 @@ class ApplicationController {
         flash.message = message(code: 'application.approved')
         redirect(controller: 'thesis', action: 'show', id: thesisInstance.id,
                 params: [headline: Util.hyphenize(thesisInstance.title)])
+    }
+
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def decline(Long id) {
+        def applicationInstance = Application.get(id)
+        if (!applicationInstance) {
+            flash.message = message(code: 'application.not.found', args: [id])
+            redirect(action: 'list')
+            return
+        }
+
+        User user = springSecurityService.currentUser
+
+        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
+                && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+
+            flash.message = message(code: 'security.denied.message')
+            redirect(action: 'list')
+            return
+        }
+
+        applicationInstance.status = AppStatus.DECLINED
+
+        if (!applicationInstance.save()) {
+            render view: 'approve', model: [applicationInstance: applicationInstance]
+            return
+        }
+
+        event("applicationDeclined", new ApplicationEvent(applicationInstance, user))
+        flash.message = message(code: 'application.declined')
+        redirect(action: 'list')
     }
 
     def show(Long id) {

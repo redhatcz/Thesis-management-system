@@ -1,4 +1,4 @@
-<%@ page import="com.redhat.theses.util.Util; com.redhat.theses.Application" %>
+<%@ page import="com.redhat.theses.AppStatus; com.redhat.theses.util.Util; com.redhat.theses.Application" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
                                   title="${message(code: 'topic.label')}"/>
                 <g:sortableColumn property="applicant"
                                   title="${message(code: 'application.applicant.label')}"/>
-                <th><g:message code="application.approved.label"/></th>
+                <th><g:message code="application.status.label"/></th>
                 <th><g:message code="action.label"/></th>
             </tr>
             </thead>
@@ -33,7 +33,7 @@
                         <g:link controller="user" action="show" id="${application.applicantId}">${fieldValue(bean: application.applicant, field: "fullName")}</g:link>
                     </td>
                     <td>
-                        <g:formatBoolean boolean="${application?.approved}"/>
+                        <g:message code="application.status.${application?.status?.toString()?.toLowerCase()}.label"/>
                     </td>
                     <td>
                         <g:link controller="application" action="show" id="${application?.id}"><g:message code="action.show.label" /></g:link>
@@ -71,11 +71,12 @@
                 <g:textField value="${params?.filter?.topic?.title}" class="wide"
                              name="filter.topic.title" placeholder="${message(code: 'topic.label')}"/>
                 <g:hiddenField name="type.topic.title" value="ilike"/>
+                <g:select name="filter.status" from="${AppStatus.values()}"
+                          noSelection="['':message(code:'application.status.select.label')]"
+                          optionValue="${{g.message(code:"application.status.${it?.toString()?.toLowerCase()}.label")}}"
+                          value="${params?.filter?.status}"/>
                 <g:submitButton class="tms-btn pull-right" name="filter-button"
                                 value="${message(code: 'filter.button')}"/>
-                <label>
-                    <g:checkBox name="filter.approved" value="${params?.filter?.approved}"/> <g:message code="application.approved.label"/>
-                </label>
             </g:form>
         </div>
     </div>

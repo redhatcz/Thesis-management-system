@@ -610,7 +610,7 @@ for example): see Web Browser Programming for details.''',
 
                 // APPLICATIONS
                 new Application(applicant: vaclav, topic: autocompletePlugin,
-                        university: muni, note: 'ahoj', type: Type.BACHELOR).save(flush: true)
+                        university: muni, note: 'ahoj', type: Type.BACHELOR, status: AppStatus.PENDING).save(flush: true)
 
                 // FAQ
                 new Faq(question: 'What is the current status of OpenShift Online?',
