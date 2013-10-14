@@ -181,5 +181,9 @@ markdown.removeHtml = true
 markdown.all = true
 
 // database migration configuration
-grails.plugin.databasemigration.updateOnStart = true
-grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+environments {
+    production {
+        grails.plugin.databasemigration.updateOnStart = true
+        grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+    }
+}
