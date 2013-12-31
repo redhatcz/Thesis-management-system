@@ -132,7 +132,7 @@ class GridFileService {
                              Map metadata = [:], String filename = null, Boolean delete = false,
                              mongoId = null) {
 
-        save(content, getBucket(object), group, object."$field", metadata,
+        save(content,  object."$field", getBucket(object), group, metadata,
                 filename, delete, mongoId)
     }
 
@@ -408,9 +408,9 @@ class GridFileService {
         def file = getFileByRawMongoId(mongoId, bucket)
 
         // No file with given mongoId has been found in its raw form
-        if (!file && !(mongoId instanceof ObjectId)) {
+         if (!file && !(mongoId instanceof ObjectId)) {
             try {
-                // Try to warp it in ObjectId
+                // Try to wrap it in ObjectId
                 file = getFileByMongoId(mongoId, bucket)
             } catch (Exception e) {
                 // Apparently mongoId is not a valid representation of ObjectId either.
@@ -420,7 +420,7 @@ class GridFileService {
         file
     }
     /**
-     * Retrieves first file matching given group and id bound the to the given object from  GridFS
+     * Retrieves all files matching given group and id bound the to the given object from  GridFS
      *
      * @param id
      * @param group
