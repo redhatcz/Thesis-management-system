@@ -28,7 +28,7 @@ class RegistrationController {
     def register(RegistrationCommand registrationCommand) {
         User user = new User(params.registrationCommand)
         user.accountExpired = false
-        user.enabled = false
+        user.enabled = true // temporary fix
         user.accountLocked = false
         user.passwordExpired = false
         user.roles = [Role.STUDENT]
