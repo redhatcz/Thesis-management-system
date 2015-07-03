@@ -91,13 +91,12 @@ How to deploy the Thesis management system
 1. Create an openshift JBoss EWS 2 cartridge and add Postgres and MongoDB 
 cartridge.
 2. Add remote openshift repository to your local project git repository.
-3. Create file `.myenv` on OpenShift in directory `$OPENSHIFT_DATA_DIR` with 
-   email credentials as environment variables like this:
+3. Create custom environment variables on openshift with mailgun settings:
 ```
-   export OPENSHIFT_EMAIL_HOST="smtp.example.com"
-   export OPENSHIFT_EMAIL_PORT=465
-   export OPENSHIFT_EMAIL_USERNAME="example@example.com"
-   export OPENSHIFT_EMAIL_PASSWORD="example_password"
+   rhc env set OPENSHIFT_MAIL_FROM="Example User <mailgun@sandboxEXAMPLE.mailgun.org>" \
+               OPENSHIFT_MAILGUN_API_URL="https://api.mailgun.net/v3/sandboxEXAMPLE.mailgun.org/messages" \
+               OPENSHIFT_MAILGUN_API_KEY="key-examexampleexampleexampleexample" \
+               -a YourAppName
 ```
 
 4. Push your local repository to OpenShift.
