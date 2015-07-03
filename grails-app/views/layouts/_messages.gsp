@@ -14,7 +14,7 @@
     <p><strong>Error!</strong></p>
 
     <g:eachError var="error">
-    <p><g:message error="${error}"/>.</p>
+    <p><g:message error="${error}" encodeAs="HTML"/>.</p>
     </g:eachError>
 </div>
 </g:hasErrors>
