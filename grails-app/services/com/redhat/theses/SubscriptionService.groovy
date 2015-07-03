@@ -10,6 +10,11 @@ class SubscriptionService {
     def messageSource
 
     /**
+     * Dependency injection of grails.plugin.sendmail.MailService
+     */
+    def mailService
+
+    /**
      * Subscribes a subscriber for an article
      *
      * @return true on success, false otherwise
@@ -44,7 +49,7 @@ class SubscriptionService {
         // send mail
         log.debug "Sending mail to ${subscriber.email}"
         try {
-            sendMail {
+            mailService.sendMail {
                 to subscriber.email
                 subject subj
                 html body

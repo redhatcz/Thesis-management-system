@@ -26,6 +26,11 @@ class UserListenerService {
     def messageSource
 
     /**
+     * Dependency injection of grails.plugin.sendmail.MailService
+     */
+    def mailService
+
+    /**
      * Sends confirmation mail to newly created user
      */
     @Listener(topic = "userCreated")
@@ -185,7 +190,7 @@ class UserListenerService {
 
         def subj = messageSource.getMessage('mail.new.password.set.subject', [].toArray(), LCH.locale)
         try {
-            sendMail {
+            mailService.sendMail {
                 to user.email
                 subject subj
                 text view: '/emailConfirmation/message',

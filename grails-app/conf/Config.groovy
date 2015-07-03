@@ -79,21 +79,12 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "https://${System.getenv('OPENSHIFT_APP_DNS')}"
+        grails.serverURL = "${System.getenv('OPENSHIFT_SERVER_URL')}"
 
-        grails.mail.default.from="noreply@thesis.redhat.com"
-        grails {
-            mail {
-                host = System.getenv('OPENSHIFT_EMAIL_HOST')
-                port = System.getenv('OPENSHIFT_EMAIL_PORT')?.toInteger()
-                username = System.getenv('OPENSHIFT_EMAIL_USERNAME')
-                password = System.getenv('OPENSHIFT_EMAIL_PASSWORD')
-                props = ["mail.smtp.auth":"true",
-                        "mail.smtp.socketFactory.port":"465",
-                        "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-                        "mail.smtp.socketFactory.fallback":"false"]
-            }
-        }
+        grails.mail.from = "${System.getenv('OPENSHIFT_MAIL_FROM')}"
+        grails.mail.deliveryBean = "mailGunService"
+        grails.mailgun.api.url = "${System.getenv('OPENSHIFT_MAILGUN_API_URL')}"
+        grails.mailgun.api.key = "${System.getenv('OPENSHIFT_MAILGUN_API_KEY')}"
     }
 }
 

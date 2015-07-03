@@ -120,6 +120,20 @@
         <version>2.0.8</version>
         <scope>compile</scope>
         <type>zip</type>
+        <exclusions>
+            <exclusion>
+                <groupId>org.grails.plugins</groupId>
+                <artifactId>mail</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <dependency>
+        <groupId>com.vaclavdedik</groupId>
+        <artifactId>sendmail</artifactId>
+        <version>0.1</version>
+        <scope>compile</scope>
+        <type>zip</type>
     </dependency>
                     
 
@@ -152,15 +166,6 @@
 
     <dependency>
         <groupId>org.grails.plugins</groupId>
-        <artifactId>searchable</artifactId>
-        <version>0.6.4</version>
-        <scope>compile</scope>
-        <type>zip</type>
-    </dependency>
-                    
-
-    <dependency>
-        <groupId>org.grails.plugins</groupId>
         <artifactId>cache</artifactId>
         <version>1.0.0</version>
         <scope>compile</scope>
@@ -172,15 +177,6 @@
         <groupId>org.grails.plugins</groupId>
         <artifactId>markdown</artifactId>
         <version>1.1.1</version>
-        <scope>compile</scope>
-        <type>zip</type>
-    </dependency>
-                    
-
-    <dependency>
-        <groupId>org.grails.plugins</groupId>
-        <artifactId>mail</artifactId>
-        <version>1.0.1</version>
         <scope>compile</scope>
         <type>zip</type>
     </dependency>
@@ -329,6 +325,14 @@
             <id>grails-plugins</id>
             <name>grails-plugins</name>
             <url>http://repo.grails.org/grails/plugins</url>
+        </repository>
+        <repository>
+            <id>grails-sendmail-mvn-repo</id>
+            <url>https://raw.github.com/VaclavDedik/grails-sendmail/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 

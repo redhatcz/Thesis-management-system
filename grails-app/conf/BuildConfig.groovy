@@ -31,7 +31,7 @@ grails.project.dependency.resolution = {
         mavenCentral()
 
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://snapshots.repository.codehaus.org"
+        mavenRepo "https://raw.github.com/VaclavDedik/grails-sendmail/mvn-repo/"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
@@ -68,8 +68,10 @@ grails.project.dependency.resolution = {
         compile ":platform-core:1.0.RC5"
         compile ":markdown:1.1.1"
         compile ":spring-security-core:1.2.7.3"
-        compile ":mail:1.0.1"
-        compile ":email-confirmation:2.0.8"
+        compile ":email-confirmation:2.0.8", {
+            excludes "mail"
+        }
+        compile "com.vaclavdedik:sendmail:0.1"
         compile ":lesscss-resources:1.3.1"
         compile ":hibernate-filter:0.3.2"
         compile ":feeds:1.5"
