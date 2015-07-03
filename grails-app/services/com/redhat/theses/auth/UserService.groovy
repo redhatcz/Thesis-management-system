@@ -19,7 +19,7 @@ class UserService {
 
         def persistedUser = user.save()
 
-        if (persistedUser && createdByAdmin) { // temporary fix
+        if (persistedUser) {
             if (eventType == 'create') {
                 event('userCreated',
                     new UserCreatedEvent(persistedUser, password, createdByAdmin))
