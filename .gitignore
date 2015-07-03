@@ -46,3 +46,5 @@ PutObjectStoreDirHere
 # grails specifics
 /plugins
 /null
+# I store local email settings here
+/email.sh

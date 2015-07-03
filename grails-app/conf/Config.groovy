@@ -63,19 +63,11 @@ environments {
     development {
         grails.logging.jul.usebridge = true
 
-        grails {
-            mail {
-                host = "smtp.gmail.com"
-                port = 465
-                username = "noone.localhost@gmail.com"
-                password = "noone.local"
-                overrideAddress = "noone.localhost@gmail.com"
-                props = ["mail.smtp.auth":"true",
-                        "mail.smtp.socketFactory.port":"465",
-                        "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-                        "mail.smtp.socketFactory.fallback":"false"]
-            }
-        }
+        grails.mail.overrideAddress = "noone.localhost@gmail.com"
+        grails.mail.from = "${System.getenv('LOCALHOST_MAIL_FROM')}" // you need to set these for email to work
+        grails.mail.deliveryBean = "mailGunService"
+        grails.mailgun.api.url = "${System.getenv('LOCALHOST_MAILGUN_API_URL')}" // you need to set these for email to work
+        grails.mailgun.api.key = "${System.getenv('LOCALHOST_MAILGUN_API_KEY')}" // you need to set these for email to work
     }
     production {
         grails.logging.jul.usebridge = false
