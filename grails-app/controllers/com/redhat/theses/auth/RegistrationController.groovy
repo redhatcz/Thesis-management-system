@@ -20,6 +20,7 @@ class RegistrationController {
 
         if (Util.isActionInUrl(request, 'index')) {
             redirect uri: '/registration', permanent: true
+            return
         }
 
         [registrationCommand: new RegistrationCommand(), config: configuration.getConfig()]
