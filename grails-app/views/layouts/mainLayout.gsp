@@ -70,10 +70,10 @@
                 </div>
                 <div class="span4">
                     <p class="leading"><g:message code="footer.getInvolved.title"/></p>
-                    <a href="https://github.com/jcechace/Thesis-management-system">
+                    <a href="https://github.com/redhatcz/Thesis-management-system">
                         <g:message code="footer.github.label"/>
                     </a>
-                    <a href="https://github.com/jcechace/Thesis-management-system/issues">
+                    <a href="https://github.com/redhatcz/Thesis-management-system/issues">
                         <g:message code="footer.issues.label"/>
                     </a>
                 </div>
