@@ -48,3 +48,5 @@ PutObjectStoreDirHere
 /null
 # I store local email settings here
 /email.sh
+
+/cert
