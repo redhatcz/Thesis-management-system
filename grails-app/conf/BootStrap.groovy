@@ -68,38 +68,38 @@ class BootStrap {
                         roles: [Role.SUPERVISOR, Role.STUDENT]
                 ).save(flush: true)
 
-                def vaclav = new User(
-                        email: 'vaclav.dedik@gmail.com',
-                        fullName: 'Vaclav Dedik',
-                        password: "vaclav.dedik",
+                def example1 = new User(
+                        email: 'example1@example.com',
+                        fullName: 'Example Jedna',
+                        password: "example2",
                         enabled: true,
                         roles: [Role.STUDENT]
                 ).save(flush: true)
-                def pavel = new User(
-                        email: 'dedikx@gmail.com',
-                        fullName: 'Pavel Dedik',
-                        password: "dedikx",
+                def example2 = new User(
+                        email: 'example2@example.com',
+                        fullName: 'Example Dva',
+                        password: "example2",
                         enabled: true,
                         roles: [Role.STUDENT]
                 ).save(flush: true)
-                def kuba = new User(
-                        email: 'jcechace@gmail.com',
-                        fullName: 'Jakub Cechacek',
-                        password: "jcechace",
+                def example3 = new User(
+                        email: 'example3@example.com',
+                        fullName: 'Example Tri',
+                        password: "example3",
                         enabled: true,
                         roles: [Role.STUDENT]
                 ).save(flush: true)
-                def jiriKolar = new User(
-                        email: 'jiri.kolar@gmail.com',
-                        fullName: 'Jiri Kolar',
-                        password: "jiri.kolar",
+                def supervisor1 = new User(
+                        email: 'supervisor1@example.com',
+                        fullName: 'Supervisor Jedna',
+                        password: "supervisor1",
                         enabled: true,
                         roles: [Role.SUPERVISOR, Role.STUDENT]
                 ).save(flush: true)
-                def jiriPechanec = new User(
-                        email: 'jpechanec@redhat.com',
-                        fullName: 'Jiri Pechanec',
-                        password: "jpechanec",
+                def owner1 = new User(
+                        email: 'owner1@example.com',
+                        fullName: 'Owner Jedna',
+                        password: "owner2",
                         enabled: true,
                         roles: [Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
                 ).save(flush: true)
@@ -122,7 +122,7 @@ class BootStrap {
                 // TOPICS
                 def tms = new Topic(
                         title: 'Thesis management system',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [grailsTag],
                         categories: [redhatCategory, jbossCategory],
                         types: [Type.BACHELOR],
@@ -151,7 +151,7 @@ using the most *state-of-the-art* technologies and will be deployed on OpenShift
 _Note: You should also consider management of school projects._
 '''
                 ).save(flush: true)
-                new Supervision(topic: tms, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: tms, supervisor: supervisor1, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(tms, tms.owner, [tms.owner]))
 
                 def torquebox = new Topic(
@@ -182,7 +182,7 @@ Download ePub manual Highlights of major......'''
 
                 def pythonFramework = new Topic(
                         title: 'Framework for Python',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [pythonTag],
                         categories: [jbossCategory],
                         universities: [muni, vut],
@@ -209,7 +209,7 @@ language with the greatest growth in popularity over the course of a year, as me
 
                 def testsForWFK = new Topic(
                         title: 'Tests for WFK',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [wfkTag],
                         categories: [redhatCategory],
                         universities: [muni],
@@ -223,12 +223,12 @@ Simplify your use of popular open source frameworks. Avoid integration and versi
 Kit is a single solution that includes certified and integrated software—everything you need to build and maintain
 simple web applications.'''
                 ).save(flush: true)
-                new Supervision(topic: testsForWFK, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: testsForWFK, supervisor: supervisor1, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(testsForWFK, testsForWFK.owner, [testsForWFK.owner]))
 
                 def mavenThingy = new Topic(
                         title: 'Maven Thingy',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [javaTag],
                         categories: [jbossCategory],
                         universities: [muni, vut],
@@ -254,7 +254,7 @@ You can access the guides at any time from the left navigation.
 If you are looking for a quick reference, you can use *the documentation* index.
 '''
                 ).save(flush: true)
-                new Supervision(topic: mavenThingy, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: mavenThingy, supervisor: supervisor1, university: muni).save(flush: true)
                 new Supervision(topic: mavenThingy, supervisor: admin, university: muni).save(flush: true)
                 new Supervision(topic: mavenThingy, supervisor: person, university: vut).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(mavenThingy, mavenThingy.owner, [mavenThingy.owner]))
@@ -326,7 +326,7 @@ _Note: none_
 
                 def markdownCompiler = new Topic(
                         title: 'Markdown compiler in groovy',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [othersTag, groovyTag],
                         categories: [jbossCategory],
                         universities: [muni],
@@ -346,12 +346,12 @@ The best way to get a feel for Markdown’s formatting syntax is simply to look 
 example, you can view the Markdown source for the article text on this page here:
 http://daringfireball.net/projects/markdown/index.text'''
                 ).save(flush: true)
-                new Supervision(topic: markdownCompiler, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: markdownCompiler, supervisor: supervisor1, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(markdownCompiler, markdownCompiler.owner, [markdownCompiler.owner]))
 
                 def jbossMavenPlugin = new Topic(
                         title: 'JBoss AS maven plugin',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [javaTag],
                         categories: [jbossCategory],
                         universities: [muni, vut],
@@ -381,7 +381,7 @@ In case you still have questions regarding the plugin's usage, please have a loo
 contact the user mailing list. The posts to the mailing list are archived and could already contain the answer
 to your question as part of an older thread. Hence, it is also worth browsing/searching the mail archive.'''
                 ).save(flush: true)
-                new Supervision(topic: jbossMavenPlugin, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: jbossMavenPlugin, supervisor: supervisor1, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(jbossMavenPlugin, jbossMavenPlugin.owner, [jbossMavenPlugin.owner]))
 
                 def twitterBootstrapPlugin = new Topic(
@@ -424,7 +424,7 @@ Set a new value for the datepicker. It cand be a string in the specified format 
 
                 def autocompletePlugin = new Topic(
                         title: 'Autocomplete plugin for grails',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [grailsTag],
                         categories: [jbossCategory],
                         universities: [muni, vut],
@@ -446,12 +446,12 @@ In some network operations, one might attempt to dispatch information over a net
 program manages to keep up, using the recipient's typeahead functions. However, as this is far too reliant on the
 specifications of the computer with which one is communicating, it is not often used.'''
                 ).save(flush: true)
-                new Supervision(topic: autocompletePlugin, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: autocompletePlugin, supervisor: supervisor1, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(autocompletePlugin, autocompletePlugin.owner, [autocompletePlugin.owner]))
 
                 def hibernateProductization = new Topic(
                         title: 'Productization of hibernate',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [],
                         categories: [redhatCategory],
                         universities: [muni],
@@ -474,13 +474,13 @@ Hibernate supports the mapping of custom value types. This makes the following s
 * Mapping a single property to multiple columns.
 '''
                 ).save(flush: true)
-                new Supervision(topic: hibernateProductization, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: hibernateProductization, supervisor: supervisor1, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(hibernateProductization, hibernateProductization.owner, [hibernateProductization.owner]))
 
                 def rubyKillingMachine = new Topic(
                         title: 'Killing machine for Ruby',
                         secondaryTitle: 'Zabíjecí stroj pro Ruby',
-                        owner: jiriPechanec,
+                        owner: owner1,
                         tags: [rubyTag, othersTag],
                         categories: [redhatCategory, jbossCategory],
                         universities: [muni, vut],
@@ -500,60 +500,60 @@ Deska vyšla 1978 u společnosti Columbia Records a produkci tentokrát do svýc
 bylo remasterováno a přidány bonusy, stejně jako tomu bylo u dalších 11 řadových alb Judas Priest a dvou výběrů.
 Mohli jste si jej opatřit samostatně, nebo jako Box Set všech 12 remasterovaných studiových alb.'''
                 ).save(flush: true)
-                new Supervision(topic: rubyKillingMachine, supervisor: jiriKolar, university: muni).save(flush: true)
+                new Supervision(topic: rubyKillingMachine, supervisor: supervisor1, university: muni).save(flush: true)
                 new Supervision(topic: rubyKillingMachine, supervisor: admin, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(rubyKillingMachine, rubyKillingMachine.owner, [rubyKillingMachine.owner]))
 
                 // THESES
-                def kubaThesis = new Thesis(
+                def example3Thesis = new Thesis(
                         title: "Implementation of Thesis management system",
                         description: '''Create Topic, file upload for theses so that students can upload their work after
 they are done with their thesis and application management.''',
-                        assignee: kuba,
+                        assignee: example3,
                         topic: tms,
-                        supervisor: jiriKolar,
+                        supervisor: supervisor1,
                         tags: [grailsTag, groovyTag],
                         status: Status.IN_PROGRESS,
                         university: muni,
                         type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
-                grailsEvents.event('app', 'articleCreated', new ArticleEvent(kubaThesis, tms.owner, [kuba, jiriKolar, tms.owner]))
+                grailsEvents.event('app', 'articleCreated', new ArticleEvent(example3Thesis, tms.owner, [example3, supervisor1, tms.owner]))
 
-                def vaclavThesis = new Thesis(
+                def example1Thesis = new Thesis(
                         title: "Implementation of Thesis management system",
                         description: '''Create User, University management, news feed system so
 that everyone can see news on the home page, subscription for Topic, Thesis or Project so that anyone who is interested
 in one of those can follow it, mail service for sending these feeds to subscribers and overall configuration.''',
-                        assignee: vaclav,
+                        assignee: example1,
                         topic: tms,
-                        supervisor: jiriKolar,
+                        supervisor: supervisor1,
                         tags: [grailsTag, groovyTag],
                         status: Status.IN_PROGRESS,
                         university: muni,
                         type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
-                grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis, tms.owner, [vaclav, jiriKolar, tms.owner]))
+                grailsEvents.event('app', 'articleCreated', new ArticleEvent(example1Thesis, tms.owner, [example1, supervisor1, tms.owner]))
 
-                def pavelThesis = new Thesis(
+                def example2Thesis = new Thesis(
                         title: "Design for Thesis management system",
                         description: '''Paint all graphic stuff that anyone can do and create views for the TMS.''',
-                        assignee: pavel,
+                        assignee: example2,
                         topic: tms,
-                        supervisor: jiriKolar,
+                        supervisor: supervisor1,
                         tags: [othersTag, groovyTag],
                         status: Status.IN_PROGRESS,
                         university: muni,
                         type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
-                grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis, tms.owner, [pavel, jiriKolar, tms.owner]))
+                grailsEvents.event('app', 'articleCreated', new ArticleEvent(example2Thesis, tms.owner, [example2, supervisor1, tms.owner]))
 
-                def pavelThesis2 = new Thesis(
+                def example2Thesis2 = new Thesis(
                         title: "Implementation of a python framework",
                         description: '''Python is a general-purpose, high-level programming language whose design philosophy
 emphasizes code readability. Python's syntax allows for programmers to express concepts in fewer lines of code than
 would be possible in languages such as C, and the language provides constructs intended to enable clear programs on
 both a small and large scale.''',
-                        assignee: pavel,
+                        assignee: example2,
                         topic: pythonFramework,
                         supervisor: admin,
                         status: Status.FINISHED,
@@ -567,14 +567,14 @@ for example): see Web Browser Programming for details.''',
                         university: muni,
                         type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
-                grailsEvents.event('app', 'articleCreated', new ArticleEvent(pavelThesis2, pythonFramework.owner, [pavel, admin, pythonFramework.owner]))
+                grailsEvents.event('app', 'articleCreated', new ArticleEvent(example2Thesis2, pythonFramework.owner, [example2, admin, pythonFramework.owner]))
 
-                def vaclavThesis2 = new Thesis(
+                def example1Thesis2 = new Thesis(
                         title: "Implementation of Ruby Killing Machine",
                         description: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.''',
-                        assignee: vaclav,
+                        assignee: example1,
                         topic: rubyKillingMachine,
-                        supervisor: jiriKolar,
+                        supervisor: supervisor1,
                         status: Status.FINISHED,
                         tags: [rubyTag],
                         grade: Grade.A,
@@ -582,34 +582,34 @@ for example): see Web Browser Programming for details.''',
                         university: muni,
                         type: Type.BACHELOR
                 ).save(failOnError: true, flush: true)
-                grailsEvents.event('app', 'articleCreated', new ArticleEvent(vaclavThesis2, rubyKillingMachine.owner, [vaclav, jiriKolar, rubyKillingMachine.owner]))
+                grailsEvents.event('app', 'articleCreated', new ArticleEvent(example1Thesis2, rubyKillingMachine.owner, [example1, supervisor1, rubyKillingMachine.owner]))
 
                 // COMMENTS
-                new Comment(content: 'That is cool', user: vaclav, article: tms).save(flush: true)
-                new Comment(content: 'There is missing something', user: jiriPechanec, article: tms).save(flush: true)
-                new Comment(content: 'Yes you are right', user: kuba, article: tms).save(flush: true)
-                new Comment(content: 'I am a spammer and I don\'t even mind', user: kuba, article: tms).save(flush: true)
+                new Comment(content: 'That is cool', user: example1, article: tms).save(flush: true)
+                new Comment(content: 'There is missing something', user: owner1, article: tms).save(flush: true)
+                new Comment(content: 'Yes you are right', user: example3, article: tms).save(flush: true)
+                new Comment(content: 'I am a spammer and I don\'t even mind', user: example3, article: tms).save(flush: true)
                 new Comment(content: 'Generally, frameworks provide support for a number of activities such as interpreting requests (getting form parameters,\n' +
                         'handling cookies and sessions), producing responses (presenting data as HTML or in other formats), storing data\n' +
-                        'persistently, and so on. Since a non-trivial Web application will require', user: kuba, article: tms).save(flush: true)
-                new Comment(content: 'Spam once again', user: kuba, article: tms).save(flush: true)
+                        'persistently, and so on. Since a non-trivial Web application will require', user: example3, article: tms).save(flush: true)
+                new Comment(content: 'Spam once again', user: example3, article: tms).save(flush: true)
                 new Comment(content: 'Generally, frameworks provide support for a number of activities such as interpreting requests (getting form parameters,\n' +
                         'handling cookies and sessions), producing responses (presenting data as HTML or in other formats), storing data\n' +
                         'persistently, and so on. Since a non-trivial Web application will require a number of different kinds of abstractions,\n' +
                         'often stacked upon each other, those frameworks which attempt to provide a complete solution for applications are often\n' +
-                        'known as full-stack frameworks in that they attempt to supply components for each layer in the stack.\'\'\'', user: jiriPechanec, article: tms).save(flush: true)
-                new Comment(content: 'Nothing imported', user: jiriKolar, article: tms).save(flush: true)
-                new Comment(content: 'Another absolutely useless comment', user: vaclav, article: tms).save(flush: true)
-                new Comment(content: 'Empty comment', user: kuba, article: tms).save(flush: true)
-                new Comment(content: '> The goal of this project is to create a Thesis management system for company Red Hat.', user: kuba, article: tms).save(flush: true)
-                new Comment(content: '**** you', user: pavel, article: tms).save(flush: true)
-                new Comment(content: '**** you too', user: kuba, article: tms).save(flush: true)
-                new Comment(content: 'Ok', user: jiriKolar, article: tms).save(flush: true)
+                        'known as full-stack frameworks in that they attempt to supply components for each layer in the stack.\'\'\'', user: owner1, article: tms).save(flush: true)
+                new Comment(content: 'Nothing imported', user: supervisor1, article: tms).save(flush: true)
+                new Comment(content: 'Another absolutely useless comment', user: example1, article: tms).save(flush: true)
+                new Comment(content: 'Empty comment', user: example3, article: tms).save(flush: true)
+                new Comment(content: '> The goal of this project is to create a Thesis management system for company Red Hat.', user: example3, article: tms).save(flush: true)
+                new Comment(content: '**** you', user: example2, article: tms).save(flush: true)
+                new Comment(content: '**** you too', user: example3, article: tms).save(flush: true)
+                new Comment(content: 'Ok', user: supervisor1, article: tms).save(flush: true)
 
-                new Comment(content: 'Thesis', user: vaclav, article: kubaThesis).save(flush: true)
+                new Comment(content: 'Thesis', user: example1, article: example3Thesis).save(flush: true)
 
                 // APPLICATIONS
-                new Application(applicant: vaclav, topic: autocompletePlugin,
+                new Application(applicant: example1, topic: autocompletePlugin,
                         university: muni, note: 'ahoj', type: Type.BACHELOR, status: AppStatus.PENDING).save(flush: true)
 
                 // FAQ
