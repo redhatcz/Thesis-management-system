@@ -54,6 +54,6 @@
         <strong><g:message code="application.note.label"/></strong>
     </label>
     <div class="controls">
-        <g:textArea name="application.note" rows="5" value="${application.note}" />
+        <g:textArea name="application.note" rows="5" maxlength="255" value="${application.note}"/>
     </div>
 </div>
