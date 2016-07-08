@@ -85,25 +85,49 @@ from their topic and add private comments. Supervisor can create theses and
 manage theses that are supervised by them. Student can apply for any topic and 
 upload files and add abstract or tags to their theses.
 
-How to deploy the Thesis management system
-==========================================
+How to deploy the Thesis management system on OpenShift Online
+==============================================================
 
 1. Create an openshift JBoss EWS 2 cartridge and add Postgres and MongoDB 
 cartridge.
 2. Add remote openshift repository to your local project git repository.
 3. Create custom environment variables on openshift with mailgun and url settings:
 ```
-   rhc env set OPENSHIFT_MAIL_FROM="Example User <mailgun@sandboxEXAMPLE.mailgun.org>" \
-               OPENSHIFT_MAILGUN_API_URL="https://api.mailgun.net/v3/sandboxEXAMPLE.mailgun.org/messages" \
-               OPENSHIFT_MAILGUN_API_KEY="key-examexampleexampleexampleexample" \
+   rhc env set OPENSHIFT_MAIL_FROM="Example User <mailgun@<your_mailgun_domain>>" \
+               OPENSHIFT_MAILGUN_API_URL="https://api.mailgun.net/v3/<your_mailgun_domain>/messages" \
+               OPENSHIFT_MAILGUN_API_KEY="<your_mailgun_key>" \
                OPENSHIFT_SERVER_URL="https://exampledomain.com" \
                -a YourAppName
 ```
-
 4. Push your local repository to OpenShift.
 
 _Note:_ You need medium gear, otherwise grails won't be able to build the app. 
 Or you can use small gear and build the application your self.
+
+How to deploy the Thesis management system locally for development
+==================================================================
+
+1. Install PostgreSQL and MongoDB, e.g.:
+```
+    # dnf install postgresql-server mongodb-server
+```
+2. Start PostgreSQL and MongoDB, e.g.:
+```
+    # systemctl start postgresql.service
+    # systemctl start mongodb.service
+```
+3. Download Grails 2.2.x from [official grails website](https://grails.org/download.html).
+4. Install Oralce JDK 1.7 and set environment variable JAVA_HOME
+5. Create a [mailgun account](https://mailgun.com).
+5. Export these environment variables:
+```
+    export LOCALHOST_MAIL_FROM="postmaster@<your_mailgun_domain>"
+    export LOCALHOST_MAILGUN_API_URL="https://api.mailgun.net/v3/<your_mailgun_domain>/messages"
+    export LOCALHOST_MAILGUN_API_KEY="<your_mailgun_key>"
+```
+6. There is a `email.sh.tpl` file in the source directory, you can rename the
+file to `email.sh`, modify it to suit your mailgun settings and `source` it
+to set these mailgun variables.
 
 License
 =======
