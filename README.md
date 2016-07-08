@@ -1,6 +1,8 @@
 How to use the Thesis management system
 =======================================
 
+[![Build Status](https://travis-ci.org/redhatcz/Thesis-management-system.svg?branch=master)](https://travis-ci.org/redhatcz/Thesis-management-system)
+
 Basics
 ------
 
