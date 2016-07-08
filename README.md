@@ -116,9 +116,8 @@ How to deploy the Thesis management system locally for development
         # systemctl start postgresql.service
         # systemctl start mongodb.service
 
-3. Download Grails 2.2.x from [official grails website](https://grails.org/download.html).
-4. Install Oralce JDK 1.7 and set environment variable JAVA_HOME
-5. Create a [mailgun account](https://mailgun.com).
+3. Install Oralce JDK 1.7 and set environment variable JAVA_HOME
+4. Create a [mailgun account](https://mailgun.com).
 5. Export these environment variables:
 
         export LOCALHOST_MAIL_FROM="postmaster@<your_mailgun_domain>"
@@ -128,7 +127,9 @@ How to deploy the Thesis management system locally for development
 6. There is a `email.sh.tpl` file in the source directory, you can rename the
 file to `email.sh`, modify it to suit your mailgun settings and `source` it
 to set these mailgun variables.
-7. Navigate to the source directory and run `grails run-app`.
+7. Navigate to the source directory and run `./grailsw run-app`.
+8. Alternatively, you can download Grails 2.2.x from [official grails website](https://grails.org/download.html),
+install it and run `grails run-app`.
 
 License
 =======
