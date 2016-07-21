@@ -32,10 +32,10 @@ grails.project.dependency.resolution = {
 
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         mavenRepo "https://raw.github.com/VaclavDedik/grails-sendmail/mvn-repo/"
-        //mavenRepo "http://repository.codehaus.org"
+        mavenRepo "https://repo.grails.org/grails/plugins"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://repo.grails.org/grails/repo/"
+        mavenRepo "https://repo.grails.org/grails/repo/"
     }
 
     dependencies {
@@ -46,6 +46,8 @@ grails.project.dependency.resolution = {
 
         compile 'org.apache.tika:tika-core:1.3'
         compile 'org.imgscalr:imgscalr-lib:4.2'
+        
+        test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
     plugins {
@@ -76,6 +78,9 @@ grails.project.dependency.resolution = {
         compile ":lesscss-resources:1.3.1"
         compile ":hibernate-filter:0.3.2"
         compile ":feeds:1.5"
+        test(":spock:0.7") {
+            exclude "spock-grails-support"
+		}
         //compile ":searchable:0.6.4"
     }
 }
