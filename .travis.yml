@@ -1,6 +1,8 @@
 language: groovy
 jdk:
   - oraclejdk7
+services:
+  - mongodb
 branches:
   only:
     - master

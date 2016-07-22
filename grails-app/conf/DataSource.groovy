@@ -54,7 +54,7 @@ environments {
 
         grails {
             mongo {
-                databaseName = 'thesis-management'
+                databaseName = 'thesis-test'
             }
         }
     }
