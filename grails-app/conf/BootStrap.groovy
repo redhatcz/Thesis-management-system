@@ -503,7 +503,12 @@ Mohli jste si jej opatřit samostatně, nebo jako Box Set všech 12 remasterovan
                 new Supervision(topic: rubyKillingMachine, supervisor: supervisor1, university: muni).save(flush: true)
                 new Supervision(topic: rubyKillingMachine, supervisor: admin, university: muni).save(flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(rubyKillingMachine, rubyKillingMachine.owner, [rubyKillingMachine.owner]))
-
+                
+                // LINKS
+                def seznam = new Link(url: "www.seznam.cz").save(flush: true)
+                def google = new Link(url: "www.google.com").save(flush: true)
+                def github = new Link(url: "www.github.com").save(flush: true)
+                
                 // THESES
                 def example3Thesis = new Thesis(
                         title: "Implementation of Thesis management system",
@@ -565,7 +570,8 @@ with the particularly tricky task of programming (client-side) the user's browse
 Web Frameworks is technology that can use the web browser as a full-blown application execution environment (a la gmail
 for example): see Web Browser Programming for details.''',
                         university: muni,
-                        type: Type.BACHELOR
+                        type: Type.BACHELOR,
+                        links: [seznam,google]
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(example2Thesis2, pythonFramework.owner, [example2, admin, pythonFramework.owner]))
 

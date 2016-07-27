@@ -44,4 +44,24 @@ class ThesisService {
         }
         success
     }
+    
+    /**
+     * Transforms url into List of Links
+     * 
+     * @param url - String which was returned from form
+     * @return List with one Link
+     */
+    List transformLinks(String url) {
+        [new Link(url: url)]
+    }
+    
+    /**
+     * Transforms urls into List of Links
+     *
+     * @param urls - String[] of urls
+     * @return List of Links
+     */
+    List transformLinks(String[] urls) {
+        urls.collect({ new Link(url: it)}).unique{[it.url]}
+    }
 }

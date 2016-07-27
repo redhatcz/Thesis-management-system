@@ -16,6 +16,7 @@ class Thesis extends Article{
     Date dateCreated
     University university
     Type type
+    List links
 
     //static searchable = {
     //    root true
@@ -23,7 +24,7 @@ class Thesis extends Article{
     //    supervisor component: true
     //}
 
-    static hasMany = [tags: Tag]
+    static hasMany = [tags: Tag, links: Link]
 
     static mapping = {
         description type: 'text'

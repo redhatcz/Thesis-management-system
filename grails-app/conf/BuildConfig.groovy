@@ -33,6 +33,7 @@ grails.project.dependency.resolution = {
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         mavenRepo "https://raw.github.com/VaclavDedik/grails-sendmail/mvn-repo/"
         mavenRepo "https://repo.grails.org/grails/plugins"
+        //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
         mavenRepo "https://repo.grails.org/grails/repo/"

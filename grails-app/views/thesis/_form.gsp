@@ -176,6 +176,26 @@
 <div class="control-group">
     <div class="small-msg pull-right">
         <i class="icon-info-sign"
+           title="${message(code:'info.thesis.create.links')}"></i>
+    </div>
+    <label class="control-label" for="thesis-links">
+        <strong><g:message code="thesis.links.label"/></strong>
+    </label>
+    <div class="controls">
+        <g:set var="links" value="${thesisInstance?.links ? [thesisInstance?.links].flatten() as List : [] as List}"/>
+        <richg:dynamicField id="thesis-links"
+                            for="${links}"
+                            var="link"
+                            index="i">
+        	<g:textField name="thesis.links"
+                            id="thesis.links[${i}]"
+                            value="${link}"/>
+        </richg:dynamicField>
+    </div>    
+</div>    
+<div class="control-group">
+    <div class="small-msg pull-right">
+        <i class="icon-info-sign"
            title="${message(code:'info.thesis.create.tags')}"></i>
     </div>
     <label class="control-label" for="thesis-tags">
