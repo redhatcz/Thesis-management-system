@@ -211,10 +211,14 @@ class ThesisController {
         // setup tags
         thesisInstance.tags = params.thesis?.tags?.list('title')?.collect { new Tag(title: it) }?.unique{[it.title]}
 
+        // setup links
+        thesisInstance.links = thesisService.transformLinks(params.thesis?.links)
+     
         def isAssignee = thesisInstance.assignee == user
         if (isThesisAdmin) {
             thesisInstance.supervisor = null;
-            bindData(thesisInstance, params.thesis)
+            def excluded = ['links']
+            bindData(thesisInstance, params.thesis, [exclude: excluded])
         } else {
             def include = ['tags.title', 'thesisAbstract']
             bindData(thesisInstance, params, [include: include])

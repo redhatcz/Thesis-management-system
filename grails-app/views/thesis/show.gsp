@@ -117,6 +117,17 @@
                     <g:message code="thesis.status.awarded.grade" args="[thesisInstance?.grade]"/>
                 </g:else>
                 </dd>
+                <g:if test="${!thesisInstance?.links?.empty}">
+	                <dt class="tms-tooltip" data-placement="left"
+	                    data-original-title="${message(code: 'thesis.links.label').toString()}">
+	                    <i class="icon-external-link"></i>
+	                </dt>
+	                <dd>
+	                	<g:each in="${thesisInstance?.links}" status="i" var="link">
+	                   		<a target="_blank" href="http:\\${link.url}">${link.url}</a><br>
+	                   	</g:each>
+	                </dd>
+                </g:if>
             </dl>
         </div>
 
