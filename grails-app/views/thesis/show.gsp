@@ -84,6 +84,13 @@
                 </dd>
                 </g:if>
                 <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'role.owner.label').toString()}">
+                    <i class="icon-user-md"></i>
+                </dt>
+                <dd>
+                    <g:link controller="user" action="show" id="${thesisInstance?.topic?.ownerId}"><g:fieldValue field="fullName" bean="${thesisInstance?.topic?.owner}"/></g:link>
+                </dd>
+                <dt class="tms-tooltip" data-placement="left"
                     data-original-title="${message(code: 'thesis.dateCreated.label').toString()}">
                     <i class="icon-time"></i>
                 </dt>
