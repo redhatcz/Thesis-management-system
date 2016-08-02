@@ -47,18 +47,6 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
-            <sec:ifAnyGranted roles="ROLE_SUPERVISOR, ROLE_OWNER">
-                <h4><g:message code="thesis.list.manage.label"/></h4>
-                <div class="panel-content">
-                    <div class="panel-buttons">
-                        <g:link class="tms-link btn-link" action="create">
-                            <i class="icon-plus"></i>
-                            <g:message code="thesis.create.button"/>
-                        </g:link>
-                    </div>
-                </div>
-            </sec:ifAnyGranted>
-
             <h4>
                 <div class="small-msg pull-right">
                     <i class="icon-info-sign icon-large"
@@ -79,11 +67,6 @@
                     <g:textField value="${params?.filter?.assignee?.fullName}" class="wide"
                                  name="filter.assignee.fullName" placeholder="${message(code: 'thesis.assignee.label')}"/>
                     <g:hiddenField name="type.assignee.fullName" value="ilike"/>
-                    <g:select name="filter.status" from="${Status.values()}"
-                              noSelection="['':message(code:'thesis.status.select.label')]"
-                              optionValue="${{g.message(code:"thesis.status.${it?.toString()?.toLowerCase()}.label")}}"
-                              value="${params?.filter?.status}"
-                              class="many-to-one"/>
                     <g:select name="filter.grade" from="${Grade.values()}"
                               noSelection="['':message(code:'thesis.grade.select.label')]"
                               value="${params?.filter?.grade}"
