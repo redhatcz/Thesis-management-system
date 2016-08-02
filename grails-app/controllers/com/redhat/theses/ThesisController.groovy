@@ -45,11 +45,17 @@ class ThesisController {
     def list() {
         params.max = Util.max(params.max)
 
+        if (!params.filter) {
+            params.filter = [:]    
+        }
+        
         def tag = null
         if (params.filter?.tags?.title) {
             tag = Tag.get(new Tag(title: params.filter?.tags?.title))
         }
-
+        
+        params.filter?.status = Status.FINISHED
+        
         def tagListWithUsage = tagService.findAllWithCountUsage(Thesis, [max: TAG_MAX])
 
         def theses = filterService.filter(params, Thesis)
