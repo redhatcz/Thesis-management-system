@@ -71,6 +71,14 @@
                     <g:formatBoolean boolean="${userInstance?.accountLocked}" />
                 </dd>
                 </g:if>
+                <hr>
+                <dt class="tms-tooltip" data-placement="left"
+                    data-original-title="${message(code: 'footer.termsOfUse.label').toString()}">
+                    <i class="icon-list-alt"></i>
+                </dt>
+                <dd>
+                    <g:link controller="termsOfUse" ><g:message code="footer.termsOfUse.label"/></g:link>
+                </dd>
             </dl>
         </div>
     </div>
