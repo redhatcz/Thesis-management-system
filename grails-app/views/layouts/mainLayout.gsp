@@ -81,7 +81,8 @@
         </div>
         <div class="footer-down">
             <div class="container">
-                <p class="pull-right">Copyright &copy; 2013 Red Hat, Inc.</p>
+                <p class="pull-right">Copyright &copy; 2016 Red Hat, Inc.</p>
+                <p class="pull-left">Code released under <a href="http://opensource.org/licenses/MIT" target="blank">The MIT License</a></p>
             </div>
         </div>
     </footer>
