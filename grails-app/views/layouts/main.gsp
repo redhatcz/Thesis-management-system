@@ -19,6 +19,8 @@
                     <g:message code="faq.label"/></a>
                 <a id="news" href="${createLink(uri: '/rss')}"><i class="icon-rss"></i>
                     <g:message code="feed.news.label"/></a>
+                <a id="report-issue" href="https://github.com/redhatcz/Thesis-management-system/issues" target="blank"><i class="icon-cogs"></i>
+                    <g:message code="footer.issues.label"/></a>      
             </div>
         </div>
     </content>

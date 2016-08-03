@@ -61,28 +61,10 @@
         <g:pageProperty name="page.container-box"/>
     </div>
     <footer>
-        <div class="footer-up">
-            <div class="container">
-                <div class="span4">
-                    <p class="leading"><g:message code="footer.account.title"/></p>
-                    <g:link controller="termsOfUse"><g:message code="footer.termsOfUse.label"/></g:link>
-                    <g:link controller="faq" action="list"><g:message code="footer.faq.label"/></g:link>
-                </div>
-                <div class="span4">
-                    <p class="leading"><g:message code="footer.getInvolved.title"/></p>
-                    <a href="https://github.com/redhatcz/Thesis-management-system">
-                        <g:message code="footer.github.label"/>
-                    </a>
-                    <a href="https://github.com/redhatcz/Thesis-management-system/issues">
-                        <g:message code="footer.issues.label"/>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-down">
+    	 <div class="footer-down">
             <div class="container">
                 <p class="pull-right">Copyright &copy; 2016 Red Hat, Inc.</p>
-                <p class="pull-left">Code released under <a href="http://opensource.org/licenses/MIT" target="blank">The MIT License</a></p>
+                <p class="pull-left"><a href="https://github.com/redhatcz/Thesis-management-system" target="blank">Code</a> released under <a href="http://opensource.org/licenses/MIT" target="blank">The MIT License</a></p>
             </div>
         </div>
     </footer>
