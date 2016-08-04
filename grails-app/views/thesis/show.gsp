@@ -130,9 +130,9 @@
 	                    <i class="icon-external-link"></i>
 	                </dt>
 	                <dd>
-	                	<g:each in="${thesisInstance?.links}" status="i" var="link">
-	                   		<a target="_blank" href="http:\\${link.url}">${link.url}</a><br>
-	                   	</g:each>
+	                    <g:each in="${thesisInstance?.links}" status="i" var="link">
+	                       <a target="_blank" href="${link.url.startsWith('http') ? link.url : 'http://' + link.url }">${link.url}</a><br>
+	                    </g:each>
 	                </dd>
                 </g:if>
             </dl>
