@@ -1,13 +1,13 @@
 class UrlMappings {
 
-	static mappings = {
-		"/$controller/$action?/$id?/$headline?"{
-			constraints {
-				// apply constraints here
-			}
-		}
+    static mappings = {
+        "/$controller/$action?/$id?/$headline?"{
+            constraints {
+                // apply constraints here
+            }
+        }
 
-		"/"(controller: 'home', action: 'index')
+        "/"(controller: 'home', action: 'index')
         "400"(controller: 'errors', action: '400')
         "403"(controller: 'errors', action: '403')
         "404"(controller: 'errors', action: '404')
@@ -16,5 +16,5 @@ class UrlMappings {
         //exclude searchable controller
         "/searchable"(controller: 'errors', action: '404')
         "/searchable/$action?"(controller: 'errors', action: '404')
-	}
+    }
 }

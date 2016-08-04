@@ -81,7 +81,7 @@ grails.project.dependency.resolution = {
         compile ":feeds:1.5"
         test(":spock:0.7") {
             exclude "spock-grails-support"
-		}
+        }
         //compile ":searchable:0.6.4"
     }
 }

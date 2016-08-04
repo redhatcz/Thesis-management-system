@@ -134,12 +134,12 @@
            title="${message(code:'info.topic.create.description')}"></i>
         <g:message code="field.markdown.label" />
     </div>
-	<label class="control-label" for="topic.description">
-		<strong><g:message code="topic.description.label"/></strong>
+        <label class="control-label" for="topic.description">
+            <strong><g:message code="topic.description.label"/></strong>
         <span class="required-indicator">*</span>
-	</label>
+        </label>
     <div class="controls">
-	   <g:textArea name="topic.description" rows="15" value="${topicInstance?.description}"/>
+        <g:textArea name="topic.description" rows="15" value="${topicInstance?.description}"/>
     </div>
 </div>
 

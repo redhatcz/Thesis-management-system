@@ -25,7 +25,7 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
     /**
      * {@inheritDoc}
      * @see org.codehaus.groovy.grails.plugins.springsecurity.GrailsUserDetailsService#loadUserByUsername(
-     * 	java.lang.String, boolean)
+     *  java.lang.String, boolean)
      */
     UserDetails loadUserByUsername(String email, boolean loadRoles) throws UsernameNotFoundException {
 
@@ -44,7 +44,7 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
     /**
      * {@inheritDoc}
      * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(
-     * 	java.lang.String)
+     *  java.lang.String)
      */
     UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         loadUserByUsername email, true

@@ -14,7 +14,7 @@ class TestBootStrap {
             
             test {
                 // UNIVERSITIES
-                def first =	new University(name: "First" ,acronym: "F").save(flush: true)
+                def first = new University(name: "First" ,acronym: "F").save(flush: true)
                 def second = new University(name: "Second",acronym: "S").save(flush: true)
                 def unused = new University(name: "Third",acronym: "T").save(flush: true)
 

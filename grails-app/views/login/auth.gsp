@@ -1,7 +1,7 @@
 <html>
 <head>
-	<meta name='layout' content='loginLayout'/>
-	<title><g:message code="security.login.title"/></title>
+    <meta name='layout' content='loginLayout'/>
+    <title><g:message code="security.login.title"/></title>
 </head>
 <body>
     <div class="login-logo">

@@ -187,9 +187,9 @@
                             for="${links}"
                             var="link"
                             index="i">
-        	<g:textField name="thesis.links"
-                            id="thesis.links[${i}]"
-                            value="${link}"/>
+            <g:textField name="thesis.links"
+                         id="thesis.links[${i}]"
+                         value="${link}"/>
         </richg:dynamicField>
     </div>    
 </div>    

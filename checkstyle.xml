@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<!-- Most of the modules in this file are disabled at the moment -->
+<!-- They will be turned on incrementally -->
+<!-- Tracking issue: https://issues.jboss.org/browse/ISPN-5683 -->
+
+<module name="Checker">
+    <module name="FileTabCharacter" />    
+
+    <module name="TreeWalker">
+        <property name="cacheFile" value="target/cachefile"/>
+    </module>
+</module>
