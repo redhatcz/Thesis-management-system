@@ -6,4 +6,4 @@ branches:
     - master
 before_script:  rm -rf ~/.m2/repository && rm -rf ~/.grails
 script: ./grailsw refresh-dependencies
-  && ./grailsw "test-app unit:"
+  && ./grailsw "test-app"
