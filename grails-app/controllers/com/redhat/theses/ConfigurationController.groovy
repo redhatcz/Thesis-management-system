@@ -30,6 +30,28 @@ class ConfigurationController {
         ConfigObject config = new ConfigObject()
         config.putAll(params.configuration ?: [:])
         configuration.setConfig(config)
+        
+        def configurationCommand = new ConfigurationCommand()
+        
+        params.configuration?.emailDomains.each {
+            configurationCommand.domains.push(it)
+        }
+        params.configuration?.defaultSupervisors.each {
+            configurationCommand.defaultSupervisors.push(it)
+        }
+        params.configuration?.defaultLeaders.each {
+            configurationCommand.defaultLeaders.push(it)
+        }
+        params.configuration?.defaultAdmins.each {
+            configurationCommand.defaultAdmins.push(it)
+        }
+        
+        configurationCommand.validate()
+        
+        if (configurationCommand.hasErrors()) {
+            render view: 'index', model: [configurationCommand: configurationCommand, config: config]
+            return
+        }
 
         if (!configuration.save()) {
             flash.message = message(code: 'config.not.updated')

@@ -119,7 +119,8 @@ class Util {
      * @return true if email address is hosted at the given domain, false otherwise
      */
     static Boolean hasDomain(String email, String domain) {
-        email =~ /@${domain.replaceAll('.', '\\.')}$/
+        //Change all *, which are not followed by ., for *. and replace all uncommented . for commented ones 
+        email =~ /@${domain.replaceAll('\\*(?!\\.)','\\*\\.').replace('.', '\\.')}$/
     }
 
     /**

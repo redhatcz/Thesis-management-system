@@ -40,7 +40,7 @@
 
 <fieldset>
     <legend><g:message code="config.email.domains.header" /></legend>
-    <div class="control-group">
+    <div class="control-group ${hasErrors(bean: configurationCommand, field: 'domains', 'error')}">
         <label class="control-label" for="email-domain-list">
             <strong><g:message code="config.email.domains.label" /></strong>
         </label>
@@ -60,7 +60,7 @@
 
 <fieldset>
     <legend><g:message code="config.default.supervisors.header" /></legend>
-    <div class="control-group">
+    <div class="control-group ${hasErrors(bean: configurationCommand, field: 'defaultSupervisors', 'error')}">
         <label class="control-label" for="default-supervisors-list">
             <strong><g:message code="config.default.supervisors.label" /></strong>
         </label>
@@ -80,7 +80,7 @@
 
 <fieldset>
     <legend><g:message code="config.default.leaders.header" /></legend>
-    <div class="control-group">
+    <div class="control-group ${hasErrors(bean: configurationCommand, field: 'defaultLeaders', 'error')}">
         <label class="control-label" for="default-leaders-list">
             <strong><g:message code="config.default.leaders.label" /></strong>
         </label>
@@ -100,7 +100,7 @@
 
 <fieldset>
     <legend><g:message code="config.default.admins.header" /></legend>
-    <div class="control-group">
+    <div class="control-group ${hasErrors(bean: configurationCommand, field: 'defaultAdmins', 'error')}">
         <label class="control-label" for="default-admins-list">
             <strong><g:message code="config.default.admins.label" /></strong>
         </label>
