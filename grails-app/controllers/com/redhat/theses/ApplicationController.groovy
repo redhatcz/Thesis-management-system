@@ -101,9 +101,11 @@ class ApplicationController {
         }
 
         User user = springSecurityService.currentUser
-
-        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
-            && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
+        
+        def isSupervisor = applicationInstance.topic.supervisors.contains(user) &&
+                           Supervision.findBySupervisorAndTopic(user, applicationInstance.topic)?.university == applicationInstance.university
+                            
+        if (applicationInstance.topic.owner != user && !isSupervisor && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.message')
             redirect(action: 'list')
@@ -142,8 +144,10 @@ class ApplicationController {
 
         User user = springSecurityService.currentUser
 
-        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
-                && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+        def isSupervisor = applicationInstance.topic.supervisors.contains(user) &&
+                           Supervision.findBySupervisorAndTopic(user, applicationInstance.topic)?.university == applicationInstance.university
+                            
+        if (applicationInstance.topic.owner != user && !isSupervisor && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.message')
             redirect(action: 'list')
@@ -178,8 +182,10 @@ class ApplicationController {
 
         User user = springSecurityService.currentUser
 
-        if (applicationInstance.topic.owner != user && !applicationInstance.topic.supervisors.contains(user)
-                && !SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+        def isSupervisor = applicationInstance.topic.supervisors.contains(user) &&
+                           Supervision.findBySupervisorAndTopic(user, applicationInstance.topic)?.university == applicationInstance.university
+                            
+        if (applicationInstance.topic.owner != user && !isSupervisor && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.message')
             redirect(action: 'list')
@@ -206,6 +212,13 @@ class ApplicationController {
             return
         }
 
-        [applicationInstance: applicationInstance]
+        User user = springSecurityService.currentUser
+
+        def isSupervisor = applicationInstance.topic.supervisors.contains(user) &&
+                           Supervision.findBySupervisorAndTopic(user, applicationInstance.topic)?.university == applicationInstance.university
+
+        def canManage = applicationInstance.topic.owner == user  || isSupervisor || SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')
+
+        [applicationInstance: applicationInstance, canManage: canManage]
     }
 }
