@@ -15,6 +15,8 @@ class Application {
 
     static constraints = {
         thesis nullable: true
+        
+        applicant unique: 'topic'
 
         university validator: { university, application ->
             university.id in application.topic.universities*.id

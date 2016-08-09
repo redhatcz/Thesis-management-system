@@ -206,9 +206,11 @@ class TopicController {
         def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, topicInstance)
 
         def thesisList = Thesis.findAllByTopic(topicInstance)
+        
+        def existingApplication = Application.findByApplicantAndTopic(springSecurityService.currentUser, topicInstance)
 
         [topicInstance: topicInstance, supervisions: supervisions, thesisList: thesisList,
-                comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
+                comments: comments, commentsTotal: commentsTotal, subscriber: subscriber, existingApplication: existingApplication]
     }
 
     @Secured(['ROLE_OWNER'])
