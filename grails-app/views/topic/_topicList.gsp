@@ -78,16 +78,6 @@
                 </div>
             </div>
         </sec:ifAnyGranted>
-        <g:if test="${currentCategory}">
-            <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>
-        </g:if>
-        <g:else>
-            <h4><g:message code="topic.categories.label"/></h4>
-        </g:else>
-        <div class="panel-content">
-            <g:render template="categoryList" />
-        </div>
-
         <h4>
             <div class="small-msg pull-right">
                 <i class="icon-info-sign icon-large"
@@ -100,15 +90,12 @@
                 <g:hiddenField name="filtering" value="true"/>
                 <g:hiddenField name="filter.categories.id" value="${params?.filter?.categories?.id}"/>
                 <g:hiddenField name="filter.tags.title" value="${params?.filter?.tags?.title}"/>
-                <g:textField value="${params?.filter?.title}" class="wide"
-                             name="filter.title" placeholder="${message(code: 'topic.title.label')}"/>
-                <g:hiddenField name="type.title" value="ilike"/>
+                <g:textField value="${params?.filter?.'title-description-lead'}" class="wide"
+                             name="filter.title-description-lead" placeholder="${message(code: 'topic.filter.title')}"/>
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
                              name="filter.owner.fullName" placeholder="${message(code: 'role.owner.label')}"/>
-                <g:hiddenField name="type.owner.fullName" value="ilike"/>
                 <g:textField value="${params?.filter?.supervisions?.supervisor?.fullName}" class="wide"
                              name="filter.supervisions.supervisor.fullName" placeholder="${message(code: 'role.supervisor.label')}"/>
-                <g:hiddenField name="type.supervisions.supervisor.fullName" value="ilike"/>
                 <g:select name="filter.universities.id" from="${universities}"
                           noSelection="['':message(code:'topic.university.select.label')]"
                           optionKey="id" value="${params?.filter?.universities?.id}"
@@ -119,6 +106,15 @@
                     <g:checkBox name="filter.onlyEnabled" value="${params?.filter?.onlyEnabled}"/> <g:message code="topic.show.only.enabled.label"/>
                 </label>
             </g:form>
+        </div>        
+        <g:if test="${currentCategory}">
+            <h4><g:message code="category.label"/>: ${currentCategory?.title}</h4>
+        </g:if>
+        <g:else>
+            <h4><g:message code="topic.categories.label"/></h4>
+        </g:else>
+        <div class="panel-content">
+            <g:render template="categoryList" />
         </div>
 
         <h4><g:message code="topic.tags.label"/></h4>

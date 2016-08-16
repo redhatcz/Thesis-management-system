@@ -44,6 +44,10 @@ class UserController {
             ]
         }
 
+        if (params.filtering) {
+            params.type = [fullName: "ilike", email: "ilike"]
+        }
+
         def userInstanceList = filterService.filter(params, User)
         def userInstanceTotal = filterService.count(params, User)
 
