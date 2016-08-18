@@ -4,6 +4,4 @@ databaseChangeLog = {
 	include file: 'application-approved-replaced-by-status.groovy'
 
 	include file: 'add-links-to-theses.groovy'
-
-	include file: 'applicant-unique-to-topic.groovy'
 }
