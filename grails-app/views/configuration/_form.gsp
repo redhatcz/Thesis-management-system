@@ -1,12 +1,12 @@
 <fieldset>
     <legend><g:message code="config.termsOfUse.header" /></legend>
     <div class="control-group">
-        <label class="control-label" for="configuration.termsOfUse_en">
+        <label class="control-label" for="configuration.termsOfUse_en_US">
             <strong><g:message code="locale.en.label" /></strong>
         </label>
         <div class="controls">
-            <g:textArea name="configuration.termsOfUse_en" rows="5"
-                        value="${config?.termsOfUse_en}"/>
+            <g:textArea name="configuration.termsOfUse_en_US" rows="5"
+                        value="${config?.termsOfUse_en_US}"/>
         </div>
     </div>
 
@@ -36,6 +36,70 @@
                         value="${config?.announcement}"/>
         </div>
     </div>
+</fieldset>
+
+<fieldset>
+    <legend><g:message code="config.index.header" /></legend>
+
+    <h4><g:message code="locale.en.label" /></h4>
+    <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="field.markdown.label" />
+        </div>
+        <label class="control-label" for="configuration.upperIndex_en_US">
+            <strong><g:message code="config.index.upper.label" /></strong>
+        </label>
+        <div class="controls">
+            <g:textArea name="configuration.upperIndex_en_US" rows="5"
+                        value="${config?.upperIndex_en_US}"/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="field.markdown.label" />
+        </div>
+        <label class="control-label" for="configuration.lowerIndex_en_US">
+            <strong><g:message code="config.index.lower.label" /></strong>
+        </label>
+        <div class="controls">
+            <g:textArea name="configuration.lowerIndex_en_US" rows="5"
+                        value="${config?.lowerIndex_en_US}"/>
+        </div>
+    </div>
+
+    <hr/>
+
+    <h4><g:message code="locale.cs.label" /></h4>
+    <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="field.markdown.label" />
+        </div>
+        <label class="control-label" for="configuration.upperIndex_cs">
+            <strong><g:message code="config.index.upper.label" /></strong>
+        </label>
+        <div class="controls">
+            <g:textArea name="configuration.upperIndex_cs" rows="5"
+                        value="${config?.upperIndex_cs}"/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="field.markdown.label" />
+        </div>
+        <label class="control-label" for="configuration.lowerIndex_cs">
+            <strong><g:message code="config.index.lower.label" /></strong>
+        </label>
+        <div class="controls">
+            <g:textArea name="configuration.lowerIndex_cs" rows="5"
+                        value="${config?.lowerIndex_cs}"/>
+        </div>
+    </div>  
 </fieldset>
 
 <fieldset>
