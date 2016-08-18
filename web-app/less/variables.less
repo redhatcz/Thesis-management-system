@@ -24,15 +24,16 @@
 
 // Accent colors
 // -------------------------
-@blue:                  #049cdb;
-@blueDark:              #0064cd;
-@green:                 #46a546;
-@red:                   #ed1c24;
-@redDark:               #9c1218;
+@blue:                  #00b9e4;
+@blueDark:              #007a87;
+@green:                 #92d400;
+@redLight:              #CC0000;
+@red:                   #a30000;
+@redDark:               #820000;
 @yellow:                #ffc40d;
-@orange:                #ff6a08;
+@orange:                #f0ab00;
 @pink:                  #c3325f;
-@purple:                #7a43b6;
+@purple:                #3B0083;
 
 @yellowLight:           #fffddc;
 @yellowBorder:          #fffeed;
@@ -46,7 +47,7 @@
 
 // Links
 // -------------------------
-@linkColor:             @red;
+@linkColor:             @redLight;
 @linkColorHover:        @linkColor;
 
 
@@ -55,13 +56,15 @@
 @sansFontFamily:        Arial, "Helvetica Neue", Helvetica, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Consolas, "DejaVu Sans Mono", Monaco, Menlo, monospace;
+@overpassNormalFont:    "Overpass", Arial, "Helvetica Neue", Helvetica, sans-serif;
+@overpassBoldFont:      "Overpass-Bold";
 
 @baseFontSize:          16px;
-@baseFontFamily:        @sansFontFamily;
+@baseFontFamily:        @overpassNormalFont;
 @baseLineHeight:        23px;
 @altFontFamily:         @serifFontFamily;
 
-@titleFontFamily:       "Museo Slab", serif;
+@titleFontFamily:       @overpassBoldFont; //Overpass
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    normal;    // instead of browser default, bold
 @headingsColor:         inherit; // empty to use BS default, @textColor
@@ -93,6 +96,7 @@
 @borderRadiusLarge:     8px;
 @borderRadiusSmall:     4px;
 
+@homePageSearchButtonWidth:	10%;
 
 // Tables
 // -------------------------

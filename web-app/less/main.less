@@ -156,6 +156,25 @@ input[type="password"] {
   }
 }
 
+input.homeSearch {
+  width: 100% - @homePageSearchButtonWidth;
+  .box-sizing(border-box);
+  padding: 9px 10px;
+  border-radius: 5px 0px 0px 5px;
+  height: @inputHeight + 5px;
+}
+
+input.homeSubmit {
+  width: @homePageSearchButtonWidth;
+  height: @inputHeight + 5px;
+  .box-shadow(none);
+  border-radius: 0px 5px 5px 0px;
+
+  &:hover {
+    .box-shadow(none);
+  }
+}
+
 input.wide {
   height: 100%;
   width: 100%;
@@ -466,7 +485,6 @@ i[class*="icon-"].large {
   width: 100%;
   display: table;
   table-layout: fixed;
-  background-image: url('../images/buttons/menu.png');
   margin-bottom: 20px;
 }
 
@@ -476,8 +494,18 @@ i[class*="icon-"].large {
 
 #navigation li {
   display: table-cell;
+  background-color: @graySuperLight;
   border-right: 1px solid @grayLighter;
-
+  .box-shadow(inset 0px -8px 1px -5px darken(@graySuperLight, 15%));
+  
+  &:first-child {
+  	border-radius: 10px 0px 0px 10px;
+  }
+  
+  &:last-child {
+  	border-radius: 0px 10px 10px 0px;
+  }
+  
   a {
     height: 37px;
     padding-top: 13px;
@@ -493,8 +521,8 @@ i[class*="icon-"].large {
   }
 
   &.active {
-    background-image: url('../images/buttons/menu_active.png');
-    background-position: 490px 0px;
+    background-color: @redLight;
+    .box-shadow(inset 0px -8px 1px -5px darken(@redLight, 15%));
 
     &:first-child {
       background-position: 0px 0px;
@@ -505,7 +533,7 @@ i[class*="icon-"].large {
     }
 
     a {
-      color: @red;
+      color: @white;
     }
   }
 

@@ -48,7 +48,7 @@ class Configuration {
         }
     }
 
-    private ConfigObject createDefaultConfig() {
+    public ConfigObject createDefaultConfig() {
         Class configClass = getClass().classLoader.loadClass('DefaultRuntimeConfig')
         def config = new ConfigSlurper().parse(configClass)
         configurationProvider.save(config)
