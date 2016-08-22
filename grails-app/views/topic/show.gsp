@@ -176,11 +176,27 @@
 
                     <sec:ifAnyGranted roles="ROLE_STUDENT">
                     <g:if test="${topicInstance.enabled}">
-                        <g:link class="tms-link" controller="application"
-                                action="create" id="${topicInstance?.id}" >
-                            <i class="icon-file"></i>
-                            <g:message code="application.apply.button" />
-                        </g:link>
+                    	<g:if test="${!pendingApplication && !existingThesis}">
+	                        <g:link class="tms-link" controller="application"
+	                                action="create" id="${topicInstance?.id}" >
+	                            <i class="icon-file"></i>
+	                            <g:message code="application.apply.button" />
+	                        </g:link>
+                        </g:if>
+                        <g:elseif test="${existingThesis}">
+                        	<g:link class="tms-link" controller="thesis"
+	                                action="show" id="${existingThesis?.id}" >
+	                            <i class="icon-book"></i>
+	                            <g:message code="application.show.thesis" />
+	                        </g:link>		
+                        </g:elseif>
+                        <g:else>
+	                        <g:link class="tms-link" controller="application"
+	                                action="show" id="${pendingApplication?.id}" >
+	                            <i class="icon-file-text"></i>
+	                            <g:message code="application.show.application" />
+	                        </g:link>                        	
+                        </g:else>
                     </g:if>
                     </sec:ifAnyGranted>
 
