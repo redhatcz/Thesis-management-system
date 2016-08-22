@@ -109,15 +109,26 @@ class FilterService {
 
                         }
                     }
+                } else if(propName.contains("-")) {
+                    def properties = propName.split("-")
+                    c.or {
+                        for (String propertyName : properties) {
+                            addFilterParameter(c, domainClass, propertyName, rawValue, rawType)
+                        }
+                    }    
                 } else {
-                    def thisDomainProp = resolveDomainProperty(domainClass, propName)
-
-                    if (thisDomainProp) {
-                        def val = this.parseValue(thisDomainProp, rawValue)
-                        this.addCriterion(c, propName, val, rawType)
-                    }
+                    addFilterParameter(c, domainClass, propName, rawValue, rawType)
                 }
             }
+        }
+    }
+
+    private addFilterParameter(criteria, domainClass, propName, rawValue, rawType) {
+        def thisDomainProp = resolveDomainProperty(domainClass, propName)
+
+        if (thisDomainProp) {
+            def val = this.parseValue(thisDomainProp, rawValue)
+            this.addCriterion(criteria, propName, val, rawType)
         }
     }
 
