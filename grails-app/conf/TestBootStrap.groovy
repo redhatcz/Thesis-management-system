@@ -209,7 +209,12 @@ they are done with their thesis and application management.''',
                 //Invalid Applications
                 new Application(applicant: example2, topic: tmsTopic,
                     university: first, note: 'I want to do it', type: Type.BACHELOR, status: AppStatus.PENDING).save(flush: true)
-            }
+                
+                //Role requests
+                new RoleRequest(applicant: example1, status: AppStatus.PENDING, enabled: true).save(flush: true)
+                new RoleRequest(applicant: example2, status: AppStatus.PENDING, enabled: true).save(flush: true)
+                new RoleRequest(applicant: example3, status: AppStatus.DECLINED, enabled: true).save(flush: true)
+           }
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.redhat.theses.auth
 
 import com.redhat.theses.util.Util
+import com.redhat.theses.AppStatus
+import com.redhat.theses.RoleRequest
 
 class RegistrationController {
 
@@ -54,17 +56,30 @@ class RegistrationController {
             render(view: "index", model: [registrationCommand: registrationCommand, config: configuration.getConfig()])
             return
         }
+
+        def createRoleRequest = params.supervisorRequest && !Util.hasAnyDomain(user.email, configuration.defaultSupervisors)
+
+        if (createRoleRequest) {
+            new RoleRequest(applicant: user, status: AppStatus.PENDING, enabled: false).save()
+        }
+
         log.info("User ${user.email} registration completed.")
 
-        redirect(action: 'complete')
+        redirect(action: 'complete', params: [isSupervisor: createRoleRequest])
     }
 
     def complete() {
+        def content = message(code: 'registration.complete.message')
+
+        if (params.isSupervisor == "true") {
+            content += "</br></br>" + message(code: 'registration.complete.request.message')
+        }
+
         render view: '/emailConfirmation/lifecycle', model: [
                 redirect: false,
                 title: message(code: 'registration.complete.title'),
                 header: message(code: 'registration.complete.header'),
-                content: message(code: 'registration.complete.message')
+                content: content
         ]
     }
 
