@@ -49,11 +49,17 @@
             </label>
         </div>
         <div class="controls">
-            <g:select name="thesis.university.id"
-                      from="${universityList}"
-                      noSelection="['':message(code: 'no.selection.label')]"
-                      optionKey="id"
-                      value="${thesisInstance?.university?.id}"/>
+            <g:if test="${disabledUniversityField}">
+                <g:hiddenField name="thesis.university.id" value="${thesisInstance?.university?.id}"/>
+                <g:field type="text" name="thesis.university.name" readonly="readonly" value="${thesisInstance?.university?.name}"/>
+            </g:if>
+            <g:else>
+                <g:select name="thesis.university.id"
+                    from="${universityList}"
+                    noSelection="['':message(code: 'no.selection.label')]"
+                    optionKey="id"
+                    value="${thesisInstance?.university?.id}" />
+            </g:else>
         </div>
     </div>
 
@@ -68,15 +74,29 @@
             </label>
         </div>
         <div class="controls">
-            <g:hiddenField name="thesis.supervisor.id"
-                           value="${thesisInstance?.supervisor?.id}"/>
-            <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
-            <a4g:textField name="thesis.supervisor.fullName"
-                           value="${thesisInstance?.supervisor?.fullName}"
-                           data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
-                           data-autocomplete-target="thesis.supervisor.id"
-                           data-autocomplete-opts="a4g-role[${i}]@role"
-                           placeholder="${message(code: 'role.supervisor.label')}"/>
+            <g:if test="${supervisorsList}">
+                <g:if test="${supervisorsList.size() == 1}">
+                    <g:hiddenField name="thesis.supervisor.id" value="${supervisorsList[0].id}"/>
+                    <g:field type="text" name="thesis.supervisor.name" readonly="readonly" value="${supervisorsList[0].fullName}"/>
+                </g:if>
+                <g:else>
+                    <g:select name="thesis.supervisor.id"
+                        from="${supervisorsList}"
+                        optionKey="id"
+                        value="${supervisorsList.get(0)?.id}" />
+                </g:else>   
+            </g:if>
+            <g:else>
+                <g:hiddenField name="thesis.supervisor.id"
+                               value="${thesisInstance?.supervisor?.id}"/>
+                <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
+                <a4g:textField name="thesis.supervisor.fullName"
+                               value="${thesisInstance?.supervisor?.fullName}"
+                               data-autocomplete-url="${createLink(controller: 'json', action: 'listUsersByNameAndRole')}"
+                               data-autocomplete-target="thesis.supervisor.id"
+                               data-autocomplete-opts="a4g-role[${i}]@role"
+                               placeholder="${message(code: 'role.supervisor.label')}"/>
+            </g:else>
         </div>
     </div>
 
