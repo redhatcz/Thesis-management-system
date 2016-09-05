@@ -150,7 +150,8 @@ input[type="text"],
 input[type="password"] {
   .pretty-input();
 
-  &[disabled] {
+  &[disabled],
+  &[readonly="readonly"] {
     background-color: @grayBorder;
     .box-shadow(none);
   }
