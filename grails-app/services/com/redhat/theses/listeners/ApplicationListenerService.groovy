@@ -4,6 +4,7 @@ import com.redhat.theses.Application
 import com.redhat.theses.Feed
 import com.redhat.theses.events.ApplicationEvent
 import com.redhat.theses.util.Util
+import com.redhat.theses.auth.LoginController;
 import com.redhat.theses.auth.User
 import com.redhat.theses.Supervision
 import grails.events.Listener
@@ -41,7 +42,7 @@ class ApplicationListenerService {
         def feed = new Feed(messageCode: 'feed.application.created', args: args, user: e.user).save()
 
         subscriptionService.notify(application.topic.owner, feed, application.topic.title)
-        
+
         for (Supervision supervision : Supervision.findAllByUniversityAndTopic(application.university,application.topic)) {
             subscriptionService.notify(supervision.supervisor, feed, application.topic.title)
         }

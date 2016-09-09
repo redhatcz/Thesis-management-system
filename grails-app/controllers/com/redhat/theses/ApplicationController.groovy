@@ -58,7 +58,7 @@ class ApplicationController {
             return
         }
 
-        if (topicInstance.universities.empty) {
+        if (topicInstance.universities?.empty) {
             flash.message = message(code: 'application.impossible.no.university', args: [id])
             redirect(controller: 'topic', action: "list")
             return

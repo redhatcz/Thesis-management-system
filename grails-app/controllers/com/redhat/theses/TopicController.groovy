@@ -203,12 +203,18 @@ class TopicController {
                     [max: Util.max(params.max), sort: 'dateCreated', offset: defaultOffset])
         }
 
-        def subscriber = Subscription.findBySubscriberAndArticle(springSecurityService.currentUser, topicInstance)
+        def user = springSecurityService.currentUser
+        def subscriber = Subscription.findBySubscriberAndArticle(user, topicInstance)
 
         def thesisList = Thesis.findAllByTopic(topicInstance)
 
+        def existingThesis = Thesis.findByAssigneeAndTopic(user, topicInstance)
+
+        def pendingApplication = Application.findByApplicantAndStatusAndTopic(user, AppStatus.PENDING, topicInstance)
+
         [topicInstance: topicInstance, supervisions: supervisions, thesisList: thesisList,
-                comments: comments, commentsTotal: commentsTotal, subscriber: subscriber]
+                comments: comments, commentsTotal: commentsTotal, subscriber: subscriber,
+                pendingApplication: pendingApplication, existingThesis: existingThesis]
     }
 
     @Secured(['ROLE_OWNER'])

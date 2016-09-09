@@ -668,14 +668,4 @@ for example): see Web Browser Programming for details.''',
         }
     }
 
-    def destroy = {
-        environments {
-            development {
-                // drop database
-                def mongo = new GMongo()
-                def db = mongo.getDB('tms')
-                db.dropDatabase()
-            }
-        }
-    }
 }
