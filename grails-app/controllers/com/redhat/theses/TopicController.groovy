@@ -57,9 +57,9 @@ class TopicController {
         }
 
         if (params.filtering) {
-            params.type = ["title-description-lead": "ilike", owner: [fullName: "ilike"], supervisions: [supervisor: [fullName: "ilike"]]]    
+            params.type = ["title-description-lead-secondaryDescription": "ilike", owner: [fullName: "ilike"], supervisions: [supervisor: [fullName: "ilike"]]]    
         }
-        
+
         def tag = null
         if (params.filter?.tags?.title) {
             tag = Tag.get(new Tag(title: params.filter?.tags?.title))
