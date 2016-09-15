@@ -1,35 +1,33 @@
 <%@ page import="com.redhat.theses.auth.Role" %>
 <div class="control-group ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
     <div class="control-with-msg">
-        <div class="small-msg pull-right">
-            <i class="icon-info-sign"
-               title="${message(code:'info.user.create.email')}"></i>
-        </div>
         <label class="control-label" for="user.email">
             <strong><g:message code="user.email.label"/>
             <span class="required-indicator">*</span></strong>
         </label>
     </div>
-    <div class="controls">
+    <div class="controls half">
         <g:textField name="user.email" value="${userInstance?.email}"
                      placeholder="${message(code: 'user.email.label')}" />
+    </div>
+    <div class="info">
+        <p><g:message code="${message(code:'info.user.create.email')}"/></p>
     </div>
 </div>
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'fullName', 'error')} required">
     <div class="control-with-msg">
-        <div class="small-msg pull-right">
-            <i class="icon-info-sign"
-               title="${message(code:'info.user.create.fullName')}"></i>
-        </div>
         <label class="control-label" for="user.fullName">
             <strong><g:message code="user.fullName.label"/>
             <span class="required-indicator">*</span></strong>
         </label>
     </div>
-    <div class="controls">
+    <div class="controls half">
         <g:textField name="user.fullName" value="${userInstance?.fullName}"
                      placeholder="${message(code: 'user.fullName.label')}" />
+    </div>
+    <div class="info">
+        <p><g:message code="${message(code:'info.user.create.fullName')}"/></p>
     </div>
 </div>
 
@@ -44,10 +42,21 @@
                 <span class="required-indicator">*</span></strong>
         </label>
     </div>
-    <div class="controls">
-        <richg:multiselect name="user.roles" from="${Role.values()}" value="${userInstance?.roles}" size="4"
-                           optionValue="${{g.message(code:"role.${it?.toString()?.toLowerCase()}.label")}}"/>
-    </div>
+    <table>
+        <tr>
+            <td>    
+               <div class="controls half">
+                   <richg:multiselect name="user.roles" from="${Role.values()}" value="${userInstance?.roles}" size="4"
+                                      optionValue="${{g.message(code:"role.${it?.toString()?.toLowerCase()}.label")}}"/>
+               </div>
+            </td>
+            <td>   
+               <div class="info">
+                   <p><g:message code="${message(code:'info.user.create.roles')}"/></p>
+               </div>
+            </td>
+        </tr>
+    </table>  
 </div>
 
 <div class="control-group ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">

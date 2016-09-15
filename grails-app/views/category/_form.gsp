@@ -1,17 +1,16 @@
 <%@ page import="com.redhat.theses.Category" %>
 <div class="control-group ${hasErrors(bean: categoryInstance, field: 'title', 'error')} ">
     <div class="control-with-msg">
-        <div class="small-msg pull-right">
-            <i class="icon-info-sign"
-               title="${message(code:'info.category.create.title')}"></i>
-        </div>
         <label class="control-label" for="category.title">
             <strong><g:message code="category.title.label" /></strong>
         </label>
     </div>
-    <div class="controls">
+    <div class="controls half">
         <g:textField name="category.title" value="${categoryInstance?.title}"
                      placeholder="${message(code: 'category.title.label')}" />
+    </div>
+    <div class="info">
+        <p><g:message code="${message(code:'info.category.create.title')}"/></p>
     </div>
 </div>
 

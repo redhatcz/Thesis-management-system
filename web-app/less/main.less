@@ -533,6 +533,20 @@ ul form {
   margin: 0;
 }
 
+.info {
+  font-size: @fontSizeSmall;
+  height: @inputHeight;
+  line-height: @inputHeight;
+  max-width: 690-350px; 
+  padding: 4px 8px;
+  display: inline-block;
+  & p {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+  }
+}
+
 .control-group {
   margin-bottom: 20px;
 
@@ -547,7 +561,10 @@ ul form {
       .box-shadow(none);
     }
   }
-
+  .half {
+    width: 302px;
+    display: inline-block;
+  }
   #thesis-enabled {
     padding: 0px 0px 5px;
   }
@@ -1369,7 +1386,6 @@ table#tags {
       padding-right: 10px;
     }
   }
-
   &.faq-locale {
     float: right;
 

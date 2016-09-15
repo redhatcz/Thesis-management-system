@@ -1,32 +1,27 @@
 <sec:ifAnyGranted roles="ROLE_OWNER, ROLE_ADMIN, ROLE_SUPERVISOR">
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'title', 'error')} required">
         <div class="control-with-msg">
-            <div class="small-msg pull-right">
-                <i class="icon-info-sign"
-                   title="${message(code:'info.thesis.create.title')}"></i>
-            </div>
             <label class="control-label" for="thesis.title">
                 <strong><g:message code="thesis.title.label"/></strong>
                 <strong><span class="required-indicator">*</span></strong>
             </label>
         </div>
-        <div class="controls">
+        <div class="controls half">
             <g:textField name="thesis.title" value="${thesisInstance?.title}" placeholder="${message(code: 'thesis.title.label')}" />
+        </div>
+        <div class="info">
+            <g:message code="${message(code:'info.thesis.create.title')}"/>
         </div>
     </div>
 
     <div class="control-group ${hasErrors(bean: thesisInstance?.assignee, field: 'fullName', 'error')} required">
         <div class="control-with-msg">
-            <div class="small-msg pull-right">
-                <i class="icon-info-sign"
-                   title="${message(code:'info.thesis.create.asignee')}"></i>
-            </div>
             <label class="control-label" for="thesis.assignee.fullName">
                 <strong><g:message code="thesis.assignee.label"/></strong>
                 <strong><span class="required-indicator">*</span></strong>
             </label>
         </div>
-        <div class="controls">
+        <div class="controls half">
             <g:hiddenField name="thesis.assignee.id" value="${thesisInstance?.assignee?.id}"/>
             <a4g:textField name="thesis.assignee.fullName"
                            value="${thesisInstance?.assignee?.fullName}"
@@ -35,39 +30,37 @@
                            data-autocomplete-target="thesis.assignee.id"
                            placeholder="${message(code: 'thesis.assignee.label')}"/>
         </div>
+        <div class="info">
+            <g:message code="${message(code:'info.thesis.create.asignee')}"/>
+        </div>        
     </div>
 
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'university', 'error')} required">
         <div class="control-with-msg">
-            <div class="small-msg pull-right">
-                <i class="icon-info-sign"
-                   title="${message(code:'info.thesis.create.university')}"></i>
-            </div>
             <label class="control-label" for="thesis.university.id">
                 <strong><g:message code="university.label"/></strong>
                 <strong><span class="required-indicator">*</span></strong>
             </label>
         </div>
-        <div class="controls">
+        <div class="controls half">
             <g:select name="thesis.university.id"
                       from="${universityList}"
                       noSelection="['':message(code: 'no.selection.label')]"
                       optionKey="id"
                       value="${thesisInstance?.university?.id}"/>
         </div>
+        <div class="info">
+            <g:message code="${message(code:'info.thesis.create.university')}"/>
+        </div>
     </div>
 
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'supervisor', 'error')}">
         <div class="control-with-msg">
-            <div class="small-msg pull-right">
-                <i class="icon-info-sign"
-                   title="${message(code:'info.thesis.create.supervisor')}"></i>
-            </div>
             <label class="control-label" for="thesis.supervisor.fullName">
                 <strong><g:message code="role.supervisor.label"/></strong>
             </label>
         </div>
-        <div class="controls">
+        <div class="controls half">
             <g:hiddenField name="thesis.supervisor.id"
                            value="${thesisInstance?.supervisor?.id}"/>
             <g:hiddenField name="a4g-role[${i}]" value="${com.redhat.theses.auth.Role.SUPERVISOR}"/>
@@ -78,25 +71,27 @@
                            data-autocomplete-opts="a4g-role[${i}]@role"
                            placeholder="${message(code: 'role.supervisor.label')}"/>
         </div>
+        <div class="info">
+            <g:message code="${message(code:'info.thesis.create.supervisor')}"/>
+        </div>
     </div>
 
     <div class="control-group ${hasErrors(bean: thesisInstance, field: 'type', 'error')} required">
         <div class="control-with-msg">
-            <div class="small-msg pull-right">
-                <i class="icon-info-sign"
-                   title="${message(code:'info.thesis.create.type')}"></i>
-            </div>
             <label class="control-label" for="thesis.type">
                 <strong><g:message code="thesis.type.label"/></strong>
                 <strong><span class="required-indicator">*</span></strong>
             </label>
         </div>
-        <div class="controls">
+        <div class="controls half">
             <g:select name="thesis.type"
                       from="${typeList}"
                       noSelection="['':message(code: 'no.selection.label')]"
                       optionValue="${{g.message(code:"thesis.type.${it?.toString()?.toLowerCase()}.label")}}"
                       value="${thesisInstance?.type?.toString()}"/>
+        </div>
+        <div class="info">
+            <p><g:message code="${message(code:'info.thesis.create.type')}"/></p>
         </div>
     </div>
 
@@ -104,10 +99,6 @@
     <g:if test="${thesisInstance?.id}">
         <div class="control-group ${hasErrors(bean: thesisInstance, field: 'status', 'error')}">
             <div class="control-with-msg">
-                <span class="small-msg pull-right">
-                    <i class="icon-info-sign"
-                       title="${message(code:'info.thesis.create.status')}"></i>
-                </span>
                 <label class="control-label" for="thesis.status">
                     <strong><g:message code="thesis.status.label"/></strong>
                 </label>
@@ -119,14 +110,13 @@
                           optionValue="${{g.message(code:"thesis.status.${it?.toString()?.toLowerCase()}.label")}}"
                           value="${thesisInstance?.status?.toString()}"/>
             </div>
+            <div class="info">
+                <p><g:message code="${message(code:'info.thesis.create.status')}"/></p>
+            </div>
         </div>
 
         <div class="control-group ${hasErrors(bean: thesisInstance, field: 'grade', 'error')}">
             <div class="control-with-msg">
-                <div class="small-msg pull-right">
-                    <i class="icon-info-sign"
-                       title="${message(code:'info.thesis.create.grade')}"></i>
-                </div>
                 <label class="control-label" for="thesis.grade">
                     <strong><g:message code="thesis.grade.label"/></strong>
                 </label>
@@ -136,6 +126,9 @@
                           from="${gradeList}"
                           noSelection="['':message(code: 'no.selection.label')]"
                           value="${thesisInstance?.grade?.toString()}"/>
+            </div>
+            <div class="info">
+                <p><g:message code="${message(code:'info.thesis.create.grade')}"/></p>
             </div>
         </div>
     </g:if>
