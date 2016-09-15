@@ -101,10 +101,10 @@ class ApplicationController {
         }
 
         User user = springSecurityService.currentUser
-        
+
         def isSupervisor = applicationInstance.topic.supervisors.contains(user) &&
                            Supervision.findBySupervisorAndTopic(user, applicationInstance.topic)?.university == applicationInstance.university
-                            
+
         if (applicationInstance.topic.owner != user && !isSupervisor && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.message')
@@ -129,8 +129,14 @@ class ApplicationController {
         // Set type
         thesisInstance.type = applicationInstance.type
 
+        // Set tags
+        thesisInstance.tags = applicationInstance.topic.tags
+
+        def supervisions = Supervision.findAllByTopicAndUniversity(applicationInstance.topic, applicationInstance.university)
+
         [thesisInstance: thesisInstance, applicationInstance: applicationInstance, disabledAssigneeField: true,
-                disabledTopicField: true, universityList: University.all, typeList: Type.values()]
+                disabledTopicField: true, disabledUniversityField: true, universityList: University.all,
+                typeList: Type.values(), supervisorsList: supervisions*.supervisor]
     }
 
     @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
@@ -146,7 +152,7 @@ class ApplicationController {
 
         def isSupervisor = applicationInstance.topic.supervisors.contains(user) &&
                            Supervision.findBySupervisorAndTopic(user, applicationInstance.topic)?.university == applicationInstance.university
-                            
+
         if (applicationInstance.topic.owner != user && !isSupervisor && !SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')) {
 
             flash.message = message(code: 'security.denied.message')
@@ -160,8 +166,9 @@ class ApplicationController {
 
         if (!applicationService.approve(applicationInstance, thesisInstance)) {
             render view: 'approve', model: [thesisInstance: thesisInstance, applicationInstance: applicationInstance,
-                    disabledAssigneeField: true, disabledTopicField: true, universityList: University.all,
-                    typeList: Type.values()]
+                    disabledAssigneeField: true, disabledTopicField: true, disabledUniversityField: true,
+                    universityList: University.all, typeList: Type.values(),
+                    supervisorsList: Supervision.findAllByTopicAndUniversity(applicationInstance.topic, applicationInstance.university)*.supervisor]
             return
         }
 
