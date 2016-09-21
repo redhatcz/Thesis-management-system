@@ -55,3 +55,9 @@ Vy jste ti, kteří přichází se zajímavými tématy, které jsou nejen zají
 
 3. Akademičtí vedoucí/Univerzitní zaměstanci
 Pokud hledáte zajímavé téma pro své studenty, tak jste na správném místě :-) '''
+
+contacts_en_US = '''#Contacts
+Email: admin@diplomky.com'''
+
+contacts_cs = '''#Kontakty
+Email: admin@diplomky.com'''

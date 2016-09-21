@@ -9,6 +9,9 @@
         <li id="theses" class="${controllerName == 'thesis' ? 'active' : ''}">
             <g:link controller="thesis"><g:message code="navigation.theses.button"/></g:link>
         </li>
+        <li id="theses" class="${controllerName == 'contacts' ? 'active' : ''}">
+            <g:link controller="contacts"><g:message code="navigation.contacts.button"/></g:link>
+        </li>
         <sec:ifAllGranted roles="ROLE_ADMIN">
         <li id="users" class="${controllerName == 'user' ? 'active' : ''}">
             <g:link controller="user"><g:message code="navigation.members.button"/></g:link>

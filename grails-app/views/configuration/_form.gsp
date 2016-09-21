@@ -103,6 +103,37 @@
 </fieldset>
 
 <fieldset>
+    <legend><g:message code="config.contacts.header" /></legend>
+    <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="field.markdown.label" />
+        </div>
+        <label class="control-label" for="configuration.contacts_en_US">
+            <strong><g:message code="locale.en.label" /></strong>
+        </label>
+        <div class="controls">
+            <g:textArea name="configuration.contacts_en_US" rows="5"
+                        value="${config?.contacts_en_US}"/>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="small-msg pull-right">
+            <i class="icon-info-sign"></i>
+            <g:message code="field.markdown.label" />
+        </div>
+        <label class="control-label" for="configuration.contacts_cs">
+            <strong><g:message code="locale.cs.label" /></strong>
+        </label>
+        <div class="controls">
+            <g:textArea name="configuration.contacts_cs" rows="5"
+                        value="${config?.contacts_cs}"/>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
     <legend><g:message code="config.email.domains.header" /></legend>
     <div class="control-group ${hasErrors(bean: configurationCommand, field: 'domains', 'error')}">
         <label class="control-label" for="email-domain-list">
