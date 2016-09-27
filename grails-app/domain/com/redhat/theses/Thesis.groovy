@@ -14,6 +14,7 @@ class Thesis extends Article{
     String thesisAbstract
     String notes
     Date dateCreated
+    Date dateFinished
     University university
     Type type
     List links
@@ -39,6 +40,7 @@ class Thesis extends Article{
         grade nullable: true
         supervisor nullable: true
         thesisAbstract nullable: true
+        dateFinished nullable: true
         notes nullable: true
 
         topic validator: {topic ->

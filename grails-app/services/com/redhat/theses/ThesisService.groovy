@@ -17,7 +17,7 @@ class ThesisService {
      * @param fireEvent - if to fire event on success
      * @return true if success, false otherwise
      */
-    Thesis  save(Thesis thesis, fireEvent = true) {
+    Thesis save(Thesis thesis, fireEvent = true) {
         String type = thesis.id ? 'articleUpdated' : 'articleCreated'
         def persistedThesis = thesis.save()
 

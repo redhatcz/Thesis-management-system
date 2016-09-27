@@ -47,6 +47,18 @@
 
     <div class="span4 sidebar">
         <div class="panel right">
+            <sec:ifAnyGranted roles="ROLE_OWNER,ROLE_SUPERVISOR,ROLE_ADMIN">
+                <h4><g:message code="thesis.list.manage.label"/></h4>
+                <div class="panel-content">
+                    <div class="panel-buttons">
+                        <g:link class="tms-link btn-link" action="printable" target="_blank"
+                                params="${Util.formatParams(request, [:], ['max', 'offset'])}">
+                            <i class="icon-print"></i>
+                            <g:message code="printable.button"/>
+                        </g:link>
+                    </div>
+                </div>
+            </sec:ifAnyGranted>
             <h4>
                 <div class="small-msg pull-right">
                     <i class="icon-info-sign icon-large"

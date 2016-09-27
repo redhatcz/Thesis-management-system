@@ -79,7 +79,8 @@ class TopicController {
                 tagListWithUsage: tagListWithUsage, universities: University.all]
     }
 
-    def printableList() {
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def printable() {
         // Check onlyEnabled by default
         if (!params?.filtering || params.filter?.onlyEnabled) {
             if (!params.filter) {
@@ -111,7 +112,13 @@ class TopicController {
                     supervisors: true
             ]
         }
-
+        // Define types for filtered parameters
+        if (params.filtering) {
+            params.type = ["title": "ilike", "owner": ["fullName": "ilike"], "supervisions": ["supervisor": ["fullName": "ilike"]]]
+        }
+        // All Topic fields that can be used in loop in view
+        def properties = ["title":  "topic", "owner": "role", "secondaryTitle": "topic", "dateCreated": "topic", "types": "topic",
+                          "categories": "topic", "tags": "topic", "lead": "topic", "description": "topic", "secondaryDescription": "topic"]
         def topics = filterService.filter(params, Topic)
         def topicsWithSupervisors = [:]
         def universityId = params.filter?.universities?.long('id')
@@ -130,8 +137,8 @@ class TopicController {
             }
         }
 
-        [topics: topics, topicsWithSupervisors: topicsWithSupervisors, universityView: isUniversityFilled,
-                university: university, universities: University.all]
+        [content: topics, topicsWithSupervisors: topicsWithSupervisors, universityView: isUniversityFilled,
+                university: university, universities: University.all, properties: properties]
     }
 
     @Secured(['ROLE_OWNER'])

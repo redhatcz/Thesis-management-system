@@ -520,7 +520,7 @@ they are done with their thesis and application management.''',
                         tags: [grailsTag, groovyTag],
                         status: Status.IN_PROGRESS,
                         university: muni,
-                        type: Type.BACHELOR
+                        type: Type.DIPLOMA
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(example3Thesis, tms.owner, [example3, supervisor1, tms.owner]))
 
@@ -563,6 +563,7 @@ both a small and large scale.''',
                         supervisor: admin,
                         status: Status.FINISHED,
                         tags: [pythonTag],
+                        dateFinished: new Date(),
                         grade: Grade.F,
                         thesisAbstract: '''The majority of Web frameworks are exclusively server-side technology, although,
 with the increased prevalence of AJAX, some Web frameworks are beginning to include AJAX code that helps developers
@@ -570,7 +571,7 @@ with the particularly tricky task of programming (client-side) the user's browse
 Web Frameworks is technology that can use the web browser as a full-blown application execution environment (a la gmail
 for example): see Web Browser Programming for details.''',
                         university: muni,
-                        type: Type.BACHELOR,
+                        type: Type.DIPLOMA,
                         links: [seznam,google]
                 ).save(failOnError: true, flush: true)
                 grailsEvents.event('app', 'articleCreated', new ArticleEvent(example2Thesis2, pythonFramework.owner, [example2, admin, pythonFramework.owner]))
@@ -583,6 +584,7 @@ for example): see Web Browser Programming for details.''',
                         supervisor: supervisor1,
                         status: Status.FINISHED,
                         tags: [rubyTag],
+                        dateFinished: new Date().previous(),
                         grade: Grade.A,
                         thesisAbstract: '''Implementation of Ruby Killing Machine that will kill people that are filled in an HTML form.''',
                         university: muni,

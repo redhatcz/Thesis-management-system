@@ -190,8 +190,22 @@ they are done with their thesis and application management.''',
                         supervisor: supervisor1,
                         tags: [grailsTag],
                         status: Status.FINISHED,
+                        dateFinished: new Date(),
                         university: first,
                         type: Type.BACHELOR
+                ).save(failOnError: true, flush: true)
+
+                def example3Thesis = new Thesis(
+                    title: "Implementation of Automatic waitress robot",
+                    description: "I did it",
+                    assignee: example3,
+                    topic: waitressTopic,
+                    supervisor: supervisor2,
+                    tags: [grailsTag, djangoTag],
+                    status: Status.FINISHED,
+                    dateFinished: new Date(),
+                    university: second,
+                    type: Type.DIPLOMA
                 ).save(failOnError: true, flush: true)
 
                 //APPLICATIONS
@@ -205,7 +219,7 @@ they are done with their thesis and application management.''',
                     university: second, note: 'I want to do it', type: Type.DIPLOMA, status: AppStatus.PENDING).save(flush: true)
                 new Application(applicant: example1, topic: testTopic,
                     university: second, note: 'I want to do it', type: Type.BACHELOR, status: AppStatus.PENDING).save(flush: true)
-                
+
                 //Invalid Applications
                 new Application(applicant: example2, topic: tmsTopic,
                     university: first, note: 'I want to do it', type: Type.BACHELOR, status: AppStatus.PENDING).save(flush: true)

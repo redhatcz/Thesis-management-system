@@ -70,10 +70,10 @@
                         </g:link>
                     </g:else>
                     </sec:ifAnyGranted>
-                    <g:link class="tms-link btn-link" action="printableList" target="_blank"
+                    <g:link class="tms-link btn-link" action="printable" target="_blank"
                             params="${Util.formatParams(request, [:], ['max', 'offset'])}">
                         <i class="icon-print"></i>
-                        <g:message code="topic.show.printable.button"/>
+                        <g:message code="printable.button"/>
                     </g:link>
                 </div>
             </div>

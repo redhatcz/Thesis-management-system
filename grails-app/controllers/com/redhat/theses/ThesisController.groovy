@@ -72,6 +72,48 @@ class ThesisController {
                 currentTag: tag, tagListWithUsage: tagListWithUsage, commentCounts: commentCounts]
     }
 
+    @Secured(['ROLE_SUPERVISOR', 'ROLE_OWNER'])
+    def printable() {
+        // Select only finished by default
+        if (!params?.filtering || params.filter?.onlyEnabled) {
+            if (!params.filter) {
+                params.filter = [:]
+            }
+            params.filter += [
+                    status: Status.FINISHED
+            ]
+        }
+        // Sets up default columns to show
+        if (!params?.viewing) {
+            if (!params.view) {
+                params.view = [:]
+            }
+            params.view += [
+                    title: true,
+                    assignee: true,
+                    university: true,
+                    topic: true,
+                    dateFinished: true,
+                    supervisor: true,
+                    type: true
+            ]
+        }
+        // Define types for filtered parameters
+        if (params.filtering) {
+            params.type = [title: "ilike", supervisor: [fullName: "ilike"], assignee: [fullName: "ilike"], owner: [fullName: "ilike"],
+                           topic: ["title": "ilike"]]
+        }
+        // All Thesis fields that will be used in loop in view;
+        // Map<Variable,Namespace_for_i18n_string>
+        def properties = ["title": "thesis", "assignee": "thesis", "university": "thesis", "topic": "thesis", "supervisor": "role",
+                          "owner": "role", "dateCreated": "thesis", "dateFinished": "thesis", "type": "thesis", "status": "thesis",
+                          "grade": "thesis", "tags": "thesis", "thesisAbstract": "thesis", "description": "thesis", "notes": "thesis"]
+        def theses = filterService.filter(params, Thesis)
+
+        [content: theses, properties: properties, statuses: Status.values(), universities: University.all, grades: Grade.values(),
+         types: Type.values()]
+    }
+
     def show(Long id, String headline) {
         def thesisInstance = Thesis.get(id)
         if (!thesisInstance) {
@@ -223,7 +265,9 @@ class ThesisController {
 
         // setup links
         thesisInstance.links = thesisService.transformLinks(params.thesis?.links)
-     
+        
+        def oldStatus = thesisInstance.status
+
         def isAssignee = thesisInstance.assignee == user
         if (isThesisAdmin) {
             thesisInstance.supervisor = null;
@@ -232,6 +276,10 @@ class ThesisController {
         } else {
             def include = ['tags.title', 'thesisAbstract']
             bindData(thesisInstance, params, [include: include])
+        }
+        
+        if (thesisInstance.status == Status.FINISHED && thesisInstance.status != oldStatus) {
+            thesisInstance.dateFinished = new Date()
         }
 
         if (!thesisService.save(thesisInstance, !isAssignee)) {

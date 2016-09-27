@@ -109,6 +109,9 @@ class FilterService {
 
                         }
                     }
+                } else if (propName.contains("/")) {
+                    def properties = propName.split("/")
+                    addFilterParameter(c, domainClass, properties[0], rawValue, properties[1] + "Date" )
                 } else if(propName.contains("-")) {
                     def properties = propName.split("-")
                     c.or {
@@ -217,6 +220,12 @@ class FilterService {
                 criteria.ilike(propertyName, "%${value}%")
             } else if (value instanceof Object[] || value instanceof Collection) {
                 criteria.in(propertyName, value)
+            } else if (type == "fromDate") {
+                def date = Date.parse("dd-MM-yyyy", value)
+                criteria.ge(propertyName, date)
+            } else if (type == "toDate") {
+                def date = Date.parse("dd-MM-yyyy", value)
+                criteria.le(propertyName, date)         
             } else {
                 criteria.eq(propertyName, value)
             }
