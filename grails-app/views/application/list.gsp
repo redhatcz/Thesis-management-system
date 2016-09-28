@@ -18,6 +18,7 @@
                                   title="${message(code: 'topic.label')}"/>
                 <g:sortableColumn property="applicant"
                                   title="${message(code: 'application.applicant.label')}"/>
+                <th><g:message code="application.topic.owner.label"/></th>
                 <th><g:message code="application.status.label"/></th>
                 <th><g:message code="action.label"/></th>
             </tr>
@@ -31,6 +32,9 @@
                     </td>
                     <td>
                         <g:link controller="user" action="show" id="${application.applicantId}">${fieldValue(bean: application.applicant, field: "fullName")}</g:link>
+                    </td>
+                    <td>
+                        <g:link controller="user" action="show" id="${application.topic.ownerId}">${fieldValue(bean: application.topic.owner, field: "fullName")}</g:link>
                     </td>
                     <td>
                         <g:message code="application.status.${application?.status?.toString()?.toLowerCase()}.label"/>
@@ -67,10 +71,10 @@
                 <g:hiddenField name="filtering" value="true"/>
                 <g:textField value="${params?.filter?.applicant?.fullName}" class="wide"
                              name="filter.applicant.fullName" placeholder="${message(code: 'application.applicant.label')}"/>
-                <g:hiddenField name="type.applicant.fullName" value="ilike"/>
+                <g:textField value="${params?.filter?.topic?.owner?.fullName}" class="wide"
+                             name="filter.topic.owner.fullName" placeholder="${message(code: 'application.topic.owner.label')}"/>             
                 <g:textField value="${params?.filter?.topic?.title}" class="wide"
                              name="filter.topic.title" placeholder="${message(code: 'topic.label')}"/>
-                <g:hiddenField name="type.topic.title" value="ilike"/>
                 <g:select name="filter.status" from="${AppStatus.values()}"
                           noSelection="['':message(code:'application.status.select.label')]"
                           optionValue="${{g.message(code:"application.status.${it?.toString()?.toLowerCase()}.label")}}"
