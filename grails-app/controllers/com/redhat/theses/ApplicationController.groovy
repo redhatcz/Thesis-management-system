@@ -36,6 +36,9 @@ class ApplicationController {
         if (!params?.filtering) {
             params.filter << [status: AppStatus.PENDING]
         }
+        if (params.filtering) {
+            params.type = [applicant: [fullName: "ilike"], topic: [title: "ilike", owner: [fullName: "ilike"]]]
+        }
 
         def applicationInstanceList = filterService.filter(params, Application)
         def applicationInstanceTotal = filterService.count(params, Application)
