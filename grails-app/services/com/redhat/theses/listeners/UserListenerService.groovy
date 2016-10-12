@@ -39,15 +39,17 @@ class UserListenerService {
 
         // send confirmation email
         def subject = messageSource.getMessage('mail.registration.confirmation.subject', [].toArray(), LCH.locale)
+        def model = [code: 'mail.registration.confirmation', args: [e.user.fullName]]
         if (e.createdByAdmin) {
             subject = messageSource.getMessage('mail.registration.by.admin.confirmation.subject', [].toArray(), LCH.locale)
+            model = [code: 'mail.registration.by.admin.confirmation', args: [e.user.fullName, e.password]]
         }
         try {
             emailConfirmationService.sendConfirmation(
                 to: e.user.email,
                 subject: subject,
                 view: '/emailConfirmation/message',
-                model: [code: 'mail.registration.confirmation', args: [e.user.fullName, e.password]],
+                model: model,
                 id: e.user.id,
                 event: "userCreated"
             )
