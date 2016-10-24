@@ -8,7 +8,7 @@
         <div class="container">
             <div class="pull-right">
                 <g:if test="${RequestContextUtils.getLocale(request).toString().startsWith("cs")}">
-                    <a id="lang" href="?lang=en"><i class="icon-globe"></i>
+                    <a id="lang" href="?lang=en_US"><i class="icon-globe"></i>
                         English</a>
                 </g:if>
                 <g:else>

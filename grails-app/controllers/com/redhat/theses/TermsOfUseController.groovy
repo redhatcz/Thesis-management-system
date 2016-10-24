@@ -19,10 +19,6 @@ class TermsOfUseController {
         def locale =  LCH.locale.toString()
         def termsOfUse = configuration?."termsOfUse_$locale"
 
-        if (!termsOfUse) {
-            locale =  Locale.ENGLISH.toString()
-            termsOfUse = configuration?."termsOfUse_$locale"
-        }
         [termsOfUse: termsOfUse]
     }
 }

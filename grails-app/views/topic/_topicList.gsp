@@ -90,8 +90,8 @@
                 <g:hiddenField name="filtering" value="true"/>
                 <g:hiddenField name="filter.categories.id" value="${params?.filter?.categories?.id}"/>
                 <g:hiddenField name="filter.tags.title" value="${params?.filter?.tags?.title}"/>
-                <g:textField value="${params?.filter?.'title-description-lead'}" class="wide"
-                             name="filter.title-description-lead" placeholder="${message(code: 'topic.filter.title')}"/>
+                <g:textField value="${params?.filter?.'title-description-lead-secondaryDescription'}" class="wide"
+                             name="filter.title-description-lead-secondaryDescription" placeholder="${message(code: 'topic.filter.title')}"/>
                 <g:textField value="${params?.filter?.owner?.fullName}" class="wide"
                              name="filter.owner.fullName" placeholder="${message(code: 'role.owner.label')}"/>
                 <g:textField value="${params?.filter?.supervisions?.supervisor?.fullName}" class="wide"
