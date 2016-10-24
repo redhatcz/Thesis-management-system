@@ -24,7 +24,7 @@ defaultSupervisors = [
 upperIndex_en_US = '''#Welcome to Red Hat Thesis Management System
 Greetings traveller!
 
-Welcome to Red Hat's thesis management system which lets you search through a list of available thesis topics for you to choose from. 
+Welcome to Red Hat's thesis management system which lets you search through a list of available thesis topics for you to choose from.
 Have a topic in mind? Use the search engine, there's a chance we already have a something topic to offer!'''
 
 lowerIndex_en_US = '''There are three main types of users that may benefit from using this web.
@@ -36,7 +36,8 @@ You are free to look through any topics that you can find here. You are Feel fre
 You're the ones coming up with interesting topics that are not only interesting to students but also often lead to a some useful results. And Since a topic always needs a student to work on it, posting it on this web will help it to get attract the necessary attention
 
 3. Academic Leaders/University Staff
-You are most probably looking for interesting topics for that you might offer to your students.  your students either to offer it to them directly, or to post it on your university information system. You've come to the right place. '''
+If you are looking for an interesting topics that you might offer to your students (either directly or through your university information system), you've come to the right place. '''
+
 
 upperIndex_cs = '''#Vítejte v Red Hat Thesis Management Systému
 Vítej poutníku!
