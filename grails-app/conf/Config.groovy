@@ -138,6 +138,10 @@ log4j = {
     }
 }
 
+// Locale settings
+grails.plugin.localeConfiguration.supportedLocales = [Locale.US, new Locale("cs")]
+grails.plugin.localeConfiguration.defaultLocale = Locale.US
+
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.redhat.theses.auth.User'
 grails.plugins.springsecurity.authority.className = 'com.redhat.theses.auth.Role'

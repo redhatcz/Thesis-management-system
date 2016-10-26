@@ -79,6 +79,7 @@ grails.project.dependency.resolution = {
         compile ":lesscss-resources:1.3.1"
         compile ":hibernate-filter:0.3.2"
         compile ":feeds:1.5"
+        compile ':locale-configuration:1.1.1'
         test(":spock:0.7") {
             exclude "spock-grails-support"
         }
