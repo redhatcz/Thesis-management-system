@@ -125,14 +125,21 @@ class ThesisController {
 
             if (topicInstance) {
                 thesisInstance.topic = topicInstance
+
+                // Inherit tags from topic
                 thesisInstance.tags = topicInstance.tags
+
+                // Set default description
+                thesisInstance.description = thesisInstance.topic.description
+
+                // Set default abstract
+                thesisInstance.thesisAbstract = thesisInstance.topic.lead
+
+                // Set default title to topic title
+                thesisInstance.title = thesisInstance.topic.title
+
                 disabledTopicField = true
             }
-        }
-
-        // Set default title to topic title
-        if (thesisInstance.topic && !thesisInstance.title) {
-            thesisInstance.title = thesisInstance.topic.title
         }
 
         [thesisInstance: thesisInstance, disabledTopicField: disabledTopicField,
