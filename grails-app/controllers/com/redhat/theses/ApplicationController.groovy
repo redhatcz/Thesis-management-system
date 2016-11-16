@@ -120,6 +120,12 @@ class ApplicationController {
         // Set topic
         thesisInstance.topic = applicationInstance.topic
 
+        // Set default description
+        thesisInstance.description = applicationInstance.topic.description
+
+        // Set default abstract
+        thesisInstance.thesisAbstract = applicationInstance.topic.lead
+
         // Set default title to topic title
         thesisInstance.title = applicationInstance.topic.title
 
