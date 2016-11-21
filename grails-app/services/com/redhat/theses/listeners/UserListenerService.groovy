@@ -1,7 +1,9 @@
 package com.redhat.theses.listeners
 import com.redhat.theses.auth.User
+import com.redhat.theses.RoleRequest
 import com.redhat.theses.events.EmailChangedEvent
 import com.redhat.theses.events.LostPasswordEvent
+import com.redhat.theses.events.RoleRequestEvent
 import com.redhat.theses.events.UserCreatedEvent
 import grails.events.Listener
 import org.apache.commons.lang.RandomStringUtils
@@ -15,6 +17,7 @@ import java.sql.SQLException
  */
 class UserListenerService {
 
+    def grailsEvents
     /**
      * Dependency injection of com.grailsrocks.emailconfirmation.EmailConfirmationService
      */
@@ -70,8 +73,16 @@ class UserListenerService {
         // set the user enabled
         def user = User.get(info.id)
         user.enabled = true
+
+        def roleRequest = RoleRequest.findByApplicant(user)
+
         try {
             user.save()
+            if (roleRequest) {
+                roleRequest.enabled = true
+                roleRequest.save()
+                grailsEvents.event('app', "RoleRequestCreated", new RoleRequestEvent(roleRequest, user))
+            }
             log.info "User ${info.email} successfully confirmed with application id data ${info.id}"
         } catch (Exception ex) {
             log.error(ex.getMessage())
@@ -100,6 +111,8 @@ class UserListenerService {
             User.withoutHibernateFilters {
                 user = User.findByEmail(info.email)
             }
+            RoleRequest roleRequest = RoleRequest.findByApplicant(user)
+            roleRequest?.delete()    
             user.delete()
             log.info "User with email ${info.email} deleted"
         } catch (Exception ex) {

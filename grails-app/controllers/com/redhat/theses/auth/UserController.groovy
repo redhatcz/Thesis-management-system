@@ -29,6 +29,7 @@ class UserController {
 
     static defaultAction = "list"
 
+    @Secured(['ROLE_ADMIN'])
     def list(Integer max) {
         params.max = Util.max(max, MAX_USERS)
 

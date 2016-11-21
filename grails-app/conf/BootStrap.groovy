@@ -82,6 +82,8 @@ class BootStrap {
                         enabled: true,
                         roles: [Role.STUDENT]
                 ).save(flush: true)
+                new RoleRequest(applicant: example2, status: AppStatus.PENDING, enabled: true).save(flush: true)
+                
                 def example3 = new User(
                         email: 'example3@example.com',
                         fullName: 'Example Tri',
@@ -89,6 +91,8 @@ class BootStrap {
                         enabled: true,
                         roles: [Role.STUDENT]
                 ).save(flush: true)
+                new RoleRequest(applicant: example3, status: AppStatus.PENDING, enabled: true).save(flush: true)
+                
                 def supervisor1 = new User(
                         email: 'supervisor1@example.com',
                         fullName: 'Supervisor Jedna',

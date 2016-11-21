@@ -78,7 +78,7 @@ class ApplicationControllerIntegrationSpec extends IntegrationSpec {
     }
 
     void "Can not save without proper parameters"() {
-        given: "some, but not all parameters"
+        given: "some but not all parameters"
             controller.params.application = [:]
             controller.params.application.topic = Topic.findByTitle('Thesis management system')
         when: "trying to save"
@@ -89,7 +89,7 @@ class ApplicationControllerIntegrationSpec extends IntegrationSpec {
             controller.modelAndView?.model?.universities?.size() == 1
     }
 
-    @Unroll("Can not decline application #id out of as #username, should redirect to #redirectUrl")
+    @Unroll("Can not decline application #id as #username, should redirect to #redirectUrl")
     void "Can not decline application"() {
         given:
             SpringSecurityUtils.reauthenticate(username, password)

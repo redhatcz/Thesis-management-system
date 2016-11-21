@@ -67,3 +67,13 @@
         </label>
     </div>
 </div>
+
+<div class="control-group">
+    <div class="controls">
+        <label class="checkbox" for="supervisorRequest">
+            <g:checkBox name="supervisorRequest"
+                        value="${supervisorRequest}"/>
+            <g:message code="registration.supervisor.request"/>
+        </label>
+    </div>
+</div>

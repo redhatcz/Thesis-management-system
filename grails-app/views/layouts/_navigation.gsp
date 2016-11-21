@@ -10,7 +10,7 @@
             <g:link controller="thesis"><g:message code="navigation.theses.button"/></g:link>
         </li>
         <sec:ifAllGranted roles="ROLE_ADMIN">
-        <li id="users" class="${controllerName == 'user' ? 'active' : ''}">
+        <li id="users" class="${controllerName == 'user' || controllerName == 'roleRequest' ? 'active' : ''}">
             <g:link controller="user"><g:message code="navigation.members.button"/></g:link>
         </li>
         </sec:ifAllGranted>
