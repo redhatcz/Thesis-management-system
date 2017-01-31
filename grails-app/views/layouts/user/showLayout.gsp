@@ -106,6 +106,14 @@
         </sec:ifLoggedIn>
         <div class="controls pull-right">
             <sec:ifAnyGranted roles="ROLE_ADMIN">
+               <g:if test="${!userInstance?.enabled}" >
+                    <g:link class="tms-btn" controller="user" action="confirm" id="${userInstance?.id}">
+                        <i class="icon-check-sign"></i> <g:message code="profile.confirm.button" />
+                    </g:link>
+               </g:if>
+            </sec:ifAnyGranted>
+            
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
             <g:link class="tms-btn" controller="user" action="edit" id="${userInstance?.id}">
                 <i class="icon-wrench"></i> <g:message code="default.edit.button" />
             </g:link>

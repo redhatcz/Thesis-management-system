@@ -103,7 +103,13 @@ class BootStrap {
                         enabled: true,
                         roles: [Role.OWNER, Role.SUPERVISOR, Role.STUDENT]
                 ).save(flush: true)
-
+                def unconfirmed = new User(
+                    email: 'student1@example.com',
+                    fullName: 'Student One',
+                    password: "student1",
+                    enabled: false,
+                    roles: [Role.STUDENT]
+                ).save(flush: true)
                 // TAGS
                 def javaTag = new Tag(title: 'java').save(flush: true)
                 def groovyTag = new Tag(title: 'groovy').save(flush: true)

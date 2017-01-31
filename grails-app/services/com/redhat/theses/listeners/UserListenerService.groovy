@@ -1,7 +1,10 @@
 package com.redhat.theses.listeners
+import com.redhat.theses.Feed
 import com.redhat.theses.auth.User
+import com.redhat.theses.events.ApplicationEvent
 import com.redhat.theses.events.EmailChangedEvent
 import com.redhat.theses.events.LostPasswordEvent
+import com.redhat.theses.events.UserConfirmedEvent
 import com.redhat.theses.events.UserCreatedEvent
 import grails.events.Listener
 import org.apache.commons.lang.RandomStringUtils
@@ -29,6 +32,16 @@ class UserListenerService {
      * Dependency injection of grails.plugin.sendmail.MailService
      */
     def mailService
+
+    /**
+     * Dependency injection of com.redhat.theses.SubscriptionService
+     */
+    def subscriptionService
+
+    /**
+     * Dependency injection of org.codehaus.groovy.grails.web.mapping.LinkGenerator
+     */
+    def grailsLinkGenerator
 
     /**
      * Sends confirmation mail to newly created user
@@ -205,5 +218,21 @@ class UserListenerService {
         }
 
         return [controller:'login', action:'lostPasswordVerified']
+    }
+
+    /**
+     * Creates new feed and notifies user that he was confirmed by an administrator
+     */
+    @Listener(topic = "userConfirmedByAdmin")
+    def userConfirmedByAdmin(UserConfirmedEvent e) {
+        def user = User.get(e.user.id)
+        def args = [
+                e.admin.fullName,
+                grailsLinkGenerator.link(controller: 'user', action: 'show', id: e.admin.id, absolute: true),
+        ]
+
+        def feed = new Feed(messageCode: 'feed.registration.confirmed', args: args, user: e.user).save()
+
+        subscriptionService.notify(user, feed, user.fullName)
     }
 }

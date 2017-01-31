@@ -1,6 +1,7 @@
 package com.redhat.theses.auth
 
 import com.redhat.theses.*
+import com.redhat.theses.events.UserConfirmedEvent
 import com.redhat.theses.util.Util
 import grails.plugins.springsecurity.Secured
 
@@ -220,5 +221,33 @@ class UserController {
 
         flash.message = message(code: 'user.deleted', args: [id])
         redirect(action: "list")
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def confirm(Long id) {
+        def userInstance = User.get(id)
+
+        if (!userInstance) {
+            flash.message = message(code: 'user.not.found', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        if (userInstance.enabled) {
+            flash.message = message(code: 'user.already.confirmed', args: [id])
+            redirect(action: "list")
+            return
+        }
+
+        userInstance.enabled = true
+        if (!userService.save(userInstance)) {
+            flash.message = message(code: 'user.not.confirmed', args: [id])
+            redirect(action: "show", id: id)
+            return
+        }
+
+        event("userConfirmedByAdmin", new UserConfirmedEvent(userInstance, springSecurityService.getCurrentUser()))
+        flash.message = message(code: 'user.confirmed', args: [id])
+        redirect(action: "show", id: id)
     }
 }
