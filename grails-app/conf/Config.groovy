@@ -108,6 +108,7 @@ log4j = {
                   'grails.app.services.com.redhat',
                   'grails.app.taglib.com.redhat',
                   'grails.app.conf.com.redhat',
+                  'grails.app.jobs.com.redhat',
                   'grails.app.filters.com.redhat'
         }
 

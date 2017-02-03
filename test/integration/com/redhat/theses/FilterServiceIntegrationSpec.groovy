@@ -25,7 +25,7 @@ class FilterServiceIntegrationSpec extends IntegrationSpec {
             [filter: ['title-lead-description': "think"], type:  ['title-lead-description': "ilike"]] | Topic | 2 | 2
             [filter: ['title-lead-description': "think"], type:  ['title-lead-description': "ilike"], offset: 1]  | Topic | 1 | 2
             [filter: ['title': "think"], type:  [title: "ilike"]] | Topic | 0 | 0
-            [filter: ['email': "example"], type:  [email: "ilike"]] | User | 7 | 7
+            [filter: ['email': "example"], type:  [email: "ilike"]] | User | 10 | 10
             [filter: ['email': "example", fullName: "example"], type:  [email: "ilike", fullName: "ilike"], max: 1] | User | 1 | 3
             [filter: ['email': "example", fullName: "example"], type:  [email: "ilike"]] | User | 0 | 0
     }

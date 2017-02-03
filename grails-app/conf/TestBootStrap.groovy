@@ -1,3 +1,5 @@
+import org.apache.el.parser.AstMinus
+
 import com.gmongo.GMongo
 import com.redhat.theses.*
 import com.redhat.theses.auth.Role
@@ -91,6 +93,41 @@ class TestBootStrap {
                              Role.OWNER,
                              Role.SUPERVISOR,
                              Role.STUDENT]
+                ).save(flush: true)
+                
+                //UNCONFIRMED USERS
+                def notConfirm1 = new User(
+                    email: 'n1@example.com',
+                    fullName: 'Student One',
+                    password: "owner2",
+                    enabled: false,
+                    roles: [
+                         Role.STUDENT]
+                ).save(flush: true)
+                notConfirm1.dateCreated = new Date().minus(2)
+                notConfirm1.save(flush: true)
+                
+                def notConfirm2 = new User(
+                    email: 'n2@example.com',
+                    fullName: 'Student Two',
+                    password: "owner2",
+                    enabled: false,
+                    dateCreated: new Date().previous(),
+                    roles: [
+                         Role.SUPERVISOR,
+                         Role.STUDENT]
+                ).save(flush: true)
+                notConfirm2.dateCreated = new Date().minus(1)
+                notConfirm2.save(flush: true)
+
+                def notConfirm3 = new User(
+                    email: 'n3@example.com',
+                    fullName: 'Student Three',
+                    password: "owner2",
+                    enabled: false,
+                    roles: [
+                         Role.OWNER,
+                         Role.STUDENT]
                 ).save(flush: true)
                 //TAGS
                 def grailsTag = new Tag(title: 'grails').save(flush: true)
