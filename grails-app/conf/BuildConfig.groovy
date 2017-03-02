@@ -80,6 +80,7 @@ grails.project.dependency.resolution = {
         compile ":hibernate-filter:0.3.2"
         compile ":feeds:1.5"
         compile ':locale-configuration:1.1.1'
+        compile ':quartz:1.0-RC2'
         test(":spock:0.7") {
             exclude "spock-grails-support"
         }
