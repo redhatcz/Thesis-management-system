@@ -3,7 +3,9 @@ package com.redhat.theses
 import com.redhat.theses.auth.User
 import com.redhat.theses.auth.Role
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 import grails.plugin.spock.IntegrationSpec
+import javax.servlet.http.HttpServletRequest
 import spock.lang.Shared
 import spock.lang.Unroll
 import grails.test.mixin.*
@@ -55,8 +57,8 @@ class UniversityControllerIntegrationSpec extends IntegrationSpec {
         given: "existing university"
             controller.request.method = "POST"
             def p = ['id': "3"]
-            def request = [getParameterMap: { -> p }] as javax.servlet.http.HttpServletRequest    
-            controller.params.university = new org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap(request)
+            def request = [getParameterMap: { -> p }] as HttpServletRequest    
+            controller.params.university = new GrailsParameterMap(request)
         when: "trying to delete it"
             controller.delete()
         then: "university should be deleted"
@@ -67,9 +69,9 @@ class UniversityControllerIntegrationSpec extends IntegrationSpec {
         given: "non-existing university"
             controller.request.method = "POST"
             def p = ['id': "4"]
-            def request = [getParameterMap: { -> p }] as javax.servlet.http.HttpServletRequest
+            def request = [getParameterMap: { -> p }] as HttpServletRequest
     
-            controller.params.university = new org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap(request)
+            controller.params.university = new GrailsParameterMap(request)
         when: "trying to delete it"
             controller.delete()
         then: "shouldn't delete anything"

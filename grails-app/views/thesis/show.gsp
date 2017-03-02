@@ -116,14 +116,23 @@
                     data-original-title="${message(code: 'thesis.status.label').toString()}">
                     <i class="icon-question-sign"></i>
                 </dt>
-                <dd>
                 <g:if test="${thesisInstance?.status?.toString() != 'FINISHED'}">
-                    <g:message code="thesis.status.${thesisInstance?.status?.toString()?.toLowerCase()}.label" />
+                    <dd>
+                        <g:message code="thesis.status.${thesisInstance?.status?.toString()?.toLowerCase()}.label" />
+                    </dd>    
                 </g:if>
                 <g:else>
-                    <g:message code="thesis.status.awarded.grade" args="[thesisInstance?.grade]"/>
+                    <dd>
+                        <g:message code="thesis.status.awarded.grade" args="[thesisInstance?.grade]"/>
+                    </dd>
+                    <dt class="tms-tooltip" data-placement="left"
+                        data-original-title="${message(code: 'thesis.dateFinished.label').toString()}">
+                        <i class="icon-calendar"></i>
+                    </dt>
+                    <dd>
+                        <g:formatDate date="${thesisInstance?.dateFinished}" dateStyle="LONG" type="date" />
+                    </dd>
                 </g:else>
-                </dd>
                 <g:if test="${!thesisInstance?.links?.empty}">
                     <dt class="tms-tooltip" data-placement="left"
                         data-original-title="${message(code: 'thesis.links.label').toString()}">
